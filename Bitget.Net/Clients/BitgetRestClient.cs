@@ -1,4 +1,6 @@
 ﻿using Bitget.Net.Clients.SpotApi;
+using Bitget.Net.Interfaces.Clients;
+using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
@@ -6,9 +8,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Bitget.Net.Clients
 {
-    public class BitgetRestClient : BaseRestClient
+    public class BitgetRestClient : BaseRestClient, IBitgetRestClient
     {
-        public BitgetRestClientSpotApi SpotApi { get; }
+        public IBitgetRestClientSpotApi SpotApi { get; }
 
         /// <summary>
         /// Create a new instance of BitgetRestClient
@@ -24,7 +26,7 @@ namespace Bitget.Net.Clients
         /// <param name="optionsDelegate">Option configuration delegate</param>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="httpClient">Http client for this client</param>
-        public BitgetRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, Action<BitgetRestOptions>? optionsDelegate = null) : base(loggerFactory, "Kucoin")
+        public BitgetRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, Action<BitgetRestOptions>? optionsDelegate = null) : base(loggerFactory, "Bitget")
         {
             var options = BitgetRestOptions.Default.Copy();
             if (optionsDelegate != null)
@@ -37,7 +39,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public void SetApiCredentials(ApiCredentials credentials)
         {
-            //SpotApi.SetApiCredentials(credentials);
+            SpotApi.SetApiCredentials(credentials);
         }
 
         /// <summary>

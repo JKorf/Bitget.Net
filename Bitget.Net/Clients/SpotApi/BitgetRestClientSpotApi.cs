@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Objects.Models;
+﻿using Bitget.Net.Interfaces.Clients.SpotApi;
+using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
@@ -13,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace Bitget.Net.Clients.SpotApi
 {
-    public class BitgetRestClientSpotApi : RestApiClient//, ISpotClient
+    public class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi//, ISpotClient
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 
-        public BitgetRestClientSpotApiExchangeData ExchangeData { get; }
+        public IBitgetRestClientSpotApiExchangeData ExchangeData { get; }
 
         internal BitgetRestClientSpotApi(ILogger logger, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
             : base(logger, httpClient, options.Environment.BaseAddress, options, options.SpotOptions)
@@ -27,7 +28,7 @@ namespace Bitget.Net.Clients.SpotApi
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => null;//new KucoinAuthenticationProvider((KucoinApiCredentials)credentials);
+            => new BitgetAuthenticationProvider(credentials);
 
         internal Uri GetUri(string path)
         {

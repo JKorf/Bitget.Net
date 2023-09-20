@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bitget.Net", "Bitget.Net\Bitget.Net.csproj", "{1BA00AFF-3F8F-4EF7-97C3-7C1F10AB8745}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bitget.Net.UnitTests", "Bitget.Net.UnitTests\Bitget.Net.UnitTests.csproj", "{47A5207C-887C-4E15-ADCD-A1255BA80E1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BA00AFF-3F8F-4EF7-97C3-7C1F10AB8745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA00AFF-3F8F-4EF7-97C3-7C1F10AB8745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA00AFF-3F8F-4EF7-97C3-7C1F10AB8745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA00AFF-3F8F-4EF7-97C3-7C1F10AB8745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47A5207C-887C-4E15-ADCD-A1255BA80E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A5207C-887C-4E15-ADCD-A1255BA80E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A5207C-887C-4E15-ADCD-A1255BA80E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A5207C-887C-4E15-ADCD-A1255BA80E1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84F0BC8D-5329-46CE-92BF-9B54FC164E68}
+	EndGlobalSection
+EndGlobal

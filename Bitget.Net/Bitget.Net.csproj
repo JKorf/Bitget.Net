@@ -10,4 +10,10 @@
     <ProjectReference Include="..\..\CryptoExchange.Net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enums\" />
+    <Folder Include="Icon\" />
+    <Folder Include="SymbolOrderBooks\" />
+  </ItemGroup>
+
 </Project>
