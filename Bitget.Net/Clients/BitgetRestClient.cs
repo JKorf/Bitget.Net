@@ -8,8 +8,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Bitget.Net.Clients
 {
+    /// <inheritdoc />
     public class BitgetRestClient : BaseRestClient, IBitgetRestClient
     {
+        /// <inheritdoc />
         public IBitgetRestClientSpotApi SpotApi { get; }
 
         /// <summary>

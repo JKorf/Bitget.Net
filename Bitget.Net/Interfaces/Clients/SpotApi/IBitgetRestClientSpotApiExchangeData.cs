@@ -1,8 +1,12 @@
-﻿using Bitget.Net.Objects.Models;
+﻿using Bitget.Net.Enums;
+using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Objects;
 
 namespace Bitget.Net.Interfaces.Clients.SpotApi
 {
+    /// <summary>
+    /// Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+    /// </summary>
     public interface IBitgetRestClientSpotApiExchangeData
     {
         /// <summary>
@@ -29,8 +33,69 @@ namespace Bitget.Net.Interfaces.Clients.SpotApi
         /// Get a list of supported assets on the platform
         /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-coin-list" /></para>
         /// </summary>
-        /// <param name="ct"></param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BitgetAsset>>> GetAssetsAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a list of supported symbols on the platform
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-symbols" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetSymbol>>> GetSymbolsAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a single symbol ticker
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-single-ticker" /></para>
+        /// </summary>
+        /// <param name="symbol">The id of the symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetTicker>> GetTickerAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get all symbol tickers
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-all-tickers" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetTicker>>> GetTickersAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get recent trades
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-recent-trades" /></para>
+        /// </summary>
+        /// <param name="symbol">The id of the symbol</param>
+        /// <param name="limit">Results to return, max 500</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetTrade>>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get trade history
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-market-trades" /></para>
+        /// </summary>
+        /// <param name="symbol">The id of the symbol</param>
+        /// <param name="tradeId">Filter by trade id</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Results to return, max 500</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetTrade>>> GetTradesAsync(string symbol, string? tradeId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get kline/candlestick data
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-candle-data" /></para>
+        /// </summary>
+        /// <param name="symbol">The id of the symbol</param>
+        /// <param name="interval">The kline interval</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Results to return, max 1000</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetKline>>> GetKlinesAsync(string symbol, BitgetKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
     }
 }

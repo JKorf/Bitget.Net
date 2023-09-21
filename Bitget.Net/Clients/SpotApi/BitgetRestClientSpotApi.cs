@@ -3,21 +3,17 @@ using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bitget.Net.Clients.SpotApi
 {
+    /// <inheritdoc />
     public class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi//, ISpotClient
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 
+        /// <inheritdoc />
         public IBitgetRestClientSpotApiExchangeData ExchangeData { get; }
 
         internal BitgetRestClientSpotApi(ILogger logger, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)

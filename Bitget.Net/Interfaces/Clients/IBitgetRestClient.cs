@@ -1,14 +1,12 @@
 ﻿using Bitget.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bitget.Net.Interfaces.Clients
 {
+    /// <summary>
+    /// Client for accessing the Bitget API. 
+    /// </summary>
     public interface IBitgetRestClient : IRestClient
     {
         /// <summary>

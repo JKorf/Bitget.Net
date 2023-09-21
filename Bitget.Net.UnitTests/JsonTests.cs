@@ -26,6 +26,12 @@ namespace Bitget.Net.UnitTests
                 {
                     { "GetNotificationsAsync", "data" },
                     { "GetAssetsAsync", "data" },
+                    { "GetSymbolsAsync", "data" },
+                    { "GetTickerAsync", "data" },
+                    { "GetTickersAsync", "data" },
+                    { "GetRecentTradesAsync", "data" },
+                    { "GetTradesAsync", "data" },
+                    { "GetKlinesAsync", "data" },
                 });
         }
 

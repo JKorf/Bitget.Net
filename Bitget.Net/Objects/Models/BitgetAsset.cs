@@ -22,6 +22,9 @@ namespace Bitget.Net.Objects.Models
         /// </summary>
         [JsonProperty("transfer")]
         public bool Transferable { get; set; }
+        /// <summary>
+        /// Networks for this asset
+        /// </summary>
         [JsonProperty("chains")]
         public IEnumerable<BitgetNetwork> Networks { get; set; } = Array.Empty<BitgetNetwork>();
     }

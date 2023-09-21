@@ -1,17 +1,40 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+	  <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+	  <Nullable>enable</Nullable>
+	  <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
+	  <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 
+	<PropertyGroup>
+		<PackageId>JK.Bitget.Net</PackageId>
+		<Authors>JKorf</Authors>
+		<PackageVersion>0.0.1</PackageVersion>
+		<AssemblyVersion>0.0.1</AssemblyVersion>
+		<FileVersion>0.0.1</FileVersion>
+		<Description>TODO</Description>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageTags>TODO</PackageTags>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/JKorf/Bitget.Net.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/JKorf/Bitget.Net</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<!--<PackageIcon>icon.png</PackageIcon>-->
+		<NeutralLanguage>en</NeutralLanguage>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageReleaseNotes>TODO</PackageReleaseNotes>
+	</PropertyGroup>
+	<PropertyGroup>
+		<DocumentationFile>Bitget.Net.xml</DocumentationFile>
+	</PropertyGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\..\CryptoExchange.Net\CryptoExchange.Net\CryptoExchange.Net.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Enums\" />
     <Folder Include="Icon\" />
     <Folder Include="SymbolOrderBooks\" />
   </ItemGroup>

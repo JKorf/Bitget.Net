@@ -1,0 +1,748 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bitget.Net</name>
+    </assembly>
+    <members>
+        <member name="T:Bitget.Net.BitgetEnvironment">
+            <summary>
+            Bitget environment
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetEnvironment.BaseAddress">
+            <summary>
+            Base API address
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetEnvironment.Live">
+            <summary>
+            Live environment
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.BitgetEnvironment.CreateCustom(System.String,System.String)">
+            <summary>
+            Create a custom environment
+            </summary>
+            <param name="name"></param>
+            <param name="baseAddress"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.BitgetHelpers">
+            <summary>
+            Helper functions
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Clients.BitgetRestClient">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.BitgetRestClient.SpotApi">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
+            <summary>
+            Create a new instance of BitgetRestClient
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
+            <summary>
+            Create a new instance of BitgetRestClient
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="loggerFactory">The logger factory</param>
+            <param name="httpClient">Http client for this client</param>
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetRestClient.SetDefaultOptions(System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
+            <summary>
+            Set the default options to be used when creating new clients
+            </summary>
+            <param name="optionsFunc">Option configuration delegate</param>
+        </member>
+        <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.ExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.GetServerTimestampAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.GetTimeSyncInfo">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData.GetNotificationsAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData.GetAssetsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData.GetSymbolsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData.GetTickersAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData.GetRecentTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData.GetTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiExchangeData.GetKlinesAsync(System.String,Bitget.Net.Enums.BitgetKlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetKlineInterval">
+            <summary>
+            Kline interval
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneMinute">
+            <summary>
+            1 minute
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.FiveMinutes">
+            <summary>
+            5 minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.FifteenMinutes">
+            <summary>
+            15 minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.ThirtyMinutes">
+            <summary>
+            30 minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneHour">
+            <summary>
+            1 hour
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.FourHours">
+            <summary>
+            4 hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.SixHours">
+            <summary>
+            6 hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.TwelfHours">
+            <summary>
+            12 hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneDay">
+            <summary>
+            1 day
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.ThreeDays">
+            <summary>
+            3 days
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneWeek">
+            <summary>
+            1 week
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneMonth">
+            <summary>
+            1 month
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.SixHourUtc">
+            <summary>
+            6 hour UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.TwelfHourUtc">
+            <summary>
+            12 hour UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneDayUtc">
+            <summary>
+            1 day UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.ThreeDayUTC">
+            <summary>
+            3 day UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneWeekUtc">
+            <summary>
+            1 week UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneMonthUtc">
+            <summary>
+            1 month UTC 0
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetOrderSide">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderSide.Buy">
+            <summary>
+            Buy
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderSide.Sell">
+            <summary>
+            Sell
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetSymbolStatus">
+            <summary>
+            Status of a symbol
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetSymbolStatus.Offline">
+            <summary>
+            Offline
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetSymbolStatus.Gray">
+            <summary>
+            Gray
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetSymbolStatus.Online">
+            <summary>
+            Online
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.IBitgetRestClient">
+            <summary>
+            Client for accessing the Bitget API. 
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SpotApi">
+            <summary>
+            Spot API endpoints
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi">
+            <summary>
+            Spot API endpoints
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi.ExchangeData">
+            <summary>
+            Endpoints related to retrieving market and system data
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData">
+            <summary>
+            Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the server time
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-server-time" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData.GetNotificationsAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get server notifications of the last month
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#notice" /></para>
+            </summary>
+            <param name="languageType">The language type</param>
+            <param name="noticeType">Filter by notice type</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData.GetAssetsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of supported assets on the platform
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-coin-list" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData.GetSymbolsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of supported symbols on the platform
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-symbols" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a single symbol ticker
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-single-ticker" /></para>
+            </summary>
+            <param name="symbol">The id of the symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData.GetTickersAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get all symbol tickers
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-all-tickers" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData.GetRecentTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get recent trades
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-recent-trades" /></para>
+            </summary>
+            <param name="symbol">The id of the symbol</param>
+            <param name="limit">Results to return, max 500</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData.GetTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get trade history
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-market-trades" /></para>
+            </summary>
+            <param name="symbol">The id of the symbol</param>
+            <param name="tradeId">Filter by trade id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Results to return, max 500</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiExchangeData.GetKlinesAsync(System.String,Bitget.Net.Enums.BitgetKlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get kline/candlestick data
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-candle-data" /></para>
+            </summary>
+            <param name="symbol">The id of the symbol</param>
+            <param name="interval">The kline interval</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Results to return, max 1000</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Objects.BitgetApiAddresses">
+            <summary>
+            Bitget Api addresses
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.BitgetApiAddresses.BaseAddress">
+            <summary>
+            The address used by the Bitget for the API
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Objects.BitgetApiAddresses.Default">
+            <summary>
+            The default addresses to connect to the kucoin.com API
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetAsset">
+            <summary>
+            Asset info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetAsset.AssetId">
+            <summary>
+            Asset id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetAsset.AssetName">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetAsset.Transferable">
+            <summary>
+            Transferable
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetAsset.Networks">
+            <summary>
+            Networks for this asset
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetKline">
+            <summary>
+            Kline info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKline.OpenPrice">
+            <summary>
+            Open price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKline.HighPrice">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKline.LowPrice">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKline.ClosePrice">
+            <summary>
+            Close price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKline.QuoteVolume">
+            <summary>
+            Quote volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKline.BaseVolume">
+            <summary>
+            Base volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKline.UsdtVolume">
+            <summary>
+            Usdt volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKline.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetNetwork">
+            <summary>
+            Network info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.Name">
+            <summary>
+            Network name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.NeedTag">
+            <summary>
+            Whether tag is needed
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.Withdrawable">
+            <summary>
+            Whether it is possible to withdraw
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.Depositable">
+            <summary>
+            Wheter it is possible to deposit
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.WithdrawFee">
+            <summary>
+            Withdraw fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.DepositConfirmations">
+            <summary>
+            Deposit confirmations required
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.WithdrawConfimations">
+            <summary>
+            Withdraw confirmations required
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.MinDepositQuantity">
+            <summary>
+            Min deposit quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.MinWithdrawQuantity">
+            <summary>
+            Min withdrawal quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNetwork.Url">
+            <summary>
+            Explorer url
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetNotification">
+            <summary>
+            Notification
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNotification.NoticeId">
+            <summary>
+            Id of the notice
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNotification.NoticeTitle">
+            <summary>
+            Title
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNotification.NoticeDescription">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNotification.CreateTime">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNotification.LanguageType">
+            <summary>
+            Language
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetNotification.NoticeUrl">
+            <summary>
+            Notice url
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetSymbol">
+            <summary>
+            Symbol info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.Id">
+            <summary>
+            Symbol id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.MinOrderQuantity">
+            <summary>
+            Min order quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.MaxOrderQuantity">
+            <summary>
+            Max order quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.TakerFeeRate">
+            <summary>
+            Taker fee rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.MakerFeeRate">
+            <summary>
+            Maker fee rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.PriceDecimals">
+            <summary>
+            Price decimals
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.QuantityDecimals">
+            <summary>
+            Quantity decimals
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.MinOrderValueUsd">
+            <summary>
+            Min value of the order in USDT
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.Status">
+            <summary>
+            Symbol status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.BuyLimitPriceRatio">
+            <summary>
+            Buy price gap from market price, "0.05" means: 5%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.SellLimitPriceRatio">
+            <summary>
+            Sell price gap from market price, "0.05" means: 5%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetSymbol.MaxOrders">
+            <summary>
+            Max number of orders
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetTicker">
+            <summary>
+            Ticker info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.HighPrice24h">
+            <summary>
+            High price in last 24h
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.LowPrice24h">
+            <summary>
+            Low price in last 24h
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.ClosePrice">
+            <summary>
+            Close price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.QuoteVolume">
+            <summary>
+            Quote volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.BaseVolume">
+            <summary>
+            Base volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.UsdtVolume">
+            <summary>
+            Usdt volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.BestBidPrice">
+            <summary>
+            Best bid price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.BestBidQuantity">
+            <summary>
+            Best bid quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.BestAskPrice">
+            <summary>
+            Best sell price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.BestAskQuantity">
+            <summary>
+            Best ask price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.OpenPriceUtc0">
+            <summary>
+            Open price at UTC 0
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.ChangePercentageUtc0">
+            <summary>
+            Change percentage since UTC 0, 0.01 means 1%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTicker.ChangePercentage">
+            <summary>
+            Change percentage, 0.01 means 1%
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetTrade">
+            <summary>
+            Trade info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTrade.Symbol">
+            <summary>
+            The symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTrade.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTrade.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTrade.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTrade.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTrade.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Options.BitgetRestOptions">
+            <summary>
+            Bitget rest client options
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.Default">
+            <summary>
+            Default options for new clients
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.SpotOptions">
+            <summary>
+            Spot API options
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -28,8 +28,7 @@ namespace Bitget.Net
         /// Create a custom environment
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="spotAddress"></param>
-        /// <param name="futuresAddress"></param>
+        /// <param name="baseAddress"></param>
         /// <returns></returns>
         public static BitgetEnvironment CreateCustom(string name, string baseAddress)
             => new BitgetEnvironment(name, baseAddress);

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bitget.Net
 {
+    /// <summary>
+    /// Helper functions
+    /// </summary>
     public class BitgetHelpers
     {
     }
