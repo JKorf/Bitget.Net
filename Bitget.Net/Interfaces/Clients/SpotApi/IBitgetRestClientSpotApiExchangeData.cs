@@ -97,5 +97,46 @@ namespace Bitget.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BitgetKline>>> GetKlinesAsync(string symbol, BitgetKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get historical kline/candlestick data
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-history-candle-data" /></para>
+        /// </summary>
+        /// <param name="symbol">The id of the symbol</param>
+        /// <param name="interval">The kline interval</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Results to return, max 1000</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetKline>>> GetHistoricalKlinesAsync(string symbol, BitgetKlineInterval interval, DateTime endTime, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get order book
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-depth" /></para>
+        /// </summary>
+        /// <param name="symbol">The id of the symbol</param>
+        /// <param name="mergeLevel">Merge level for entires</param>
+        /// <param name="limit">Results to return, max 1000</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderBook>> GetOrderBookAsync(string symbol, int? mergeLevel = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get merged order book
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-merged-depth-data" /></para>
+        /// </summary>
+        /// <param name="symbol">The id of the symbol</param>
+        /// <param name="mergeLevel">Merge level for entires</param>
+        /// <param name="limit">Results to return, max 1000</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderBook>> GetMergedOrderBookAsync(string symbol, int? mergeLevel = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get limits according to the VIP levels
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetFeeLevel>>> GetFeeRatesAsync(CancellationToken ct = default);
     }
 }

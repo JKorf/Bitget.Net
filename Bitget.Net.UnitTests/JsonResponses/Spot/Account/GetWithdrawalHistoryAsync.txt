@@ -1,0 +1,23 @@
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1654507973411,
+    "data": [
+        {
+            "id": "912533114861326336",
+            "txId": "912533114861326336",
+            "coin": "USDT",
+            "clientOid": "123",
+            "type": "withdraw",
+            "amount": "10.00000000",
+            "status": "success",
+            "toAddress": "7713789662",
+            "fee": "0.00000000",
+            "chain": "erc20",
+            "confirm": "0",
+            "tag": null,
+            "cTime": "1653290769222",
+            "uTime": "1653290769222"
+        }
+    ]
+}

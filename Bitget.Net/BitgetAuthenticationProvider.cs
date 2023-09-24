@@ -1,17 +1,14 @@
-﻿using CryptoExchange.Net;
+﻿using Bitget.Net.Objects;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Bitget.Net
 {
-    internal class BitgetAuthenticationProvider : AuthenticationProvider
+    internal class BitgetAuthenticationProvider : AuthenticationProvider<BitgetApiCredentials>
     {
-        public BitgetAuthenticationProvider(ApiCredentials credentials) : base(credentials)
+        public BitgetAuthenticationProvider(BitgetApiCredentials credentials) : base(credentials)
         {
             if (credentials.CredentialType != ApiCredentialsType.Hmac)
                 throw new Exception("Only Hmac authentication is supported");
@@ -25,6 +22,23 @@ namespace Bitget.Net
 
             if (!auth)
                 return;
+
+            if (_credentials.CredentialType == ApiCredentialsType.Hmac)
+            {
+                var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonConvert.SerializeObject(bodyParameters) : "";
+
+                var timestamp = GetMillisecondTimestamp(apiClient);
+                var signString = timestamp + method.ToString().ToUpperInvariant() + uri.PathAndQuery + body;
+                var sign = SignHMACSHA256(signString, SignOutputType.Base64);
+                headers["ACCESS-KEY"] = _credentials.Key!.GetString();
+                headers["ACCESS-SIGN"] = sign;
+                headers["ACCESS-TIMESTAMP"] = timestamp;
+                headers["ACCESS-PASSPHRASE"] = _credentials.PassPhrase.GetString();
+            }
+            else
+            {
+                 
+            }
         }
     }
 }

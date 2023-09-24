@@ -5,7 +5,7 @@ namespace Bitget.Net.Objects.Options
     /// <summary>
     /// Bitget rest client options
     /// </summary>
-    public class BitgetRestOptions : RestExchangeOptions<BitgetEnvironment>
+    public class BitgetRestOptions : RestExchangeOptions<BitgetEnvironment, BitgetApiCredentials>
     {
         /// <summary>
         /// Default options for new clients

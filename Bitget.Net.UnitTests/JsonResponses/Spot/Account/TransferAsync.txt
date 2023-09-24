@@ -1,0 +1,8 @@
+{
+    "code":"00000",
+    "msg":"success",
+    "data": {
+        "transferId":"123456",
+        "clientOrderId":"x123"
+    }
+}
