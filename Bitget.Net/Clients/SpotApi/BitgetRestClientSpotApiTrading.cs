@@ -48,5 +48,69 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("clientOid", clientOrderId);
             return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/spot/v1/trade/cancel-order-v2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> CancelOrdersAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            return await _baseClient.ExecuteAsync(_baseClient.GetUri("/api/spot/v1/trade/cancel-symbol-order"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrder>> GetOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("clientOid", clientOrderId);
+            var result = await _baseClient.ExecuteAsync<IEnumerable<BitgetOrder>>(_baseClient.GetUri("/api/spot/v1/trade/orderInfo"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result.As<BitgetOrder>(default);
+
+            return result.As(result.Data.First());
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOrdersAsync(string? symbol = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol ?? "" }
+            };
+
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetOrder>>(_baseClient.GetUri("/api/spot/v1/trade/open-orders"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOrderHistoryAsync(string symbol, string? startId, string? endId, int? limit = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("after", endId);
+            parameters.AddOptionalParameter("before", startId);
+            parameters.AddOptionalParameter("limit", limit);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetOrder>>(_baseClient.GetUri("/api/spot/v1/trade/history"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetUserTrade>>> GetUserTradesAsync(string symbol, string? orderId = null, string? startId = null, string? endId = null, int? limit = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol }
+            };
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("after", endId);
+            parameters.AddOptionalParameter("before", startId);
+            parameters.AddOptionalParameter("limit", limit);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetUserTrade>>(_baseClient.GetUri("/api/spot/v1/trade/fills"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
     }
 }

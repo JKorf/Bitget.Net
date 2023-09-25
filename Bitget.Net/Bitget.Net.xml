@@ -181,6 +181,21 @@
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.CancelOrderAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.CancelOrdersAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.GetOrderAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.GetOrdersAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.GetOrderHistoryAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.GetUserTradesAsync(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetAccountType">
             <summary>
             Account type
@@ -366,6 +381,41 @@
             1 month UTC 0
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.BitgetOrderPlacementSource">
+            <summary>
+            Placement source
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Web">
+            <summary>
+            Web
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.App">
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Api">
+            <summary>
+            Api
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Sys">
+            <summary>
+            Sys
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Android">
+            <summary>
+            Android
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Ios">
+            <summary>
+            Ios
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetOrderSide">
             <summary>
             Order side
@@ -379,6 +429,36 @@
         <member name="F:Bitget.Net.Enums.BitgetOrderSide.Sell">
             <summary>
             Sell
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetOrderStatus">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.Initial">
+            <summary>
+            Initial
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.New">
+            <summary>
+            New
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.PartiallyFilled">
+            <summary>
+            Partially filled
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.Filled">
+            <summary>
+            Filled
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.Cancelled">
+            <summary>
+            Cancelled
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetOrderType">
@@ -932,6 +1012,60 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.CancelOrdersAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel all orders for a symbol
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#cancel-order-by-symbol" /></para>
+            </summary>
+            <param name="symbol">Symbol id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.GetOrderAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get order info by id
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-order-details" /></para>
+            </summary>
+            <param name="symbol">Symbol id</param>
+            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.GetOrdersAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get orders
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-order-list" /></para>
+            </summary>
+            <param name="symbol">Symbol id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.GetOrderHistoryAsync(System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get order history
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-order-list" /></para>
+            </summary>
+            <param name="symbol">Symbol id</param>
+            <param name="startId">Return results with id after this</param>
+            <param name="endId">Return results with id before this</param>
+            <param name="limit">Max results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.GetUserTradesAsync(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get trade history
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-transaction-details" /></para>
+            </summary>
+            <param name="symbol">Symbol id</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="startId">Filter by start id</param>
+            <param name="endId">Filter by end id</param>
+            <param name="limit">Max results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Bitget.Net.Objects.BitgetApiAddresses">
             <summary>
             Bitget Api addresses
@@ -1412,6 +1546,116 @@
             Notice url
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetOrder">
+            <summary>
+            Bitget order
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.AccountId">
+            <summary>
+            Account id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.Quantity">
+            <summary>
+            Order quantity (base asset when orderType=limit; quote asset when orderType=market)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.FillPrice">
+            <summary>
+            Transaction price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.QuantityFilled">
+            <summary>
+            Quantity filled
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.ValueFilled">
+            <summary>
+            Quantity filled
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.PlaceSource">
+            <summary>
+            Source
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.OrderSource">
+            <summary>
+            Order source
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrder.FeeDetails">
+            <summary>
+            Fee details
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetOrderFee">
+            <summary>
+            Order fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderFee.Deduction">
+            <summary>
+            Deduction
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderFee.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderFee.DeductionFee">
+            <summary>
+            Total deduction fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderFee.TotalFee">
+            <summary>
+            Total fee
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetOrderBook">
             <summary>
             Order book
@@ -1740,6 +1984,71 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetUserFee.TakerRate">
             <summary>
             Taker fee rate
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetUserTrade">
+            <summary>
+            User trade info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.AccountId">
+            <summary>
+            Account id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.Symbol">
+            <summary>
+            Symbol id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.Price">
+            <summary>
+            Trade price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.Quantity">
+            <summary>
+            Filled quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.Value">
+            <summary>
+            Filled value
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserTrade.Fee">
+            <summary>
+            Fee paid
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetWithdrawal">

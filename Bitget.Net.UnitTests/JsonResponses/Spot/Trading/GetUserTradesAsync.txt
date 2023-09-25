@@ -1,0 +1,18 @@
+{
+  "code":"00000",
+  "message":"success",
+  "data":[{
+  "accountId":"1001",
+  "symbol":"btcusdt_spbl",
+  "orderId":"100021",
+  "fillId":"102211",
+  "orderType":"limit",
+  "side":"buy",
+  "fillPrice":"38293.12",
+  "fillQuantity":"1",
+  "fillTotalAmount":"38293.12",
+  "cTime":"1622697148",
+  "feeCcy":"btc",
+  "fees":"0.0001"
+}]
+}
