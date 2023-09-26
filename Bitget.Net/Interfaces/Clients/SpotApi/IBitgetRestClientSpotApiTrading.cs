@@ -88,5 +88,70 @@ namespace Bitget.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BitgetUserTrade>>> GetUserTradesAsync(string symbol, string? orderId = null, string? startId = null, string? endId = null, int? limit = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Place a new planned order
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#place-plan-order" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol id</param>
+        /// <param name="side">Order side</param>
+        /// <param name="type">Order type</param>
+        /// <param name="quantity">Order quantity, base coin when orderType is limit; quote asset when orderType is buy-market, base asset when orderType is sell-market</param>
+        /// <param name="triggerPrice">Trigger price</param>
+        /// <param name="triggerType">Trigger type</param>
+        /// <param name="executePrice">Execution price (if limit order)</param>
+        /// <param name="timeInForce">Time in force</param>
+        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderResult>> PlacePlanOrderAsync(string symbol, BitgetOrderSide side, BitgetOrderType type, decimal quantity, decimal triggerPrice, BitgetTriggerType triggerType, decimal? executePrice = null, BitgetTimeInForce? timeInForce = null, string? clientOrderId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Modify an existing plan order
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#modify-plan-order" /></para>
+        /// </summary>
+        /// <param name="orderId">Order id of order to edit, either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">Client order id of order to edit, either this or orderId should be provided</param>
+        /// <param name="type">Order type</param>
+        /// <param name="quantity">Order quantity, base coin when orderType is limit; quote asset when orderType is buy-market, base asset when orderType is sell-market</param>
+        /// <param name="triggerPrice">Trigger price</param>
+        /// <param name="executePrice">Execution price (if limit order)</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderResult>> EditPlanOrderAsync(string? orderId, string? clientOrderId, BitgetOrderType type, decimal quantity, decimal triggerPrice, decimal? executePrice = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel a plan order
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#cancel-plan-order" /></para>
+        /// </summary>
+        /// <param name="orderId">Order id of order to cancel, either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">Client order id of order to cancel, either this or orderId should be provided</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> CancelPlanOrderAsync(string? orderId, string? clientOrderId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get current plan orders
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-current-plan-orders" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol id</param>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="fromId">Return results after this order id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetPagination<BitgetPlanOrder>>> GetPlanOrdersAsync(string symbol, int pageSize, string? fromId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get historic plan orders
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-history-plan-orders" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol id</param>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="fromId">Return results after this order id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetPagination<BitgetPlanOrder>>> GetPlanOrderHistoryAsync(string symbol, int pageSize, DateTime startTime, DateTime endTime, string? fromId = null, CancellationToken ct = default);
     }
 }

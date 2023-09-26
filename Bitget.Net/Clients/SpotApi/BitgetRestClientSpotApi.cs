@@ -23,7 +23,7 @@ namespace Bitget.Net.Clients.SpotApi
         public IBitgetRestClientSpotApiTrading Trading { get; }
 
         internal BitgetRestClientSpotApi(ILogger logger, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
-            : base(logger, httpClient, options.Environment.BaseAddress, options, options.SpotOptions)
+            : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.SpotOptions)
         {
             Account = new BitgetRestClientSpotApiAccount(this);
             ExchangeData = new BitgetRestClientSpotApiExchangeData(this);

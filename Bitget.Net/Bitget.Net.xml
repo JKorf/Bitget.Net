@@ -9,9 +9,14 @@
             Bitget environment
             </summary>
         </member>
-        <member name="P:Bitget.Net.BitgetEnvironment.BaseAddress">
+        <member name="P:Bitget.Net.BitgetEnvironment.RestBaseAddress">
             <summary>
-            Base API address
+            Base rest API address
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetEnvironment.SocketBaseAddress">
+            <summary>
+            Base socket API address
             </summary>
         </member>
         <member name="P:Bitget.Net.BitgetEnvironment.Live">
@@ -19,12 +24,13 @@
             Live environment
             </summary>
         </member>
-        <member name="M:Bitget.Net.BitgetEnvironment.CreateCustom(System.String,System.String)">
+        <member name="M:Bitget.Net.BitgetEnvironment.CreateCustom(System.String,System.String,System.String)">
             <summary>
             Create a custom environment
             </summary>
             <param name="name"></param>
-            <param name="baseAddress"></param>
+            <param name="baseRestAddress"></param>
+            <param name="socketRestAddress"></param>
             <returns></returns>
         </member>
         <member name="T:Bitget.Net.BitgetHelpers">
@@ -60,6 +66,34 @@
             Set the default options to be used when creating new clients
             </summary>
             <param name="optionsFunc">Option configuration delegate</param>
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance of the BitfinexSocketClient
+            </summary>
+            <param name="loggerFactory">The logger factory</param>
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions})">
+            <summary>
+            Create a new instance of the BitfinexSocketClient
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance of the BitfinexSocketClient
+            </summary>
+            <param name="loggerFactory">The logger factory</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetSocketClient.SetDefaultOptions(System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions})">
+            <summary>
+            Set the default options to be used when creating new clients
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetSocketClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
+            <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi">
             <inheritdoc />
@@ -194,6 +228,45 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.GetUserTradesAsync(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.PlacePlanOrderAsync(System.String,Bitget.Net.Enums.BitgetOrderSide,Bitget.Net.Enums.BitgetOrderType,System.Decimal,System.Decimal,Bitget.Net.Enums.BitgetTriggerType,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.BitgetTimeInForce},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.EditPlanOrderAsync(System.String,System.String,Bitget.Net.Enums.BitgetOrderType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.CancelPlanOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.GetPlanOrdersAsync(System.String,System.Int32,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.GetPlanOrderHistoryAsync(System.String,System.Int32,System.DateTime,System.DateTime,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.HandleSubscriptionResponse(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{System.Object}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.MessageMatchesHandler(CryptoExchange.Net.Sockets.SocketConnection,Newtonsoft.Json.Linq.JToken,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.UnsubscribeAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Enums.BitgetAccountType">
@@ -574,6 +647,21 @@
         <member name="F:Bitget.Net.Enums.BitgetTransferStatus.Processing">
             <summary>
             In progress
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetTriggerType">
+            <summary>
+            Trigger type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetTriggerType.FillPrice">
+            <summary>
+            Fill price
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetTriggerType.MarketPrice">
+            <summary>
+            Market price
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BizType">
@@ -1066,14 +1154,84 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.PlacePlanOrderAsync(System.String,Bitget.Net.Enums.BitgetOrderSide,Bitget.Net.Enums.BitgetOrderType,System.Decimal,System.Decimal,Bitget.Net.Enums.BitgetTriggerType,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.BitgetTimeInForce},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Place a new planned order
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#place-plan-order" /></para>
+            </summary>
+            <param name="symbol">Symbol id</param>
+            <param name="side">Order side</param>
+            <param name="type">Order type</param>
+            <param name="quantity">Order quantity, base coin when orderType is limit; quote asset when orderType is buy-market, base asset when orderType is sell-market</param>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="triggerType">Trigger type</param>
+            <param name="executePrice">Execution price (if limit order)</param>
+            <param name="timeInForce">Time in force</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.EditPlanOrderAsync(System.String,System.String,Bitget.Net.Enums.BitgetOrderType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Modify an existing plan order
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#modify-plan-order" /></para>
+            </summary>
+            <param name="orderId">Order id of order to edit, either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id of order to edit, either this or orderId should be provided</param>
+            <param name="type">Order type</param>
+            <param name="quantity">Order quantity, base coin when orderType is limit; quote asset when orderType is buy-market, base asset when orderType is sell-market</param>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="executePrice">Execution price (if limit order)</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.CancelPlanOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a plan order
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#cancel-plan-order" /></para>
+            </summary>
+            <param name="orderId">Order id of order to cancel, either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id of order to cancel, either this or orderId should be provided</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.GetPlanOrdersAsync(System.String,System.Int32,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get current plan orders
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-current-plan-orders" /></para>
+            </summary>
+            <param name="symbol">Symbol id</param>
+            <param name="pageSize">Page size</param>
+            <param name="fromId">Return results after this order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiTrading.GetPlanOrderHistoryAsync(System.String,System.Int32,System.DateTime,System.DateTime,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get historic plan orders
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-history-plan-orders" /></para>
+            </summary>
+            <param name="symbol">Symbol id</param>
+            <param name="pageSize">Page size</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="fromId">Return results after this order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Bitget.Net.Objects.BitgetApiAddresses">
             <summary>
             Bitget Api addresses
             </summary>
         </member>
-        <member name="P:Bitget.Net.Objects.BitgetApiAddresses.BaseAddress">
+        <member name="P:Bitget.Net.Objects.BitgetApiAddresses.RestBaseAddress">
             <summary>
-            The address used by the Bitget for the API
+            The address used by the library for the Bitget rest API
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.BitgetApiAddresses.SocketBaseAddress">
+            <summary>
+            The address used by the library for the Bitget socket API
             </summary>
         </member>
         <member name="F:Bitget.Net.Objects.BitgetApiAddresses.Default">
@@ -1706,6 +1864,97 @@
             Client order id
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetPagination`1">
+            <summary>
+            Paginated result
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPagination`1.HasNext">
+            <summary>
+            Has another page
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPagination`1.EndId">
+            <summary>
+            Last id of the results, can be used for requesting the next page
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPagination`1.Data">
+            <summary>
+            Paged data
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetPlanOrder">
+            <summary>
+            Plan order
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.ExecutePrice">
+            <summary>
+            Execution price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.TriggerPrice">
+            <summary>
+            Trigger price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.Type">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.TriggerType">
+            <summary>
+            	Order trigger type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.Source">
+            <summary>
+            	Order trigger type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPlanOrder.PlaceType">
+            <summary>
+            Place type
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetSymbol">
             <summary>
             Symbol info
@@ -1864,6 +2113,86 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetTicker.ChangePercentage">
             <summary>
             Change percentage, 0.01 means 1%
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetTickerUpdate">
+            <summary>
+            Ticker update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.LastPrice">
+            <summary>
+            Last trade price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.BestAskQuantity">
+            <summary>
+            Best ask quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.BestAskPrice">
+            <summary>
+            Best ask price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.BestBidQuantity">
+            <summary>
+            Best bid quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.BestBidPrice">
+            <summary>
+            Best bid price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.OpenPrice24h">
+            <summary>
+            Open price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.OpenPriceUtc0">
+            <summary>
+            Open price at UTC 0
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.HighPrice24h">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.LowPrice24h">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.BaseVolume">
+            <summary>
+            Base volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.QuoteVolume">
+            <summary>
+            Quote volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.LabelId">
+            <summary>
+            Label id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTickerUpdate.ChangePercentageUtc0">
+            <summary>
+            Change rate since openUtc, that is: (last - openUtc) / openUtc, scale e-5
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetTrade">
@@ -2152,6 +2481,21 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.SpotOptions">
+            <summary>
+            Spot API options
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Options.BitgetSocketOptions">
+            <summary>
+            Bitget socket client options
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetSocketOptions.Default">
+            <summary>
+            Default options for new clients
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetSocketOptions.SpotOptions">
             <summary>
             Spot API options
             </summary>

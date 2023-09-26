@@ -71,6 +71,9 @@ namespace Bitget.Net.UnitTests
                     { "GetOrdersAsync", "data" },
                     { "GetOrderHistoryAsync", "data" },
                     { "GetUserTradesAsync", "data" },
+                    { "PlacePlanOrderAsync", "data" },
+                    { "EditPlanOrderAsync", "data" },
+                    { "GetPlanOrdersAsync", "data" },
                 });
         }
     }
