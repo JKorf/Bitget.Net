@@ -245,7 +245,40 @@
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiTrading.GetPlanOrderHistoryAsync(System.String,System.Int32,System.DateTime,System.DateTime,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="T:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTradeUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetBalanceUpdate}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
@@ -399,7 +432,7 @@
             6 hours
             </summary>
         </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.TwelfHours">
+        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.TwelveHours">
             <summary>
             12 hours
             </summary>
@@ -547,6 +580,56 @@
         <member name="F:Bitget.Net.Enums.BitgetOrderType.Market">
             <summary>
             Market
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetStreamKlineInterval">
+            <summary>
+            Kline interval
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.OneMinute">
+            <summary>
+            One minute
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.FiveMinutes">
+            <summary>
+            Five minute
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.FifteenMinutes">
+            <summary>
+            Fifteen minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.ThirtyMinutes">
+            <summary>
+            Thirty minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.OneHour">
+            <summary>
+            One hour
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.FourHours">
+            <summary>
+            Four hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.TwelveHours">
+            <summary>
+            Twelve hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.OneDay">
+            <summary>
+            One day
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.OneWeek">
+            <summary>
+            One week
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetSymbolStatus">
@@ -1379,6 +1462,26 @@
             Last update time
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetBalanceUpdate">
+            <summary>
+            Balance update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetBalanceUpdate.AssetId">
+            <summary>
+            Asset id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetBalanceUpdate.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetBalanceUpdate.Available">
+            <summary>
+            Available quantity
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetBill">
             <summary>
             Bill info
@@ -1614,6 +1717,41 @@
             Timestamp
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetKlineUpdate">
+            <summary>
+            Kline update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKlineUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKlineUpdate.OpenPrice">
+            <summary>
+            Open price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKlineUpdate.HighPrice">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKlineUpdate.LowPrice">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKlineUpdate.ClosePrice">
+            <summary>
+            Close price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetKlineUpdate.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetNetwork">
             <summary>
             Network info
@@ -1847,6 +1985,26 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetOrderBookEntry.Quantity">
             <summary>
             Quantity
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetOrderBookUpdate">
+            <summary>
+            Book update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderBookUpdate.Asks">
+            <summary>
+            Asks
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderBookUpdate.Bids">
+            <summary>
+            Bids
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderBookUpdate.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetOrderResult">
@@ -2226,6 +2384,31 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.BitgetTrade.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetTradeUpdate">
+            <summary>
+            Trade update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTradeUpdate.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTradeUpdate.Quantity">
+            <summary>
+            Trade quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTradeUpdate.Price">
+            <summary>
+            Trade price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetTradeUpdate.Timestamp">
             <summary>
             Timestamp
             </summary>

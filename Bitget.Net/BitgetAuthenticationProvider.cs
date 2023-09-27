@@ -1,13 +1,18 @@
 ﻿using Bitget.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
+using System;
 
 namespace Bitget.Net
 {
     internal class BitgetAuthenticationProvider : AuthenticationProvider<BitgetApiCredentials>
     {
+        public string ApiKey => _credentials.Key!.GetString();
+        public string Passphrase => _credentials.PassPhrase!.GetString();
+
         public BitgetAuthenticationProvider(BitgetApiCredentials credentials) : base(credentials)
         {
             if (credentials.CredentialType != ApiCredentialsType.Hmac)
@@ -39,6 +44,11 @@ namespace Bitget.Net
             {
                  
             }
+        }
+
+        public string GetWebsocketSignature(long timestamp)
+        {
+            return SignHMACSHA256(timestamp + "GET" + "/user/verify", SignOutputType.Base64);
         }
     }
 }

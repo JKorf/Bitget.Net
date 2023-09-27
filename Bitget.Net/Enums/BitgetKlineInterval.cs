@@ -46,7 +46,7 @@ namespace Bitget.Net.Enums
         /// 12 hours
         /// </summary>
         [Map("12h")]
-        TwelfHours = 60 * 60 * 12,
+        TwelveHours = 60 * 60 * 12,
         /// <summary>
         /// 1 day
         /// </summary>

@@ -12,7 +12,8 @@ namespace Bitget.Net.Objects.Options
         /// </summary>
         public static BitgetSocketOptions Default { get; set; } = new BitgetSocketOptions()
         {
-            Environment = BitgetEnvironment.Live
+            Environment = BitgetEnvironment.Live,
+            SocketSubscriptionsCombineTarget = 10
         };
 
         /// <summary>
