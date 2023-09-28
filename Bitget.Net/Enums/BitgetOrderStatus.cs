@@ -20,12 +20,12 @@ namespace Bitget.Net.Enums
         /// <summary>
         /// Partially filled
         /// </summary>
-        [Map("partial_fill")]
+        [Map("partial_fill", "partial-fill")]
         PartiallyFilled,
         /// <summary>
         /// Filled
         /// </summary>
-        [Map("full_fill")]
+        [Map("full_fill", "full-fill")]
         Filled,
         /// <summary>
         /// Cancelled

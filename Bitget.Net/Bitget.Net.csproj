@@ -43,7 +43,6 @@
 
   <ItemGroup>
     <Folder Include="Icon\" />
-    <Folder Include="SymbolOrderBooks\" />
   </ItemGroup>
 
 </Project>

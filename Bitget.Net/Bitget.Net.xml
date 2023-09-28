@@ -67,6 +67,12 @@
             </summary>
             <param name="optionsFunc">Option configuration delegate</param>
         </member>
+        <member name="T:Bitget.Net.Clients.BitgetSocketClient">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.BitgetSocketClient.SpotApi">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             Create a new instance of the BitfinexSocketClient
@@ -281,6 +287,9 @@
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetBalanceUpdate}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetOrderUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
@@ -360,6 +369,21 @@
         <member name="F:Bitget.Net.Enums.BitgetBusinessType.SpotMargin">
             <summary>
             Spot margin
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetExecutionType">
+            <summary>
+            Execution type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetExecutionType.Taker">
+            <summary>
+            Taker
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetExecutionType.Maker">
+            <summary>
+            Maker
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetGroupType">
@@ -485,6 +509,36 @@
         <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneMonthUtc">
             <summary>
             1 month UTC 0
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetOrderForce">
+            <summary>
+            Order force
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderForce.Normal">
+            <summary>
+            Normal
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderForce.Twap">
+            <summary>
+            Twap
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderForce.Adl">
+            <summary>
+            Adl
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderForce.FullLiquidation">
+            <summary>
+            Full liquidation
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetOrderForce.PartialLiquidation">
+            <summary>
+            Partial liquidation
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetOrderPlacementSource">
@@ -828,6 +882,22 @@
             </summary>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.IBitgetSocketClient">
+            <summary>
+            Client for accessing the Bitget websocket API
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.SpotApi">
+            <summary>
+            Spot streams
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
             <summary>
             Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
             </summary>
@@ -1300,6 +1370,133 @@
             <param name="endTime">Filter by end time</param>
             <param name="fromId">Return results after this order id</param>
             <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi">
+            <summary>
+            Bitget spot streams
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetBalanceUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to updates to the account balance
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#account-channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to kline/candlestick updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#candlesticks-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="interval">Kline interval</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to kline/candlestick updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#candlesticks-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="interval">Kline interval</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to orderbook changes updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#depth-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to orderbook snapshot updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#depth-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="limit">The book depth, either 5 or 15</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to orderbook changes updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#depth-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to orderbook snapshot updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#depth-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="limit">The book depth, either 5 or 15</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetOrderUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to account order updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#order-channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to symbol ticker updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#tickers-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to symbol ticker updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#tickers-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTradeUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to symbol trade updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#trades-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to symbol trade updates
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#trades-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
         <member name="T:Bitget.Net.Objects.BitgetApiAddresses">
@@ -2022,6 +2219,141 @@
             Client order id
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetOrderUpdate">
+            <summary>
+            Order update info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.SymbolId">
+            <summary>
+            Symbol id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.Price">
+            <summary>
+            Order price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.Quantity">
+            <summary>
+            Order original quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.Notional">
+            <summary>
+            The purchase amount, which will be returned when the market price is purchased
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.OrderType">
+            <summary>
+            The order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.Force">
+            <summary>
+            The order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.OrderSide">
+            <summary>
+            The order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.FillPrice">
+            <summary>
+            Fill price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.FillQuantity">
+            <summary>
+            Fill quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.FillFee">
+            <summary>
+            Fill fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.FeeAsset">
+            <summary>
+            Fill fee asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.FillTime">
+            <summary>
+            Fill time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.ExecutionType">
+            <summary>
+            Fill type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.QuantityFilled">
+            <summary>
+            Quantity filled
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.AverageTradePrice">
+            <summary>
+            Average trade price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.Source">
+            <summary>
+            Order source
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderUpdate.OrderFees">
+            <summary>
+            Fee info
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetOrderFeeQuantity">
+            <summary>
+            Fee info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderFeeQuantity.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOrderFeeQuantity.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetPagination`1">
             <summary>
             Paginated result
@@ -2653,6 +2985,21 @@
             Client order id
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Options.BitgetOrderBookOptions">
+            <summary>
+            Order book options
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetOrderBookOptions.Default">
+            <summary>
+            Default options for new order books
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetOrderBookOptions.Limit">
+            <summary>
+            The limit of entries in the order book, either 5, 15 or null
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Options.BitgetRestOptions">
             <summary>
             Bitget rest client options
@@ -2681,6 +3028,41 @@
         <member name="P:Bitget.Net.Objects.Options.BitgetSocketOptions.SpotOptions">
             <summary>
             Spot API options
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.SymbolOrderBooks.BitgetSpotSymbolOrderBook">
+            <summary>
+            Live order book implementation
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetSpotSymbolOrderBook.#ctor(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
+            <summary>
+            Create a new order book instance
+            </summary>
+            <param name="symbol">The symbol the order book is for</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetSpotSymbolOrderBook.#ctor(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions},Microsoft.Extensions.Logging.ILogger{Bitget.Net.SymbolOrderBooks.BitgetSpotSymbolOrderBook},Bitget.Net.Interfaces.Clients.IBitgetSocketClient)">
+            <summary>
+            Create a new order book instance
+            </summary>
+            <param name="symbol">The symbol the order book is for</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="logger">Logger</param>
+            <param name="socketClient">Socket client instance</param>
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetSpotSymbolOrderBook.DoStartAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetSpotSymbolOrderBook.DoReset">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetSpotSymbolOrderBook.DoResyncAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetSpotSymbolOrderBook.Dispose(System.Boolean)">
+            <summary>
+            Dispose
             </summary>
         </member>
     </members>

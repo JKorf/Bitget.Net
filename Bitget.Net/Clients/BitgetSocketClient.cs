@@ -1,15 +1,18 @@
 ﻿using Bitget.Net.Clients.SpotApi;
+using Bitget.Net.Interfaces.Clients;
+using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using Microsoft.Extensions.Logging;
 
-
 namespace Bitget.Net.Clients
 {
-    public class BitgetSocketClient : BaseSocketClient
+    /// <inheritdoc />
+    public class BitgetSocketClient : BaseSocketClient, IBitgetSocketClient
     {
-        public BitgetSocketClientSpotApi SpotApi { get; set; }
+        /// <inheritdoc />
+        public IBitgetSocketClientSpotApi SpotApi { get; set; }
 
         #region ctor
 

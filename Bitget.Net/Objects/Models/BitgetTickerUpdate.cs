@@ -46,7 +46,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Open price at UTC 0
         /// </summary>
-        [JsonProperty("openUTC")]
+        [JsonProperty("openUtc")]
         public decimal OpenPriceUtc0 { get; set; }
         /// <summary>
         /// High price

@@ -1,4 +1,5 @@
 ﻿using Bitget.Net.Enums;
+using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
@@ -14,7 +15,7 @@ using Newtonsoft.Json.Linq;
 namespace Bitget.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BitgetSocketClientSpotApi : SocketApiClient
+    public class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
     {
         #region ctor
         internal BitgetSocketClientSpotApi(ILogger logger, BitgetSocketOptions options) :
@@ -32,7 +33,7 @@ namespace Bitget.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BitgetTickerUpdate>> handler, CancellationToken ct = default)
-            => SubscribeToTickerUpdatesAsync(new [] { symbol }, handler, ct);
+            => SubscribeToTickerUpdatesAsync(new[] { symbol }, handler, ct);
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetTickerUpdate>> handler, CancellationToken ct = default)
@@ -167,6 +168,22 @@ namespace Bitget.Net.Clients.SpotApi
             }, true, handler, ct).ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BitgetOrderUpdate>>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), new BitgetSocketRequest
+            {
+                Op = "subscribe",
+                Args = new object[] { new Dictionary<string, object>
+                    {
+                        { "instType", "spbl" },
+                        { "channel", "orders" },
+                        { "instId", "default" },
+                    }
+                }
+            }, true, handler, ct).ConfigureAwait(false);
+        }
+
         private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(string url, object request, bool authenticated, Action<DataEvent<T>> handler, CancellationToken ct)
         {
             var internalHandler = (DataEvent<JToken> data) =>
@@ -205,7 +222,7 @@ namespace Bitget.Net.Clients.SpotApi
                         { "timestamp", time.ToString() },
                         { "sign", signature },
                     }
-                } 
+                }
             };
 
             var result = new CallResult<bool>(new ServerError("No response from server"));
@@ -242,8 +259,10 @@ namespace Bitget.Net.Clients.SpotApi
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
+
         /// <inheritdoc />
         protected override bool HandleQueryResponse<T>(SocketConnection socketConnection, object request, JToken data, out CallResult<T> callResult) => throw new NotImplementedException();
+
         /// <inheritdoc />
         protected override bool HandleSubscriptionResponse(SocketConnection socketConnection, SocketSubscription subscription, object request, JToken message, out CallResult<object>? callResult)
         {
@@ -251,12 +270,12 @@ namespace Bitget.Net.Clients.SpotApi
             if (message.Type != JTokenType.Object)
                 return false;
 
-            var op = message["event"];
+            var op = message["event"]?.ToString();
             if (op == null)
                 return false;
 
             var bRequest = (BitgetSocketRequest)request;
-            if (op.ToString() != "subscribe")
+            if (op != "subscribe" && op != "error")
                 return false;
 
             var instType = message["arg"]?["instType"]?.ToString();
@@ -273,7 +292,12 @@ namespace Bitget.Net.Clients.SpotApi
                 return false;
             }
 
-            // TODO handle error
+            if (op == "error")
+            {
+                _logger.Log(LogLevel.Trace, $"Socket {socketConnection.SocketId} Subscription failed");
+                callResult = new CallResult<object>(new ServerError(message["code"]!.Value<int>(), message["msg"]!.ToString()));
+                return true;
+            }
 
             _logger.Log(LogLevel.Trace, $"Socket {socketConnection.SocketId} Subscription completed");
             callResult = new CallResult<object>(new object());
@@ -320,6 +344,7 @@ namespace Bitget.Net.Clients.SpotApi
 
         /// <inheritdoc />
         protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier) => throw new NotImplementedException();
+
         /// <inheritdoc />
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
         {
@@ -334,7 +359,7 @@ namespace Bitget.Net.Clients.SpotApi
             {
                 if (data.Type != JTokenType.Object)
                     return false;
-                
+
                 var evnt = data["event"];
                 if (evnt?.ToString() != "unsubscribe")
                     return false;
