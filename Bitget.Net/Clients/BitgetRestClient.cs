@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Clients.SpotApi;
+﻿using Bitget.Net.Clients.FuturesApi;
+using Bitget.Net.Clients.SpotApi;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects.Options;
@@ -13,6 +14,8 @@ namespace Bitget.Net.Clients
     {
         /// <inheritdoc />
         public IBitgetRestClientSpotApi SpotApi { get; }
+        /// <inheritdoc />
+        public IBitgetRestClientFuturesApi FuturesApi { get; }
 
         /// <summary>
         /// Create a new instance of BitgetRestClient
@@ -36,6 +39,7 @@ namespace Bitget.Net.Clients
             Initialize(options);
 
             SpotApi = AddApiClient(new BitgetRestClientSpotApi(_logger, httpClient, this, options));
+            FuturesApi = AddApiClient(new BitgetRestClientFuturesApi(_logger, httpClient, this, options));
         }
 
         /// <inheritdoc />

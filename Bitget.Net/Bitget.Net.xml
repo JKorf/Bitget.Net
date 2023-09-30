@@ -44,6 +44,9 @@
         <member name="P:Bitget.Net.Clients.BitgetRestClient.SpotApi">
             <inheritdoc />
         </member>
+        <member name="P:Bitget.Net.Clients.BitgetRestClient.FuturesApi">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
             <summary>
             Create a new instance of BitgetRestClient
@@ -99,6 +102,99 @@
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.Account">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.ExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.Trading">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.GetServerTimestampAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.GetTimeSyncInfo">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetBalancesAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetSymbolsAsync(Bitget.Net.Enums.BitgetProductType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetMergedOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetTickersAsync(Bitget.Net.Enums.BitgetProductType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetFeeRatesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetRecentTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetTradeHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetKlinesAsync(System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetKlineType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetHistoricalKlinesAsync(System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetKlineType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetHistoricalIndexKlinesAsync(System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetKlineType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetHistoricalMarkKlinesAsync(System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetKlineType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetIndexPriceAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetNextFundingTimeAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetFundingRateHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetFundingRateAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiTrading">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiTrading.PlaceOrderAsync(System.String,Bitget.Net.Enums.BitgetOrderSide,Bitget.Net.Enums.BitgetOrderType,System.Decimal,Bitget.Net.Enums.BitgetTimeInForce,System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi">
@@ -386,6 +482,146 @@
             Maker
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.BitgetFuturesKlineInterval">
+            <summary>
+            Kline interval
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.OneMinute">
+            <summary>
+            1 minute
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.FiveMinutes">
+            <summary>
+            5 minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.FifteenMinutes">
+            <summary>
+            15 minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.ThirtyMinutes">
+            <summary>
+            30 minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.OneHour">
+            <summary>
+            1 hour
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.FourHours">
+            <summary>
+            4 hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.SixHours">
+            <summary>
+            6 hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.TwelveHours">
+            <summary>
+            12 hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.OneDay">
+            <summary>
+            1 day
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.ThreeDays">
+            <summary>
+            3 days
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.OneWeek">
+            <summary>
+            1 week
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.OneMonth">
+            <summary>
+            1 month
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.SixHourUtc">
+            <summary>
+            6 hour UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.TwelfHourUtc">
+            <summary>
+            12 hour UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.OneDayUtc">
+            <summary>
+            1 day UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.ThreeDayUTC">
+            <summary>
+            3 day UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.OneWeekUtc">
+            <summary>
+            1 week UTC 0
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.OneMonthUtc">
+            <summary>
+            1 month UTC 0
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetFuturesSymbolStatus">
+            <summary>
+            Symbol status
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.Normal">
+            <summary>
+            Normal
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.Maintainance">
+            <summary>
+            Maintenance
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.Offline">
+            <summary>
+            Offline
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.Restricted">
+            <summary>
+            Restricted API
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.NoNewOrders">
+            <summary>
+            No new openings
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetFuturesSymbolType">
+            <summary>
+            Symbol type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolType.Perpetual">
+            <summary>
+            Perpetual contract
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolType.Delivery">
+            <summary>
+            Delivery contract
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetGroupType">
             <summary>
             Group type
@@ -511,6 +747,26 @@
             1 month UTC 0
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.BitgetKlineType">
+            <summary>
+            Kline type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineType.Market">
+            <summary>
+            Market price
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineType.Mark">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetKlineType.Index">
+            <summary>
+            Index price
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetOrderForce">
             <summary>
             Order force
@@ -634,6 +890,41 @@
         <member name="F:Bitget.Net.Enums.BitgetOrderType.Market">
             <summary>
             Market
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetProductType">
+            <summary>
+            Product type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductType.UsdtPerpetual">
+            <summary>
+            Usdt perpetual contracts
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductType.UniversalMarginPerpetual">
+            <summary>
+            Universal margin perpetual contracts
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductType.UsdcPerpetual">
+            <summary>
+            Usdc perpetual contracts
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductType.SimUsdtPerpetual">
+            <summary>
+            Simulation usdt perpetual contracts
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductType.SimUniversalMarginPerpetual">
+            <summary>
+            Simulation universal margin perpetual contracts
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductType.SimUsdcPerpetual">
+            <summary>
+            Simulation usdc perpetual contracts
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetStreamKlineInterval">
@@ -871,37 +1162,25 @@
             User lock
             </summary>
         </member>
-        <member name="T:Bitget.Net.Interfaces.Clients.IBitgetRestClient">
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientFuturesApi">
             <summary>
-            Client for accessing the Bitget API. 
+            Futures API endpoints
             </summary>
         </member>
-        <member name="P:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SpotApi">
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientFuturesApi.Account">
             <summary>
-            Spot API endpoints
+            Endpoints related to account settings, info or actions
             </summary>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientFuturesApi.ExchangeData">
             <summary>
-            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
-            </summary>
-            <param name="credentials">The credentials to set</param>
-        </member>
-        <member name="T:Bitget.Net.Interfaces.Clients.IBitgetSocketClient">
-            <summary>
-            Client for accessing the Bitget websocket API
+            Endpoints related to retrieving market and system data
             </summary>
         </member>
-        <member name="P:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.SpotApi">
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientFuturesApi.Trading">
             <summary>
-            Spot streams
+            Endpoints related to account settings, info or actions
             </summary>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
-            <summary>
-            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
-            </summary>
-            <param name="credentials">The credentials to set</param>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi">
             <summary>
@@ -1199,7 +1478,7 @@
             <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-depth" /></para>
             </summary>
             <param name="symbol">The id of the symbol</param>
-            <param name="mergeLevel">Merge level for entires</param>
+            <param name="mergeLevel">Merge level for entries</param>
             <param name="limit">Results to return, max 1000</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -1498,6 +1777,240 @@
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount">
+            <summary>
+            Bitget account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData">
+            <summary>
+            Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the server time
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-server-time" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetSymbolsAsync(Bitget.Net.Enums.BitgetProductType,System.Threading.CancellationToken)">
+            <summary>
+            Get symbols
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-all-symbols" /></para>
+            </summary>
+            <param name="type">Product type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetMergedOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get merged order book
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-merged-depth-data" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="mergeLevel">Merge level for entries</param>
+            <param name="limit">Results to return, 1/5/15/50, defaults to 100</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get order book
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-depth" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="limit">Results to return, 1/5/15/50/100</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetTickerAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get ticker
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-single-symbol-ticker" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetTickersAsync(Bitget.Net.Enums.BitgetProductType,System.Threading.CancellationToken)">
+            <summary>
+            Get tickers
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-all-symbol-ticker" /></para>
+            </summary>
+            <param name="type">Type of symbols</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetFeeRatesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get fee information
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#vip-fee-rate" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetRecentTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get recent trades for a symbol
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-recent-fills" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="limit">Max amount of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetTradeHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get trade history for a symbol
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-fills" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="maxTradeId">Return trades before this id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max amount of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetKlinesAsync(System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetKlineType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get klines/candlestick data
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-candle-data" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="priceType">Price type</param>
+            <param name="startTime">Start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max amount of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetHistoricalKlinesAsync(System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetKlineType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get klines/candlestick data
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-history-candle-data" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="priceType">Price type</param>
+            <param name="startTime">Start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max amount of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetHistoricalIndexKlinesAsync(System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetKlineType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get index klines/candlestick data
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-history-index-candle-data" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="priceType">Price type</param>
+            <param name="startTime">Start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max amount of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetHistoricalMarkKlinesAsync(System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetKlineType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get mark klines/candlestick data
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-history-mark-candle-data" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="priceType">Price type</param>
+            <param name="startTime">Start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max amount of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetIndexPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the index price for a symbol
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-symbol-index-price" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetNextFundingTimeAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get next funding time
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-symbol-next-funding-time" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetFundingRateHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            Get funding rate history
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-history-funding-rate" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="page">Page number</param>
+            <param name="pageSize">Page size</param>
+            <param name="nextPage">Whether to query the next page default false</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetFundingRateAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get current funding rate
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-current-funding-rate" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiTrading">
+            <summary>
+            Bitget trading endpoints, placing and mananging orders.
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.IBitgetRestClient">
+            <summary>
+            Client for accessing the Bitget API. 
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SpotApi">
+            <summary>
+            Spot API endpoints
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.IBitgetRestClient.FuturesApi">
+            <summary>
+            Futures API endpoints
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.IBitgetSocketClient">
+            <summary>
+            Client for accessing the Bitget websocket API
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.SpotApi">
+            <summary>
+            Spot streams
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
         </member>
         <member name="T:Bitget.Net.Objects.BitgetApiAddresses">
             <summary>
@@ -1867,6 +2380,386 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetFeeLevel.WithdrawQuantityUsdt">
             <summary>
             24 hours withdraw amount (USDT)
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFundingRate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFundingRate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFundingRate.FundingRate">
+            <summary>
+            Current funding rate
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFundingRateHistory">
+            <summary>
+            Historical funding rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFundingRateHistory.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFundingRateHistory.FundingRate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFundingRateHistory.SettleTime">
+            <summary>
+            Settle time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFundingTime">
+            <summary>
+            Next funding time info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFundingTime.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFundingTime.FundingTime">
+            <summary>
+            Funding time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFuturesKline">
+            <summary>
+            Kline info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesKline.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesKline.OpenPrice">
+            <summary>
+            Open price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesKline.HighPrice">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesKline.LowPrice">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesKline.ClosePrice">
+            <summary>
+            Close price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesKline.BaseVolume">
+            <summary>
+            Base volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesKline.QuoteVolume">
+            <summary>
+            Quote volume
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFuturesOrderBook">
+            <summary>
+            Order book
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesOrderBook.Asks">
+            <summary>
+            Ask entries
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesOrderBook.Bids">
+            <summary>
+            Bid entries
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesOrderBook.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesOrderBook.Precision">
+            <summary>
+            Current gear, for example: scale 1
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesOrderBook.Scale">
+            <summary>
+            Precision value
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesOrderBook.IsMaxPrecision">
+            <summary>
+            Is max precision
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFuturesSymbol">
+            <summary>
+            Futures symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.Id">
+            <summary>
+            Symbol id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.Name">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.BuyLimitPriceRatio">
+            <summary>
+            Buy limit price ratio
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.SellLimitPriceRatio">
+            <summary>
+            Sell limit price ratio
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.FeeRateUpRatio">
+            <summary>
+            Rate of increase in handling fee, 0.005 means 0.5%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.MakerFeeRate">
+            <summary>
+            Maker fee rate, 0.0002 means 0.02%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.TakerFeeRate">
+            <summary>
+            Taker fee rate, 0.0006 means 0.06%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.OpenCostUpRatio">
+            <summary>
+            Percentage of increase in opening cost, 0.01 means 1%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.SupportMarginAssets">
+            <summary>
+            	Support margin currency array
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.MinTradeNum">
+            <summary>
+            Minimum number of openings(Base Currency)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.PriceEndStep">
+            <summary>
+            Price step, i.e. when pricePlace=1, priceEndStep=5 means the price would only accept numbers like 10.0, 10.5, and reject numbers like 10.2(10.2 divided by 0.5 not equals to 0)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.QuantityDecimals">
+            <summary>
+            Number of decimal places
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.PriceDecimals">
+            <summary>
+            Price scale precision, i.e. 1 means 0.1; 2 means 0.01
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.SizeMultiplier">
+            <summary>
+            Quantity Multiplier The order size must be greater than minTradeNum and satisfy the multiple of sizeMultiplier
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.Type">
+            <summary>
+            Futures symbol type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.Status">
+            <summary>
+            Symbol status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.DelistTime">
+            <summary>
+            Delist time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesSymbol.LimitOpenTime">
+            <summary>
+            Prohibit create order time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFuturesTicker">
+            <summary>
+            Ticker info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.HighPrice24h">
+            <summary>
+            High price in last 24h
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.LowPrice24h">
+            <summary>
+            Low price in last 24h
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.LastPrice">
+            <summary>
+            Last price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.QuoteVolume">
+            <summary>
+            Quote volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.BaseVolume">
+            <summary>
+            Base volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.UsdtVolume">
+            <summary>
+            Usdt volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.BestBidPrice">
+            <summary>
+            Best bid price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.BestBidQuantity">
+            <summary>
+            Best bid quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.BestAskPrice">
+            <summary>
+            Best sell price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.BestAskQuantity">
+            <summary>
+            Best ask price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.OpenPriceUtc0">
+            <summary>
+            Open price at UTC 0
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.ChangePercentageUtc0">
+            <summary>
+            Change percentage since UTC 0, 0.01 means 1%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.ChangePercentage">
+            <summary>
+            Change percentage, 0.01 means 1%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.IndexPrice">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.FundingRate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTicker.HoldingAmount">
+            <summary>
+            Holding amount
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFuturesTrade">
+            <summary>
+            Trade info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTrade.Symbol">
+            <summary>
+            The symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTrade.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTrade.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTrade.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTrade.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesTrade.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetIndexPrice">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetIndexPrice.Symbol">
+            <summary>
+            Symbol id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetIndexPrice.Index">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetIndexPrice.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetKline">
@@ -3013,6 +3906,11 @@
         <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.SpotOptions">
             <summary>
             Spot API options
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.FuturesOptions">
+            <summary>
+            Futures API options
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Options.BitgetSocketOptions">

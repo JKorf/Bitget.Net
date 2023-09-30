@@ -20,9 +20,15 @@ namespace Bitget.Net.Objects.Options
         /// </summary>
         public RestApiOptions SpotOptions { get; private set; } = new RestApiOptions();
 
+        /// <summary>
+        /// Futures API options
+        /// </summary>
+        public RestApiOptions FuturesOptions { get; private set; } = new RestApiOptions();
+
         internal BitgetRestOptions Copy()
         {
             var options = Copy<BitgetRestOptions>();
+            options.FuturesOptions = FuturesOptions.Copy<RestApiOptions>();
             options.SpotOptions = SpotOptions.Copy<RestApiOptions>();
             return options;
         }

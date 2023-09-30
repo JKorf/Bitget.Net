@@ -13,6 +13,10 @@ namespace Bitget.Net.Interfaces.Clients
         /// Spot API endpoints
         /// </summary>
         IBitgetRestClientSpotApi SpotApi { get; }
+        /// <summary>
+        /// Futures API endpoints
+        /// </summary>
+        IBitgetRestClientFuturesApi FuturesApi { get; }
 
         /// <summary>
         /// Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.

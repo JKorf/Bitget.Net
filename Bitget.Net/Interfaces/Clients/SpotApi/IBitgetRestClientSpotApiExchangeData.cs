@@ -115,7 +115,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-depth" /></para>
         /// </summary>
         /// <param name="symbol">The id of the symbol</param>
-        /// <param name="mergeLevel">Merge level for entires</param>
+        /// <param name="mergeLevel">Merge level for entries</param>
         /// <param name="limit">Results to return, max 1000</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
