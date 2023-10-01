@@ -46,6 +46,7 @@ namespace Bitget.Net.Clients
         public void SetApiCredentials(ApiCredentials credentials)
         {
             SpotApi.SetApiCredentials(credentials);
+            FuturesApi.SetApiCredentials(credentials);
         }
 
         /// <summary>

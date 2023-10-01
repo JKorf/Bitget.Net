@@ -1,0 +1,10 @@
+{
+  "code":"00000",
+  "data":{
+    "symbol":"BTCUSDT_UMCBL",
+    "minLeverage":"1",
+    "maxLeverage":"125"
+  },
+  "msg":"success",
+  "requestTime":1627292076687
+}

@@ -1,0 +1,9 @@
+{
+  "code":"00000",
+  "data":{
+    "symbol":"BTCUSDT_UMCBL",
+    "fundingTime":"1627311600000"
+  },
+  "msg":"success",
+  "requestTime":1627291915767
+}

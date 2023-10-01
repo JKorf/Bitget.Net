@@ -228,5 +228,52 @@ namespace Bitget.Net.Clients.SpotApi
             };
             return await _baseClient.ExecuteAsync<BitgetFundingRate>(_baseClient.GetUri("/api/mix/v1/market/current-fundRate"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOpenInterest>> GetOpenInterestAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol.ToUpperInvariant() }
+            };
+            return await _baseClient.ExecuteAsync<BitgetOpenInterest>(_baseClient.GetUri("/api/mix/v1/market/open-interest"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMarkPrice>> GetMarkPriceAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol.ToUpperInvariant() }
+            };
+            return await _baseClient.ExecuteAsync<BitgetMarkPrice>(_baseClient.GetUri("/api/mix/v1/market/mark-price"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetLeverageInfo>> GetLeverageInfoAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol.ToUpperInvariant() }
+            };
+            return await _baseClient.ExecuteAsync<BitgetLeverageInfo>(_baseClient.GetUri("/api/mix/v1/market/symbol-leverage"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetPositionTier>>> GetPositionsTiersAsync(BitgetProductType type, string symbol, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "productType", EnumConverter.GetString(type) },
+                { "symbol", symbol.ToUpperInvariant() }
+            };
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetPositionTier>>(_baseClient.GetUri("/api/mix/v1/market/queryPositionLever"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetPositionRisk>>> GetPositionRiskLimitAsync(CancellationToken ct = default)
+        {
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetPositionRisk>>(_baseClient.GetUri("/api/mix/v1/market/open-limit"), HttpMethod.Get, ct, null).ConfigureAwait(false);
+        }
     }
 }

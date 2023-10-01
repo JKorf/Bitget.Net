@@ -21,6 +21,11 @@ namespace Bitget.Net.Objects.Models
         /// Paged data
         /// </summary>
         [JsonProperty("orderList")]
-        public IEnumerable<BitgetPlanOrder> Data { get; set; } = Array.Empty<BitgetPlanOrder>();
+        public IEnumerable<T> Data { get; set; } = Array.Empty<T>();
+
+        [JsonProperty("list")]
+        internal IEnumerable<T> IntData1 { get => Data; set => Data = value; }
+        [JsonProperty("result")]
+        internal IEnumerable<T> IntData2 { get => Data; set => Data = value; }
     }
 }

@@ -1,0 +1,21 @@
+{
+  "code": "00000",
+  "msg": "success",
+  "data": {
+    "result": [
+      {
+        "id": "892962903462432768",
+        "symbol": "BTCUSDT_UMCBL",
+        "marginCoin": "USDT",
+        "amount": "0",
+        "fee": "-0.1765104",
+        "feeByCoupon": "",
+        "feeCoin": "USDT",
+        "business": "open_long",
+        "ctime": "1648624867354"
+      }
+    ],
+    "endId": "885353495773458432",
+    "nextFlag": false
+  }
+}

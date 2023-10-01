@@ -1,0 +1,24 @@
+{
+  "code":"00000",
+  "data":{
+    "marginCoin":"USDT",
+    "locked":0,
+    "available":13168.86110692,
+    "crossMaxAvailable":13168.86110692,
+    "fixedMaxAvailable":13168.86110692,
+    "maxTransferOut":13168.86110692,
+    "equity":13178.86110692,
+    "usdtEquity":13178.861106922,
+    "btcEquity":0.344746495477,
+    "crossRiskRate":0,
+    "crossMarginLeverage":20,
+    "fixedLongLeverage":20,
+    "fixedShortLeverage":20,
+    "marginMode":"crossed",
+    "holdMode":"double_hold",
+    "unrealizedPL": null,
+    "bonus": "0"
+  },
+  "msg":"success",
+  "requestTime":1627292199523
+}

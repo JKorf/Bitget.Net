@@ -1,0 +1,12 @@
+{
+  "code":"00000",
+  "data":[
+    {
+      "symbol":"BTCUSDT",
+      "fundingRate":"0",
+      "settleTime":"1627369200000"
+    }
+  ],
+  "msg":"success",
+  "requestTime":1627389063463
+}

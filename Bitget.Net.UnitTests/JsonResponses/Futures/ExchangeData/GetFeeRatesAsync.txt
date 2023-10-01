@@ -1,0 +1,16 @@
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1675759699382,
+  "data": [
+    {
+      "level": 1,
+      "dealAmount": "1000000",
+      "assetAmount": "50000",
+      "takerFeeRate": "0.000475",
+      "makerFeeRate": "0.00006",
+      "withdrawAmount": "300",
+      "withdrawAmountUSDT": "5000000"
+    }
+  ]
+}

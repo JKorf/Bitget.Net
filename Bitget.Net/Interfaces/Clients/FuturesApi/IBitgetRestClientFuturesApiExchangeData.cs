@@ -190,5 +190,50 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFundingRate>> GetFundingRateAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get open interest rate
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-current-funding-rate" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOpenInterest>> GetOpenInterestAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get mark price
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-symbol-mark-price" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetMarkPrice>> GetMarkPriceAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get leverage info
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-symbol-leverage" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetLeverageInfo>> GetLeverageInfoAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get position tiers
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-position-tier" /></para>
+        /// </summary>
+        /// <param name="type">Product type</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetPositionTier>>> GetPositionsTiersAsync(BitgetProductType type, string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get position risk limit
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-risk-position-limit" /></para>
+        /// </summary>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetPositionRisk>>> GetPositionRiskLimitAsync(CancellationToken ct = default);
     }
 }

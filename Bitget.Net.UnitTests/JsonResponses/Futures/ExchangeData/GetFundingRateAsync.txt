@@ -1,0 +1,9 @@
+{
+  "code":"00000",
+  "data":{
+    "symbol":"BTCUSDT_UMCBL",
+    "fundingRate":"0.0002"
+  },
+  "msg":"success",
+  "requestTime":1627291969594
+}

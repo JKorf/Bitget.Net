@@ -1,0 +1,10 @@
+{
+  "code":"00000",
+  "msg":"success",
+  "data":{
+    "symbol":"BTCUSDT_UMCBL",
+    "marginCoin":"USDT",
+    "dualSidePosition":true
+  },
+  "requestTime":1627293445916
+}

@@ -76,5 +76,50 @@ namespace Bitget.Net.UnitTests
                     { "GetPlanOrdersAsync", "data" },
                 });
         }
+
+        [Test]
+        public async Task ValidateFuturesExchangeDataCalls()
+        {
+            await _comparer.ProcessSubject(
+                "Futures/ExchangeData",
+                c => c.FuturesApi.ExchangeData, useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetFeeRatesAsync", "data" },
+                    { "GetFundingRateAsync", "data" },
+                    { "GetFundingRateHistoryAsync", "data" },
+                    { "GetIndexPriceAsync", "data" },
+                    { "GetLeverageInfoAsync", "data" },
+                    { "GetMarkPriceAsync", "data" },
+                    { "GetMergedOrderBookAsync", "data" },
+                    { "GetNextFundingTimeAsync", "data" },
+                    { "GetOpenInterestAsync", "data" },
+                    { "GetOrderBookAsync", "data" },
+                    { "GetPositionRiskLimitAsync", "data" },
+                    { "GetPositionsTiersAsync", "data" },
+                    { "GetRecentTradesAsync", "data" },
+                    { "GetSymbolsAsync", "data" },
+                    { "GetTickerAsync", "data" },
+                }, parametersToSetNull: new[] { "limit" } );
+        }
+
+        [Test]
+        public async Task ValidateFuturesAccountCalls()
+        {
+            await _comparer.ProcessSubject(
+                "Futures/Account",
+                c => c.FuturesApi.Account, useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "GetAccountAsync", "data" },
+                    { "GetBillsAsync", "data" },
+                    { "GetHistoryPositionAsync", "data" },
+                    { "GetMaxOpenPositionsAsync", "data" },
+                    { "GetPositionAsync", "data" },
+                    { "SetAutoMarginAsync", "data" },
+                    { "SetHoldModeAsync", "data" },
+                    { "SetLeverageAsync", "data" },
+                    { "SetMarginAsync", "data" },
+                    { "SetMarginModeAsync", "data" },
+                }, parametersToSetNull: new string [] {  });
+        }
     }
 }

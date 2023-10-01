@@ -1,0 +1,10 @@
+{
+  "code":"00000",
+  "data":{
+    "symbol":"BTCUSDT_UMCBL",
+    "index":"35000",
+    "timestamp":"1627291836179"
+  },
+  "msg":"success",
+  "requestTime":1627291836179
+}

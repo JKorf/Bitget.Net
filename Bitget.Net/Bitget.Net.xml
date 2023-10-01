@@ -134,7 +134,43 @@
         <member name="T:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetBalancesAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetAccountAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetAccountsAsync(Bitget.Net.Enums.BitgetProductType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetMaxOpenPositionsAsync(System.String,System.String,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.SetLeverageAsync(System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.BitgetPositionSide},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.SetMarginAsync(System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.BitgetPositionSide},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.SetMarginModeAsync(System.String,System.String,Bitget.Net.Enums.BitgetMarginMode,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.SetAutoMarginAsync(System.String,System.String,Bitget.Net.Enums.BitgetPositionSide,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.SetHoldModeAsync(Bitget.Net.Enums.BitgetProductType,Bitget.Net.Enums.BitgetHoldMode,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetPositionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetPositionsAsync(Bitget.Net.Enums.BitgetProductType,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetHistoryPositionAsync(System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetBillsAsync(System.String,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.String,System.Nullable{System.Int32},System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetBusinessBillsAsync(Bitget.Net.Enums.BitgetProductType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData">
@@ -189,6 +225,21 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetFundingRateAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetOpenInterestAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetMarkPriceAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetLeverageInfoAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetPositionsTiersAsync(Bitget.Net.Enums.BitgetProductType,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData.GetPositionRiskLimitAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiTrading">
@@ -652,6 +703,21 @@
             Other
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.BitgetHoldMode">
+            <summary>
+            Hold mode
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetHoldMode.SingleHold">
+            <summary>
+            Single hold
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetHoldMode.DoubleHold">
+            <summary>
+            Double hold
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetKlineInterval">
             <summary>
             Kline interval
@@ -765,6 +831,21 @@
         <member name="F:Bitget.Net.Enums.BitgetKlineType.Index">
             <summary>
             Index price
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetMarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetMarginMode.IsolatedMargin">
+            <summary>
+            Isolated margin
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetMarginMode.CrossMargin">
+            <summary>
+            Cross margin
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetOrderForce">
@@ -890,6 +971,21 @@
         <member name="F:Bitget.Net.Enums.BitgetOrderType.Market">
             <summary>
             Market
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetPositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetPositionSide.Long">
+            <summary>
+            Long position
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetPositionSide.Short">
+            <summary>
+            Short position
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetProductType">
@@ -1783,6 +1879,145 @@
             Bitget account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
             </summary>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.GetAccountAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get account info
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-single-account" /></para>
+            </summary>
+            <param name="symbol">Symbol id</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.GetAccountsAsync(Bitget.Net.Enums.BitgetProductType,System.Threading.CancellationToken)">
+            <summary>
+            Get account list
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-account-list" /></para>
+            </summary>
+            <param name="type">The type of product</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.GetMaxOpenPositionsAsync(System.String,System.String,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Get max open positions
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-open-count" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">The margin asset</param>
+            <param name="openPrice">Open price</param>
+            <param name="openQuantity">Open quantity</param>
+            <param name="leverage">Leverage</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.SetLeverageAsync(System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.BitgetPositionSide},System.Threading.CancellationToken)">
+            <summary>
+            Set the leverage
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#change-leverage" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="leverage">Leverage</param>
+            <param name="positionSide">Position direction (ignore this field if marginMode is crossed）</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.SetMarginAsync(System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.BitgetPositionSide},System.Threading.CancellationToken)">
+            <summary>
+            Set the margin
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#change-margin" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="margin">Margin amount</param>
+            <param name="positionSide">Position direction (ignore this field if marginMode is crossed）</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.SetMarginModeAsync(System.String,System.String,Bitget.Net.Enums.BitgetMarginMode,System.Threading.CancellationToken)">
+            <summary>
+            Change the margin mode
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#change-margin-mode" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="mode">Margin mode</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.SetAutoMarginAsync(System.String,System.String,Bitget.Net.Enums.BitgetPositionSide,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Set auto margin
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#set-auto-margin" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="side">Position side</param>
+            <param name="autoMargin">Auto margin on or off</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.SetHoldModeAsync(Bitget.Net.Enums.BitgetProductType,Bitget.Net.Enums.BitgetHoldMode,System.Threading.CancellationToken)">
+            <summary>
+            Set position hold mode
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#change-hold-mode" /></para>
+            </summary>
+            <param name="type">Product type</param>
+            <param name="mode">New hold mode</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.GetPositionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get symbol position
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-symbol-position-v2" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.GetPositionsAsync(Bitget.Net.Enums.BitgetProductType,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get all postions
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-all-position-v2" /></para>
+            </summary>
+            <param name="type">Product type</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.GetHistoryPositionAsync(System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get history position (max 3 months ago)
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-history-position" /></para>
+            </summary>
+            <param name="startTime">Start time</param>
+            <param name="endTime">End time</param>
+            <param name="type">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="pageSize">Page size</param>
+            <param name="endId">Last end id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.GetBillsAsync(System.String,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.String,System.Nullable{System.Int32},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get account bill
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-account-bill" /></para>
+            </summary>
+            <param name="startTime">Start time</param>
+            <param name="endTime">End time</param>
+            <param name="type">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="pageSize">Page size</param>
+            <param name="endId">Last end id</param>
+            <param name="business">Business</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData">
             <summary>
             Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
@@ -1968,6 +2203,51 @@
             </summary>
             <param name="symbol">Symbol</param>
             <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetOpenInterestAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get open interest rate
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-current-funding-rate" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetMarkPriceAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get mark price
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-symbol-mark-price" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetLeverageInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get leverage info
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-symbol-leverage" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetPositionsTiersAsync(Bitget.Net.Enums.BitgetProductType,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get position tiers
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-position-tier" /></para>
+            </summary>
+            <param name="type">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiExchangeData.GetPositionRiskLimitAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get position risk limit
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-risk-position-limit" /></para>
+            </summary>
+            <param name="ct"></param>
             <returns></returns>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiTrading">
@@ -2432,6 +2712,146 @@
             Funding time
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo">
+            <summary>
+            Account info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.Locked">
+            <summary>
+            Locked amount (margin asset), system will lock when close position
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.Available">
+            <summary>
+            Available balance(margin asset)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.CrossMaxAvailable">
+            <summary>
+            The maximum available balance for crossed margin mode(margin currency)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.FixedMaxAvailable">
+            <summary>
+            The maximum available balance for fixed margin mode(margin currency)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.MaxTransferOut">
+            <summary>
+            Maximum transferable
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.Equity">
+            <summary>
+            Account equity (margin asset), includes uPnL (calculated by mark price)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.UsdtEquity">
+            <summary>
+            Account equity convert to USDT
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.BtcEquity">
+            <summary>
+            Account equity convert to BTC
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.CrossRiskRate">
+            <summary>
+            Risk ratio at crossed margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.CrossMarginLeverage">
+            <summary>
+            Leverage level for crossed margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.FixedLongLeverage">
+            <summary>
+            Long leverage with isolated(fixed) margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.FixedShortLeverage">
+            <summary>
+            Short leverage with isolated(fixed) margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.HoldMode">
+            <summary>
+            Hold mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.UnrealizedProfitLoss">
+            <summary>
+            Urealized profit and loss at crossed margin mode, unit in USDT
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesAccountInfo.Bonus">
+            <summary>
+            Coupon
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFuturesBill">
+            <summary>
+            Bill info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBill.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBill.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBill.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBill.Type">
+            <summary>
+            Transaction type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBill.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBill.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBill.FeeDeduct">
+            <summary>
+            Fees
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBill.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBill.Id">
+            <summary>
+            Bill id
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetFuturesKline">
             <summary>
             Kline info
@@ -2842,6 +3262,56 @@
             Volume
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetLeverageInfo">
+            <summary>
+            Leverage info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetLeverageInfo.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetLeverageInfo.MinLeverage">
+            <summary>
+            Min leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetLeverageInfo.MaxLeverage">
+            <summary>
+            Max leverage
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetMarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetMarkPrice.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetMarkPrice.MarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetMarkPrice.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetMaxPositions">
+            <summary>
+            Max positions info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetMaxPositions.OpenCount">
+            <summary>
+            Max open positions
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetNetwork">
             <summary>
             Network info
@@ -2930,6 +3400,26 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetNotification.NoticeUrl">
             <summary>
             Notice url
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetOpenInterest">
+            <summary>
+            Open interest
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOpenInterest.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOpenInterest.OpenInterest">
+            <summary>
+            Open interest
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetOpenInterest.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetOrder">
@@ -3338,6 +3828,261 @@
             Place type
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetPosition">
+            <summary>
+            Position info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.HoldSide">
+            <summary>
+            Hold side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.OpenQuantity">
+            <summary>
+            Open pending to fill (base currency)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.Margin">
+            <summary>
+            Margin quantity (margin currency)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.AutoMargin">
+            <summary>
+            Auto suppliment margin
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.Available">
+            <summary>
+            Position available (Quote currency)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.Locked">
+            <summary>
+            Position locked (Quote currency)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.Total">
+            <summary>
+            Total position (available + locked)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.ProfitAndLoss">
+            <summary>
+            Realized profit and loss
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.AverageOpenPrice">
+            <summary>
+            Average opening price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.HoldMode">
+            <summary>
+            Hold mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.UnrealizedProfitAndLoss">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.LiquidationPrice">
+            <summary>
+            Estimated liquidation price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.KeepMarginRate">
+            <summary>
+            Keep margin rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.MarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetPositionHistory">
+            <summary>
+            Position history
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.Side">
+            <summary>
+            Hold side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.AverageOpenPrice">
+            <summary>
+            Average open price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.CloseOpenPrice">
+            <summary>
+            Average close price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.OpenPositionSize">
+            <summary>
+            Open position size
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.ClosePositionSize">
+            <summary>
+            Close position size
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.ProfitAndLoss">
+            <summary>
+            Profit and loss
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.Netprofit">
+            <summary>
+            Net profit
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.TotalFundingCost">
+            <summary>
+            Total funding cost
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.OpeningFee">
+            <summary>
+            Opening fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.ClosingFee">
+            <summary>
+            Closing fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionHistory.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetPositionMode">
+            <summary>
+            Position mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionMode.Symbol">
+            <summary>
+            Symbol id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionMode.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionMode.DualSidePosition">
+            <summary>
+            True: DoubleHold, false: SingleHold
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetPositionRisk">
+            <summary>
+            Position risk
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionRisk.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionRisk.PositionLimit">
+            <summary>
+            Position limit
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetPositionTier">
+            <summary>
+            Position tier
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionTier.Level">
+            <summary>
+            Tier
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionTier.StartUnit">
+            <summary>
+            Start value
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionTier.EndUnit">
+            <summary>
+            End value
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionTier.Leverage">
+            <summary>
+            Leverage multiple
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPositionTier.KeepMarginRate">
+            <summary>
+            Margin Rate, The value corresponding to the position, when the margin rate of the position is less than the maintenance margin rate, forced decreased or liquidation will be triggered
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetResult">
+            <summary>
+            Result
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetResult.Success">
+            <summary>
+            Is successful
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetSymbol">
             <summary>
             Symbol info
@@ -3721,6 +4466,36 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetUserFee.TakerRate">
             <summary>
             Taker fee rate
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetUserLeverage">
+            <summary>
+            User leverage info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserLeverage.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserLeverage.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserLeverage.LongLeverage">
+            <summary>
+            Long leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserLeverage.ShortLeverage">
+            <summary>
+            Short leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetUserLeverage.MarginMode">
+            <summary>
+            Margin mode
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetUserTrade">
