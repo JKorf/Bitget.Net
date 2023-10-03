@@ -11,11 +11,14 @@ namespace Bitget.Net.Objects.Models
         /// Order id
         /// </summary>
         [JsonProperty("orderId")]
-        public string OrderId { get; set; } = string.Empty;
+        public string? OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Client order id
         /// </summary>
         [JsonProperty("clientOrderId")]
         public string? ClientOrderId { get; set; }
+
+        [JsonProperty("clientOid")]
+        internal string? IntClientOrderId { get => ClientOrderId; set => ClientOrderId = value; }
     }
 }

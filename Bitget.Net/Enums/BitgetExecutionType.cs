@@ -10,12 +10,12 @@ namespace Bitget.Net.Enums
         /// <summary>
         /// Taker
         /// </summary>
-        [Map("T")]
+        [Map("T", "taker")]
         Taker,
         /// <summary>
         /// Maker
         /// </summary>
-        [Map("M")]
+        [Map("M", "maker")]
         Maker
     }
 }
