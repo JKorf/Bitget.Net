@@ -245,5 +245,141 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApi
                                                                 decimal? takeProfitPrice = null,
                                                                 decimal? stopLossPrice = null,
                                                                 CancellationToken ct = default);
+
+        /// <summary>
+        /// Place a new stop order
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#place-stop-order" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="planType">Plan type</param>
+        /// <param name="triggerPrice">Trigger price</param>
+        /// <param name="side">Position side</param>
+        /// <param name="triggerType">Trigger type</param>
+        /// <param name="quantity">Quantity</param>
+        /// <param name="executePrice">Execution price</param>
+        /// <param name="rangeRate">Only works when planType is "MovingPlan", "1" means 1.0% price correction, two decimal places</param>
+        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderResult>> PlaceStopOrderAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                BitgetPlanType planType,
+                                                                decimal triggerPrice,
+                                                                BitgetPositionSide side,
+                                                                BitgetTriggerType? triggerType = null,
+                                                                decimal? quantity = null,
+                                                                decimal? executePrice = null,
+                                                                decimal? rangeRate = null,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default);
+
+        /// <summary>
+        /// Place a new trailling stop order
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#place-trailing-stop-order" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="triggerPrice">Trigger price</param>
+        /// <param name="side">Order side</param>
+        /// <param name="triggerType">Trigger type</param>
+        /// <param name="quantity">Quantity</param>
+        /// <param name="rangeRate">"1" means 1.0% price correction, max 10</param>
+        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderResult>> PlaceTrailingStopOrderAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                decimal triggerPrice,
+                                                                BitgetFuturesOrderSide side,
+                                                                decimal quantity,
+                                                                decimal rangeRate,
+                                                                BitgetTriggerType? triggerType = null,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default);
+
+        /// <summary>
+        /// Set stop loss / take profit price for an position. When the position take profit / stop loss are triggered, the full amount of the position will be entrusted at the market price by default
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#place-position-tpsl" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="triggerPrice">Trigger price</param>
+        /// <param name="side">Order side</param>
+        /// <param name="triggerType">Trigger type</param>
+        /// <param name="planType">Plan type</param>
+        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderResult>> PlacePositionTpSlAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                BitgetPlanType planType,
+                                                                decimal triggerPrice,
+                                                                BitgetTriggerType triggerType,
+                                                                BitgetPositionSide side,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default);
+
+        /// <summary>
+        /// Edit an existing stop order
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#modify-stop-order" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="planType">Plan type</param>
+        /// <param name="triggerPrice">Trigger price</param>
+        /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">Client order id, either this or orderId should be provided</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderResult>> EditStopOrderAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                BitgetPlanType planType,
+                                                                decimal triggerPrice,
+                                                                string? orderId = null,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel a plan order
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#modify-stop-order" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="planType">Plan type</param>
+        /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">Client order id, either this or orderId should be provided</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderResult>> CancelPlanOrderAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                BitgetPlanType planType,
+                                                                string? orderId = null,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default);
+
+        /// <summary>
+        /// Get plan order history
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-history-plan-orders-tpsl" /></para>
+        /// </summary>
+        /// <param name="startTime">Start time</param>
+        /// <param name="endTime">End time</param>
+        /// <param name="type">Filter by product type</param>
+        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetFuturesPlanOrder>>> GetPlanOrderHistoryAsync(
+                                                                DateTime startTime,
+                                                                DateTime endTime,
+                                                                BitgetProductType? type = null,
+                                                                string? symbol = null,
+                                                                int? pageSize = null,
+                                                                CancellationToken ct = default);
     }
 }

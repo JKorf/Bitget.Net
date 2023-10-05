@@ -43,7 +43,7 @@ namespace Bitget.Net.Objects.Models
         /// Order status
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; } = string.Empty;
+        public BitgetPlanOrderStatus Status { get; set; }
         /// <summary>
         /// Order type
         /// </summary>

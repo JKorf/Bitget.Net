@@ -278,5 +278,151 @@ namespace Bitget.Net.Clients.SpotApi
             return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/mix/v1/order/modifyPlanPreset"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderResult>> PlaceStopOrderAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                BitgetPlanType planType,
+                                                                decimal triggerPrice,
+                                                                BitgetPositionSide side,
+                                                                BitgetTriggerType? triggerType = null,
+                                                                decimal? quantity = null,
+                                                                decimal? executePrice = null,
+                                                                decimal? rangeRate = null,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol.ToUpperInvariant() },
+                { "marginCoin", marginAsset.ToUpperInvariant() },
+                { "holdSide", EnumConverter.GetString(side) },
+                { "planType", EnumConverter.GetString(planType) },
+                { "triggerPrice", triggerPrice.ToString(CultureInfo.InvariantCulture) }
+            };
+
+            parameters.AddOptionalParameter("executePrice", executePrice?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("triggerType", EnumConverter.GetString(triggerType));
+            parameters.AddOptionalParameter("size", quantity?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("rangeRate", rangeRate?.ToString(CultureInfo.InvariantCulture));
+            parameters.AddOptionalParameter("clientOid", clientOrderId);
+            return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/mix/v1/plan/placeTPSL"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderResult>> PlaceTrailingStopOrderAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                decimal triggerPrice,
+                                                                BitgetFuturesOrderSide side,
+                                                                decimal quantity,
+                                                                decimal rangeRate,
+                                                                BitgetTriggerType? triggerType = null,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol.ToUpperInvariant() },
+                { "marginCoin", marginAsset.ToUpperInvariant() },
+                { "side", EnumConverter.GetString(side) },
+                { "triggerPrice", triggerPrice.ToString(CultureInfo.InvariantCulture) },
+                { "size", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "rangeRate", rangeRate.ToString(CultureInfo.InvariantCulture) }
+            };
+
+            parameters.AddOptionalParameter("triggerType", EnumConverter.GetString(triggerType));
+            parameters.AddOptionalParameter("clientOid", clientOrderId);
+            return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/mix/v1/plan/placeTrailStop"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderResult>> PlacePositionTpSlAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                BitgetPlanType planType,
+                                                                decimal triggerPrice,
+                                                                BitgetTriggerType triggerType,
+                                                                BitgetPositionSide side,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol.ToUpperInvariant() },
+                { "marginCoin", marginAsset.ToUpperInvariant() },
+                { "planType", EnumConverter.GetString(planType) },
+                { "triggerPrice", triggerPrice.ToString(CultureInfo.InvariantCulture) },
+                { "holdSide", EnumConverter.GetString(side) },
+                { "triggerType", EnumConverter.GetString(triggerType) },
+            };
+
+            parameters.AddOptionalParameter("clientOid", clientOrderId);
+            return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/mix/v1/plan/placePositionsTPSL"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderResult>> EditStopOrderAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                BitgetPlanType planType,
+                                                                decimal triggerPrice,
+                                                                string? orderId = null,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol.ToUpperInvariant() },
+                { "marginCoin", marginAsset.ToUpperInvariant() },
+                { "planType", EnumConverter.GetString(planType) },
+                { "triggerPrice", triggerPrice.ToString(CultureInfo.InvariantCulture) },
+            };
+
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("clientOid", clientOrderId);
+            return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/mix/v1/plan/placePositionsTPSL"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderResult>> CancelPlanOrderAsync(
+                                                                string symbol,
+                                                                string marginAsset,
+                                                                BitgetPlanType planType,
+                                                                string? orderId = null,
+                                                                string? clientOrderId = null,
+                                                                CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "symbol", symbol.ToUpperInvariant() },
+                { "marginCoin", marginAsset.ToUpperInvariant() },
+                { "planType", EnumConverter.GetString(planType) },
+            };
+
+            parameters.AddOptionalParameter("orderId", orderId);
+            parameters.AddOptionalParameter("clientOid", clientOrderId);
+            return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/mix/v1/plan/cancelPlan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetFuturesPlanOrder>>> GetPlanOrderHistoryAsync(
+                                                                DateTime startTime,
+                                                                DateTime endTime,
+                                                                BitgetProductType? type = null,
+                                                                string? symbol = null,
+                                                                int? pageSize = null,
+                                                                CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "startTime", DateTimeConverter.ConvertToMilliseconds(startTime) },
+                { "endTime", DateTimeConverter.ConvertToMilliseconds(endTime) }
+            };
+            parameters.AddOptionalParameter("type", EnumConverter.GetString(type));
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("pageSize", pageSize);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetFuturesPlanOrder>>(_baseClient.GetUri("/api/mix/v1/plan/historyPlan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
     }
 }
