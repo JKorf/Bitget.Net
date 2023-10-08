@@ -3,7 +3,7 @@ title: Home
 nav_order: 1
 ---
 
-[![.NET](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) [![Nuget version](https://img.shields.io/nuget/v/bitget.net.svg)](https://www.nuget.org/packages/Bitget.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Bitget.Net.svg)](https://www.nuget.org/packages/Bitget.Net)
+[![.NET](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) [![Nuget version](https://img.shields.io/nuget/v/jk.bitget.net.svg)](https://www.nuget.org/packages/JK.Bitget.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/JK.Bitget.Net.svg)](https://www.nuget.org/packages/JK.Bitget.Net)
 
 This library is based on the CryptoExchange.Net base library. General usage/configuration information can be found in the [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net)
 
