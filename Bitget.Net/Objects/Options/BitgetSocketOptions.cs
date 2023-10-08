@@ -21,10 +21,16 @@ namespace Bitget.Net.Objects.Options
         /// </summary>
         public SocketApiOptions SpotOptions { get; private set; } = new SocketApiOptions();
 
+        /// <summary>
+        /// Futures API options
+        /// </summary>
+        public SocketApiOptions FuturesOptions { get; private set; } = new SocketApiOptions();
+
         internal BitgetSocketOptions Copy()
         {
             var options = Copy<BitgetSocketOptions>();
             options.SpotOptions = SpotOptions.Copy<SocketApiOptions>();
+            options.FuturesOptions = FuturesOptions.Copy<SocketApiOptions>();
             return options;
         }
     }

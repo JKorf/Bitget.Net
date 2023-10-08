@@ -66,7 +66,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApi
 
         /// <summary>
         /// Get order history
-        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-order-list" /></para>
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-order-history" /></para>
         /// </summary>
         /// <param name="symbol">Symbol id</param>
         /// <param name="startId">Return results with id after this</param>
@@ -74,7 +74,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOrderHistoryAsync(string symbol, string? startId, string? endId, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOrderHistoryAsync(string symbol, string? startId = null, string? endId = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get trade history

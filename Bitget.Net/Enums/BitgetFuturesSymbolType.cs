@@ -10,12 +10,12 @@ namespace Bitget.Net.Enums
         /// <summary>
         /// Perpetual contract
         /// </summary>
-        [Map("perpetual")]
+        [Map("perpetual", "1")]
         Perpetual,
         /// <summary>
         /// Delivery contract
         /// </summary>
-        [Map("delivery")]
+        [Map("delivery", "2")]
         Delivery
     }
 }

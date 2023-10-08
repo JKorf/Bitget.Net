@@ -1,15 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bitget.Net.Objects.Socket
 {
     internal class BitgetSocketRequest
     {
         [JsonProperty("op")]
-        public string Op { get; set; }
+        public string Op { get; set; } = string.Empty;
         [JsonProperty("args")]
-        public object[] Args { get; set; }
+        public object[] Args { get; set; } = Array.Empty<object>();
     }
 }

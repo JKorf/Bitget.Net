@@ -98,7 +98,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApi
         /// <param name="marginAsset">Filter by margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesOrder>> GetOpenOrdersAsync(BitgetProductType type, string? marginAsset = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BitgetFuturesOrder>>> GetOpenOrdersByProductAsync(BitgetProductType type, string? marginAsset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order history

@@ -133,7 +133,7 @@ namespace Bitget.Net.Clients.FuturesApi
                 { "symbol", symbol },
                 { "marginCoin", marginAsset },
             };
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetPosition>>(_baseClient.GetUri("/api/mix/v1/position/singlePosition-v2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetPosition>>(_baseClient.GetUri("/api/mix/v1/position/singlePosition-v2"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -144,7 +144,7 @@ namespace Bitget.Net.Clients.FuturesApi
                 { "productType", EnumConverter.GetString(type) }
             };
             parameters.AddOptionalParameter("marginCoin", marginAsset);
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetPosition>>(_baseClient.GetUri("/api/mix/v1/position/allPosition-v2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetPosition>>(_baseClient.GetUri("/api/mix/v1/position/allPosition-v2"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -159,7 +159,7 @@ namespace Bitget.Net.Clients.FuturesApi
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("pageSize", pageSize);
             parameters.AddOptionalParameter("lastEndId", endId);
-            return await _baseClient.ExecuteAsync<BitgetPagination<BitgetPositionHistory>>(_baseClient.GetUri("/api/mix/v1/position/history-position"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetPagination<BitgetPositionHistory>>(_baseClient.GetUri("/api/mix/v1/position/history-position"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -176,7 +176,7 @@ namespace Bitget.Net.Clients.FuturesApi
             parameters.AddOptionalParameter("pageSize", pageSize);
             parameters.AddOptionalParameter("lastEndId", endId);
             parameters.AddOptionalParameter("business", business);
-            return await _baseClient.ExecuteAsync<BitgetPagination<BitgetFuturesBill>>(_baseClient.GetUri("/api/mix/v1/account/accountBill"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetPagination<BitgetFuturesBill>>(_baseClient.GetUri("/api/mix/v1/account/accountBill"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -191,7 +191,7 @@ namespace Bitget.Net.Clients.FuturesApi
             parameters.AddOptionalParameter("pageSize", pageSize);
             parameters.AddOptionalParameter("lastEndId", endId);
             parameters.AddOptionalParameter("business", business);
-            return await _baseClient.ExecuteAsync<BitgetPagination<BitgetFuturesBill>>(_baseClient.GetUri("/api/mix/v1/account/accountBusinessBill"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetPagination<BitgetFuturesBill>>(_baseClient.GetUri("/api/mix/v1/account/accountBusinessBill"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
     }
 }

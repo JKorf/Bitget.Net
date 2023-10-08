@@ -39,12 +39,16 @@ namespace Bitget.Net.Objects.Models
         /// </summary>
         [JsonProperty("fee")]
         public decimal Fee { get; set; }
-
-        [JsonProperty("side")]
-        public object Side { get; set; }
+        /// <summary>
+        /// Trade side
+        /// </summary>
+        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        public BitgetTradeSide Side { get; set; }
+        /// <summary>
+        /// Trade side
+        /// </summary>
         [JsonProperty("tradeSide")]
-        public object TradeSide { get; set; }
-
+        public string TradeSide { get; set; } = string.Empty;
         /// <summary>
         /// Quantity filled
         /// </summary>
@@ -74,7 +78,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("ctime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
     }
 }

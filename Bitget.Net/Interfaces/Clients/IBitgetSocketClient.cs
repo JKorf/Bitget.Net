@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Interfaces.Clients.SpotApi;
+﻿using Bitget.Net.Interfaces.Clients.FuturesApi;
+using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects;
 using CryptoExchange.Net.Interfaces;
 
@@ -13,6 +14,10 @@ namespace Bitget.Net.Interfaces.Clients
         /// Spot streams
         /// </summary>
         IBitgetSocketClientSpotApi SpotApi { get; set; }
+        /// <summary>
+        /// Futures streams
+        /// </summary>
+        IBitgetSocketClientFuturesApi FuturesApi { get; set; }
 
         /// <summary>
         /// Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.

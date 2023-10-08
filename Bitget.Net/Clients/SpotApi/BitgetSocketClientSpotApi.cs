@@ -30,6 +30,7 @@ namespace Bitget.Net.Clients.SpotApi
                 return data;
             });
         }
+        #endregion
 
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BitgetTickerUpdate>> handler, CancellationToken ct = default)
@@ -128,18 +129,12 @@ namespace Bitget.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BitgetTickerUpdate>> handler, CancellationToken ct = default)
-            => SubscribeToTickerUpdatesAsync(new[] { symbol }, handler, ct);
+        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BitgetTradeUpdate>>> handler, CancellationToken ct = default)
+            => SubscribeToTradeUpdatesAsync(new[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetTradeUpdate>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetTradeUpdate>>> handler, CancellationToken ct = default)
         {
-            var internalHandler = (DataEvent<IEnumerable<BitgetTradeUpdate>> data) =>
-            {
-                foreach (var item in data.Data)
-                    handler(data.As(item));
-            };
-
             return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), new BitgetSocketRequest
             {
                 Op = "subscribe",
@@ -149,7 +144,7 @@ namespace Bitget.Net.Clients.SpotApi
                         { "channel", "trade" },
                         { "instId", s },
                     }).ToArray()
-            }, false, internalHandler, ct).ConfigureAwait(false);
+            }, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -386,6 +381,5 @@ namespace Bitget.Net.Clients.SpotApi
             }).ConfigureAwait(false);
             return result;
         }
-        #endregion
     }
 }

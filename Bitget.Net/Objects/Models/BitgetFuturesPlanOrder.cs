@@ -63,12 +63,12 @@ namespace Bitget.Net.Objects.Models
         /// Plan type
         /// </summary>
         [JsonProperty("planType"), JsonConverter(typeof(EnumConverter))]
-        public BitgetPlanType PlanType { get; set; }
+        public BitgetFuturesPlanType PlanType { get; set; }
         /// <summary>
-        /// Order side
+        /// Trade side
         /// </summary>
         [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
-        public BitgetOrderSide Side { get; set; }
+        public BitgetTradeSide Side { get; set; }
         /// <summary>
         /// Order trigger type
         /// </summary>
@@ -117,7 +117,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("utime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// Execute time

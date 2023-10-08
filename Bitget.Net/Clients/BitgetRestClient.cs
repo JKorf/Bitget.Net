@@ -5,6 +5,9 @@ using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.CommonObjects;
+using CryptoExchange.Net.Interfaces.CommonClients;
+using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 
 namespace Bitget.Net.Clients
@@ -12,6 +15,8 @@ namespace Bitget.Net.Clients
     /// <inheritdoc />
     public class BitgetRestClient : BaseRestClient, IBitgetRestClient
     {
+        internal readonly string _defaultChannelCode = "pchc";
+
         /// <inheritdoc />
         public IBitgetRestClientSpotApi SpotApi { get; }
         /// <inheritdoc />

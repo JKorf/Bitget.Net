@@ -1,5 +1,6 @@
 ﻿using Bitget.Net.Clients.SpotApi;
 using Bitget.Net.Interfaces.Clients;
+using Bitget.Net.Interfaces.Clients.FuturesApi;
 using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Options;
@@ -13,6 +14,8 @@ namespace Bitget.Net.Clients
     {
         /// <inheritdoc />
         public IBitgetSocketClientSpotApi SpotApi { get; set; }
+        /// <inheritdoc />
+        public IBitgetSocketClientFuturesApi FuturesApi { get; set; }
 
         #region ctor
 
@@ -44,6 +47,7 @@ namespace Bitget.Net.Clients
             Initialize(options);
 
             SpotApi = AddApiClient(new BitgetSocketClientSpotApi(_logger, options));
+            FuturesApi = AddApiClient(new BitgetSocketClientFuturesApi(_logger, options));
         }
 
         #endregion
@@ -63,6 +67,7 @@ namespace Bitget.Net.Clients
         public void SetApiCredentials(BitgetApiCredentials credentials)
         {
             SpotApi.SetApiCredentials(credentials);
+            FuturesApi.SetApiCredentials(credentials);
         }
     }
 }

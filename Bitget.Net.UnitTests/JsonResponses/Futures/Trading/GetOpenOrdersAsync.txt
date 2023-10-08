@@ -1,0 +1,37 @@
+{
+  "code":"00000",
+  "data":{
+    "nextFlag":false,
+    "endId":"802355881591844864",
+    "orderList": [
+      {
+        "symbol":"BTCUSDT_UMCBL",
+        "size":1,
+        "orderId":"802382049422487552",
+        "clientOid":"RFIut#1627028708738",
+        "filledQty":0,
+        "fee":0,
+        "price":23999.3,
+        "priceAvg": 23999.00,
+        "state":"filled",
+        "side":"open_long",
+        "timeInForce":"normal",
+        "totalProfits":0,
+        "posSide":"long",
+        "marginCoin":"USDT",
+        "filledAmount": 48.4520,
+        "leverage": "6",
+        "marginMode": "fixed",
+        "reduceOnly": false,
+        "enterPointSource": "WEB",
+        "tradeSide": "buy_single",
+        "holdMode": "single_hold",
+        "orderType":"limit",
+        "orderSource": "normal",
+        "cTime": "1678779464831",
+        "uTime": "1678779464891"
+      }
+    ]
+  },
+  "msg":"success"
+}

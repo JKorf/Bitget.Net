@@ -15,7 +15,7 @@ namespace Bitget.Net.Enums
         /// <summary>
         /// Cross margin
         /// </summary>
-        [Map("crossed")]
+        [Map("crossed", "cross")]
         CrossMargin
     }
 }

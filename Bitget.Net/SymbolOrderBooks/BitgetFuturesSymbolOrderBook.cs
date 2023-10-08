@@ -1,121 +1,121 @@
-﻿//using Bitget.Net.Clients;
-//using Bitget.Net.Interfaces.Clients;
-//using Bitget.Net.Objects.Models;
-//using Bitget.Net.Objects.Options;
-//using CryptoExchange.Net.Objects;
-//using CryptoExchange.Net.OrderBook;
-//using CryptoExchange.Net.Sockets;
-//using Microsoft.Extensions.Logging;
+﻿using Bitget.Net.Clients;
+using Bitget.Net.Interfaces.Clients;
+using Bitget.Net.Objects.Models;
+using Bitget.Net.Objects.Options;
+using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.OrderBook;
+using CryptoExchange.Net.Sockets;
+using Microsoft.Extensions.Logging;
 
-//namespace Bitget.Net.SymbolOrderBooks
-//{
-//    /// <summary>
-//    /// Live order book implementation
-//    /// </summary>
-//    public class BitgeFuturesSymbolOrderBook : SymbolOrderBook
-//    {
-//        private readonly IBitgetSocketClient _socketClient;
-//        private bool _initial = true;
-//        private readonly bool _clientOwner;
+namespace Bitget.Net.SymbolOrderBooks
+{
+    /// <summary>
+    /// Live order book implementation
+    /// </summary>
+    public class BitgetFuturesSymbolOrderBook : SymbolOrderBook
+    {
+        private readonly IBitgetSocketClient _socketClient;
+        private bool _initial = true;
+        private readonly bool _clientOwner;
 
-//        /// <summary>
-//        /// Create a new order book instance
-//        /// </summary>
-//        /// <param name="symbol">The symbol the order book is for</param>
-//        /// <param name="optionsDelegate">Option configuration delegate</param>
-//        public BitgeFuturesSymbolOrderBook(string symbol, Action<BitgetOrderBookOptions>? optionsDelegate = null)
-//            : this(symbol, optionsDelegate, null, null)
-//        {
-//            _clientOwner = true;
-//        }
+        /// <summary>
+        /// Create a new order book instance
+        /// </summary>
+        /// <param name="symbol">The symbol the order book is for</param>
+        /// <param name="optionsDelegate">Option configuration delegate</param>
+        public BitgetFuturesSymbolOrderBook(string symbol, Action<BitgetOrderBookOptions>? optionsDelegate = null)
+            : this(symbol, optionsDelegate, null, null)
+        {
+            _clientOwner = true;
+        }
 
-//        /// <summary>
-//        /// Create a new order book instance
-//        /// </summary>
-//        /// <param name="symbol">The symbol the order book is for</param>
-//        /// <param name="optionsDelegate">Option configuration delegate</param>
-//        /// <param name="logger">Logger</param>
-//        /// <param name="socketClient">Socket client instance</param>
-//        public BitgeFuturesSymbolOrderBook(string symbol,
-//            Action<BitgetOrderBookOptions>? optionsDelegate,
-//            ILogger<BitgeFuturesSymbolOrderBook>? logger,
-//            IBitgetSocketClient? socketClient) : base(logger, "Bitget", symbol)
-//        {
-//            var options = BitgetOrderBookOptions.Default.Copy();
-//            if (optionsDelegate != null)
-//                optionsDelegate(options);
-//            Initialize(options);
+        /// <summary>
+        /// Create a new order book instance
+        /// </summary>
+        /// <param name="symbol">The symbol the order book is for</param>
+        /// <param name="optionsDelegate">Option configuration delegate</param>
+        /// <param name="logger">Logger</param>
+        /// <param name="socketClient">Socket client instance</param>
+        public BitgetFuturesSymbolOrderBook(string symbol,
+            Action<BitgetOrderBookOptions>? optionsDelegate,
+            ILogger<BitgetFuturesSymbolOrderBook>? logger,
+            IBitgetSocketClient? socketClient) : base(logger, "Bitget[Futures]", symbol)
+        {
+            var options = BitgetOrderBookOptions.Default.Copy();
+            if (optionsDelegate != null)
+                optionsDelegate(options);
+            Initialize(options);
 
-//            _socketClient = socketClient ?? new BitgetSocketClient();
-//            _clientOwner = socketClient == null;
+            _socketClient = socketClient ?? new BitgetSocketClient();
+            _clientOwner = socketClient == null;
 
-//            Levels = options?.Limit;
-//        }
+            Levels = options?.Limit;
+        }
 
-//        /// <inheritdoc />
-//        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync(CancellationToken ct)
-//        {
-//            CallResult<UpdateSubscription> result;
-//            if (Levels != null)
-//                result = await _socketClient.SpotApi.SubscribeToOrderBookUpdatesAsync(Symbol, Levels.Value, ProcessUpdate).ConfigureAwait(false);
-//            else
-//                result = await _socketClient.SpotApi.SubscribeToOrderBookUpdatesAsync(Symbol, ProcessUpdate).ConfigureAwait(false);
-//            if (!result)
-//                return result;
+        /// <inheritdoc />
+        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync(CancellationToken ct)
+        {
+            CallResult<UpdateSubscription> result;
+            if (Levels != null)
+                result = await _socketClient.FuturesApi.SubscribeToOrderBookUpdatesAsync(Symbol, Levels.Value, ProcessUpdate).ConfigureAwait(false);
+            else
+                result = await _socketClient.FuturesApi.SubscribeToOrderBookUpdatesAsync(Symbol, ProcessUpdate).ConfigureAwait(false);
+            if (!result)
+                return result;
 
-//            if (ct.IsCancellationRequested)
-//            {
-//                await result.Data.CloseAsync().ConfigureAwait(false);
-//                return result.AsError<UpdateSubscription>(new CancellationRequestedError());
-//            }
+            if (ct.IsCancellationRequested)
+            {
+                await result.Data.CloseAsync().ConfigureAwait(false);
+                return result.AsError<UpdateSubscription>(new CancellationRequestedError());
+            }
 
-//            Status = OrderBookStatus.Syncing;
+            Status = OrderBookStatus.Syncing;
 
-//            var setResult = await WaitForSetOrderBookAsync(TimeSpan.FromMilliseconds(10000), ct).ConfigureAwait(false);
-//            return setResult ? result : new CallResult<UpdateSubscription>(setResult.Error!);
-//        }
+            var setResult = await WaitForSetOrderBookAsync(TimeSpan.FromMilliseconds(10000), ct).ConfigureAwait(false);
+            return setResult ? result : new CallResult<UpdateSubscription>(setResult.Error!);
+        }
 
-//        /// <inheritdoc />
-//        protected override void DoReset()
-//        {
-//            _initial = true;
-//        }
+        /// <inheritdoc />
+        protected override void DoReset()
+        {
+            _initial = true;
+        }
 
-//        private void ProcessUpdate(DataEvent<BitgetOrderBookUpdate> data)
-//        {
-//            if (Levels != null)
-//            {
-//                SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks);
-//            }
-//            else
-//            {
-//                if (_initial)
-//                {
-//                    _initial = false;
-//                    SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks);
-//                }
-//                else
-//                {
-//                    UpdateOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks);
-//                }
-//            }
-//        }
+        private void ProcessUpdate(DataEvent<BitgetOrderBookUpdate> data)
+        {
+            if (Levels != null)
+            {
+                SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks);
+            }
+            else
+            {
+                if (_initial)
+                {
+                    _initial = false;
+                    SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks);
+                }
+                else
+                {
+                    UpdateOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks);
+                }
+            }
+        }
 
-//        /// <inheritdoc />
-//        protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
-//        {
-//            return await WaitForSetOrderBookAsync(TimeSpan.FromSeconds(10), ct).ConfigureAwait(false);
-//        }
+        /// <inheritdoc />
+        protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
+        {
+            return await WaitForSetOrderBookAsync(TimeSpan.FromSeconds(10), ct).ConfigureAwait(false);
+        }
 
-//        /// <summary>
-//        /// Dispose
-//        /// </summary>
-//        protected override void Dispose(bool disposing)
-//        {
-//            if (_clientOwner)
-//                _socketClient?.Dispose();
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (_clientOwner)
+                _socketClient?.Dispose();
 
-//            base.Dispose(disposing);
-//        }
-//    }
-//}
+            base.Dispose(disposing);
+        }
+    }
+}

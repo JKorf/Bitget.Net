@@ -61,7 +61,7 @@ namespace Bitget.Net
 
             services.AddSingleton<IBitgetOrderBookFactory, BitgetOrderBookFactory>();
             services.AddTransient<IBitgetRestClient, BitgetRestClient>();
-            //services.AddTransient(x => x.GetRequiredService<IBitgetRestClient>().SpotApi.CommonSpotClient);
+            services.AddTransient(x => x.GetRequiredService<IBitgetRestClient>().SpotApi.CommonSpotClient);
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBitgetSocketClient, BitgetSocketClient>();
             else

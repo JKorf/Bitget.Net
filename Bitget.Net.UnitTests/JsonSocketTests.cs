@@ -30,6 +30,12 @@ namespace Bitget.Net.UnitTests
             await TestFileToObject<BitgetOrderUpdate>(@"JsonResponses/Spot/Socket/OrderUpdate.txt");
         }
 
+        [Test]
+        public async Task ValidateFuturesTickerUpdateStreamJson()
+        {
+            await TestFileToObject<BitgetFuturesTickerUpdate>(@"JsonResponses/Futures/Socket/TickerUpdate.txt");
+        }
+
         private static async Task TestFileToObject<T>(string filePath, List<string> ignoreProperties = null)
         {
             var listener = new EnumValueTraceListener();

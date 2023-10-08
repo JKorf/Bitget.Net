@@ -15,5 +15,12 @@ namespace Bitget.Net.Interfaces
         /// <param name="options">Book options</param>
         /// <returns></returns>
         ISymbolOrderBook CreateSpot(string symbol, Action<BitgetOrderBookOptions>? options = null);
+        /// <summary>
+        /// Create a SymbolOrderBook for a futures symbol
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="options">Book options</param>
+        /// <returns></returns>
+        ISymbolOrderBook CreateFutures(string symbol, Action<BitgetOrderBookOptions>? options = null);
     }
 }

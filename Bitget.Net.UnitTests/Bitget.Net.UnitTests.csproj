@@ -16,10 +16,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Bitget.Net\Bitget.Net.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="JsonResponses\Futures\Trading\" />
-	  <Folder Include="JsonResponses\Futures\Socket\" />
-	</ItemGroup>
 	
 </Project>

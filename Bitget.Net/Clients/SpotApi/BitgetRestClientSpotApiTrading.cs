@@ -2,6 +2,7 @@
 using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects.Models;
 using CryptoExchange.Net;
+using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using System;
@@ -34,7 +35,16 @@ namespace Bitget.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("clientOrderId", clientOrderId);
-            return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/spot/v1/trade/orders"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/spot/v1/trade/orders"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result;
+
+            _baseClient.InvokeOrderPlaced(new OrderId
+            {
+                Id = result.Data.OrderId!,
+                SourceObject = result.Data
+            });
+            return result;
         }
 
         /// <inheritdoc />
@@ -46,7 +56,16 @@ namespace Bitget.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("orderId", orderId);
             parameters.AddOptionalParameter("clientOid", clientOrderId);
-            return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/spot/v1/trade/cancel-order-v2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/spot/v1/trade/cancel-order-v2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result;
+
+            _baseClient.InvokeOrderCanceled(new OrderId
+            {
+                Id = result.Data.OrderId!,
+                SourceObject = result.Data
+            });
+            return result;
         }
 
         /// <inheritdoc />
@@ -87,7 +106,7 @@ namespace Bitget.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOrderHistoryAsync(string symbol, string? startId, string? endId, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOrderHistoryAsync(string symbol, string? startId = null, string? endId = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -128,7 +147,17 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("executePrice", executePrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("timeInForceValue", EnumConverter.GetString(timeInForce));
             parameters.AddOptionalParameter("clientOrderId", clientOrderId);
-            return await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/spot/v1/plan/placePlan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var result = await _baseClient.ExecuteAsync<BitgetOrderResult>(_baseClient.GetUri("/api/spot/v1/plan/placePlan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            if (!result)
+                return result;
+
+            _baseClient.InvokeOrderPlaced(new OrderId
+            {
+                Id = result.Data.OrderId!,
+                SourceObject = result.Data
+            });
+
+            return result;
         }
 
         /// <inheritdoc />

@@ -42,7 +42,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
         public BitgetPlanOrderStatus Status { get; set; }
         /// <summary>
         /// Order type

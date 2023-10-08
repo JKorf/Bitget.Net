@@ -39,7 +39,7 @@ namespace Bitget.Net.SymbolOrderBooks
         public BitgetSpotSymbolOrderBook(string symbol,
             Action<BitgetOrderBookOptions>? optionsDelegate,
             ILogger<BitgetSpotSymbolOrderBook>? logger,
-            IBitgetSocketClient? socketClient) : base(logger, "Bitget", symbol)
+            IBitgetSocketClient? socketClient) : base(logger, "Bitget[Spot]", symbol)
         {
             var options = BitgetOrderBookOptions.Default.Copy();
             if (optionsDelegate != null)

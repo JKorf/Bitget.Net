@@ -44,7 +44,7 @@ namespace Bitget.Net.Clients.SpotApi
                 { "marginCoin", marginAsset.ToUpperInvariant() },
                 { "side", EnumConverter.GetString(side) },
                 { "orderType", EnumConverter.GetString(type) },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "size", quantity.ToString(CultureInfo.InvariantCulture) },
             };
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("clientOrderId", clientOrderId);
@@ -113,14 +113,14 @@ namespace Bitget.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFuturesOrder>> GetOpenOrdersAsync(BitgetProductType type, string? marginAsset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BitgetFuturesOrder>>> GetOpenOrdersByProductAsync(BitgetProductType type, string? marginAsset = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "productType", EnumConverter.GetString(type) },
             };
             parameters.AddOptionalParameter("marginCoin", marginAsset?.ToUpperInvariant());
-            return await _baseClient.ExecuteAsync<BitgetFuturesOrder>(_baseClient.GetUri("/api/mix/v1/order/marginCoinCurrent"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetFuturesOrder>>(_baseClient.GetUri("/api/mix/v1/order/marginCoinCurrent"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

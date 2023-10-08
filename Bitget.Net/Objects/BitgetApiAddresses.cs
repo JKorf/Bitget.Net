@@ -15,7 +15,7 @@
         public string SocketBaseAddress { get; set; } = string.Empty;
 
         /// <summary>
-        /// The default addresses to connect to the kucoin.com API
+        /// The default addresses to connect to the bitget.com API
         /// </summary>
         public static BitgetApiAddresses Default = new BitgetApiAddresses
         {

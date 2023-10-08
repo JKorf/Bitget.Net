@@ -20,6 +20,11 @@ namespace Bitget.Net.Enums
         /// Short position
         /// </summary>
         [Map("short")]
-        Short
+        Short,
+        /// <summary>
+        /// Net
+        /// </summary>
+        [Map("net")]
+        Net
     }
 }

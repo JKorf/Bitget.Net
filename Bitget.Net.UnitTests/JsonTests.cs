@@ -121,5 +121,21 @@ namespace Bitget.Net.UnitTests
                     { "SetMarginModeAsync", "data" },
                 }, parametersToSetNull: new string [] {  });
         }
+
+        [Test]
+        public async Task ValidateFuturesTradingCalls()
+        {
+            await _comparer.ProcessSubject(
+                "Futures/Trading",
+                c => c.FuturesApi.Trading, useNestedJsonPropertyForCompare: new Dictionary<string, string>
+                {
+                    { "PlaceOrderAsync", "data" },
+                    { "GetOpenOrdersAsync", "data" },
+                    { "GetOpenOrdersByProductAsync", "data" },
+                    { "GetOrderAsync", "data" },
+                    { "GetUserTradesAsync", "data" },
+                    { "GetPlanOrderHistoryAsync", "data" },
+                }, parametersToSetNull: new string[] { });
+        }
     }
 }

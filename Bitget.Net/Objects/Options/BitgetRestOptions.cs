@@ -16,6 +16,11 @@ namespace Bitget.Net.Objects.Options
         };
 
         /// <summary>
+        /// Channel code
+        /// </summary>
+        public string? ChannelCode { get; set; }
+
+        /// <summary>
         /// Spot API options
         /// </summary>
         public RestApiOptions SpotOptions { get; private set; } = new RestApiOptions();

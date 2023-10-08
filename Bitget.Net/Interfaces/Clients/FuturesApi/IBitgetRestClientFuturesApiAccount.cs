@@ -147,5 +147,19 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetPagination<BitgetFuturesBill>>> GetBillsAsync(string marginAsset, DateTime startTime, DateTime endTime, BitgetProductType? type = null, string? symbol = null, int? pageSize = null, string? business = null, string? endId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get business account bills
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-business-account-bill" /></para>
+        /// </summary>
+        /// <param name="type">Product type</param>
+        /// <param name="startTime">Start time</param>
+        /// <param name="endTime">End time</param>
+        /// <param name="pageSize">Page size</param>
+        /// <param name="business">Business type</param>
+        /// <param name="endId">Last end id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetPagination<BitgetFuturesBill>>> GetBusinessBillsAsync(BitgetProductType type, DateTime startTime, DateTime endTime, int? pageSize = null, string? business = null, string? endId = null, CancellationToken ct = default);
     }
 }

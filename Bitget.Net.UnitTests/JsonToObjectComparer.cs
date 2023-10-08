@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -323,7 +324,7 @@ namespace Bitget.Net.UnitTests
             {
                 if (objectValue is decimal dec)
                 {
-                    if (jsonValue.Value<decimal>() != dec)
+                    if (decimal.Parse(jsonValue.Value<string>(), System.Globalization.NumberStyles.Float, CultureInfo.InvariantCulture) != dec)
                         throw new Exception($"{method}: {property} not equal: {jsonValue.Value<decimal>()} vs {dec}");
                 }
                 else if (objectValue is DateTime time)

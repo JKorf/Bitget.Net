@@ -22,7 +22,8 @@ namespace Bitget.Net.Objects
         /// <param name="apiKey">The API key</param>
         /// <param name="apiSecret">The API secret</param>
         /// <param name="apiPassPhrase">The API passPhrase</param>
-        public BitgetApiCredentials(string apiKey, string apiSecret, string apiPassPhrase): base(apiKey, apiSecret)
+        /// <param name="credentialsType">The type of credentials</param>
+        public BitgetApiCredentials(string apiKey, string apiSecret, string apiPassPhrase, ApiCredentialsType credentialsType = ApiCredentialsType.Hmac): base(apiKey, apiSecret, credentialsType)
         {
             PassPhrase = apiPassPhrase.ToSecureString();
         }
@@ -54,7 +55,7 @@ namespace Bitget.Net.Objects
         /// <inheritdoc />
         public override ApiCredentials Copy()
         {
-            return new BitgetApiCredentials(Key!.GetString(), Secret!.GetString(), PassPhrase!.GetString());
+            return new BitgetApiCredentials(Key!.GetString(), Secret!.GetString(), PassPhrase!.GetString(), CredentialType);
         }
     }
 }

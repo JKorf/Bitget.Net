@@ -13,7 +13,7 @@ using Newtonsoft.Json.Linq;
 namespace Bitget.Net.Clients.FuturesApi
 {
     /// <inheritdoc />
-    public class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi//, ISpotClient
+    public class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Futures Api");
 
@@ -30,6 +30,11 @@ namespace Bitget.Net.Clients.FuturesApi
             Account = new BitgetRestClientFuturesApiAccount(this);
             ExchangeData = new BitgetRestClientFuturesApiExchangeData(this);
             Trading = new BitgetRestClientFuturesApiTrading(this);
+
+            StandardRequestHeaders = new Dictionary<string, string>
+            {
+                { "X-CHANNEL-API-CODE", !string.IsNullOrEmpty(options.ChannelCode) ? options.ChannelCode! : baseClient._defaultChannelCode }
+            };
         }
 
         /// <inheritdoc />

@@ -10,12 +10,12 @@ namespace Bitget.Net.Enums
         /// <summary>
         /// Fill price
         /// </summary>
-        [Map("fill_price")]
+        [Map("fill_price", "last")]
         FillPrice,
         /// <summary>
-        /// Market price
+        /// Mark price
         /// </summary>
-        [Map("market_price")]
-        MarketPrice
+        [Map("market_price", "mark")]
+        MarkPrice
     }
 }

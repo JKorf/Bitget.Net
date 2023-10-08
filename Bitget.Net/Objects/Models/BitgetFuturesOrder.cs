@@ -17,7 +17,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Client order id
         /// </summary>
-        [JsonProperty("clientOrderId")]
+        [JsonProperty("clientOid")]
         public string? ClientOrderId { get; set; }
         /// <summary>
         /// Symbol
@@ -47,7 +47,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Average price
         /// </summary>
-        [JsonProperty("avgPrice")]
+        [JsonProperty("priceAvg")]
         public decimal? AveragePrice { get; set; }
         /// <summary>
         /// Order side
@@ -132,7 +132,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("state"), JsonConverter(typeof(EnumConverter))]
         public BitgetOrderStatus Status { get; set; }
         /// <summary>
         /// Stop loss price
