@@ -22,6 +22,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>0.0.1 - Initial release</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
@@ -42,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon\icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0">
