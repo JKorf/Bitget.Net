@@ -38,7 +38,7 @@ namespace Bitget.Net.Objects.Models
         /// Fee
         /// </summary>
         [JsonProperty("fee")]
-        public decimal Fee { get; set; } // TODO
+        public decimal Fee { get; set; }
         /// <summary>
         /// Price
         /// </summary>
@@ -129,24 +129,26 @@ namespace Bitget.Net.Objects.Models
         /// </summary>
         [JsonProperty("force"), JsonConverter(typeof(EnumConverter))]
         public BitgetTimeInForce TimeInForce { get; set; }
-
         /// <summary>
         /// Last filled price
         /// </summary>
         [JsonProperty("fillPx")]
         public decimal? LastFillPrice { get; set; }
-
         /// <summary>
         /// Last filled quantity
         /// </summary>
         [JsonProperty("fillSz")]
         public decimal? LastFillQuantity { get; set; }
-
         /// <summary>
         /// Last filled fee
         /// </summary>
         [JsonProperty("fillFee")]
         public decimal? LastFillFee { get; set; }
+        /// <summary>
+        /// Last filled fee asset
+        /// </summary>
+        [JsonProperty("fillFeeCcy")]
+        public decimal? LastFillFeeAsset { get; set; }
         /// <summary>
         /// Last filled time
         /// </summary>
@@ -162,7 +164,6 @@ namespace Bitget.Net.Objects.Models
         /// </summary>
         [JsonProperty("execType"), JsonConverter(typeof(EnumConverter))]
         public BitgetExecutionType ExecutionType { get; set; }
-
         /// <summary>
         /// Filled notional value in USD of order
         /// </summary>

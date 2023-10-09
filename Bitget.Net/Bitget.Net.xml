@@ -58,7 +58,7 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
-            <summary>
+            <summary> 
             Create a new instance of BitgetRestClient
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
@@ -4177,6 +4177,11 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetFuturesOrderUpdate.LastFillFee">
             <summary>
             Last filled fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesOrderUpdate.LastFillFeeAsset">
+            <summary>
+            Last filled fee asset
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.BitgetFuturesOrderUpdate.LastFillTime">

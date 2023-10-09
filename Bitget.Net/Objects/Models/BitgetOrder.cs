@@ -84,11 +84,13 @@ namespace Bitget.Net.Objects.Models
         /// </summary>
         [JsonProperty("orderSource")]
         public string OrderSource { get; set; } = string.Empty;
+        [JsonProperty("feeDetail")]
+        internal string FeeDetailsInt { get; set; } = string.Empty;
+
         /// <summary>
         /// Fee details
         /// </summary>
-        [JsonProperty("feeDetail")]
-        public string FeeDetails { get; set; } = string.Empty; // TODO json test fails, can it be deserialized?
+        public Dictionary<string, BitgetOrderFee>? FeeDetails => string.IsNullOrEmpty(FeeDetailsInt) ? null : JsonConvert.DeserializeObject<Dictionary<string, BitgetOrderFee>>(FeeDetailsInt);
     }
 
     /// <summary>
