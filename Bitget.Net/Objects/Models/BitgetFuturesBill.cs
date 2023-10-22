@@ -12,7 +12,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Creation time
         /// </summary>
-        [JsonProperty("ctime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("ctime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Margin asset

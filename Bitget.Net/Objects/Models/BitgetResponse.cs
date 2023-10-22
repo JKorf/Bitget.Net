@@ -8,7 +8,6 @@ namespace Bitget.Net.Objects.Models
         public string Code { get; set; } = string.Empty;
         [JsonProperty("msg")]
         public string? Message { get; set; }
-        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime RequestTime { get; set; }
     }
 

@@ -42,17 +42,17 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonProperty("orderType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("orderType")]
         public BitgetOrderType OrderType { get; set; }
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetOrderSide Side { get; set; }
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("status")]
         public BitgetOrderStatus Status { get; set; }
         /// <summary>
         /// Transaction price
@@ -72,12 +72,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Source
         /// </summary>
-        [JsonProperty("enterPointSource"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("enterPointSource")]
         public BitgetOrderPlacementSource PlaceSource { get; set; }
         /// <summary>
         /// Creation time
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Order source

@@ -25,7 +25,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Hold side
         /// </summary>
-        [JsonProperty("holdSide"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("holdSide")]
         public BitgetPositionSide Side { get; set; }
         /// <summary>
         /// Average open price
@@ -40,7 +40,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Margin mode
         /// </summary>
-        [JsonProperty("marginMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("marginMode")]
         public BitgetMarginMode MarginMode { get; set; }
         /// <summary>
         /// Open position size
@@ -80,12 +80,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("ctime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("ctime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("utime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("utime")]
         public DateTime? UpdateTime { get; set; }
     }
 }

@@ -51,7 +51,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("ts"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("ts")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Best bid price

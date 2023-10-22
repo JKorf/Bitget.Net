@@ -22,7 +22,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Hold side
         /// </summary>
-        [JsonProperty("holdSide"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("holdSide")]
         public BitgetPositionSide HoldSide { get; set; }
         /// <summary>
         /// Open pending to fill (base currency)
@@ -37,7 +37,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Auto suppliment margin
         /// </summary>
-        [JsonProperty("autoMargin"), JsonConverter(typeof(BoolConverter))]
+        [JsonProperty("autoMargin")]
         public bool AutoMargin { get; set; }
         /// <summary>
         /// Position available (Quote currency)
@@ -72,12 +72,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Margin mode
         /// </summary>
-        [JsonProperty("marginMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("marginMode")]
         public BitgetMarginMode MarginMode { get; set; }
         /// <summary>
         /// Hold mode
         /// </summary>
-        [JsonProperty("holdMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("holdMode")]
         public BitgetHoldMode HoldMode { get; set; }
         /// <summary>
         /// Unrealized profit and loss

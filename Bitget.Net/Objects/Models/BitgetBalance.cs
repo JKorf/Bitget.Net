@@ -36,7 +36,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Last update time
         /// </summary>
-        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("uTime")]
         public DateTime UpdateTime { get; set; }
     }
 }

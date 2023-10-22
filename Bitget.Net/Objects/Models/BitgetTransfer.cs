@@ -20,12 +20,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("status")]
         public BitgetTransferStatus Status { get; set; }
         /// <summary>
         /// To type
         /// </summary>
-        [JsonProperty("toType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("toType")]
         public BitgetAccountType ToType { get; set; }
         /// <summary>
         /// To symbol
@@ -35,7 +35,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// From type
         /// </summary>
-        [JsonProperty("fromType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("fromType")]
         public BitgetAccountType FromType { get; set; }
         /// <summary>
         /// From symbol
@@ -50,7 +50,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("tradeTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("tradeTime")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Client order id

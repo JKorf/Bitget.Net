@@ -42,7 +42,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Trade side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetTradeSide Side { get; set; }
         /// <summary>
         /// Trade side
@@ -63,22 +63,22 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Source
         /// </summary>
-        [JsonProperty("enterPointSource"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("enterPointSource")]
         public BitgetOrderPlacementSource PlaceSource { get; set; }
         /// <summary>
         /// Hold mode
         /// </summary>
-        [JsonProperty("holdMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("holdMode")]
         public BitgetHoldMode HoldMode { get; set; }
         /// <summary>
         /// Hold mode
         /// </summary>
-        [JsonProperty("takerMakerFlag"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("takerMakerFlag")]
         public BitgetExecutionType ExecutionType { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("ctime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("ctime")]
         public DateTime Timestamp { get; set; }
     }
 }

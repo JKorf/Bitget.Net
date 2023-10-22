@@ -52,27 +52,27 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("status")]
         public BitgetPlanOrderStatus Status { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonProperty("orderType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("orderType")]
         public BitgetOrderType OrderType { get; set; }
         /// <summary>
         /// Plan type
         /// </summary>
-        [JsonProperty("planType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("planType")]
         public BitgetFuturesPlanType PlanType { get; set; }
         /// <summary>
         /// Trade side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetTradeSide Side { get; set; }
         /// <summary>
         /// Order trigger type
         /// </summary>
-        [JsonProperty("triggerType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("triggerType")]
         public BitgetTriggerType TriggerType { get; set; }
         /// <summary>
         /// Take profit price
@@ -92,12 +92,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order trigger type
         /// </summary>
-        [JsonProperty("enterPointSource"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("enterPointSource")]
         public BitgetOrderPlacementSource Source { get; set; }
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Trade side
@@ -107,7 +107,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Hold mode
         /// </summary>
-        [JsonProperty("holdMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("holdMode")]
         public BitgetHoldMode HoldMode { get; set; }
         /// <summary>
         /// Reduce only
@@ -117,12 +117,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("uTime")]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// Execute time
         /// </summary>
-        [JsonProperty("executeTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("executeTime")]
         public DateTime? ExecuteTime { get; set; }
         /// <summary>
         /// Executed quantity

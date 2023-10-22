@@ -32,7 +32,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Hold side
         /// </summary>
-        [JsonProperty("holdSide"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("holdSide")]
         public BitgetPositionSide HoldSide { get; set; }
         /// <summary>
         /// Margin quantity (margin currency)
@@ -42,7 +42,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Auto suppliment margin
         /// </summary>
-        [JsonProperty("autoMargin"), JsonConverter(typeof(BoolConverter))]
+        [JsonProperty("autoMargin")]
         public bool AutoMargin { get; set; }
         /// <summary>
         /// Position available (Quote currency)
@@ -77,12 +77,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Margin mode
         /// </summary>
-        [JsonProperty("marginMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("marginMode")]
         public BitgetMarginMode MarginMode { get; set; }
         /// <summary>
         /// Hold mode
         /// </summary>
-        [JsonProperty("holdMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("holdMode")]
         public BitgetHoldMode HoldMode { get; set; }
         /// <summary>
         /// Unrealized profit and loss
@@ -117,12 +117,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("cTime")]
         public DateTime? CreateTime { get; set; }
         /// <summary>
         /// Last update time
         /// </summary>
-        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("uTime")]
         public DateTime? UpdateTime { get; set; }
     }
 }

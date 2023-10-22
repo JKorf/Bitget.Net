@@ -92,22 +92,22 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Futures symbol type
         /// </summary>
-        [JsonProperty("symbolType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("symbolType")]
         public BitgetFuturesSymbolType Type { get; set; }
         /// <summary>
         /// Symbol status
         /// </summary>
-        [JsonProperty("symbolStatus"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("symbolStatus")]
         public BitgetFuturesSymbolStatus Status { get; set; }
         /// <summary>
         /// Delist time
         /// </summary>
-        [JsonProperty("offTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("offTime")]
         public DateTime? DelistTime { get; set; }
         /// <summary>
         /// Prohibit create order time
         /// </summary>
-        [JsonProperty("limitOpenTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("limitOpenTime")]
         public DateTime? LimitOpenTime { get; set; }
     }
 }

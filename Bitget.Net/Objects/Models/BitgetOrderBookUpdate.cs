@@ -21,7 +21,6 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("ts")]
         public DateTime Timestamp { get; set; }
     }
