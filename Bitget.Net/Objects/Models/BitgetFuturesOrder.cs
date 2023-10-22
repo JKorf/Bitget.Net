@@ -52,12 +52,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetFuturesOrderSide Side { get; set; }
         /// <summary>
         /// Time in force
         /// </summary>
-        [JsonProperty("timeInForce"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("timeInForce")]
         public BitgetTimeInForce TimeInForce { get; set; }
         /// <summary>
         /// Total profits
@@ -67,7 +67,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonProperty("posSide"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("posSide")]
         public BitgetPositionSide PositionSide { get; set; }
         /// <summary>
         /// Margin asset
@@ -87,7 +87,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Margin mode
         /// </summary>
-        [JsonProperty("marginMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("marginMode")]
         public BitgetMarginMode MarginMode { get; set; }
         /// <summary>
         /// Reduce only
@@ -97,17 +97,17 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Source
         /// </summary>
-        [JsonProperty("enterPointSource"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("enterPointSource")]
         public BitgetOrderPlacementSource PlaceSource { get; set; }
         /// <summary>
         /// Hold mode
         /// </summary>
-        [JsonProperty("holdMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("holdMode")]
         public BitgetHoldMode HoldMode { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonProperty("orderType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("orderType")]
         public BitgetOrderType OrderType { get; set; }
         /// <summary>
         /// Order source
@@ -122,17 +122,17 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Creation time
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("uTime")]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("state"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("state")]
         public BitgetOrderStatus Status { get; set; }
         /// <summary>
         /// Stop loss price

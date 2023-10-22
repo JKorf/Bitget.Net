@@ -1,6 +1,6 @@
 ﻿using Bitget.Net.Clients;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Objects.Sockets;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

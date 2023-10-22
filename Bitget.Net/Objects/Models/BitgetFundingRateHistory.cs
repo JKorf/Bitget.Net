@@ -24,7 +24,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Settle time
         /// </summary>
-        [JsonProperty("settleTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("settleTime")]
         public DateTime SettleTime { get; set; }
     }
 }

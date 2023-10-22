@@ -16,7 +16,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Funding time
         /// </summary>
-        [JsonProperty("fundingTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("fundingTime")]
         public DateTime FundingTime { get; set; }
     }
 }

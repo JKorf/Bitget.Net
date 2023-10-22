@@ -12,7 +12,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("ts"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("ts")]
         [ArrayProperty(0)]
         public DateTime Timestamp { get; set; }
         /// <summary>

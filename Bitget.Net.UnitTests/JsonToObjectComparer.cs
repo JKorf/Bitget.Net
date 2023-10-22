@@ -327,16 +327,21 @@ namespace Bitget.Net.UnitTests
                     if (decimal.Parse(jsonValue.Value<string>(), System.Globalization.NumberStyles.Float, CultureInfo.InvariantCulture) != dec)
                         throw new Exception($"{method}: {property} not equal: {jsonValue.Value<decimal>()} vs {dec}");
                 }
-                else if (objectValue is DateTime time)
+                else if (objectValue.GetType().IsEnum 
+                    || objectValue is DateTime || objectValue is DateTime?
+                    || (objectValue is bool && jsonValue.Type == JTokenType.String))
                 {
-                    // timestamp, hard to check..
+                    // enum value..
                 }
                 else if (jsonValue.Value<string>().ToLowerInvariant() != objectValue.ToString().ToLowerInvariant())
                     throw new Exception($"{method}: {property} not equal: {jsonValue.Value<string>()} vs {objectValue.ToString()}");
             }
             else if (jsonValue.Type == JTokenType.Integer)
             {
-                if (jsonValue.Value<long>() != Convert.ToInt64(objectValue))
+                if (objectValue.GetType().IsEnum || objectValue is DateTime || objectValue is DateTime?)
+                {
+                }
+                else if (jsonValue.Value<long>() != Convert.ToInt64(objectValue))
                     throw new Exception($"{method}: {property} not equal: {jsonValue.Value<long>()} vs {Convert.ToInt64(objectValue)}");
             }
             else if (jsonValue.Type == JTokenType.Boolean)

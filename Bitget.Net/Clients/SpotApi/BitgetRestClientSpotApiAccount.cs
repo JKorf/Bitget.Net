@@ -24,7 +24,7 @@ namespace Bitget.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("coin", asset);
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetBalance>>(_baseClient.GetUri("/api/spot/v1/account/assets"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetBalance>>("/api/spot/v1/account/assets", HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -32,13 +32,13 @@ namespace Bitget.Net.Clients.SpotApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("coin", asset);
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetBalance>>(_baseClient.GetUri("/api/spot/v1/account/assets-lite"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetBalance>>("/api/spot/v1/account/assets-lite", HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<BitgetApiKeyInfo>> GetApiKeyInfoAsync(CancellationToken ct = default)
         {
-            return await _baseClient.ExecuteAsync<BitgetApiKeyInfo>(_baseClient.GetUri("/api/spot/v1/account/getInfo"), HttpMethod.Get, ct, null, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetApiKeyInfo>("/api/spot/v1/account/getInfo", HttpMethod.Get, ct, null, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -53,7 +53,7 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("before", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("after", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("limit", limit);
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetBill>>(_baseClient.GetUri("/api/spot/v1/account/bills"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetBill>>("/api/spot/v1/account/bills", HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -71,7 +71,7 @@ namespace Bitget.Net.Clients.SpotApi
 
             parameters.AddOptionalParameter("clientOid", clientOrderId);
             parameters.AddOptionalParameter("limit", limit);
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetTransfer>>(_baseClient.GetUri("/api/spot/v1/account/transferRecords"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetTransfer>>("/api/spot/v1/account/transferRecords", HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -87,7 +87,7 @@ namespace Bitget.Net.Clients.SpotApi
 
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("clientOid", clientOrderId);
-            return await _baseClient.ExecuteAsync<BitgetTransferResult>(_baseClient.GetUri("/api/spot/v1/wallet/transfer-v2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetTransferResult>("/api/spot/v1/wallet/transfer-v2", HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -104,7 +104,7 @@ namespace Bitget.Net.Clients.SpotApi
                 { "toUserId", toUserId },
             };
 
-            return await _baseClient.ExecuteAsync(_baseClient.GetUri("/api/spot/v1/wallet/subTransfer"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync("/api/spot/v1/wallet/subTransfer", HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -115,7 +115,7 @@ namespace Bitget.Net.Clients.SpotApi
                 { "coin", asset },
                 { "chain", network }
             };
-            return await _baseClient.ExecuteAsync<BitgetDepositAddress>(_baseClient.GetUri("/api/spot/v1/wallet/deposit-address"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetDepositAddress>("/api/spot/v1/wallet/deposit-address", HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -133,7 +133,7 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("remark", remark);
             parameters.AddOptionalParameter("clientOid", clientOrderId);
 
-            return await _baseClient.ExecuteAsync<BitgetWithdrawResult>(_baseClient.GetUri("/api/spot/v1/wallet/withdrawal-v2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetWithdrawResult>("/api/spot/v1/wallet/withdrawal-v2", HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -150,7 +150,7 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("areaCode", areaCode);
             parameters.AddOptionalParameter("clientOid", clientOrderId);
 
-            return await _baseClient.ExecuteAsync<BitgetWithdrawResult>(_baseClient.GetUri("/api/spot/v1/wallet/withdrawal-inner-v2"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetWithdrawResult>("/api/spot/v1/wallet/withdrawal-inner-v2", HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -166,7 +166,7 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("pageNo", page);
             parameters.AddOptionalParameter("pageSize", pageSize);
 
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetWithdrawal>>(_baseClient.GetUri("/api/spot/v1/wallet/withdrawal-list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetWithdrawal>>("/api/spot/v1/wallet/withdrawal-list", HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -181,7 +181,7 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("pageNo", page);
             parameters.AddOptionalParameter("pageSize", pageSize);
 
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetDeposit>>(_baseClient.GetUri("/api/spot/v1/wallet/deposit-list"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetDeposit>>("/api/spot/v1/wallet/deposit-list", HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -193,7 +193,7 @@ namespace Bitget.Net.Clients.SpotApi
                 { "business", EnumConverter.GetString(businessType) }
             };
 
-            return await _baseClient.ExecuteAsync<BitgetUserFee>(_baseClient.GetUri("/api/user/v1/fee/query"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetUserFee>("/api/user/v1/fee/query", HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
     }
 }

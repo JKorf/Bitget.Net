@@ -78,7 +78,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Symbol status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("status")]
         public BitgetSymbolStatus Status { get; set; }
 
         /// <summary>

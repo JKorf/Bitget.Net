@@ -12,7 +12,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Creation time
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Asset id
@@ -27,12 +27,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Group type
         /// </summary>
-        [JsonProperty("groupType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("groupType")]
         public BitgetGroupType GroupType { get; set; }
         /// <summary>
         /// Transaction type
         /// </summary>
-        [JsonProperty("bizType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("bizType")]
         public BizType Type { get; set; }
         /// <summary>
         /// Quantity

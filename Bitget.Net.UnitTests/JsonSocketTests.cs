@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using Bitget.Net.Clients;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Models;
+using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -53,7 +55,7 @@ namespace Bitget.Net.UnitTests
                 throw;
             }
 
-            var result = JsonConvert.DeserializeObject<T>(json);
+            var result = JsonConvert.DeserializeObject<T>(json, SerializerOptions.WithConverters);
             JsonToObjectComparer<IBitgetSocketClient>.ProcessData("", result, json, ignoreProperties: new Dictionary<string, List<string>>
             {
                 { "", ignoreProperties ?? new List<string>() }

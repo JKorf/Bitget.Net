@@ -80,12 +80,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Margin mode
         /// </summary>
-        [JsonProperty("marginMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("marginMode")]
         public BitgetMarginMode? MarginMode { get; set; }
         /// <summary>
         /// Hold mode
         /// </summary>
-        [JsonProperty("holdMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("holdMode")]
         public BitgetHoldMode? HoldMode { get; set; }
         /// <summary>
         /// Urealized profit and loss at crossed margin mode, unit in USDT

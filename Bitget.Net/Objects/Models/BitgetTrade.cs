@@ -22,7 +22,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetOrderSide Side { get; set; }
         /// <summary>
         /// Price
@@ -37,7 +37,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("fillTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("fillTime")]
         public DateTime Timestamp { get; set; }
     }
 }
