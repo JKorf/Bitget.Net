@@ -27,13 +27,6 @@ namespace Bitget.Net.Clients.SpotApi
 
             AddSystemSubscription(new BitgetPongSubscription(logger, this));
             SendPeriodic("Ping", TimeSpan.FromSeconds(30), x => "ping");
-
-            SetDataInterpreter(null, data =>
-            {
-                if (data == "pong")
-                    return "";
-                return data;
-            });
         }
         #endregion
 
@@ -186,7 +179,7 @@ namespace Bitget.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
 
         /// <inheritdoc />
-        protected override QueryActor GetAuthenticationRequest()
+        protected override Query GetAuthenticationRequest()
         {
             var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;

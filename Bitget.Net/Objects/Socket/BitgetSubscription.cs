@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Bitget.Net.Objects.Socket
 {
-    internal class BitgetSubscription<T> : SubscriptionActor
+    internal class BitgetSubscription<T> : Subscription
     {
         private readonly object[] _args;
         private readonly Action<DataEvent<T>> _handler;
@@ -23,8 +23,8 @@ namespace Bitget.Net.Objects.Socket
             _handler = handler;
         }
 
-        public override object? GetSubscribeRequest() => new BitgetSocketRequest { Args = _args, Op = "subscribe" };
-        public override object? GetUnsubscribeRequest() => new BitgetSocketRequest { Args = _args, Op = "unsubscribe" };
+        public override object? GetSubRequest() => new BitgetSocketRequest { Args = _args, Op = "subscribe" };
+        public override object? GetUnsubRequest() => new BitgetSocketRequest { Args = _args, Op = "unsubscribe" };
 
         public override async Task HandleEventAsync(StreamMessage message)
         {
@@ -39,7 +39,7 @@ namespace Bitget.Net.Objects.Socket
             message.Dispose();
         }
 
-        public override bool MessageMatchesSubscription(StreamMessage message)
+        public override bool MessageMatchesEvent(StreamMessage message)
         {
             var token = message.Get(ParsingUtils.GetJToken);
             if (token.Type != JTokenType.Object)
@@ -75,7 +75,7 @@ namespace Bitget.Net.Objects.Socket
             return false;
         }
 
-        public override (bool, CallResult?) MessageMatchesSubscribeRequest(StreamMessage message)
+        public override (bool, CallResult?) MessageMatchesSubRequest(StreamMessage message)
         {
             var token = message.Get(ParsingUtils.GetJToken);
             if (token.Type != JTokenType.Object)
@@ -113,7 +113,7 @@ namespace Bitget.Net.Objects.Socket
             return (true, new CallResult(null));
         }
 
-        public override (bool, CallResult?) MessageMatchesUnsubscribeRequest(StreamMessage message)
+        public override (bool, CallResult?) MessageMatchesUnsubRequest(StreamMessage message)
         {
             var token = message.Get(ParsingUtils.GetJToken);
             if (token.Type != JTokenType.Object)
