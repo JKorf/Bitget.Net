@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Bitget.Net.Objects.Socket
 {
-    internal class BitgetAuthRequest : QueryActor
+    internal class BitgetAuthRequest : Query
     {
         public BitgetAuthRequest(BitgetSocketRequest request) : base(request, false)
         {

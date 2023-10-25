@@ -5,23 +5,23 @@ using System.Text;
 
 namespace Bitget.Net.Objects.Socket
 {
-    public class BitgetSocketArgs
+    internal class BitgetSocketArgs
     {
         [JsonProperty("instType")]
-        public string IntstrumentType { get; set; }
+        public string IntstrumentType { get; set; } = null!;
         [JsonProperty("channel")]
-        public string Channel { get; set; }
+        public string Channel { get; set; } = null!;
         [JsonProperty("instId")]
-        public string InstrumentId { get; set; }
+        public string InstrumentId { get; set; } = null!;
     }
 
-    public class BitgetSocketUpdate<T>
+    internal class BitgetSocketUpdate<T>
     {
         [JsonProperty("action")]
-        public string Action { get; set; }
+        public string Action { get; set; } = null!;
         [JsonProperty("arg")]
-        public BitgetSocketArgs Args { get; set; }
+        public BitgetSocketArgs Args { get; set; } = null!;
         [JsonProperty("data")]
-        public T Data { get; set; }
+        public T Data { get; set; } = default!;
     }
 }

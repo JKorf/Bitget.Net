@@ -3,13 +3,10 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bitget.Net.Objects.Socket
 {
-    public class BitgetPongSubscription : SystemSubscription
+    internal class BitgetPongSubscription : SystemSubscription
     {
         public BitgetPongSubscription(ILogger logger, ISocketApiClient socketApiClient) : base(logger, socketApiClient)
         {
@@ -21,7 +18,7 @@ namespace Bitget.Net.Objects.Socket
             return Task.CompletedTask;
         }
 
-        public override bool MessageMatchesSubscription(StreamMessage message)
+        public override bool MessageMatchesEvent(StreamMessage message)
         {
             if (message.Stream.Length != 4)
                 return false;
