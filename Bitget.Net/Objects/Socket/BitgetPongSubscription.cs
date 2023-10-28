@@ -12,6 +12,8 @@ namespace Bitget.Net.Objects.Socket
         {
         }
 
+        public override List<string> Identifiers => null;
+
         public override Task HandleEventAsync(StreamMessage message)
         {
             _logger.LogDebug($"Socket {message.Connection.SocketId} received pong message");

@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net;
+﻿using Bitget.Net.Objects.Models;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -16,12 +17,17 @@ namespace Bitget.Net.Objects.Socket
     {
         private readonly object[] _args;
         private readonly Action<DataEvent<T>> _handler;
+        private readonly List<string> _identifiers;
 
-        public BitgetSubscription(ILogger logger, ISocketApiClient socketApiClient, object[] args, Action<DataEvent<T>> handler, bool authenticated) : base(logger, socketApiClient, authenticated)
+        public BitgetSubscription(ILogger logger, ISocketApiClient socketApiClient, Dictionary<string, string>[] args, Action<DataEvent<T>> handler, bool authenticated) : base(logger, socketApiClient, authenticated)
         {
             _args = args;
             _handler = handler;
+            _identifiers = args.Select(a => "update" + a["instType"] + a["channel"] + a["instId"]).ToList();
+            _identifiers.AddRange(args.Select(a => "snapshot" + a["instType"] + a["channel"] + a["instId"]));
         }
+
+        public override List<string> Identifiers => _identifiers;
 
         public override object? GetSubRequest() => new BitgetSocketRequest { Args = _args, Op = "subscribe" };
         public override object? GetUnsubRequest() => new BitgetSocketRequest { Args = _args, Op = "unsubscribe" };
@@ -62,7 +68,7 @@ namespace Bitget.Net.Objects.Socket
             if (instType == null || channel == null || instId == null)
                 return false;
 
-            foreach (Dictionary<string, object> dict in _args)
+            foreach (Dictionary<string, string> dict in _args)
             {
                 if (instType.Equals((string)dict["instType"], StringComparison.InvariantCultureIgnoreCase)
                     && channel.Equals((string)dict["channel"], StringComparison.InvariantCultureIgnoreCase)
@@ -94,7 +100,7 @@ namespace Bitget.Net.Objects.Socket
             if (instType == null || channel == null || instId == null)
                 return (false, null);
 
-            var dict = (Dictionary<string, object>)_args[0];
+            var dict = (Dictionary<string, string>)_args[0];
             if (!instType.Equals((string)dict["instType"], StringComparison.InvariantCultureIgnoreCase)
                 || !channel.Equals((string)dict["channel"], StringComparison.InvariantCultureIgnoreCase)
                 || !instId.Equals((string)dict["instId"], StringComparison.InvariantCultureIgnoreCase))

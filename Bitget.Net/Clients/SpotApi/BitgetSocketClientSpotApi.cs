@@ -43,7 +43,7 @@ namespace Bitget.Net.Clients.SpotApi
                     handler(data.As(item));
             };
 
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, object>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", "SP" },
                         { "channel", "ticker" },
@@ -59,7 +59,7 @@ namespace Bitget.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, BitgetStreamKlineInterval interval, Action<DataEvent<IEnumerable<BitgetKlineUpdate>>> handler, CancellationToken ct = default)
         {
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, object>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", "SP" },
                         { "channel", "candle" + EnumConverter.GetString(interval) },
@@ -81,7 +81,7 @@ namespace Bitget.Net.Clients.SpotApi
                     handler(data.As(item));
             };
 
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, object>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", "SP" },
                         { "channel", "books" },
@@ -105,7 +105,7 @@ namespace Bitget.Net.Clients.SpotApi
                     handler(data.As(item));
             };
 
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, object>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", "SP" },
                         { "channel", "books" + limit },
@@ -121,7 +121,7 @@ namespace Bitget.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetTradeUpdate>>> handler, CancellationToken ct = default)
         {
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, object>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", "SP" },
                         { "channel", "trade" },
@@ -133,7 +133,7 @@ namespace Bitget.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetBalanceUpdate>>> handler, CancellationToken ct = default)
         {
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), new object[] { new Dictionary<string, object>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), new [] { new Dictionary<string, string>
                     {
                         { "instType", "spbl" },
                         { "channel", "account" },
@@ -145,7 +145,7 @@ namespace Bitget.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BitgetOrderUpdate>>> handler, CancellationToken ct = default)
         {
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), new object[] { new Dictionary<string, object>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), new [] { new Dictionary<string, string>
                     {
                         { "instType", "spbl" },
                         { "channel", "orders" },
@@ -154,7 +154,12 @@ namespace Bitget.Net.Clients.SpotApi
             }, true, handler, ct).ConfigureAwait(false);
         }
 
-        private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(string url, object[] request, bool authenticated, Action<DataEvent<T>> handler, CancellationToken ct)
+        private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(
+            string url,
+            Dictionary<string, string>[] request,
+            bool authenticated,
+            Action<DataEvent<T>> handler,
+            CancellationToken ct)
         {
             //var internalHandler = (DataEvent<JToken> data) =>
             //{
@@ -201,6 +206,25 @@ namespace Bitget.Net.Clients.SpotApi
             };
 
             return new BitgetAuthRequest(socketRequest);
+        }
+
+        protected override SocketConverter GetConverter() => new SocketConverter(new List<string> { "event", "action", "arg:instType", "arg:channel", "arg:instId" }, UpdateTypeIdentifier);
+
+        private Type UpdateTypeIdentifier(Dictionary<string, string> args)
+        {
+            if (args["event"] == "subscribe" || args["event"] == "unsubscribe")
+                return typeof(BitgetSocketUpdate);
+
+            if (args["action"] == null)
+                return null;
+
+            //if (args["arg:channel"] == "ticker")
+            //    return typeof(BitgetTickerUpdate);
+
+            if (args["arg:channel"] == "trade")
+                return typeof(BitgetSocketUpdate<IEnumerable<BitgetTradeUpdate>>);
+
+            return null;
         }
     }
 }
