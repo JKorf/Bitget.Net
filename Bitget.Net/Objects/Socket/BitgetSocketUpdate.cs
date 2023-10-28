@@ -15,12 +15,16 @@ namespace Bitget.Net.Objects.Socket
         public string InstrumentId { get; set; } = null!;
     }
 
-    internal class BitgetSocketUpdate<T>
+    internal class BitgetSocketUpdate
     {
         [JsonProperty("action")]
         public string Action { get; set; } = null!;
         [JsonProperty("arg")]
         public BitgetSocketArgs Args { get; set; } = null!;
+    }
+
+    internal class BitgetSocketUpdate<T> : BitgetSocketUpdate
+    {
         [JsonProperty("data")]
         public T Data { get; set; } = default!;
     }
