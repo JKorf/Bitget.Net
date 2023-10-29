@@ -15,7 +15,7 @@ namespace Bitget.Net.Objects.Socket
 {
     internal class BitgetSubscription<T> : Subscription
     {
-        private readonly object[] _args;
+        private readonly Dictionary<string, string>[] _args;
         private readonly Action<DataEvent<T>> _handler;
         private readonly List<string> _identifiers;
 
@@ -32,120 +32,48 @@ namespace Bitget.Net.Objects.Socket
         public override object? GetSubRequest() => new BitgetSocketRequest { Args = _args, Op = "subscribe" };
         public override object? GetUnsubRequest() => new BitgetSocketRequest { Args = _args, Op = "unsubscribe" };
 
-        public override async Task HandleEventAsync(StreamMessage message)
+        public override async Task HandleEventAsync(DataEvent<ParsedMessage> message)
         {
-            var deserializeResult = await DeserializeAsync<BitgetSocketUpdate<T>>(message, SerializerOptions.WithConverters).ConfigureAwait(false);
-            if (!deserializeResult)
-            {
-                // TODO
-            }
-
-            var dataEvent = CreateDataEvent(deserializeResult.Data.Data, message);
-            _handler.Invoke(dataEvent);
-            message.Dispose();
+            var data = (BitgetSocketUpdate<T>)message.Data.Data;
+            _handler.Invoke(message.As(data.Data, data.Args.InstrumentId, data.Action == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
         }
 
-        public override bool MessageMatchesEvent(StreamMessage message)
+        public override (bool, CallResult?) MessageMatchesSubRequest(ParsedMessage message)
         {
-            var token = message.Get(ParsingUtils.GetJToken);
-            if (token.Type != JTokenType.Object)
-                return false;
-
-            var action = token["action"]?.ToString();
-            if (action == null)
-                return false;
-
-            if (action != "update" && action != "snapshot")
-                return false;
-
-            var arg = token["arg"];
-            if (arg == null)
-                return false;
-
-            var instType = arg?["instType"]?.ToString();
-            var channel = arg?["channel"]?.ToString();
-            var instId = arg?["instId"]?.ToString();
-            if (instType == null || channel == null || instId == null)
-                return false;
-
-            foreach (Dictionary<string, string> dict in _args)
-            {
-                if (instType.Equals((string)dict["instType"], StringComparison.InvariantCultureIgnoreCase)
-                    && channel.Equals((string)dict["channel"], StringComparison.InvariantCultureIgnoreCase)
-                    && instId.Equals((string)dict["instId"], StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public override (bool, CallResult?) MessageMatchesSubRequest(StreamMessage message)
-        {
-            var token = message.Get(ParsingUtils.GetJToken);
-            if (token.Type != JTokenType.Object)
+            if (message.Data is not BitgetSocketEvent socketEvent)
                 return (false, null);
 
-            var op = token["event"]?.ToString();
-            if (op == null)
+            var args = _args[0];
+            if (!socketEvent.Args.IntstrumentType.Equals(args["instType"], StringComparison.InvariantCultureIgnoreCase)
+                || !socketEvent.Args.Channel.Equals(args["channel"], StringComparison.InvariantCultureIgnoreCase)
+                || !socketEvent.Args.InstrumentId.Equals(args["instId"], StringComparison.InvariantCultureIgnoreCase))
                 return (false, null);
 
-            if (op != "subscribe" && op != "error")
+            if (socketEvent.Event == "error")
+                return (true, new CallResult(new ServerError(socketEvent.Code!.Value, socketEvent.Message)));
+
+            if (socketEvent.Event != "subscribe")
                 return (false, null);
 
-            var instType = token["arg"]?["instType"]?.ToString();
-            var channel = token["arg"]?["channel"]?.ToString();
-            var instId = token["arg"]?["instId"]?.ToString();
-            if (instType == null || channel == null || instId == null)
-                return (false, null);
-
-            var dict = (Dictionary<string, string>)_args[0];
-            if (!instType.Equals((string)dict["instType"], StringComparison.InvariantCultureIgnoreCase)
-                || !channel.Equals((string)dict["channel"], StringComparison.InvariantCultureIgnoreCase)
-                || !instId.Equals((string)dict["instId"], StringComparison.InvariantCultureIgnoreCase))
-            {
-                return (false, null);
-            }
-
-            if (op == "error")
-            {
-                _logger.Log(LogLevel.Trace, $"Socket {message.Connection.SocketId} Subscription failed");
-                var callResult = new CallResult<object>(new ServerError(token["code"]!.Value<int>(), token["msg"]!.ToString()));
-                return (true, callResult);
-            }
-
-            _logger.Log(LogLevel.Trace, $"Socket {message.Connection.SocketId} Subscription completed");
             return (true, new CallResult(null));
         }
 
-        public override (bool, CallResult?) MessageMatchesUnsubRequest(StreamMessage message)
+        public override (bool, CallResult?) MessageMatchesUnsubRequest(ParsedMessage message)
         {
-            var token = message.Get(ParsingUtils.GetJToken);
-            if (token.Type != JTokenType.Object)
+            if (message.Data is not BitgetSocketEvent socketEvent)
                 return (false, null);
 
-            var evnt = token["event"];
-            if (evnt?.ToString() != "unsubscribe")
+            var args = _args[0];
+            if (!socketEvent.Args.IntstrumentType.Equals(args["instType"], StringComparison.InvariantCultureIgnoreCase)
+                 || !socketEvent.Args.Channel.Equals(args["channel"], StringComparison.InvariantCultureIgnoreCase)
+                 || !socketEvent.Args.InstrumentId.Equals(args["instId"], StringComparison.InvariantCultureIgnoreCase))
                 return (false, null);
 
-            var arg = token["arg"];
-            if (arg == null)
-                return (false, null);
+            if (socketEvent.Event == "error")
+                return (true, new CallResult(new ServerError(socketEvent.Code!.Value, socketEvent.Message)));
 
-            var instType = arg?["instType"]?.ToString();
-            var channel = arg?["channel"]?.ToString();
-            var instId = arg?["instId"]?.ToString();
-            if (instType == null || channel == null || instId == null)
+            if (socketEvent.Event != "unsubscribe")
                 return (false, null);
-
-            var dict = (Dictionary<string, object>)_args[0];
-            if (!instType.Equals((string)dict["instType"], StringComparison.InvariantCultureIgnoreCase)
-                || !channel.Equals((string)dict["channel"], StringComparison.InvariantCultureIgnoreCase)
-                || !instId.Equals((string)dict["instId"], StringComparison.InvariantCultureIgnoreCase))
-            {
-                return (false, null);
-            }
 
             return (true, new CallResult(null));
         }
