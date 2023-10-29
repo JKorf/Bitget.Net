@@ -9,7 +9,7 @@ namespace Bitget.Net.Objects.Socket
 {
     public class BitgetStreamConverter : SocketConverter
     {
-        public override string[] IdFields { get; } = new string[]
+        public override string[] TypeIdFields { get; } = new string[]
         {
             "event",
             "action",
