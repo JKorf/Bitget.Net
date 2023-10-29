@@ -23,6 +23,20 @@ namespace Bitget.Net.Objects.Socket
         public BitgetSocketArgs Args { get; set; } = null!;
     }
 
+    internal class BitgetSocketEvent
+    {
+        [JsonProperty("event")]
+        public string Event { get; set; } = null!;
+        [JsonProperty("arg")]
+        public BitgetSocketArgs Args { get; set; } = null!;
+        [JsonProperty("op")]
+        public string Op { get; set; } = null!;
+        [JsonProperty("code")]
+        public int? Code { get; set; }
+        [JsonProperty("msg")]
+        public string Message { get; set; }
+    }
+
     internal class BitgetSocketUpdate<T> : BitgetSocketUpdate
     {
         [JsonProperty("data")]

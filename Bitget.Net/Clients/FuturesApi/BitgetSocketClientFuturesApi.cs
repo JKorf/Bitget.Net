@@ -20,6 +20,9 @@ namespace Bitget.Net.Clients.SpotApi
     /// <inheritdoc />
     public class BitgetSocketClientFuturesApi : SocketApiClient, IBitgetSocketClientFuturesApi
     {
+        /// <inheritdoc />
+        public override SocketConverter StreamConverter { get; } = new BitgetStreamConverter();
+
         internal BitgetSocketClientFuturesApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.FuturesOptions)
         {
@@ -223,15 +226,5 @@ namespace Bitget.Net.Clients.SpotApi
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
-
-        protected override SocketConverter GetConverter() => new SocketConverter(new List<string> { "arg:instType", "arg:channel", "arg:instId" }, UpdateTypeIdentifier);
-
-        private Type UpdateTypeIdentifier(Dictionary<string, string> args)
-        {
-            if (args["arg:channel"] == "ticker")
-                return typeof(BitgetTickerUpdate);
-
-            return null;
-        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
@@ -12,38 +13,21 @@ namespace Bitget.Net.Objects.Socket
         {
         }
 
-        public override CallResult HandleResponse(StreamMessage message)
+        public override CallResult HandleResponse(ParsedMessage message)
         {
-            var token = message.Get(ParsingUtils.GetJToken);
-            var evnt = token["event"]!.ToString();
-            var code = token["code"]!.ToString();
-            if (evnt == "login" && code == "0")
+            var evnt = (BitgetSocketEvent)message.Data;
+            if (evnt.Code == 0)
                 return new CallResult(null);
 
-            return new CallResult(new ServerError("Login failed"));
+            return new CallResult(new ServerError(evnt.Code!.Value, evnt.Message));
         }
 
-        public override bool MessageMatchesQuery(StreamMessage message)
+        public override bool MessageMatchesQuery(ParsedMessage message)
         {
-            var token = message.Get(ParsingUtils.GetJToken);
-            if (token.Type != JTokenType.Object)
+            if (message.Data is not BitgetSocketEvent evnt)
                 return false;
 
-            var code = token["code"]?.ToString();
-            if (code == null)
-                return false;
-
-            var evnt = token["event"]?.ToString();
-            if (code == null)
-                return false;
-
-            if (evnt == "error" && code == "30005")
-                return true;
-
-            if (evnt == "login")
-                return true;
-
-            return false;
+            return evnt.Event == "login" || evnt.Event == "error";
         }
     }
 }

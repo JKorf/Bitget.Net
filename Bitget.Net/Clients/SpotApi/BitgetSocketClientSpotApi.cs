@@ -19,16 +19,25 @@ namespace Bitget.Net.Clients.SpotApi
     /// <inheritdoc />
     public class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
     {
+        /// <inheritdoc />
+        public override SocketConverter StreamConverter { get; } = new BitgetStreamConverter();
+
         #region ctor
         internal BitgetSocketClientSpotApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.SpotOptions)
         {
             DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
 
-            AddSystemSubscription(new BitgetPongSubscription(logger, this));
+            //AddSystemSubscription(new BitgetPongSubscription(logger, this));
             SendPeriodic("Ping", TimeSpan.FromSeconds(30), x => "ping");
         }
         #endregion
+
+        protected override void HandleUnparsedMessage(byte[] message)
+        {
+            if (message.Length == 4)
+                _logger.LogInformation("Received pong");
+        }
 
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BitgetTickerUpdate>> handler, CancellationToken ct = default)
@@ -161,21 +170,6 @@ namespace Bitget.Net.Clients.SpotApi
             Action<DataEvent<T>> handler,
             CancellationToken ct)
         {
-            //var internalHandler = (DataEvent<JToken> data) =>
-            //{
-            //    var internalData = data.Data["data"]!;
-            //    var deserializeResult = Deserialize<T>(internalData);
-            //    if (!deserializeResult)
-            //    {
-            //        _logger.LogWarning("Failed to deserialize update: " + deserializeResult.Error);
-            //        return;
-            //    }
-
-            //    var instId = data.Data["arg"]?["instId"]?.ToString();
-            //    var updateType = data.Data["action"]?.ToString();
-            //    handler(data.As(deserializeResult.Data, instId, updateType == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
-            //};
-
             var subscription = new BitgetSubscription<T>(_logger, this, request, handler, authenticated);
             return await SubscribeAsync<T>(url, subscription, ct).ConfigureAwait(false);
         }
@@ -206,25 +200,6 @@ namespace Bitget.Net.Clients.SpotApi
             };
 
             return new BitgetAuthRequest(socketRequest);
-        }
-
-        protected override SocketConverter GetConverter() => new SocketConverter(new List<string> { "event", "action", "arg:instType", "arg:channel", "arg:instId" }, UpdateTypeIdentifier);
-
-        private Type UpdateTypeIdentifier(Dictionary<string, string> args)
-        {
-            if (args["event"] == "subscribe" || args["event"] == "unsubscribe")
-                return typeof(BitgetSocketUpdate);
-
-            if (args["action"] == null)
-                return null;
-
-            //if (args["arg:channel"] == "ticker")
-            //    return typeof(BitgetTickerUpdate);
-
-            if (args["arg:channel"] == "trade")
-                return typeof(BitgetSocketUpdate<IEnumerable<BitgetTradeUpdate>>);
-
-            return null;
         }
     }
 }
