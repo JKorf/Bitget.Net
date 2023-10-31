@@ -170,7 +170,7 @@ namespace Bitget.Net.Clients.SpotApi
             Action<DataEvent<T>> handler,
             CancellationToken ct)
         {
-            var subscription = new BitgetSubscription<T>(_logger, this, request, handler, authenticated);
+            var subscription = new BitgetSubscription<T>(_logger, request, handler, authenticated);
             return await SubscribeAsync<T>(url, subscription, ct).ConfigureAwait(false);
         }
 
