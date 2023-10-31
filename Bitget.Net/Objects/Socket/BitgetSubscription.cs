@@ -19,7 +19,7 @@ namespace Bitget.Net.Objects.Socket
         private readonly Action<DataEvent<T>> _handler;
         private readonly List<string> _identifiers;
 
-        public BitgetSubscription(ILogger logger, ISocketApiClient socketApiClient, Dictionary<string, string>[] args, Action<DataEvent<T>> handler, bool authenticated) : base(logger, socketApiClient, authenticated)
+        public BitgetSubscription(ILogger logger, Dictionary<string, string>[] args, Action<DataEvent<T>> handler, bool authenticated) : base(logger, authenticated)
         {
             _args = args;
             _handler = handler;

@@ -196,7 +196,7 @@ namespace Bitget.Net.Clients.SpotApi
             //    handler(data.As(deserializeResult.Data, instId, updateType == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
             //};
 
-            var subscription = new BitgetSubscription<T>(_logger, this, request, handler, authenticated);
+            var subscription = new BitgetSubscription<T>(_logger, request, handler, authenticated);
             return await SubscribeAsync<T>(url, subscription, ct).ConfigureAwait(false);
         }
 
