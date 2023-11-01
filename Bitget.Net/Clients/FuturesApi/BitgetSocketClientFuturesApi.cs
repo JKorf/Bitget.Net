@@ -197,7 +197,7 @@ namespace Bitget.Net.Clients.SpotApi
             //};
 
             var subscription = new BitgetSubscription<T>(_logger, request, handler, authenticated);
-            return await SubscribeAsync<T>(url, subscription, ct).ConfigureAwait(false);
+            return await SubscribeAsync(url, subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
