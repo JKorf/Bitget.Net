@@ -13,13 +13,13 @@ namespace Bitget.Net.Objects.Socket
         {
         }
 
-        public override CallResult HandleResponse(ParsedMessage message)
+        public override CallResult HandleResult(ParsedMessage message)
         {
             var evnt = (BitgetSocketEvent)message.Data;
             if (evnt.Code == 0)
-                return new CallResult(null);
+                return new CallResult<object>(null);
 
-            return new CallResult(new ServerError(evnt.Code!.Value, evnt.Message));
+            return new CallResult<object>(new ServerError(evnt.Code!.Value, evnt.Message));
         }
 
         public override bool MessageMatchesQuery(ParsedMessage message)
