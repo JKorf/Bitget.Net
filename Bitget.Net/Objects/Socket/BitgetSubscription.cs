@@ -38,44 +38,35 @@ namespace Bitget.Net.Objects.Socket
             _handler.Invoke(message.As(data.Data, data.Args.InstrumentId, data.Action == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
         }
 
-        public override (bool, CallResult?) MessageMatchesSubRequest(ParsedMessage message)
+        public override CallResult HandleSubResponse(ParsedMessage message) => new CallResult(null); // TODO check error
+        public override CallResult HandleUnsubResponse(ParsedMessage message) => new CallResult(null);// TODO check error
+
+        public override bool MessageMatchesSubRequest(ParsedMessage message)
         {
             if (message.Data is not BitgetSocketEvent socketEvent)
-                return (false, null);
+                return false;
 
             var args = _args[0];
             if (!socketEvent.Args.IntstrumentType.Equals(args["instType"], StringComparison.InvariantCultureIgnoreCase)
                 || !socketEvent.Args.Channel.Equals(args["channel"], StringComparison.InvariantCultureIgnoreCase)
                 || !socketEvent.Args.InstrumentId.Equals(args["instId"], StringComparison.InvariantCultureIgnoreCase))
-                return (false, null);
+                return false;
 
-            if (socketEvent.Event == "error")
-                return (true, new CallResult(new ServerError(socketEvent.Code!.Value, socketEvent.Message)));
-
-            if (socketEvent.Event != "subscribe")
-                return (false, null);
-
-            return (true, new CallResult(null));
+            return socketEvent.Event == "error" || socketEvent.Event == "subscribe";
         }
 
-        public override (bool, CallResult?) MessageMatchesUnsubRequest(ParsedMessage message)
+        public override bool MessageMatchesUnsubRequest(ParsedMessage message)
         {
             if (message.Data is not BitgetSocketEvent socketEvent)
-                return (false, null);
+                return false;
 
             var args = _args[0];
             if (!socketEvent.Args.IntstrumentType.Equals(args["instType"], StringComparison.InvariantCultureIgnoreCase)
                  || !socketEvent.Args.Channel.Equals(args["channel"], StringComparison.InvariantCultureIgnoreCase)
                  || !socketEvent.Args.InstrumentId.Equals(args["instId"], StringComparison.InvariantCultureIgnoreCase))
-                return (false, null);
+                return false;
 
-            if (socketEvent.Event == "error")
-                return (true, new CallResult(new ServerError(socketEvent.Code!.Value, socketEvent.Message)));
-
-            if (socketEvent.Event != "unsubscribe")
-                return (false, null);
-
-            return (true, new CallResult(null));
+            return socketEvent.Event == "error" || socketEvent.Event == "subscribe";
         }
     }
 }

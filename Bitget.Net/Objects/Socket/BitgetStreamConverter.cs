@@ -1,6 +1,7 @@
 ﻿using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.Sockets;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Bitget.Net.Objects.Socket
             "arg:instId"
         };
 
-        public override Type? GetDeserializationType(Dictionary<string, string> idValues, List<MessageListener> listeners)
+        public override Type? GetDeserializationType(Dictionary<string, string> idValues, List<BasePendingRequest> pendingRequests, List<Subscription> listeners)
         {
             if (idValues["event"] == "subscribe" || idValues["event"] == "unsubscribe")
                 return typeof(BitgetSocketEvent);
