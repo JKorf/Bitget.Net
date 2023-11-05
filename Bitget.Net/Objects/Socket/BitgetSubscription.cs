@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Bitget.Net.Objects.Socket
 {
-    internal class BitgetSubscription<T> : Subscription
+    internal class BitgetSubscription<T> : Subscription<BitgetSocketEvent, BitgetSocketUpdate<T>>
     {
         private readonly Dictionary<string, string>[] _args;
         private readonly Action<DataEvent<T>> _handler;
@@ -29,44 +29,12 @@ namespace Bitget.Net.Objects.Socket
 
         public override List<string> Identifiers => _identifiers;
 
-        public override object? GetSubRequest() => new BitgetSocketRequest { Args = _args, Op = "subscribe" };
-        public override object? GetUnsubRequest() => new BitgetSocketRequest { Args = _args, Op = "unsubscribe" };
+        public override BaseQuery? GetSubQuery() => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false);
+        public override BaseQuery? GetUnsubQuery() => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "unsubscribe" }, false);
 
-        public override async Task HandleEventAsync(DataEvent<ParsedMessage> message)
+        public override async Task HandleEventAsync(DataEvent<ParsedMessage<BitgetSocketUpdate<T>>> message)
         {
-            var data = (BitgetSocketUpdate<T>)message.Data.Data;
-            _handler.Invoke(message.As(data.Data, data.Args.InstrumentId, data.Action == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
-        }
-
-        public override CallResult HandleSubResponse(ParsedMessage message) => new CallResult(null); // TODO check error
-        public override CallResult HandleUnsubResponse(ParsedMessage message) => new CallResult(null);// TODO check error
-
-        public override bool MessageMatchesSubRequest(ParsedMessage message)
-        {
-            if (message.Data is not BitgetSocketEvent socketEvent)
-                return false;
-
-            var args = _args[0];
-            if (!socketEvent.Args.IntstrumentType.Equals(args["instType"], StringComparison.InvariantCultureIgnoreCase)
-                || !socketEvent.Args.Channel.Equals(args["channel"], StringComparison.InvariantCultureIgnoreCase)
-                || !socketEvent.Args.InstrumentId.Equals(args["instId"], StringComparison.InvariantCultureIgnoreCase))
-                return false;
-
-            return socketEvent.Event == "error" || socketEvent.Event == "subscribe";
-        }
-
-        public override bool MessageMatchesUnsubRequest(ParsedMessage message)
-        {
-            if (message.Data is not BitgetSocketEvent socketEvent)
-                return false;
-
-            var args = _args[0];
-            if (!socketEvent.Args.IntstrumentType.Equals(args["instType"], StringComparison.InvariantCultureIgnoreCase)
-                 || !socketEvent.Args.Channel.Equals(args["channel"], StringComparison.InvariantCultureIgnoreCase)
-                 || !socketEvent.Args.InstrumentId.Equals(args["instId"], StringComparison.InvariantCultureIgnoreCase))
-                return false;
-
-            return socketEvent.Event == "error" || socketEvent.Event == "subscribe";
+            _handler.Invoke(message.As(message.Data.Data.Data, message.Data.Data.Args.InstrumentId, message.Data.Data.Action == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
         }
     }
 }

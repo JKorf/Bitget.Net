@@ -8,6 +8,6 @@ namespace Bitget.Net.Objects.Socket
         [JsonProperty("op")]
         public string Op { get; set; } = string.Empty;
         [JsonProperty("args")]
-        public object[] Args { get; set; } = Array.Empty<object>();
+        public Dictionary<string, string>[] Args { get; set; } = Array.Empty<Dictionary<string, string>>();
     }
 }

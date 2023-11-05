@@ -28,7 +28,7 @@ namespace Bitget.Net.Clients.SpotApi
         {
             DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
 
-            SendPeriodic("Ping", TimeSpan.FromSeconds(30), x => "ping");
+            QueryPeriodic("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery());
         }
 
         /// <inheritdoc />
@@ -201,7 +201,7 @@ namespace Bitget.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        protected override Query GetAuthenticationRequest()
+        protected override BaseQuery GetAuthenticationRequest()
         {
             var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;

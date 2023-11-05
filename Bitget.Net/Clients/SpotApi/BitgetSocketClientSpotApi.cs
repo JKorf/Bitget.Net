@@ -28,11 +28,11 @@ namespace Bitget.Net.Clients.SpotApi
         {
             DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
 
-            //AddSystemSubscription(new BitgetPongSubscription(logger, this));
-            SendPeriodic("Ping", TimeSpan.FromSeconds(30), x => "ping");
+            QueryPeriodic("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery());
         }
         #endregion
 
+        /// <inheritdoc />
         protected override void HandleUnparsedMessage(byte[] message)
         {
             if (message.Length == 4)
@@ -178,7 +178,7 @@ namespace Bitget.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
 
         /// <inheritdoc />
-        protected override Query GetAuthenticationRequest()
+        protected override BaseQuery GetAuthenticationRequest()
         {
             var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;
