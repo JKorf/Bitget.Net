@@ -19,6 +19,12 @@ namespace Bitget.Net.Objects.Socket
             "arg:instId"
         };
 
+        private readonly Dictionary<string, Type> _channelTypeMap = new Dictionary<string, Type>()
+        {
+            { "ticker", typeof(BitgetSocketUpdate<IEnumerable<BitgetTickerUpdate>>) },
+            { "trade", typeof(BitgetSocketUpdate<IEnumerable<BitgetTradeUpdate>>) },
+        };
+
         public override Type? GetDeserializationType(Dictionary<string, string> idValues, List<BasePendingRequest> pendingRequests, List<Subscription> listeners)
         {
             if (idValues["event"] == "subscribe" || idValues["event"] == "unsubscribe")
@@ -27,11 +33,8 @@ namespace Bitget.Net.Objects.Socket
             if (idValues["action"] == null)
                 return null;
 
-            if (idValues["arg:channel"] == "ticker")
-                return typeof(BitgetSocketUpdate<IEnumerable<BitgetTickerUpdate>>);
-
-            if (idValues["arg:channel"] == "trade")
-                return typeof(BitgetSocketUpdate<IEnumerable<BitgetTradeUpdate>>);
+            if (_channelTypeMap.TryGetValue(idValues["arg:channel"], out var type))
+                return type;
 
             return null;
         }

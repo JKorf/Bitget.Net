@@ -5,6 +5,8 @@ using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using Bitget.Net.Objects.Socket;
+using Bitget.Net.Objects.Socket.Queries;
+using Bitget.Net.Objects.Socket.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
@@ -221,7 +223,7 @@ namespace Bitget.Net.Clients.SpotApi
                     }
                 }
             };
-            return new BitgetAuthRequest(socketRequest);
+            return new BitgetAuthQuery(socketRequest);
         }
 
         /// <inheritdoc />
