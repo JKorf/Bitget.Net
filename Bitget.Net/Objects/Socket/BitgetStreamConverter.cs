@@ -27,8 +27,8 @@ namespace Bitget.Net.Objects.Socket
             if (idValues["action"] == null)
                 return null;
 
-            //if (args["arg:channel"] == "ticker")
-            //    return typeof(BitgetTickerUpdate);
+            if (idValues["arg:channel"] == "ticker")
+                return typeof(BitgetSocketUpdate<IEnumerable<BitgetTickerUpdate>>);
 
             if (idValues["arg:channel"] == "trade")
                 return typeof(BitgetSocketUpdate<IEnumerable<BitgetTradeUpdate>>);

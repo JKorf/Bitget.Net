@@ -582,6 +582,9 @@
         <member name="P:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.StreamConverter">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.HandleUnparsedMessage(System.Byte[])">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
