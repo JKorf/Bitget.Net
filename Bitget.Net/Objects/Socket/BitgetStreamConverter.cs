@@ -10,26 +10,35 @@ namespace Bitget.Net.Objects.Socket
 {
     public class BitgetStreamConverter : SocketConverter
     {
-        public override string[] TypeIdFields { get; } = new string[]
-        {
-            "event",
-            "action",
-            "arg:instType",
-            "arg:channel",
-            "arg:instId"
-        };
-
-        private readonly Dictionary<string, Type> _channelTypeMap = new Dictionary<string, Type>()
+        private static readonly Dictionary<string, Type> _channelTypeMap = new Dictionary<string, Type>()
         {
             { "ticker", typeof(BitgetSocketUpdate<IEnumerable<BitgetTickerUpdate>>) },
             { "trade", typeof(BitgetSocketUpdate<IEnumerable<BitgetTradeUpdate>>) },
         };
 
-        public override Type? GetDeserializationType(Dictionary<string, string> idValues, List<BasePendingRequest> pendingRequests, List<Subscription> listeners)
+        public override List<StreamMessageParseCallback> InterpreterPipeline { get; } = new List<StreamMessageParseCallback>
         {
-            if (idValues["event"] == "subscribe" || idValues["event"] == "unsubscribe")
-                return typeof(BitgetSocketEvent);
+            new StreamMessageParseCallback
+            {
+                TypeFields = new List<string> { "event" },
+                IdFields = new List<string> { "event", "arg:instType", "arg:channel", "arg:instId" },
+                Callback = GetDeserializationTypeEvent
+            },
+            new StreamMessageParseCallback
+            {
+                TypeFields = new List<string> { "action", "arg:channel"  },
+                IdFields = new List<string> { "action", "arg:instType", "arg:channel", "arg:instId" },
+                Callback = GetDeserializationTypeStream
+            }
+        };
 
+        public static Type? GetDeserializationTypeEvent(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        {
+            return typeof(BitgetSocketEvent);
+        }
+
+        public static Type? GetDeserializationTypeStream(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        {
             if (idValues["action"] == null)
                 return null;
 
