@@ -25,8 +25,7 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         {
             _args = args;
             _handler = handler;
-            _identifiers = args.Select(a => $"update-{a["instType"]}-{a["channel"]}-{a["instId"]}").ToList();
-            _identifiers.AddRange(args.Select(a => $"snapshot-{a["instType"]}-{a["channel"]}-{a["instId"]}"));
+            _identifiers = args.Select(a => $"update-{a["channel"]}-{a["instId"]}").ToList();
         }
 
 
