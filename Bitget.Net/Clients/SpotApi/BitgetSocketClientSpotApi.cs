@@ -30,15 +30,20 @@ namespace Bitget.Net.Clients.SpotApi
         {
             DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
 
-            QueryPeriodic("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery());
+            QueryPeriodic("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), HandlePong);
         }
         #endregion
+
+        private void HandlePong(CallResult response)
+        {
+            _logger.LogInformation("Received pong1");
+        }
 
         /// <inheritdoc />
         protected override void HandleUnparsedMessage(byte[] message)
         {
             if (message.Length == 4)
-                _logger.LogInformation("Received pong");
+                _logger.LogInformation("Received pong2");
         }
 
         /// <inheritdoc />

@@ -1,5 +1,6 @@
 ﻿using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -16,36 +17,63 @@ namespace Bitget.Net.Objects.Socket
             { "trade", typeof(BitgetSocketUpdate<IEnumerable<BitgetTradeUpdate>>) },
         };
 
-        public override List<StreamMessageParseCallback> InterpreterPipeline { get; } = new List<StreamMessageParseCallback>
+        public override MessageInterpreterPipeline InterpreterPipeline { get; } = new MessageInterpreterPipeline
         {
-            new StreamMessageParseCallback
+            PreInspectCallbacks = new List<PreInspectCallback>
             {
-                TypeFields = new List<string> { "event" },
-                IdFields = new List<string> { "event", "arg:instType", "arg:channel", "arg:instId" },
-                Callback = GetDeserializationTypeEvent
+                new PreInspectCallback
+                {
+                    Callback = PreInspectForPong
+                }
             },
-            new StreamMessageParseCallback
+            PostInspectCallbacks = new List<PostInspectCallback>
             {
-                TypeFields = new List<string> { "action", "arg:channel"  },
-                IdFields = new List<string> { "action", "arg:instType", "arg:channel", "arg:instId" },
-                Callback = GetDeserializationTypeStream
+                new PostInspectCallback
+                {
+                    TypeFields = new List<string> { "event", "arg:channel", "arg:instId"  },
+                    Callback = GetDeserializationTypeEvent
+                },
+                new PostInspectCallback
+                {
+                    TypeFields = new List<string> { "action", "arg:channel", "arg:instId"  },
+                    Callback = GetDeserializationTypeStream
+                }
             }
         };
 
-        public static Type? GetDeserializationTypeEvent(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        public static PreInspectResult? PreInspectForPong(Stream stream)
         {
-            return typeof(BitgetSocketEvent);
+            return new PreInspectResult
+            {
+                Matched = stream.Length == 4,
+                Identifier = "pong"
+            };
         }
 
-        public static Type? GetDeserializationTypeStream(Dictionary<string, string> idValues, IEnumerable<BasePendingRequest> pendingRequests, IEnumerable<Subscription> listeners)
+        public static PostInspectResult GetDeserializationTypeEvent(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
+        {
+            return new PostInspectResult
+            {
+                Identifier = $"{idValues["event"]}-{idValues["arg:channel"]}-{idValues["arg:instId"].ToLowerInvariant()}",
+                Type = typeof(BitgetSocketEvent)
+            };
+        }
+
+        public static PostInspectResult GetDeserializationTypeStream(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
         {
             if (idValues["action"] == null)
-                return null;
+                return new PostInspectResult();
 
             if (_channelTypeMap.TryGetValue(idValues["arg:channel"], out var type))
-                return type;
+            {
+                return new PostInspectResult
+                {
+                    Identifier = $"update-{idValues["arg:channel"]}-{idValues["arg:instId"].ToLowerInvariant()}",
+                    Type = type
+                };
+            }
 
-            return null;
+            return new PostInspectResult();
         }
     }
 }
