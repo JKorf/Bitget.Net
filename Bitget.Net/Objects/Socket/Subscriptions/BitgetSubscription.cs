@@ -25,16 +25,16 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         {
             _args = args;
             _handler = handler;
-            _identifiers = args.Select(a => $"update-{a["channel"]}-{a["instId"]}").ToList();
+            _identifiers = args.Select(a => $"update-{a["channel"].ToLower()}-{a["instId"].ToLower()}").ToList();
         }
 
 
-        public override BaseQuery? GetSubQuery() => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false);
+        public override BaseQuery? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false);
         public override BaseQuery? GetUnsubQuery() => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "unsubscribe" }, false);
 
-        public override async Task<CallResult> HandleEventAsync(DataEvent<ParsedMessage<BitgetSocketUpdate<T>>> message)
+        public override async Task<CallResult> HandleEventAsync(SocketConnection connection, DataEvent<ParsedMessage<BitgetSocketUpdate<T>>> message)
         {
-            _handler.Invoke(message.As(message.Data.Data.Data, message.Data.Data.Args.InstrumentId, message.Data.Data.Action == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
+            _handler.Invoke(message.As(message.Data.TypedData.Data, message.Data.TypedData.Args.InstrumentId, message.Data.TypedData.Action == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
             return new CallResult(null);
         }
     }

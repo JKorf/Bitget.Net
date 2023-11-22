@@ -16,8 +16,8 @@ namespace Bitget.Net.Objects.Socket.Queries
         public BitgetQuery(BitgetSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
             _args = request.Args;
-            Identifiers = _args.Select(a => $"error-{a["channel"]}-{a["instId"]}").ToList();
-            Identifiers.AddRange(_args.Select(a => $"{request.Op}-{a["channel"]}-{a["instId"]}"));
+            Identifiers = _args.Select(a => $"error-{a["channel"].ToLowerInvariant()}-{a["instId"].ToLowerInvariant()}").ToList();
+            Identifiers.AddRange(_args.Select(a => $"{request.Op}-{a["channel"].ToLowerInvariant()}-{a["instId"].ToLowerInvariant()}"));
         }
     }
 }
