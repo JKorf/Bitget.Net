@@ -1,6 +1,7 @@
 ﻿using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using System;
@@ -26,20 +27,43 @@ namespace Bitget.Net.Objects.Socket
                     Callback = PreInspectForPong
                 }
             },
-            PostInspectCallbacks = new List<PostInspectCallback>
-            {
-                new PostInspectCallback
-                {
-                    TypeFields = new List<string> { "event", "arg:channel", "arg:instId"  },
-                    Callback = GetDeserializationTypeEvent
-                },
-                new PostInspectCallback
-                {
-                    TypeFields = new List<string> { "action", "arg:channel", "arg:instId"  },
-                    Callback = GetDeserializationTypeStream
-                }
-            }
+            GetIdentity = GetIdentity,
+
+            //PostInspectCallbacks = new List<object>
+            //{
+            //    new PostInspectCallback
+            //    {
+            //        TypeFields = new List<TypeField> 
+            //        { 
+            //            new TypeField("event"),
+            //            new TypeField("arg:channel"),
+            //            new TypeField("arg:instId") 
+            //        },
+            //        Callback = GetDeserializationTypeEvent
+            //    },
+            //    new PostInspectCallback
+            //    {
+            //        TypeFields = new List<TypeField> 
+            //        { 
+            //            new TypeField("action"),
+            //            new TypeField("arg:channel"),
+            //            new TypeField("arg:instId")
+            //        },
+            //        Callback = GetDeserializationTypeStream
+            //    }
+            //}
         };
+
+        private static string GetIdentity(IMessageAccessor accessor)
+        {
+            var evnt = accessor.GetStringValue("event");
+            var channel = accessor.GetStringValue("arg:channel");
+            var instId = accessor.GetStringValue("arg:instId");
+            if (evnt != null)
+                return $"{accessor.GetStringValue("event")}-{channel.ToLowerInvariant()}-{instId.ToLowerInvariant()}";
+
+            return $"update-{channel.ToLowerInvariant()}-{instId.ToLowerInvariant()}";
+        }
 
         public static PreInspectResult? PreInspectForPong(Stream stream)
         {
@@ -50,25 +74,25 @@ namespace Bitget.Net.Objects.Socket
             };
         }
 
-        public static PostInspectResult GetDeserializationTypeEvent(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
+        public static PostInspectResult GetDeserializationTypeEvent(IMessageAccessor accessor, Dictionary<string, Type> processors)
         {
             return new PostInspectResult
             {
-                Identifier = $"{idValues["event"]}-{idValues["arg:channel"]}-{idValues["arg:instId"].ToLowerInvariant()}",
+                Identifier = $"{accessor.GetStringValue("event")}-{accessor.GetStringValue("arg:channel").ToLowerInvariant()}-{accessor.GetStringValue("arg:instId").ToLowerInvariant()}",
                 Type = typeof(BitgetSocketEvent)
             };
         }
 
-        public static PostInspectResult GetDeserializationTypeStream(Dictionary<string, string> idValues, IDictionary<string, IMessageProcessor> processors)
+        public static PostInspectResult GetDeserializationTypeStream(IMessageAccessor accessor, Dictionary<string, Type> processors)
         {
-            if (idValues["action"] == null)
+            if (accessor.GetStringValue("action") == null)
                 return new PostInspectResult();
 
-            if (_channelTypeMap.TryGetValue(idValues["arg:channel"], out var type))
+            if (_channelTypeMap.TryGetValue(accessor.GetStringValue("arg:channel").ToLowerInvariant(), out var type))
             {
                 return new PostInspectResult
                 {
-                    Identifier = $"update-{idValues["arg:channel"]}-{idValues["arg:instId"].ToLowerInvariant()}",
+                    Identifier = $"update-{accessor.GetStringValue("arg:channel").ToLowerInvariant()}-{accessor.GetStringValue("arg:instId").ToLowerInvariant()}",
                     Type = type
                 };
             }

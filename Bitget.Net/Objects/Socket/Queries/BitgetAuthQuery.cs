@@ -16,11 +16,11 @@ namespace Bitget.Net.Objects.Socket.Queries
             Identifiers = new List<string>();
         }
 
-        public override Task<CallResult<BitgetSocketEvent>> HandleMessageAsync(DataEvent<ParsedMessage<BitgetSocketEvent>> message)
+        public override Task<CallResult<BitgetSocketEvent>> HandleMessageAsync(SocketConnection connection, DataEvent<ParsedMessage<BitgetSocketEvent>> message)
         {
-            var evnt = message.Data.Data;
+            var evnt = message.Data.TypedData;
             if (evnt.Code == 0)
-                return Task.FromResult(new CallResult<BitgetSocketEvent>(message.Data.Data));
+                return Task.FromResult(new CallResult<BitgetSocketEvent>(message.Data.TypedData));
 
             return Task.FromResult(new CallResult<BitgetSocketEvent>(new ServerError(evnt.Code!.Value, evnt.Message)));
         }
