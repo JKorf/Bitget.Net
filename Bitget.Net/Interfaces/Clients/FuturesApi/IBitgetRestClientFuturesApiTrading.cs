@@ -88,7 +88,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApi
         /// <param name="symbol">Symbol id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPagination<BitgetFuturesOrder>>> GetOpenOrdersAsync(string symbol, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BitgetFuturesOrder>>> GetOpenOrdersAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of open order for a product type

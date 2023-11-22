@@ -102,14 +102,14 @@ namespace Bitget.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetPagination<BitgetFuturesOrder>>> GetOpenOrdersAsync(string symbol, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BitgetFuturesOrder>>> GetOpenOrdersAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "symbol", symbol.ToUpperInvariant() },
             };
 
-            return await _baseClient.ExecuteAsync<BitgetPagination<BitgetFuturesOrder>>(_baseClient.GetUri("/api/mix/v1/order/current"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetFuturesOrder>>(_baseClient.GetUri("/api/mix/v1/order/current"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
