@@ -217,7 +217,7 @@ namespace Bitget.Net.Clients.SpotApi
                 { "marginCoin", marginAsset.ToUpperInvariant() },
                 { "side", EnumConverter.GetString(side) },
                 { "orderType", EnumConverter.GetString(type) },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "size", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "triggerPrice", triggerPrice.ToString(CultureInfo.InvariantCulture) },
                 { "triggerType", EnumConverter.GetString(triggerType) },
             };
