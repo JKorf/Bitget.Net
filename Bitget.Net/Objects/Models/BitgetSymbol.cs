@@ -85,13 +85,13 @@ namespace Bitget.Net.Objects.Models
         /// Buy price gap from market price, "0.05" means: 5%
         /// </summary>
         [JsonProperty("buyLimitPriceRatio")]
-        public decimal BuyLimitPriceRatio { get; set; }
+        public decimal? BuyLimitPriceRatio { get; set; }
 
         /// <summary>
         /// Sell price gap from market price, "0.05" means: 5%
         /// </summary>
         [JsonProperty("sellLimitPriceRatio")]
-        public decimal SellLimitPriceRatio { get; set; }
+        public decimal? SellLimitPriceRatio { get; set; }
 
         /// <summary>
         /// Max number of orders
