@@ -97,6 +97,6 @@ namespace Bitget.Net.Objects.Models
         /// Max number of orders
         /// </summary>
         [JsonProperty("maxOrderNum")]
-        public int MaxOrders { get; set; }
+        public int? MaxOrders { get; set; }
     }
 }
