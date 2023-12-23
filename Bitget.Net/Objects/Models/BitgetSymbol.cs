@@ -37,43 +37,43 @@ namespace Bitget.Net.Objects.Models
         /// Min order quantity
         /// </summary>
         [JsonProperty("minTradeAmount")]
-        public decimal MinOrderQuantity { get; set; }
+        public decimal? MinOrderQuantity { get; set; }
 
         /// <summary>
         /// Max order quantity
         /// </summary>
         [JsonProperty("maxTradeAmount")]
-        public decimal MaxOrderQuantity { get; set; }
+        public decimal? MaxOrderQuantity { get; set; }
 
         /// <summary>
         /// Taker fee rate
         /// </summary>
         [JsonProperty("takerFeeRate")]
-        public decimal TakerFeeRate { get; set; }
+        public decimal? TakerFeeRate { get; set; }
 
         /// <summary>
         /// Maker fee rate
         /// </summary>
         [JsonProperty("makerFeeRate")]
-        public decimal MakerFeeRate { get; set; }
+        public decimal? MakerFeeRate { get; set; }
 
         /// <summary>
         /// Price decimals
         /// </summary>
         [JsonProperty("priceScale")]
-        public int PriceDecimals { get; set; }
+        public int? PriceDecimals { get; set; }
 
         /// <summary>
         /// Quantity decimals
         /// </summary>
         [JsonProperty("quantityScale")]
-        public int QuantityDecimals { get; set; }
+        public int? QuantityDecimals { get; set; }
 
         /// <summary>
         /// Min value of the order in USDT
         /// </summary>
         [JsonProperty("minTradeUSDT")]
-        public decimal MinOrderValueUsd { get; set; }
+        public decimal? MinOrderValueUsd { get; set; }
 
         /// <summary>
         /// Symbol status
@@ -97,6 +97,6 @@ namespace Bitget.Net.Objects.Models
         /// Max number of orders
         /// </summary>
         [JsonProperty("maxOrderNum")]
-        public int MaxOrders { get; set; }
+        public int? MaxOrders { get; set; }
     }
 }
