@@ -24,6 +24,21 @@ namespace Bitget.Net.Enums
         /// Moving plan
         /// </summary>
         [Map("moving_plan")]
-        Moving
+        Moving,
+        /// <summary>
+        /// Position profit
+        /// </summary>
+        [Map("pos_profit")]
+        PositionProfit,
+        /// <summary>
+        /// Position loss
+        /// </summary>
+        [Map("pos_loss")]
+        PositionLoss,
+        /// <summary>
+        /// Trailing stop
+        /// </summary>
+        [Map("track_plan")]
+        TrailingStop,
     }
 }
