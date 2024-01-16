@@ -1300,6 +1300,21 @@
             Moving plan
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.BitgetPlanType.PositionProfit">
+            <summary>
+            Position profit
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetPlanType.PositionLoss">
+            <summary>
+            Position loss
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetPlanType.TrailingStop">
+            <summary>
+            Trailing stop
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetPlanOrderEvent">
             <summary>
             Plan type 
@@ -5648,6 +5663,11 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetPosition.MarkPrice">
             <summary>
             Mark price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPosition.CreateTime">
+            <summary>
+            Creation time
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.BitgetPosition.UpdateTime">
