@@ -100,9 +100,14 @@ namespace Bitget.Net.Objects.Models
         [JsonProperty("marketPrice")]
         public decimal? MarkPrice { get; set; }
         /// <summary>
-        /// Last update time
+        /// Creation time
         /// </summary>
         [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? CreateTime { get; set; }
+        /// <summary>
+        /// Last update time
+        /// </summary>
+        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? UpdateTime { get; set; }
     }
 }
