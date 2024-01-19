@@ -6,7 +6,7 @@ namespace Bitget.Net.Objects.Socket.Queries
 {
     internal class BitgetPingQuery : Query<string>
     {
-        public override List<string> Identifiers => new List<string> { "pong" };
+        public override List<string> StreamIdentifiers { get; set; } = new List<string> { "pong" };
 
         public BitgetPingQuery() : base("ping", false, 0)
         {

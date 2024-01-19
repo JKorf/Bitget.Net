@@ -12,6 +12,7 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.SocketsV2;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,9 +22,6 @@ namespace Bitget.Net.Clients.SpotApi
     /// <inheritdoc />
     public class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
     {
-        /// <inheritdoc />
-        public override SocketConverter StreamConverter { get; } = new BitgetStreamConverter();
-
         #region ctor
         internal BitgetSocketClientSpotApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.SpotOptions)
@@ -33,6 +31,17 @@ namespace Bitget.Net.Clients.SpotApi
             QueryPeriodic("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), HandlePong);
         }
         #endregion
+
+        public override string GetStreamHash(SocketMessage message)
+        {
+            var evnt = message.MessageData.GetValue<string>(new MessagePath(MessageNode.String("event")));
+            var channel = message.MessageData.GetValue<string>(new MessagePath(MessageNode.String("arg"), MessageNode.String("channel")));
+            var instId = message.MessageData.GetValue<string>(new MessagePath(MessageNode.String("arg"), MessageNode.String("instId")));
+            if (evnt != null)
+                return $"{evnt}-{channel.ToLowerInvariant()}-{instId.ToLowerInvariant()}";
+
+            return $"update-{channel.ToLowerInvariant()}-{instId.ToLowerInvariant()}";
+        }
 
         private void HandlePong(CallResult response)
         {

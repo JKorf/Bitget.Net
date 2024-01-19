@@ -9,18 +9,18 @@ namespace Bitget.Net.Objects.Socket.Queries
 {
     internal class BitgetAuthQuery : Query<BitgetSocketEvent>
     {
-        public override List<string> Identifiers { get; } = new List<string> { "login", "error" };
+        public override List<string> StreamIdentifiers { get; set; } = new List<string> { "login", "error" };
 
         public BitgetAuthQuery(BitgetSocketRequest request) : base(request, false)
         {
-            Identifiers = new List<string>();
+            StreamIdentifiers = new List<string>();
         }
 
-        public override Task<CallResult<BitgetSocketEvent>> HandleMessageAsync(SocketConnection connection, DataEvent<ParsedMessage<BitgetSocketEvent>> message)
+        public override Task<CallResult<BitgetSocketEvent>> HandleMessageAsync(SocketConnection connection, DataEvent<BitgetSocketEvent> message)
         {
-            var evnt = message.Data.TypedData;
+            var evnt = message.Data;
             if (evnt.Code == 0)
-                return Task.FromResult(new CallResult<BitgetSocketEvent>(message.Data.TypedData));
+                return Task.FromResult(new CallResult<BitgetSocketEvent>(evnt));
 
             return Task.FromResult(new CallResult<BitgetSocketEvent>(new ServerError(evnt.Code!.Value, evnt.Message)));
         }
