@@ -422,7 +422,7 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("type", EnumConverter.GetString(type));
             parameters.AddOptionalParameter("symbol", symbol);
             parameters.AddOptionalParameter("pageSize", pageSize);
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetFuturesPlanOrder>>(_baseClient.GetUri("/api/mix/v1/plan/historyPlan"), HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetFuturesPlanOrder>>(_baseClient.GetUri("/api/mix/v1/plan/historyPlan"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
     }
 }
