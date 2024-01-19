@@ -1315,6 +1315,11 @@
             Trailing stop
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.BitgetPlanType.NormalPlan">
+            <summary>
+            Plan order
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetPlanOrderEvent">
             <summary>
             Plan type 
