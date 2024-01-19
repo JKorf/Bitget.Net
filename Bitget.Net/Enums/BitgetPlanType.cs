@@ -40,5 +40,10 @@ namespace Bitget.Net.Enums
         /// </summary>
         [Map("track_plan")]
         TrailingStop,
+        /// <summary>
+        /// Plan order
+        /// </summary>
+        [Map("normal_plan")]
+        NormalPlan,
     }
 }
