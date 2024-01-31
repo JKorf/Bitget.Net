@@ -1,13 +1,11 @@
 ﻿using Bitget.Net.Interfaces;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
-using Bitget.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
 
-namespace Bitfinex.Net.SymbolOrderBooks
+namespace Bitget.Net.SymbolOrderBooks
 {
     /// <summary>
     /// Bitget order book factory

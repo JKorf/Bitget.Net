@@ -20,7 +20,7 @@ namespace Bitget.Net.Clients
         #region ctor
 
         /// <summary>
-        /// Create a new instance of the BitfinexSocketClient
+        /// Create a new instance of the BitgetSocketClient
         /// </summary>
         /// <param name="loggerFactory">The logger factory</param>
         public BitgetSocketClient(ILoggerFactory? loggerFactory = null) : this((x) => { }, loggerFactory)
@@ -28,7 +28,7 @@ namespace Bitget.Net.Clients
         }
 
         /// <summary>
-        /// Create a new instance of the BitfinexSocketClient
+        /// Create a new instance of the BitgetSocketClient
         /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
         public BitgetSocketClient(Action<BitgetSocketOptions> optionsDelegate) : this(optionsDelegate, null)
@@ -36,7 +36,7 @@ namespace Bitget.Net.Clients
         }
 
         /// <summary>
-        /// Create a new instance of the BitfinexSocketClient
+        /// Create a new instance of the BitgetSocketClient
         /// </summary>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="optionsDelegate">Option configuration delegate</param>

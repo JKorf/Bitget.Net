@@ -40,12 +40,12 @@
         </member>
         <member name="M:Bitget.Net.BitgetHelpers.AddBitget(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Bitget.Net.Objects.Options.BitgetRestOptions},System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
             <summary>
-            Add the IBitfinexClient and IBitfinexSocketClient to the sevice collection so they can be injected
+            Add the IBitgetClient and IBitgetSocketClient to the sevice collection so they can be injected
             </summary>
             <param name="services">The service collection</param>
             <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
             <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
-            <param name="socketClientLifeTime">The lifetime of the IBitfinexSocketClient for the service collection. Defaults to Singleton.</param>
+            <param name="socketClientLifeTime">The lifetime of the IBitgetSocketClient for the service collection. Defaults to Singleton.</param>
             <returns></returns>
         </member>
         <member name="T:Bitget.Net.Clients.BitgetRestClient">
@@ -91,19 +91,19 @@
         </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
-            Create a new instance of the BitfinexSocketClient
+            Create a new instance of the BitgetSocketClient
             </summary>
             <param name="loggerFactory">The logger factory</param>
         </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions})">
             <summary>
-            Create a new instance of the BitfinexSocketClient
+            Create a new instance of the BitgetSocketClient
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
-            Create a new instance of the BitfinexSocketClient
+            Create a new instance of the BitgetSocketClient
             </summary>
             <param name="loggerFactory">The logger factory</param>
             <param name="optionsDelegate">Option configuration delegate</param>
@@ -6620,6 +6620,23 @@
             Dispose
             </summary>
         </member>
+        <member name="T:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory">
+            <summary>
+            Bitget order book factory
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.#ctor(System.IServiceProvider)">
+            <summary>
+            ctor
+            </summary>
+            <param name="serviceProvider">Service provider for resolving logging and clients</param>
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.CreateSpot(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.CreateFutures(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.SymbolOrderBooks.BitgetSpotSymbolOrderBook">
             <summary>
             Live order book implementation
@@ -6654,23 +6671,6 @@
             <summary>
             Dispose
             </summary>
-        </member>
-        <member name="T:Bitfinex.Net.SymbolOrderBooks.BitgetOrderBookFactory">
-            <summary>
-            Bitget order book factory
-            </summary>
-        </member>
-        <member name="M:Bitfinex.Net.SymbolOrderBooks.BitgetOrderBookFactory.#ctor(System.IServiceProvider)">
-            <summary>
-            ctor
-            </summary>
-            <param name="serviceProvider">Service provider for resolving logging and clients</param>
-        </member>
-        <member name="M:Bitfinex.Net.SymbolOrderBooks.BitgetOrderBookFactory.CreateSpot(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitfinex.Net.SymbolOrderBooks.BitgetOrderBookFactory.CreateFutures(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
-            <inheritdoc />
         </member>
     </members>
 </doc>

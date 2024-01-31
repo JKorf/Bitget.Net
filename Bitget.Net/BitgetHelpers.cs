@@ -1,8 +1,8 @@
-﻿using Bitfinex.Net.SymbolOrderBooks;
-using Bitget.Net.Clients;
+﻿using Bitget.Net.Clients;
 using Bitget.Net.Interfaces;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
+using Bitget.Net.SymbolOrderBooks;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -19,12 +19,12 @@ namespace Bitget.Net
     public static class BitgetHelpers
     {
         /// <summary>
-        /// Add the IBitfinexClient and IBitfinexSocketClient to the sevice collection so they can be injected
+        /// Add the IBitgetClient and IBitgetSocketClient to the sevice collection so they can be injected
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
         /// <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
-        /// <param name="socketClientLifeTime">The lifetime of the IBitfinexSocketClient for the service collection. Defaults to Singleton.</param>
+        /// <param name="socketClientLifeTime">The lifetime of the IBitgetSocketClient for the service collection. Defaults to Singleton.</param>
         /// <returns></returns>
         public static IServiceCollection AddBitget(
             this IServiceCollection services,
