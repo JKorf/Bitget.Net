@@ -2,7 +2,6 @@
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net;
 using Bitget.Net.Objects.Models;
-using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Enums;
 using Bitget.Net.Clients.FuturesApi;
 using Bitget.Net.Interfaces.Clients.FuturesApi;

@@ -1,8 +1,4 @@
 ﻿using CryptoExchange.Net.Attributes;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bitget.Net.Enums
 {

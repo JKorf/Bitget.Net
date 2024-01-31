@@ -1,9 +1,6 @@
 ﻿using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bitget.Net.Objects.Socket.Queries
 {
@@ -11,13 +8,22 @@ namespace Bitget.Net.Objects.Socket.Queries
     {
         private readonly Dictionary<string, string>[] _args;
 
-        public override List<string> StreamIdentifiers { get; set; }
+        public override HashSet<string> ListenerIdentifiers { get; set; }
 
         public BitgetQuery(BitgetSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
             _args = request.Args;
-            StreamIdentifiers = _args.Select(a => $"error-{a["channel"].ToLowerInvariant()}-{a["instId"].ToLowerInvariant()}").ToList();
-            StreamIdentifiers.AddRange(_args.Select(a => $"{request.Op}-{a["channel"].ToLowerInvariant()}-{a["instId"].ToLowerInvariant()}"));
+            ListenerIdentifiers = new HashSet<string>(_args.Select(a => $"error-{a["channel"].ToLowerInvariant()}-{a["instId"].ToLowerInvariant()}"));
+            foreach(var arg in _args)
+                ListenerIdentifiers.Add($"{request.Op}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}");
+        }
+
+        public override Task<CallResult<BitgetSocketEvent>> HandleMessageAsync(SocketConnection connection, DataEvent<BitgetSocketEvent> message)
+        {
+            if (message.Data.Code != null)
+                return Task.FromResult(new CallResult<BitgetSocketEvent>(new ServerError(message.Data.Code.Value, message.Data.Message!), message.OriginalData));
+
+            return base.HandleMessageAsync(connection, message);
         }
     }
 }

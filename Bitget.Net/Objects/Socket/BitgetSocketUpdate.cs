@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bitget.Net.Objects.Socket
 {
@@ -34,7 +31,7 @@ namespace Bitget.Net.Objects.Socket
         [JsonProperty("code")]
         public int? Code { get; set; }
         [JsonProperty("msg")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
     }
 
     internal class BitgetSocketUpdate<T> : BitgetSocketUpdate

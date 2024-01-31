@@ -1,17 +1,9 @@
-﻿using Bitget.Net.Objects.Models;
-using Bitget.Net.Objects.Socket.Queries;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.Interfaces;
+﻿using Bitget.Net.Objects.Socket.Queries;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using CryptoExchange.Net.SocketsV2;
+using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bitget.Net.Objects.Socket.Subscriptions
 {
@@ -19,18 +11,17 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
     {
         private readonly Dictionary<string, string>[] _args;
         private readonly Action<DataEvent<T>> _handler;
-        public override List<string> StreamIdentifiers { get; set; }
+        public override HashSet<string> ListenerIdentifiers { get; set; }
 
         public BitgetSubscription(ILogger logger, Dictionary<string, string>[] args, Action<DataEvent<T>> handler, bool authenticated) : base(logger, authenticated)
         {
             _args = args;
             _handler = handler;
-            StreamIdentifiers = args.Select(a => $"update-{a["channel"].ToLower()}-{a["instId"].ToLower()}").ToList();
+            ListenerIdentifiers = new HashSet<string>(args.SelectMany(a => new[] { $"snapshot-{a["channel"].ToLower()}-{a["instId"].ToLower()}", $"update-{a["channel"].ToLower()}-{a["instId"].ToLower()}" }));
         }
 
-
-        public override BaseQuery? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false);
-        public override BaseQuery? GetUnsubQuery() => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "unsubscribe" }, false);
+        public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false);
+        public override Query? GetUnsubQuery() => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "unsubscribe" }, false);
 
         public override Task<CallResult> DoHandleMessageAsync(SocketConnection connection, DataEvent<object> message)
         {
@@ -39,6 +30,6 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
             return Task.FromResult(new CallResult(null));
         }
 
-        public override Type? GetMessageType(SocketMessage message) => typeof(BitgetSocketUpdate<T>);
+        public override Type? GetMessageType(IMessageAccessor message) => typeof(BitgetSocketUpdate<T>);
     }
 }
