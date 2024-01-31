@@ -72,6 +72,7 @@ namespace Bitget.Net.Objects.Models
         /// Timestamp
         /// </summary>
         [JsonProperty("ts")]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Label id

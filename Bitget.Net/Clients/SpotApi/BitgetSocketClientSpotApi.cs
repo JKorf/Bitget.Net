@@ -12,47 +12,46 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using CryptoExchange.Net.SocketsV2;
+using CryptoExchange.Net.Sockets.MessageParsing;
+using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Bitget.Net.Clients.SpotApi
 {
     /// <inheritdoc />
     public class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
     {
+        private static readonly MessagePath _eventPath = MessagePath.Get().Property("event");
+        private static readonly MessagePath _actionPath = MessagePath.Get().Property("action");
+        private static readonly MessagePath _channelPath = MessagePath.Get().Property("arg").Property("channel");
+        private static readonly MessagePath _instIdPath = MessagePath.Get().Property("arg").Property("instId");
+
         #region ctor
         internal BitgetSocketClientSpotApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.SpotOptions)
         {
             DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
 
-            QueryPeriodic("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), HandlePong);
+            QueryPeriodic("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
         }
         #endregion
 
-        public override string GetStreamHash(SocketMessage message)
-        {
-            var evnt = message.MessageData.GetValue<string>(new MessagePath(MessageNode.String("event")));
-            var channel = message.MessageData.GetValue<string>(new MessagePath(MessageNode.String("arg"), MessageNode.String("channel")));
-            var instId = message.MessageData.GetValue<string>(new MessagePath(MessageNode.String("arg"), MessageNode.String("instId")));
-            if (evnt != null)
-                return $"{evnt}-{channel.ToLowerInvariant()}-{instId.ToLowerInvariant()}";
-
-            return $"update-{channel.ToLowerInvariant()}-{instId.ToLowerInvariant()}";
-        }
-
-        private void HandlePong(CallResult response)
-        {
-            _logger.LogInformation("Received pong1");
-        }
-
         /// <inheritdoc />
-        protected override void HandleUnparsedMessage(byte[] message)
+        public override string GetListenerIdentifier(IMessageAccessor message)
         {
-            if (message.Length == 4)
-                _logger.LogInformation("Received pong2");
+            if (!message.IsJson)
+                return "pong";
+
+            var evnt = message.GetValue<string>(_eventPath);
+            var channel = message.GetValue<string>(_channelPath);
+            var instId = message.GetValue<string>(_instIdPath);
+            if (evnt != null)
+                return $"{evnt}-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
+
+            // TODO use the action property?
+            var action = message.GetValue<string>(_actionPath);
+            return $"{action}-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
         }
 
         /// <inheritdoc />
@@ -194,7 +193,7 @@ namespace Bitget.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
 
         /// <inheritdoc />
-        protected override BaseQuery GetAuthenticationRequest()
+        protected override Query GetAuthenticationRequest()
         {
             var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;

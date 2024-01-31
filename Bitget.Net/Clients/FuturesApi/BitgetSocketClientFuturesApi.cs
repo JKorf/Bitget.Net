@@ -1,6 +1,5 @@
 ﻿using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.FuturesApi;
-using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
@@ -13,16 +12,20 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using CryptoExchange.Net.SocketsV2;
+using CryptoExchange.Net.Sockets.MessageParsing;
+using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Bitget.Net.Clients.SpotApi
 {
     /// <inheritdoc />
     public class BitgetSocketClientFuturesApi : SocketApiClient, IBitgetSocketClientFuturesApi
     {
+        private static readonly MessagePath _eventPath = MessagePath.Get().Property("event");
+        private static readonly MessagePath _channelPath = MessagePath.Get().Property("arg").Property("channel");
+        private static readonly MessagePath _instIdPath = MessagePath.Get().Property("arg").Property("instId");
+
         internal BitgetSocketClientFuturesApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.FuturesOptions)
         {
@@ -31,15 +34,16 @@ namespace Bitget.Net.Clients.SpotApi
             QueryPeriodic("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
         }
 
-        public override string GetStreamHash(SocketMessage message)
+        /// <inheritdoc />
+        public override string GetListenerIdentifier(IMessageAccessor message)
         {
-            var evnt = message.MessageData.GetValue<string>(new MessagePath(MessageNode.String("event")));
-            var channel = message.MessageData.GetValue<string>(new MessagePath(MessageNode.String("arg"), MessageNode.String("channel")));
-            var instId = message.MessageData.GetValue<string>(new MessagePath(MessageNode.String("arg"), MessageNode.String("instId")));
+            var evnt = message.GetValue<string>(_eventPath);
+            var channel = message.GetValue<string>(_channelPath);
+            var instId = message.GetValue<string>(_instIdPath);
             if (evnt != null)
-                return $"{evnt}-{channel.ToLowerInvariant()}-{instId.ToLowerInvariant()}";
+                return $"{evnt}-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
 
-            return $"update-{channel.ToLowerInvariant()}-{instId.ToLowerInvariant()}";
+            return $"update-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
         }
 
         /// <inheritdoc />
@@ -192,27 +196,12 @@ namespace Bitget.Net.Clients.SpotApi
 
         private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(string url, Dictionary<string, string>[] request, bool authenticated, Action<DataEvent<T>> handler, CancellationToken ct)
         {
-            //var internalHandler = (DataEvent<JToken> data) =>
-            //{
-            //    var internalData = data.Data["data"]!;
-            //    var deserializeResult = Deserialize<T>(internalData);
-            //    if (!deserializeResult)
-            //    {
-            //        _logger.LogWarning("Failed to deserialize update: " + deserializeResult.Error);
-            //        return;
-            //    }
-
-            //    var instId = data.Data["arg"]?["instId"]?.ToString();
-            //    var updateType = data.Data["action"]?.ToString();
-            //    handler(data.As(deserializeResult.Data, instId, updateType == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
-            //};
-
             var subscription = new BitgetSubscription<T>(_logger, request, handler, authenticated);
             return await SubscribeAsync(url, subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        protected override BaseQuery GetAuthenticationRequest()
+        protected override Query GetAuthenticationRequest()
         {
             var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;

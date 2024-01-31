@@ -4,7 +4,6 @@ using Bitget.Net.Objects.Models;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace Bitget.Net.Clients.SpotApi

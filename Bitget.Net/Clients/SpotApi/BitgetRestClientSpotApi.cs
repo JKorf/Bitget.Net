@@ -11,10 +11,6 @@ using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
 
 namespace Bitget.Net.Clients.SpotApi
 {
@@ -63,6 +59,7 @@ namespace Bitget.Net.Clients.SpotApi
 
         internal async Task<WebCallResult> ExecuteAsync(string path, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, int weight = 1, bool ignoreRatelimit = false, HttpMethodParameterPosition? parameterPosition = null)
         {
+            var uri = new Uri(BaseAddress.AppendPath(path));
             var result = await SendRequestAsync<BitgetResponse>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: weight, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.AsDatalessError(result.Error!);
@@ -75,6 +72,7 @@ namespace Bitget.Net.Clients.SpotApi
 
         internal async Task<WebCallResult<T>> ExecuteAsync<T>(string path, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, int weight = 1, bool ignoreRatelimit = false, HttpMethodParameterPosition? parameterPosition = null)
         {
+            var uri = new Uri(BaseAddress.AppendPath(path));
             var result = await SendRequestAsync<BitgetResponse<T>>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: weight, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.AsError<T>(result.Error!);
