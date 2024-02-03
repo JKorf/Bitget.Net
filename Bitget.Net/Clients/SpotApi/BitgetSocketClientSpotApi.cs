@@ -49,7 +49,6 @@ namespace Bitget.Net.Clients.SpotApi
             if (evnt != null)
                 return $"{evnt}-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
 
-            // TODO use the action property?
             var action = message.GetValue<string>(_actionPath);
             return $"{action}-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
         }
