@@ -56,7 +56,8 @@ namespace Bitget.Net
                 return handler;
             });
 
-            services.AddTransient<ICryptoExchangeClient, CryptoExchangeClient>();
+            services.AddTransient<ICryptoRestClient, CryptoRestClient>();
+            services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddSingleton<IBitgetOrderBookFactory, BitgetOrderBookFactory>();
             services.AddTransient(x => x.GetRequiredService<IBitgetRestClient>().SpotApi.CommonSpotClient);
             if (socketClientLifeTime == null)
