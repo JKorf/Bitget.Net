@@ -33,7 +33,7 @@ namespace Bitget.Net.Clients.SpotApi
         {
             DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
 
-            QueryPeriodic("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
+            RegisterPeriodicQuery("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
         }
         #endregion
 
