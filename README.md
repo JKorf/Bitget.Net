@@ -26,6 +26,10 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.0.7 - 05 Feb 2024
+    * Added FuturesApi.Trading.GetPlanOrdersAsync endpoint
+    * Fixed futures order update deserialization when filled
+
 * Version 1.0.6 - 19 Jan 2024
     * Fixed V5.Trading.GetPlanOrderHistoryAsync
     * Added missing PlanType enum value
