@@ -315,6 +315,9 @@
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiTrading.GetPlanOrderHistoryAsync(System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiTrading.GetPlanOrdersAsync(System.String,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.Nullable{Bitget.Net.Enums.BitgetPlanFilter},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi">
             <inheritdoc />
         </member>
@@ -1253,6 +1256,21 @@
         <member name="F:Bitget.Net.Enums.BitgetOrderType.Market">
             <summary>
             Market
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetPlanFilter">
+            <summary>
+            Plan filter
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetPlanFilter.TrailingStop">
+            <summary>
+            Trailing stop plan
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetPlanFilter.Other">
+            <summary>
+            profit order, loss order, position profit, position loss, Trailing TP/SL
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetPlanOrderStatus">
@@ -3028,6 +3046,17 @@
             <param name="type">Filter by product type</param>
             <param name="symbol">Filter by symbol</param>
             <param name="pageSize">Page size</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiTrading.GetPlanOrdersAsync(System.String,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.Nullable{Bitget.Net.Enums.BitgetPlanFilter},System.Threading.CancellationToken)">
+            <summary>
+            Get current open plan orders
+            <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-plan-order-tpsl-list" /></para>
+            </summary>
+            <param name="symbol">Symbol, either this or type should be provided</param>
+            <param name="type">Product type, either this or symbol should be provided</param>
+            <param name="planType">Filter by plan type</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>

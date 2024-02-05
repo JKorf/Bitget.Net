@@ -381,5 +381,16 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApi
                                                                 string? symbol = null,
                                                                 int? pageSize = null,
                                                                 CancellationToken ct = default);
+
+        /// <summary>
+        /// Get current open plan orders
+        /// <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-plan-order-tpsl-list" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol, either this or type should be provided</param>
+        /// <param name="type">Product type, either this or symbol should be provided</param>
+        /// <param name="planType">Filter by plan type</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetFuturesPlanOrder>>> GetPlanOrdersAsync(string? symbol, BitgetProductType? type = null, BitgetPlanFilter? planType = null, CancellationToken ct = default);
     }
 }

@@ -1,0 +1,30 @@
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 0,
+    "data": [
+        {
+            "orderId": "1083147482484514819",
+            "clientOid": "1083147482484514818",
+            "symbol": "SBTCSUSDT_SUMCBL",
+            "marginCoin": "SUSDT",
+            "size": "0.01",
+            "executePrice": "0",
+            "triggerPrice": "26746.5",
+            "status": "not_trigger",
+            "orderType": "market",
+            "planType": "normal_plan",
+            "side": "buy_single",
+            "triggerType": "market_price",
+            "presetTakeProfitPrice": "0",
+            "presetTakeLossPrice": "0",
+            "rangeRate": "",
+            "enterPointSource": "API",
+            "tradeSide": "buy_single",
+            "holdMode": "single_hold",
+            "reduceOnly": false,
+            "cTime": "1693968404408",
+            "uTime": null
+        }
+    ]
+}

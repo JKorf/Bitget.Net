@@ -424,5 +424,16 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("pageSize", pageSize);
             return await _baseClient.ExecuteAsync<IEnumerable<BitgetFuturesPlanOrder>>(_baseClient.GetUri("/api/mix/v1/plan/historyPlan"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetFuturesPlanOrder>>> GetPlanOrdersAsync(string? symbol, BitgetProductType? type = null, BitgetPlanFilter? planType = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddOptionalParameter("symbol", symbol);
+            parameters.AddOptionalParameter("productType", EnumConverter.GetString(type));
+            parameters.AddOptionalParameter("isPlan", EnumConverter.GetString(planType));
+
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetFuturesPlanOrder>>(_baseClient.GetUri("/api/mix/v1/plan/currentPlan"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+        }
     }
 }
