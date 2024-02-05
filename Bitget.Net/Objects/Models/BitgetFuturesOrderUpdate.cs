@@ -148,7 +148,7 @@ namespace Bitget.Net.Objects.Models
         /// Last filled fee asset
         /// </summary>
         [JsonProperty("fillFeeCcy")]
-        public decimal? LastFillFeeAsset { get; set; }
+        public string? LastFillFeeAsset { get; set; }
         /// <summary>
         /// Last filled time
         /// </summary>
