@@ -1,11 +1,7 @@
 ﻿using Bitget.Net.Clients;
 using Bitget.Net.Interfaces.Clients;
-using CryptoExchange.Net.Interfaces.CommonClients;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CryptoExchange.Net.Clients
+namespace CryptoExchange.Net.Interfaces
 {
 
     /// <summary>

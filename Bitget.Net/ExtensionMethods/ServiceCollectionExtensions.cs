@@ -4,16 +4,15 @@ using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
 using Bitget.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Interfaces.CommonClients;
-using Microsoft.Extensions.DependencyInjection;
+using CryptoExchange.Net.Interfaces;
 using System.Net;
 
-namespace Bitget.Net
+namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// Helper functions
+    /// Extensions for DI
     /// </summary>
-    public static class BitgetHelpers
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Add the IBitgetClient and IBitgetSocketClient to the sevice collection so they can be injected
@@ -66,6 +65,5 @@ namespace Bitget.Net
                 services.Add(new ServiceDescriptor(typeof(IBitgetSocketClient), typeof(BitgetSocketClient), socketClientLifeTime.Value));
             return services;
         }
-
     }
 }
