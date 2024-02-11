@@ -1,14 +1,97 @@
-# Bitget.Net
-[![.NET](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) [![Nuget version](https://img.shields.io/nuget/v/jk.bitget.net.svg)](https://www.nuget.org/packages/JK.Bitget.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/JK.Bitget.Net.svg)](https://www.nuget.org/packages/JK.Bitget.Net)
+# ![.Bitfinex.Net](https://github.com/JKorf/Bitfinex.Net/blob/beta/Bitfinex.Net/Icon/icon.png?raw=true) Bitget.Net
+
+[![.NET](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml)
 
 Bitget.Net is a wrapper around the Bitget API as described on [Bitget](https://bitgetlimited.github.io/apidoc/en/spot), including all features the API provides using clear and readable objects, both for the REST  as the websocket API's.
 
-**If you think something is broken, something is missing or have any questions, please open an [Issue](https://github.com/JKorf/Bitget.Net/issues)**
+## Get the library
+Available on Nuget  
+ [![Nuget version](https://img.shields.io/nuget/v/JK.Bitget.net.svg)](https://www.nuget.org/packages/JK.Bitget.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/JK.Bitget.Net.svg)](https://www.nuget.org/packages/JK.Bitget.Net)
 
-[Documentation](https://jkorf.github.io/Bitget.Net/)
-
-## Installation
 `dotnet add package JK.Bitget.Net`
+
+## How to use
+Simplest usage
+```csharp
+// Get the ETH/USDT ticker via rest request
+var restClient = new BitgetRestClient();
+var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT_SPBL");
+var lastPrice = tickerResult.Data.ClosePrice;
+```
+
+```csharp
+// Subscribe to ETH/USDT ticker updates via the websocket API
+var socketClient = new BitgetSocketClient();
+var tickerSubscriptionResult = socketClient.SpotApi.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) => 
+{
+  var lastPrice = update.Data.LastPrice;
+});
+```
+
+For information on the clients, dependency injection, response processing and more see the [documentation](https://jkorf.github.io/CryptoExchange.Net), or have a look at the examples  [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
+
+## CryptoExchange.Net
+Binance.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
+
+CryptoExchange.Net also allows for [easy access to different exchange API's](https://jkorf.github.io/CryptoExchange.Net#idocs_common).
+
+|Exchange|Repository|Nuget|
+|--|--|--|
+|Binance|[JKorf/Binance.Net](https://github.com/JKorf/Binance.Net)|[![Nuget version](https://img.shields.io/nuget/v/Binance.net.svg)](https://www.nuget.org/packages/Binance.Net)|
+|Bitfinex|[JKorf/Bitfinex.Net](https://github.com/JKorf/Bitfinex.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bitfinex.net.svg)](https://www.nuget.org/packages/Bitfinex.Net)|
+|Bybit|[JKorf/Bybit.Net](https://github.com/JKorf/Bybit.Net)|[![Nuget version](https://img.shields.io/nuget/v/Bybit.net.svg)](https://www.nuget.org/packages/Bybit.Net)|
+|CoinEx|[JKorf/CoinEx.Net](https://github.com/JKorf/CoinEx.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinEx.net.svg)](https://www.nuget.org/packages/CoinEx.Net)|
+|CoinGecko|[JKorf/CoinGecko.Net](https://github.com/JKorf/CoinGecko.Net)|[![Nuget version](https://img.shields.io/nuget/v/CoinGecko.net.svg)](https://www.nuget.org/packages/CoinGecko.Net)|
+|Huobi/HTX|[JKorf/Huobi.Net](https://github.com/JKorf/Huobi.Net)|[![Nuget version](https://img.shields.io/nuget/v/Huobi.net.svg)](https://www.nuget.org/packages/Huobi.Net)|
+|Kraken|[JKorf/Kraken.Net](https://github.com/JKorf/Kraken.Net)|[![Nuget version](https://img.shields.io/nuget/v/KrakenExchange.net.svg)](https://www.nuget.org/packages/KrakenExchange.Net)|
+|Kucoin|[JKorf/Kucoin.Net](https://github.com/JKorf/Kucoin.Net)|[![Nuget version](https://img.shields.io/nuget/v/Kucoin.net.svg)](https://www.nuget.org/packages/Kucoin.Net)|
+|Mexc|[JKorf/Mexc.Net](https://github.com/JKorf/Mexc.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.Mexc.net.svg)](https://www.nuget.org/packages/JK.Mexc.Net)|
+|OKX|[JKorf/OKX.Net](https://github.com/JKorf/OKX.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.OKX.net.svg)](https://www.nuget.org/packages/JK.OKX.Net)|
+
+## Discord
+A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
+
+## Supported functionality
+
+*The library currently uses the V1 API, it will be updated to V2 soon*
+
+### Spot
+|API|Supported|Location|
+|--|--:|--|
+|Rest Public|✓|`restClient.SpotApi.ExchangeData`|
+|Rest Market|✓|`restClient.SpotApi.ExchangeData`|
+|Rest Wallet|✓|`restClient.SpotApi.Account`|
+|Rest Account|✓|`restClient.SpotApi.Account`|
+|Rest Trade|✓|`restClient.SpotApi.Trading`|
+|Rest P2P|X||
+|Rest Sub-Account|X||
+|Rest Convert|X||
+|Websocket Public|✓|`socketClient.SpotApi`|
+|Websocket Private|✓|`socketClient.SpotApi`|
+
+### Futures USDT/Coin
+|API|Supported|Location|
+|--|--:|--|
+|Rest Market|✓|`restClient.SpotApi.ExchangeData`|
+|Rest Account|✓|`restClient.SpotApi.Account`|
+|Rest Trade|✓|`restClient.SpotApi.Trading`|
+|Websocket Public|✓|`socketClient.SpotApi`|
+|Websocket Private|✓|`socketClient.SpotApi`|
+
+### Broker
+|API|Supported|Location|
+|--|--:|--|
+|*|X||
+
+### Spot Margin
+|API|Supported|Location|
+|--|--:|--|
+|*|X||
+
+### Copy Trading
+|API|Supported|Location|
+|--|--:|--|
+|*|X||
 
 ## Support the project
 I develop and maintain this package on my own for free in my spare time, any support is greatly appreciated.
@@ -21,9 +104,6 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 
 ### Sponsor
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
-
-## Discord
-A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
 * Version 1.1.0-beta2 - 06 Feb 2024
