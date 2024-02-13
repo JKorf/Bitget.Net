@@ -1,6 +1,6 @@
-# ![.Bitget.Net](https://img.shields.io/github/actions/workflow/status/JKorf/Bitget.Net/dotnet.yml?style=for-the-badge) Bitget.Net
+# ![.Bitget.Net](https://github.com/JKorf/Bitget.Net/blob/main/Bitget.Net/Icon/icon.png?raw=true) Bitget.Net
 
-[![.NET](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge)
+[![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bitget.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge)
 
 Bitget.Net is a wrapper around the Bitget API as described on [Bitget](https://bitgetlimited.github.io/apidoc/en/spot), including all features the API provides using clear and readable objects, both for the REST  as the websocket API's.
 
