@@ -119,6 +119,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.1.0-beta3 - 18 Feb 2024
+    * Fixed socket auth handling
+
 * Version 1.1.0-beta2 - 06 Feb 2024
     * Fixed missing previous fixes
 
