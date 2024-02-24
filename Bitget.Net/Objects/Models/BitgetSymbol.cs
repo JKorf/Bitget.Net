@@ -1,5 +1,4 @@
 ﻿using Bitget.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
@@ -78,7 +77,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Symbol status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("status")]
         public BitgetSymbolStatus Status { get; set; }
 
         /// <summary>

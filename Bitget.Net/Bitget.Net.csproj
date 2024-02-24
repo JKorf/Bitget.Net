@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <Nullable>enable</Nullable>
@@ -9,9 +9,9 @@
   <PropertyGroup>
     <PackageId>JK.Bitget.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>1.0.7</PackageVersion>
-    <AssemblyVersion>1.0.7</AssemblyVersion>
-    <FileVersion>1.0.7</FileVersion>
+    <PackageVersion>1.1.0-beta3</PackageVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0</FileVersion>
     <Description>JK.Bitget.Net is a .Net client wrapper for the Bitget API, including Bitget Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Bitget Bitget.Net JK C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -23,7 +23,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>1.0.7 - Added FuturesApi.Trading.GetPlanOrdersAsync endpoint, Fixed futures order update deserialization when filled</PackageReleaseNotes>
+    <PackageReleaseNotes>1.1.0-beta3 - Fixed socket auth handling</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Bitget.Net.xml</DocumentationFile>
@@ -50,6 +50,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="CryptoExchange.Net" Version="6.2.3" />
+    <PackageReference Include="CryptoExchange.Net" Version="7.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>

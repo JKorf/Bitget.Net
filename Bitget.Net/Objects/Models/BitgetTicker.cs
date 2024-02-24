@@ -1,10 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -51,7 +45,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("ts"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("ts")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Best bid price

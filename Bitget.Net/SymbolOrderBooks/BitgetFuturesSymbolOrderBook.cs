@@ -3,8 +3,8 @@ using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.OrderBook;
-using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 
 namespace Bitget.Net.SymbolOrderBooks

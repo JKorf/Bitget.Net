@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -36,7 +35,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Last update time
         /// </summary>
-        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("uTime")]
         public DateTime UpdateTime { get; set; }
     }
 }

@@ -1,8 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -24,7 +20,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Settle time
         /// </summary>
-        [JsonProperty("settleTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("settleTime")]
         public DateTime SettleTime { get; set; }
     }
 }

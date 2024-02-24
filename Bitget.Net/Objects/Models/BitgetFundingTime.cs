@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -16,7 +15,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Funding time
         /// </summary>
-        [JsonProperty("fundingTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("fundingTime")]
         public DateTime FundingTime { get; set; }
     }
 }

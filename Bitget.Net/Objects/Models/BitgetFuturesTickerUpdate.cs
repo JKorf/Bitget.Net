@@ -1,9 +1,5 @@
 ﻿using Bitget.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -55,12 +51,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Next settlement time
         /// </summary>
-        [JsonProperty("nextSettleTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("nextSettleTime")]
         public DateTime? NextSettlementTime { get; set; }
         /// <summary>
         /// System time
         /// </summary>
-        [JsonProperty("systemTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("systemTime")]
         public DateTime? SystemTime { get; set; }
         /// <summary>
         /// Mark price
@@ -100,7 +96,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Type of symbol
         /// </summary>
-        [JsonProperty("symbolType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("symbolType")]
         public BitgetFuturesSymbolType? SymbolType { get; set; }
         /// <summary>
         /// Symbol id

@@ -1,5 +1,4 @@
 ﻿using Bitget.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
@@ -52,7 +51,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetOrderSide Side { get; set; }
         /// <summary>
         /// Total profits
@@ -62,12 +61,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonProperty("posSide"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("posSide")]
         public BitgetPositionSide PositionSide { get; set; }
         /// <summary>
         /// Margin mode
         /// </summary>
-        [JsonProperty("tdMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("tdMode")]
         public BitgetMarginMode MarginMode { get; set; }
         /// <summary>
         /// Margin asset
@@ -92,27 +91,27 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Hold mode
         /// </summary>
-        [JsonProperty("hM"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("hM")]
         public BitgetHoldMode HoldMode { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonProperty("ordType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("ordType")]
         public BitgetOrderType OrderType { get; set; }
         /// <summary>
         /// Creation time
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("uTime")]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("status")]
         public BitgetOrderStatus Status { get; set; }
         /// <summary>
         /// Estimated national value in USD of order
@@ -122,12 +121,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Source
         /// </summary>
-        [JsonProperty("eps"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("eps")]
         public BitgetOrderPlacementSource PlaceSource { get; set; }
         /// <summary>
         /// Time in force
         /// </summary>
-        [JsonProperty("force"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("force")  ]
         public BitgetTimeInForce TimeInForce { get; set; }
         /// <summary>
         /// Last filled price
@@ -152,7 +151,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Last filled time
         /// </summary>
-        [JsonProperty("fillTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("fillTime")]
         public DateTime? LastFillTime { get; set; }
         /// <summary>
         /// Last traded id
@@ -162,7 +161,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Time in force
         /// </summary>
-        [JsonProperty("execType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("execType")]
         public BitgetExecutionType ExecutionType { get; set; }
         /// <summary>
         /// Filled notional value in USD of order

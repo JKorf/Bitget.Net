@@ -1,5 +1,4 @@
 ﻿using Bitget.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
@@ -42,18 +41,18 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// The order type
         /// </summary>
-        [JsonProperty("ordType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("ordType")]
         public BitgetOrderType? OrderType { get; set; }
         /// <summary>
         /// The order type
         /// </summary>
-        [JsonProperty("force"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("force")]
         public BitgetOrderForce? Force { get; set; }
 
         /// <summary>
         /// The order side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetOrderSide? OrderSide { get; set; }
         /// <summary>
         /// Fill price
@@ -83,12 +82,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Fill time
         /// </summary>
-        [JsonProperty("fillTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("fillTime")]
         public DateTime? FillTime { get; set; }
         /// <summary>
         /// Fill type
         /// </summary>
-        [JsonProperty("execType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("execType")]
         public BitgetExecutionType? ExecutionType { get; set; }
         /// <summary>
         /// Quantity filled
@@ -103,22 +102,22 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("status")]
         public BitgetOrderStatus Status { get; set; }
         /// <summary>
         /// Order source
         /// </summary>
-        [JsonProperty("eps"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("eps")]
         public BitgetOrderPlacementSource Source { get; set; }
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("uTime")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
         /// Fee info

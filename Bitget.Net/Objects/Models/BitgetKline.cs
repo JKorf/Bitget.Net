@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -46,7 +45,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("ts"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("ts")]
         public DateTime Timestamp { get; set; }
     }
 }

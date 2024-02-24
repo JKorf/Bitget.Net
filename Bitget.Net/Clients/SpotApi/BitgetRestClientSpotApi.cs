@@ -6,11 +6,11 @@ using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.CommonObjects;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
-using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Bitget.Net.Clients.SpotApi
 {
@@ -45,6 +45,8 @@ namespace Bitget.Net.Clients.SpotApi
             ExchangeData = new BitgetRestClientSpotApiExchangeData(this);
             Trading = new BitgetRestClientSpotApiTrading(this);
 
+            DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
+
             StandardRequestHeaders = new Dictionary<string, string>
             {
                 { "X-CHANNEL-API-CODE", !string.IsNullOrEmpty(options.ChannelCode) ? options.ChannelCode! : baseClient._defaultChannelCode }
@@ -55,13 +57,9 @@ namespace Bitget.Net.Clients.SpotApi
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
 
-        internal Uri GetUri(string path)
+        internal async Task<WebCallResult> ExecuteAsync(string path, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, int weight = 1, bool ignoreRatelimit = false, HttpMethodParameterPosition? parameterPosition = null)
         {
-            return new Uri(BaseAddress.AppendPath(path));
-        }
-
-        internal async Task<WebCallResult> ExecuteAsync(Uri uri, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, int weight = 1, bool ignoreRatelimit = false, HttpMethodParameterPosition? parameterPosition = null)
-        {
+            var uri = new Uri(BaseAddress.AppendPath(path));
             var result = await SendRequestAsync<BitgetResponse>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: weight, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.AsDatalessError(result.Error!);
@@ -72,8 +70,9 @@ namespace Bitget.Net.Clients.SpotApi
             return result.AsDataless();
         }
 
-        internal async Task<WebCallResult<T>> ExecuteAsync<T>(Uri uri, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, int weight = 1, bool ignoreRatelimit = false, HttpMethodParameterPosition? parameterPosition = null)
+        internal async Task<WebCallResult<T>> ExecuteAsync<T>(string path, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, int weight = 1, bool ignoreRatelimit = false, HttpMethodParameterPosition? parameterPosition = null)
         {
+            var uri = new Uri(BaseAddress.AppendPath(path));
             var result = await SendRequestAsync<BitgetResponse<T>>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: weight, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             if (!result)
                 return result.AsError<T>(result.Error!);

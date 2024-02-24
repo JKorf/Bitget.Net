@@ -1,5 +1,4 @@
 ﻿using Bitget.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
@@ -42,32 +41,32 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("status"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("status")]
         public BitgetPlanOrderStatus Status { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonProperty("orderType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("orderType")]
         public BitgetOrderType Type { get; set; }
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetOrderSide Side { get; set; }
         /// <summary>
         /// 	Order trigger type
         /// </summary>
-        [JsonProperty("triggerType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("triggerType")]
         public BitgetTriggerType TriggerType { get; set; }
         /// <summary>
         /// 	Order trigger type
         /// </summary>
-        [JsonProperty("enterPointSource"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("enterPointSource")]
         public BitgetOrderPlacementSource Source { get; set; }
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Place type

@@ -20,7 +20,7 @@ namespace Bitget.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.ExecuteAsync<long>(_baseClient.GetUri("/api/spot/v1/public/time"), HttpMethod.Get, ct, ignoreRatelimit: true).ConfigureAwait(false);
+            var result = await _baseClient.ExecuteAsync<long>("/api/spot/v1/public/time", HttpMethod.Get, ct, ignoreRatelimit: true).ConfigureAwait(false);
             return result.As(result ? DateTimeConverter.ConvertFromMilliseconds(result.Data) : default);
         }
 
@@ -35,19 +35,19 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(startTime));
 
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetNotification>>(_baseClient.GetUri("/api/spot/v1/notice/queryAllNotices"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetNotification>>("/api/spot/v1/notice/queryAllNotices", HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BitgetAsset>>> GetAssetsAsync(CancellationToken ct = default)
         {
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetAsset>>(_baseClient.GetUri("/api/spot/v1/public/currencies"), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetAsset>>("/api/spot/v1/public/currencies", HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BitgetSymbol>>> GetSymbolsAsync(CancellationToken ct = default)
         {
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetSymbol>>(_baseClient.GetUri("/api/spot/v1/public/products"), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetSymbol>>("/api/spot/v1/public/products", HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -57,13 +57,13 @@ namespace Bitget.Net.Clients.SpotApi
             {
                 { "symbol", symbol }
             };
-            return await _baseClient.ExecuteAsync<BitgetTicker>(_baseClient.GetUri("/api/spot/v1/market/ticker"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetTicker>("/api/spot/v1/market/ticker", HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BitgetTicker>>> GetTickersAsync(CancellationToken ct = default)
         {
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetTicker>>(_baseClient.GetUri("/api/spot/v1/market/tickers"), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetTicker>>("/api/spot/v1/market/tickers", HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -77,7 +77,7 @@ namespace Bitget.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("limit", limit);
 
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetTrade>>(_baseClient.GetUri("/api/spot/v1/market/fills"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetTrade>>("/api/spot/v1/market/fills", HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -94,7 +94,7 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
 
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetTrade>>(_baseClient.GetUri("/api/spot/v1/market/fills-history"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetTrade>>("/api/spot/v1/market/fills-history", HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -111,7 +111,7 @@ namespace Bitget.Net.Clients.SpotApi
             parameters.AddOptionalParameter("after", DateTimeConverter.ConvertToMilliseconds(startTime));
             parameters.AddOptionalParameter("before", DateTimeConverter.ConvertToMilliseconds(endTime));
 
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetKline>>(_baseClient.GetUri("/api/spot/v1/market/candles"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetKline>>("/api/spot/v1/market/candles", HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -127,7 +127,7 @@ namespace Bitget.Net.Clients.SpotApi
             };
             parameters.AddOptionalParameter("limit", limit);
 
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetKline>>(_baseClient.GetUri("/api/spot/v1/market/history-candles"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetKline>>("/api/spot/v1/market/history-candles", HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -143,7 +143,7 @@ namespace Bitget.Net.Clients.SpotApi
                 parameters.AddOptionalParameter("type", "step" + mergeLevel);
             parameters.AddOptionalParameter("limit", limit);
 
-            return await _baseClient.ExecuteAsync<BitgetOrderBook>(_baseClient.GetUri("/api/spot/v1/market/depth"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetOrderBook>("/api/spot/v1/market/depth", HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -159,13 +159,13 @@ namespace Bitget.Net.Clients.SpotApi
                 parameters.AddOptionalParameter("precision", "scale" + mergeLevel);
             parameters.AddOptionalParameter("limit", limit?.ToString() ?? "max");
 
-            return await _baseClient.ExecuteAsync<BitgetOrderBook>(_baseClient.GetUri("/api/spot/v1/market/merge-depth"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<BitgetOrderBook>("/api/spot/v1/market/merge-depth", HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<BitgetFeeLevel>>> GetFeeRatesAsync(CancellationToken ct = default)
         {
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetFeeLevel>>(_baseClient.GetUri("/api/spot/v1/market/spot-vip-level"), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetFeeLevel>>("/api/spot/v1/market/spot-vip-level", HttpMethod.Get, ct).ConfigureAwait(false);
         }
     }
 }

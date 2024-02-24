@@ -1,5 +1,4 @@
 ﻿using Bitget.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
@@ -32,7 +31,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Margin mode
         /// </summary>
-        [JsonProperty("marginMode"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("marginMode")]
         public BitgetMarginMode MarginMode { get; set; }
     }
 }

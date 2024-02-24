@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -23,7 +22,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("ts"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("ts")]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Current gear, for example: scale 1
@@ -38,7 +37,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Is max precision
         /// </summary>
-        [JsonProperty("isMaxPrecision"), JsonConverter(typeof(BoolConverter))]
+        [JsonProperty("isMaxPrecision")]
         public bool IsMaxPrecision { get; set; }
     }
 }

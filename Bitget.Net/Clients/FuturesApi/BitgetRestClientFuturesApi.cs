@@ -6,9 +6,10 @@ using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Bitget.Net.Clients.FuturesApi
 {
@@ -30,6 +31,8 @@ namespace Bitget.Net.Clients.FuturesApi
             Account = new BitgetRestClientFuturesApiAccount(this);
             ExchangeData = new BitgetRestClientFuturesApiExchangeData(this);
             Trading = new BitgetRestClientFuturesApiTrading(this);
+
+            DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
 
             StandardRequestHeaders = new Dictionary<string, string>
             {

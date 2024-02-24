@@ -1,5 +1,4 @@
 ﻿using Bitget.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
@@ -22,7 +21,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetOrderSide Side { get; set; }
         /// <summary>
         /// Price
@@ -37,7 +36,7 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("timestamp"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("timestamp")]
         public DateTime Timestamp { get; set; }
     }
 }

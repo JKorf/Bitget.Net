@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -8,7 +7,6 @@ namespace Bitget.Net.Objects.Models
         public string Code { get; set; } = string.Empty;
         [JsonProperty("msg")]
         public string? Message { get; set; }
-        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime RequestTime { get; set; }
     }
 

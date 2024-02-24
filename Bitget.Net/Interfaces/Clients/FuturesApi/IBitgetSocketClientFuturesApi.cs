@@ -2,7 +2,7 @@
 using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Objects.Sockets;
 
 namespace Bitget.Net.Interfaces.Clients.FuturesApi
 {

@@ -1,5 +1,4 @@
 ﻿using Bitget.Net.Enums;
-using CryptoExchange.Net.Converters;
 using Newtonsoft.Json;
 
 namespace Bitget.Net.Objects.Models
@@ -57,42 +56,42 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order status
         /// </summary>
-        [JsonProperty("state"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("state")]
         public BitgetPlanOrderStatus Status { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonProperty("ordType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("ordType")]
         public BitgetOrderType OrderType { get; set; }
         /// <summary>
         /// Plan type
         /// </summary>
-        [JsonProperty("planType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("planType")]
         public BitgetPlanOrderEvent? PlanType { get; set; }
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonProperty("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("side")]
         public BitgetOrderSide Side { get; set; }
         /// <summary>
         /// Position side
         /// </summary>
-        [JsonProperty("posSide"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("posSide")]
         public BitgetPositionSide PositionSide { get; set; }
         /// <summary>
         /// Order trigger type
         /// </summary>
-        [JsonProperty("triggerPxType"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("triggerPxType")]
         public BitgetTriggerType TriggerType { get; set; }
         /// <summary>
         /// Order trigger type
         /// </summary>
-        [JsonProperty("eps"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("eps")]
         public BitgetOrderPlacementSource Source { get; set; }
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonProperty("cTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Trade side
@@ -102,17 +101,17 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Hold mode
         /// </summary>
-        [JsonProperty("hM"), JsonConverter(typeof(EnumConverter))]
+        [JsonProperty("hM")]
         public BitgetHoldMode HoldMode { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonProperty("uTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("uTime")]
         public DateTime UpdateTime { get; set; }
         /// <summary>
         /// Trigger time
         /// </summary>
-        [JsonProperty("triggerTime"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonProperty("triggerTime")]
         public DateTime? TriggerTime { get; set; }
         /// <summary>
         /// Executed quantity
