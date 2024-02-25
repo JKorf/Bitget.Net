@@ -9,12 +9,12 @@
   <PropertyGroup>
     <PackageId>JK.Bitget.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>1.1.0-beta3</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <AssemblyVersion>1.1.0</AssemblyVersion>
     <FileVersion>1.1.0</FileVersion>
-    <Description>JK.Bitget.Net is a .Net client wrapper for the Bitget API, including Bitget Futures. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
+    <Description>JK.Bitget.Net is a client library for accessing the Bitget REST and Websocket API. All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageTags>Bitget Bitget.Net JK C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
+    <PackageTags>Bitget;Bitget.Net;Bitget Client;Bitget API;CryptoCurrency;CryptoCurrency Exchange</PackageTags>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/JKorf/Bitget.Net.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/JKorf/Bitget.Net</PackageProjectUrl>
@@ -23,7 +23,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>1.1.0-beta3 - Fixed socket auth handling</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/JKorf/Bitget.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>Bitget.Net.xml</DocumentationFile>
