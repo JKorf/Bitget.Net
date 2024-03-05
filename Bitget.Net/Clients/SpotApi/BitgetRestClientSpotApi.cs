@@ -9,6 +9,7 @@ using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -45,8 +46,6 @@ namespace Bitget.Net.Clients.SpotApi
             ExchangeData = new BitgetRestClientSpotApiExchangeData(this);
             Trading = new BitgetRestClientSpotApiTrading(this);
 
-            DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
-
             StandardRequestHeaders = new Dictionary<string, string>
             {
                 { "X-CHANNEL-API-CODE", !string.IsNullOrEmpty(options.ChannelCode) ? options.ChannelCode! : baseClient._defaultChannelCode }
@@ -64,7 +63,7 @@ namespace Bitget.Net.Clients.SpotApi
             if (!result)
                 return result.AsDatalessError(result.Error!);
 
-            if (result.Data.Code != "00000")
+            if (result.Data.Code != 0)
                 return result.AsDatalessError(new ServerError(result.Data.Code, result.Data.Message ?? "-"));
 
             return result.AsDataless();
@@ -77,25 +76,23 @@ namespace Bitget.Net.Clients.SpotApi
             if (!result)
                 return result.AsError<T>(result.Error!);
 
-            if (result.Data.Code != "00000")
+            if (result.Data.Code != 0)
                 return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message ?? "-"));
 
             return result.As(result.Data.Data!);
         }
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, string data)
+        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
         {
-            var tokenData = data.ToJToken();
-            if (tokenData == null)
-                return new ServerError(data);
+            if (!accessor.IsJson)
+                return new ServerError(accessor.GetOriginalString());
 
-            var msg = tokenData["msg"];
-            var code = tokenData["code"];
-            if (msg == null || code == null || !int.TryParse(code.ToString(), out var intCode))
-                return new ServerError(data);
+            var result = accessor.Deserialize<BitgetResponse>();
+            if (!result)
+                return new ServerError(accessor.GetOriginalString());
 
-            return new ServerError(intCode, msg.ToString());
+            return new ServerError(result.Data.Code!, result.Data.Message!);
         }
 
         /// <inheritdoc />

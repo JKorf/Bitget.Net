@@ -30,8 +30,6 @@ namespace Bitget.Net.Clients.SpotApi
         internal BitgetSocketClientFuturesApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.FuturesOptions)
         {
-            DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
-
             RegisterPeriodicQuery("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
         }
 

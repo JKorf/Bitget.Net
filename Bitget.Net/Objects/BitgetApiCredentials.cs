@@ -3,6 +3,8 @@ using System.Security;
 using System.Text;
 using CryptoExchange.Net;
 using Newtonsoft.Json.Linq;
+using CryptoExchange.Net.Sockets.MessageParsing;
+using CryptoExchange.Net.Sockets.MessageParsing.JsonNet;
 
 namespace Bitget.Net.Objects
 {
@@ -37,18 +39,14 @@ namespace Bitget.Net.Objects
         /// <param name="identifierPassPhrase">A key to identify the credentials for the API. For example, when set to `BitgetPass` the json data should contain a value for the property `BitgetPass`. Defaults to 'apiPassPhrase'.</param>
         public BitgetApiCredentials(Stream inputStream, string? identifierKey = null, string? identifierSecret = null, string? identifierPassPhrase = null) : base(inputStream, identifierKey, identifierSecret)
         {
-            string? pass;
-            using (var reader = new StreamReader(inputStream, Encoding.ASCII, false, 512, true))
-            {
-                var stringData = reader.ReadToEnd();
-                var jsonData = JToken.Parse(stringData);
-                pass = TryGetValue(jsonData, identifierKey ?? "apiPassPhrase");
+            var accessor = new JsonNetMessageAccessor();
+            if (!accessor.Read(inputStream, false))
+                throw new ArgumentException("Input stream not valid json data");
 
-                if (pass == null)
-                    throw new ArgumentException($"PassPhrase value not found in Json credential file, key: {identifierPassPhrase ?? "apiPassPhrase"}");
-            }
+            var pass = accessor.GetValue<string>(MessagePath.Get().Property(identifierPassPhrase ?? "apiPassPhrase"));
+            if (pass == null)
+                throw new ArgumentException("apiKey or apiSecret value not found in Json credential file");
 
-            inputStream.Seek(0, SeekOrigin.Begin);
             PassPhrase = pass.ToSecureString();
         }
 
