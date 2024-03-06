@@ -9,6 +9,7 @@ using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Sockets.MessageParsing;
 using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -88,11 +89,15 @@ namespace Bitget.Net.Clients.SpotApi
             if (!accessor.IsJson)
                 return new ServerError(accessor.GetOriginalString());
 
-            var result = accessor.Deserialize<BitgetResponse>();
-            if (!result)
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
+            var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
+            if (msg == null)
                 return new ServerError(accessor.GetOriginalString());
 
-            return new ServerError(result.Data.Code!, result.Data.Message!);
+            if (code == null)
+                return new ServerError(msg);
+
+            return new ServerError(code.Value, msg);
         }
 
         /// <inheritdoc />
