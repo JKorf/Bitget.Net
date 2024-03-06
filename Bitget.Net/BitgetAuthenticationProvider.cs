@@ -1,6 +1,7 @@
 ﻿using Bitget.Net.Objects;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
 using Newtonsoft.Json;
 using System.Text;

@@ -1,10 +1,7 @@
 ﻿using CryptoExchange.Net.Authentication;
 using System.Security;
-using System.Text;
 using CryptoExchange.Net;
-using Newtonsoft.Json.Linq;
-using CryptoExchange.Net.Sockets.MessageParsing;
-using CryptoExchange.Net.Sockets.MessageParsing.JsonNet;
+using CryptoExchange.Net.Converters.MessageParsing;
 
 namespace Bitget.Net.Objects
 {
@@ -43,10 +40,7 @@ namespace Bitget.Net.Objects
             if (!accessor.Read(inputStream, false))
                 throw new ArgumentException("Input stream not valid json data");
 
-            var pass = accessor.GetValue<string>(MessagePath.Get().Property(identifierPassPhrase ?? "apiPassPhrase"));
-            if (pass == null)
-                throw new ArgumentException("apiKey or apiSecret value not found in Json credential file");
-
+            var pass = accessor.GetValue<string>(MessagePath.Get().Property(identifierPassPhrase ?? "apiPassPhrase")) ?? throw new ArgumentException("apiKey or apiSecret value not found in Json credential file");
             PassPhrase = pass.ToSecureString();
         }
 
