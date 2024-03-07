@@ -1,6 +1,8 @@
 ﻿using Bitget.Net.Clients;
+using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -54,6 +56,68 @@ namespace Bitget.Net.UnitTests
                 }
                 Debug.WriteLine($"{clientInterface.Name} {methods} methods validated");
             }
+        }
+
+
+        [TestCase()]
+        public async Task ReceivingError_Should_ReturnErrorAndNotSuccess()
+        {
+            // arrange
+            var client = TestHelpers.CreateClient();
+            var resultObj = new BitgetResponse()
+            {
+                Code = 400001,
+                Message = "Error occured"
+            };
+
+            TestHelpers.SetResponse((BitgetRestClient)client, JsonConvert.SerializeObject(resultObj));
+
+            // act
+            var result = await client.SpotApi.ExchangeData.GetAssetsAsync();
+
+            // assert
+            Assert.IsFalse(result.Success);
+            Assert.IsNotNull(result.Error);
+            Assert.IsTrue(result.Error!.Code == 400001);
+            Assert.IsTrue(result.Error.Message == "Error occured");
+        }
+
+        [TestCase()]
+        public async Task ReceivingHttpErrorWithNoJson_Should_ReturnErrorAndNotSuccess()
+        {
+            // arrange
+            var client = TestHelpers.CreateClient();
+            TestHelpers.SetResponse((BitgetRestClient)client, "", System.Net.HttpStatusCode.BadRequest);
+
+            // act
+            var result = await client.SpotApi.ExchangeData.GetAssetsAsync();
+
+            // assert
+            Assert.IsFalse(result.Success);
+            Assert.IsNotNull(result.Error);
+        }
+
+        [TestCase()]
+        public async Task ReceivingHttpErrorWithJsonError_Should_ReturnErrorAndNotSuccess()
+        {
+            // arrange
+            var client = TestHelpers.CreateClient();
+            var resultObj = new BitgetResponse<object>()
+            {
+                Code = 400001,
+                Message = "Error occured"
+            };
+
+            TestHelpers.SetResponse((BitgetRestClient)client, JsonConvert.SerializeObject(resultObj), System.Net.HttpStatusCode.BadRequest);
+
+            // act
+            var result = await client.SpotApi.ExchangeData.GetAssetsAsync();
+
+            // assert
+            Assert.IsFalse(result.Success);
+            Assert.IsNotNull(result.Error);
+            Assert.IsTrue(result.Error!.Code == 400001);
+            Assert.IsTrue(result.Error.Message == "Error occured");
         }
     }
 }
