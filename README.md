@@ -121,6 +121,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.1.2 - 08 Mar 2024
+    * Fixed deserialization error for nullable UpdateTime properties
+
 * Version 1.1.1 - 08 Mar 2024
     * Fixed Socket Futures subscription data handling
 
