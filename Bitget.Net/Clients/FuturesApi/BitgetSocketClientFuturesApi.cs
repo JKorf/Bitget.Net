@@ -23,6 +23,7 @@ namespace Bitget.Net.Clients.SpotApi
     public class BitgetSocketClientFuturesApi : SocketApiClient, IBitgetSocketClientFuturesApi
     {
         private static readonly MessagePath _eventPath = MessagePath.Get().Property("event");
+        private static readonly MessagePath _actionPath = MessagePath.Get().Property("action");
         private static readonly MessagePath _channelPath = MessagePath.Get().Property("arg").Property("channel");
         private static readonly MessagePath _instIdPath = MessagePath.Get().Property("arg").Property("instId");
 
@@ -37,13 +38,20 @@ namespace Bitget.Net.Clients.SpotApi
         /// <inheritdoc />
         public override string GetListenerIdentifier(IMessageAccessor message)
         {
+            if (!message.IsJson)
+                return "pong";
+
             var evnt = message.GetValue<string>(_eventPath);
+            if (evnt == "login")
+                return evnt;
+
             var channel = message.GetValue<string>(_channelPath);
             var instId = message.GetValue<string>(_instIdPath);
             if (evnt != null)
                 return $"{evnt}-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
 
-            return $"update-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
+            var action = message.GetValue<string>(_actionPath);
+            return $"{action}-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
         }
 
         /// <inheritdoc />
