@@ -117,7 +117,7 @@ namespace Bitget.Net.Objects.Models
         /// Update time
         /// </summary>
         [JsonProperty("uTime")]
-        public DateTime UpdateTime { get; set; }
+        public DateTime? UpdateTime { get; set; }
         /// <summary>
         /// Execute time
         /// </summary>
