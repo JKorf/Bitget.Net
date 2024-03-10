@@ -39,15 +39,16 @@ namespace Bitget.Net.Interfaces.Clients.SpotApi
         /// Get bills history
         /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-bills" /></para>
         /// </summary>
-        /// <param name="assetId">Asset id</param>
+        /// <param name="asset">Asset</param>
         /// <param name="groupType">Transaction group type</param>
         /// <param name="bizType">	Business type</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max amount of results</param>
+        /// <param name="pageSize">Max amount of results</param>
+        /// <param name="endId">Last end id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetBill>>> GetBillsAsync(string? assetId = null, BitgetGroupType? groupType = null, BizType? bizType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BitgetBill>>> GetBillsAsync(string? asset = null, BitgetGroupType? groupType = null, string? bizType = null, DateTime? startTime = null, DateTime? endTime = null, string? endId = null, int? pageSize = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get transfer history

@@ -41,18 +41,17 @@ namespace Bitget.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetBill>>> GetBillsAsync(string? assetId = null, BitgetGroupType? groupType = null, BizType? bizType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BitgetBill>>> GetBillsAsync(string? asset = null, BitgetGroupType? groupType = null, string? bizType = null, DateTime? startTime = null, DateTime? endTime = null, string? endId = null, int? pageSize = null, CancellationToken ct = default)
         {
-            limit?.ValidateIntBetween(nameof(limit), 1, 500);
-
-            var parameters = new Dictionary<string, object>();
-            parameters.AddOptionalParameter("coinId", assetId);
-            parameters.AddOptionalParameter("groupType", EnumConverter.GetString(groupType));
-            parameters.AddOptionalParameter("bizType", EnumConverter.GetString(bizType));
-            parameters.AddOptionalParameter("before", DateTimeConverter.ConvertToMilliseconds(startTime));
-            parameters.AddOptionalParameter("after", DateTimeConverter.ConvertToMilliseconds(endTime));
-            parameters.AddOptionalParameter("limit", limit);
-            return await _baseClient.ExecuteAsync<IEnumerable<BitgetBill>>("/api/spot/v1/account/bills", HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("coin", asset);
+            parameters.AddOptionalEnum("groupType", groupType);
+            parameters.AddOptional("businessType", bizType);
+            parameters.AddOptional("idLessThan", endId);
+            parameters.AddOptionalMillisecondsString("startTime", startTime);
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", pageSize);
+            return await _baseClient.ExecuteAsync<IEnumerable<BitgetBill>>("/api/v2/spot/account/bills", HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

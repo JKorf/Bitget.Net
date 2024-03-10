@@ -16,13 +16,8 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Asset id
         /// </summary>
-        [JsonProperty("coinId")]
-        public string AssetId { get; set; } = string.Empty;
-        /// <summary>
-        /// Asset name
-        /// </summary>
-        [JsonProperty("coinName")]
-        public string AssetName { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Group type
         /// </summary>
@@ -31,12 +26,12 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Transaction type
         /// </summary>
-        [JsonProperty("bizType")]
+        [JsonProperty("businessType")]
         public BizType Type { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonProperty("quantity")]
+        [JsonProperty("size")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Balance Before transfer

@@ -160,20 +160,18 @@ namespace Bitget.Net.Clients.FuturesApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetPagination<BitgetFuturesBill>>> GetBillsAsync(string marginAsset, DateTime startTime, DateTime endTime, BitgetProductType? type = null, string? symbol = null, int? pageSize = null, string? business = null, string? endId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetFuturesBills>> GetBillsAsync(BitgetProductTypeV2 productType, string? symbol = null, string? asset = null, string? bizType = null, DateTime? startTime = null, DateTime? endTime = null, string? endId = null, int? pageSize = null, CancellationToken ct = default)
         {
-            var parameters = new Dictionary<string, object>()
-            {
-                { "startTime", DateTimeConverter.ConvertToMilliseconds(startTime) },
-                { "endTime", DateTimeConverter.ConvertToMilliseconds(endTime) },
-                { "marginCoin", marginAsset },
-            };
-            parameters.AddOptionalParameter("productType", EnumConverter.GetString(type));
-            parameters.AddOptionalParameter("symbol", symbol);
-            parameters.AddOptionalParameter("pageSize", pageSize);
-            parameters.AddOptionalParameter("lastEndId", endId);
-            parameters.AddOptionalParameter("business", business);
-            return await _baseClient.ExecuteAsync<BitgetPagination<BitgetFuturesBill>>(_baseClient.GetUri("/api/mix/v1/account/accountBill"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("productType", productType);
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptional("coin", asset);
+            parameters.AddOptional("businessType", bizType);
+            parameters.AddOptional("idLessThan", endId);
+            parameters.AddOptionalMillisecondsString("startTime", startTime);
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", pageSize);
+            return await _baseClient.ExecuteAsync<BitgetFuturesBills>(_baseClient.GetUri("/api/v2/mix/account/bill"), HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

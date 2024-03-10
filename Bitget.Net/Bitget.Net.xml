@@ -165,7 +165,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetHistoryPositionAsync(System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetBillsAsync(System.String,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.String,System.Nullable{System.Int32},System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetBillsAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetBusinessBillsAsync(Bitget.Net.Enums.BitgetProductType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.String,System.String,System.Threading.CancellationToken)">
@@ -450,7 +450,7 @@
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiAccount.GetApiKeyInfoAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiAccount.GetBillsAsync(System.String,System.Nullable{Bitget.Net.Enums.BitgetGroupType},System.Nullable{Bitget.Net.Enums.BizType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiAccount.GetBillsAsync(System.String,System.Nullable{Bitget.Net.Enums.BitgetGroupType},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiAccount.GetTransferHistoryAsync(System.String,Bitget.Net.Enums.BitgetAccountType,System.DateTime,System.DateTime,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -1384,6 +1384,41 @@
             Simulation usdc perpetual contracts
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.BitgetProductTypeV2">
+            <summary>
+            Product type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductTypeV2.UsdtFutures">
+            <summary>
+            USDT futures
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductTypeV2.CoinFutures">
+            <summary>
+            Mixed futures
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductTypeV2.UsdcFutures">
+            <summary>
+            USDC Futures
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductTypeV2.SimUsdtFutures">
+            <summary>
+            DEMO USDT futures
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductTypeV2.SimCoinFutures">
+            <summary>
+            DEMO Mixed futures
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetProductTypeV2.SimUsdcFutures">
+            <summary>
+            DEMO USDC futures
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetStreamKlineInterval">
             <summary>
             Kline interval
@@ -1801,17 +1836,18 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiAccount.GetBillsAsync(System.String,System.Nullable{Bitget.Net.Enums.BitgetGroupType},System.Nullable{Bitget.Net.Enums.BizType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiAccount.GetBillsAsync(System.String,System.Nullable{Bitget.Net.Enums.BitgetGroupType},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get bills history
             <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#get-bills" /></para>
             </summary>
-            <param name="assetId">Asset id</param>
+            <param name="asset">Asset</param>
             <param name="groupType">Transaction group type</param>
             <param name="bizType">	Business type</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
-            <param name="limit">Max amount of results</param>
+            <param name="pageSize">Max amount of results</param>
+            <param name="endId">Last end id</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -2474,19 +2510,19 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.GetBillsAsync(System.String,System.DateTime,System.DateTime,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.String,System.Nullable{System.Int32},System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApiAccount.GetBillsAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get account bill
             <para><a href="https://bitgetlimited.github.io/apidoc/en/mix/#get-account-bill" /></para>
             </summary>
+            <param name="productType">Product type</param>
             <param name="startTime">Start time</param>
             <param name="endTime">End time</param>
-            <param name="type">Product type</param>
             <param name="symbol">Symbol</param>
             <param name="pageSize">Page size</param>
             <param name="endId">Last end id</param>
-            <param name="business">Business</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="bizType">Business type</param>
+            <param name="asset">Asset</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -3424,14 +3460,9 @@
             Creation time
             </summary>
         </member>
-        <member name="P:Bitget.Net.Objects.Models.BitgetBill.AssetId">
+        <member name="P:Bitget.Net.Objects.Models.BitgetBill.Asset">
             <summary>
             Asset id
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Objects.Models.BitgetBill.AssetName">
-            <summary>
-            Asset name
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.BitgetBill.GroupType">
@@ -3782,6 +3813,16 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBalanceUpdate.EquityUsdt">
             <summary>
             Equity of the currency USD
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetFuturesBills">
+            <summary>
+            Bills page
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetFuturesBills.Bills">
+            <summary>
+            Bills list
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetFuturesBill">
@@ -5493,6 +5534,16 @@
         <member name="P:Bitget.Net.Objects.Models.BitgetPagination`1.Data">
             <summary>
             Paged data
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.BitgetPaginationBase">
+            <summary>
+            Paginated result
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.BitgetPaginationBase.EndId">
+            <summary>
+            Last id of the results, can be used for requesting the next page
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.BitgetPlanOrder">
