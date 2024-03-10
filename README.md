@@ -121,6 +121,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.2.0 - 10 Mar 2024
+    * Updated GetBillsAsync endpoints to V2 API to fix some issues occoring with the V1 endpoints. Full update to the V2 API will follow later
+
 * Version 1.1.2 - 08 Mar 2024
     * Fixed deserialization error for nullable UpdateTime properties
 
