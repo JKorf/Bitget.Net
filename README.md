@@ -2,7 +2,7 @@
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bitget.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge)
 
-Bitget.Net is a client library for accessing the [Bitget REST and Websocket API](https://bitgetlimited.github.io/apidoc/en/spot). All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.
+Bitget.Net is a strongly typed client library for accessing the [Bitget REST and Websocket API](https://bitgetlimited.github.io/apidoc/en/spot). All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.
 
 ## Supported Frameworks
 The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility
@@ -123,7 +123,6 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 ## Release notes
 * Version 1.3.0 - 16 Mar 2024
     * Updated CryptoExchange.Net to 7.1.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-    * Updated unit test package dependencies and updated tests accordingly
 	
 * Version 1.2.0 - 10 Mar 2024
     * Updated GetBillsAsync endpoints to V2 API to fix some issues occurring with the V1 endpoints. Full update to the V2 API will follow later
