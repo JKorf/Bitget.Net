@@ -5,8 +5,11 @@ using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
@@ -45,8 +48,6 @@ namespace Bitget.Net.Clients.SpotApi
             ExchangeData = new BitgetRestClientSpotApiExchangeData(this);
             Trading = new BitgetRestClientSpotApiTrading(this);
 
-            DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
-
             StandardRequestHeaders = new Dictionary<string, string>
             {
                 { "X-CHANNEL-API-CODE", !string.IsNullOrEmpty(options.ChannelCode) ? options.ChannelCode! : baseClient._defaultChannelCode }
@@ -64,7 +65,7 @@ namespace Bitget.Net.Clients.SpotApi
             if (!result)
                 return result.AsDatalessError(result.Error!);
 
-            if (result.Data.Code != "00000")
+            if (result.Data.Code != 0)
                 return result.AsDatalessError(new ServerError(result.Data.Code, result.Data.Message ?? "-"));
 
             return result.AsDataless();
@@ -77,25 +78,27 @@ namespace Bitget.Net.Clients.SpotApi
             if (!result)
                 return result.AsError<T>(result.Error!);
 
-            if (result.Data.Code != "00000")
+            if (result.Data.Code != 0)
                 return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message ?? "-"));
 
             return result.As(result.Data.Data!);
         }
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, string data)
+        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
         {
-            var tokenData = data.ToJToken();
-            if (tokenData == null)
-                return new ServerError(data);
+            if (!accessor.IsJson)
+                return new ServerError(accessor.GetOriginalString());
 
-            var msg = tokenData["msg"];
-            var code = tokenData["code"];
-            if (msg == null || code == null || !int.TryParse(code.ToString(), out var intCode))
-                return new ServerError(data);
+            var code = accessor.GetValue<int?>(MessagePath.Get().Property("code"));
+            var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
+            if (msg == null)
+                return new ServerError(accessor.GetOriginalString());
 
-            return new ServerError(intCode, msg.ToString());
+            if (code == null)
+                return new ServerError(msg);
+
+            return new ServerError(code.Value, msg);
         }
 
         /// <inheritdoc />

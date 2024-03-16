@@ -5,7 +5,7 @@ namespace Bitget.Net.Objects.Models
     internal class BitgetResponse
     {
         [JsonProperty("code")]
-        public string Code { get; set; } = string.Empty;
+        public int Code { get; set; }
         [JsonProperty("msg")]
         public string? Message { get; set; }
         public DateTime RequestTime { get; set; }

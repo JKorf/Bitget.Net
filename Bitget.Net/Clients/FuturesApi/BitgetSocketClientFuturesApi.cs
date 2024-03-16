@@ -8,12 +8,13 @@ using Bitget.Net.Objects.Socket.Queries;
 using Bitget.Net.Objects.Socket.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
-using CryptoExchange.Net.Sockets.MessageParsing;
-using CryptoExchange.Net.Sockets.MessageParsing.Interfaces;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -30,8 +31,6 @@ namespace Bitget.Net.Clients.SpotApi
         internal BitgetSocketClientFuturesApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.FuturesOptions)
         {
-            DefaultSerializer = JsonSerializer.Create(SerializerOptions.WithConverters);
-
             RegisterPeriodicQuery("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
         }
 

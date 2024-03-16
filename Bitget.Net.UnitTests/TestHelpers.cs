@@ -92,7 +92,7 @@ namespace Bitget.Net.UnitTests
             return client;
         }
 
-        public static void SetResponse(BitgetRestClient client, string responseData)
+        public static void SetResponse(BitgetRestClient client, string responseData, HttpStatusCode statusCode = HttpStatusCode.OK)
         {
             var expectedBytes = Encoding.UTF8.GetBytes(responseData);
             var responseStream = new MemoryStream();
@@ -100,7 +100,8 @@ namespace Bitget.Net.UnitTests
             responseStream.Seek(0, SeekOrigin.Begin);
 
             var response = new Mock<IResponse>();
-            response.Setup(c => c.IsSuccessStatusCode).Returns(true);
+            response.Setup(c => c.StatusCode).Returns(statusCode);
+            response.Setup(c => c.IsSuccessStatusCode).Returns(statusCode == HttpStatusCode.OK);
             response.Setup(c => c.GetResponseStreamAsync()).Returns(Task.FromResult((Stream)responseStream));
 
             var request = new Mock<IRequest>();

@@ -18,12 +18,12 @@ namespace Bitget.Net.Objects.Socket.Queries
                 ListenerIdentifiers.Add($"{request.Op}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}");
         }
 
-        public override Task<CallResult<BitgetSocketEvent>> HandleMessageAsync(SocketConnection connection, DataEvent<BitgetSocketEvent> message)
+        public override CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DataEvent<BitgetSocketEvent> message)
         {
             if (message.Data.Code != null)
-                return Task.FromResult(new CallResult<BitgetSocketEvent>(new ServerError(message.Data.Code.Value, message.Data.Message!), message.OriginalData));
+                return new CallResult<BitgetSocketEvent>(new ServerError(message.Data.Code.Value, message.Data.Message!), message.OriginalData);
 
-            return base.HandleMessageAsync(connection, message);
+            return base.HandleMessage(connection, message);
         }
     }
 }

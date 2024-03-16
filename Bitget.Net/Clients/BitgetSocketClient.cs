@@ -4,7 +4,7 @@ using Bitget.Net.Interfaces.Clients.FuturesApi;
 using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Options;
-using CryptoExchange.Net;
+using CryptoExchange.Net.Clients;
 using Microsoft.Extensions.Logging;
 
 namespace Bitget.Net.Clients

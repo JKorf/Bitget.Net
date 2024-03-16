@@ -7,6 +7,7 @@ using Bitget.Net.Clients;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.JsonNet;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
