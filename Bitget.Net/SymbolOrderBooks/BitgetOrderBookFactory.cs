@@ -27,14 +27,14 @@ namespace Bitget.Net.SymbolOrderBooks
         public ISymbolOrderBook CreateSpot(string symbol, Action<BitgetOrderBookOptions>? options = null)
             => new BitgetSpotSymbolOrderBook(symbol,
                                              options,
-                                             _serviceProvider.GetRequiredService<ILogger<BitgetSpotSymbolOrderBook>>(),
+                                             _serviceProvider.GetRequiredService<ILoggerFactory>(),
                                              _serviceProvider.GetRequiredService<IBitgetSocketClient>());
 
         /// <inheritdoc />
         public ISymbolOrderBook CreateFutures(string symbol, Action<BitgetOrderBookOptions>? options = null)
             => new BitgetFuturesSymbolOrderBook(symbol,
                                              options,
-                                             _serviceProvider.GetRequiredService<ILogger<BitgetFuturesSymbolOrderBook>>(),
+                                             _serviceProvider.GetRequiredService<ILoggerFactory>(),
                                              _serviceProvider.GetRequiredService<IBitgetSocketClient>());
     }
 }

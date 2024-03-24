@@ -38,8 +38,8 @@ namespace Bitget.Net.SymbolOrderBooks
         /// <param name="socketClient">Socket client instance</param>
         public BitgetFuturesSymbolOrderBook(string symbol,
             Action<BitgetOrderBookOptions>? optionsDelegate,
-            ILogger<BitgetFuturesSymbolOrderBook>? logger,
-            IBitgetSocketClient? socketClient) : base(logger, "Bitget[Futures]", symbol)
+            ILoggerFactory? logger,
+            IBitgetSocketClient? socketClient) : base(logger, "Bitget", "Futures", symbol)
         {
             var options = BitgetOrderBookOptions.Default.Copy();
             if (optionsDelegate != null)
