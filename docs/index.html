@@ -269,13 +269,13 @@ var result = await bitgetClient.SpotApi.Trading.CancelOrderAsync("ETHUSDT_SPBL",
 var result = await bitgetClient.FuturesApi.ExchangeData.GetSymbolsAsync(Bitget.Net.Enums.BitgetProductType.UsdcPerpetual);</code></pre>
 		  
 		  <b id="idocs_example_symbols">Get Symbol Ticker</b><br />
-		  <p>Get the 24h price ticker of a spot symbol</p>
+		  <p>Get the 24h price ticker of a futures symbol</p>
 		  <pre><code>var bitgetClient = new BitgetRestClient();
 
 var result = await bitgetClient.FuturesApi.ExchangeData.GetTickerAsync("ETHUSDT_UMCBL");;</code></pre>
 
 		  <b id="idocs_example_symbols">Get Recent Trades</b><br />
-		  <p>Get the most recent trades for a spot symbol</p>
+		  <p>Get the most recent trades for a futures symbol</p>
 		  <pre><code>var bitgetClient = new BitgetRestClient();
 
 var result = await bitgetClient.FuturesApi.ExchangeData.GetRecentTradesAsync("ETHUSDT_UMCBL");</code></pre>
