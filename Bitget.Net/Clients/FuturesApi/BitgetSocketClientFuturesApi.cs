@@ -41,8 +41,8 @@ namespace Bitget.Net.Clients.SpotApi
                 return "pong";
 
             var evnt = message.GetValue<string>(_eventPath);
-            if (evnt == "login")
-                return evnt;
+            if (string.Equals(evnt, "login", StringComparison.Ordinal))
+                return evnt!;
 
             var channel = message.GetValue<string>(_channelPath);
             var instId = message.GetValue<string>(_instIdPath);

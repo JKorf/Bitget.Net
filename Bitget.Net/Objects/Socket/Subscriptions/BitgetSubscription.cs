@@ -26,7 +26,7 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
         {
             var data = (BitgetSocketUpdate<T>)message.Data;
-            _handler.Invoke(message.As(data.Data, data.Args.InstrumentId, data.Action == "snapshot" ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
+            _handler.Invoke(message.As(data.Data, data.Args.InstrumentId, string.Equals(data.Action, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
             return new CallResult(null);
         }
 
