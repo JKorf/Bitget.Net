@@ -124,7 +124,7 @@ namespace Bitget.Net.Clients.SpotApi
                 { "coin", asset },
                 { "address", address },
                 { "chain", network },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "amount", quantity.ToString(CultureInfo.InvariantCulture) },
             };
 
             parameters.AddOptionalParameter("tag", tag);
