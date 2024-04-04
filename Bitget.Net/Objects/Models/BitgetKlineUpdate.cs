@@ -14,6 +14,7 @@ namespace Bitget.Net.Objects.Models
         /// </summary>
         [JsonProperty("ts")]
         [ArrayProperty(0)]
+        [JsonConverter(typeof(DateTimeConverter))]
         public DateTime Timestamp { get; set; }
         /// <summary>
         /// Open price
