@@ -117,14 +117,14 @@ namespace Bitget.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetWithdrawResult>> WithdrawAsync(string asset, string address, string network, decimal quantity, string? tag = null, string? remark = null, string? clientOrderId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetWithdrawResult>> WithdrawAsync(string asset, string address, string network, decimal amount, string? tag = null, string? remark = null, string? clientOrderId = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
                 { "coin", asset },
                 { "address", address },
                 { "chain", network },
-                { "quantity", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "amount", amount.ToString(CultureInfo.InvariantCulture) },
             };
 
             parameters.AddOptionalParameter("tag", tag);
