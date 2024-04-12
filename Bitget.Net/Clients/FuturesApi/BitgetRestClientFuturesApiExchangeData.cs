@@ -21,7 +21,7 @@ namespace Bitget.Net.Clients.SpotApi
         /// <inheritdoc />
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var result = await _baseClient.ExecuteAsync<long>(_baseClient.GetUri("/api/spot/v1/public/time"), HttpMethod.Get, ct, ignoreRatelimit: true).ConfigureAwait(false);
+            var result = await _baseClient.ExecuteAsync<long>(_baseClient.GetUri("/api/spot/v1/public/time"), HttpMethod.Get, ct).ConfigureAwait(false);
             return result.As(result ? DateTimeConverter.ConvertFromMilliseconds(result.Data) : default);
         }
 
