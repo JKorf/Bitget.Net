@@ -115,7 +115,26 @@ namespace Bitget.Net.Clients.SpotApi
             };
             return await _baseClient.ExecuteAsync<BitgetDepositAddress>("/api/spot/v1/wallet/deposit-address", HttpMethod.Get, ct, parameters, true).ConfigureAwait(false);
         }
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetWithdrawResult>> WithdrawAsync(string asset, BitgetWithdrawalType withdrawalType, string address, decimal quantity, string? network = null, string? toUserId = null, string? tag = null, string? remark = null, string? areaCode = null, string? clientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>()
+            {
+                { "coin", asset },
+                { "transferType", EnumConverter.GetString(withdrawalType).ToLowerInvariant() },
+                { "address", address },
+                { "size", quantity.ToString(CultureInfo.InvariantCulture) },
+            };
 
+            parameters.AddOptionalParameter("chain", network);
+            parameters.AddOptionalParameter("innerToType", toUserId);
+            parameters.AddOptionalParameter("tag", tag);
+            parameters.AddOptionalParameter("areaCode", areaCode);
+            parameters.AddOptionalParameter("remark", remark);
+            parameters.AddOptionalParameter("clientOid", clientOrderId);
+
+            return await _baseClient.ExecuteAsync<BitgetWithdrawResult>("/api/v2/spot/wallet/withdrawal", HttpMethod.Post, ct, parameters, true).ConfigureAwait(false);
+        }
         /// <inheritdoc />
         public async Task<WebCallResult<BitgetWithdrawResult>> WithdrawAsync(string asset, string address, string network, decimal quantity, string? tag = null, string? remark = null, string? clientOrderId = null, CancellationToken ct = default)
         {

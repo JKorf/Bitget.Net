@@ -465,6 +465,9 @@
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiAccount.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiAccount.WithdrawAsync(System.String,Bitget.Net.Enums.BitgetWithdrawalType,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApiAccount.WithdrawAsync(System.String,System.String,System.String,System.Decimal,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1689,6 +1692,21 @@
             Mark price
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.BitgetWithdrawalType">
+            <summary>
+            Withdrawal type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetWithdrawalType.External">
+            <summary>
+            External transfer
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetWithdrawalType.Internal">
+            <summary>
+            Internal transfer
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BizType">
             <summary>
             Biz type
@@ -1901,6 +1919,24 @@
             </summary>
             <param name="asset">Asset</param>
             <param name="network">Network</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApiAccount.WithdrawAsync(System.String,Bitget.Net.Enums.BitgetWithdrawalType,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Withdraw funds externally or internally
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
+            </summary>
+            <param name="asset">Asset</param>
+            <param name="withdrawalType">Withdrawal type</param>
+            <param name="address">Target address</param>
+            <param name="quantity">Quantity</param>
+            <param name="network">Network</param>
+            <param name="toUserId">'email/mobile/uid', default 'uid'</param>
+            <param name="tag">Tag</param>
+            <param name="remark">Remard</param>
+            <param name="areaCode">	Tel area code, This field is mandatory when the toType equals to 'mobile'</param>
+            <param name="clientOrderId">Client order id</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>

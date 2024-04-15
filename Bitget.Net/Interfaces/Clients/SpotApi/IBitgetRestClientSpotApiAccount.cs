@@ -104,6 +104,24 @@ namespace Bitget.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<BitgetDepositAddress>> GetDepositAddressAsync(string asset, string network, CancellationToken ct = default);
 
         /// <summary>
+        /// Withdraw funds externally or internally
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
+        /// </summary>
+        /// <param name="asset">Asset</param>
+        /// <param name="withdrawalType">Withdrawal type</param>
+        /// <param name="address">Target address</param>
+        /// <param name="quantity">Quantity</param>
+        /// <param name="network">Network</param>
+        /// <param name="toUserId">'email/mobile/uid', default 'uid'</param>
+        /// <param name="tag">Tag</param>
+        /// <param name="remark">Remard</param>
+        /// <param name="areaCode">	Tel area code, This field is mandatory when the toType equals to 'mobile'</param>
+        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetWithdrawResult>> WithdrawAsync(string asset, BitgetWithdrawalType withdrawalType, string address, decimal quantity, string? network = null, string? toUserId = null, string? tag = null, string? remark = null, string? areaCode = null, string? clientOrderId = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Withdraw funds
         /// <para><a href="https://bitgetlimited.github.io/apidoc/en/spot/#withdraw-v2" /></para>
         /// </summary>
