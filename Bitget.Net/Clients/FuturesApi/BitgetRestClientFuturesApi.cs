@@ -50,9 +50,9 @@ namespace Bitget.Net.Clients.FuturesApi
             return new Uri(BaseAddress.AppendPath(path));
         }
 
-        internal async Task<WebCallResult> ExecuteAsync(Uri uri, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, int weight = 1, bool ignoreRatelimit = false, HttpMethodParameterPosition? parameterPosition = null)
+        internal async Task<WebCallResult> ExecuteAsync(Uri uri, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? parameterPosition = null)
         {
-            var result = await SendRequestAsync<BitgetResponse>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: weight, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<BitgetResponse>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: 0).ConfigureAwait(false);
             if (!result)
                 return result.AsDatalessError(result.Error!);
 
@@ -62,9 +62,9 @@ namespace Bitget.Net.Clients.FuturesApi
             return result.AsDataless();
         }
 
-        internal async Task<WebCallResult<T>> ExecuteAsync<T>(Uri uri, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, int weight = 1, bool ignoreRatelimit = false, HttpMethodParameterPosition? parameterPosition = null)
+        internal async Task<WebCallResult<T>> ExecuteAsync<T>(Uri uri, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? parameterPosition = null)
         {
-            var result = await SendRequestAsync<BitgetResponse<T>>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: weight, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<BitgetResponse<T>>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: 0).ConfigureAwait(false);
             if (!result)
                 return result.AsError<T>(result.Error!);
 
@@ -74,9 +74,9 @@ namespace Bitget.Net.Clients.FuturesApi
             return result.As(result.Data.Data!);
         }
 
-        internal async Task<WebCallResult<T>> ExecuteRawAsync<T>(Uri uri, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, int weight = 1, bool ignoreRatelimit = false, HttpMethodParameterPosition? parameterPosition = null) where T : class
+        internal async Task<WebCallResult<T>> ExecuteRawAsync<T>(Uri uri, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? parameterPosition = null) where T : class
         {
-            var result = await SendRequestAsync<T>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: weight, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
+            var result = await SendRequestAsync<T>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight:0).ConfigureAwait(false);
             if (!result)
                 return result.AsError<T>(result.Error!);
 
