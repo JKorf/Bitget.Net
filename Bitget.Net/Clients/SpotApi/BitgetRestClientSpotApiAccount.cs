@@ -159,8 +159,8 @@ namespace Bitget.Net.Clients.SpotApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("coin", asset);
             parameters.AddOptionalParameter("clientOid", clientOrderId);
-            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMicroseconds(startTime));
-            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMicroseconds(endTime));
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("pageNo", page);
             parameters.AddOptionalParameter("pageSize", pageSize);
 
@@ -174,8 +174,8 @@ namespace Bitget.Net.Clients.SpotApi
 
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("coin", asset);
-            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMicroseconds(startTime));
-            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMicroseconds(endTime));
+            parameters.AddOptionalParameter("startTime", DateTimeConverter.ConvertToMilliseconds(startTime));
+            parameters.AddOptionalParameter("endTime", DateTimeConverter.ConvertToMilliseconds(endTime));
             parameters.AddOptionalParameter("pageNo", page);
             parameters.AddOptionalParameter("pageSize", pageSize);
 
