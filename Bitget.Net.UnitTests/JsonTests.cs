@@ -14,7 +14,7 @@ namespace Bitget.Net.UnitTests
         private JsonToObjectComparer<IBitgetRestClient> _comparer = new JsonToObjectComparer<IBitgetRestClient>((json) => TestHelpers.CreateResponseClient(json, options =>
         {
             options.ApiCredentials = new BitgetApiCredentials("123", "123", "123");
-            options.RatelimiterEnabled = false;
+            options.RateLimiterEnabled = false;
             options.SpotOptions.AutoTimestamp = false;
         }));
 
