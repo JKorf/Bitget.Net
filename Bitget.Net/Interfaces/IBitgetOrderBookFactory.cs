@@ -9,6 +9,16 @@ namespace Bitget.Net.Interfaces
     public interface IBitgetOrderBookFactory
     {
         /// <summary>
+        /// Spot order book factory methods
+        /// </summary>
+        public IOrderBookFactory<BitgetOrderBookOptions> Spot { get; }
+
+        /// <summary>
+        /// Futures order book factory methods
+        /// </summary>
+        public IOrderBookFactory<BitgetOrderBookOptions> Futures { get; }
+
+        /// <summary>
         /// Create a SymbolOrderBook for a spot symbol
         /// </summary>
         /// <param name="symbol">The symbol</param>

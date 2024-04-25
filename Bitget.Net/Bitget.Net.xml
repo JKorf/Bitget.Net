@@ -3265,6 +3265,16 @@
             Bitget order book factory
             </summary>
         </member>
+        <member name="P:Bitget.Net.Interfaces.IBitgetOrderBookFactory.Spot">
+            <summary>
+            Spot order book factory methods
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.IBitgetOrderBookFactory.Futures">
+            <summary>
+            Futures order book factory methods
+            </summary>
+        </member>
         <member name="M:Bitget.Net.Interfaces.IBitgetOrderBookFactory.CreateSpot(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
             <summary>
             Create a SymbolOrderBook for a spot symbol
@@ -6677,6 +6687,12 @@
             <summary>
             Bitget order book factory
             </summary>
+        </member>
+        <member name="P:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.Spot">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.Futures">
+            <inheritdoc />
         </member>
         <member name="M:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.#ctor(System.IServiceProvider)">
             <summary>
