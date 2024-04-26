@@ -33,6 +33,26 @@
             <param name="socketRestAddress"></param>
             <returns></returns>
         </member>
+        <member name="T:Bitget.Net.BitgetExchange">
+            <summary>
+            Bitget exchange information and configuration
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetExchange.ExchangeName">
+            <summary>
+            Exchange name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetExchange.Url">
+            <summary>
+            Url to the main website
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetExchange.ApiDocsUrl">
+            <summary>
+            Urls to the API documentation
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Clients.BitgetRestClient">
             <inheritdoc />
         </member>
