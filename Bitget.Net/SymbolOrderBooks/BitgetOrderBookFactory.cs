@@ -2,6 +2,7 @@
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.OrderBook;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -14,6 +15,12 @@ namespace Bitget.Net.SymbolOrderBooks
     {
         private readonly IServiceProvider _serviceProvider;
 
+        /// <inheritdoc />
+        public IOrderBookFactory<BitgetOrderBookOptions> Spot { get; }
+
+        /// <inheritdoc />
+        public IOrderBookFactory<BitgetOrderBookOptions> Futures { get; }
+
         /// <summary>
         /// ctor
         /// </summary>
@@ -21,6 +28,9 @@ namespace Bitget.Net.SymbolOrderBooks
         public BitgetOrderBookFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+
+            Spot = new OrderBookFactory<BitgetOrderBookOptions>((symbol, options) => CreateSpot(symbol, options), (baseAsset, quoteAsset, options) => CreateSpot(baseAsset + quoteAsset, options));
+            Futures = new OrderBookFactory<BitgetOrderBookOptions>((symbol, options) => CreateFutures(symbol, options), (baseAsset, quoteAsset, options) => CreateFutures(baseAsset + quoteAsset, options));
         }
 
         /// <inheritdoc />

@@ -33,6 +33,26 @@
             <param name="socketRestAddress"></param>
             <returns></returns>
         </member>
+        <member name="T:Bitget.Net.BitgetExchange">
+            <summary>
+            Bitget exchange information and configuration
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetExchange.ExchangeName">
+            <summary>
+            Exchange name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetExchange.Url">
+            <summary>
+            Url to the main website
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetExchange.ApiDocsUrl">
+            <summary>
+            Urls to the API documentation
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Clients.BitgetRestClient">
             <inheritdoc />
         </member>
@@ -115,6 +135,9 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.FormatSymbol(System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -306,6 +329,9 @@
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
@@ -382,6 +408,9 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.FormatSymbol(System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -562,6 +591,9 @@
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.FormatSymbol(System.String,System.String)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -3251,6 +3283,16 @@
         <member name="T:Bitget.Net.Interfaces.IBitgetOrderBookFactory">
             <summary>
             Bitget order book factory
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.IBitgetOrderBookFactory.Spot">
+            <summary>
+            Spot order book factory methods
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.IBitgetOrderBookFactory.Futures">
+            <summary>
+            Futures order book factory methods
             </summary>
         </member>
         <member name="M:Bitget.Net.Interfaces.IBitgetOrderBookFactory.CreateSpot(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
@@ -6665,6 +6707,12 @@
             <summary>
             Bitget order book factory
             </summary>
+        </member>
+        <member name="P:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.Spot">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.Futures">
+            <inheritdoc />
         </member>
         <member name="M:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.#ctor(System.IServiceProvider)">
             <summary>
