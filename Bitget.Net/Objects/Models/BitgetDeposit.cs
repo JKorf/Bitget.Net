@@ -46,7 +46,7 @@ namespace Bitget.Net.Objects.Models
         /// Fee
         /// </summary>
         [JsonProperty("fee")]
-        public decimal Fee { get; set; }
+        public decimal? Fee { get; set; }
         /// <summary>
         /// Network
         /// </summary>
@@ -56,7 +56,7 @@ namespace Bitget.Net.Objects.Models
         /// Confirmations
         /// </summary>
         [JsonProperty("confirm")]
-        public int Confirm { get; set; }
+        public int? Confirm { get; set; }
         /// <summary>
         /// Tag
         /// </summary>
