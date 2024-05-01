@@ -32,7 +32,7 @@ namespace Bitget.Net
             if (!auth)
                 return;
 
-            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonConvert.SerializeObject(bodyParameters) : "";
+            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonConvert.SerializeObject(bodyParams) : "";
 
             var timestamp = GetMillisecondTimestamp(apiClient);
             var signString = timestamp + method.ToString().ToUpperInvariant() + uri.PathAndQuery + body;
