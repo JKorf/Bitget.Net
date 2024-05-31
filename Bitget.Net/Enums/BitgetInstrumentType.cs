@@ -21,6 +21,21 @@ namespace Bitget.Net.Enums
         /// USDC margin Perpetual Contract
         /// </summary>
         [Map("CMCBL")]
-        UsdcPerpetual
+        UsdcPerpetual,
+        /// <summary>
+        /// USDT simulation perpetual contract
+        /// </summary>
+        [Map("SUMCBL")]
+        UsdtPerpetualSimulated,
+        /// <summary>
+        /// Universal margin simulation perpetual contract
+        /// </summary>
+        [Map("SDMCBL")]
+        CoinPerpetualSimulated,
+        /// <summary>
+        /// USDC simulation perpetual contract
+        /// </summary>
+        [Map("CMCBL")]
+        UsdcPerpetualSimulated
     }
 }

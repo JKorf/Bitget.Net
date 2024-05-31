@@ -996,6 +996,21 @@
             USDC margin Perpetual Contract
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.BitgetInstrumentType.UsdtPerpetualSimulated">
+            <summary>
+            USDT simulation perpetual contract
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetInstrumentType.CoinPerpetualSimulated">
+            <summary>
+            Universal margin simulation perpetual contract
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetInstrumentType.UsdcPerpetualSimulated">
+            <summary>
+            USDC simulation perpetual contract
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetKlineInterval">
             <summary>
             Kline interval
