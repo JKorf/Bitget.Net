@@ -123,6 +123,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.3.8 - 02 Jun 2024
+    * Added simulated product types to BitgetInstrumentType enum
+
 * Version 1.3.7 - 07 May 2024
     * Fixed SpotApi.Account.GetDepositHistoryAsync deserialization
     * Updated CryptoExchange.Net to v7.5.2, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
