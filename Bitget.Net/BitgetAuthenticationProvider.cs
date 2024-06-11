@@ -21,18 +21,18 @@ namespace Bitget.Net
             RestApiClient apiClient,
             Uri uri,
             HttpMethod method,
-            IDictionary<string, object> uriParams,
-            IDictionary<string, object> bodyParams,
+            IDictionary<string, object> uriParameters,
+            IDictionary<string, object> bodyParameters,
             Dictionary<string, string> headers,
             bool auth,
             ArrayParametersSerialization arraySerialization,
             HttpMethodParameterPosition parameterPosition,
-            RequestBodyFormat bodyFormat)
+            RequestBodyFormat requestBodyFormat)
         {
             if (!auth)
                 return;
 
-            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonConvert.SerializeObject(bodyParams) : "";
+            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonConvert.SerializeObject(bodyParameters) : "";
 
             var timestamp = GetMillisecondTimestamp(apiClient);
             var signString = timestamp + method.ToString().ToUpperInvariant() + uri.PathAndQuery + body;
