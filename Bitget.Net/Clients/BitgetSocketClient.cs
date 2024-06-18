@@ -1,7 +1,5 @@
 ﻿using Bitget.Net.Clients.SpotApi;
 using Bitget.Net.Interfaces.Clients;
-using Bitget.Net.Interfaces.Clients.FuturesApi;
-using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
@@ -13,9 +11,11 @@ namespace Bitget.Net.Clients
     public class BitgetSocketClient : BaseSocketClient, IBitgetSocketClient
     {
         /// <inheritdoc />
-        public IBitgetSocketClientSpotApi SpotApi { get; set; }
+        public Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi SpotApi { get; set; }
         /// <inheritdoc />
-        public IBitgetSocketClientFuturesApi FuturesApi { get; set; }
+        public Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi SpotApiV2 { get; set; }
+        /// <inheritdoc />
+        public Interfaces.Clients.FuturesApi.IBitgetSocketClientFuturesApi FuturesApi { get; set; }
 
         #region ctor
 
