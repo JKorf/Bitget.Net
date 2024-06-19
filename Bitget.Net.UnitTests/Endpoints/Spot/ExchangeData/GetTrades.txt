@@ -1,0 +1,26 @@
+GET
+/api/v2/spot/market/fills-history
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695808949356,
+    "data": [
+        {
+            "symbol": "BTCUSDT",
+            "tradeId": "1",
+            "side": "buy",
+            "price": "2.38735",
+            "size": "2470.6224",
+            "ts": "1622097282536"
+        },
+        {
+            "symbol": "BFTUSDT",
+            "tradeId": "2",
+            "side": "sell",
+            "price": "2.38649",
+            "size": "3239.7976",
+            "ts": "1622097280642"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+GET
+/api/v2/spot/account/info
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695808949356,
+    "data": {
+        "userId": "**********",
+        "inviterId": "**********",
+        "ips": "127.0.0.1",
+        "authorities": [
+            "trade",
+            "readonly"
+        ],
+        "parentId": 1,
+        "traderType": "trader",
+        "channelCode": "XXX",
+        "channel": "YYY",
+        "regisTime":"1246566789345"
+    }
+}

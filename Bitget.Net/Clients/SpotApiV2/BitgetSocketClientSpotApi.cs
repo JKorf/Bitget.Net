@@ -197,7 +197,7 @@ namespace Bitget.Net.Clients.SpotSpotApiV2Api
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
 
         /// <inheritdoc />
-        protected override Query GetAuthenticationRequest()
+        protected override Query GetAuthenticationRequest(SocketConnection connection)
         {
             var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;

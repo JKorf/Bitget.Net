@@ -1,37 +1,38 @@
 ﻿using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.Json.Serialization;
 
-namespace Bitget.Net.Objects.Models
+namespace Bitget.Net.Objects.Models.V2
 {
     /// <summary>
-    /// Order book
+    /// Order book info
     /// </summary>
-    public class BitgetOrderBook
+    public record BitgetOrderBook
     {
         /// <summary>
-        /// Ask entries
+        /// Asks
         /// </summary>
-        [JsonProperty("asks")]
+        [JsonPropertyName("asks")]
         public IEnumerable<BitgetOrderBookEntry> Asks { get; set; } = Array.Empty<BitgetOrderBookEntry>();
-
         /// <summary>
-        /// Bid entries
+        /// Bids
         /// </summary>
-        [JsonProperty("bids")]
+        [JsonPropertyName("bids")]
         public IEnumerable<BitgetOrderBookEntry> Bids { get; set; } = Array.Empty<BitgetOrderBookEntry>();
-
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonProperty("timestamp")]
+        [JsonPropertyName("ts")]
         public DateTime Timestamp { get; set; }
     }
 
     /// <summary>
     /// Order book entry
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter))]
+    [JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.ArrayConverter))]
     public record BitgetOrderBookEntry : ISymbolOrderBookEntry
     {
         /// <summary>

@@ -1,0 +1,18 @@
+GET
+/api/v2/spot/account/assets
+true
+{
+    "code": "00000",
+    "message": "success",
+    "requestTime": 1695808949356,
+    "data": [
+        {
+            "coin": "usdt",
+            "available": "0",
+            "frozen": "0",
+            "locked": "0",
+            "limitAvailable": "0",
+            "uTime": "1622697148"
+        }
+    ]
+}

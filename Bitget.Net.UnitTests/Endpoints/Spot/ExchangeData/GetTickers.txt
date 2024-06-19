@@ -1,0 +1,28 @@
+GET
+/api/v2/spot/market/tickers
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695808949356,
+    "data": [
+        {
+            "symbol": "BTCUSDT",
+            "high24h": "37775.65",
+            "open": "35134.2",
+            "low24h": "34413.1",
+            "lastPr": "34413.1",
+            "quoteVolume": "0",
+            "baseVolume": "0",
+            "usdtVolume": "0",
+            "bidPr": "0",
+            "askPr": "0",
+            "bidSz": "0.0663",
+            "askSz": "0.0119",
+            "openUtc": "23856.72",
+            "ts": "1625125755277",
+            "changeUtc24h": "0.00301",
+            "change24h": "0.00069"
+        }
+    ]
+}

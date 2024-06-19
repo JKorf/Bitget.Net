@@ -1,0 +1,12 @@
+GET
+/api/v2/common/trade-rate
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1683875302853,
+    "data": {
+        "makerFeeRate": "0.0002",
+        "takerFeeRate": "0.0006"
+    }
+}

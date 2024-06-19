@@ -1,0 +1,12 @@
+POST
+/api/v2/spot/wallet/withdrawal
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695808949356,
+    "data": {
+        "orderId": "123",
+        "clientOid": "123"
+    }
+}

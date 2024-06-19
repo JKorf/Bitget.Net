@@ -1,0 +1,16 @@
+GET
+/api/v2/account/funding-assets
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1712129301188,
+  "data": [
+    {
+      "coin": "USDT",
+      "available": "326",
+      "frozen": "",
+      "usdtValue": "326"
+    }
+  ]
+}

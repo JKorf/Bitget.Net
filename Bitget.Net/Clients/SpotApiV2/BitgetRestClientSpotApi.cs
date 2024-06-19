@@ -94,6 +94,21 @@ namespace Bitget.Net.Clients.SpotApiV2
             return result.As<T>(result.Data.Data);
         }
 
+        internal Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, Dictionary<string, string>? requestHeaders = null)
+            => SendToAddressAsync(BaseAddress, definition, parameters, cancellationToken, weight, requestHeaders);
+
+        internal async Task<WebCallResult> SendToAddressAsync(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, Dictionary<string, string>? requestHeaders = null)
+        {
+            var result = await base.SendAsync<BitgetResponse>(baseAddress, definition, parameters, cancellationToken, requestHeaders, weight).ConfigureAwait(false);
+            if (!result.Success)
+                return result.AsDataless();
+
+            if (result.Data.Code != 0)
+                return result.AsDatalessError(new ServerError(result.Data.Code, result.Data.Message!));
+
+            return result.AsDataless();
+        }
+
         /// <inheritdoc />
         protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
         {

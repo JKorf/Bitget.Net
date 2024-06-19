@@ -1,0 +1,11 @@
+GET
+/api/v2/public/time
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1688008631614,
+    "data": {
+        "serverTime": "1688008631614"
+    }
+}

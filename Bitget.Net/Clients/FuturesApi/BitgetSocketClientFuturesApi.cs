@@ -211,7 +211,7 @@ namespace Bitget.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        protected override Query GetAuthenticationRequest()
+        protected override Query GetAuthenticationRequest(SocketConnection connection)
         {
             var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;

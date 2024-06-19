@@ -1,0 +1,26 @@
+GET
+/api/v2/spot/public/symbols
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695808949356,
+    "data": [
+        {
+            "symbol": "BTCUSDT",
+            "baseCoin": "BTC",
+            "quoteCoin": "USDT",
+            "minTradeAmount": "0.0001",
+            "maxTradeAmount": "10000",
+            "takerFeeRate": "0.001",
+            "makerFeeRate": "0.001",
+            "pricePrecision": "4",
+            "quantityPrecision": "8",
+            "quotePrecision":"4",
+            "minTradeUSDT": "5",
+            "status": "online",
+            "buyLimitPriceRatio": "0.05",
+            "sellLimitPriceRatio": "0.05"
+        }
+    ]
+}
