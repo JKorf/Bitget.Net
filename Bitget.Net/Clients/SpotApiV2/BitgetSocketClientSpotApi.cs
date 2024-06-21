@@ -1,7 +1,7 @@
 ﻿using Bitget.Net.Enums;
-using Bitget.Net.Interfaces.Clients.SpotApi;
+using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects;
-using Bitget.Net.Objects.Models;
+using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Options;
 using Bitget.Net.Objects.Socket;
 using Bitget.Net.Objects.Socket.Queries;
@@ -11,6 +11,7 @@ using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
@@ -18,7 +19,7 @@ using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Bitget.Net.Clients.SpotSpotApiV2Api
+namespace Bitget.Net.Clients.SpotApiV2
 {
     /// <inheritdoc />
     public class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
@@ -35,6 +36,11 @@ namespace Bitget.Net.Clients.SpotSpotApiV2Api
             RegisterPeriodicQuery("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
         }
         #endregion
+
+        /// <inheritdoc />
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        /// <inheritdoc />
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
@@ -71,72 +77,10 @@ namespace Bitget.Net.Clients.SpotSpotApiV2Api
                     handler(data.As(item));
             };
 
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
-                        { "instType", "SP" },
+                        { "instType", "SPOT" },
                         { "channel", "ticker" },
-                        { "instId", s },
-                    }).ToArray()
-            , false, internalHandler, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, BitgetStreamKlineInterval interval, Action<DataEvent<IEnumerable<BitgetKlineUpdate>>> handler, CancellationToken ct = default)
-            => SubscribeToKlineUpdatesAsync(new[] { symbol }, interval, handler, ct);
-
-        /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, BitgetStreamKlineInterval interval, Action<DataEvent<IEnumerable<BitgetKlineUpdate>>> handler, CancellationToken ct = default)
-        {
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
-                    {
-                        { "instType", "SP" },
-                        { "channel", "candle" + EnumConverter.GetString(interval) },
-                        { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<BitgetOrderBookUpdate>> handler, CancellationToken ct = default)
-            => SubscribeToOrderBookUpdatesAsync(new[] { symbol }, handler, ct);
-
-        /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetOrderBookUpdate>> handler, CancellationToken ct = default)
-        {
-            var internalHandler = (DataEvent<IEnumerable<BitgetOrderBookUpdate>> data) =>
-            {
-                foreach (var item in data.Data)
-                    handler(data.As(item));
-            };
-
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
-                    {
-                        { "instType", "SP" },
-                        { "channel", "books" },
-                        { "instId", s },
-                    }).ToArray()
-            , false, internalHandler, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, int limit, Action<DataEvent<BitgetOrderBookUpdate>> handler, CancellationToken ct = default)
-            => SubscribeToOrderBookUpdatesAsync(new[] { symbol }, limit, handler, ct);
-
-        /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int limit, Action<DataEvent<BitgetOrderBookUpdate>> handler, CancellationToken ct = default)
-        {
-            limit.ValidateIntValues(nameof(limit), 5, 15);
-
-            var internalHandler = (DataEvent<IEnumerable<BitgetOrderBookUpdate>> data) =>
-            {
-                foreach (var item in data.Data)
-                    handler(data.As(item));
-            };
-
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
-                    {
-                        { "instType", "SP" },
-                        { "channel", "books" + limit },
                         { "instId", s },
                     }).ToArray()
             , false, internalHandler, ct).ConfigureAwait(false);
@@ -149,9 +93,9 @@ namespace Bitget.Net.Clients.SpotSpotApiV2Api
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetTradeUpdate>>> handler, CancellationToken ct = default)
         {
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), symbols.Select(s => new Dictionary<string, string>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
-                        { "instType", "SP" },
+                        { "instType", "SPOT" },
                         { "channel", "trade" },
                         { "instId", s },
                     }).ToArray()
@@ -159,27 +103,91 @@ namespace Bitget.Net.Clients.SpotSpotApiV2Api
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetBalanceUpdate>>> handler, CancellationToken ct = default)
+        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, BitgetStreamKlineInterval interval, Action<DataEvent<IEnumerable<BitgetKlineUpdate>>> handler, CancellationToken ct = default)
+            => SubscribeToKlineUpdatesAsync(new[] { symbol }, interval, handler, ct);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, BitgetStreamKlineInterval interval, Action<DataEvent<IEnumerable<BitgetKlineUpdate>>> handler, CancellationToken ct = default)
         {
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), new [] { new Dictionary<string, string>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
-                        { "instType", "spbl" },
-                        { "channel", "account" },
-                        { "instId", "default" },
-                    }
-            }, true, handler, ct).ConfigureAwait(false);
+                        { "instType", "SPOT" },
+                        { "channel", "candle" + CryptoExchange.Net.Converters.SystemTextJson.EnumConverter.GetString(interval) },
+                        { "instId", s },
+                    }).ToArray()
+            , false, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, int? limit, Action<DataEvent<BitgetOrderBookUpdate>> handler, CancellationToken ct = default)
+            => SubscribeToOrderBookUpdatesAsync(new[] { symbol }, limit, handler, ct);
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int? limit, Action<DataEvent<BitgetOrderBookUpdate>> handler, CancellationToken ct = default)
+        {
+            limit?.ValidateIntValues(nameof(limit), 1, 5, 15);
+
+            var internalHandler = (DataEvent<IEnumerable<BitgetOrderBookUpdate>> data) =>
+            {
+                foreach (var item in data.Data)
+                    handler(data.As(item));
+            };
+
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
+                    {
+                        { "instType", "SPOT" },
+                        { "channel", "books" + limit?.ToString() },
+                        { "instId", s },
+                    }).ToArray()
+            , false, internalHandler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BitgetOrderUpdate>>> handler, CancellationToken ct = default)
         {
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("spot/v1/stream"), new [] { new Dictionary<string, string>
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
                     {
-                        { "instType", "spbl" },
+                        { "instType", "SPOT" },
                         { "channel", "orders" },
                         { "instId", "default" },
-                    }
-            }, true, handler, ct).ConfigureAwait(false);
+                    } }
+            , true, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BitgetUserTradeUpdate>>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
+                    {
+                        { "instType", "SPOT" },
+                        { "channel", "fill" },
+                        { "instId", "default" },
+                    } }
+            , true, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTriggerOrderUpdatesAsync(Action<DataEvent<IEnumerable<BitgetTriggerOrderUpdate>>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
+                    {
+                        { "instType", "SPOT" },
+                        { "channel", "orders-algo" },
+                        { "instId", "default" },
+                    } }
+            , true, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetBalanceUpdate>>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
+                    {
+                        { "instType", "SPOT" },
+                        { "channel", "account" },
+                        { "coin", "default" },
+                    } }
+            , true, handler, ct).ConfigureAwait(false);
         }
 
         private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(
@@ -199,7 +207,7 @@ namespace Bitget.Net.Clients.SpotSpotApiV2Api
         /// <inheritdoc />
         protected override Query GetAuthenticationRequest(SocketConnection connection)
         {
-            var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
+            var time = CryptoExchange.Net.Converters.SystemTextJson.DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;
             var signature = authProvider.GetWebsocketSignature(time);
 

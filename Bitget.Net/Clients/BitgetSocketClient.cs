@@ -1,5 +1,4 @@
-﻿using Bitget.Net.Clients.SpotApi;
-using Bitget.Net.Interfaces.Clients;
+﻿using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
@@ -16,6 +15,8 @@ namespace Bitget.Net.Clients
         public Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi SpotApiV2 { get; set; }
         /// <inheritdoc />
         public Interfaces.Clients.FuturesApi.IBitgetSocketClientFuturesApi FuturesApi { get; set; }
+        /// <inheritdoc />
+        public Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi FuturesApiV2 { get; set; }
 
         #region ctor
 
@@ -46,8 +47,10 @@ namespace Bitget.Net.Clients
             optionsDelegate(options);
             Initialize(options);
 
-            SpotApi = AddApiClient(new BitgetSocketClientSpotApi(_logger, options));
-            FuturesApi = AddApiClient(new BitgetSocketClientFuturesApi(_logger, options));
+            SpotApi = AddApiClient(new SpotApi.BitgetSocketClientSpotApi(_logger, options));
+            SpotApiV2 = AddApiClient(new SpotApiV2.BitgetSocketClientSpotApi(_logger, options));
+            FuturesApi = AddApiClient(new FuturesApi.BitgetSocketClientFuturesApi(_logger, options));
+            FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetSocketClientFuturesApi(_logger, options));
         }
 
         #endregion
@@ -67,7 +70,9 @@ namespace Bitget.Net.Clients
         public void SetApiCredentials(BitgetApiCredentials credentials)
         {
             SpotApi.SetApiCredentials(credentials);
+            SpotApiV2.SetApiCredentials(credentials);
             FuturesApi.SetApiCredentials(credentials);
+            FuturesApiV2.SetApiCredentials(credentials);
         }
     }
 }

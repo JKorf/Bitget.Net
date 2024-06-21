@@ -1,0 +1,9 @@
+POST
+/api/v2/spot/wallet/cancel-withdrawal
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1683875302853,
+    "data": "success"
+}

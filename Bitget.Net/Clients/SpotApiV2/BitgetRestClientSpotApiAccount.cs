@@ -128,5 +128,85 @@ namespace Bitget.Net.Clients.SpotApiV2
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/withdrawal", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
             return await _baseClient.SendAsync<BitgetWithdrawResult>(request, parameters, ct).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetTransferRecord>>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType fromAccount, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("coin", asset);
+            parameters.AddEnum("fromType", fromAccount);
+            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.AddOptionalMilliseconds("startTime", startTime);
+            parameters.AddOptionalMilliseconds("endTime", endTime);
+            parameters.AddOptional("idLessThan", idLessThan);
+            parameters.AddOptional("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/transferRecords", BitgetExchange.RateLimiter.Overal, 1, true, 20, TimeSpan.FromSeconds(1));
+            return await _baseClient.SendAsync<IEnumerable<BitgetTransferRecord>>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> SetBgbDeductEnabledAsync(bool enable, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("deduct", enable ? "on" : "off");
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/account/switch-deduct", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetBgbDeduct>> GetBgbDeductEnabledAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/deduct-info", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            return await _baseClient.SendAsync<BitgetBgbDeduct>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("coin", asset);
+            parameters.AddOptional("chain", network);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/deposit-address", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            return await _baseClient.SendAsync<BitgetDepositAddress>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> CancelWithdrawalAsync(string withdrawalOrderId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("orderId", withdrawalOrderId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/cancel-withdrawal", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetWithdrawalRecord>>> GetWithdrawalHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, string? clientOrderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("coin", asset);
+            parameters.AddOptionalEnum("orderId", orderId);
+            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.AddMilliseconds("startTime", startTime);
+            parameters.AddMilliseconds("endTime", endTime);
+            parameters.AddOptional("idLessThan", idLessThan);
+            parameters.AddOptional("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/withdrawal-records", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            return await _baseClient.SendAsync<IEnumerable<BitgetWithdrawalRecord>>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetDepositRecord>>> GetDepositHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("coin", asset);
+            parameters.AddOptionalEnum("orderId", orderId);
+            parameters.AddMilliseconds("startTime", startTime);
+            parameters.AddMilliseconds("endTime", endTime);
+            parameters.AddOptional("idLessThan", idLessThan);
+            parameters.AddOptional("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/deposit-records", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            return await _baseClient.SendAsync<IEnumerable<BitgetDepositRecord>>(request, parameters, ct).ConfigureAwait(false);
+        }
     }
 }

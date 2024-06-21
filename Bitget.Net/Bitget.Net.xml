@@ -80,6 +80,9 @@
         <member name="P:Bitget.Net.Clients.BitgetRestClient.FuturesApi">
             <inheritdoc />
         </member>
+        <member name="P:Bitget.Net.Clients.BitgetRestClient.FuturesApiV2">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
             <summary> 
             Create a new instance of BitgetRestClient
@@ -115,6 +118,9 @@
         <member name="P:Bitget.Net.Clients.BitgetSocketClient.FuturesApi">
             <inheritdoc />
         </member>
+        <member name="P:Bitget.Net.Clients.BitgetSocketClient.FuturesApiV2">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             Create a new instance of the BitgetSocketClient
@@ -141,6 +147,153 @@
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.Account">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.ExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.Trading">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.ExchangeName">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.CreateAccessor">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.CreateSerializer">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.GetServerTimestampAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.GetTimeSyncInfo">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.GetBalancesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.GetBalancesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.SetLeverageAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.AdjustMarginAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.SetMarginModeAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{Bitget.Net.Enums.V2.MarginMode},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.SetPositionModeAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.PositionMode,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.GetLedgerAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetContractsAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetVipFeeRatesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetOrderBookAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetTickerAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetTickersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetRecentTradesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetTradesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetKlinesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.Nullable{Bitget.Net.Enums.V2.KlineType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetHistoricalKlinesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetHistoricalIndexPriceKlinesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetHistoricalMarkPriceKlinesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetOpenInterestAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetNextFundingTimeAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetPricesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetHistoricalFundingRateAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetFundingRateAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.CreateAccessor">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.CreateSerializer">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.GetAuthenticationRequest(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi">
@@ -213,6 +366,63 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApiAccount.GetBusinessBillsAsync(Bitget.Net.Enums.BitgetProductType,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetFuturesTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetFuturesTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToBalanceUpdatesAsync(Bitget.Net.Enums.BitgetInstrumentType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetFuturesBalanceUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToPositionUpdatesAsync(Bitget.Net.Enums.BitgetInstrumentType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetPositionUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToOrderUpdatesAsync(Bitget.Net.Enums.BitgetInstrumentType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetFuturesOrderUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.SubscribeToPlanOrderUpdatesAsync(Bitget.Net.Enums.BitgetInstrumentType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetFuturesPlanOrderUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.GetAuthenticationRequest(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiExchangeData">
@@ -345,63 +555,6 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientFuturesApiTrading.GetPlanOrdersAsync(System.String,System.Nullable{Bitget.Net.Enums.BitgetProductType},System.Nullable{Bitget.Net.Enums.BitgetPlanFilter},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="T:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.FormatSymbol(System.String,System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetFuturesTickerUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetFuturesTickerUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToBalanceUpdatesAsync(Bitget.Net.Enums.BitgetInstrumentType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetFuturesBalanceUpdate}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToPositionUpdatesAsync(Bitget.Net.Enums.BitgetInstrumentType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetPositionUpdate}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToOrderUpdatesAsync(Bitget.Net.Enums.BitgetInstrumentType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetFuturesOrderUpdate}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.SubscribeToPlanOrderUpdatesAsync(Bitget.Net.Enums.BitgetInstrumentType,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetFuturesPlanOrderUpdate}}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.GetAuthenticationRequest(CryptoExchange.Net.Sockets.SocketConnection)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi">
@@ -740,6 +893,27 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.WithdrawAsync(System.String,Bitget.Net.Enums.V2.TransferType,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetTransferHistoryAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.SetBgbDeductEnabledAsync(System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetBgbDeductEnabledAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.CancelWithdrawalAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetWithdrawalHistoryAsync(System.DateTime,System.DateTime,System.String,System.String,System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetDepositHistoryAsync(System.DateTime,System.DateTime,System.String,System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData">
             <inheritdoc />
         </member>
@@ -776,55 +950,109 @@
         <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading">
             <inheritdoc />
         </member>
-        <member name="T:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.PlaceOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,Bitget.Net.Enums.V2.TimeInForce,System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.FormatSymbol(System.String,System.String)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.PlaceMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.CancelOrderAsync(System.String,System.String,System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.CancelOrdersBySymbolAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.GetOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.GetOpenOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.GetClosedOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.PlaceTriggerOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.QuantityType},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TimeInForce},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.EditTriggerOrderAsync(System.Decimal,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.CancelTriggerOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.CancelAllTriggerOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetBalanceUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.GetOpenTriggerOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.BitgetOrderUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.GetTriggerSubOrdersAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.GetClosedTriggerOrdersAsync(System.String,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotSpotApiV2Api.BitgetSocketClientSpotApi.GetAuthenticationRequest(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.CreateAccessor">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.CreateSerializer">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetOrderUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToUserTradeUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTriggerOrderUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.GetAuthenticationRequest(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Enums.BitgetAccountType">
@@ -910,6 +1138,11 @@
         <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.OneMinute">
             <summary>
             1 minute
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.ThreeMinutes">
+            <summary>
+            3 minutes
             </summary>
         </member>
         <member name="F:Bitget.Net.Enums.BitgetFuturesKlineInterval.FiveMinutes">
@@ -2122,6 +2355,56 @@
             Inner address withdraw in
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.V2.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.ContractType.Perpetual">
+            <summary>
+            Perpetual futures
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.ContractType.Delivery">
+            <summary>
+            Delivery futures
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.DeliveryPeriod">
+            <summary>
+            Delivery period
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.DeliveryPeriod.ThisQuarter">
+            <summary>
+            This quarter
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.DeliveryPeriod.NextQuarter">
+            <summary>
+            Next quarter
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.DeliveryStatus">
+            <summary>
+            Delivery status
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.DeliveryStatus.Normal">
+            <summary>
+            Trading normally
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.DeliveryStatus.DeliveryBefore">
+            <summary>
+            10 minutes before delivery, opening positions are prohibited
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.DeliveryStatus.DeliveryPeriod">
+            <summary>
+            Delivery, opening, closing, and canceling orders are prohibited
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.GroupType">
             <summary>
             Group type
@@ -2150,6 +2433,261 @@
         <member name="F:Bitget.Net.Enums.V2.GroupType.Other">
             <summary>
             Other
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.KlineType">
+            <summary>
+            Kline type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.KlineType.Market">
+            <summary>
+            Market price
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.KlineType.Mark">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.KlineType.Index">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginMode.CrossMargin">
+            <summary>
+            Cross margin
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginMode.IsolatedMargin">
+            <summary>
+            Isolated margin
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.OrderSide">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderSide.Buy">
+            <summary>
+            Buy order
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderSide.Sell">
+            <summary>
+            Sell order
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.OrderStatus">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderStatus.Initial">
+            <summary>
+            Initial
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderStatus.Live">
+            <summary>
+            Pending match
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderStatus.New">
+            <summary>
+            Unfilled, waiting for match
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderStatus.PartiallyFilled">
+            <summary>
+            Partially filled
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderStatus.Filled">
+            <summary>
+            Filled
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderStatus.Canceled">
+            <summary>
+            Canceled
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderType.Limit">
+            <summary>
+            Limit order
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.OrderType.Market">
+            <summary>
+            Market order
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.PositionMode">
+            <summary>
+            Position mode
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.PositionMode.OneWay">
+            <summary>
+            One way mode
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.PositionMode.Hedge">
+            <summary>
+            Hedge mode
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.PositionSide.Long">
+            <summary>
+            Long position
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.PositionSide.Short">
+            <summary>
+            Short position
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.QuantityType">
+            <summary>
+            Trigger plan type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.QuantityType.BaseAsset">
+            <summary>
+            Base asset quantity
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.QuantityType.QuoteAsset">
+            <summary>
+            Quote asset quantity
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.Role">
+            <summary>
+            Role
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.Role.Taker">
+            <summary>
+            Taker
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.Role.Maker">
+            <summary>
+            Maker
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.SubTriggerOrderStatus">
+            <summary>
+            Tirgger sub order status
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.SubTriggerOrderStatus.Success">
+            <summary>
+            Trigger success
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.SubTriggerOrderStatus.Fail">
+            <summary>
+            Trigger failed
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.SubTriggerOrderStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.SubTriggerOrderStatus.InProgress">
+            <summary>
+            Placing order
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.SubTriggerOrderStatus.InProgressTracking">
+            <summary>
+            Tracking in progress
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.SymbolStatus">
+            <summary>
+            Symbol status
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.SymbolStatus.Normal">
+            <summary>
+            Normal
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.SymbolStatus.Maintainance">
+            <summary>
+            In maintenance
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.SymbolStatus.Limited">
+            <summary>
+            Order placement restricted
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.SymbolStatus.RestrictedApi">
+            <summary>
+            API order placement restricted
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.TakeProfitStopLossType">
+            <summary>
+            Tpsl type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TakeProfitStopLossType.Normal">
+            <summary>
+            Normal order
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TakeProfitStopLossType.Tpsl">
+            <summary>
+            Take profit/Stop loss order
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.TimeInForce">
+            <summary>
+            Time in force
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TimeInForce.GoodTillCanceled">
+            <summary>
+            Good till canceled
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TimeInForce.PostOnly">
+            <summary>
+            Post only
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TimeInForce.FillOrKill">
+            <summary>
+            Fill or kill
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TimeInForce.ImmediateOrCancel">
+            <summary>
+            Immediate or cancel
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.V2.TransferAccountType">
@@ -2192,6 +2730,26 @@
             Isolated margin account
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.V2.TransferStatus">
+            <summary>
+            Transfer status 
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TransferStatus.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TransferStatus.Failed">
+            <summary>
+            Failed
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TransferStatus.Processing">
+            <summary>
+            Processing
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.TransferType">
             <summary>
             Type of transfer
@@ -2205,6 +2763,365 @@
         <member name="F:Bitget.Net.Enums.V2.TransferType.InternalTransfer">
             <summary>
             Withdraw to another Bitget user
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.TriggerOrderStatus">
+            <summary>
+            Trigger order status
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderStatus.Live">
+            <summary>
+            Not triggered yet
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderStatus.Executing">
+            <summary>
+            Order executing
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.TriggerPriceType">
+            <summary>
+            Trigger order price type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerPriceType.LastPrice">
+            <summary>
+            Last fill price
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerPriceType.MarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.BitgetCancelOrderRequest">
+            <summary>
+            Order cancel request
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Enums.V2.BitgetCancelOrderRequest.OrderId">
+            <summary>
+            Order id. Either this or ClientOrderId should be provided
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Enums.V2.BitgetCancelOrderRequest.ClientOrderId">
+            <summary>
+            Client order id. Either this or OrderId should be provided
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi">
+            <summary>
+            Futures API endpoints
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi.Account">
+            <summary>
+            Endpoints related to account settings, info or actions
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi.ExchangeData">
+            <summary>
+            Endpoints related to retrieving market and system data
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi.Trading">
+            <summary>
+            Endpoints related to account settings, info or actions
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount">
+            <summary>
+            Bitget account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.GetBalancesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get balance
+            <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Single-Account" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.GetBalancesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <summary>
+            Get balances
+            <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-List" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.SetLeverageAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Threading.CancellationToken)">
+            <summary>
+            Set leverage
+            <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-List" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="leverage">New leverage</param>
+            <param name="side">Position side</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.AdjustMarginAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Threading.CancellationToken)">
+            <summary>
+            Adjust margin
+            <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Margin" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="quantity">Margin amount, positive means increase, and negative means decrease</param>
+            <param name="side">Position side</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.SetMarginModeAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{Bitget.Net.Enums.V2.MarginMode},System.Threading.CancellationToken)">
+            <summary>
+            Set margin mode
+            <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Margin-Mode" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="mode">Margin mode</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.SetPositionModeAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.PositionMode,System.Threading.CancellationToken)">
+            <summary>
+            Set position mode
+            <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Hold-Mode" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="mode">Position mode</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.GetLedgerAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get account ledger
+            <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-Bill" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="asset">Filter by asset</param>
+            <param name="businessType">Filter by business type</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData">
+            <summary>
+            Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the server time
+            <para><a href="https://www.bitget.com/api-doc/common/public/Get-Server-Time" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetContractsAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get list of contracts
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="productType">Product type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetVipFeeRatesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of VIP levels and fee rates
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-VIP-Fee-Rate" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetOrderBookAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get futures order book
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Merge-Depth" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="productType">Product type</param>
+            <param name="mergeStep">Merge step</param>
+            <param name="limit">The book depth, 1, 5, 15, 50, 100 or -1. -1 will request the max gear of the symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetTickerAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get futures ticker
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Ticker" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="productType">Product type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetTickersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <summary>
+            Get all futures tickers
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-All-Symbol-Ticker" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetRecentTradesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get recent trades
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Recent-Fills" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetTradesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get trades
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Fills-History" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetKlinesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.Nullable{Bitget.Net.Enums.V2.KlineType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get kline/candlestick data
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Candle-Data" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="klineType">Price type</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetHistoricalKlinesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get historical market price kline/candlestick data
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Candle-Data" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetHistoricalIndexPriceKlinesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get historical index price kline/candlestick data
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Index-Candle-Data" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetHistoricalMarkPriceKlinesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetFuturesKlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get historical mark price kline/candlestick data
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Mark-Candle-Data" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetOpenInterestAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get open interest
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Open-Interest" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetNextFundingTimeAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get next funding time
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Symbol-Next-Funding-Time" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetPricesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get prices
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Symbol-Price" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetHistoricalFundingRateAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get historical funding rate
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Funding-Rate" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="pageSize">Page size</param>
+            <param name="page">Page number</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetFundingRateAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get current funding rate
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading">
+            <summary>
+            Bitget trading endpoints, placing and mananging orders.
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi">
+            <summary>
+            Bitget futures streams
             </summary>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApi">
@@ -3071,6 +3988,11 @@
             Futures API endpoints
             </summary>
         </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.IBitgetRestClient.FuturesApiV2">
+            <summary>
+            Futures API endpoints
+            </summary>
+        </member>
         <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
             <summary>
             Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
@@ -3237,6 +4159,86 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetTransferHistoryAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get transfer history
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
+            </summary>
+            <param name="asset">Asset</param>
+            <param name="fromAccount">From account</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="clientOrderId">Filter by client order id</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.SetBgbDeductEnabledAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Set BGB fee deduction enabled status
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Switch-Deduct" /></para>
+            </summary>
+            <param name="enable">Enabled</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetBgbDeductEnabledAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get BGB deduct status
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deduct-Info" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get deposit address
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Address" /></para>
+            </summary>
+            <param name="asset">Asset</param>
+            <param name="network">Network</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.CancelWithdrawalAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a withdrawal
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Cancel-Withdrawal" /></para>
+            </summary>
+            <param name="withdrawalOrderId">Withdrawal order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetWithdrawalHistoryAsync(System.DateTime,System.DateTime,System.String,System.String,System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get withdrawal history 
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Withdraw-Record" /></para>
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="clientOrderId">Filter by client order id</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetDepositHistoryAsync(System.DateTime,System.DateTime,System.String,System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get deposit history
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record" /></para>
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData">
             <summary>
             Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
@@ -3349,34 +4351,351 @@
             Bitget trading endpoints, placing and mananging orders.
             </summary>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,Bitget.Net.Enums.V2.TimeInForce,System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
+            <summary>
+            Place a new order
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="side">Order side</param>
+            <param name="type">Order type</param>
+            <param name="quantity">Quantity. For limit and market-sell orders this is in base asset, for market-buy orders it is in quote asset.</param>
+            <param name="timeInForce">Time in force</param>
+            <param name="price">Limit price</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="tpslType">Tpsl type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest},System.Threading.CancellationToken)">
+            <summary>
+            Place multiple orders in a single call
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Place-Orders" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="orders">Orders to place</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelOrderAsync(System.String,System.String,System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
+            <summary>
+            Cancel an order
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
+            <param name="tpslType">Tpsl type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
+            <summary>
+            Cancel multiple orders in a single call
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Orders" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="orders">Orders to cancel</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelOrdersBySymbolAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel all orders on a symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Cancel-Symbol-Orders" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get order info
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Order-Info" /></para>
+            </summary>
+            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetOpenOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get current open orders
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Unfilled-Orders" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="tpslType">Tpsl type</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetClosedOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get closed orders
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-History-Orders" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="tpslType">Tpsl type</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get user trade history
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Fills" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceTriggerOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.QuantityType},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TimeInForce},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Place a trigger order
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Place-Plan-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="side">Order side</param>
+            <param name="type">Order type</param>
+            <param name="quantity">Quantity</param>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="quantityType">Asset the quantity is in</param>
+            <param name="triggerPriceType">Trigger price type</param>
+            <param name="orderPrice">Order price (when orderType is limit)</param>
+            <param name="timeInForce">Time in force</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.EditTriggerOrderAsync(System.Decimal,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Edit a trigger order
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Modify-Plan-Order" /></para>
+            </summary>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="orderType">Order type</param>
+            <param name="quantity">Quantity</param>
+            <param name="orderPrice">Order price for limit orders</param>
+            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client Order id. Either this or orderId should be provided</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelTriggerOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a trigger order
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Cancel-Plan-Order" /></para>
+            </summary>
+            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client Order id. Either this or orderId should be provided</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelAllTriggerOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Cancel all trigger orders
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Batch-Cancel-Plan-Order" /></para>
+            </summary>
+            <param name="symbols">Only cancel trigger orders on these symbols</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetOpenTriggerOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get list of currently open trigger orders
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-Current-Plan-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetTriggerSubOrdersAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get trigger order sub orders
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-Plan-Sub-Order" /></para>
+            </summary>
+            <param name="triggerOrderId">Trigger order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetClosedTriggerOrdersAsync(System.String,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get closed trigger orders
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-History-Plan-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi">
             <summary>
             Bitget spot streams
             </summary>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to ticker updates for multiple symbols
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to ticker updates for multiple symbols
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to trade updates for a symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to trade updates for multiple symbols
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to kline/candlestick updates for a symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to kline/candlestick updates for multiple symbols
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="interval">Kline interval</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to order book updates for a symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updatesa after</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to order book updates for multiple symbols
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
+            </summary>
+            <param name="symbols">The symbols</param>
+            <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updatesa after</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetOrderUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to user order updates
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Order-Channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToUserTradeUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to user trade updates
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Fill-Channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTriggerOrderUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to user trigger order updates
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Plan-Order-Channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to user balance updates
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Account-Channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi">
             <summary>
-            Spot API endpoints
+            DEPRECATED, use <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi">V2</see> instead. Spot API endpoints
             </summary>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi.Account">
             <summary>
-            Endpoints related to account settings, info or actions
+            DEPRECATED, use <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi">V2</see> instead.Endpoints related to account settings, info or actions
             </summary>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi.ExchangeData">
             <summary>
-            Endpoints related to retrieving market and system data
+            DEPRECATED, use <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi">V2</see> instead. Endpoints related to retrieving market and system data
             </summary>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi.Trading">
             <summary>
-            Endpoints related to account settings, info or actions
+            DEPRECATED, use <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi">V2</see> instead. Endpoints related to account settings, info or actions
             </summary>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi.CommonSpotClient">
             <summary>
-            Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+            DEPRECATED, use <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi">V2</see> instead. Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
             </summary>
             <returns></returns>
         </member>
@@ -7475,6 +8794,711 @@
             Usdt value
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate">
+            <summary>
+            Balance update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate.Available">
+            <summary>
+            Available quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate.Frozen">
+            <summary>
+            Frozen quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate.Locked">
+            <summary>
+            Frozen quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate.LimitAvailable">
+            <summary>
+            Limit available
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate.UsdtValue">
+            <summary>
+            Usdt value
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetBgbDeduct">
+            <summary>
+            BGB deduct status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBgbDeduct.Enabled">
+            <summary>
+            Deduct enabled
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetContract">
+            <summary>
+            Contract info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.BuyLimitPriceRatio">
+            <summary>
+            Max percentage spread between buy limit price and current price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.SellLimitPriceRatio">
+            <summary>
+            Max percentage spread between sell limit price and current price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.FeeRateUpRatio">
+            <summary>
+            Transaction fee increase ratio
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MakerFeeRate">
+            <summary>
+            Maker fee rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.TakerFeeRate">
+            <summary>
+            Taker fee rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.OpenCostUpRatio">
+            <summary>
+            Opening cost increase ratio
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.SupportMarginAsset">
+            <summary>
+            Supported margin assets
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MinOrderQuantity">
+            <summary>
+            Minimal position open quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.PriceStep">
+            <summary>
+            Price step
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.QuantityDecimals">
+            <summary>
+            Quantity decimal places
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.PriceDecimals">
+            <summary>
+            Price decimal places
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.QuantityStep">
+            <summary>
+            Quantity step
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.ContractType">
+            <summary>
+            Contract type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MinTradeValue">
+            <summary>
+            Minimal trade value in USDT
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MaxSymbolOpenOrders">
+            <summary>
+            Max open orders on symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MaxProductOpenOrders">
+            <summary>
+            Max open orders on product
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MaxPositions">
+            <summary>
+            Max number of positions
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.OfflineTime">
+            <summary>
+            Removal time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.LimitOpenTime">
+            <summary>
+            Planned order restriction time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.DeliveryTime">
+            <summary>
+            Delivery time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.DeliveryStartTime">
+            <summary>
+            Delivery start time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.DeliveryPeriod">
+            <summary>
+            Delivery period
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.LaunchTime">
+            <summary>
+            Listing time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.FundingInterval">
+            <summary>
+            Funding interval
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MinLeverage">
+            <summary>
+            Minimal leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MaxLeverage">
+            <summary>
+            Maximal leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.PosLimit">
+            <summary>
+            Position limit
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MaintenanceTime">
+            <summary>
+            Planned maintenance time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetDepositAddress">
+            <summary>
+            Deposit address
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositAddress.Address">
+            <summary>
+            Address
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositAddress.Network">
+            <summary>
+            Network
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositAddress.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositAddress.Tag">
+            <summary>
+            Tag
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositAddress.Url">
+            <summary>
+            Deposit address url
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetDepositRecord">
+            <summary>
+            Deposit record
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.Destination">
+            <summary>
+            Destination
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.ToAddress">
+            <summary>
+            Target address
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.FromAddress">
+            <summary>
+            From address
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.Network">
+            <summary>
+            Network
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetDepositRecord.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFundingRate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFundingRate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFundingRate.FundingRate">
+            <summary>
+            Current funding rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFundingRate.FundingTime">
+            <summary>
+            Funding time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFundingTime">
+            <summary>
+            Funding time info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFundingTime.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFundingTime.NextFundingTime">
+            <summary>
+            Next funding time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFundingTime.RatePeriod">
+            <summary>
+            Rate settlement cycle in hours
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance">
+            <summary>
+            Futures balance
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.Locked">
+            <summary>
+            Quantity locked
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.Available">
+            <summary>
+            Quantity available
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.CrossMarginMaxAvailable">
+            <summary>
+            Maximum available balance to open positions under the cross margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.IsolatedMarginMaxAvailable">
+            <summary>
+            Maximum available balance to open positions under the isolated margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.MaxTransferable">
+            <summary>
+            Max transferable quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.Equity">
+            <summary>
+            Account equity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.UsdtEquity">
+            <summary>
+            Usdt equity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.BtcEquity">
+            <summary>
+            BTC equity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.CrossMarginRiskRate">
+            <summary>
+            Risk ratio in cross margin mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.UnrealizedProfitAndLoss">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.CrossMarginUnrealizedProfitAndLoss">
+            <summary>
+            Unrealized profit and loss cross margin
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.IosaltedMarginProfitAndLoss">
+            <summary>
+            Unrealized profit and loss isolated margin
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.Coupon">
+            <summary>
+            Trading bonus
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesKline">
+            <summary>
+            Kline/candlestick info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesKline.OpenTime">
+            <summary>
+            Open time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesKline.OpenPrice">
+            <summary>
+            Open price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesKline.HighPrice">
+            <summary>
+            Highest price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesKline.LowPrice">
+            <summary>
+            Lowest price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesKline.ClosePrice">
+            <summary>
+            Close price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesKline.Volume">
+            <summary>
+            Volume in base asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesKline.QuoteVolume">
+            <summary>
+            Volume in quote asset
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesLedger">
+            <summary>
+            Ledger
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedger.EndId">
+            <summary>
+            The final transaction order ID.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedger.Entries">
+            <summary>
+            Entries
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry">
+            <summary>
+            Ledger entry
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.BusinessType">
+            <summary>
+            Business type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.Fees">
+            <summary>
+            Fees
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.CouponFees">
+            <summary>
+            Fees paid with coupon
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesOrderBook">
+            <summary>
+            Order book info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrderBook.Asks">
+            <summary>
+            Asks
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrderBook.Bids">
+            <summary>
+            Bids
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrderBook.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrderBook.Scale">
+            <summary>
+            Scale
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrderBook.Precision">
+            <summary>
+            Precision
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrderBook.IsMaxPrecision">
+            <summary>
+            Is max precision
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesPrices">
+            <summary>
+            Futures prices
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesPrices.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesPrices.Price">
+            <summary>
+            Last price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesPrices.IndexPrice">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesPrices.MarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesPrices.Timestamp">
+            <summary>
+            Data timestamp
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker">
+            <summary>
+            Ticker info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.OpenPrice">
+            <summary>
+            Open price 24h ago
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.HighPrice">
+            <summary>
+            Highest price in 24h
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.LowPrice">
+            <summary>
+            Lowest price in 24h
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.LastPrice">
+            <summary>
+            Last trade price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.QuoteVolume">
+            <summary>
+            Volume in quote asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.Volume">
+            <summary>
+            Volume in base asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.UsdtVolume">
+            <summary>
+            Volume in USDT
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.BestBidPrice">
+            <summary>
+            Best bid price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.BestAskPrice">
+            <summary>
+            Best ask price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.BestBidQuantity">
+            <summary>
+            Best bid quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.BestAskQuantity">
+            <summary>
+            Best ask quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.OpenPriceUtc">
+            <summary>
+            Price at last UTC+0
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.Timestamp">
+            <summary>
+            Data timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.ChangePercentageUtc">
+            <summary>
+            Price change compared to UTC+0. Returned as factor, 0.01 means 1%.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.ChangePercentage24H">
+            <summary>
+            Price change compared to 24h ago. Returned as factor, 0.01 means 1%.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.IndexPrice">
+            <summary>
+            Index price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.FundingRate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.HoldingPositions">
+            <summary>
+            Holding positions
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.DeliveryStartTime">
+            <summary>
+            Delivery start timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.DeliveryTime">
+            <summary>
+            Delivery timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.DeliveryStatus">
+            <summary>
+            Delivery status
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetKline">
             <summary>
             Kline/candlestick info
@@ -7520,6 +9544,206 @@
             Volume in USDT
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetKlineUpdate">
+            <summary>
+            Kline update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetKlineUpdate.OpenTime">
+            <summary>
+            Open time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetKlineUpdate.OpenPrice">
+            <summary>
+            Open price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetKlineUpdate.HighPrice">
+            <summary>
+            Highest price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetKlineUpdate.LowPrice">
+            <summary>
+            Lowest price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetKlineUpdate.ClosePrice">
+            <summary>
+            Close price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetKlineUpdate.Volume">
+            <summary>
+            Volume in base asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetKlineUpdate.QuoteVolume">
+            <summary>
+            Volume in quote asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetKlineUpdate.UsdtVolume">
+            <summary>
+            Volume in USDT
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOpenInterest">
+            <summary>
+            Open interest
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOpenInterest.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOpenInterest.Quantity">
+            <summary>
+            Open interest quantity
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrder">
+            <summary>
+            Order info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.UserId">
+            <summary>
+            User id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.Price">
+            <summary>
+            Order price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.BasePrice">
+            <summary>
+            Base price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.TriggerPrice">
+            <summary>
+            Trigger price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.TpslType">
+            <summary>
+            Take profit / stop loss type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.AveragePrice">
+            <summary>
+            Average fill price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.QuantityFilled">
+            <summary>
+            Base volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.QuoteQuantityFilled">
+            <summary>
+            Quote quantity volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.EnterPointSource">
+            <summary>
+            Entry point
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.OrderSource">
+            <summary>
+            Order source
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.Fees">
+            <summary>
+            Fee info
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderFees">
+            <summary>
+            Order fees
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderFees.NewFees">
+            <summary>
+            New fee info
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderNewFees">
+            <summary>
+            Order fee info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderNewFees.CouponDeduction">
+            <summary>
+            Amount deducted by coupons, unit：currency obtained from the transaction.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderNewFees.BgbDeduction">
+            <summary>
+            Amount deducted in BGB (Bitget Coin), unit：BGB
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderNewFees.RemainingFeeDeduction">
+            <summary>
+            If the BGB balance is insufficient to cover the fees, the remaining amount is deducted from the currency obtained from the transaction.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderNewFees.TotalFee">
+            <summary>
+            The total fee amount to be paid
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderBook">
             <summary>
             Order book info
@@ -7553,6 +9777,306 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderBookEntry.Quantity">
             <summary>
             Quantity
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate">
+            <summary>
+            Order book update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate.Asks">
+            <summary>
+            Asks
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate.Bids">
+            <summary>
+            Bids
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate.Checksum">
+            <summary>
+            Checksum
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderId.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderId.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderList">
+            <summary>
+            Order list
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderList.NextFlag">
+            <summary>
+            Next flag
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderList.IdLessThan">
+            <summary>
+            Id for pagination
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderList.Orders">
+            <summary>
+            Orders
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderMultipleResult">
+            <summary>
+            Multiple orders result
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderMultipleResult.Success">
+            <summary>
+            Successful orders
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderMultipleResult.Failed">
+            <summary>
+            Failed orders
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetPlaceFailure">
+            <summary>
+            Place order failure info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceFailure.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceFailure.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceFailure.Error">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate">
+            <summary>
+            Order update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.OrderQuantity">
+            <summary>
+            Order quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.Notional">
+            <summary>
+            Buy value for market order
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.TimeInForce">
+            <summary>
+            Time in force
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.LastTradePrice">
+            <summary>
+            Last trade price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.BaseVolume">
+            <summary>
+            Number of latest filled orders
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.LastTradeTime">
+            <summary>
+            Last trade time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.LastTradeFee">
+            <summary>
+            Last trade fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.LastTradeRole">
+            <summary>
+            Last trade role
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.QuantityFilled">
+            <summary>
+            Total quantity filled
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.AveragePrice">
+            <summary>
+            Average trade price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.EnterPointSource">
+            <summary>
+            Entry point
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.Fees">
+            <summary>
+            Fees
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderUpdateFee">
+            <summary>
+            Trade fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdateFee.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdateFee.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest">
+            <summary>
+            Order request
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.TimeInForce">
+            <summary>
+            Time in force
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetPositionLeverage">
+            <summary>
+            Position leverage info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionLeverage.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionLeverage.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionLeverage.LongLeverage">
+            <summary>
+            Long position leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionLeverage.ShortLeverage">
+            <summary>
+            Short position leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionLeverage.CrossMarginLeverage">
+            <summary>
+            Cross margin position leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionLeverage.MarginMode">
+            <summary>
+            Margin mode
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetPositionMode">
+            <summary>
+            Position mode info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionMode.PositionMode">
+            <summary>
+            Position mode
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetSpotBalance">
@@ -7795,6 +10319,81 @@
             Price change compared to 24h ago. Returned as factor, 0.01 means 1%.
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate">
+            <summary>
+            Ticker update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.LastPrice">
+            <summary>
+            Last trade price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.BestAskQuantity">
+            <summary>
+            Best ask quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.BestAskPrice">
+            <summary>
+            Best ask price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.BestBidQuantity">
+            <summary>
+            Best bid quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.BestBidPrice">
+            <summary>
+            Best bid price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.OpenPrice24h">
+            <summary>
+            Open price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.OpenPriceUtc0">
+            <summary>
+            Open price at UTC 0
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.HighPrice24h">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.LowPrice24h">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.BaseVolume">
+            <summary>
+            Base volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.QuoteVolume">
+            <summary>
+            Quote volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTickerUpdate.ChangePercentageUtc0">
+            <summary>
+            Change rate since openUtc, that is: (last - openUtc) / openUtc, scale e-5
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetTrade">
             <summary>
             Trade info
@@ -7830,6 +10429,91 @@
             Trade time
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetTradeUpdate">
+            <summary>
+            Trade update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTradeUpdate.Price">
+            <summary>
+            Trade price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTradeUpdate.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTradeUpdate.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTradeUpdate.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTradeUpdate.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetTransferRecord">
+            <summary>
+            Transfer record
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.ToAccount">
+            <summary>
+            To account
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.FromAccount">
+            <summary>
+            From account
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.ToSymbol">
+            <summary>
+            To symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.FromSymbol">
+            <summary>
+            From symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.TransferId">
+            <summary>
+            Transfer id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTransferRecord.Timestamp">
+            <summary>
+            Transfer time
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetTransferResult">
             <summary>
             Transfer result
@@ -7845,6 +10529,181 @@
             Client order id
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder">
+            <summary>
+            Trigger order info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.TriggerPrice">
+            <summary>
+            Trigger price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.OrderPrice">
+            <summary>
+            Order price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.QuantityType">
+            <summary>
+            Quantity type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.TriggerPriceType">
+            <summary>
+            Trigger price type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.Status">
+            <summary>
+            Trigger order status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.EnterPointSource">
+            <summary>
+            Entry point
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrder.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate">
+            <summary>
+            Trigger order update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.TriggerPrice">
+            <summary>
+            Trigger price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.OrderPrice">
+            <summary>
+            Order price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.QuantityType">
+            <summary>
+            Quantity type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.TriggerPriceType">
+            <summary>
+            Trigger price type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.Status">
+            <summary>
+            Trigger order status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.EnterPointSource">
+            <summary>
+            Entry point
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetTriggerSubOrder">
+            <summary>
+            Trigger sub order
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerSubOrder.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerSubOrder.Price">
+            <summary>
+            Order price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerSubOrder.Type">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTriggerSubOrder.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetUserFee">
             <summary>
             User fee info
@@ -7858,6 +10717,191 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserFee.TakerRate">
             <summary>
             Taker fee rate
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetUserTrade">
+            <summary>
+            User trade info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.UserId">
+            <summary>
+            User id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.QuoteQuantity">
+            <summary>
+            Quote quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.Role">
+            <summary>
+            Role
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTrade.Fees">
+            <summary>
+            Fees
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetTradeFee">
+            <summary>
+            Trade fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTradeFee.Deduction">
+            <summary>
+            Deduction
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTradeFee.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTradeFee.TotalDeductionFee">
+            <summary>
+            Total deduction fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetTradeFee.TotalFee">
+            <summary>
+            Total fee
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate">
+            <summary>
+            User trade update
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.QuoteQuantity">
+            <summary>
+            Quote quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.UpdateTime">
+            <summary>
+            Last update time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.Role">
+            <summary>
+            Role
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate.Fees">
+            <summary>
+            Fees
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetUserTradeFee">
+            <summary>
+            Trade fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeFee.Deduction">
+            <summary>
+            Deduction
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeFee.FeeAsset">
+            <summary>
+            Fee asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeFee.TotalDeductionFee">
+            <summary>
+            Total deduction fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetUserTradeFee.TotalFee">
+            <summary>
+            Total fee
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetVipFeeRate">
@@ -7898,6 +10942,86 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetVipFeeRate.UsdtWithdrawQuantity">
             <summary>
             USDT max withdrawal quantity per 24 hours
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord">
+            <summary>
+            Withdrawal record
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.Destination">
+            <summary>
+            Destination
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.Tag">
+            <summary>
+            Tag
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.ToAddress">
+            <summary>
+            Target address
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.FromAddress">
+            <summary>
+            From address
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.Confirmations">
+            <summary>
+            Number of confirmed blocks
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.Network">
+            <summary>
+            Network
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.CreateTime">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawalRecord.UpdateTime">
+            <summary>
+            Last update time
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetWithdrawResult">

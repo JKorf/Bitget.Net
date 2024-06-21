@@ -1,0 +1,12 @@
+POST
+/api/v2/spot/trade/place-plan-order
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1668134576535,
+    "data": {
+        "orderId": "121211212122",
+        "clientOid": "121211212122"
+    }
+}

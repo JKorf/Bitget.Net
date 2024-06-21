@@ -1,0 +1,29 @@
+GET
+/api/v2/spot/trade/orderInfo
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1684492945476,
+    "data": [
+        {
+            "userId": "**********",
+            "symbol": "TRXUSDT",
+            "orderId": "121211212122",
+            "clientOid": "1-2-1-2-1",
+            "price": "0",
+            "size": "10.0000000000000000",
+            "orderType": "market",
+            "side": "buy",
+            "status": "filled",
+            "priceAvg": "0.0699782527055350",
+            "baseVolume": "142.9015000000000000",
+            "quoteVolume": "9.9999972790000000",
+            "enterPointSource": "API",
+            "feeDetail": "{\"newFees\":{\"c\":0,\"d\":0,\"deduction\":false,\"r\":-0.112079256,\"t\":-0.112079256,\"totalDeductionFee\":0},\"USDT\":{\"deduction\":false,\"feeCoinCode\":\"TRX\",\"totalDeductionFee\":0,\"totalFee\":-0.1120792560000000}}",
+            "orderSource": "market",
+            "cTime": "1690196141868",
+            "uTime": "1690196141868"
+        }
+    ]
+}

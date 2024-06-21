@@ -1,0 +1,23 @@
+POST
+/api/v2/spot/trade/batch-cancel-order
+true
+{
+    "code": "00000",
+    "message": "success",
+    "requestTime": 1695808949356,
+    "data": {
+        "successList": [
+            {
+                "orderId": "121211212122",
+                "clientOid": "121211212122"
+            }
+        ],
+        "failureList": [
+            {
+                "orderId": "121211212122",
+                "clientOid": "xxx001",
+                "errorMsg": "duplicate clientOrderId"
+            }
+        ]
+    }
+}

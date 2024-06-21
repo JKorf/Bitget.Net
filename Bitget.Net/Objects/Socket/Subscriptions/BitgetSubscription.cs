@@ -17,7 +17,15 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         {
             _args = args;
             _handler = handler;
-            ListenerIdentifiers = new HashSet<string>(args.SelectMany(a => new[] { $"snapshot-{a["channel"].ToLower()}-{a["instId"].ToLower()}", $"update-{a["channel"].ToLower()}-{a["instId"].ToLower()}" }));
+            ListenerIdentifiers = new HashSet<string>(args.SelectMany(GetIdentifier));
+        }
+
+        private string[] GetIdentifier(Dictionary<string, string> arg)
+        {
+            if (arg.ContainsKey("instId"))
+                return new[] { $"snapshot-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}", $"update-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}" };
+
+            return new[] { $"snapshot-{arg["channel"].ToLower()}-", $"update-{arg["channel"].ToLower()}-" };
         }
 
         public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false);

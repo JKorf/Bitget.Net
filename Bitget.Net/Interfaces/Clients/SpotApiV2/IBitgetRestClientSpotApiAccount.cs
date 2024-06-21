@@ -116,5 +116,85 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetWithdrawResult>> WithdrawAsync(string asset, Enums.V2.TransferType transferType, string address, decimal quantity, string? network = null, string? innerTargetType = null, string? areaCode = null, string? tag = null, string? remark = null, string? clientOrderId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get transfer history
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
+        /// </summary>
+        /// <param name="asset">Asset</param>
+        /// <param name="fromAccount">From account</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="clientOrderId">Filter by client order id</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="idLessThan">Return results before this id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetTransferRecord>>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType fromAccount, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Set BGB fee deduction enabled status
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Switch-Deduct" /></para>
+        /// </summary>
+        /// <param name="enable">Enabled</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> SetBgbDeductEnabledAsync(bool enable, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get BGB deduct status
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deduct-Info" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetBgbDeduct>> GetBgbDeductEnabledAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get deposit address
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Address" /></para>
+        /// </summary>
+        /// <param name="asset">Asset</param>
+        /// <param name="network">Network</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel a withdrawal
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Cancel-Withdrawal" /></para>
+        /// </summary>
+        /// <param name="withdrawalOrderId">Withdrawal order id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> CancelWithdrawalAsync(string withdrawalOrderId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get withdrawal history 
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Withdraw-Record" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="orderId">Filter by order id</param>
+        /// <param name="clientOrderId">Filter by client order id</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="idLessThan">Return results before this id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetWithdrawalRecord>>> GetWithdrawalHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, string? clientOrderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get deposit history
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="orderId">Filter by order id</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="idLessThan">Return results before this id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetDepositRecord>>> GetDepositHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
     }
 }

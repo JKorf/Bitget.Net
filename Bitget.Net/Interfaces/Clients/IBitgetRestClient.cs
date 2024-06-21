@@ -20,6 +20,10 @@ namespace Bitget.Net.Interfaces.Clients
         /// Futures API endpoints
         /// </summary>
         FuturesApi.IBitgetRestClientFuturesApi FuturesApi { get; }
+        /// <summary>
+        /// Futures API endpoints
+        /// </summary>
+        FuturesApiV2.IBitgetRestClientFuturesApi FuturesApiV2 { get; }
 
         /// <summary>
         /// Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.

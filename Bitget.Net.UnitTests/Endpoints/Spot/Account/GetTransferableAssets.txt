@@ -1,4 +1,4 @@
-POST
+GET
 /api/v2/spot/wallet/transfer-coin-info
 true
 {

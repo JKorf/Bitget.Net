@@ -13,7 +13,8 @@ namespace Bitget.Net.Objects.Options
         public static BitgetSocketOptions Default { get; set; } = new BitgetSocketOptions()
         {
             Environment = BitgetEnvironment.Live,
-            SocketSubscriptionsCombineTarget = 10
+            SocketSubscriptionsCombineTarget = 10,
+            MaxSocketConnections = 100
         };
 
         /// <summary>

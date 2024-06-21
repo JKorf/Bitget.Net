@@ -18,7 +18,7 @@ using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Bitget.Net.Clients.SpotApi
+namespace Bitget.Net.Clients.FuturesApi
 {
     /// <inheritdoc />
     public class BitgetSocketClientFuturesApi : SocketApiClient, IBitgetSocketClientFuturesApi

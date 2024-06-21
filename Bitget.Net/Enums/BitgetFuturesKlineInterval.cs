@@ -13,6 +13,11 @@ namespace Bitget.Net.Enums
         [Map("1m")]
         OneMinute = 60,
         /// <summary>
+        /// 3 minutes
+        /// </summary>
+        [Map("3m")]
+        ThreeMinutes = 60 * 3,
+        /// <summary>
         /// 5 minutes
         /// </summary>
         [Map("5m")]

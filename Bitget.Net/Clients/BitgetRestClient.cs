@@ -17,6 +17,8 @@ namespace Bitget.Net.Clients
         public Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi SpotApiV2 { get; }
         /// <inheritdoc />
         public Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApi FuturesApi { get; }
+        /// <inheritdoc />
+        public Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi FuturesApiV2 { get; }
 
         /// <summary> 
         /// Create a new instance of BitgetRestClient
@@ -42,13 +44,16 @@ namespace Bitget.Net.Clients
             SpotApi = AddApiClient(new SpotApi.BitgetRestClientSpotApi(_logger, httpClient, this, options));
             SpotApiV2 = AddApiClient(new SpotApiV2.BitgetRestClientSpotApi(_logger, httpClient, this, options));
             FuturesApi = AddApiClient(new FuturesApi.BitgetRestClientFuturesApi(_logger, httpClient, this, options));
+            FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options));
         }
 
         /// <inheritdoc />
         public void SetApiCredentials(ApiCredentials credentials)
         {
             SpotApi.SetApiCredentials(credentials);
+            SpotApiV2.SetApiCredentials(credentials);
             FuturesApi.SetApiCredentials(credentials);
+            FuturesApiV2.SetApiCredentials(credentials);
         }
 
         /// <summary>

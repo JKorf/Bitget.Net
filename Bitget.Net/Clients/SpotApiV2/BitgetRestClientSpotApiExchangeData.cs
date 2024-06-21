@@ -67,7 +67,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.AddOptional("step" + mergeStep, mergeStep);
+            parameters.AddOptional("step", mergeStep + mergeStep);
             parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/market/orderbook", BitgetExchange.RateLimiter.Overal, 1, false, 20, TimeSpan.FromSeconds(1));
             return await _baseClient.SendAsync<BitgetOrderBook>(request, parameters, ct).ConfigureAwait(false);

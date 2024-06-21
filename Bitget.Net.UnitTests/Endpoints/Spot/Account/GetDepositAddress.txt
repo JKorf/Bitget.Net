@@ -1,0 +1,15 @@
+GET
+/api/v2/spot/wallet/deposit-address
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1683875302853,
+    "data": {
+        "address": "xxx",
+        "chain": "BTC-Bitcoin",
+        "coin": "BTC",
+        "tag": "",
+        "url": "https://btc.com/xxx"
+    }
+}
