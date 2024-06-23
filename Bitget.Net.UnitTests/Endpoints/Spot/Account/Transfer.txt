@@ -1,0 +1,12 @@
+POST
+/api/v2/spot/wallet/transfer
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1683875302853,
+    "data": {
+        "transferId": "123456",
+        "clientOid": "x123"
+    }
+}

@@ -1,0 +1,9 @@
+POST
+/api/v2/mix/account/set-margin
+true
+{
+    "code": "00000",
+    "data": "",
+    "msg": "success",
+    "requestTime": 1627293357336
+}

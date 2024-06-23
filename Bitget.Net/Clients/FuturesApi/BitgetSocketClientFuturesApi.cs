@@ -18,7 +18,7 @@ using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Bitget.Net.Clients.SpotApi
+namespace Bitget.Net.Clients.FuturesApi
 {
     /// <inheritdoc />
     public class BitgetSocketClientFuturesApi : SocketApiClient, IBitgetSocketClientFuturesApi
@@ -211,7 +211,7 @@ namespace Bitget.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        protected override Query GetAuthenticationRequest()
+        protected override Query GetAuthenticationRequest(SocketConnection connection)
         {
             var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;

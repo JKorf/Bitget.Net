@@ -1,0 +1,12 @@
+POST
+/api/v2/spot/trade/cancel-order
+true
+{
+    "code": "00000",
+    "message": "success",
+    "requestTime": 1234567891234,
+    "data": {
+        "orderId": "121211212122",
+        "clientOid": "xx001"
+    }
+}

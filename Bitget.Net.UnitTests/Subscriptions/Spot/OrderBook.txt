@@ -1,0 +1,38 @@
+> { "op": "subscribe", "args": [{ "instType": "SPOT", "channel": "books5", "instId": "BTCUSDT" }]}
+< { "event": "subscribe", "arg": { "instType": "SPOT", "channel": "books5", "instId": "BTCUSDT" }}
+= 
+{
+  "action": "snapshot",
+  "arg": {
+    "instType": "SPOT",
+    "channel": "books5",
+    "instId": "BTCUSDT"
+  },
+  "data": [
+    {
+      "asks": [
+        [
+          "26274.9",
+          "0.0009"
+        ],
+        [
+          "26275.0",
+          "0.0500"
+        ]
+      ],
+      "bids": [
+        [
+          "26274.8",
+          "0.0009"
+        ],
+        [
+          "26274.7",
+          "0.0027"
+        ]
+      ],
+      "checksum": 0,
+      "ts": "1695710946294"
+    }
+  ],
+  "ts": 1695710946294
+}

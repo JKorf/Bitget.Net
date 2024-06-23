@@ -1,0 +1,40 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "USDT-FUTURES", "channel": "orders-algo", "instId": "default" }]}
+< { "event": "subscribe", "arg": { "instType": "USDT-FUTURES", "channel": "orders-algo", "instId": "default" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "USDT-FUTURES",
+        "channel": "orders-algo",
+        "instId": "default"
+    },
+    "data": [
+        {
+            "instId": "BTCUSDT",
+            "orderId": "1",
+            "clientOid": "1",
+            "triggerPrice": "27000.000000000",
+            "triggerType": "fill_price",
+            "triggerTime": "1695719197612",
+            "planType": "pl",
+            "price": "27000.000000000",
+            "size": "0.020000000",
+            "actualSize": "0.000000000",
+            "orderType": "market",
+            "side": "buy",
+            "tradeSide": "open",
+            "posSide": "long",
+            "marginCoin": "USDT",
+            "status": "live",
+            "posMode": "hedge_mode",
+            "enterPointSource": "web",
+            "stopSurplusTriggerType": "fill_price",
+            "stopLossTriggerType": "fill_price",
+            "cTime": "1695719197612",
+            "uTime": "1695719197612"
+        }
+    ],
+    "ts": 1695719197733
+}

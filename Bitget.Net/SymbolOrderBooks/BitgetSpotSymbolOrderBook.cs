@@ -1,6 +1,6 @@
 ﻿using Bitget.Net.Clients;
 using Bitget.Net.Interfaces.Clients;
-using Bitget.Net.Objects.Models;
+using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
@@ -57,9 +57,9 @@ namespace Bitget.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> result;
             if (Levels != null)
-                result = await _socketClient.SpotApi.SubscribeToOrderBookUpdatesAsync(Symbol, Levels.Value, ProcessUpdate).ConfigureAwait(false);
+                result = await _socketClient.SpotApiV2.SubscribeToOrderBookUpdatesAsync(Symbol, Levels.Value, ProcessUpdate).ConfigureAwait(false);
             else
-                result = await _socketClient.SpotApi.SubscribeToOrderBookUpdatesAsync(Symbol, ProcessUpdate).ConfigureAwait(false);
+                result = await _socketClient.SpotApiV2.SubscribeToOrderBookUpdatesAsync(Symbol, null, ProcessUpdate).ConfigureAwait(false);
             if (!result)
                 return result;
 

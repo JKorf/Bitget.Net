@@ -1,0 +1,40 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "USDT-FUTURES", "channel": "fill", "instId": "default" }]}
+< { "event": "subscribe", "arg": { "instType": "USDT-FUTURES", "channel": "fill", "instId": "default" }}
+= 
+{
+    "action":"snapshot",
+    "arg":{
+        "instType":"USDT-FUTURES",
+        "channel":"fill",
+        "instId":"default"
+    },
+    "data":[
+        {
+            "orderId":"111",
+            "tradeId":"222",
+            "symbol":"BTCUSDT",
+            "side":"buy",
+            "orderType":"market",
+            "posMode":"one_way_mode",
+            "price":"51000.5",
+            "baseVolume":"0.01",
+            "quoteVolume":"510.005",
+            "profit":"0",
+            "tradeSide":"open",
+            "tradeScope":"taker",
+            "feeDetail":[
+                {
+                    "feeCoin":"USDT",
+                    "deduction":"no",
+                    "totalDeductionFee":"0",
+                    "totalFee":"-0.183717"
+                }
+            ],
+            "cTime":"1703577336606",
+            "uTime":"1703577336606"
+        }
+    ],
+    "ts":1703577336700
+}

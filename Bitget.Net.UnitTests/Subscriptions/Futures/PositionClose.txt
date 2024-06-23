@@ -1,0 +1,17 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "USDT-FUTURES", "channel": "positions-history", "instId": "default" }]}
+< { "event": "subscribe", "arg": { "instType": "USDT-FUTURES", "channel": "positions-history", "instId": "default" }}
+= 
+{
+    "action":"snapshot",
+    "arg":{
+        "instType":"USDT-FUTURES",
+        "channel":"positions-history",
+        "instId":"default"
+    },
+    "data":[
+        {"posId":"1188739982370652163","instId":"ETHUSDT","marginCoin":"USDT","marginMode":"crossed","holdSide":"long","posMode":"one_way_mode","openPriceAvg":"3495.34","closePriceAvg":"3494.99","openSize":"0.01","closeSize":"0.01","achievedProfits":"-0.00350000","settleFee":"0","openFee":"-0.02097204","closeFee":"-0.02096994","cTime":"1719143618195","uTime":"1719143618543"}
+    ],
+    "ts":1697099840122
+}

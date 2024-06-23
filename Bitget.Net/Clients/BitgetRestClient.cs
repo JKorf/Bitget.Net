@@ -1,7 +1,4 @@
-﻿using Bitget.Net.Clients.FuturesApi;
-using Bitget.Net.Clients.SpotApi;
-using Bitget.Net.Interfaces.Clients;
-using Bitget.Net.Interfaces.Clients.SpotApi;
+﻿using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
@@ -15,9 +12,13 @@ namespace Bitget.Net.Clients
         internal readonly string _defaultChannelCode = "6x21p";
 
         /// <inheritdoc />
-        public IBitgetRestClientSpotApi SpotApi { get; }
+        public Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi SpotApi { get; }
         /// <inheritdoc />
-        public IBitgetRestClientFuturesApi FuturesApi { get; }
+        public Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi SpotApiV2 { get; }
+        /// <inheritdoc />
+        public Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApi FuturesApi { get; }
+        /// <inheritdoc />
+        public Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi FuturesApiV2 { get; }
 
         /// <summary> 
         /// Create a new instance of BitgetRestClient
@@ -40,15 +41,19 @@ namespace Bitget.Net.Clients
                 optionsDelegate(options);
             Initialize(options);
 
-            SpotApi = AddApiClient(new BitgetRestClientSpotApi(_logger, httpClient, this, options));
-            FuturesApi = AddApiClient(new BitgetRestClientFuturesApi(_logger, httpClient, this, options));
+            SpotApi = AddApiClient(new SpotApi.BitgetRestClientSpotApi(_logger, httpClient, this, options));
+            SpotApiV2 = AddApiClient(new SpotApiV2.BitgetRestClientSpotApi(_logger, httpClient, this, options));
+            FuturesApi = AddApiClient(new FuturesApi.BitgetRestClientFuturesApi(_logger, httpClient, this, options));
+            FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options));
         }
 
         /// <inheritdoc />
         public void SetApiCredentials(ApiCredentials credentials)
         {
             SpotApi.SetApiCredentials(credentials);
+            SpotApiV2.SetApiCredentials(credentials);
             FuturesApi.SetApiCredentials(credentials);
+            FuturesApiV2.SetApiCredentials(credentials);
         }
 
         /// <summary>

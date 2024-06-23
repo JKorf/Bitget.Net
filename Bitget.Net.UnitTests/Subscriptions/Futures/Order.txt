@@ -1,0 +1,55 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "USDT-FUTURES", "channel": "orders", "instId": "default" }]}
+< { "event": "subscribe", "arg": { "instType": "USDT-FUTURES", "channel": "orders", "instId": "default" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "USDT-FUTURES",
+        "channel": "orders",
+        "instId": "default"
+    },
+    "data": [
+        {
+            "accBaseVolume": "0.01",
+            "cTime": "1695718781129",
+            "clientOId": "1",
+            "feeDetail": [
+                {
+                    "feeCoin": "USDT",
+                    "fee": "-0.162003"
+                }
+            ],
+            "fillFee": "-0.162003",
+            "fillFeeCoin": "USDT",
+            "fillNotionalUsd": "270.005",
+            "fillPrice": "27000.5",
+            "baseVolume": "0.01",
+            "fillTime": "1695718781146",
+            "force": "gtc",
+            "instId": "BTCUSDT",
+            "leverage": "20",
+            "marginCoin": "USDT",
+            "marginMode": "crossed",
+            "notionalUsd": "270",
+            "orderId": "1",
+            "orderType": "market",
+            "pnl": "0",
+            "posMode": "hedge_mode",
+            "posSide": "long",
+            "price": "0",
+            "priceAvg": "27000.5",
+            "reduceOnly": "no",
+            "side": "buy",
+            "size": "0.01",
+            "enterPointSource": "WEB",
+            "status": "filled",
+            "tradeScope": "T",
+            "tradeId": "1111111111",
+            "tradeSide": "open",
+            "uTime": "1695718781146"
+        }
+    ],
+    "ts": 1695718781206
+}

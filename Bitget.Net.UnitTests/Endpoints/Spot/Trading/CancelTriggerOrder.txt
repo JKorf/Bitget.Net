@@ -1,0 +1,11 @@
+POST
+/api/v2/spot/trade/cancel-plan-order
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1668134497496,
+    "data": {
+        "result":"success"
+    }
+}

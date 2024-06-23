@@ -32,7 +32,7 @@ namespace Bitget.Net.Objects.Models
     /// Order book entry
     /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
-    public class BitgetOrderBookEntry : ISymbolOrderBookEntry
+    public record BitgetOrderBookEntry : ISymbolOrderBookEntry
     {
         /// <summary>
         /// Price

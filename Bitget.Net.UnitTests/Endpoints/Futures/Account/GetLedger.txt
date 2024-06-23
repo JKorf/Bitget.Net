@@ -1,0 +1,35 @@
+GET
+/api/v2/mix/account/bill
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695809161807,
+    "data": {
+        "bills": [
+            {
+                "orderId": "1",
+                "symbol": "BTCUSDT",
+                "amount": "-0.004992",
+                "fee": "0",
+                "feeByCoupon": "",
+                "feeCoin": "USDT",
+                "businessType": "contract_settle_fee",
+                "coin": "USDT",
+                "cTime": "1695715200654"
+            },
+            {
+                "orderId": "2",
+                "symbol": "ETHUSDT",
+                "amount": "0",
+                "fee": "-0.222012",
+                "feeByCoupon": "",
+                "feeCoin": "USDT",
+                "businessType": "open_long",
+                "coin": "USDT",
+                "cTime": "1695714563516"
+            }
+        ],
+        "endId": "2"
+    }
+}

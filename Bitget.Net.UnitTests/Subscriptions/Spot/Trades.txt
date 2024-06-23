@@ -1,0 +1,21 @@
+> { "op": "subscribe", "args": [{ "instType": "SPOT", "channel": "trade", "instId": "BTCUSDT" }]}
+< { "event": "subscribe", "arg": { "instType": "SPOT", "channel": "trade", "instId": "BTCUSDT" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "SPOT",
+        "channel": "trade",
+        "instId": "BTCUSDT"
+    },
+    "data": [
+        {
+            "ts": "1695709835822",
+            "price": "26293.4",
+            "size": "0.0013",
+            "side": "buy",
+            "tradeId": "1000000000"
+        }
+    ],
+    "ts": 1695711090682
+}

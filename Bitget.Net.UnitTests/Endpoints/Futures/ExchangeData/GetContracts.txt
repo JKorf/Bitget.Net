@@ -1,0 +1,45 @@
+GET
+/api/v2/mix/market/contracts
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695793701269,
+    "data": [
+        {
+            "symbol": "BTCUSDT",
+            "baseCoin": "BTC",
+            "quoteCoin": "USDT",
+            "buyLimitPriceRatio": "0.9",
+            "sellLimitPriceRatio": "0.9",
+            "feeRateUpRatio": "0.1",
+            "makerFeeRate": "0.0004",
+            "takerFeeRate": "0.0006",
+            "openCostUpRatio": "0.1",
+            "supportMarginCoins": [
+                "USDT"
+            ],
+            "minTradeNum": "0.01",
+            "priceEndStep": "1",
+            "volumePlace": "2",
+            "pricePlace": "1",
+            "sizeMultiplier": "0.01",
+            "symbolType": "perpetual",
+            "minTradeUSDT": "5",
+            "maxSymbolOrderNum": "999999",
+            "maxProductOrderNum": "999999",
+            "maxPositionNum": "150",
+            "symbolStatus": "normal",
+            "offTime": "-1",
+            "limitOpenTime": "-1",
+            "deliveryTime": "",
+            "deliveryStartTime": "",
+            "launchTime": "",
+            "fundInterval": "8",
+            "minLever": "1",
+            "maxLever": "125",
+            "posLimit": "0.05",
+            "maintainTime": "1680165535278"
+        }
+    ]
+}

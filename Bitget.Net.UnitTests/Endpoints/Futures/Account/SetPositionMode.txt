@@ -1,0 +1,11 @@
+POST
+/api/v2/mix/account/set-position-mode
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "data": {
+        "posMode": "one_way_mode"
+    },
+    "requestTime": 1627293445916
+}

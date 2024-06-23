@@ -1,0 +1,13 @@
+GET
+/api/v2/spot/wallet/transfer-coin-info
+true
+{
+    "code":"00000",
+    "msg":"success",
+    "requestTime":1683875302853,
+    "data":[
+        "BTC",
+        "USDT",
+        "ETH"
+    ]
+}

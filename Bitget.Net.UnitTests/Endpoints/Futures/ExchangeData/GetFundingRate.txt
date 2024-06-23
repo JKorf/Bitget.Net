@@ -1,0 +1,14 @@
+GET
+/api/v2/mix/market/current-fund-rate
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695796725656,
+    "data": [
+        {
+            "symbol": "BTCUSDT",
+            "fundingRate": "0.0005"
+        }
+    ]
+}

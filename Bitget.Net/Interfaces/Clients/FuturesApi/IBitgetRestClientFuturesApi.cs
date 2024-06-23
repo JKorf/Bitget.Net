@@ -1,7 +1,7 @@
 ﻿using Bitget.Net.Interfaces.Clients.FuturesApi;
 using CryptoExchange.Net.Interfaces;
 
-namespace Bitget.Net.Interfaces.Clients.SpotApi
+namespace Bitget.Net.Interfaces.Clients.FuturesApi
 {
     /// <summary>
     /// Futures API endpoints

@@ -1,5 +1,6 @@
 ﻿using Bitget.Net.Enums;
 using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -135,10 +136,12 @@ namespace Bitget.Net.Objects.Models
         /// Fee asset
         /// </summary>
         [JsonProperty("feeCcy")]
+        [JsonPropertyName("feeCoin")]
         public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// Fee
         /// </summary>
+        [JsonPropertyName("fee")]
         [JsonProperty("fee")]
         public decimal Fee { get; set; }
     }

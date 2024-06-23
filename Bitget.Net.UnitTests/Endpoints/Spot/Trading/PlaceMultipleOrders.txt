@@ -1,0 +1,23 @@
+POST
+/api/v2/spot/trade/batch-orders
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1666336231317,
+    "data": {
+        "successList": [
+            {
+                "orderId": "121211212122",
+                "clientOid": "1"
+            }
+        ],
+        "failureList": [
+            {
+                "orderId": "121211212122",
+                "clientOid": "1",
+                "errorMsg": "clientOrderId duplicate"
+            }
+        ]
+    }
+}

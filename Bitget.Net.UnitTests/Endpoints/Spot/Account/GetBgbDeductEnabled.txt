@@ -1,0 +1,11 @@
+GET
+/api/v2/spot/account/deduct-info
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695808949356,
+    "data": {
+        "deduct": "on"
+    }
+}

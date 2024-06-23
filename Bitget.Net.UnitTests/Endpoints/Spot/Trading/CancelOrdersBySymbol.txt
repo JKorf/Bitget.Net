@@ -1,0 +1,11 @@
+POST
+/api/v2/spot/trade/cancel-symbol-order
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1698313139948,
+    "data": {
+        "symbol": "BGBUSDT"
+    }
+}

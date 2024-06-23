@@ -1,0 +1,31 @@
+> { "op": "subscribe", "args": [{ "instType": "SPOT", "channel": "ticker", "instId": "ETHUSDT" }]}
+< { "event": "subscribe", "arg": { "instType": "SPOT", "channel": "ticker", "instId": "ETHUSDT" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "SPOT",
+        "channel": "ticker",
+        "instId": "ETHUSDT"
+    },
+    "data": [
+        {
+            "instId": "ETHUSDT",
+            "lastPr": "2200.10",
+            "open24h": "0.00",
+            "high24h": "0.00",
+            "low24h": "0.00",
+            "change24h": "0.00",
+            "bidPr": "1792",
+            "askPr": "2200.1",
+            "bidSz": "0.0084",
+            "askSz": "19740.8811",
+            "baseVolume": "0.0000",
+            "quoteVolume": "0.0000",
+            "openUtc": "0.00",
+            "changeUtc24h": "0",
+            "ts": "1695702438018"
+        }
+    ],
+    "ts": 1695702438029
+}

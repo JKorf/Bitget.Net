@@ -1,0 +1,17 @@
+GET
+/api/v2/mix/market/symbol-price
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695793384294,
+    "data": [
+        {
+            "symbol": "BTCUSDT",
+            "price": "26242",
+            "indexPrice": "34867",
+            "markPrice": "25555",
+            "ts": "1695793390482"
+        }
+    ]
+}

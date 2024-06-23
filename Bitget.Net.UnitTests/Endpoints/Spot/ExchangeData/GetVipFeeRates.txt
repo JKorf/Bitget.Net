@@ -1,0 +1,19 @@
+GET
+/api/v2/spot/market/vip-fee-rate
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1675759699382,
+    "data": [
+        {
+            "level": 1,
+            "dealAmount": "1000000",
+            "assetAmount": "50000",
+            "takerFeeRate": "0",
+            "makerFeeRate": "0",
+            "btcWithdrawAmount": "300",
+            "usdtWithdrawAmount": "5000000"
+        }
+    ]
+}
