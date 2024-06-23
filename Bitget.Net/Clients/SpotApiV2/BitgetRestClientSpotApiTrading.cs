@@ -43,7 +43,16 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptionalEnum("tpslType", tpslType);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/place-order", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
-            return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
+            if (!result)
+                return result;
+
+            _baseClient.InvokeOrderPlaced(new OrderId
+            {
+                Id = result.Data.OrderId!,
+                SourceObject = result.Data
+            });
+            return result;
         }
 
         /// <inheritdoc />
@@ -56,7 +65,19 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("symbol", symbol);
             parameters.Add("orderList", orders);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-orders", BitgetExchange.RateLimiter.Overal, 1, true, 5, TimeSpan.FromSeconds(1));
-            return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
+            if (!result)
+                return result;
+
+            foreach (var item in result.Data.Success)
+            {
+                _baseClient.InvokeOrderPlaced(new OrderId
+                {
+                    Id = item.OrderId!,
+                    SourceObject = item
+                });
+            }
+            return result;
         }
 
         /// <inheritdoc />
@@ -73,7 +94,16 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptionalEnum("tpslType", tpslType);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-order", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
-            return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
+            if (!result)
+                return result;
+
+            _baseClient.InvokeOrderCanceled(new OrderId
+            {
+                Id = result.Data.OrderId!,
+                SourceObject = result.Data
+            });
+            return result;
         }
 
         /// <inheritdoc />
@@ -86,7 +116,19 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("symbol", symbol);
             parameters.Add("orderList", orders);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
-            return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
+            if (!result)
+                return result;
+
+            foreach (var item in result.Data.Success)
+            {
+                _baseClient.InvokeOrderPlaced(new OrderId
+                {
+                    Id = item.OrderId!,
+                    SourceObject = item
+                });
+            }
+            return result;
         }
 
         /// <inheritdoc />

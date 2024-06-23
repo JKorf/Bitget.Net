@@ -59,8 +59,8 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetVipFeeRatesAsync(), "GetVipFeeRates");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetTickersAsync(), "GetTickers");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetOrderBookAsync("ETHUSDT"), "GetOrderBook");
-            await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetKlinesAsync("ETHUSDT", Enums.BitgetKlineInterval.OneDay), "GetKlines");
-            await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetHistoricalKlinesAsync("ETHUSDT", Enums.BitgetKlineInterval.OneDay), "GetHistoricalKlines");
+            await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetKlinesAsync("ETHUSDT", KlineInterval.OneDay), "GetKlines");
+            await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetHistoricalKlinesAsync("ETHUSDT", KlineInterval.OneDay), "GetHistoricalKlines");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetRecentTradesAsync("ETHUSDT"), "GetRecentTrades");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetTradesAsync("ETHUSDT"), "GetTrades");
 
@@ -94,6 +94,85 @@ namespace Bitget.Net.UnitTests
 
         }
 
+        [Test]
+        public async Task ValidateFuturesAccountCalls()
+        {
+            var client = new BitgetRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new BitgetApiCredentials("123", "456", "789");
+            });
+            var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Futures/Account", "https://api.bitget.com", IsAuthenticated, stjCompare: true, nestedPropertyForCompare: "data");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Account.GetBalancesAsync(Enums.BitgetProductTypeV2.UsdtFutures), "GetBalances");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Account.GetBalanceAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT"), "GetBalance");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Account.SetLeverageAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", 10), "SetLeverage");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Account.AdjustMarginAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", 10), "AdjustMargin");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Account.SetMarginModeAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", MarginMode.IsolatedMargin), "SetMarginMode");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Account.SetPositionModeAsync(Enums.BitgetProductTypeV2.UsdtFutures, PositionMode.OneWay), "SetPositionMode");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Account.GetLedgerAsync(Enums.BitgetProductTypeV2.UsdtFutures), "GetLedger");
+        }
+
+        [Test]
+        public async Task ValidateFuturesExchangeDataCalls()
+        {
+            var client = new BitgetRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new BitgetApiCredentials("123", "456", "789");
+            });
+            var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Futures/ExchangeData", "https://api.bitget.com", IsAuthenticated, stjCompare: true, nestedPropertyForCompare: "data");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetContractsAsync(Enums.BitgetProductTypeV2.UsdtFutures), "GetContracts");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetVipFeeRatesAsync(), "GetVipFeeRates");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetOrderBookAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetOrderBook", ignoreProperties: new List<string> { "isMaxPrecision" });
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetTickerAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetTicker", useSingleArrayItem: true);
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetTickersAsync(Enums.BitgetProductTypeV2.UsdtFutures), "GetTickers");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetRecentTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetRecentTrades");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetTrades");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.TwelveHours), "GetKlines");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetHistoricalKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.TwelveHours), "GetHistoricalKlines");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetHistoricalIndexPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.TwelveHours), "GetHistoricalIndexPriceKlines");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetHistoricalMarkPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.TwelveHours), "GetHistoricalMarkPriceKlines");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetOpenInterestAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetOpenInterest", nestedJsonProperty: "data.openInterestList", useSingleArrayItem: true);
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetNextFundingTimeAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetNextFundingTime", useSingleArrayItem: true);
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetPricesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetPrices", useSingleArrayItem: true);
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetHistoricalFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetHistoricalFundingRate");
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetFundingRate", useSingleArrayItem: true);
+            await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetPositionTiersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetPositionTiers");
+        }
+
+        [Test]
+        public async Task ValidateFuturesTradingCalls()
+        {
+            var client = new BitgetRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new BitgetApiCredentials("123", "456", "789");
+            });
+            var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Futures/Trading", "https://api.bitget.com", IsAuthenticated, stjCompare: true, nestedPropertyForCompare: "data");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetPositionAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT"), "GetPosition");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetPositionsAsync(Enums.BitgetProductTypeV2.UsdtFutures, "USDT"), "GetPositions");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetPositionHistoryAsync(Enums.BitgetProductTypeV2.UsdtFutures, "USDT"), "GetPositionHistory");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", OrderSide.Sell, OrderType.Market, MarginMode.CrossMargin, 1), "PlaceOrder");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceMultipleOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", MarginMode.IsolatedMargin, new[] { new BitgetFuturesPlaceOrderRequest() }), "PlaceMultipleOrders");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.EditOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT"), "EditOrder");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.CancelOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT"), "CancelOrder");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.CancelMultipleOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, new[] { new BitgetCancelOrderRequest() }), "CancelMultipleOrders");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.CancelAllOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures), "CancelAllOrders");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetOrder", ignoreProperties: new List<string> { "reduceOnly" });
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetOpenOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetOpenOrders", ignoreProperties: new List<string> { "reduceOnly" });
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetClosedOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetClosedOrders", ignoreProperties: new List<string> { "reduceOnly" });
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetUserTrades", ignoreProperties: new List<string> { "deduction" });
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetHistoricalUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetHistoricalUserTrades", ignoreProperties: new List<string> { "deduction" });
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.ClosePositionsAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "ClosePosition");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceTpSlOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", PlanType.TailingStop, 1, 1), "PlaceTpSlOrder");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceTriggerOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", TriggerPlanType.Normal, MarginMode.CrossMargin, OrderSide.Buy, OrderType.Market, 1, 1), "PlaceTriggerOrder");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetTriggerSubOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "1", PlanType.TailingStop), "GetTriggerSubOrders");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.EditTriggerOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures), "EditTriggerOrder");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.EditTpSlOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT"), "EditTpSlOrder");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetOpenTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, PlanType.TailingStop), "GetOpenTriggerOrders");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetClosedTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, PlanType.TailingStop), "GetClosedTriggerOrders");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.CancelTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, PlanType.TailingStop), "CancelTriggerOrders");
+        }
 
         private bool IsAuthenticated(WebCallResult result)
         {

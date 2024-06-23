@@ -1,0 +1,38 @@
+> { "op": "subscribe", "args": [{ "instType": "USDT-FUTURES", "channel": "books5", "instId": "BTCUSDT" }]}
+< { "event": "subscribe", "arg": { "instType": "USDT-FUTURES", "channel": "books5", "instId": "BTCUSDT" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "USDT-FUTURES",
+        "channel": "books5",
+        "instId": "BTCUSDT"
+    },
+    "data": [
+        {
+            "asks": [
+                [
+                    "27000.5",
+                    "8.760"
+                ],
+                [
+                    "27001.0",
+                    "0.400"
+                ]
+            ],
+            "bids": [
+                [
+                    "27000.0",
+                    "2.710"
+                ],
+                [
+                    "26999.5",
+                    "1.460"
+                ]
+            ],
+            "checksum": 0,
+            "ts": "1695716059516"
+        }
+    ],
+    "ts": 1695716059516
+}

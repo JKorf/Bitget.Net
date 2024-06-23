@@ -19,7 +19,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesBalance>> GetBalancesAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
+        Task<WebCallResult<BitgetFuturesBalance>> GetBalanceAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
 
         /// <summary>
         /// Get balances
@@ -92,5 +92,6 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesLedger>> GetLedgerAsync(BitgetProductTypeV2 productType, string? asset = null, string? businessType = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
+
     }
 }

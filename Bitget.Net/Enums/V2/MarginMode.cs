@@ -13,12 +13,12 @@ namespace Bitget.Net.Enums.V2
         /// <summary>
         /// Cross margin
         /// </summary>
-        [Map("cross")]
+        [Map("crossed", "cross")]
         CrossMargin,
         /// <summary>
         /// Isolated margin
         /// </summary>
-        [Map("isolated")]
+        [Map("isolated", "fixed")]
         IsolatedMargin
     }
 }

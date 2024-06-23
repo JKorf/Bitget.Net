@@ -21,17 +21,17 @@ namespace Bitget.Net.Objects.Socket.Queries
         private string GetErrorIdentifier(Dictionary<string, string> arg)
         {
             if (arg.ContainsKey("instId"))
-                return $"error-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}";
+                return $"error-{arg["instType"].ToLower()}-{arg["channel"].ToLowerInvariant()}-{arg["instType"].ToLower()}-{arg["instId"].ToLowerInvariant()}";
 
-            return $"error-{arg["channel"].ToLowerInvariant()}-";
+            return $"error-{arg["instType"].ToLower()}-{arg["channel"].ToLowerInvariant()}-";
         }
 
         private string GetIdentifier(string op, Dictionary<string, string> arg)
         {
             if (arg.ContainsKey("instId"))
-                return $"{op}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}";
+                return $"{op}-{arg["instType"].ToLower()}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}";
 
-            return $"{op}-{arg["channel"].ToLowerInvariant()}-";
+            return $"{op}-{arg["instType"].ToLower()}-{arg["channel"].ToLowerInvariant()}-";
         }
 
         public override CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DataEvent<BitgetSocketEvent> message)

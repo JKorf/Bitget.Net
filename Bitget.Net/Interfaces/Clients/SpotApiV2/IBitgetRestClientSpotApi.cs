@@ -27,6 +27,6 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
         /// </summary>
         /// <returns></returns>
-        //ISpotClient CommonSpotClient { get; }
+        ISpotClient CommonSpotClient { get; }
     }
 }

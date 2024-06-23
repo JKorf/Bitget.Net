@@ -1,0 +1,24 @@
+POST
+/api/v2/mix/order/close-positions
+true
+{
+    "code": "00000", 
+    "data": {
+        "successList": [
+            {
+                "orderId": "123", 
+                "clientOid": "xxxxx"
+            }
+        ], 
+        "failureList": [
+            {
+                "orderId": "1234", 
+                "clientOid": "321", 
+                "errorMsg": "clientOrderId duplicate ", 
+                "errorCode": "43118"
+            }
+        ]
+    }, 
+    "msg": "success", 
+    "requestTime": 1627293504612
+}

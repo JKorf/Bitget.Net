@@ -216,5 +216,15 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await _baseClient.SendAsync<IEnumerable<BitgetFundingRate>>(request, parameters, ct).ConfigureAwait(false);
             return result.As<BitgetFundingRate>(result.Data?.First());
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetPositionTier>>> GetPositionTiersAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddEnum("productType", productType);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/market/query-position-lever", BitgetExchange.RateLimiter.Overal, 1, false, 10, TimeSpan.FromSeconds(1));
+            return await _baseClient.SendAsync<IEnumerable<BitgetPositionTier>>(request, parameters, ct).ConfigureAwait(false);
+        }
     }
 }

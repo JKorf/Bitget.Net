@@ -1,0 +1,58 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "SPOT", "channel": "fill", "instId": "default" }]}
+< { "event": "subscribe", "arg": { "instType": "SPOT", "channel": "fill", "instId": "default" }}
+= 
+{
+    "action":"snapshot",
+    "arg":{
+        "instType":"SPOT",
+        "channel":"fill",
+        "instId":"default"
+    },
+    "data":[
+        {
+            "orderId":"111",
+            "tradeId":"111",
+            "symbol":"BTCUSDT",
+            "orderType":"limit",
+            "side":"buy",
+            "priceAvg":"42740.41",
+            "size":"0.0006",
+            "amount":"25.644246",
+            "tradeScope":"maker",
+            "feeDetail":[
+                {
+                    "feeCoin":"USDT",
+                    "deduction":"no",
+                    "totalDeductionFee":"0",
+                    "totalFee":"0.01538655"
+                }
+            ],
+            "cTime":"1703580202094",
+            "uTime":"1703580202094"
+        },
+        {
+            "orderId":"111",
+            "tradeId":"222",
+            "symbol":"BTCUSDT",
+            "orderType":"limit",
+            "side":"buy",
+            "priceAvg":"42741.46",
+            "size":"0.0006",
+            "amount":"25.644876",            
+            "tradeScope":"maker",
+            "feeDetail":[
+                {
+                    "feeCoin":"USDT",
+                    "deduction":"no",
+                    "totalDeductionFee":"0",
+                    "totalFee":"0.01538693"
+                }
+            ],
+            "cTime":"1703580202094",
+            "uTime":"1703580202094"
+        }
+    ],
+    "ts":1703580202416
+}

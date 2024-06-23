@@ -1,0 +1,42 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "USDT-FUTURES", "channel": "positions", "instId": "default" }]}
+< { "event": "subscribe", "arg": { "instType": "USDT-FUTURES", "channel": "positions", "instId": "default" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "USDT-FUTURES",
+        "channel": "positions",
+        "instId": "default"
+    },
+    "data": [
+        {
+            "posId": "1",
+            "instId": "ETHUSDT",
+            "marginCoin": "USDT",
+            "marginSize": "9.5",
+            "marginMode": "crossed",
+            "holdSide": "short",
+            "posMode": "hedge_mode",
+            "total": "0.1",
+            "available": "0.1",
+            "frozen": "0",
+            "openPriceAvg": "1900",
+            "leverage": 20,
+            "achievedProfits": "0",
+            "unrealizedPL": "0",
+            "unrealizedPLR": "0",
+            "liquidationPrice": "5788.108475905242",
+            "keepMarginRate": "0.005",
+            "marginRate": "0.004416374196",
+            "cTime": "1695649246169",
+            "breakEvenPrice": "24778.97",
+            "totalFee": "1.45",
+            "deductedFee": "0.388",
+            "uTime": "1695711602568",
+            "autoMargin": "off"
+        }
+    ],
+    "ts": 1695717430441
+}

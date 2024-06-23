@@ -32,10 +32,20 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("triggerPrice")]
         public decimal TriggerPrice { get; set; }
         /// <summary>
+        /// Price
+        /// </summary>
+        [JsonPropertyName("price")]
+        public decimal? Price { get; set; }
+        /// <summary>
         /// Quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
+        /// <summary>
+        /// Actual quantity
+        /// </summary>
+        [JsonPropertyName("actualSize")]
+        public decimal ActualQuantity { get; set; }
         /// <summary>
         /// Order type
         /// </summary>

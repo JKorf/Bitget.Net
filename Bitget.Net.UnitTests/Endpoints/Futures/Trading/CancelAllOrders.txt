@@ -1,0 +1,23 @@
+POST
+/api/v2/mix/order/cancel-all-orders
+true
+{
+    "code": "00000",
+    "data": {
+        "successList": [
+            {
+                "orderId": "121211212122",
+                "clientOid": "BITGET#121211212122"
+            }
+        ],
+        "failureList": [
+            {
+                "orderId": "232",
+                "clientOid": "321342",
+                "errorMsg": "notExistend"
+            }
+        ]
+    },
+    "msg": "success",
+    "requestTime": 1627293504612
+}

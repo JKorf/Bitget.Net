@@ -1,0 +1,17 @@
+GET
+/api/v2/mix/market/open-interest
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695796780343,
+    "data": {
+        "openInterestList": [
+            {
+                "symbol": "BTCUSDT",
+                "size": "34278.06"
+            }
+        ],
+        "ts": "1695796781616"
+    }
+}

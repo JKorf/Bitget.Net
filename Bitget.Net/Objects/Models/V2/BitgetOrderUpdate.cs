@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -27,7 +28,7 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
         /// <summary>
-        /// Quantity
+        /// Order amount. When Side = Buy, it represents the amount of quote asset; When Side = Sell, it represents the amount of base asset.
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
@@ -114,8 +115,18 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Fees
         /// </summary>
-        [JsonPropertyName("feeDetails")]
+        [JsonPropertyName("feeDetail")]
         public IEnumerable<BitgetOrderUpdateFee> Fees { get; set; } = Array.Empty<BitgetOrderUpdateFee>();
+        /// <summary>
+        /// Create time
+        /// </summary>
+        [JsonPropertyName("cTime")]
+        public DateTime CreateTime { get; set; }
+        /// <summary>
+        /// Update time
+        /// </summary>
+        [JsonPropertyName("uTime")]
+        public DateTime? UpdateTime { get; set; }
     }
 
     /// <summary>

@@ -1,0 +1,28 @@
+GET
+/api/v2/mix/position/history-position
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1312312312321,
+    "data": {
+        "list":[{
+            "marginCoin": "USDT",
+            "symbol": "BTCUSDT",
+            "holdSide": "long",
+            "openAvgPrice": "32000",
+            "closeAvgPrice": "32500",
+            "marginMode": "fixed",
+            "openTotalPos": "0.01",
+            "closeTotalPos": "0.01",
+            "pnl": "14.1",
+            "netProfit": "12.1",
+            "totalFunding": "0.1",
+            "openFee": "0.01",
+            "closeFee": "0.01",
+            "cTime": "1988824171000",
+            "uTime": "1988824171000"
+        }],
+        "endId":"23423432423423234"
+    }
+}

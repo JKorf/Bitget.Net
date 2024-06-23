@@ -21,7 +21,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFuturesBalance>> GetBalancesAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetFuturesBalance>> GetBalanceAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
@@ -102,5 +102,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/bill", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
             return await _baseClient.SendAsync<BitgetFuturesLedger>(request, parameters, ct).ConfigureAwait(false);
         }
+
     }
 }

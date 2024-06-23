@@ -1,0 +1,36 @@
+GET
+/api/v2/mix/order/fill-history
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1699267238892,
+    "data": {
+        "fillList": [
+            {
+                "tradeId": "1103122437840805890",
+                "symbol": "ETHUSDT",
+                "orderId": "1103122437760503816",
+                "price": "1801.33",
+                "baseVolume": "0.02",
+                "feeDetail": [
+                    {
+                        "deduction": "no",
+                        "feeCoin": "USDT",
+                        "totalDeductionFee": "0",
+                        "totalFee": "-0.02161596"
+                    }
+                ],
+                "side": "sell",
+                "quoteVolume": "36.0266",
+                "profit": "0.0252",
+                "enterPointSource": "ios",
+                "tradeSide": "open",
+                "posMode": "one_way_mode",
+                "tradeScope": "taker",
+                "cTime": "1698730804882"
+            }
+        ],
+        "endId": "1095254722472030209"
+    }
+}

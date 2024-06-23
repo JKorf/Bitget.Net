@@ -1,0 +1,58 @@
+GET
+/api/v2/mix/market/tickers
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695794269124,
+    "data": [
+        {
+            "symbol": "BTCUSD",
+            "lastPr": "29904.5",
+            "askPr": "29904.5",
+            "bidPr": "29903.5",
+            "bidSz": "0.5091",
+            "askSz": "2.2694",
+            "high24h": "0",
+            "low24h": "0",
+            "ts": "1695794271400",
+            "change24h": "0",
+            "baseVolume": "0",
+            "quoteVolume": "0",
+            "usdtVolume": "0",
+            "openUtc": "0",
+            "changeUtc24h": "0",
+            "indexPrice": "29132.353333",
+            "fundingRate": "-0.0007",
+            "holdingAmount": "125.6844",
+            "deliveryStartTime": null,
+            "deliveryTime": null,
+            "deliveryStatus": "delivery_normal",
+            "open24h": "0"
+        },
+        {
+            "symbol": "ETHUSD_231229",
+            "lastPr": "1829.3",
+            "askPr": "1829.8",
+            "bidPr": "1829.3",
+            "bidSz": "0.054",
+            "askSz": "0.785",
+            "high24h": "0",
+            "low24h": "0",
+            "ts": "1695794271400",
+            "change24h": "0",
+            "baseVolume": "0",
+            "quoteVolume": "0",
+            "usdtVolume": "0",
+            "openUtc": "0",
+            "changeUtc24h": "0",
+            "indexPrice": "1822.15",
+            "fundingRate": "0",
+            "holdingAmount": "9488.49",
+            "deliveryStartTime": "1693538723186",
+            "deliveryTime": "1703836799000",
+            "deliveryStatus": "delivery_normal",
+            "open24h": "0"
+        }
+    ]
+}

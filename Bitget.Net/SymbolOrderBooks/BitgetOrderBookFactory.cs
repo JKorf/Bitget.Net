@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Interfaces;
+﻿using Bitget.Net.Enums;
+using Bitget.Net.Interfaces;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces;
@@ -17,9 +18,12 @@ namespace Bitget.Net.SymbolOrderBooks
 
         /// <inheritdoc />
         public IOrderBookFactory<BitgetOrderBookOptions> Spot { get; }
-
         /// <inheritdoc />
-        public IOrderBookFactory<BitgetOrderBookOptions> Futures { get; }
+        public IOrderBookFactory<BitgetOrderBookOptions> UsdtFutures { get; }
+        /// <inheritdoc />
+        public IOrderBookFactory<BitgetOrderBookOptions> UsdcFutures { get; }
+        /// <inheritdoc />
+        public IOrderBookFactory<BitgetOrderBookOptions> CoinFutures { get; }
 
         /// <summary>
         /// ctor
@@ -30,7 +34,9 @@ namespace Bitget.Net.SymbolOrderBooks
             _serviceProvider = serviceProvider;
 
             Spot = new OrderBookFactory<BitgetOrderBookOptions>((symbol, options) => CreateSpot(symbol, options), (baseAsset, quoteAsset, options) => CreateSpot(baseAsset + quoteAsset, options));
-            Futures = new OrderBookFactory<BitgetOrderBookOptions>((symbol, options) => CreateFutures(symbol, options), (baseAsset, quoteAsset, options) => CreateFutures(baseAsset + quoteAsset, options));
+            UsdtFutures = new OrderBookFactory<BitgetOrderBookOptions>((symbol, options) => CreateFutures(BitgetProductTypeV2.UsdtFutures, symbol, options), (baseAsset, quoteAsset, options) => CreateFutures(BitgetProductTypeV2.UsdtFutures, baseAsset + quoteAsset, options));
+            UsdcFutures = new OrderBookFactory<BitgetOrderBookOptions>((symbol, options) => CreateFutures(BitgetProductTypeV2.UsdcFutures, symbol, options), (baseAsset, quoteAsset, options) => CreateFutures(BitgetProductTypeV2.UsdcFutures, baseAsset + quoteAsset, options));
+            CoinFutures = new OrderBookFactory<BitgetOrderBookOptions>((symbol, options) => CreateFutures(BitgetProductTypeV2.CoinFutures, symbol, options), (baseAsset, quoteAsset, options) => CreateFutures(BitgetProductTypeV2.CoinFutures, baseAsset + quoteAsset, options));
         }
 
         /// <inheritdoc />
@@ -41,8 +47,8 @@ namespace Bitget.Net.SymbolOrderBooks
                                              _serviceProvider.GetRequiredService<IBitgetSocketClient>());
 
         /// <inheritdoc />
-        public ISymbolOrderBook CreateFutures(string symbol, Action<BitgetOrderBookOptions>? options = null)
-            => new BitgetFuturesSymbolOrderBook(symbol,
+        public ISymbolOrderBook CreateFutures(BitgetProductTypeV2 productType, string symbol, Action<BitgetOrderBookOptions>? options = null)
+            => new BitgetFuturesSymbolOrderBook(productType, symbol,
                                              options,
                                              _serviceProvider.GetRequiredService<ILoggerFactory>(),
                                              _serviceProvider.GetRequiredService<IBitgetSocketClient>());

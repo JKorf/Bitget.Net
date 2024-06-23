@@ -13,12 +13,12 @@ namespace Bitget.Net.Enums.V2
         /// <summary>
         /// Taker
         /// </summary>
-        [Map("taker")]
+        [Map("taker", "T")]
         Taker,
         /// <summary>
         /// Maker
         /// </summary>
-        [Map("maker")]
+        [Map("maker", "M")]
         Maker
     }
 }

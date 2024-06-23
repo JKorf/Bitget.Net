@@ -41,6 +41,11 @@ namespace Bitget.Net.Objects.Models.V2
         /// Error message
         /// </summary>
         [JsonPropertyName("errorMsg")]
-        public string Error { get; set; } = string.Empty;
+        public string ErrorMessage { get; set; } = string.Empty;
+        /// <summary>
+        /// Error code
+        /// </summary>
+        [JsonPropertyName("errorCode")]
+        public int? ErrorCode { get; set; }
     }
 }

@@ -74,6 +74,11 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("ts")]
         public DateTime Timestamp { get; set; }
         /// <summary>
+        /// Change rate since 24h
+        /// </summary>
+        [JsonPropertyName("change24h")]
+        public decimal ChangePercentage { get; set; }
+        /// <summary>
         /// Change rate since openUtc, that is: (last - openUtc) / openUtc, scale e-5
         /// </summary>
         [JsonPropertyName("changeUtc24h")]

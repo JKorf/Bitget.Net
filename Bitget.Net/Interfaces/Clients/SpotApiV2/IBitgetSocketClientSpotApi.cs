@@ -13,7 +13,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
     public interface IBitgetSocketClientSpotApi : ISocketApiClient, IDisposable
     {
         /// <summary>
-        /// Subscribe to ticker updates for multiple symbols
+        /// Subscribe to ticker updates for a symbol
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
@@ -79,7 +79,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
-        /// <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updatesa after</param>
+        /// <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>

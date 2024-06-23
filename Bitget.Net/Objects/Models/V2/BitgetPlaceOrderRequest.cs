@@ -29,12 +29,12 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Price
         /// </summary>
-        [JsonPropertyName("price"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonPropertyName("price"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter)), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? Price { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>
-        [JsonPropertyName("size")]
+        [JsonPropertyName("size"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter))]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Client order id

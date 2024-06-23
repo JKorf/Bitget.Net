@@ -1,6 +1,7 @@
 ﻿using Bitget.Net.Clients;
+using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients;
-using Bitget.Net.Objects.Models;
+using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
@@ -17,14 +18,16 @@ namespace Bitget.Net.SymbolOrderBooks
         private readonly IBitgetSocketClient _socketClient;
         private bool _initial = true;
         private readonly bool _clientOwner;
+        private readonly BitgetProductTypeV2 _productType;
 
         /// <summary>
         /// Create a new order book instance
         /// </summary>
         /// <param name="symbol">The symbol the order book is for</param>
+        /// <param name="productType">The product type</param>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BitgetFuturesSymbolOrderBook(string symbol, Action<BitgetOrderBookOptions>? optionsDelegate = null)
-            : this(symbol, optionsDelegate, null, null)
+        public BitgetFuturesSymbolOrderBook(BitgetProductTypeV2 productType, string symbol, Action<BitgetOrderBookOptions>? optionsDelegate = null)
+            : this(productType, symbol, optionsDelegate, null, null)
         {
             _clientOwner = true;
         }
@@ -33,10 +36,13 @@ namespace Bitget.Net.SymbolOrderBooks
         /// Create a new order book instance
         /// </summary>
         /// <param name="symbol">The symbol the order book is for</param>
+        /// <param name="productType">The product type</param>
         /// <param name="optionsDelegate">Option configuration delegate</param>
         /// <param name="logger">Logger</param>
         /// <param name="socketClient">Socket client instance</param>
-        public BitgetFuturesSymbolOrderBook(string symbol,
+        public BitgetFuturesSymbolOrderBook(
+            BitgetProductTypeV2 productType,
+            string symbol,
             Action<BitgetOrderBookOptions>? optionsDelegate,
             ILoggerFactory? logger,
             IBitgetSocketClient? socketClient) : base(logger, "Bitget", "Futures", symbol)
@@ -46,6 +52,7 @@ namespace Bitget.Net.SymbolOrderBooks
                 optionsDelegate(options);
             Initialize(options);
 
+            _productType = productType;
             _socketClient = socketClient ?? new BitgetSocketClient();
             _clientOwner = socketClient == null;
 
@@ -57,9 +64,9 @@ namespace Bitget.Net.SymbolOrderBooks
         {
             CallResult<UpdateSubscription> result;
             if (Levels != null)
-                result = await _socketClient.FuturesApi.SubscribeToOrderBookUpdatesAsync(Symbol, Levels.Value, ProcessUpdate).ConfigureAwait(false);
+                result = await _socketClient.FuturesApiV2.SubscribeToOrderBookUpdatesAsync(_productType, Symbol, Levels.Value, ProcessUpdate).ConfigureAwait(false);
             else
-                result = await _socketClient.FuturesApi.SubscribeToOrderBookUpdatesAsync(Symbol, ProcessUpdate).ConfigureAwait(false);
+                result = await _socketClient.FuturesApiV2.SubscribeToOrderBookUpdatesAsync(_productType, Symbol, null, ProcessUpdate).ConfigureAwait(false);
             if (!result)
                 return result;
 

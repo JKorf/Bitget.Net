@@ -1,0 +1,37 @@
+GET
+/api/v2/mix/order/detail
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695823012595,
+    "data": {
+        "symbol": "ethusdt",
+        "size": "2",
+        "orderId": "123456",
+        "clientOid": "77777",
+        "baseVolume": "2",
+        "priceAvg": "1900",
+        "fee": "",
+        "price": "1900",
+        "status": "filled",
+        "side": "buy",
+        "force": "gtc",
+        "totalProfits": "2112",
+        "posSide": "long",
+        "marginCoin": "usdt",
+        "presetStopSurplusPrice": "1910",
+        "presetStopLossPrice": "1890",
+        "quoteVolume": "1900",
+        "orderType": "limit",
+        "leverage": "20",
+        "marginMode": "cross",
+        "reduceOnly": "yes",
+        "enterPointSource": "api",
+        "tradeSide": "",
+        "posMode": "one_way_mode",
+        "orderSource": "normal",
+        "cTime": "1627300098776",
+        "uTime": "1627300098776"
+    }
+}

@@ -23,9 +23,9 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         private string[] GetIdentifier(Dictionary<string, string> arg)
         {
             if (arg.ContainsKey("instId"))
-                return new[] { $"snapshot-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}", $"update-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}" };
+                return new[] { $"snapshot-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}", $"update-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}" };
 
-            return new[] { $"snapshot-{arg["channel"].ToLower()}-", $"update-{arg["channel"].ToLower()}-" };
+            return new[] { $"snapshot-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-", $"update-{arg["channel"].ToLower()}-" };
         }
 
         public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false);
@@ -34,7 +34,8 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
         {
             var data = (BitgetSocketUpdate<T>)message.Data;
-            _handler.Invoke(message.As(data.Data, data.Args.Channel, data.Args.InstrumentId, string.Equals(data.Action, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
+            var symbol = data.Args.InstrumentId;
+            _handler.Invoke(message.As(data.Data, data.Args.Channel, symbol == "default" ? null : symbol, string.Equals(data.Action, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
             return new CallResult(null);
         }
 

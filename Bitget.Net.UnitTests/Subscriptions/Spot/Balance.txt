@@ -1,0 +1,24 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "SPOT", "channel": "account", "instId": "default" }]}
+< { "event": "subscribe", "arg": { "instType": "SPOT", "channel": "account", "instId": "default" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "SPOT",
+        "channel": "account",
+        "coin": "default"
+    },
+    "data": [
+        {
+            "coin": "USDT",
+            "available": "100000",
+            "frozen": "0",
+            "locked": "0",
+            "limitAvailable": "0",
+            "uTime":"1697092295506"
+        }
+    ],
+    "ts": 1695713887792
+}

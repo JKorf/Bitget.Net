@@ -200,5 +200,15 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFundingRate>> GetFundingRateAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get position tiers
+        /// <para><a href="https://www.bitget.com/api-doc/contract/position/Get-Query-Position-Lever" /></para>
+        /// </summary>
+        /// <param name="productType">Product type</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetPositionTier>>> GetPositionTiersAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
     }
 }

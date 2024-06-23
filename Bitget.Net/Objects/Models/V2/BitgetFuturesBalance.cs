@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using Bitget.Net.Enums.V2;
 
 namespace Bitget.Net.Objects.Models.V2
 {
@@ -80,5 +81,30 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("coupon")]
         public decimal? Coupon { get; set; }
+        /// <summary>
+        /// Cross margin leverage
+        /// </summary>
+        [JsonPropertyName("crossedMarginLeverage")]
+        public decimal? CrossMarginLeverage { get; set; }
+        /// <summary>
+        /// Isolated margin long leverage
+        /// </summary>
+        [JsonPropertyName("isolatedLongLever")]
+        public decimal? IsolatedMarginLongLeverage { get; set; }
+        /// <summary>
+        /// Isolated margin short leverage
+        /// </summary>
+        [JsonPropertyName("isolatedShortLever")]
+        public decimal? IsolatedMarginShortLeverage { get; set; }
+        /// <summary>
+        /// Margin mode
+        /// </summary>
+        [JsonPropertyName("marginMode")]
+        public MarginMode? MarginMode { get; set; }
+        /// <summary>
+        /// Position mode
+        /// </summary>
+        [JsonPropertyName("posMode")]
+        public PositionMode? PositionMode { get; set; }
     }
 }

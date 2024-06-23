@@ -19,6 +19,11 @@ namespace Bitget.Net.Enums.V2
         /// Order executing
         /// </summary>
         [Map("executing")]
-        Executing
+        Executing,
+        /// <summary>
+        /// Order executed
+        /// </summary>
+        [Map("executed")]
+        Executed
     }
 }

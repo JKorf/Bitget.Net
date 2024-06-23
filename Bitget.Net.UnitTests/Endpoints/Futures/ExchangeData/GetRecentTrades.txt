@@ -1,0 +1,26 @@
+GET
+/api/v2/mix/market/fills
+false
+{
+    "code": "00000",
+    "data": [
+        {
+            "tradeId": "1",
+            "price": "29990.5",
+            "size": "0.0166",
+            "side": "sell",
+            "ts": "1627116776464",
+            "symbol": "BTCUSDT"
+        },
+        {
+            "tradeId": "2",
+            "price": "30007.0",
+            "size": "0.0166",
+            "side": "buy",
+            "ts": "1627116600875",
+            "symbol": "BTCUSDT"
+        }
+    ],
+    "msg": "success",
+    "requestTime": 1690313813709
+}

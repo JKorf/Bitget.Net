@@ -19,6 +19,11 @@ namespace Bitget.Net.Enums.V2
         /// Short position
         /// </summary>
         [Map("short")]
-        Short
+        Short,
+        /// <summary>
+        /// One way position
+        /// </summary>
+        [Map("net")]
+        Oneway
     }
 }

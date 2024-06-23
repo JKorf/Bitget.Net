@@ -1,0 +1,15 @@
+GET
+/api/v2/mix/market/funding-time
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695796425096,
+    "data": [
+        {
+            "symbol": "BTCUSDT",
+            "nextFundingTime": "1695801600000",
+            "ratePeriod": "8"
+        }
+    ]
+}

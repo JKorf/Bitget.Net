@@ -1,0 +1,32 @@
+GET
+/api/v2/mix/order/cancel-plan-order
+true
+{
+    "code": "00000",
+    "data": {
+        "successList": [
+            {
+                "orderId": "121212121212",
+                "clientOid": "123"
+            },
+            {
+                "orderId": "123",
+                "clientOid": ""
+            }
+        ],
+        "failureList": [
+            {
+                "orderId": "3",
+                "clientOid": "123",
+                "errorMsg": "notExistend"
+            },
+            {
+                "orderId": "21221",
+                "clientOid": "",
+                "errorMsg": "notExistend"
+            }
+        ]
+    },
+    "msg": "success",
+    "requestTime": 1627293504612
+}
