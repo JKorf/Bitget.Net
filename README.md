@@ -70,9 +70,32 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 
 ## Supported functionality
 
-*The library currently uses the V1 API, it will be updated to V2 soon*
+*Both V1 API and V2 are currently supported*
 
-### Spot
+### V2  
+#### Spot
+|API|Supported|Location|
+|--|--:|--|
+|Rest Market|✓|`restClient.SpotApiV2.ExchangeData`|
+|Rest Trade|✓|`restClient.SpotApiV2.Trading`|
+|Rest Trigger|✓|`restClient.SpotApi.Account`|
+|Rest Account|✓|`restClient.SpotApi.Account`|
+|Websocket Public|✓|`socketClient.SpotApiV2`|
+|Websocket Private|✓|`socketClient.SpotApiV2`|
+
+#### Future (usdt/usdc/coin)
+|API|Supported|Location|
+|--|--:|--|
+|Rest Market|✓|`restClient.FuturesApiV2.ExchangeData`|
+|Rest Account|✓|`restClient.FuturesApiV2.Account`|
+|Rest Position|✓|`restClient.FuturesApiV2.Trading`|
+|Rest Trade|✓|`restClient.FuturesApiV2.Trading`|
+|Rest Trigger Order|✓|`restClient.FuturesApiV2.Trading`|
+|Websocket Public|✓|`socketClient.FuturesApiV2`|
+|Websocket Private|✓|`socketClient.FuturesApiV2`|
+
+### V1  
+#### Spot
 |API|Supported|Location|
 |--|--:|--|
 |Rest Public|✓|`restClient.SpotApi.ExchangeData`|
@@ -86,29 +109,15 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 |Websocket Public|✓|`socketClient.SpotApi`|
 |Websocket Private|✓|`socketClient.SpotApi`|
 
-### Futures USDT/Coin
+#### Futures USDT/Coin
 |API|Supported|Location|
 |--|--:|--|
-|Rest Market|✓|`restClient.SpotApi.ExchangeData`|
-|Rest Account|✓|`restClient.SpotApi.Account`|
-|Rest Trade|✓|`restClient.SpotApi.Trading`|
-|Websocket Public|✓|`socketClient.SpotApi`|
-|Websocket Private|✓|`socketClient.SpotApi`|
+|Rest Market|✓|`restClient.FuturesApi.ExchangeData`|
+|Rest Account|✓|`restClient.FuturesApi.Account`|
+|Rest Trade|✓|`restClient.FuturesApi.Trading`|
+|Websocket Public|✓|`socketClient.FuturesApi`|
+|Websocket Private|✓|`socketClient.FuturesApi`|
 
-### Broker
-|API|Supported|Location|
-|--|--:|--|
-|*|X||
-
-### Spot Margin
-|API|Supported|Location|
-|--|--:|--|
-|*|X||
-
-### Copy Trading
-|API|Supported|Location|
-|--|--:|--|
-|*|X||
 
 ## Support the project
 I develop and maintain this package on my own for free in my spare time, any support is greatly appreciated.
