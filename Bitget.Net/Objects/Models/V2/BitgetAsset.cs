@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Bitget.Net.Converters;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
 {
@@ -70,12 +71,12 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Deposit confirmations needed
         /// </summary>
-        [JsonPropertyName("depositConfirm")]
+        [JsonPropertyName("depositConfirm"), JsonConverter(typeof(IntConverter))]
         public int? DepositConfirm { get; set; }
         /// <summary>
         /// Withdrawal confirmations
         /// </summary>
-        [JsonPropertyName("withdrawConfirm")]
+        [JsonPropertyName("withdrawConfirm"), JsonConverter(typeof(IntConverter))]
         public int? WithdrawConfirm { get; set; }
         /// <summary>
         /// Minimal deposit quantity
@@ -105,7 +106,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Decimal places of withdrawal quantity
         /// </summary>
-        [JsonPropertyName("withdrawMinScale")]
+        [JsonPropertyName("withdrawMinScale"), JsonConverter(typeof(IntConverter))]
         public int? WithdrawQuantityPrecision { get; set; }
     }
 }

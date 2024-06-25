@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bitget.Net.Converters;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -45,7 +46,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Error code
         /// </summary>
-        [JsonPropertyName("errorCode")]
+        [JsonPropertyName("errorCode"), JsonConverter(typeof(IntConverter))]
         public int? ErrorCode { get; set; }
     }
 }

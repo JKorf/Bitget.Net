@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums.V2;
+﻿using Bitget.Net.Converters;
+using Bitget.Net.Enums.V2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -69,7 +70,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Number of confirmed blocks
         /// </summary>
-        [JsonPropertyName("confirm")]
+        [JsonPropertyName("confirm"), JsonConverter(typeof(IntConverter))]
         public int? Confirmations { get; set; }
         /// <summary>
         /// Network

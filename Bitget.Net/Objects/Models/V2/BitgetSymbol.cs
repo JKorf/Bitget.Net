@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using Bitget.Net.Converters;
 using Bitget.Net.Enums;
 
 namespace Bitget.Net.Objects.Models.V2
@@ -49,17 +50,17 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// The number of decimals used for price
         /// </summary>
-        [JsonPropertyName("pricePrecision")]
+        [JsonPropertyName("pricePrecision"), JsonConverter(typeof(IntConverter))]
         public int? PricePrecision { get; set; }
         /// <summary>
         /// The number of decimals used for quantity
         /// </summary>
-        [JsonPropertyName("quantityPrecision")]
+        [JsonPropertyName("quantityPrecision"), JsonConverter(typeof(IntConverter))]
         public int? QuantityPrecision { get; set; }
         /// <summary>
         /// The number of decimals used for quote quantity
         /// </summary>
-        [JsonPropertyName("quotePrecision")]
+        [JsonPropertyName("quotePrecision"), JsonConverter(typeof(IntConverter))]
         public int? QuoteQuantityPrecision { get; set; }
         /// <summary>
         /// Minimal order value in USDT
@@ -75,11 +76,11 @@ namespace Bitget.Net.Objects.Models.V2
         /// Max percentage spread between buy limit price and current price
         /// </summary>
         [JsonPropertyName("buyLimitPriceRatio")]
-        public decimal BuyLimitPriceRatio { get; set; }
+        public decimal? BuyLimitPriceRatio { get; set; }
         /// <summary>
         /// Max percentage spread between sell limit price and current price
         /// </summary>
         [JsonPropertyName("sellLimitPriceRatio")]
-        public decimal SellLimitPriceRatio { get; set; }
+        public decimal? SellLimitPriceRatio { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bitget.Net.Converters;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -23,7 +24,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Rate settlement cycle in hours
         /// </summary>
-        [JsonPropertyName("ratePeriod")]
+        [JsonPropertyName("ratePeriod"), JsonConverter(typeof(IntConverter))]
         public int? RatePeriod { get; set; }
     }
 }

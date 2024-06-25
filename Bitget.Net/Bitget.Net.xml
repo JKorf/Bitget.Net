@@ -1208,6 +1208,17 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.GetAuthenticationRequest(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
+        <member name="T:Bitget.Net.Converters.IntConverter">
+            <summary>
+            Int converter
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Converters.IntConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Converters.IntConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.Int32},System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetAccountType">
             <summary>
             Account type

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 using Bitget.Net.Enums.V2;
+using Bitget.Net.Converters;
 
 namespace Bitget.Net.Objects.Models.V2
 {
@@ -150,7 +151,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Funding interval
         /// </summary>
-        [JsonPropertyName("fundInterval")]
+        [JsonPropertyName("fundInterval"), System.Text.Json.Serialization.JsonConverter(typeof(IntConverter))]
         public int? FundingInterval { get; set; }
         /// <summary>
         /// Minimal leverage
