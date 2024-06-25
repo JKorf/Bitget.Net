@@ -134,7 +134,7 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 
 ## Release notes
 * Version 1.5.1 - 25 Jun 2024
-    * Updated CryptoExchange.Net to 7.7.2
+    * Updated CryptoExchange.Net to 7.7.2, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.7.2
     * Fixed deserialization of nullable int values
     * Fixed SpotApiV2.ExchangeData.GetSymbolsAsync deserialization
 
