@@ -368,10 +368,10 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToTradeUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetFuturesKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetFuturesKlineUpdate}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetFuturesKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetFuturesKlineUpdate}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToOrderBookUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
@@ -1178,10 +1178,10 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
@@ -2097,6 +2097,101 @@
         <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.OneWeek">
             <summary>
             One week
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.BitgetStreamKlineIntervalV2">
+            <summary>
+            Kline interval
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.OneMinute">
+            <summary>
+            One minute
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.FiveMinutes">
+            <summary>
+            Five minute
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.FifteenMinutes">
+            <summary>
+            Fifteen minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.ThirtyMinutes">
+            <summary>
+            Thirty minutes
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.OneHour">
+            <summary>
+            One hour
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.FourHours">
+            <summary>
+            Four hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.SixHours">
+            <summary>
+            Six hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.TwelveHours">
+            <summary>
+            Twelve hours
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.OneDay">
+            <summary>
+            One day
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.ThreeDays">
+            <summary>
+            Three days
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.OneWeek">
+            <summary>
+            One week
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.OneMonth">
+            <summary>
+            One month
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.SixHoursUtc">
+            <summary>
+            Six hours UTC
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.TwelveHoursUtc">
+            <summary>
+            Twelve hours UTC
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.OneDayUtc">
+            <summary>
+            One day UTC
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.ThreeDayUtc">
+            <summary>
+            Three day UTC
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.OneWeekUtc">
+            <summary>
+            One week UTC
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.OneMonthUtc">
+            <summary>
+            One month UTC
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetSymbolStatus">
@@ -3923,7 +4018,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetFuturesKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetFuturesKlineUpdate}}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to kline/candlestick updates for a symbol
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /></para>
@@ -3935,7 +4030,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetFuturesKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SubscribeToKlineUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetFuturesKlineUpdate}}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to kline/candlestick updates for symbols
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /></para>
@@ -5511,7 +5606,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to kline/candlestick updates for a symbol
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
@@ -5522,7 +5617,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineInterval,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to kline/candlestick updates for multiple symbols
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
