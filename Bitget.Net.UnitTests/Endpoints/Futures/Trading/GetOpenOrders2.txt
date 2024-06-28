@@ -1,0 +1,4 @@
+GET
+/api/v2/mix/order/orders-pending
+true
+{"code":"00000","msg":"success","requestTime":1719535797753,"data":{"entrustedList":[{"symbol":"BLURUSDT","size":"40","orderId":"1190384645049036801","clientOid":"1190384645074202625","baseVolume":"0","fee":"0","price":"0.15","priceAvg":"","status":"live","side":"buy","force":"gtc","totalProfits":"0","posSide":"net","marginCoin":"USDT","quoteVolume":"0","leverage":"10","marginMode":"crossed","enterPointSource":"web","tradeSide":"buy_single","posMode":"one_way_mode","orderType":"limit","orderSource":"normal","presetStopSurplusPrice":"","presetStopLossPrice":"","reduceOnly":"NO","cTime":"1719535736339","uTime":"1719535736393"}],"endId":"1190384645049036801"}}

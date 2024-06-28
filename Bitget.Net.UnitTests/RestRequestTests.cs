@@ -160,6 +160,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.CancelAllOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures), "CancelAllOrders");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetOrder", ignoreProperties: new List<string> { "reduceOnly" });
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetOpenOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetOpenOrders", ignoreProperties: new List<string> { "reduceOnly" });
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetOpenOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetOpenOrders2", ignoreProperties: new List<string> { "reduceOnly" });
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetClosedOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetClosedOrders", ignoreProperties: new List<string> { "reduceOnly" });
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetUserTrades", ignoreProperties: new List<string> { "deduction" });
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetHistoricalUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetHistoricalUserTrades", ignoreProperties: new List<string> { "deduction" });

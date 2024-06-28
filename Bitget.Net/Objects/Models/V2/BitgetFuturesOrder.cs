@@ -57,7 +57,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Average fill price
         /// </summary>
         [JsonPropertyName("priceAvg")]
-        public decimal AveragePrice { get; set; }
+        public decimal? AveragePrice { get; set; }
         /// <summary>
         /// Fee paid
         /// </summary>
