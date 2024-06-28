@@ -1,5 +1,4 @@
-﻿using Bitget.Net.Enums;
-using Bitget.Net.Enums.V2;
+﻿using Bitget.Net.Enums.V2;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net.Objects;
 
@@ -75,7 +74,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetKline>>> GetKlinesAsync(string symbol, BitgetStreamKlineIntervalV2 interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BitgetKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get historical kline data
@@ -87,7 +86,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetKline>>> GetHistoricalKlinesAsync(string symbol, BitgetStreamKlineIntervalV2 interval, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BitgetKline>>> GetHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get the most recent trades on the symbol

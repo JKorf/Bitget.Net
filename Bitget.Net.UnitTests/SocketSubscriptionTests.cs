@@ -21,7 +21,7 @@ namespace Bitget.Net.UnitTests
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Spot", "https://api.bitget.com", "data", stjCompare: true);
             await tester.ValidateAsync<BitgetTickerUpdate>((client, handler) => client.SpotApiV2.SubscribeToTickerUpdatesAsync("ETHUSDT", handler), "Ticker", useFirstUpdateItem: true);
             await tester.ValidateAsync<IEnumerable<BitgetTradeUpdate>>((client, handler) => client.SpotApiV2.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
-            await tester.ValidateAsync<IEnumerable<BitgetKlineUpdate>>((client, handler) => client.SpotApiV2.SubscribeToKlineUpdatesAsync("ETHUSDT", Enums.BitgetStreamKlineInterval.OneWeek, handler), "Klines");
+            await tester.ValidateAsync<IEnumerable<BitgetKlineUpdate>>((client, handler) => client.SpotApiV2.SubscribeToKlineUpdatesAsync("ETHUSDT", Enums.BitgetStreamKlineIntervalV2.OneWeek, handler), "Klines");
             await tester.ValidateAsync<BitgetOrderBookUpdate>((client, handler) => client.SpotApiV2.SubscribeToOrderBookUpdatesAsync("BTCUSDT", 5, handler), "OrderBook", useFirstUpdateItem: true);
             await tester.ValidateAsync<IEnumerable<BitgetOrderUpdate>>((client, handler) => client.SpotApiV2.SubscribeToOrderUpdatesAsync(handler), "Order");
             await tester.ValidateAsync<IEnumerable<BitgetUserTradeUpdate>>((client, handler) => client.SpotApiV2.SubscribeToUserTradeUpdatesAsync(handler), "UserTrade", ignoreProperties: new List<string> { "deduction" });
@@ -39,7 +39,7 @@ namespace Bitget.Net.UnitTests
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Futures", "https://api.bitget.com", "data", stjCompare: true);
             await tester.ValidateAsync<BitgetFuturesTickerUpdate>((client, handler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", handler), "Ticker", useFirstUpdateItem: true);
             await tester.ValidateAsync<IEnumerable<BitgetTradeUpdate>>((client, handler) => client.FuturesApiV2.SubscribeToTradeUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", handler), "Trade");
-            await tester.ValidateAsync<IEnumerable<BitgetFuturesKlineUpdate>>((client, handler) => client.FuturesApiV2.SubscribeToKlineUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", Enums.BitgetStreamKlineInterval.TwelveHours, handler), "Kline");
+            await tester.ValidateAsync<IEnumerable<BitgetFuturesKlineUpdate>>((client, handler) => client.FuturesApiV2.SubscribeToKlineUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", Enums.BitgetStreamKlineIntervalV2.TwelveHours, handler), "Kline");
             await tester.ValidateAsync<BitgetOrderBookUpdate>((client, handler) => client.FuturesApiV2.SubscribeToOrderBookUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", 5, handler), "OrderBook", useFirstUpdateItem: true);
             await tester.ValidateAsync<IEnumerable<BitgetFuturesBalanceUpdate>>((client, handler) => client.FuturesApiV2.SubscribeToBalanceUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "Balance");
             await tester.ValidateAsync<IEnumerable<BitgetPositionUpdate>>((client, handler) => client.FuturesApiV2.SubscribeToPositionUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "Position", ignoreProperties: new List<string> { "autoMargin" });
