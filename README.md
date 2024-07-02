@@ -133,6 +133,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.6.1 - 02 Jul 2024
+    * Updated CryptoExchange.Net to V7.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.8.0
+    * Updated ratelimiting for per-endpoint limits
+
 * Version 1.6.0 - 28 Jun 2024
     * Fixed V1 socket subscriptions
     * Fixed FuturesApiV2.Trading.GetOpenOrdersAsync deserialization
