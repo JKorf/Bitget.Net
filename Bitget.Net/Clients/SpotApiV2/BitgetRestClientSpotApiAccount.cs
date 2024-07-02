@@ -4,6 +4,7 @@ using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.RateLimiting.Guards;
 using System.Globalization;
 
 namespace Bitget.Net.Clients.SpotApiV2
@@ -23,7 +24,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         public async Task<WebCallResult<IEnumerable<BitgetBalance>>> GetFundingBalancesAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/account/funding-assets", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/account/funding-assets", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<IEnumerable<BitgetBalance>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -31,7 +33,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         public async Task<WebCallResult<IEnumerable<BitgetAssetValue>>> GetAssetsValuationAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/account/all-account-balance", BitgetExchange.RateLimiter.Overal, 1, true, 1, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/account/all-account-balance", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<IEnumerable<BitgetAssetValue>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -42,7 +45,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddEnum("businessType", businessType);
             parameters.Add("symbol", symbol);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/common/trade-rate", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/common/trade-rate", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetUserFee>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -50,7 +54,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         public async Task<WebCallResult<BitgetAccountInfo>> GetAccountInfoAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/info", BitgetExchange.RateLimiter.Overal, 1, true, 1, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/info", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetAccountInfo>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -58,7 +63,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         public async Task<WebCallResult<IEnumerable<BitgetSpotBalance>>> GetSpotBalancesAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/assets", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/assets", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<IEnumerable<BitgetSpotBalance>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -68,7 +74,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.Add("coin", asset);
             parameters.AddEnum("accountType", accountType);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/modify-deposit-account", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/modify-deposit-account", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -83,7 +90,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/bills", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/bills", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<IEnumerable<BitgetSpotLedgerEntry>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -97,7 +105,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddString("amount", quantity);
             parameters.AddOptional("symbol", symbol);
             parameters.AddOptional("clientOid", clientId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/transfer", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/transfer", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetTransferResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -107,7 +116,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.AddEnum("fromType", fromAccount);
             parameters.AddEnum("toType", toAccount);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/transfer-coin-info", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/transfer-coin-info", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<IEnumerable<string>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -125,7 +135,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("tag", tag);
             parameters.AddOptional("remark", remark);
             parameters.AddOptional("clientOid", clientOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/withdrawal", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/withdrawal", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetWithdrawResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -140,7 +151,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/transferRecords", BitgetExchange.RateLimiter.Overal, 1, true, 20, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/transferRecords", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<IEnumerable<BitgetTransferRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -149,7 +161,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("deduct", enable ? "on" : "off");
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/account/switch-deduct", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/account/switch-deduct", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -157,7 +170,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         public async Task<WebCallResult<BitgetBgbDeduct>> GetBgbDeductEnabledAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/deduct-info", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/deduct-info", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetBgbDeduct>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -167,7 +181,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.Add("coin", asset);
             parameters.AddOptional("chain", network);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/deposit-address", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/deposit-address", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetDepositAddress>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -176,7 +191,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("orderId", withdrawalOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/cancel-withdrawal", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/cancel-withdrawal", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -191,7 +207,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/withdrawal-records", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/withdrawal-records", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<IEnumerable<BitgetWithdrawalRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -205,7 +222,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/deposit-records", BitgetExchange.RateLimiter.Overal, 1, true, 10, TimeSpan.FromSeconds(1));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/deposit-records", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<IEnumerable<BitgetDepositRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
     }
