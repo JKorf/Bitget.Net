@@ -21,7 +21,7 @@ using Newtonsoft.Json;
 namespace Bitget.Net.Clients.FuturesApi
 {
     /// <inheritdoc />
-    public class BitgetSocketClientFuturesApi : SocketApiClient, IBitgetSocketClientFuturesApi
+    internal class BitgetSocketClientFuturesApi : SocketApiClient, IBitgetSocketClientFuturesApi
     {
         private static readonly MessagePath _eventPath = MessagePath.Get().Property("event");
         private static readonly MessagePath _actionPath = MessagePath.Get().Property("action");

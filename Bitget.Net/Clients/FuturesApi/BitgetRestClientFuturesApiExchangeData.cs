@@ -9,7 +9,7 @@ using Bitget.Net.Interfaces.Clients.FuturesApi;
 namespace Bitget.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BitgetRestClientFuturesApiExchangeData : IBitgetRestClientFuturesApiExchangeData
+    internal class BitgetRestClientFuturesApiExchangeData : IBitgetRestClientFuturesApiExchangeData
     {
         private readonly BitgetRestClientFuturesApi _baseClient;
 

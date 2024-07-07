@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 namespace Bitget.Net.Clients.FuturesApi
 {
     /// <inheritdoc />
-    public class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
+    internal class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Futures Api");
 

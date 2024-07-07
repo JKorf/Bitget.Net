@@ -8,7 +8,7 @@ using Bitget.Net.Enums;
 namespace Bitget.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BitgetRestClientSpotApiExchangeData : IBitgetRestClientSpotApiExchangeData
+    internal class BitgetRestClientSpotApiExchangeData : IBitgetRestClientSpotApiExchangeData
     {
         private readonly BitgetRestClientSpotApi _baseClient;
 

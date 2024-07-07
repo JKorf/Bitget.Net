@@ -17,7 +17,7 @@ using Microsoft.Extensions.Logging;
 namespace Bitget.Net.Clients.SpotApiV2
 {
     /// <inheritdoc />
-    public class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi, ISpotClient
+    internal class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi, ISpotClient
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 

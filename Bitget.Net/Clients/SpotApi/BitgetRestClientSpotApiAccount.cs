@@ -9,7 +9,7 @@ using System.Globalization;
 namespace Bitget.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BitgetRestClientSpotApiAccount : IBitgetRestClientSpotApiAccount
+    internal class BitgetRestClientSpotApiAccount : IBitgetRestClientSpotApiAccount
     {
         private readonly BitgetRestClientSpotApi _baseClient;
 

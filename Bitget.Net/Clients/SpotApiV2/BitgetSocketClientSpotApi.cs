@@ -22,7 +22,7 @@ using Newtonsoft.Json;
 namespace Bitget.Net.Clients.SpotApiV2
 {
     /// <inheritdoc />
-    public class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
+    internal class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
     {
         private static readonly MessagePath _eventPath = MessagePath.Get().Property("event");
         private static readonly MessagePath _actionPath = MessagePath.Get().Property("action");

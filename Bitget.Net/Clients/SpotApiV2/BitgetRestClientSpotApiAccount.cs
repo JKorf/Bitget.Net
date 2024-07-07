@@ -10,7 +10,7 @@ using System.Globalization;
 namespace Bitget.Net.Clients.SpotApiV2
 {
     /// <inheritdoc />
-    public class BitgetRestClientSpotApiAccount : IBitgetRestClientSpotApiAccount
+    internal class BitgetRestClientSpotApiAccount : IBitgetRestClientSpotApiAccount
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
         private readonly BitgetRestClientSpotApi _baseClient;

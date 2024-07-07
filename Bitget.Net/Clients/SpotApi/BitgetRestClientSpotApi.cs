@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 namespace Bitget.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi, ISpotClient
+    internal class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi, ISpotClient
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 

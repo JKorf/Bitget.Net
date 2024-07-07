@@ -10,7 +10,7 @@ using System.Globalization;
 namespace Bitget.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BitgetRestClientFuturesApiTrading : IBitgetRestClientFuturesApiTrading
+    internal class BitgetRestClientFuturesApiTrading : IBitgetRestClientFuturesApiTrading
     {
         private readonly BitgetRestClientFuturesApi _baseClient;
 

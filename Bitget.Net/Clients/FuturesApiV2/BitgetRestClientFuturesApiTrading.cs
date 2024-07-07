@@ -11,7 +11,7 @@ using CryptoExchange.Net.RateLimiting.Guards;
 namespace Bitget.Net.Clients.FuturesApiV2
 {
     /// <inheritdoc />
-    public class BitgetRestClientFuturesApiTrading : IBitgetRestClientFuturesApiTrading
+    internal class BitgetRestClientFuturesApiTrading : IBitgetRestClientFuturesApiTrading
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
         private readonly BitgetRestClientFuturesApi _baseClient;

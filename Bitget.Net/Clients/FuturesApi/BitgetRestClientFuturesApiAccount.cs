@@ -9,7 +9,7 @@ using System.Globalization;
 namespace Bitget.Net.Clients.FuturesApi
 {
     /// <inheritdoc />
-    public class BitgetRestClientFuturesApiAccount : IBitgetRestClientFuturesApiAccount
+    internal class BitgetRestClientFuturesApiAccount : IBitgetRestClientFuturesApiAccount
     {
         private readonly BitgetRestClientFuturesApi _baseClient;
 

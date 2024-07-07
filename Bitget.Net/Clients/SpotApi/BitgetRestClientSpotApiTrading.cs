@@ -7,7 +7,7 @@ using CryptoExchange.Net.Objects;
 namespace Bitget.Net.Clients.SpotApi
 {
     /// <inheritdoc />
-    public class BitgetRestClientSpotApiTrading : IBitgetRestClientSpotApiTrading
+    internal class BitgetRestClientSpotApiTrading : IBitgetRestClientSpotApiTrading
     {
         private readonly BitgetRestClientSpotApi _baseClient;
 

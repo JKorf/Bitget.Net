@@ -10,7 +10,7 @@ using CryptoExchange.Net.RateLimiting.Guards;
 namespace Bitget.Net.Clients.SpotApiV2
 {
     /// <inheritdoc />
-    public class BitgetRestClientSpotApiTrading : IBitgetRestClientSpotApiTrading
+    internal class BitgetRestClientSpotApiTrading : IBitgetRestClientSpotApiTrading
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
         private readonly BitgetRestClientSpotApi _baseClient;

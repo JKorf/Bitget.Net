@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 namespace Bitget.Net.Clients.FuturesApiV2
 {
     /// <inheritdoc />
-    public class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
+    internal class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Futures Api");
 
