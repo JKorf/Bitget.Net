@@ -70,7 +70,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             decimal quantity,
             decimal? price = null,
             TimeInForce? timeInForce = null,
-            PositionSide? positionSide = null,
+            TradeSide? tradeSide = null,
             string? clientOrderId = null,
             bool? reduceOnly = null,
             decimal? takeProfitPrice = null,
@@ -87,7 +87,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddString("size", quantity);
             parameters.AddOptionalString("price", price);
             parameters.AddOptionalEnum("force", timeInForce);
-            parameters.AddOptionalEnum("tradeSide", positionSide);
+            parameters.AddOptionalEnum("tradeSide", tradeSide);
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptional("reduceOnly", reduceOnly == null ? null : reduceOnly == true ? "YES" : "NO");
             parameters.AddOptionalString("presetStopSurplusPrice", takeProfitPrice);

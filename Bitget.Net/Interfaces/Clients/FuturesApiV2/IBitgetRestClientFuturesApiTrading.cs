@@ -58,7 +58,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="quantity">Quantity</param>
         /// <param name="price">Limit price</param>
         /// <param name="timeInForce">Time in force</param>
-        /// <param name="positionSide">Position side</param>
+        /// <param name="tradeSide">Trade side</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="reduceOnly">Reduce only order</param>
         /// <param name="takeProfitPrice">Take profit price</param>
@@ -75,7 +75,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
             decimal quantity,
             decimal? price = null,
             TimeInForce? timeInForce = null,
-            PositionSide? positionSide = null,
+            TradeSide? tradeSide = null,
             string? clientOrderId = null,
             bool? reduceOnly = null,
             decimal? takeProfitPrice = null,

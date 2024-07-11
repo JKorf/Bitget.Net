@@ -22,6 +22,11 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("orderType"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
         public OrderType OrderType { get; set; }
         /// <summary>
+        /// Trade side
+        /// </summary>
+        [JsonPropertyName("tradeSide"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
+        public TradeSide TradeSide { get; set; }
+        /// <summary>
         /// Time in force
         /// </summary>
         [JsonPropertyName("force"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
