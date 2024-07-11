@@ -21,7 +21,7 @@ namespace Bitget.Net.Objects.Socket.Queries
         private string GetErrorIdentifier(Dictionary<string, string> arg)
         {
             if (arg.ContainsKey("instId"))
-                return $"error-{arg["instType"].ToLower()}-{arg["channel"].ToLowerInvariant()}-{arg["instType"].ToLower()}-{arg["instId"].ToLowerInvariant()}";
+                return $"error-{arg["instType"].ToLower()}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}";
 
             return $"error-{arg["instType"].ToLower()}-{arg["channel"].ToLowerInvariant()}-";
         }
