@@ -105,7 +105,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Funding fee, the accumulated value of funding fee during the position
         /// </summary>
         [JsonPropertyName("totalFee")]
-        public decimal TotalFee { get; set; }
+        public decimal? TotalFee { get; set; }
         /// <summary>
         /// Deducted transaction fees: transaction fees deducted during the position
         /// </summary>
