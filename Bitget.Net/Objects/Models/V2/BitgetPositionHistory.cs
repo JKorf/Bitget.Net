@@ -96,12 +96,12 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Create time
         /// </summary>
-        [JsonPropertyName("cTime")]
+        [JsonPropertyName("ctime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
         /// Update time
         /// </summary>
-        [JsonPropertyName("uTime")]
+        [JsonPropertyName("utime")]
         public DateTime UpdateTime { get; set; }
     }
 }
