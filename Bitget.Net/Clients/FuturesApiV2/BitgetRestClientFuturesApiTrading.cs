@@ -77,6 +77,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
             decimal? stopLossPrice = null,
             CancellationToken ct = default)
         {
+            if (tradeSide.HasValue && (tradeSide != TradeSide.Open && tradeSide != TradeSide.Close))
+                throw new ArgumentException("Trade side should be either Open or Close if provided", nameof(tradeSide));
+
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
             parameters.Add("symbol", symbol);
