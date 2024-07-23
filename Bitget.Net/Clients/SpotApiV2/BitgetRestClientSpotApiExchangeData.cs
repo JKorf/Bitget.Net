@@ -95,12 +95,12 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetKline>>> GetHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BitgetKline>>> GetHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime endTime, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
             parameters.AddEnum("granularity", interval);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
+            parameters.AddMilliseconds("endTime", endTime);
             parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/market/history-candles", BitgetExchange.RateLimiter.Overal, 1, false,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));

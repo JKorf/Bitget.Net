@@ -405,7 +405,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         Task<WebCallResult<IEnumerable<BitgetTriggerSubOrder>>> GetTriggerSubOrdersAsync(
             BitgetProductTypeV2 productType,
             string triggerOrderId,
-            PlanType planType,
+            TriggerPlanType planType,
             CancellationToken ct = default);
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesTriggerOrders>> GetOpenTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
-            PlanType planType,
+            BitgetFuturesPlanType planType,
             string? symbol = null,
             string? orderId = null,
             string? clientOrderId = null,
@@ -518,7 +518,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesTriggerOrders>> GetClosedTriggerOrdersAsync(
            BitgetProductTypeV2 productType,
-           PlanType planType,
+           BitgetFuturesPlanType planType,
            string? symbol = null,
            string? orderId = null,
            string? clientOrderId = null,
@@ -541,7 +541,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> CancelTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
-            PlanType? planType = null,
+            BitgetFuturesPlanType? planType = null,
             string? symbol = null,
             string? marginCoin = null,
             IEnumerable<BitgetCancelOrderRequest>? orderIds = null,
