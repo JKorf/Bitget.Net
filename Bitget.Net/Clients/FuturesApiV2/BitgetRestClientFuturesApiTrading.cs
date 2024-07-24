@@ -115,7 +115,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
             parameters.AddEnum("marginMode", marginMode);
-            parameters.AddEnum("orderList", orders);
+            parameters.Add("orderList", orders);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/batch-place-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
