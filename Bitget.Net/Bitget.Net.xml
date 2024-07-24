@@ -3715,7 +3715,7 @@
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.CancelMultipleOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.String,System.String,System.Threading.CancellationToken)">
             <summary>
-            Cancel multiple orders
+            Cancel multiple orders. Make sure to check the individual order responses for success
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Batch-Cancel-Orders" /></para>
             </summary>
             <param name="productType">Product type</param>

@@ -3,8 +3,8 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
-using Newtonsoft.Json;
 using System.Text;
+using System.Text.Json;
 
 namespace Bitget.Net
 {
@@ -32,7 +32,7 @@ namespace Bitget.Net
             if (!auth)
                 return;
 
-            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonConvert.SerializeObject(bodyParameters) : "";
+            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonSerializer.Serialize(bodyParameters) : "";
             var query = uriParameters.ToFormData();
 
             var timestamp = GetMillisecondTimestamp(apiClient);

@@ -148,7 +148,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
             CancellationToken ct = default);
 
         /// <summary>
-        /// Cancel multiple orders
+        /// Cancel multiple orders. Make sure to check the individual order responses for success
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Batch-Cancel-Orders" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
