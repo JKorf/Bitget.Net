@@ -14,7 +14,7 @@ true
         "priceAvg": "1900",
         "fee": "",
         "price": "1900",
-        "status": "filled",
+        "state": "filled",
         "side": "buy",
         "force": "gtc",
         "totalProfits": "2112",
