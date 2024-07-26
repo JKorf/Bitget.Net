@@ -71,7 +71,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Status
         /// </summary>
-        [JsonPropertyName("status")]
+        [JsonPropertyName("state")]
         public OrderStatus Status { get; set; }
         /// <summary>
         /// Side

@@ -323,7 +323,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceTriggerOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.TriggerPlanType,Bitget.Net.Enums.V2.MarginMode,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.TradeSide},System.Nullable{System.Decimal},System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetTriggerSubOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.V2.PlanType,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetTriggerSubOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.V2.TriggerPlanType,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.EditTriggerOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Threading.CancellationToken)">
@@ -332,13 +332,13 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.EditTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetOpenTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.PlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetOpenTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.BitgetFuturesPlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.PlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.BitgetFuturesPlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.V2.PlanType},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.BitgetFuturesPlanType},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi">
@@ -1091,7 +1091,7 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData.GetKlinesAsync(System.String,Bitget.Net.Enums.V2.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData.GetHistoricalKlinesAsync(System.String,Bitget.Net.Enums.V2.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData.GetHistoricalKlinesAsync(System.String,Bitget.Net.Enums.V2.KlineInterval,System.DateTime,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData.GetRecentTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
@@ -3871,7 +3871,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetTriggerSubOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.V2.PlanType,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetTriggerSubOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,Bitget.Net.Enums.V2.TriggerPlanType,System.Threading.CancellationToken)">
             <summary>
             Get trigger order sub orders
             <para><a href="https://www.bitget.com/api-doc/contract/plan/Plan-Sub-Orders" /></para>
@@ -3922,7 +3922,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetOpenTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.PlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetOpenTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.BitgetFuturesPlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get open trigger orders
             <para><a href="https://www.bitget.com/api-doc/contract/plan/get-orders-plan-pending" /></para>
@@ -3939,7 +3939,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.PlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.BitgetFuturesPlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get closed trigger orders
             <para><a href="https://www.bitget.com/api-doc/contract/plan/orders-plan-history" /></para>
@@ -3956,7 +3956,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.V2.PlanType},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.BitgetFuturesPlanType},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
             <summary>
             Cancel trigger orders matching the parameters
             <para><a href="https://www.bitget.com/api-doc/contract/plan/Cancel-Plan-Order" /></para>
@@ -5324,7 +5324,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetHistoricalKlinesAsync(System.String,Bitget.Net.Enums.V2.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetHistoricalKlinesAsync(System.String,Bitget.Net.Enums.V2.KlineInterval,System.DateTime,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get historical kline data
             <para><a href="https://www.bitget.com/api-doc/spot/market/Get-History-Candle-Data" /></para>
