@@ -15,8 +15,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Single-Account" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesBalance>> GetBalanceAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
@@ -35,8 +35,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-List" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="leverage">New leverage</param>
         /// <param name="side">Position side</param>
         /// <param name="ct">Cancellation token</param>
@@ -48,8 +48,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Margin" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="quantity">Margin amount, positive means increase, and negative means decrease</param>
         /// <param name="side">Position side</param>
         /// <param name="ct">Cancellation token</param>
@@ -61,8 +61,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Margin-Mode" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `ETHT`</param>
         /// <param name="mode">Margin mode</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -83,7 +83,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-Bill" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="asset">Filter by asset</param>
+        /// <param name="asset">Filter by asset, for example `USDT`</param>
         /// <param name="businessType">Filter by business type</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>

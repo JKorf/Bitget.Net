@@ -14,7 +14,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Place a new order
         /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="side">Order side</param>
         /// <param name="type">Order type</param>
         /// <param name="quantity">Quantity. For limit and market-sell orders this is in base asset, for market-buy orders it is in quote asset.</param>
@@ -41,7 +41,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Place multiple orders in a single call
         /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Place-Orders" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orders">Orders to place</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -54,7 +54,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Cancel an order
         /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
         /// <param name="tpslType">Tpsl type</param>
@@ -71,7 +71,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Cancel multiple orders in a single call
         /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Orders" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orders">Orders to cancel</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -84,7 +84,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Cancel all orders on a symbol
         /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Cancel-Symbol-Orders" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> CancelOrdersBySymbolAsync(
@@ -108,7 +108,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get current open orders
         /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Unfilled-Orders" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -131,7 +131,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get closed orders
         /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-History-Orders" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -154,7 +154,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get user trade history
         /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Fills" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -175,7 +175,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Place a trigger order
         /// <para><a href="https://www.bitget.com/api-doc/spot/plan/Place-Plan-Order" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="side">Order side</param>
         /// <param name="type">Order type</param>
         /// <param name="quantity">Quantity</param>
@@ -238,7 +238,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Cancel all trigger orders
         /// <para><a href="https://www.bitget.com/api-doc/spot/plan/Batch-Cancel-Plan-Order" /></para>
         /// </summary>
-        /// <param name="symbols">Only cancel trigger orders on these symbols</param>
+        /// <param name="symbols">Only cancel trigger orders on these symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> CancelAllTriggerOrdersAsync(
@@ -249,7 +249,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get list of currently open trigger orders
         /// <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-Current-Plan-Order" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="idLessThan">Return results before this id</param>
@@ -279,7 +279,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get closed trigger orders
         /// <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-History-Plan-Order" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Max number of results</param>

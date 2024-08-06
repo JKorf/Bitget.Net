@@ -15,7 +15,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/position/get-single-position" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="marginAsset">Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -26,7 +26,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/position/get-all-position" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BitgetPosition>>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default);
@@ -36,7 +36,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/position/Get-History-Position" /></para>
         /// </summary>
         /// <param name="productType">Filter by product type</param>
-        /// <param name="marginAsset">Filter by margin asset</param>
+        /// <param name="marginAsset">Filter by margin asset, for example `USDT`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="idLessThan">Return results before this id</param>
@@ -50,8 +50,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Place-Order" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="side">Order side</param>
         /// <param name="type">Order type</param>
         /// <param name="marginMode">Margin mode</param>
@@ -87,8 +87,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Batch-Order" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="marginMode">Margin mode</param>
         /// <param name="orders">Orders</param>
         /// <param name="ct">Cancellation token</param>
@@ -106,7 +106,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Modify-Order" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
         /// <param name="newClientOrderId">New client order id</param>
@@ -133,7 +133,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Cancel-Order" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
         /// <param name="marginAsset">Margin asset</param>
@@ -153,8 +153,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="orders">Orders to cancel</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> CancelMultipleOrdersAsync(
@@ -169,7 +169,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Details" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
@@ -186,7 +186,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Orders-Pending" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="clientOrderId">Filter by client order id</param>
         /// <param name="status">Filter by status</param>
@@ -213,7 +213,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Fills" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="clientOrderId">Filter by client order id</param>
         /// <param name="status">Filter by status</param>
@@ -240,7 +240,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Cancel-All-Orders" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="marginAsset">Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -255,7 +255,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Fills" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -278,7 +278,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Fill-History" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -301,7 +301,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="side">Position side; only respected if in hedge mode</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -316,8 +316,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="planType">Plan type</param>
         /// <param name="quantity">Quantity</param>
         /// <param name="triggerPrice">Trigger price</param>
@@ -347,8 +347,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Place-Plan-Order" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="planType">Plan type</param>
         /// <param name="marginMode">Margin mode</param>
         /// <param name="side">Order side</param>
@@ -450,8 +450,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Modify-Tpsl-Order" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">Client order id, either this or orderId should be provided</param>
         /// <param name="newTriggerPrice">New trigger price</param>
@@ -480,7 +480,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="planType">Plan type</param>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="clientOrderId">Filter by client order id</param>
         /// <param name="idLessThan">Return results before this id</param>
@@ -507,7 +507,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="planType">Plan type</param>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="clientOrderId">Filter by client order id</param>
         /// <param name="idLessThan">Return results before this id</param>
@@ -534,7 +534,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="planType">Plan type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="marginCoin">Margin coin</param>
         /// <param name="orderIds">Order ids</param>
         /// <param name="ct">Cancellation token</param>

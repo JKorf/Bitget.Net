@@ -21,7 +21,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get list of supported assets and their networks
         /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Coin-List" /></para>
         /// </summary>
-        /// <param name="asset">Filter by asset</param>
+        /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BitgetAsset>>> GetAssetsAsync(string? asset = null, CancellationToken ct = default);
@@ -30,7 +30,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get list of supported symbols and their trading rules
         /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Symbols" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BitgetSymbol>>> GetSymbolsAsync(string? symbol = null, CancellationToken ct = default);
@@ -47,7 +47,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get tickers
         /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Tickers" /></para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BitgetTicker>>> GetTickersAsync(string? symbol = null, CancellationToken ct = default);
@@ -56,7 +56,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get order book
         /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Orderbook" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="mergeStep">Merge step</param>
         /// <param name="limit">Max number of rows</param>
         /// <param name="ct">Cancellation token</param>
@@ -67,7 +67,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get kline/candlestick data
         /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Candle-Data" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -80,7 +80,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get historical kline data
         /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-History-Candle-Data" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Max number of results</param>
@@ -92,7 +92,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get the most recent trades on the symbol
         /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Recent-Trades" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -102,7 +102,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get trades
         /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Market-Trades" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="idLessThan">Return results before this id</param>

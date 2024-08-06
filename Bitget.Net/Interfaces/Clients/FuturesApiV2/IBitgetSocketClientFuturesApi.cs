@@ -17,7 +17,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Tickers-Channel" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
@@ -28,7 +28,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Tickers-Channel" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
@@ -39,7 +39,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
@@ -50,7 +50,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
@@ -61,7 +61,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Interval</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -73,7 +73,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /></para>
         /// </summary>
         /// <param name="productType"></param>
-        /// <param name="symbols">Symbols</param>
+        /// <param name="symbols">Symbols, for example `ETHUSDT`</param>
         /// <param name="interval">Interval</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -85,7 +85,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Order-Book-Channel" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbols</param>
+        /// <param name="symbol">Symbols, for example `ETHUSDT`</param>
         /// <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -97,7 +97,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Order-Book-Channel" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
-        /// <param name="symbols">Symbols</param>
+        /// <param name="symbols">Symbols, for example `ETHUSDT`</param>
         /// <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>

@@ -20,7 +20,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get trading fee for a symbol
         /// <para><a href="https://www.bitget.com/api-doc/common/public/Get-Trade-Rate" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="businessType">Business type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -54,7 +54,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Set the account to receive deposits in for an asset
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Modify-Deposit-Account" /></para>
         /// </summary>
-        /// <param name="asset">Asset</param>
+        /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="accountType">The account type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -64,7 +64,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get account ledger
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Bills" /></para>
         /// </summary>
-        /// <param name="asset">Filter by asset</param>
+        /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="groupType">Filter by group type</param>
         /// <param name="businessType">Filter by business type</param>
         /// <param name="startTime">Filter by start time</param>
@@ -79,7 +79,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Transfer funds between accounts
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Transfer" /></para>
         /// </summary>
-        /// <param name="asset">Asset</param>
+        /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="fromAccount">From account</param>
         /// <param name="toAccount">To account</param>
         /// <param name="quantity">Quantity to transfer</param>
@@ -103,7 +103,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Withdraw asset
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
         /// </summary>
-        /// <param name="asset">Asset</param>
+        /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="transferType">Transfer type</param>
         /// <param name="address">Target address</param>
         /// <param name="quantity">Quantity</param>
@@ -121,7 +121,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get transfer history
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
         /// </summary>
-        /// <param name="asset">Asset</param>
+        /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="fromAccount">From account</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -153,7 +153,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get deposit address
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Address" /></para>
         /// </summary>
-        /// <param name="asset">Asset</param>
+        /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="network">Network</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -172,7 +172,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get withdrawal history 
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Withdraw-Record" /></para>
         /// </summary>
-        /// <param name="asset">Filter by asset</param>
+        /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="orderId">Filter by order id</param>
@@ -187,7 +187,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get deposit history
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record" /></para>
         /// </summary>
-        /// <param name="asset">Filter by asset</param>
+        /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="orderId">Filter by order id</param>

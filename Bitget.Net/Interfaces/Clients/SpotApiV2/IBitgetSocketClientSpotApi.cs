@@ -16,7 +16,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Subscribe to ticker updates for a symbol
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
@@ -26,7 +26,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Subscribe to ticker updates for multiple symbols
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
@@ -36,7 +36,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Subscribe to trade updates for a symbol
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
@@ -46,7 +46,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Subscribe to trade updates for multiple symbols
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
@@ -56,7 +56,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Subscribe to kline/candlestick updates for a symbol
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -67,7 +67,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Subscribe to kline/candlestick updates for multiple symbols
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -78,7 +78,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Subscribe to order book updates for a symbol
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
         /// </summary>
-        /// <param name="symbol">The symbol</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -89,7 +89,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Subscribe to order book updates for multiple symbols
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
         /// </summary>
-        /// <param name="symbols">The symbols</param>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updatesa after</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>

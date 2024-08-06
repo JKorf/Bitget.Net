@@ -3325,8 +3325,8 @@
             <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Single-Account" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -3345,8 +3345,8 @@
             <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-List" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="leverage">New leverage</param>
             <param name="side">Position side</param>
             <param name="ct">Cancellation token</param>
@@ -3358,8 +3358,8 @@
             <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Margin" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="quantity">Margin amount, positive means increase, and negative means decrease</param>
             <param name="side">Position side</param>
             <param name="ct">Cancellation token</param>
@@ -3371,8 +3371,8 @@
             <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Margin-Mode" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `ETHT`</param>
             <param name="mode">Margin mode</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -3393,7 +3393,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-Bill" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `USDT`</param>
             <param name="businessType">Filter by business type</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -3420,7 +3420,7 @@
             Get list of contracts
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="productType">Product type</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -3438,7 +3438,7 @@
             Get futures order book
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Merge-Depth" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="productType">Product type</param>
             <param name="mergeStep">Merge step</param>
             <param name="limit">The book depth, 1, 5, 15, 50, 100 or -1. -1 will request the max gear of the symbol</param>
@@ -3450,7 +3450,7 @@
             Get futures ticker
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Ticker" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="productType">Product type</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -3470,7 +3470,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Recent-Fills" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -3481,7 +3481,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Fills-History" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="idLessThan">Return results before this id</param>
@@ -3495,7 +3495,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Candle-Data" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="klineType">Price type</param>
             <param name="startTime">Filter by start time</param>
@@ -3510,7 +3510,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Candle-Data" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -3524,7 +3524,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Index-Candle-Data" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -3538,7 +3538,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Mark-Candle-Data" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -3552,7 +3552,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Open-Interest" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -3562,7 +3562,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Symbol-Next-Funding-Time" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -3572,7 +3572,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Symbol-Price" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -3582,7 +3582,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Funding-Rate" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="pageSize">Page size</param>
             <param name="page">Page number</param>
             <param name="ct">Cancellation token</param>
@@ -3594,7 +3594,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -3604,7 +3604,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/position/Get-Query-Position-Lever" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -3619,7 +3619,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/position/get-single-position" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="marginAsset">Margin asset</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -3630,7 +3630,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/position/get-all-position" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -3640,7 +3640,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/position/Get-History-Position" /></para>
             </summary>
             <param name="productType">Filter by product type</param>
-            <param name="marginAsset">Filter by margin asset</param>
+            <param name="marginAsset">Filter by margin asset, for example `USDT`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="idLessThan">Return results before this id</param>
@@ -3654,8 +3654,8 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Place-Order" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="side">Order side</param>
             <param name="type">Order type</param>
             <param name="marginMode">Margin mode</param>
@@ -3676,8 +3676,8 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Batch-Order" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="marginMode">Margin mode</param>
             <param name="orders">Orders</param>
             <param name="ct">Cancellation token</param>
@@ -3689,7 +3689,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Modify-Order" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
             <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
             <param name="newClientOrderId">New client order id</param>
@@ -3706,7 +3706,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Cancel-Order" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
             <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
             <param name="marginAsset">Margin asset</param>
@@ -3720,8 +3720,8 @@
             </summary>
             <param name="productType">Product type</param>
             <param name="orders">Orders to cancel</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -3731,7 +3731,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Details" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
             <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
             <param name="ct">Cancellation token</param>
@@ -3743,7 +3743,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Orders-Pending" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="clientOrderId">Filter by client order id</param>
             <param name="status">Filter by status</param>
@@ -3760,7 +3760,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Fills" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="clientOrderId">Filter by client order id</param>
             <param name="status">Filter by status</param>
@@ -3777,7 +3777,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Cancel-All-Orders" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="marginAsset">Margin asset</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -3788,7 +3788,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Fills" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -3803,7 +3803,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Fill-History" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -3818,7 +3818,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="side">Position side; only respected if in hedge mode</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -3829,8 +3829,8 @@
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="planType">Plan type</param>
             <param name="quantity">Quantity</param>
             <param name="triggerPrice">Trigger price</param>
@@ -3848,8 +3848,8 @@
             <para><a href="https://www.bitget.com/api-doc/contract/plan/Place-Plan-Order" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="planType">Plan type</param>
             <param name="marginMode">Margin mode</param>
             <param name="side">Order side</param>
@@ -3910,8 +3910,8 @@
             <para><a href="https://www.bitget.com/api-doc/contract/plan/Modify-Tpsl-Order" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
-            <param name="marginAsset">Margin asset</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="orderId">Order id, either this or clientOrderId should be provided</param>
             <param name="clientOrderId">Client order id, either this or orderId should be provided</param>
             <param name="newTriggerPrice">New trigger price</param>
@@ -3929,7 +3929,7 @@
             </summary>
             <param name="productType">Product type</param>
             <param name="planType">Plan type</param>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="clientOrderId">Filter by client order id</param>
             <param name="idLessThan">Return results before this id</param>
@@ -3946,7 +3946,7 @@
             </summary>
             <param name="productType">Product type</param>
             <param name="planType">Plan type</param>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="clientOrderId">Filter by client order id</param>
             <param name="idLessThan">Return results before this id</param>
@@ -3963,7 +3963,7 @@
             </summary>
             <param name="productType">Product type</param>
             <param name="planType">Plan type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="marginCoin">Margin coin</param>
             <param name="orderIds">Order ids</param>
             <param name="ct">Cancellation token</param>
@@ -3980,7 +3980,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Tickers-Channel" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -3991,7 +3991,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Tickers-Channel" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -4002,7 +4002,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -4013,7 +4013,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -4024,7 +4024,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="interval">Interval</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -4036,7 +4036,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /></para>
             </summary>
             <param name="productType"></param>
-            <param name="symbols">Symbols</param>
+            <param name="symbols">Symbols, for example `ETHUSDT`</param>
             <param name="interval">Interval</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -4048,7 +4048,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Order-Book-Channel" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbol">Symbols</param>
+            <param name="symbol">Symbols, for example `ETHUSDT`</param>
             <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -4060,7 +4060,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Order-Book-Channel" /></para>
             </summary>
             <param name="productType">Product type</param>
-            <param name="symbols">Symbols</param>
+            <param name="symbols">Symbols, for example `ETHUSDT`</param>
             <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -5076,7 +5076,7 @@
             Get trading fee for a symbol
             <para><a href="https://www.bitget.com/api-doc/common/public/Get-Trade-Rate" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="businessType">Business type</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5110,7 +5110,7 @@
             Set the account to receive deposits in for an asset
             <para><a href="https://www.bitget.com/api-doc/spot/account/Modify-Deposit-Account" /></para>
             </summary>
-            <param name="asset">Asset</param>
+            <param name="asset">Asset, for example `ETH`</param>
             <param name="accountType">The account type</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5120,7 +5120,7 @@
             Get account ledger
             <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Bills" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="groupType">Filter by group type</param>
             <param name="businessType">Filter by business type</param>
             <param name="startTime">Filter by start time</param>
@@ -5135,7 +5135,7 @@
             Transfer funds between accounts
             <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Transfer" /></para>
             </summary>
-            <param name="asset">Asset</param>
+            <param name="asset">Asset, for example `ETH`</param>
             <param name="fromAccount">From account</param>
             <param name="toAccount">To account</param>
             <param name="quantity">Quantity to transfer</param>
@@ -5159,7 +5159,7 @@
             Withdraw asset
             <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
             </summary>
-            <param name="asset">Asset</param>
+            <param name="asset">Asset, for example `ETH`</param>
             <param name="transferType">Transfer type</param>
             <param name="address">Target address</param>
             <param name="quantity">Quantity</param>
@@ -5177,7 +5177,7 @@
             Get transfer history
             <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
             </summary>
-            <param name="asset">Asset</param>
+            <param name="asset">Asset, for example `ETH`</param>
             <param name="fromAccount">From account</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -5209,7 +5209,7 @@
             Get deposit address
             <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Address" /></para>
             </summary>
-            <param name="asset">Asset</param>
+            <param name="asset">Asset, for example `ETH`</param>
             <param name="network">Network</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5228,7 +5228,7 @@
             Get withdrawal history 
             <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Withdraw-Record" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="orderId">Filter by order id</param>
@@ -5243,7 +5243,7 @@
             Get deposit history
             <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="orderId">Filter by order id</param>
@@ -5270,7 +5270,7 @@
             Get list of supported assets and their networks
             <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Coin-List" /></para>
             </summary>
-            <param name="asset">Filter by asset</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -5279,7 +5279,7 @@
             Get list of supported symbols and their trading rules
             <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Symbols" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -5296,7 +5296,7 @@
             Get tickers
             <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Tickers" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -5305,7 +5305,7 @@
             Get order book
             <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Orderbook" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="mergeStep">Merge step</param>
             <param name="limit">Max number of rows</param>
             <param name="ct">Cancellation token</param>
@@ -5316,7 +5316,7 @@
             Get kline/candlestick data
             <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Candle-Data" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -5329,7 +5329,7 @@
             Get historical kline data
             <para><a href="https://www.bitget.com/api-doc/spot/market/Get-History-Candle-Data" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">Max number of results</param>
@@ -5341,7 +5341,7 @@
             Get the most recent trades on the symbol
             <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Recent-Trades" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5351,7 +5351,7 @@
             Get trades
             <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Market-Trades" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="idLessThan">Return results before this id</param>
@@ -5369,7 +5369,7 @@
             Place a new order
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="side">Order side</param>
             <param name="type">Order type</param>
             <param name="quantity">Quantity. For limit and market-sell orders this is in base asset, for market-buy orders it is in quote asset.</param>
@@ -5386,7 +5386,7 @@
             Place multiple orders in a single call
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Place-Orders" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orders">Orders to place</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5396,7 +5396,7 @@
             Cancel an order
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
             <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
             <param name="tpslType">Tpsl type</param>
@@ -5408,7 +5408,7 @@
             Cancel multiple orders in a single call
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Orders" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orders">Orders to cancel</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
@@ -5418,7 +5418,7 @@
             Cancel all orders on a symbol
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Cancel-Symbol-Orders" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -5437,7 +5437,7 @@
             Get current open orders
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Unfilled-Orders" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -5452,7 +5452,7 @@
             Get closed orders
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-History-Orders" /></para>
             </summary>
-            <param name="symbol">Filter by symbol</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -5467,7 +5467,7 @@
             Get user trade history
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Fills" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -5481,7 +5481,7 @@
             Place a trigger order
             <para><a href="https://www.bitget.com/api-doc/spot/plan/Place-Plan-Order" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="side">Order side</param>
             <param name="type">Order type</param>
             <param name="quantity">Quantity</param>
@@ -5523,7 +5523,7 @@
             Cancel all trigger orders
             <para><a href="https://www.bitget.com/api-doc/spot/plan/Batch-Cancel-Plan-Order" /></para>
             </summary>
-            <param name="symbols">Only cancel trigger orders on these symbols</param>
+            <param name="symbols">Only cancel trigger orders on these symbols, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -5532,7 +5532,7 @@
             Get list of currently open trigger orders
             <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-Current-Plan-Order" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="idLessThan">Return results before this id</param>
@@ -5554,7 +5554,7 @@
             Get closed trigger orders
             <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-History-Plan-Order" /></para>
             </summary>
-            <param name="symbol">Symbol</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="limit">Max number of results</param>
@@ -5571,7 +5571,7 @@
             Subscribe to ticker updates for a symbol
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -5581,7 +5581,7 @@
             Subscribe to ticker updates for multiple symbols
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -5591,7 +5591,7 @@
             Subscribe to trade updates for a symbol
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -5601,7 +5601,7 @@
             Subscribe to trade updates for multiple symbols
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
@@ -5611,7 +5611,7 @@
             Subscribe to kline/candlestick updates for a symbol
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -5622,7 +5622,7 @@
             Subscribe to kline/candlestick updates for multiple symbols
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="interval">Kline interval</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -5633,7 +5633,7 @@
             Subscribe to order book updates for a symbol
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
             </summary>
-            <param name="symbol">The symbol</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
             <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -5644,7 +5644,7 @@
             Subscribe to order book updates for multiple symbols
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
             </summary>
-            <param name="symbols">The symbols</param>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
             <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updatesa after</param>
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
