@@ -10,8 +10,7 @@ namespace Bitget.Net
 {
     internal class BitgetAuthenticationProvider : AuthenticationProvider<BitgetApiCredentials>
     {
-        public string ApiKey => _credentials.Key!.GetString();
-        public string Passphrase => _credentials.PassPhrase!.GetString();
+        public string Passphrase => _credentials.PassPhrase!;
 
         public BitgetAuthenticationProvider(BitgetApiCredentials credentials) : base(credentials)
         {
@@ -21,9 +20,9 @@ namespace Bitget.Net
             RestApiClient apiClient,
             Uri uri,
             HttpMethod method,
-            IDictionary<string, object> uriParameters,
-            IDictionary<string, object> bodyParameters,
-            Dictionary<string, string> headers,
+            ref IDictionary<string, object>? uriParameters,
+            ref IDictionary<string, object>? bodyParameters,
+            ref Dictionary<string, string>? headers,
             bool auth,
             ArrayParametersSerialization arraySerialization,
             HttpMethodParameterPosition parameterPosition,
@@ -33,7 +32,7 @@ namespace Bitget.Net
                 return;
 
             var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonConvert.SerializeObject(bodyParameters) : "";
-
+            headers ??= new Dictionary<string, string>();
             var timestamp = GetMillisecondTimestamp(apiClient);
             var signString = timestamp + method.ToString().ToUpperInvariant() + uri.PathAndQuery + body;
             if (_credentials.CredentialType == ApiCredentialsType.Hmac)
@@ -45,9 +44,9 @@ namespace Bitget.Net
                 headers["ACCESS-SIGN"] = SignRSASHA256(Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
             }
 
-            headers["ACCESS-KEY"] = _credentials.Key!.GetString();
+            headers["ACCESS-KEY"] = _credentials.Key!;
             headers["ACCESS-TIMESTAMP"] = timestamp;
-            headers["ACCESS-PASSPHRASE"] = _credentials.PassPhrase.GetString();
+            headers["ACCESS-PASSPHRASE"] = _credentials.PassPhrase;
         }
 
         public string GetWebsocketSignature(long timestamp)

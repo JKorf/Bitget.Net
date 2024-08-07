@@ -45,8 +45,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonPropertyName("ordType")]
+        [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
+        [JsonPropertyName("ordType")]
+        internal OrderType OrderTypeInt { set => OrderType = value; }
         /// <summary>
         /// Order side
         /// </summary>
