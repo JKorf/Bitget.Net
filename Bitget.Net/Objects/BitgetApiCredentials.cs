@@ -13,7 +13,7 @@ namespace Bitget.Net.Objects
         /// <summary>
         /// The pass phrase
         /// </summary>
-        public SecureString PassPhrase { get; }
+        public string PassPhrase { get; }
 
         /// <summary>
         /// Creates new api credentials. Keep this information safe.
@@ -24,7 +24,7 @@ namespace Bitget.Net.Objects
         /// <param name="credentialsType">The type of credentials</param>
         public BitgetApiCredentials(string apiKey, string apiSecret, string apiPassPhrase, ApiCredentialsType credentialsType = ApiCredentialsType.Hmac): base(apiKey, apiSecret, credentialsType)
         {
-            PassPhrase = apiPassPhrase.ToSecureString();
+            PassPhrase = apiPassPhrase;
         }
 
         /// <summary>
@@ -41,13 +41,13 @@ namespace Bitget.Net.Objects
                 throw new ArgumentException("Input stream not valid json data");
 
             var pass = accessor.GetValue<string>(MessagePath.Get().Property(identifierPassPhrase ?? "apiPassPhrase")) ?? throw new ArgumentException("apiKey or apiSecret value not found in Json credential file");
-            PassPhrase = pass.ToSecureString();
+            PassPhrase = pass;
         }
 
         /// <inheritdoc />
         public override ApiCredentials Copy()
         {
-            return new BitgetApiCredentials(Key!.GetString(), Secret!.GetString(), PassPhrase!.GetString(), CredentialType);
+            return new BitgetApiCredentials(Key, Secret, PassPhrase, CredentialType);
         }
     }
 }

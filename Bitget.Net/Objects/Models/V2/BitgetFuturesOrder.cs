@@ -71,8 +71,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Status
         /// </summary>
-        [JsonPropertyName("state")]
+        [JsonPropertyName("status")]
         public OrderStatus Status { get; set; }
+        [JsonInclude, JsonPropertyName("state")]
+        internal OrderStatus State { set => Status = value; }
         /// <summary>
         /// Side
         /// </summary>
