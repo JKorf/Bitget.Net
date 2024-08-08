@@ -125,7 +125,7 @@ namespace Bitget.Net.UnitTests
             await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetPositionsAsync(Enums.BitgetProductTypeV2.UsdtFutures, "USDT", default), true);
             await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetPositionHistoryAsync(default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetOpenOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetClosedOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetClosedOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetHistoricalUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetOpenTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, Enums.BitgetFuturesPlanType.NormalPlan, default, default, default, default, default, default, default, default), true);
