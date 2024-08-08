@@ -262,7 +262,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
             string? symbol = null,
             string? orderId = null,
             string? clientOrderId = null,
-            OrderStatus? status = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
             string? idLessThan = null,
@@ -274,7 +273,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddOptional("symbol", symbol);
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptionalEnum("status", status);
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);

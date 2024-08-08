@@ -210,13 +210,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get closed orders
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Fills" /></para>
+        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Orders-History" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="clientOrderId">Filter by client order id</param>
-        /// <param name="status">Filter by status</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="idLessThan">Return results before this id</param>
@@ -228,7 +227,6 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
             string? symbol = null,
             string? orderId = null,
             string? clientOrderId = null,
-            OrderStatus? status = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
             string? idLessThan = null,
