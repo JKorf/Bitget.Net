@@ -46,7 +46,7 @@ namespace Bitget.Net.Clients.FuturesApi
             => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_UMCBL";
+        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_UMCBL";
 
         internal Uri GetUri(string path)
         {
