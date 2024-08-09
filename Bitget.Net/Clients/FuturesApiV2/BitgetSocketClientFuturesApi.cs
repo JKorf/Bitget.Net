@@ -45,7 +45,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         /// <inheritdoc />
         public override string GetListenerIdentifier(IMessageAccessor message)

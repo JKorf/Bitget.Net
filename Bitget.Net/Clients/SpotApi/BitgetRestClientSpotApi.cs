@@ -59,7 +59,7 @@ namespace Bitget.Net.Clients.SpotApi
             => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, FuturesType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_SPBL";
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + "_SPBL";
 
         internal async Task<WebCallResult> ExecuteAsync(string path, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? parameterPosition = null)
         {
