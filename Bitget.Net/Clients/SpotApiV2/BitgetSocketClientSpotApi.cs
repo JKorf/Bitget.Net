@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums;
+﻿using Binance.Net.Interfaces.Clients.SpotApi;
+using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models.V2;
@@ -22,7 +23,7 @@ using Newtonsoft.Json;
 namespace Bitget.Net.Clients.SpotApiV2
 {
     /// <inheritdoc />
-    internal class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
+    internal partial class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
     {
         private static readonly MessagePath _eventPath = MessagePath.Get().Property("event");
         private static readonly MessagePath _actionPath = MessagePath.Get().Property("action");
@@ -45,6 +46,8 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+        public IBitgetSocketClientSpotApiShared SharedClient => this;
 
         /// <inheritdoc />
         public override string GetListenerIdentifier(IMessageAccessor message)
