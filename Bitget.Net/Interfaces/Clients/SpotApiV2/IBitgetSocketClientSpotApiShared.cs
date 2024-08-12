@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Binance.Net.Interfaces.Clients.SpotApi
+namespace Bitget.Net.Interfaces.Clients.SpotApi
 {
     public interface IBitgetSocketClientSpotApiShared :
         ITickerSocketClient,
         ITradeSocketClient,
-        IBookTickerSocketClient
+        IBookTickerSocketClient,
+        IBalanceSocketClient,
+        ISpotOrderSocketClient
     {
     }
 }
