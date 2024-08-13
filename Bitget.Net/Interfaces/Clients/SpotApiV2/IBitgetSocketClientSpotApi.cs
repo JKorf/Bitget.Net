@@ -1,6 +1,6 @@
-﻿using Binance.Net.Interfaces.Clients.SpotApi;
-using Bitget.Net.Enums;
+﻿using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
+using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;

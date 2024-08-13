@@ -28,5 +28,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <returns></returns>
         ISpotClient CommonSpotClient { get; }
+        IBitgetRestClientSpotApiShared SharedClient { get; }
+
     }
 }

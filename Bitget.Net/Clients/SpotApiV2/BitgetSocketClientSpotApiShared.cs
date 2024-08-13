@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Interfaces.Clients.SpotApi;
+﻿using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using CryptoExchange.Net.SharedApis.Enums;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {
@@ -59,21 +60,49 @@ namespace Bitget.Net.Clients.SpotApiV2
                     new SharedSpotOrder(
                         x.Symbol,
                         x.OrderId.ToString(),
-                        x.OrderType == Enums.V2.OrderType.Limit ? CryptoExchange.Net.SharedApis.Enums.SharedOrderType.Limit : x.OrderType == Enums.V2.OrderType.Market ? CryptoExchange.Net.SharedApis.Enums.SharedOrderType.Market : CryptoExchange.Net.SharedApis.Enums.SharedOrderType.Other,
-                        x.Side == Enums.V2.OrderSide.Buy ? CryptoExchange.Net.SharedApis.Enums.SharedOrderSide.Buy : CryptoExchange.Net.SharedApis.Enums.SharedOrderSide.Sell,
-                        x.Status == Enums.V2.OrderStatus.Canceled ? CryptoExchange.Net.SharedApis.Enums.SharedOrderStatus.Canceled : (x.Status == Enums.V2.OrderStatus.Live || x.Status == Enums.V2.OrderStatus.New) ? CryptoExchange.Net.SharedApis.Enums.SharedOrderStatus.Open : x.Status == Enums.V2.OrderStatus.PartiallyFilled ? CryptoExchange.Net.SharedApis.Enums.SharedOrderStatus.PartiallyFilled : CryptoExchange.Net.SharedApis.Enums.SharedOrderStatus.Filled,
+                        x.OrderType == Enums.V2.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.V2.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
+                        x.Side == Enums.V2.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
+                        x.Status == Enums.V2.OrderStatus.Canceled ? SharedOrderStatus.Canceled : (x.Status == Enums.V2.OrderStatus.Live || x.Status == Enums.V2.OrderStatus.New || x.Status == Enums.V2.OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
                         x.CreateTime)
                     {
                         ClientOrderId = x.ClientOrderId?.ToString(),
                         Quantity = x.OrderType == Enums.V2.OrderType.Market && x.Side == Enums.V2.OrderSide.Buy ? null : x.OrderQuantity, // For a market buy order the OrderQuantity is the quote quantity
                         QuantityFilled = x.QuantityFilled,
-                        TimeInForce = x.TimeInForce == Enums.V2.TimeInForce.ImmediateOrCancel ? CryptoExchange.Net.SharedApis.Enums.SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.V2.TimeInForce.FillOrKill ? CryptoExchange.Net.SharedApis.Enums.SharedTimeInForce.FillOrKill: CryptoExchange.Net.SharedApis.Enums.SharedTimeInForce.GoodTillCanceled,
+                        TimeInForce = x.TimeInForce == Enums.V2.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.V2.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill: SharedTimeInForce.GoodTillCanceled,
                         AveragePrice = x.AveragePrice,
                         UpdateTime = x.UpdateTime,
                         Fee = x.Fees.Any() ? x.Fees.Sum(f => f.Fee) : 0,
                         FeeAsset = x.FeeAsset,
                         QuoteQuantity = x.Notional,
-                        Price = x.Price
+                        Price = x.Price,
+                        LastTrade = x.TradeId == null ? null : new SharedUserTrade(x.OrderId, x.TradeId, x.BaseVolume!.Value, x.LastTradePrice!.Value, x.LastTradeTime!.Value)
+                        {
+                            Fee = x.LastTradeFee,
+                            FeeAsset = x.FeeAsset,
+                            Role = x.LastTradeRole == Enums.V2.Role.Taker ? SharedRole.Taker : SharedRole.Maker
+                        }
+                    }
+                ))),
+                ct: ct).ConfigureAwait(false);
+
+            return result;
+        }
+
+        async Task<CallResult<UpdateSubscription>> ISpotUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(SharedRequest request, Action<DataEvent<IEnumerable<SharedUserTrade>>> handler, CancellationToken ct)
+        {
+            var result = await SubscribeToUserTradeUpdatesAsync(
+                update => handler(update.As(update.Data.Select(x =>
+                    new SharedUserTrade(
+                        x.OrderId.ToString(),
+                        x.TradeId.ToString(),
+                        x.Quantity,
+                        x.Price,
+
+                        x.UpdateTime ?? x.CreateTime)
+                    {
+                        Fee = x.Fees.First().TotalFee,
+                        FeeAsset = x.Fees.First().FeeAsset,
+                        Role = x.Role == Enums.V2.Role.Maker ? SharedRole.Maker : SharedRole.Taker
                     }
                 ))),
                 ct: ct).ConfigureAwait(false);

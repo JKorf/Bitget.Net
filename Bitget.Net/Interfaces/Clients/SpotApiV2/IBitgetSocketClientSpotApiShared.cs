@@ -3,14 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bitget.Net.Interfaces.Clients.SpotApi
+namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 {
     public interface IBitgetSocketClientSpotApiShared :
         ITickerSocketClient,
         ITradeSocketClient,
         IBookTickerSocketClient,
         IBalanceSocketClient,
-        ISpotOrderSocketClient
+        ISpotOrderSocketClient,
+        ISpotUserTradeSocketClient
     {
     }
 }

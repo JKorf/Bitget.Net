@@ -11997,6 +11997,11 @@
             Client order id
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.Price">
+            <summary>
+            Order price
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderUpdate.Quantity">
             <summary>
             Order amount. When Side = Buy, it represents the amount of quote asset; When Side = Sell, it represents the amount of base asset.
