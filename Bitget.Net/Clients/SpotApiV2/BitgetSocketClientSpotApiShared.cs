@@ -75,7 +75,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                         FeeAsset = x.FeeAsset,
                         QuoteQuantity = x.Notional,
                         Price = x.Price,
-                        LastTrade = x.TradeId == null ? null : new SharedUserTrade(x.OrderId, x.TradeId, x.BaseVolume!.Value, x.LastTradePrice!.Value, x.LastTradeTime!.Value)
+                        LastTrade = x.TradeId == null ? null : new SharedUserTrade(x.Symbol, x.OrderId, x.TradeId, x.BaseVolume!.Value, x.LastTradePrice!.Value, x.LastTradeTime!.Value)
                         {
                             Fee = x.LastTradeFee,
                             FeeAsset = x.FeeAsset,
@@ -93,6 +93,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var result = await SubscribeToUserTradeUpdatesAsync(
                 update => handler(update.As(update.Data.Select(x =>
                     new SharedUserTrade(
+                        x.Symbol,
                         x.OrderId.ToString(),
                         x.TradeId.ToString(),
                         x.Quantity,
