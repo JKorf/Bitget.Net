@@ -95,18 +95,17 @@ namespace Bitget.Net.Clients.SpotApiV2
             return result.AsExchangeResult<IEnumerable<SharedTicker>>(Exchange, result.Data.Select(x => new SharedTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice)));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> ITradeRestClient.GetTradesAsync(GetTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
-            if (request.StartTime != null || request.EndTime != null)
-                return new ExchangeWebResult<IEnumerable<SharedTrade>>(Exchange, new ArgumentError("Start/EndTime filtering not supported"));
-
-            var result = await ExchangeData.GetRecentTradesAsync(
+            // Get data
+            var result = await ExchangeData.GetTradesAsync(
                 FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, default);
 
+            // Return
             return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)));
         }
 
@@ -246,14 +245,26 @@ namespace Bitget.Net.Clients.SpotApiV2
             }));
         }
 
-        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetUserTradesAsync(GetUserTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
+            // Determine page token
+            string? fromId = null;
+            if (pageToken is FromIdToken fromIdToken)
+                fromId = fromIdToken.FromToken;
+
+            // Get data
             var trades = await Trading.GetUserTradesAsync(FormatSymbol(request.BaseAsset, request.QuoteAsset, request.ApiType),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
-                limit: request.Limit).ConfigureAwait(false);
+                limit: request.Limit,
+                idLessThan: fromId).ConfigureAwait(false);
             if (!trades)
                 return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
+
+            // Get next token
+            FromIdToken? nextToken = null;
+            if (trades.Data.Count() == (request.Limit ?? 100))
+                nextToken = new FromIdToken(trades.Data.Max(o => o.TradeId).ToString());
 
             return trades.AsExchangeResult(Exchange, trades.Data.Select(x => new SharedUserTrade(
                 x.Symbol,
@@ -266,7 +277,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 Fee = x.Fees.TotalFee,
                 FeeAsset = x.Fees.FeeAsset,
                 Role = x.Role == Role.Taker ? SharedRole.Taker : SharedRole.Maker
-            }));
+            }), nextToken);
         }
 
         async Task<ExchangeWebResult<SharedOrderId>> ISpotOrderRestClient.CancelOrderAsync(CancelOrderRequest request, CancellationToken ct)

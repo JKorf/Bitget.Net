@@ -9,7 +9,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         ITickerRestClient,
         ISpotSymbolRestClient,
         IKlineRestClient,
-        ITradeRestClient,
+        IRecentTradeRestClient,
         IBalanceRestClient,
         ISpotOrderRestClient
     {
