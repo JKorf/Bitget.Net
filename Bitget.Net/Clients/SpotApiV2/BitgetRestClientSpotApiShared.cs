@@ -52,12 +52,27 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (pageToken is DateTimeToken dateTimeToken)
                 fromTimestamp = dateTimeToken.LastTime;
 
+            var startTime = request.Filter?.StartTime?.AddSeconds(-1);
+            var endTime = request.Filter?.EndTime?.AddSeconds(-1);
+            var apiLimit = 1000;
+
+            // API returns the newest data first if the timespan is bigger than the api limit of 1000 results
+            // So we need to request the first 1000 from the start time, then the 1000 after that etc
+            if (request.Filter?.StartTime != null)
+            {
+                // Not paginated, check if the data will fit
+                var seconds = apiLimit * (int)request.Interval;
+                var maxEndTime = (fromTimestamp ?? request.Filter.StartTime).Value.AddSeconds(seconds - 1);
+                if (maxEndTime < endTime)
+                    endTime = maxEndTime;
+            }
+
             var result = await ExchangeData.GetKlinesAsync(
                 request.GetSymbol(FormatSymbol),
                 interval,
-                request.StartTime,
-                fromTimestamp ?? request.EndTime,
-                request.Limit ?? 1000,
+                fromTimestamp ?? startTime,
+                endTime,
+                limit: request.Filter?.Limit ?? apiLimit,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -65,10 +80,12 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (result.Data.Count() == (request.Limit ?? 1000))
-                nextToken = new DateTimeToken(result.Data.Min(o => o.OpenTime.AddSeconds((int)interval)));
-            if (nextToken?.LastTime < request.StartTime)
-                nextToken = null;
+            if (request.Filter?.StartTime != null && result.Data.Any())
+            {
+                var maxOpenTime = result.Data.Max(x => x.OpenTime);
+                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                    nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval - 1));
+            }
 
             return result.AsExchangeResult(Exchange, result.Data.Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)), nextToken);
         }
@@ -217,16 +234,16 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Get data
             var orders = await Trading.GetClosedOrdersAsync(request.GetSymbol(FormatSymbol),
-                startTime: request.StartTime,
-                endTime: request.EndTime,
-                limit: request.Limit ?? 100,
+                startTime: request.Filter?.StartTime,
+                endTime: request.Filter?.EndTime,
+                limit: request.Filter?.Limit ?? 100,
                 idLessThan: fromToken).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
 
             // Get next token
             FromIdToken? nextToken = null;
-            if (orders.Data.Count() == (request.Limit ?? 100))
+            if (orders.Data.Count() == (request.Filter?.Limit ?? 100))
                 nextToken = new FromIdToken(orders.Data.OrderBy(d => d.CreateTime).First().OrderId);
 
             return orders.AsExchangeResult(Exchange, orders.Data.Select(x => new SharedSpotOrder(
@@ -278,16 +295,16 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Get data
             var trades = await Trading.GetUserTradesAsync(request.GetSymbol(FormatSymbol),
-                startTime: request.StartTime,
-                endTime: request.EndTime,
-                limit: request.Limit,
+                startTime: request.Filter?.StartTime,
+                endTime: request.Filter?.EndTime,
+                limit: request.Filter?.Limit,
                 idLessThan: fromId).ConfigureAwait(false);
             if (!trades)
                 return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
 
             // Get next token
             FromIdToken? nextToken = null;
-            if (trades.Data.Count() == (request.Limit ?? 100))
+            if (trades.Data.Count() == (request.Filter?.Limit ?? 100))
                 nextToken = new FromIdToken(trades.Data.Max(o => o.TradeId).ToString());
 
             return trades.AsExchangeResult(Exchange, trades.Data.Select(x => new SharedUserTrade(
