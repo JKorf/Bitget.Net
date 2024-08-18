@@ -162,7 +162,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.Add("deduct", enable ? "on" : "off");
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/account/switch-deduct", BitgetExchange.RateLimiter.Overal, 1, true,
-                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+                limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
 
@@ -171,7 +171,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/deduct-info", BitgetExchange.RateLimiter.Overal, 1, true,
-                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+                limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetBgbDeduct>(request, parameters, ct).ConfigureAwait(false);
         }
 
