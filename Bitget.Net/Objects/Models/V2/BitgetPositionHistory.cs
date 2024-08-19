@@ -29,6 +29,11 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetPositionHistoryEntry
     {
         /// <summary>
+        /// Position id
+        /// </summary>
+        [JsonPropertyName("positionId")]
+        public string PositionId { get; set; } = string.Empty;
+        /// <summary>
         /// Margin asset
         /// </summary>
         [JsonPropertyName("marginCoin")]

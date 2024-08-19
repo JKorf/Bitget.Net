@@ -120,7 +120,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("symbol", symbol);
             parameters.Add("orderList", orders);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
-                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+                limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
                 return result;

@@ -12287,6 +12287,11 @@
             Position history entry
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionHistoryEntry.PositionId">
+            <summary>
+            Position id
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionHistoryEntry.MarginAsset">
             <summary>
             Margin asset
