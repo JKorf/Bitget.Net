@@ -153,6 +153,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.9.2 - 23 Aug 2024
+    * Fixed deserialization issue in FuturesApiV2.Account.SetLeverageAsync and SetMarginModeAsync response
+
 * Version 1.9.1 - 18 Aug 2024
     * Added PositionId to FuturesApiV2.Trading.GetPositionHistoryAsync response model
     * Updated some endpoint ratelimits
