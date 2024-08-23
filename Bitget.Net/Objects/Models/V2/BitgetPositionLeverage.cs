@@ -25,17 +25,17 @@ namespace Bitget.Net.Objects.Models.V2
         /// Long position leverage
         /// </summary>
         [JsonPropertyName("longLeverage")]
-        public decimal LongLeverage { get; set; }
+        public decimal? LongLeverage { get; set; }
         /// <summary>
         /// Short position leverage
         /// </summary>
         [JsonPropertyName("shortLeverage")]
-        public decimal ShortLeverage { get; set; }
+        public decimal? ShortLeverage { get; set; }
         /// <summary>
         /// Cross margin position leverage
         /// </summary>
         [JsonPropertyName("crossMarginLeverage")]
-        public decimal CrossMarginLeverage { get; set; }
+        public decimal? CrossMarginLeverage { get; set; }
         /// <summary>
         /// Margin mode
         /// </summary>
