@@ -153,6 +153,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.9.3 - 28 Aug 2024
+    * Updated CryptoExchange.Net to version 7.11.2, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.11.2
+    * Added missing Price property on SpotApi websocket order update model
+
 * Version 1.9.2 - 23 Aug 2024
     * Fixed deserialization issue in FuturesApiV2.Account.SetLeverageAsync and SetMarginModeAsync response
 
