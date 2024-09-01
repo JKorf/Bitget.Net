@@ -6,7 +6,7 @@ using System.Text;
 namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 {
     public interface IBitgetRestClientSpotApiShared :
-        IAssetRestClient,
+        IAssetsRestClient,
         IBalanceRestClient,
         IDepositRestClient,
         IKlineRestClient,

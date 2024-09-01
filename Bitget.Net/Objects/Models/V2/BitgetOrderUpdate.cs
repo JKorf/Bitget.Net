@@ -38,11 +38,6 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Order price
-        /// </summary>
-        [JsonPropertyName("price")]
-        public decimal? Price { get; set; }
-        /// <summary>
         /// Order quantity
         /// </summary>
         [JsonPropertyName("newSize")]
