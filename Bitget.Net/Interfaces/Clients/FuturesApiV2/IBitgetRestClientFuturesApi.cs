@@ -22,5 +22,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// Endpoints related to account settings, info or actions
         /// </summary>
         public IBitgetRestClientFuturesApiTrading Trading { get; }
+
+        public IBitgetRestClientFuturesApiShared SharedClient { get; }
     }
 }

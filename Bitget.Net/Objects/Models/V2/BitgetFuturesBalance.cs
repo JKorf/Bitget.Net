@@ -75,7 +75,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Unrealized profit and loss isolated margin
         /// </summary>
         [JsonPropertyName("isolatedUnrealizedPL")]
-        public decimal? IosaltedMarginProfitAndLoss { get; set; }
+        public decimal? IsolatedMarginProfitAndLoss { get; set; }
         /// <summary>
         /// Trading bonus
         /// </summary>

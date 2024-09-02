@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 namespace Bitget.Net.Clients.FuturesApiV2
 {
     /// <inheritdoc />
-    internal class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
+    internal partial class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Futures Api");
 
@@ -51,6 +51,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
         protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor();
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+
+        public IBitgetRestClientFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)

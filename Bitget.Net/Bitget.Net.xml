@@ -10227,7 +10227,7 @@
             Unrealized profit and loss cross margin
             </summary>
         </member>
-        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.IosaltedMarginProfitAndLoss">
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance.IsolatedMarginProfitAndLoss">
             <summary>
             Unrealized profit and loss isolated margin
             </summary>

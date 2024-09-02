@@ -77,12 +77,12 @@ namespace Bitget.Net.Objects.Models.V2
         /// Quantity decimal places
         /// </summary>
         [JsonPropertyName("volumePlace")]
-        public decimal QuantityDecimals { get; set; }
+        public int QuantityDecimals { get; set; }
         /// <summary>
         /// Price decimal places
         /// </summary>
         [JsonPropertyName("pricePlace")]
-        public decimal PriceDecimals { get; set; }
+        public int PriceDecimals { get; set; }
         /// <summary>
         /// Quantity step
         /// </summary>
