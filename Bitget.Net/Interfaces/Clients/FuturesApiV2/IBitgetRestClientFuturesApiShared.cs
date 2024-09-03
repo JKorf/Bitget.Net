@@ -14,7 +14,6 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         IKlineRestClient,
         IRecentTradeRestClient,
         ILeverageRestClient,
-        IPositionRestClient,
         IMarkPriceKlineRestClient,
         IIndexPriceKlineRestClient,
         IOrderBookRestClient,

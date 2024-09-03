@@ -315,53 +315,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
         #endregion
 
-        #region Positions client
-
-        EndpointOptions<GetPositionsRequest> IPositionRestClient.GetPositionsOptions { get; } = new EndpointOptions<GetPositionsRequest>(true)
-        {
-            RequiredExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
-            }
-        };
-        async Task<ExchangeWebResult<IEnumerable<SharedPosition>>> IPositionRestClient.GetPositionsAsync(GetPositionsRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
-        {
-            var validationError = ((IPositionRestClient)this).GetPositionsOptions.ValidateRequest(Exchange, request, exchangeParameters);
-            if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, validationError);
-
-            WebCallResult<IEnumerable<Objects.Models.V2.BitgetPosition>> result;
-            if (request.Symbol != null)
-            {
-                result = await Trading.GetPositionAsync(
-                    GetProductType(request.ApiType, exchangeParameters),
-                    symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
-                    marginAsset: exchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
-                    ct: ct).ConfigureAwait(false);
-                if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
-            }
-            else
-            {
-                var productType = GetProductType(request.ApiType, exchangeParameters);
-                result = await Trading.GetPositionsAsync(productType, exchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!, ct: ct).ConfigureAwait(false);
-                if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
-            }
-
-            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, result.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
-            {
-                UnrealizedPnl = x.UnrealizedProfitAndLoss,
-                LiquidationPrice = x.LiquidationPrice,
-                AverageEntryPrice = x.AverageOpenPrice,
-                MaintenanceMargin = x.MaintenanceMarginRate,
-                PositionSide = x.PositionSide == PositionSide.Oneway ? SharedPositionSide.Both : x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
-            }).ToList());
-        }
-
-        #endregion
-
         #region Mark Klines client
 
         GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(true, false)
@@ -848,6 +801,67 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return order.AsExchangeResult<SharedId>(Exchange, default);
 
             return order.AsExchangeResult(Exchange, new SharedId(order.Data.OrderId.ToString()));
+        }
+
+        EndpointOptions<GetPositionsRequest> IFuturesOrderRestClient.GetPositionsOptions { get; } = new EndpointOptions<GetPositionsRequest>(true)
+        {
+            RequiredExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
+                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
+            }
+        };
+        async Task<ExchangeWebResult<IEnumerable<SharedPosition>>> IFuturesOrderRestClient.GetPositionsAsync(GetPositionsRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IFuturesOrderRestClient)this).GetPositionsOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, validationError);
+
+            WebCallResult<IEnumerable<Objects.Models.V2.BitgetPosition>> result;
+            if (request.Symbol != null)
+            {
+                result = await Trading.GetPositionAsync(
+                    GetProductType(request.ApiType, exchangeParameters),
+                    symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                    marginAsset: exchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
+                    ct: ct).ConfigureAwait(false);
+                if (!result)
+                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
+            }
+            else
+            {
+                var productType = GetProductType(request.ApiType, exchangeParameters);
+                result = await Trading.GetPositionsAsync(productType, exchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!, ct: ct).ConfigureAwait(false);
+                if (!result)
+                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
+            }
+
+            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, result.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
+            {
+                UnrealizedPnl = x.UnrealizedProfitAndLoss,
+                LiquidationPrice = x.LiquidationPrice,
+                AverageEntryPrice = x.AverageOpenPrice,
+                Leverage = x.Leverage,
+                MaintenanceMargin = x.MaintenanceMarginRate,
+                PositionSide = x.PositionSide == PositionSide.Oneway ? SharedPositionSide.Both : x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
+            }).ToList());
+        }
+
+        EndpointOptions<ClosePositionRequest> IFuturesOrderRestClient.ClosePositionOptions { get; } = new EndpointOptions<ClosePositionRequest>(true);
+        async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.ClosePositionAsync(ClosePositionRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IFuturesOrderRestClient)this).ClosePositionOptions.ValidateRequest(Exchange, request, exchangeParameters);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
+            var result = await Trading.ClosePositionsAsync(
+                GetProductType(request.ApiType, exchangeParameters),
+                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                side: request.PositionSide == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedId>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, new SharedId(result.Data.Success.Single().ToString()));
         }
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
