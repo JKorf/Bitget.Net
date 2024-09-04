@@ -138,13 +138,21 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>(Exchange, validationError);
 
+            var productType = GetProductType(apiType, exchangeParameters);
             var result = await ExchangeData.GetContractsAsync(
-                GetProductType(apiType, exchangeParameters),
+                productType,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.Select(s => new SharedFuturesSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol)
+            return result.AsExchangeResult(Exchange, result.Data.Select(s => new SharedFuturesSymbol(
+                productType == BitgetProductTypeV2.CoinFutures && s.DeliveryPeriod.HasValue ? SharedSymbolType.DeliveryInverse :
+                productType == BitgetProductTypeV2.CoinFutures && !s.DeliveryPeriod.HasValue ? SharedSymbolType.PerpetualInverse :
+                s.DeliveryPeriod.HasValue ? SharedSymbolType.DeliveryLinear :
+                SharedSymbolType.PerpetualLinear,
+                s.BaseAsset,
+                s.QuoteAsset,
+                s.Symbol)
             {
                 MinTradeQuantity = s.MinOrderQuantity,
                 PriceDecimals = s.PriceDecimals,
