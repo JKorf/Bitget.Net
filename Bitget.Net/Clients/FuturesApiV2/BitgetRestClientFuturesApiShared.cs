@@ -916,7 +916,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         private BitgetProductTypeV2 GetProductType(ApiType? apiType, ExchangeParameters? exchangeParameters)
         {
-            if (apiType == ApiType.InverseFutures)
+            if (apiType == ApiType.PerpetualInverse || apiType == ApiType.DeliveryInverse)
             {
                 return BitgetProductTypeV2.CoinFutures;
             }
