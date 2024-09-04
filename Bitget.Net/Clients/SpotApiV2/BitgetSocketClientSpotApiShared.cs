@@ -20,6 +20,7 @@ namespace Bitget.Net.Clients.SpotApiV2
     internal partial class BitgetSocketClientSpotApi : IBitgetSocketClientSpotApiShared
     {
         public string Exchange => BitgetExchange.ExchangeName;
+        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.Spot };
 
         async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(TickerSubscribeRequest request, Action<DataEvent<SharedSpotTicker>> handler, CancellationToken ct)
         {
