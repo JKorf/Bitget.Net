@@ -98,7 +98,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedSpotSymbol>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol)
+            return result.AsExchangeResult(Exchange, result.Data.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol, s.Status == Enums.SymbolStatus.Online)
             {
                 MinTradeQuantity = s.MinOrderQuantity,
                 MaxTradeQuantity = s.MaxOrderQuantity,

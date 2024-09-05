@@ -146,14 +146,18 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!result)
                 return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, result.Data.Select(s => new SharedFuturesSymbol(
-                productType == BitgetProductTypeV2.CoinFutures && s.DeliveryPeriod.HasValue ? SharedSymbolType.DeliveryInverse :
-                productType == BitgetProductTypeV2.CoinFutures && !s.DeliveryPeriod.HasValue ? SharedSymbolType.PerpetualInverse :
+            var data = result.Data.Where(x => 
+                ((apiType == ApiType.PerpetualInverse || apiType == ApiType.PerpetualLinear) && x.ContractType == ContractType.Perpetual)
+                || ((apiType == ApiType.DeliveryLinear || apiType == ApiType.DeliveryInverse) && x.ContractType == ContractType.Delivery));
+            return result.AsExchangeResult(Exchange, data.Select(s => new SharedFuturesSymbol(
+                productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Delivery ? SharedSymbolType.DeliveryInverse :
+                productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Perpetual ? SharedSymbolType.PerpetualInverse :
                 s.DeliveryPeriod.HasValue ? SharedSymbolType.DeliveryLinear :
                 SharedSymbolType.PerpetualLinear,
                 s.BaseAsset,
                 s.QuoteAsset,
-                s.Symbol)
+                s.Symbol, 
+                s.Status == Enums.V2.SymbolStatus.Normal)
             {
                 MinTradeQuantity = s.MinOrderQuantity,
                 PriceDecimals = s.PriceDecimals,
