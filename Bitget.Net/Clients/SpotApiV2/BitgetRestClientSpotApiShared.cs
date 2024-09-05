@@ -45,17 +45,17 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (pageToken is DateTimeToken dateTimeToken)
                 fromTimestamp = dateTimeToken.LastTime;
 
-            var startTime = request.Filter?.StartTime?.AddSeconds(-1);
-            var endTime = request.Filter?.EndTime?.AddSeconds(-1);
+            var startTime = request.StartTime?.AddSeconds(-1);
+            var endTime = request.EndTime?.AddSeconds(-1);
             var apiLimit = 1000;
 
             // API returns the newest data first if the timespan is bigger than the api limit of 1000 results
             // So we need to request the first 1000 from the start time, then the 1000 after that etc
-            if (request.Filter?.StartTime != null)
+            if (request.StartTime != null)
             {
                 // Not paginated, check if the data will fit
                 var seconds = apiLimit * (int)request.Interval;
-                var maxEndTime = (fromTimestamp ?? request.Filter.StartTime).Value.AddSeconds(seconds - 1);
+                var maxEndTime = (fromTimestamp ?? request.StartTime).Value.AddSeconds(seconds - 1);
                 if (maxEndTime < endTime)
                     endTime = maxEndTime;
             }
@@ -65,7 +65,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 interval,
                 fromTimestamp ?? startTime,
                 endTime,
-                limit: request.Filter?.Limit ?? apiLimit,
+                limit: request.Limit ?? apiLimit,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -73,10 +73,10 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.Filter?.StartTime != null && result.Data.Any())
+            if (request.StartTime != null && result.Data.Any())
             {
                 var maxOpenTime = result.Data.Max(x => x.OpenTime);
-                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
                     nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval - 1));
             }
 
@@ -305,16 +305,16 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Get data
             var orders = await Trading.GetClosedOrdersAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit ?? 100,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit ?? 100,
                 idLessThan: fromToken).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, default);
 
             // Get next token
             FromIdToken? nextToken = null;
-            if (orders.Data.Count() == (request.Filter?.Limit ?? 100))
+            if (orders.Data.Count() == (request.Limit ?? 100))
                 nextToken = new FromIdToken(orders.Data.OrderBy(d => d.CreateTime).First().OrderId);
 
             return orders.AsExchangeResult(Exchange, orders.Data.Select(x => new SharedSpotOrder(
@@ -376,16 +376,16 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Get data
             var trades = await Trading.GetUserTradesAsync(request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit,
                 idLessThan: fromId).ConfigureAwait(false);
             if (!trades)
                 return trades.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
 
             // Get next token
             FromIdToken? nextToken = null;
-            if (trades.Data.Count() == (request.Filter?.Limit ?? 100))
+            if (trades.Data.Count() == (request.Limit ?? 100))
                 nextToken = new FromIdToken(trades.Data.Max(o => o.TradeId).ToString());
 
             return trades.AsExchangeResult(Exchange, trades.Data.Select(x => new SharedUserTrade(
@@ -536,10 +536,10 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Get data
             var deposits = await Account.GetDepositHistoryAsync(
-                startTime: request.Filter?.StartTime ?? DateTime.UtcNow.AddDays(-7),
-                endTime: request.Filter?.EndTime ?? DateTime.UtcNow,
+                startTime: request.StartTime ?? DateTime.UtcNow.AddDays(-7),
+                endTime: request.EndTime ?? DateTime.UtcNow,
                 asset: request.Asset,
-                limit: request.Filter?.Limit ?? 100,
+                limit: request.Limit ?? 100,
                 idLessThan: from,
                 ct: ct).ConfigureAwait(false);
             if (!deposits)
@@ -547,7 +547,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Determine next token
             FromIdToken? nextToken = null;
-            if (deposits.Data.Count() == (request.Filter?.Limit ?? 100))
+            if (deposits.Data.Count() == (request.Limit ?? 100))
                 nextToken = new FromIdToken(deposits.Data.Min(x => x.OrderId));
 
             return deposits.AsExchangeResult(Exchange, deposits.Data.Select(x => new SharedDeposit(x.Asset, x.Quantity, x.Status == TransferStatus.Success, x.CreateTime)
@@ -631,10 +631,10 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Get data
             var withdrawals = await Account.GetWithdrawalHistoryAsync(
-                startTime: request.Filter?.StartTime ?? DateTime.UtcNow.AddDays(-7),
-                endTime: request.Filter?.EndTime ?? DateTime.UtcNow,
+                startTime: request.StartTime ?? DateTime.UtcNow.AddDays(-7),
+                endTime: request.EndTime ?? DateTime.UtcNow,
                 asset: request.Asset,
-                limit: request.Filter?.Limit ?? 100,
+                limit: request.Limit ?? 100,
                 idLessThan: from,
                 ct: ct).ConfigureAwait(false);
             if (!withdrawals)
@@ -642,7 +642,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Determine next token
             FromIdToken? nextToken = null;
-            if (withdrawals.Data.Count() == (request.Filter?.Limit ?? 100))
+            if (withdrawals.Data.Count() == (request.Limit ?? 100))
                 nextToken = new FromIdToken(withdrawals.Data.Min(x => x.OrderId));
 
             return withdrawals.AsExchangeResult(Exchange, withdrawals.Data.Select(x => new SharedWithdrawal(x.Asset, x.ToAddress, x.Quantity, x.Status == TransferStatus.Success, x.CreateTime)

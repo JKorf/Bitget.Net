@@ -197,17 +197,17 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (pageToken is DateTimeToken dateTimeToken)
                 fromTimestamp = dateTimeToken.LastTime;
 
-            var startTime = request.Filter?.StartTime;
-            var endTime = request.Filter?.EndTime;
+            var startTime = request.StartTime;
+            var endTime = request.EndTime;
             var apiLimit = 1000;
 
             // API returns the newest data first if the timespan is bigger than the api limit of 1000 results
             // So we need to request the first 1000 from the start time, then the 1000 after that etc
-            if (request.Filter?.StartTime != null)
+            if (request.StartTime != null)
             {
                 // Not paginated, check if the data will fit
                 var seconds = apiLimit * (int)request.Interval;
-                var maxEndTime = (fromTimestamp ?? request.Filter.StartTime).Value.AddSeconds(seconds);
+                var maxEndTime = (fromTimestamp ?? request.StartTime).Value.AddSeconds(seconds);
                 if (maxEndTime < endTime)
                     endTime = maxEndTime;
             }
@@ -217,9 +217,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
                 interval,
                 KlineType.Market,
-                fromTimestamp ?? request.Filter?.StartTime,
+                fromTimestamp ?? request.StartTime,
                 endTime,
-                limit: request.Filter?.Limit ?? apiLimit,
+                limit: request.Limit ?? apiLimit,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -227,10 +227,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.Filter?.StartTime != null && result.Data.Any())
+            if (request.StartTime != null && result.Data.Any())
             {
                 var maxOpenTime = result.Data.Max(x => x.OpenTime);
-                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
                     nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
             }
 
@@ -291,7 +291,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!result)
                 return result.AsExchangeResult<SharedLeverage>(Exchange, default);
 
-            var position = result.Data.SingleOrDefault(x => x.PositionSide == (request.Side == SharedPositionSide.Both ? PositionSide.Oneway : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long));
+            var position = result.Data.SingleOrDefault(x => x.PositionSide == (request.Side == null ? PositionSide.Oneway : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long));
 
             return result.AsExchangeResult(Exchange, new SharedLeverage(position?.Leverage ?? 0));
         }
@@ -316,7 +316,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
                 marginAsset: exchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
                 (int)request.Leverage,
-                side: request.Side == SharedPositionSide.Both ? PositionSide.Oneway : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long,
+                side: request.Side == null ? PositionSide.Oneway : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedLeverage>(Exchange, default);
@@ -358,9 +358,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 GetProductType(request.ApiType, exchangeParameters),
                 request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
                 interval,
-                fromTimestamp ?? request.Filter?.StartTime,
-                request.Filter?.EndTime,
-                request.Filter?.Limit ?? 200,
+                fromTimestamp ?? request.StartTime,
+                request.EndTime,
+                request.Limit ?? 200,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -368,10 +368,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.Filter?.StartTime != null && result.Data.Any())
+            if (request.StartTime != null && result.Data.Any())
             {
                 var maxOpenTime = result.Data.Max(x => x.OpenTime);
-                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
                     nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
             }
 
@@ -410,9 +410,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 GetProductType(request.ApiType, exchangeParameters),
                 request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
                 interval,
-                fromTimestamp ?? request.Filter?.StartTime,
-                request.Filter?.EndTime,
-                request.Filter?.Limit ?? 200,
+                fromTimestamp ?? request.StartTime,
+                request.EndTime,
+                request.Limit ?? 200,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
@@ -420,10 +420,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (request.Filter?.StartTime != null && result.Data.Any())
+            if (request.StartTime != null && result.Data.Any())
             {
                 var maxOpenTime = result.Data.Max(x => x.OpenTime);
-                if (maxOpenTime < request.Filter.EndTime!.Value.AddSeconds(-(int)request.Interval))
+                if (maxOpenTime < request.EndTime!.Value.AddSeconds(-(int)request.Interval))
                     nextToken = new DateTimeToken(maxOpenTime.AddSeconds((int)interval));
             }
 
@@ -615,7 +615,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 QuoteQuantityFilled = order.Data.QuoteQuantityFilled,
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.UpdateTime,
-                PositionSide = order.Data.PositionSide == PositionSide.Oneway ? SharedPositionSide.Both : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
+                PositionSide = order.Data.PositionSide == PositionSide.Oneway ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = order.Data.ReduceOnly,
                 Fee = order.Data.Fee
             });
@@ -655,7 +655,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 QuoteQuantityFilled = x.QuoteQuantityFilled,
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
-                PositionSide = x.PositionSide == PositionSide.Oneway ? SharedPositionSide.Both : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
+                PositionSide = x.PositionSide == PositionSide.Oneway ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.Fee
             }));
@@ -681,15 +681,15 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             // Get data
             var orders = await Trading.GetClosedOrdersAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
-                startTime: fromTimestamp ?? request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit ?? 1000).ConfigureAwait(false);
+                startTime: fromTimestamp ?? request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit ?? 1000).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
-            if (orders.Data.Orders.Count() == (request.Filter?.Limit ?? 1000))
+            if (orders.Data.Orders.Count() == (request.Limit ?? 1000))
                 nextToken = new DateTimeToken(orders.Data.Orders.Max(o => o.CreateTime));
 
             return orders.AsExchangeResult(Exchange, orders.Data.Orders.Select(x => new SharedFuturesOrder(
@@ -708,7 +708,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 QuoteQuantityFilled = x.QuoteQuantityFilled,
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.UpdateTime,
-                PositionSide = x.PositionSide == PositionSide.Oneway ? SharedPositionSide.Both : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
+                PositionSide = x.PositionSide == PositionSide.Oneway ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.Fee
             }));
@@ -767,9 +767,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             // Get data
             var orders = await Trading.GetUserTradesAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
-                startTime: request.Filter?.StartTime,
-                endTime: request.Filter?.EndTime,
-                limit: request.Filter?.Limit ?? 500,
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                limit: request.Limit ?? 500,
                 idLessThan: fromId
                 ).ConfigureAwait(false);
             if (!orders)
@@ -777,7 +777,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             // Get next token
             FromIdToken? nextToken = null;
-            if (orders.Data.Trades.Count() == (request.Filter?.Limit ?? 500))
+            if (orders.Data.Trades.Count() == (request.Limit ?? 500))
                 nextToken = new FromIdToken(orders.Data.EndId);
 
             return orders.AsExchangeResult(Exchange, orders.Data.Trades.Select(x => new SharedUserTrade(
@@ -856,7 +856,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 AverageEntryPrice = x.AverageOpenPrice,
                 Leverage = x.Leverage,
                 MaintenanceMargin = x.MaintenanceMarginRate,
-                PositionSide = x.PositionSide == PositionSide.Oneway ? SharedPositionSide.Both : x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
+#warning check if x.PositionSide is never OneWay
+                PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
             }).ToList());
         }
 
@@ -870,7 +871,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Trading.ClosePositionsAsync(
                 GetProductType(request.ApiType, exchangeParameters),
                 symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
-                side: request.PositionSide == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long).ConfigureAwait(false);
+                side: request.PositionSide == null ? null : request.PositionSide == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, default);
 
@@ -906,17 +907,59 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         private TradeSide? GetTradeSide(PlaceFuturesOrderRequest request)
         {
-            if (request.PositionSide == SharedPositionSide.Both)
+            if (request.PositionSide == null)
                 return null;
 
             if (request.PositionSide == SharedPositionSide.Long)
-            {
                 return request.Side == SharedOrderSide.Buy ? TradeSide.Open : TradeSide.Close;
-            }
 
             return request.Side == SharedOrderSide.Buy ? TradeSide.Close : TradeSide.Open;
         }
 
+        #endregion
+
+        #region Position Mode client
+
+        GetPositionModeOptions IPositionModeRestClient.GetPositionModeOptions { get; } = new GetPositionModeOptions(true)
+        {
+            RequiredExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
+                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
+            }
+        };
+        async Task<ExchangeWebResult<SharedPositionModeResult>> IPositionModeRestClient.GetPositionModeAsync(GetPositionModeRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IPositionModeRestClient)this).GetPositionModeOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
+
+            var result = await Account.GetBalanceAsync(
+                GetProductType(request.ApiType, exchangeParameters),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                exchangeParameters.GetValue<string>(Exchange, "MarginAsset"),
+                ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(result.Data.PositionMode == PositionMode.Hedge ? SharedPositionMode.LongShort : SharedPositionMode.OneWay));
+        }
+
+        SetPositionModeOptions IPositionModeRestClient.SetPositionModeOptions { get; } = new SetPositionModeOptions(true, true, false);
+        async Task<ExchangeWebResult<SharedPositionModeResult>> IPositionModeRestClient.SetPositionModeAsync(SetPositionModeRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IPositionModeRestClient)this).SetPositionModeOptions.ValidateRequest(Exchange, request, exchangeParameters, request.ApiType, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
+
+            var result = await Account.SetPositionModeAsync(
+                GetProductType(request.ApiType, exchangeParameters), 
+                request.Mode == SharedPositionMode.LongShort ? PositionMode.Hedge : PositionMode.OneWay, ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
+
+            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(request.Mode));
+        }
         #endregion
 
         private BitgetProductTypeV2 GetProductType(ApiType? apiType, ExchangeParameters? exchangeParameters)
