@@ -11,7 +11,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         IBookTickerSocketClient,
         IBalanceSocketClient,
         ISpotOrderSocketClient,
-        ISpotUserTradeSocketClient
+        IUserTradeSocketClient
     {
     }
 }
