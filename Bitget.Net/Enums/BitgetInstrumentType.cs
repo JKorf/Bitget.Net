@@ -35,7 +35,7 @@ namespace Bitget.Net.Enums
         /// <summary>
         /// USDC simulation perpetual contract
         /// </summary>
-        [Map("CMCBL")]
+        [Map("SCMCBL")]
         UsdcPerpetualSimulated
     }
 }
