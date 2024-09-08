@@ -5,15 +5,15 @@ using System.Text;
 
 namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 {
-    public interface IBitgetSocketClientSpotApiShared :
+    public interface IBitgetSocketClientFuturesApiShared :
         ITickerSocketClient,
         ITradeSocketClient,
         IBookTickerSocketClient,
         IBalanceSocketClient,
-        ISpotOrderSocketClient,
-        IUserTradeSocketClient,
         IKlineSocketClient,
-        IOrderBookSocketClient
+        IOrderBookSocketClient,
+        IFuturesOrderSocketClient,
+        IUserTradeSocketClient
     {
     }
 }

@@ -35,12 +35,12 @@ namespace Bitget.Net.Objects.Models.V2
         /// Last trade id
         /// </summary>
         [JsonPropertyName("tradeId")]
-        public decimal LastTradeId { get; set; }
+        public string? LastTradeId { get; set; }
         /// <summary>
         /// Quantity filled of last trade
         /// </summary>
         [JsonPropertyName("baseVolume")]
-        public decimal LastTradeQuantity { get; set; }
+        public decimal? LastTradeQuantity { get; set; }
         /// <summary>
         /// Role
         /// </summary>
@@ -50,7 +50,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Average fill price
         /// </summary>
         [JsonPropertyName("priceAvg")]
-        public decimal AveragePrice { get; set; }
+        public decimal? AveragePrice { get; set; }
         /// <summary>
         /// Order price
         /// </summary>
@@ -171,12 +171,12 @@ namespace Bitget.Net.Objects.Models.V2
         /// Last trade fill price
         /// </summary>
         [JsonPropertyName("fillPrice")]
-        public decimal LastTradeFillPrice { get; set; }
+        public decimal? LastTradeFillPrice { get; set; }
         /// <summary>
         /// Last trade fill time
         /// </summary>
         [JsonPropertyName("fillTime")]
-        public DateTime LastTradeFillTime { get; set; }
+        public DateTime? LastTradeFillTime { get; set; }
         /// <summary>
         /// Total filled quantity
         /// </summary>

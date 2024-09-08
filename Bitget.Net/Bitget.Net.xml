@@ -4125,6 +4125,660 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi">
+            <summary>
+            Spot API endpoints
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.Account">
+            <summary>
+            Endpoints related to account settings, info or actions
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.ExchangeData">
+            <summary>
+            Endpoints related to retrieving market and system data
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.Trading">
+            <summary>
+            Endpoints related to account settings, info or actions
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.CommonSpotClient">
+            <summary>
+            Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount">
+            <summary>
+            Bitget account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetFundingBalancesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get funding balances
+            <para><a href="https://www.bitget.com/api-doc/common/account/Funding-Assets" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetTradeFeeAsync(System.String,Bitget.Net.Enums.BitgetBusinessType,System.Threading.CancellationToken)">
+            <summary>
+            Get trading fee for a symbol
+            <para><a href="https://www.bitget.com/api-doc/common/public/Get-Trade-Rate" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="businessType">Business type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetAssetsValuationAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get asset valuation per account type
+            <para><a href="https://www.bitget.com/api-doc/common/account/All-Account-Balance" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetAccountInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get account info
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Info" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetSpotBalancesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get spot account balances
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Assets" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.SetDepositAccountAsync(System.String,Bitget.Net.Enums.V2.AccountType,System.Threading.CancellationToken)">
+            <summary>
+            Set the account to receive deposits in for an asset
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Modify-Deposit-Account" /></para>
+            </summary>
+            <param name="asset">Asset, for example `ETH`</param>
+            <param name="accountType">The account type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetLedgerAsync(System.String,System.Nullable{Bitget.Net.Enums.V2.GroupType},System.Nullable{Bitget.Net.Enums.V2.BusinessType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get account ledger
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Bills" /></para>
+            </summary>
+            <param name="asset">Filter by asset, for example `ETH`</param>
+            <param name="groupType">Filter by group type</param>
+            <param name="businessType">Filter by business type</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.TransferAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,Bitget.Net.Enums.V2.TransferAccountType,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Transfer funds between accounts
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Transfer" /></para>
+            </summary>
+            <param name="asset">Asset, for example `ETH`</param>
+            <param name="fromAccount">From account</param>
+            <param name="toAccount">To account</param>
+            <param name="quantity">Quantity to transfer</param>
+            <param name="symbol">Symbol, required when transferring to or from an account type that is a leveraged position-by-position account.</param>
+            <param name="clientId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetTransferableAssetsAsync(Bitget.Net.Enums.V2.TransferAccountType,Bitget.Net.Enums.V2.TransferAccountType,System.Threading.CancellationToken)">
+            <summary>
+            Get list of assets that can be transfered between accounts
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Transfer-Coins" /></para>
+            </summary>
+            <param name="fromAccount">From account</param>
+            <param name="toAccount">To account</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.WithdrawAsync(System.String,Bitget.Net.Enums.V2.TransferType,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Withdraw asset
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
+            </summary>
+            <param name="asset">Asset, for example `ETH`</param>
+            <param name="transferType">Transfer type</param>
+            <param name="address">Target address</param>
+            <param name="quantity">Quantity</param>
+            <param name="network">Network to use</param>
+            <param name="innerTargetType">Inner transfer target type</param>
+            <param name="areaCode">Area code for inner transfer</param>
+            <param name="tag">Tag</param>
+            <param name="remark">Remark</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetTransferHistoryAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get transfer history
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
+            </summary>
+            <param name="asset">Asset, for example `ETH`</param>
+            <param name="fromAccount">From account</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="clientOrderId">Filter by client order id</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.SetBgbDeductEnabledAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Set BGB fee deduction enabled status
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Switch-Deduct" /></para>
+            </summary>
+            <param name="enable">Enabled</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetBgbDeductEnabledAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get BGB deduct status
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deduct-Info" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get deposit address
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Address" /></para>
+            </summary>
+            <param name="asset">Asset, for example `ETH`</param>
+            <param name="network">Network</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.CancelWithdrawalAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a withdrawal
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Cancel-Withdrawal" /></para>
+            </summary>
+            <param name="withdrawalOrderId">Withdrawal order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetWithdrawalHistoryAsync(System.DateTime,System.DateTime,System.String,System.String,System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get withdrawal history 
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Withdraw-Record" /></para>
+            </summary>
+            <param name="asset">Filter by asset, for example `ETH`</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="clientOrderId">Filter by client order id</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetDepositHistoryAsync(System.DateTime,System.DateTime,System.String,System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get deposit history
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record" /></para>
+            </summary>
+            <param name="asset">Filter by asset, for example `ETH`</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData">
+            <summary>
+            Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the server time
+            <para><a href="https://www.bitget.com/api-doc/common/public/Get-Server-Time" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetAssetsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get list of supported assets and their networks
+            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Coin-List" /></para>
+            </summary>
+            <param name="asset">Filter by asset, for example `ETH`</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetSymbolsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get list of supported symbols and their trading rules
+            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Symbols" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetVipFeeRatesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of VIP levels and fee rates
+            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-VIP-Fee-Rate" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetTickersAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get tickers
+            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Tickers" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get order book
+            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Orderbook" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="mergeStep">Merge step</param>
+            <param name="limit">Max number of rows</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetKlinesAsync(System.String,Bitget.Net.Enums.V2.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get kline/candlestick data
+            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Candle-Data" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="interval">Kline interval</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetHistoricalKlinesAsync(System.String,Bitget.Net.Enums.V2.KlineInterval,System.DateTime,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get historical kline data
+            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-History-Candle-Data" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="interval">Kline interval</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetRecentTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get the most recent trades on the symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Recent-Trades" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get trades
+            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Market-Trades" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading">
+            <summary>
+            Bitget trading endpoints, placing and mananging orders.
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,Bitget.Net.Enums.V2.TimeInForce,System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
+            <summary>
+            Place a new order
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="side">Order side</param>
+            <param name="type">Order type</param>
+            <param name="quantity">Quantity. For limit and market-sell orders this is in base asset, for market-buy orders it is in quote asset.</param>
+            <param name="timeInForce">Time in force</param>
+            <param name="price">Limit price</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="tpslType">Tpsl type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest},System.Threading.CancellationToken)">
+            <summary>
+            Place multiple orders in a single call
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Place-Orders" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="orders">Orders to place</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelOrderAsync(System.String,System.String,System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
+            <summary>
+            Cancel an order
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
+            <param name="tpslType">Tpsl type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
+            <summary>
+            Cancel multiple orders in a single call
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Orders" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="orders">Orders to cancel</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelOrdersBySymbolAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel all orders on a symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Cancel-Symbol-Orders" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get order info
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Order-Info" /></para>
+            </summary>
+            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetOpenOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get current open orders
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Unfilled-Orders" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="tpslType">Tpsl type</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetClosedOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get closed orders
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-History-Orders" /></para>
+            </summary>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="tpslType">Tpsl type</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get user trade history
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Fills" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceTriggerOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.QuantityType},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TimeInForce},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Place a trigger order
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Place-Plan-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="side">Order side</param>
+            <param name="type">Order type</param>
+            <param name="quantity">Quantity</param>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="quantityType">Asset the quantity is in</param>
+            <param name="triggerPriceType">Trigger price type</param>
+            <param name="orderPrice">Order price (when orderType is limit)</param>
+            <param name="timeInForce">Time in force</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.EditTriggerOrderAsync(System.Decimal,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Edit a trigger order
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Modify-Plan-Order" /></para>
+            </summary>
+            <param name="triggerPrice">Trigger price</param>
+            <param name="orderType">Order type</param>
+            <param name="quantity">Quantity</param>
+            <param name="orderPrice">Order price for limit orders</param>
+            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client Order id. Either this or orderId should be provided</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelTriggerOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a trigger order
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Cancel-Plan-Order" /></para>
+            </summary>
+            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client Order id. Either this or orderId should be provided</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelAllTriggerOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Cancel all trigger orders
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Batch-Cancel-Plan-Order" /></para>
+            </summary>
+            <param name="symbols">Only cancel trigger orders on these symbols, for example `ETHUSDT`</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetOpenTriggerOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get list of currently open trigger orders
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-Current-Plan-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return results before this id</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetTriggerSubOrdersAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get trigger order sub orders
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-Plan-Sub-Order" /></para>
+            </summary>
+            <param name="triggerOrderId">Trigger order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetClosedTriggerOrdersAsync(System.String,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get closed trigger orders
+            <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-History-Plan-Order" /></para>
+            </summary>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi">
+            <summary>
+            Bitget spot streams
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to ticker updates for a symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to ticker updates for multiple symbols
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to trade updates for a symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to trade updates for multiple symbols
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to kline/candlestick updates for a symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
+            <param name="interval">Kline interval</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to kline/candlestick updates for multiple symbols
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
+            <param name="interval">Kline interval</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to order book updates for a symbol
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
+            </summary>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
+            <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to order book updates for multiple symbols
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
+            </summary>
+            <param name="symbols">The symbols, for example `ETHUSDT`</param>
+            <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updatesa after</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetOrderUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to user order updates
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Order-Channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToUserTradeUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to user trade updates
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Fill-Channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTriggerOrderUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to user trigger order updates
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Plan-Order-Channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to user balance updates
+            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Account-Channel" /></para>
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns></returns>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApi">
             <summary>
             Futures API endpoints
@@ -5030,660 +5684,6 @@
             Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
             </summary>
             <param name="credentials">The credentials to set</param>
-        </member>
-        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi">
-            <summary>
-            Spot API endpoints
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.Account">
-            <summary>
-            Endpoints related to account settings, info or actions
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.ExchangeData">
-            <summary>
-            Endpoints related to retrieving market and system data
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.Trading">
-            <summary>
-            Endpoints related to account settings, info or actions
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.CommonSpotClient">
-            <summary>
-            Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount">
-            <summary>
-            Bitget account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
-            </summary>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetFundingBalancesAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get funding balances
-            <para><a href="https://www.bitget.com/api-doc/common/account/Funding-Assets" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetTradeFeeAsync(System.String,Bitget.Net.Enums.BitgetBusinessType,System.Threading.CancellationToken)">
-            <summary>
-            Get trading fee for a symbol
-            <para><a href="https://www.bitget.com/api-doc/common/public/Get-Trade-Rate" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="businessType">Business type</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetAssetsValuationAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get asset valuation per account type
-            <para><a href="https://www.bitget.com/api-doc/common/account/All-Account-Balance" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetAccountInfoAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get account info
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Info" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetSpotBalancesAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get spot account balances
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Assets" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.SetDepositAccountAsync(System.String,Bitget.Net.Enums.V2.AccountType,System.Threading.CancellationToken)">
-            <summary>
-            Set the account to receive deposits in for an asset
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Modify-Deposit-Account" /></para>
-            </summary>
-            <param name="asset">Asset, for example `ETH`</param>
-            <param name="accountType">The account type</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetLedgerAsync(System.String,System.Nullable{Bitget.Net.Enums.V2.GroupType},System.Nullable{Bitget.Net.Enums.V2.BusinessType},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get account ledger
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Bills" /></para>
-            </summary>
-            <param name="asset">Filter by asset, for example `ETH`</param>
-            <param name="groupType">Filter by group type</param>
-            <param name="businessType">Filter by business type</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="idLessThan">Return results before this id</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.TransferAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,Bitget.Net.Enums.V2.TransferAccountType,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Transfer funds between accounts
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Transfer" /></para>
-            </summary>
-            <param name="asset">Asset, for example `ETH`</param>
-            <param name="fromAccount">From account</param>
-            <param name="toAccount">To account</param>
-            <param name="quantity">Quantity to transfer</param>
-            <param name="symbol">Symbol, required when transferring to or from an account type that is a leveraged position-by-position account.</param>
-            <param name="clientId">Client order id</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetTransferableAssetsAsync(Bitget.Net.Enums.V2.TransferAccountType,Bitget.Net.Enums.V2.TransferAccountType,System.Threading.CancellationToken)">
-            <summary>
-            Get list of assets that can be transfered between accounts
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Transfer-Coins" /></para>
-            </summary>
-            <param name="fromAccount">From account</param>
-            <param name="toAccount">To account</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.WithdrawAsync(System.String,Bitget.Net.Enums.V2.TransferType,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Withdraw asset
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
-            </summary>
-            <param name="asset">Asset, for example `ETH`</param>
-            <param name="transferType">Transfer type</param>
-            <param name="address">Target address</param>
-            <param name="quantity">Quantity</param>
-            <param name="network">Network to use</param>
-            <param name="innerTargetType">Inner transfer target type</param>
-            <param name="areaCode">Area code for inner transfer</param>
-            <param name="tag">Tag</param>
-            <param name="remark">Remark</param>
-            <param name="clientOrderId">Client order id</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetTransferHistoryAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get transfer history
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
-            </summary>
-            <param name="asset">Asset, for example `ETH`</param>
-            <param name="fromAccount">From account</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="clientOrderId">Filter by client order id</param>
-            <param name="limit">Max number of results</param>
-            <param name="idLessThan">Return results before this id</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.SetBgbDeductEnabledAsync(System.Boolean,System.Threading.CancellationToken)">
-            <summary>
-            Set BGB fee deduction enabled status
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Switch-Deduct" /></para>
-            </summary>
-            <param name="enable">Enabled</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetBgbDeductEnabledAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get BGB deduct status
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deduct-Info" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get deposit address
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Address" /></para>
-            </summary>
-            <param name="asset">Asset, for example `ETH`</param>
-            <param name="network">Network</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.CancelWithdrawalAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Cancel a withdrawal
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Cancel-Withdrawal" /></para>
-            </summary>
-            <param name="withdrawalOrderId">Withdrawal order id</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetWithdrawalHistoryAsync(System.DateTime,System.DateTime,System.String,System.String,System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get withdrawal history 
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Withdraw-Record" /></para>
-            </summary>
-            <param name="asset">Filter by asset, for example `ETH`</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="orderId">Filter by order id</param>
-            <param name="clientOrderId">Filter by client order id</param>
-            <param name="limit">Max number of results</param>
-            <param name="idLessThan">Return results before this id</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetDepositHistoryAsync(System.DateTime,System.DateTime,System.String,System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get deposit history
-            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record" /></para>
-            </summary>
-            <param name="asset">Filter by asset, for example `ETH`</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="orderId">Filter by order id</param>
-            <param name="limit">Max number of results</param>
-            <param name="idLessThan">Return results before this id</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData">
-            <summary>
-            Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
-            </summary>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get the server time
-            <para><a href="https://www.bitget.com/api-doc/common/public/Get-Server-Time" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetAssetsAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get list of supported assets and their networks
-            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Coin-List" /></para>
-            </summary>
-            <param name="asset">Filter by asset, for example `ETH`</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetSymbolsAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get list of supported symbols and their trading rules
-            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Symbols" /></para>
-            </summary>
-            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetVipFeeRatesAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get list of VIP levels and fee rates
-            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-VIP-Fee-Rate" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetTickersAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get tickers
-            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Tickers" /></para>
-            </summary>
-            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get order book
-            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Orderbook" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="mergeStep">Merge step</param>
-            <param name="limit">Max number of rows</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetKlinesAsync(System.String,Bitget.Net.Enums.V2.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get kline/candlestick data
-            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Candle-Data" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="interval">Kline interval</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetHistoricalKlinesAsync(System.String,Bitget.Net.Enums.V2.KlineInterval,System.DateTime,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get historical kline data
-            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-History-Candle-Data" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="interval">Kline interval</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetRecentTradesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get the most recent trades on the symbol
-            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Recent-Trades" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get trades
-            <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Market-Trades" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="idLessThan">Return results before this id</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading">
-            <summary>
-            Bitget trading endpoints, placing and mananging orders.
-            </summary>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,Bitget.Net.Enums.V2.TimeInForce,System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
-            <summary>
-            Place a new order
-            <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="side">Order side</param>
-            <param name="type">Order type</param>
-            <param name="quantity">Quantity. For limit and market-sell orders this is in base asset, for market-buy orders it is in quote asset.</param>
-            <param name="timeInForce">Time in force</param>
-            <param name="price">Limit price</param>
-            <param name="clientOrderId">Client order id</param>
-            <param name="triggerPrice">Trigger price</param>
-            <param name="tpslType">Tpsl type</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest},System.Threading.CancellationToken)">
-            <summary>
-            Place multiple orders in a single call
-            <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Place-Orders" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="orders">Orders to place</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelOrderAsync(System.String,System.String,System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
-            <summary>
-            Cancel an order
-            <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-            <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
-            <param name="tpslType">Tpsl type</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
-            <summary>
-            Cancel multiple orders in a single call
-            <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Orders" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="orders">Orders to cancel</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelOrdersBySymbolAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Cancel all orders on a symbol
-            <para><a href="https://www.bitget.com/api-doc/spot/trade/Cancel-Symbol-Orders" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get order info
-            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Order-Info" /></para>
-            </summary>
-            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-            <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetOpenOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get current open orders
-            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Unfilled-Orders" /></para>
-            </summary>
-            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-            <param name="orderId">Filter by order id</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="idLessThan">Return results before this id</param>
-            <param name="tpslType">Tpsl type</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetClosedOrdersAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get closed orders
-            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-History-Orders" /></para>
-            </summary>
-            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-            <param name="orderId">Filter by order id</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="idLessThan">Return results before this id</param>
-            <param name="tpslType">Tpsl type</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetUserTradesAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get user trade history
-            <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Fills" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="orderId">Filter by order id</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="idLessThan">Return results before this id</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceTriggerOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.QuantityType},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TimeInForce},System.String,System.Threading.CancellationToken)">
-            <summary>
-            Place a trigger order
-            <para><a href="https://www.bitget.com/api-doc/spot/plan/Place-Plan-Order" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="side">Order side</param>
-            <param name="type">Order type</param>
-            <param name="quantity">Quantity</param>
-            <param name="triggerPrice">Trigger price</param>
-            <param name="quantityType">Asset the quantity is in</param>
-            <param name="triggerPriceType">Trigger price type</param>
-            <param name="orderPrice">Order price (when orderType is limit)</param>
-            <param name="timeInForce">Time in force</param>
-            <param name="clientOrderId">Client order id</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.EditTriggerOrderAsync(System.Decimal,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Nullable{System.Decimal},System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Edit a trigger order
-            <para><a href="https://www.bitget.com/api-doc/spot/plan/Modify-Plan-Order" /></para>
-            </summary>
-            <param name="triggerPrice">Trigger price</param>
-            <param name="orderType">Order type</param>
-            <param name="quantity">Quantity</param>
-            <param name="orderPrice">Order price for limit orders</param>
-            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-            <param name="clientOrderId">Client Order id. Either this or orderId should be provided</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelTriggerOrderAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Cancel a trigger order
-            <para><a href="https://www.bitget.com/api-doc/spot/plan/Cancel-Plan-Order" /></para>
-            </summary>
-            <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-            <param name="clientOrderId">Client Order id. Either this or orderId should be provided</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelAllTriggerOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
-            <summary>
-            Cancel all trigger orders
-            <para><a href="https://www.bitget.com/api-doc/spot/plan/Batch-Cancel-Plan-Order" /></para>
-            </summary>
-            <param name="symbols">Only cancel trigger orders on these symbols, for example `ETHUSDT`</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetOpenTriggerOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get list of currently open trigger orders
-            <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-Current-Plan-Order" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="idLessThan">Return results before this id</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetTriggerSubOrdersAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get trigger order sub orders
-            <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-Plan-Sub-Order" /></para>
-            </summary>
-            <param name="triggerOrderId">Trigger order id</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.GetClosedTriggerOrdersAsync(System.String,System.DateTime,System.DateTime,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <summary>
-            Get closed trigger orders
-            <para><a href="https://www.bitget.com/api-doc/spot/plan/Get-History-Plan-Order" /></para>
-            </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
-            <param name="startTime">Filter by start time</param>
-            <param name="endTime">Filter by end time</param>
-            <param name="limit">Max number of results</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi">
-            <summary>
-            Bitget spot streams
-            </summary>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to ticker updates for a symbol
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
-            </summary>
-            <param name="symbol">The symbol, for example `ETHUSDT`</param>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to ticker updates for multiple symbols
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
-            </summary>
-            <param name="symbols">The symbols, for example `ETHUSDT`</param>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to trade updates for a symbol
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
-            </summary>
-            <param name="symbol">The symbol, for example `ETHUSDT`</param>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to trade updates for multiple symbols
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
-            </summary>
-            <param name="symbols">The symbols, for example `ETHUSDT`</param>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.String,Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to kline/candlestick updates for a symbol
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
-            </summary>
-            <param name="symbol">The symbol, for example `ETHUSDT`</param>
-            <param name="interval">Kline interval</param>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to kline/candlestick updates for multiple symbols
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
-            </summary>
-            <param name="symbols">The symbols, for example `ETHUSDT`</param>
-            <param name="interval">Kline interval</param>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to order book updates for a symbol
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
-            </summary>
-            <param name="symbol">The symbol, for example `ETHUSDT`</param>
-            <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to order book updates for multiple symbols
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
-            </summary>
-            <param name="symbols">The symbols, for example `ETHUSDT`</param>
-            <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updatesa after</param>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetOrderUpdate}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to user order updates
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Order-Channel" /></para>
-            </summary>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToUserTradeUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetUserTradeUpdate}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to user trade updates
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Fill-Channel" /></para>
-            </summary>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTriggerOrderUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetTriggerOrderUpdate}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to user trigger order updates
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Plan-Order-Channel" /></para>
-            </summary>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetBalanceUpdate}}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to user balance updates
-            <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Account-Channel" /></para>
-            </summary>
-            <param name="handler">The handler for the data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns></returns>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi">
             <summary>
