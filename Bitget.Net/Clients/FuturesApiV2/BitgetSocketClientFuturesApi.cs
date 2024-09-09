@@ -44,6 +44,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
+        public IBitgetSocketClientFuturesApiShared SharedClient => this;
+
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
