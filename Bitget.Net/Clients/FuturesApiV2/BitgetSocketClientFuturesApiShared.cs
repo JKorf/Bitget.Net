@@ -16,6 +16,7 @@ using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Models;
 using CryptoExchange.Net.SharedApis.Models.FilterOptions;
 using Bitget.Net.Enums;
+using CryptoExchange.Net.SharedApis.Interfaces.Socket.Futures;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {
@@ -231,6 +232,32 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
         #endregion
 
+        #region Position client
+        SubscriptionOptions IPositionSocketClient.SubscribePositionOptions { get; } = new SubscriptionOptions("SubscribePositionRequest", true);
+        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(Action<ExchangeEvent<IEnumerable<SharedPosition>>> handler, ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IUserTradeSocketClient)this).SubscribeUserTradeOptions.ValidateRequest(Exchange, exchangeParameters, ApiType.Spot, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
+
+            var productType = GetProductType(apiType, exchangeParameters);
+            var result = await SubscribeToPositionUpdatesAsync(productType!,
+                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
+                {
+                    AverageEntryPrice = x.AverageOpenPrice,
+#warning check if x.PositionSide is never OneWay
+                    PositionSide = x.PositionSide == Enums.V2.PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
+                    UnrealizedPnl = x.UnrealizedProfitAndLoss,
+                    MaintenanceMargin = x.MaintenanceMarginRate,
+                    Leverage = x.Leverage,
+                    LiquidationPrice = x.LiquidationPrice
+                }))),
+                ct: ct).ConfigureAwait(false);
+
+            return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        #endregion
 
         private BitgetProductTypeV2 GetProductType(ApiType? apiType, ExchangeParameters? exchangeParameters)
         {
