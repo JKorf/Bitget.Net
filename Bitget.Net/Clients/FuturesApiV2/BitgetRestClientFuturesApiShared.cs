@@ -2,6 +2,8 @@
 using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Objects.Models.V2;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis.Enums;
 using CryptoExchange.Net.SharedApis.Interfaces;
@@ -69,13 +71,15 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var productType = GetProductType(request.ApiType, exchangeParameters);
 
-            var resultTicker = ExchangeData.GetTickerAsync(productType, request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct);
-            var resultFunding = ExchangeData.GetNextFundingTimeAsync(productType, request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct);
-            var resultPrices = ExchangeData.GetPricesAsync(productType, request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), ct);
+            var resultTicker = ExchangeData.GetTickerAsync(productType, request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), ct);
+            Task<WebCallResult<BitgetFundingTime>> resultFunding = Task.FromResult<WebCallResult<BitgetFundingTime>>(default!);
+            if (!request.ApiType.IsDelivery())
+                resultFunding = ExchangeData.GetNextFundingTimeAsync(productType, request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), ct);
+            var resultPrices = ExchangeData.GetPricesAsync(productType, request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), ct);
             await Task.WhenAll(resultTicker, resultFunding, resultPrices).ConfigureAwait(false);
             if (!resultTicker.Result)
                 return resultTicker.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
-            if (!resultFunding.Result)
+            if (resultFunding.Result?.Success == false)
                 return resultFunding.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
             if (!resultPrices.Result)
                 return resultPrices.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
@@ -91,7 +95,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     MarkPrice = resultPrices.Result.Data.MarkPrice,
                     IndexPrice = resultPrices.Result.Data.IndexPrice,
                     FundingRate = resultTicker.Result.Data.FundingRate,
-                    NextFundingTime = resultFunding.Result.Data.NextFundingTime
+                    NextFundingTime = resultFunding.Result?.Data.NextFundingTime
                 });
         }
 
@@ -214,7 +218,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await ExchangeData.GetKlinesAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 interval,
                 KlineType.Market,
                 fromTimestamp ?? request.StartTime,
@@ -256,7 +260,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await ExchangeData.GetRecentTradesAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -285,7 +289,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await Trading.GetPositionAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 marginAsset: exchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -313,7 +317,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await Account.SetLeverageAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 marginAsset: exchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
                 (int)request.Leverage,
                 side: request.Side == null ? PositionSide.Oneway : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long,
@@ -356,7 +360,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await ExchangeData.GetHistoricalMarkPriceKlinesAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 interval,
                 fromTimestamp ?? request.StartTime,
                 request.EndTime,
@@ -408,7 +412,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await ExchangeData.GetHistoricalIndexPriceKlinesAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 interval,
                 fromTimestamp ?? request.StartTime,
                 request.EndTime,
@@ -448,7 +452,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await ExchangeData.GetOrderBookAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -474,7 +478,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<SharedOpenInterest>(Exchange, validationError);
 
-            var result = await ExchangeData.GetOpenInterestAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)), ct: ct).ConfigureAwait(false);
+            var result = await ExchangeData.GetOpenInterestAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedOpenInterest>(Exchange, default);
 
@@ -509,7 +513,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             // Get data
             var result = await ExchangeData.GetHistoricalFundingRateAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 page: page,
                 pageSize: pageSize,
                 ct: ct).ConfigureAwait(false);
@@ -564,7 +568,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await Trading.PlaceOrderAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 exchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
                 request.Side == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 request.OrderType == SharedOrderType.Limit ? OrderType.Limit : OrderType.Market,
@@ -595,7 +599,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesOrder>(Exchange, validationError);
 
-            var order = await Trading.GetOrderAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), request.OrderId).ConfigureAwait(false);
+            var order = await Trading.GetOrderAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), request.OrderId).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedFuturesOrder>(Exchange, default);
 
@@ -634,7 +638,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesOrder>>(Exchange, validationError);
 
-            var symbol = request.Symbol?.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType));
+            var symbol = request.Symbol?.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate));
             var orders = await Trading.GetOpenOrdersAsync(GetProductType(request.ApiType, exchangeParameters), symbol).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
@@ -680,7 +684,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 fromTimestamp = dateTimeToken.LastTime;
 
             // Get data
-            var orders = await Trading.GetClosedOrdersAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+            var orders = await Trading.GetClosedOrdersAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 startTime: fromTimestamp ?? request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit ?? 1000).ConfigureAwait(false);
@@ -727,7 +731,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
 
-            var orders = await Trading.GetUserTradesAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), orderId: request.OrderId).ConfigureAwait(false);
+            var orders = await Trading.GetUserTradesAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), orderId: request.OrderId).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
 
@@ -766,7 +770,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 fromId = fromIdToken.FromToken;
 
             // Get data
-            var orders = await Trading.GetUserTradesAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)),
+            var orders = await Trading.GetUserTradesAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit ?? 500,
@@ -809,7 +813,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var order = await Trading.CancelOrderAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset, request.ApiType)), request.OrderId).ConfigureAwait(false);
+            var order = await Trading.CancelOrderAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)), request.OrderId).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, default);
 
@@ -835,7 +839,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             {
                 result = await Trading.GetPositionAsync(
                     GetProductType(request.ApiType, exchangeParameters),
-                    symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                    symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                     marginAsset: exchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
                     ct: ct).ConfigureAwait(false);
                 if (!result)
@@ -870,7 +874,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await Trading.ClosePositionsAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                symbol: request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 side: request.PositionSide == null ? null : request.PositionSide == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, default);
@@ -936,7 +940,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await Account.GetBalanceAsync(
                 GetProductType(request.ApiType, exchangeParameters),
-                request.Symbol.GetSymbol((baseAsset, quoteAsset) => FormatSymbol(baseAsset, quoteAsset)),
+                request.Symbol.GetSymbol((baseAsset, quoteAsset, deliverDate) => FormatSymbol(baseAsset, quoteAsset, request.ApiType, deliverDate)),
                 exchangeParameters.GetValue<string>(Exchange, "MarginAsset"),
                 ct: ct).ConfigureAwait(false);
             if (!result)

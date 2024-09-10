@@ -47,7 +47,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
         public IBitgetSocketClientFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType? futuresType = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, ApiType apiType, DateTime? deliverTime = null)
+        {
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
+        }
 
         /// <inheritdoc />
         public override string GetListenerIdentifier(IMessageAccessor message)
