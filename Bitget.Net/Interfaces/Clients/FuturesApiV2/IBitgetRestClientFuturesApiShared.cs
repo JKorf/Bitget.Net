@@ -20,7 +20,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         IOpenInterestRestClient,
         IFundingRateRestClient,
         IFuturesOrderRestClient,
-        IPositionModeRestClient
+        IPositionModeRestClient,
+        IPositionHistoryRestClient
     {
     }
 }

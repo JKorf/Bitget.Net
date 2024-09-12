@@ -41,7 +41,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
             var productType = GetProductType(request.Symbol.ApiType, exchangeParameters);
-            var result = await SubscribeToTickerUpdatesAsync(productType, symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(productType, symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.ChangePercentage24H))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }

@@ -30,11 +30,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.PerpetualLinear, ApiType.PerpetualInverse, ApiType.DeliveryLinear, ApiType.DeliveryInverse };
 
         #region Balance client
-        EndpointOptions IBalanceRestClient.GetBalancesOptions { get; } = new EndpointOptions("GetBalancesRequest", true);
+        EndpointOptions<GetBalancesRequest> IBalanceRestClient.GetBalancesOptions { get; } = new EndpointOptions<GetBalancesRequest>(true);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(GetBalancesRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, exchangeParameters, request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedBalance>>(Exchange, validationError);
 
@@ -90,7 +90,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     resultTicker.Result.Data.LastPrice,
                     resultTicker.Result.Data.HighPrice,
                     resultTicker.Result.Data.LowPrice,
-                    resultTicker.Result.Data.Volume)
+                    resultTicker.Result.Data.Volume,
+                    resultTicker.Result.Data.ChangePercentage24H)
                 {
                     MarkPrice = resultPrices.Result.Data.MarkPrice,
                     IndexPrice = resultPrices.Result.Data.IndexPrice,
@@ -99,7 +100,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 });
         }
 
-        EndpointOptions IFuturesTickerRestClient.GetFuturesTickersOptions { get; } = new EndpointOptions("GetFuturesTickersRequest", false)
+        EndpointOptions<GetTickersRequest> IFuturesTickerRestClient.GetFuturesTickersOptions { get; } = new EndpointOptions<GetTickersRequest>(false)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -107,18 +108,18 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }
         };
 
-        async Task<ExchangeWebResult<IEnumerable<SharedFuturesTicker>>> IFuturesTickerRestClient.GetFuturesTickersAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedFuturesTicker>>> IFuturesTickerRestClient.GetFuturesTickersAsync(GetTickersRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickerOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickerOptions.ValidateRequest(Exchange, exchangeParameters, request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesTicker>>(Exchange, validationError);
 
-            var resultTickers = await ExchangeData.GetTickersAsync(GetProductType(apiType, exchangeParameters), ct: ct).ConfigureAwait(false);
+            var resultTickers = await ExchangeData.GetTickersAsync(GetProductType(request.ApiType, exchangeParameters), ct: ct).ConfigureAwait(false);
             if (!resultTickers)
                 return resultTickers.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, default);
 
             return resultTickers.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, resultTickers.Data.Select(x =>
-             new SharedFuturesTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume)
+             new SharedFuturesTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.ChangePercentage24H)
                 {
                     FundingRate = x.FundingRate,
                     IndexPrice = x.IndexPrice
@@ -130,20 +131,20 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Futures Symbol client
 
-        EndpointOptions IFuturesSymbolRestClient.GetFuturesSymbolsOptions { get; } = new EndpointOptions("GetFuturesSymbolsRequest", false)
+        EndpointOptions<GetFuturesSymbolsRequest> IFuturesSymbolRestClient.GetFuturesSymbolsOptions { get; } = new EndpointOptions<GetFuturesSymbolsRequest>(false)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetFuturesSymbolsAsync(ApiType? apiType, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        async Task<ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetFuturesSymbolsAsync(GetFuturesSymbolsRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
-            var validationError = ((IFuturesSymbolRestClient)this).GetFuturesSymbolsOptions.ValidateRequest(Exchange, exchangeParameters, apiType, SupportedApiTypes);
+            var validationError = ((IFuturesSymbolRestClient)this).GetFuturesSymbolsOptions.ValidateRequest(Exchange, exchangeParameters, request.ApiType, SupportedApiTypes);
             if (validationError != null)
                 return new ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>(Exchange, validationError);
 
-            var productType = GetProductType(apiType, exchangeParameters);
+            var productType = GetProductType(request.ApiType, exchangeParameters);
             var result = await ExchangeData.GetContractsAsync(
                 productType,
                 ct: ct).ConfigureAwait(false);
@@ -151,8 +152,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
 
             var data = result.Data.Where(x => 
-                ((apiType == ApiType.PerpetualInverse || apiType == ApiType.PerpetualLinear) && x.ContractType == ContractType.Perpetual)
-                || ((apiType == ApiType.DeliveryLinear || apiType == ApiType.DeliveryInverse) && x.ContractType == ContractType.Delivery));
+                ((request.ApiType == ApiType.PerpetualInverse || request.ApiType == ApiType.PerpetualLinear) && x.ContractType == ContractType.Perpetual)
+                || ((request.ApiType == ApiType.DeliveryLinear || request.ApiType == ApiType.DeliveryInverse) && x.ContractType == ContractType.Delivery));
             return result.AsExchangeResult(Exchange, data.Select(s => new SharedFuturesSymbol(
                 productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Delivery ? SharedSymbolType.DeliveryInverse :
                 productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Perpetual ? SharedSymbolType.PerpetualInverse :
@@ -177,7 +178,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Klines client
 
-        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(true, false)
+        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationType.Descending, false)
         {
             MaxRequestDataPoints = 1000,
             RequiredExchangeParameters = new List<ParameterDescription>
@@ -334,7 +335,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Mark Klines client
 
-        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(true, false)
+        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationType.Ascending, false)
         {
             MaxRequestDataPoints = 200,
             RequiredExchangeParameters = new List<ParameterDescription>
@@ -386,7 +387,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Index Klines client
 
-        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(true, false)
+        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationType.Descending, false)
         {
             MaxRequestDataPoints = 200,
             RequiredExchangeParameters = new List<ParameterDescription>
@@ -488,7 +489,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         #endregion
 
         #region Funding Rate client
-        GetFundingRateHistoryOptions IFundingRateRestClient.GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(false, false)
+        GetFundingRateHistoryOptions IFundingRateRestClient.GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(false)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -665,7 +666,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }));
         }
 
-        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(true, true)
+        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationType.Ascending, true)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -684,7 +685,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 fromTimestamp = dateTimeToken.LastTime;
 
             // Get data
-            var orders = await Trading.GetClosedOrdersAsync(GetProductType(request.ApiType, exchangeParameters), request.Symbol.GetSymbol(FormatSymbol),
+            var orders = await Trading.GetClosedOrdersAsync(GetProductType(request.Symbol.ApiType, exchangeParameters), request.Symbol.GetSymbol(FormatSymbol),
                 startTime: fromTimestamp ?? request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit ?? 1000).ConfigureAwait(false);
@@ -751,7 +752,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }));
         }
 
-        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(true, true)
+        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationType.Ascending, true)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -963,6 +964,53 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
 
             return result.AsExchangeResult(Exchange, new SharedPositionModeResult(request.Mode));
+        }
+        #endregion
+
+        #region Position History client
+
+        GetPositionHistoryOptions IPositionHistoryRestClient.GetPositionHistoryOptions { get; } = new GetPositionHistoryOptions(false, SharedPaginationType.Descending);
+        async Task<ExchangeWebResult<IEnumerable<SharedPositionHistory>>> IPositionHistoryRestClient.GetPositionHistoryAsync(GetPositionHistoryRequest request, INextPageToken? pageToken, ExchangeParameters? exchangeParameters, CancellationToken ct)
+        {
+            var validationError = ((IPositionHistoryRestClient)this).GetPositionHistoryOptions.ValidateRequest(Exchange, request, exchangeParameters, request.Symbol?.ApiType ?? request.ApiType!.Value, SupportedApiTypes);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedPositionHistory>>(Exchange, validationError);
+
+            // Determine page token
+            string? fromId = null;
+            if (pageToken is FromIdToken token)
+                fromId = token.FromToken;
+
+            int limit = request.Limit ?? 1000;
+
+            // Get data
+            var orders = await Trading.GetPositionHistoryAsync(
+                GetProductType(request.ApiType, exchangeParameters),
+                symbol: request.Symbol.GetSymbol(FormatSymbol),
+                startTime: request.StartTime,
+                endTime: request.EndTime,
+                idLessThan: fromId,
+                limit: limit
+                ).ConfigureAwait(false);
+            if (!orders)
+                return orders.AsExchangeResult<IEnumerable<SharedPositionHistory>>(Exchange, default);
+
+            // Get next token
+            FromIdToken? nextToken = null;
+            if (!string.IsNullOrEmpty(orders.Data.EndId))
+                nextToken = new FromIdToken(orders.Data.EndId);
+
+            return orders.AsExchangeResult(Exchange, orders.Data.Entries.Select(x => new SharedPositionHistory(
+                x.Symbol,
+                x.Side == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
+                x.AverageOpenPrice,
+                x.AverageClosePrice,
+                x.CloseTotalPosition,
+                x.NetProfit,
+                x.UpdateTime)
+            {
+                PositionId = x.PositionId
+            }), nextToken);
         }
         #endregion
 

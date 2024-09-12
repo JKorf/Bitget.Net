@@ -3640,7 +3640,7 @@
             <para><a href="https://www.bitget.com/api-doc/contract/position/Get-History-Position" /></para>
             </summary>
             <param name="productType">Filter by product type</param>
-            <param name="marginAsset">Filter by margin asset, for example `USDT`</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="idLessThan">Return results before this id</param>

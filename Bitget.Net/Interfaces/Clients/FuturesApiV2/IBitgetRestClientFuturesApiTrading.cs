@@ -36,14 +36,14 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/position/Get-History-Position" /></para>
         /// </summary>
         /// <param name="productType">Filter by product type</param>
-        /// <param name="marginAsset">Filter by margin asset, for example `USDT`</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="idLessThan">Return results before this id</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? marginAsset = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new order

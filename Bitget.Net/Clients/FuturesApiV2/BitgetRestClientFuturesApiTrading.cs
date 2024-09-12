@@ -45,11 +45,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? marginAsset = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalEnum("productType", productType);
-            parameters.AddOptional("marginCoin", marginAsset);
+            parameters.AddOptional("symbol", symbol);
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);
