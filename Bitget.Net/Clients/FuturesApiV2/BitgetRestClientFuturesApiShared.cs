@@ -545,10 +545,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 SharedTimeInForce.FillOrKill
             },
             new SharedQuantitySupport(
-                SharedQuantityType.BaseAssetQuantity,
-                SharedQuantityType.BaseAssetQuantity,
-                SharedQuantityType.BaseAssetQuantity,
-                SharedQuantityType.BaseAssetQuantity))
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset))
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {

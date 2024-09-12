@@ -200,10 +200,10 @@ namespace Bitget.Net.Clients.SpotApiV2
                 SharedTimeInForce.FillOrKill
             },
             new SharedQuantitySupport(
-                SharedQuantityType.BaseAssetQuantity,
-                SharedQuantityType.BaseAssetQuantity,
-                SharedQuantityType.QuoteAssetQuantity,
-                SharedQuantityType.BaseAssetQuantity));
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.BaseAsset,
+                SharedQuantityType.QuoteAsset,
+                SharedQuantityType.BaseAsset));
 
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, ExchangeParameters? exchangeParameters, CancellationToken ct)
         {
