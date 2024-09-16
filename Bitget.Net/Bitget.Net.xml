@@ -10722,7 +10722,7 @@
             Stop loss price
             </summary>
         </member>
-        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrderUpdate.QuoteQuantityFilled">
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrderUpdate.QuoteQuantity">
             <summary>
             Estimated USD value of orders
             </summary>

@@ -95,7 +95,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Estimated USD value of orders
         /// </summary>
         [JsonPropertyName("notionalUsd")]
-        public decimal? QuoteQuantityFilled { get; set; }
+        public decimal? QuoteQuantity { get; set; }
         /// <summary>
         /// Order type
         /// </summary>

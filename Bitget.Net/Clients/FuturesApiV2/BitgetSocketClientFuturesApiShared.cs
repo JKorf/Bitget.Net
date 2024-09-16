@@ -110,7 +110,12 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var productType = GetProductType(request.ApiType, request.ExchangeParameters);
             var result = await SubscribeToBalanceUpdatesAsync(
                 productType,
-                update => handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.Select(x => new SharedBalance(x.MarginAsset, x.Available, x.Equity)).ToArray())),
+                update => {
+                    if (update.UpdateType == SocketUpdateType.Snapshot)
+                        return;
+
+                    handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.Select(x => new SharedBalance(x.MarginAsset, x.Available, x.Equity)).ToArray()));
+                },
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -181,15 +186,19 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         x.CreateTime)
                     {
                         ClientOrderId = x.ClientOrderId?.ToString(),
+#warning check?
                         Quantity = x.Quantity, // For a market buy order the OrderQuantity is the quote quantity
                         QuantityFilled = x.QuantityFilled,
-                        QuoteQuantityFilled = x.QuoteQuantityFilled,
+                        QuoteQuantity = x.QuoteQuantity,
                         TimeInForce = x.TimeInForce == Enums.V2.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.V2.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
                         AveragePrice = x.AveragePrice,
                         UpdateTime = x.UpdateTime,
                         Fee = Math.Abs(x.Fees.Any() ? x.Fees.Sum(f => f.Fee) : 0),
                         FeeAsset = x.Fees.FirstOrDefault()?.FeeAsset,
                         Price = x.Price,
+                        Leverage = x.Leverage,
+                        PositionSide = x.PositionSide == Enums.V2.PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
+                        ReduceOnly = x.ReduceOnly,
                         LastTrade = x.LastTradeId == null ? null : new SharedUserTrade(x.Symbol, x.OrderId, x.LastTradeId, x.LastTradeQuantity ?? 0, x.LastTradeFillPrice ?? 0, x.LastTradeFillTime!.Value)
                         {
                             Fee = Math.Abs(x.LastTradeFee),
@@ -225,7 +234,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         x.Price,
                         x.UpdateTime ?? x.CreateTime)
                     {
-                        Fee = x.Fees.First().TotalFee,
+                        Fee = Math.Abs(x.Fees.First().TotalFee),
                         FeeAsset = x.Fees.First().FeeAsset,
                         Role = x.Role == Enums.V2.Role.Maker ? SharedRole.Maker : SharedRole.Taker
                     }
@@ -246,16 +255,18 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var productType = GetProductType(request.ApiType, request.ExchangeParameters);
             var result = await SubscribeToPositionUpdatesAsync(productType!,
-                update => handler(update.AsExchangeEvent<IEnumerable<SharedPosition>>(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
-                {
-                    AverageEntryPrice = x.AverageOpenPrice,
+                update => {
+                    handler(update.AsExchangeEvent<IEnumerable<SharedPosition>>(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
+                    {
+                        AverageEntryPrice = x.AverageOpenPrice,
 #warning check if x.PositionSide is never OneWay
-                    PositionSide = x.PositionSide == Enums.V2.PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
-                    UnrealizedPnl = x.UnrealizedProfitAndLoss,
-                    MaintenanceMargin = x.MaintenanceMarginRate,
-                    Leverage = x.Leverage,
-                    LiquidationPrice = x.LiquidationPrice
-                }).ToArray())),
+                        PositionSide = x.PositionSide == Enums.V2.PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
+                        UnrealizedPnl = x.UnrealizedProfitAndLoss,
+                        MaintenanceMargin = x.MaintenanceMarginRate,
+                        Leverage = x.Leverage,
+                        LiquidationPrice = x.LiquidationPrice
+                    }).ToArray()));
+                    },
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
