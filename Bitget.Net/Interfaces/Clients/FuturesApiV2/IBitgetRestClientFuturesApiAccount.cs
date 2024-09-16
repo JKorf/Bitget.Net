@@ -32,7 +32,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Set leverage
-        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-List" /></para>
+        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Leverage" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>

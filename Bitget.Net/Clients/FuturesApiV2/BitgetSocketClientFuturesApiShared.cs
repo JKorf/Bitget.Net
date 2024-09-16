@@ -41,7 +41,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
             var productType = GetProductType(request.Symbol.ApiType, request.ExchangeParameters);
-            var result = await SubscribeToTickerUpdatesAsync(productType, symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.ChangePercentage24H))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(productType, symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.ChangePercentage24H * 100))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -65,7 +65,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
             var productType = GetProductType(request.Symbol.ApiType, request.ExchangeParameters);
-            var result = await SubscribeToTradeUpdatesAsync(productType, symbol, update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTradeUpdatesAsync(productType, symbol, update => handler(update.AsExchangeEvent<IEnumerable<SharedTrade>>(Exchange, update.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray())), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -110,7 +110,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var productType = GetProductType(request.ApiType, request.ExchangeParameters);
             var result = await SubscribeToBalanceUpdatesAsync(
                 productType,
-                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedBalance(x.MarginAsset, x.Available, x.Equity)))),
+                update => handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.Select(x => new SharedBalance(x.MarginAsset, x.Available, x.Equity)).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -133,6 +133,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var productType = GetProductType(request.Symbol.ApiType, request.ExchangeParameters);
             var result = await SubscribeToKlineUpdatesAsync(productType, symbol, interval, update =>
             {
+                if (update.UpdateType == SocketUpdateType.Snapshot)
+                    return;
+
                 foreach(var item in update.Data)
                     handler(update.AsExchangeEvent(Exchange, new SharedKline(item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
             }, ct).ConfigureAwait(false);
@@ -168,7 +171,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var productType = GetProductType(request.ApiType, request.ExchangeParameters);
             var result = await SubscribeToOrderUpdatesAsync(
                 productType,
-                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x =>
+                update => handler(update.AsExchangeEvent<IEnumerable<SharedFuturesOrder>>(Exchange, update.Data.Select(x =>
                     new SharedFuturesOrder(
                         x.Symbol,
                         x.OrderId.ToString(),
@@ -180,20 +183,21 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         ClientOrderId = x.ClientOrderId?.ToString(),
                         Quantity = x.Quantity, // For a market buy order the OrderQuantity is the quote quantity
                         QuantityFilled = x.QuantityFilled,
+                        QuoteQuantityFilled = x.QuoteQuantityFilled,
                         TimeInForce = x.TimeInForce == Enums.V2.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.V2.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
                         AveragePrice = x.AveragePrice,
                         UpdateTime = x.UpdateTime,
-                        Fee = x.Fees.Any() ? x.Fees.Sum(f => f.Fee) : 0,
+                        Fee = Math.Abs(x.Fees.Any() ? x.Fees.Sum(f => f.Fee) : 0),
                         FeeAsset = x.Fees.FirstOrDefault()?.FeeAsset,
                         Price = x.Price,
                         LastTrade = x.LastTradeId == null ? null : new SharedUserTrade(x.Symbol, x.OrderId, x.LastTradeId, x.LastTradeQuantity ?? 0, x.LastTradeFillPrice ?? 0, x.LastTradeFillTime!.Value)
                         {
-                            Fee = x.LastTradeFee,
+                            Fee = Math.Abs(x.LastTradeFee),
                             FeeAsset = x.LastTradeFeeAsset,
                             Role = x.LastTradeRole == Enums.V2.Role.Taker ? SharedRole.Taker : SharedRole.Maker
                         }
                     }
-                ))),
+                ).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -212,7 +216,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var productType = GetProductType(request.ApiType, request.ExchangeParameters);
             var result = await SubscribeToUserTradeUpdatesAsync(
                 productType,
-                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x =>
+                update => handler(update.AsExchangeEvent<IEnumerable<SharedUserTrade>>(Exchange, update.Data.Select(x =>
                     new SharedUserTrade(
                         x.Symbol,
                         x.OrderId.ToString(),
@@ -225,7 +229,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         FeeAsset = x.Fees.First().FeeAsset,
                         Role = x.Role == Enums.V2.Role.Maker ? SharedRole.Maker : SharedRole.Taker
                     }
-                ))),
+                ).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -242,7 +246,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var productType = GetProductType(request.ApiType, request.ExchangeParameters);
             var result = await SubscribeToPositionUpdatesAsync(productType!,
-                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
+                update => handler(update.AsExchangeEvent<IEnumerable<SharedPosition>>(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
                 {
                     AverageEntryPrice = x.AverageOpenPrice,
 #warning check if x.PositionSide is never OneWay
@@ -251,7 +255,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     MaintenanceMargin = x.MaintenanceMarginRate,
                     Leverage = x.Leverage,
                     LiquidationPrice = x.LiquidationPrice
-                }))),
+                }).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);

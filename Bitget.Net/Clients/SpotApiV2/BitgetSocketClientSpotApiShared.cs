@@ -32,7 +32,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.HighPrice24h, update.Data.LowPrice24h, update.Data.BaseVolume, update.Data.ChangePercentage))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(symbol, update.Data.LastPrice, update.Data.HighPrice24h, update.Data.LowPrice24h, update.Data.BaseVolume, update.Data.ChangePercentage * 100))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -49,7 +49,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await SubscribeToTradeUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTradeUpdatesAsync(symbol, update => handler(update.AsExchangeEvent<IEnumerable<SharedTrade>>(Exchange, update.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray())), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -79,7 +79,13 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
             var result = await SubscribeToBalanceUpdatesAsync(
-                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + (x.Locked ?? 0) + (x.Frozen ?? 0))))),
+                update =>
+                {
+                    if (update.UpdateType == SocketUpdateType.Snapshot)
+                        return;
+
+                    handler(update.AsExchangeEvent<IEnumerable<SharedBalance>>(Exchange, update.Data.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + (x.Locked ?? 0) + (x.Frozen ?? 0))).ToArray()));
+                },
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -96,7 +102,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await SubscribeToOrderUpdatesAsync(
-                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x =>
+                update => handler(update.AsExchangeEvent<IEnumerable<SharedSpotOrder>>(Exchange, update.Data.Select(x =>
                     new SharedSpotOrder(
                         x.Symbol,
                         x.OrderId.ToString(),
@@ -122,7 +128,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                             Role = x.LastTradeRole == Enums.V2.Role.Taker ? SharedRole.Taker : SharedRole.Maker
                         }
                     }
-                ))),
+                ).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -139,21 +145,20 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await SubscribeToUserTradeUpdatesAsync(
-                update => handler(update.AsExchangeEvent(Exchange, update.Data.Select(x =>
+                update => handler(update.AsExchangeEvent<IEnumerable<SharedUserTrade>>(Exchange, update.Data.Select(x =>
                     new SharedUserTrade(
                         x.Symbol,
                         x.OrderId.ToString(),
                         x.TradeId.ToString(),
                         x.Quantity,
                         x.Price,
-
                         x.UpdateTime ?? x.CreateTime)
                     {
                         Fee = x.Fees.First().TotalFee,
                         FeeAsset = x.Fees.First().FeeAsset,
                         Role = x.Role == Enums.V2.Role.Maker ? SharedRole.Maker : SharedRole.Taker
                     }
-                ))),
+                ).ToArray())),
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -175,6 +180,9 @@ namespace Bitget.Net.Clients.SpotApiV2
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
             var result = await SubscribeToKlineUpdatesAsync(symbol, interval, update =>
             {
+                if (update.UpdateType == SocketUpdateType.Snapshot)
+                    return;
+
                 foreach(var item in update.Data)
                     handler(update.AsExchangeEvent(Exchange, new SharedKline(item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
             }, ct).ConfigureAwait(false);
