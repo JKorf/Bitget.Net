@@ -29,6 +29,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
         public string Exchange => BitgetExchange.ExchangeName;
         public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.PerpetualLinear, ApiType.PerpetualInverse, ApiType.DeliveryLinear, ApiType.DeliveryInverse };
 
+        public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
+        public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
+
         #region Balance client
         EndpointOptions<GetBalancesRequest> IBalanceRestClient.GetBalancesOptions { get; } = new EndpointOptions<GetBalancesRequest>(true);
 
@@ -983,7 +986,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Account.GetBalanceAsync(
                 GetProductType(request.Symbol?.ApiType ?? request.ApiType, request.ExchangeParameters),
                 request.Symbol.GetSymbol(FormatSymbol),
-                request.ExchangeParameters.GetValue<string>(Exchange, "MarginAsset"),
+                ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset"),
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
@@ -1063,7 +1066,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return BitgetProductTypeV2.CoinFutures;
             }
 
-            var productTypeStr = exchangeParameters!.GetValue<string>(Exchange, "ProductType");
+            var productTypeStr = ExchangeParameters.GetValue<string>(exchangeParameters, Exchange, "ProductType");
             return (BitgetProductTypeV2)Enum.Parse(typeof(BitgetProductTypeV2), productTypeStr);
         }
 
