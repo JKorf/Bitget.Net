@@ -24,7 +24,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Client order id
         /// </summary>
-        [JsonPropertyName("clientOId")]
+        [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
         /// <summary>
         /// Quantity
