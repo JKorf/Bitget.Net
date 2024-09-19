@@ -991,7 +991,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!result)
                 return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
 
-            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(result.Data.PositionMode == PositionMode.Hedge ? SharedPositionMode.LongShort : SharedPositionMode.OneWay));
+            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(result.Data.PositionMode == PositionMode.Hedge ? SharedPositionMode.HedgeMode : SharedPositionMode.OneWay));
         }
 
         SetPositionModeOptions IPositionModeRestClient.SetPositionModeOptions { get; } = new SetPositionModeOptions(true, true, false);
@@ -1003,7 +1003,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await Account.SetPositionModeAsync(
                 GetProductType(request.Symbol?.ApiType ?? request.ApiType, request.ExchangeParameters), 
-                request.Mode == SharedPositionMode.LongShort ? PositionMode.Hedge : PositionMode.OneWay, ct: ct).ConfigureAwait(false);
+                request.Mode == SharedPositionMode.HedgeMode ? PositionMode.Hedge : PositionMode.OneWay, ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
 
