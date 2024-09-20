@@ -23,7 +23,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
     internal partial class BitgetSocketClientFuturesApi : IBitgetSocketClientFuturesApiShared
     {
         public string Exchange => BitgetExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.PerpetualLinear, ApiType.PerpetualInverse, ApiType.DeliveryLinear, ApiType.DeliveryInverse };
+        public TradingMode[] SupportedApiTypes { get; } = new[] { TradingMode.PerpetualLinear, TradingMode.PerpetualInverse, TradingMode.DeliveryLinear, TradingMode.DeliveryInverse };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
@@ -265,7 +265,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
 #warning check if x.PositionSide is never OneWay
                         PositionSide = x.PositionSide == Enums.V2.PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
                         UnrealizedPnl = x.UnrealizedProfitAndLoss,
-                        MaintenanceMargin = x.MaintenanceMarginRate,
                         Leverage = x.Leverage,
                         LiquidationPrice = x.LiquidationPrice
                     }).ToArray()));
@@ -277,9 +276,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #endregion
 
-        private BitgetProductTypeV2 GetProductType(ApiType? apiType, ExchangeParameters? exchangeParameters)
+        private BitgetProductTypeV2 GetProductType(TradingMode? apiType, ExchangeParameters? exchangeParameters)
         {
-            if (apiType == ApiType.PerpetualInverse || apiType == ApiType.DeliveryInverse)
+            if (apiType == TradingMode.PerpetualInverse || apiType == TradingMode.DeliveryInverse)
             {
                 return BitgetProductTypeV2.CoinFutures;
             }

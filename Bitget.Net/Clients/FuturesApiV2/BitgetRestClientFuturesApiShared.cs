@@ -27,7 +27,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
     internal partial class BitgetRestClientFuturesApi : IBitgetRestClientFuturesApiShared
     {
         public string Exchange => BitgetExchange.ExchangeName;
-        public ApiType[] SupportedApiTypes { get; } = new[] { ApiType.PerpetualLinear, ApiType.PerpetualInverse, ApiType.DeliveryLinear, ApiType.DeliveryInverse };
+        public TradingMode[] SupportedApiTypes { get; } = new[] { TradingMode.PerpetualLinear, TradingMode.PerpetualInverse, TradingMode.DeliveryLinear, TradingMode.DeliveryInverse };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
@@ -45,14 +45,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var resultUsdc = Account.GetBalancesAsync(Enums.BitgetProductTypeV2.UsdcFutures, ct: ct);
             await Task.WhenAll(resultUsdt, resultUsdc).ConfigureAwait(false);
             if (!resultUsdt.Result)
-                return resultUsdt.Result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, default);
+                return resultUsdt.Result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, null, default);
             if (!resultUsdc.Result)
-                return resultUsdc.Result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, default);
+                return resultUsdc.Result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, null, default);
 
             var result = new List<SharedBalance>();
             result.AddRange(resultUsdt.Result.Data.Select(x => new SharedBalance("USDT", x.MaxTransferable, x.Available)));
             result.AddRange(resultUsdc.Result.Data.Select(x => new SharedBalance("USDC", x.MaxTransferable, x.Available)));
-            return resultUsdt.Result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, result);
+            return resultUsdt.Result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, SupportedApiTypes, result);
         }
 
         #endregion
@@ -81,13 +81,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var resultPrices = ExchangeData.GetPricesAsync(productType, request.Symbol.GetSymbol(FormatSymbol), ct);
             await Task.WhenAll(resultTicker, resultFunding, resultPrices).ConfigureAwait(false);
             if (!resultTicker.Result)
-                return resultTicker.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
+                return resultTicker.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
             if (resultFunding.Result?.Success == false)
-                return resultFunding.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
+                return resultFunding.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
             if (!resultPrices.Result)
-                return resultPrices.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, default);
+                return resultPrices.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
 
             return resultTicker.Result.AsExchangeResult(Exchange,
+                request.Symbol.ApiType,
                 new SharedFuturesTicker(
                     resultTicker.Result.Data.Symbol,
                     resultTicker.Result.Data.LastPrice,
@@ -119,13 +120,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var resultTickers = await ExchangeData.GetTickersAsync(GetProductType(request.ApiType, request.ExchangeParameters), ct: ct).ConfigureAwait(false);
             if (!resultTickers)
-                return resultTickers.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, default);
+                return resultTickers.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, null, default);
 
             var data = resultTickers.Data;
             if (request.ApiType != null)
-                data = data.Where(x => (request.ApiType == ApiType.DeliveryLinear || request.ApiType == ApiType.DeliveryInverse) ? x.DeliveryTime != null : x.DeliveryTime == null);
+                data = data.Where(x => (request.ApiType == TradingMode.DeliveryLinear || request.ApiType == TradingMode.DeliveryInverse) ? x.DeliveryTime != null : x.DeliveryTime == null);
 
-            return resultTickers.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, data.Select(x =>
+            return resultTickers.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, request.ApiType == null ? SupportedApiTypes : new[] { request.ApiType.Value }, data.Select(x =>
              new SharedFuturesTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.ChangePercentage24H * 100)
                 {
                     FundingRate = x.FundingRate,
@@ -156,15 +157,15 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 productType,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, null, default);
 
             var data = result.Data;
             if (request.ApiType != null)
                 data = data
-                    .Where(x => ((request.ApiType == ApiType.PerpetualInverse || request.ApiType == ApiType.PerpetualLinear) && x.ContractType == ContractType.Perpetual)
-                             || ((request.ApiType == ApiType.DeliveryLinear || request.ApiType == ApiType.DeliveryInverse) && x.ContractType == ContractType.Delivery));
+                    .Where(x => ((request.ApiType == TradingMode.PerpetualInverse || request.ApiType == TradingMode.PerpetualLinear) && x.ContractType == ContractType.Perpetual)
+                             || ((request.ApiType == TradingMode.DeliveryLinear || request.ApiType == TradingMode.DeliveryInverse) && x.ContractType == ContractType.Delivery));
 
-            return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, data.Select(s => new SharedFuturesSymbol(
+            return result.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, request.ApiType == null ? SupportedApiTypes: new[] { request.ApiType.Value }, data.Select(s => new SharedFuturesSymbol(
                 productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Delivery ? SharedSymbolType.DeliveryInverse :
                 productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Perpetual ? SharedSymbolType.PerpetualInverse :
                 s.DeliveryPeriod.HasValue ? SharedSymbolType.DeliveryLinear :
@@ -235,7 +236,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
@@ -246,7 +247,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, result.Data.Reverse().Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, request.Symbol.ApiType, result.Data.Reverse().Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 
         #endregion
@@ -272,9 +273,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, null, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, result.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray());
+            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.ApiType, result.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray());
         }
 
         #endregion
@@ -301,11 +302,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 marginAsset: request.ExchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedLeverage>(Exchange, default);
+                return result.AsExchangeResult<SharedLeverage>(Exchange, null, default);
 
             var position = result.Data.SingleOrDefault(x => x.PositionSide == (request.Side == null ? PositionSide.Oneway : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long));
 
-            return result.AsExchangeResult(Exchange, new SharedLeverage(position?.Leverage ?? 0));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedLeverage(position?.Leverage ?? 0));
         }
 
         SetLeverageOptions ILeverageRestClient.SetLeverageOptions { get; } = new SetLeverageOptions(false)
@@ -330,9 +331,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 side: request.Side == null ? null : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedLeverage>(Exchange, default);
+                return result.AsExchangeResult<SharedLeverage>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedLeverage(request.Leverage)
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedLeverage(request.Leverage)
             {
                 Side = request.Side
             });
@@ -387,7 +388,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
@@ -398,7 +399,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     nextToken = new DateTimeToken(minOpenTime);
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, request.Symbol.ApiType, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -451,7 +452,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
@@ -462,7 +463,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     nextToken = new DateTimeToken(minOpenTime);
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedMarkKline>>(Exchange, request.Symbol.ApiType, result.Data.Reverse().Select(x => new SharedMarkKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
         }
 
         #endregion
@@ -487,9 +488,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedOrderBook>(Exchange, default);
+                return result.AsExchangeResult<SharedOrderBook>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
         }
 
         #endregion
@@ -511,9 +512,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var result = await ExchangeData.GetOpenInterestAsync(GetProductType(request.Symbol.ApiType, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedOpenInterest>(Exchange, default);
+                return result.AsExchangeResult<SharedOpenInterest>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedOpenInterest(result.Data.Quantity));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedOpenInterest(result.Data.Quantity));
         }
 
         #endregion
@@ -549,14 +550,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 pageSize: pageSize,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, default);
+                return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, null, default);
 
             PageToken? nextToken = null;
             if (result.Data.Count() == pageSize && result.Data.Min(x => x.FundingTime) > request.StartTime)
                 nextToken = new PageToken(page + 1, pageSize);
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, result.Data.Where(x => x.FundingTime >= request.StartTime).Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime ?? default)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedFundingRate>>(Exchange, request.Symbol.ApiType,result.Data.Where(x => x.FundingTime >= request.StartTime).Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime ?? default)).ToArray(), nextToken);
         }
         #endregion
 
@@ -588,7 +589,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
 
         SharedFeeDeductionType IFuturesOrderRestClient.FuturesFeeDeductionType => SharedFeeDeductionType.AddToCost;
-        SharedFeeAssetType IFuturesOrderRestClient.FuturesFeeAssetType => SharedFeeAssetType.QuoteAsset;
+        SharedFeeAssetType IFuturesOrderRestClient.FuturesFeeAssetType => SharedFeeAssetType.InputAsset;
 
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
@@ -613,9 +614,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ct: ct).ConfigureAwait(false);
 
             if (!result)
-                return result.AsExchangeResult<SharedId>(Exchange, default);
+                return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedId(result.Data.OrderId.ToString()));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(result.Data.OrderId.ToString()));
         }
 
         EndpointOptions<GetOrderRequest> IFuturesOrderRestClient.GetFuturesOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true)
@@ -633,9 +634,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var order = await Trading.GetOrderAsync(GetProductType(request.Symbol.ApiType, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), request.OrderId, ct: ct).ConfigureAwait(false);
             if (!order)
-                return order.AsExchangeResult<SharedFuturesOrder>(Exchange, default);
+                return order.AsExchangeResult<SharedFuturesOrder>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, new SharedFuturesOrder(
+            return order.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedFuturesOrder(
                 order.Data.Symbol,
                 order.Data.OrderId.ToString(),
                 ParseOrderType(order.Data.OrderType),
@@ -673,9 +674,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
             var orders = await Trading.GetOpenOrdersAsync(GetProductType(request.Symbol?.ApiType ?? request.ApiType, request.ExchangeParameters), symbol, ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
+                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, orders.Data.Orders.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, SupportedApiTypes ,orders.Data.Orders.Select(x => new SharedFuturesOrder(
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -724,14 +725,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 idLessThan: fromId,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, default);
+                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, null, default);
 
             // Get next token
             FromIdToken? nextToken = null;
             if (orders.Data.Orders.Count() == limit)
                 nextToken = new FromIdToken(orders.Data.Orders.OrderBy(x => x.CreateTime).First().OrderId);
 
-            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, orders.Data.Orders.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, SupportedApiTypes ,orders.Data.Orders.Select(x => new SharedFuturesOrder(
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
@@ -768,9 +769,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var orders = await Trading.GetUserTradesAsync(GetProductType(request.Symbol.ApiType, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), orderId: request.OrderId, ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
+                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, orders.Data.Trades.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, request.Symbol.ApiType,orders.Data.Trades.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId,
@@ -786,7 +787,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationType.Ascending, true)
+        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationType.Descending, true)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -813,14 +814,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ct: ct
                 ).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, default);
+                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, null, default);
 
             // Get next token
             FromIdToken? nextToken = null;
             if (orders.Data.Trades.Count() == (request.Limit ?? 500))
                 nextToken = new FromIdToken(orders.Data.EndId);
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, orders.Data.Trades.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, request.Symbol.ApiType,orders.Data.Trades.Select(x => new SharedUserTrade(
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId.ToString(),
@@ -851,9 +852,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var order = await Trading.CancelOrderAsync(GetProductType(request.Symbol.ApiType, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), request.OrderId, ct: ct).ConfigureAwait(false);
             if (!order)
-                return order.AsExchangeResult<SharedId>(Exchange, default);
+                return order.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, new SharedId(order.Data.OrderId.ToString()));
+            return order.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(order.Data.OrderId.ToString()));
         }
 
         EndpointOptions<GetPositionsRequest> IFuturesOrderRestClient.GetPositionsOptions { get; } = new EndpointOptions<GetPositionsRequest>(true)
@@ -879,23 +880,22 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     marginAsset: request.ExchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
                     ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
+                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, null, default);
             }
             else
             {
                 var productType = GetProductType(request.ApiType, request.ExchangeParameters);
                 result = await Trading.GetPositionsAsync(productType, request.ExchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!, ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, default);
+                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, null, default);
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, result.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
+            return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, request.Symbol == null ? SupportedApiTypes : new[] { request.Symbol.ApiType }, result.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
             {
                 UnrealizedPnl = x.UnrealizedProfitAndLoss,
                 LiquidationPrice = x.LiquidationPrice,
                 AverageEntryPrice = x.AverageOpenPrice,
                 Leverage = x.Leverage,
-                MaintenanceMargin = x.MaintenanceMarginRate,
 #warning check if x.PositionSide is never OneWay
                 PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
             }).ToArray());
@@ -913,9 +913,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 symbol: request.Symbol.GetSymbol(FormatSymbol),
                 side: request.PositionSide == null ? null : request.PositionSide == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedId>(Exchange, default);
+                return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedId(result.Data.Success.Single().OrderId.ToString()));
+            return result.AsExchangeResult(Exchange, request.Symbol.ApiType, new SharedId(result.Data.Success.Single().OrderId.ToString()));
         }
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
@@ -983,15 +983,17 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
 
+            var productType = GetProductType(request.Symbol?.ApiType ?? request.ApiType, request.ExchangeParameters);
             var result = await Account.GetBalanceAsync(
-                GetProductType(request.Symbol?.ApiType ?? request.ApiType, request.ExchangeParameters),
+                productType,
+#warning check
                 request.Symbol.GetSymbol(FormatSymbol),
                 ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset"),
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
+                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(result.Data.PositionMode == PositionMode.Hedge ? SharedPositionMode.HedgeMode : SharedPositionMode.OneWay));
+            return result.AsExchangeResult(Exchange, productType == BitgetProductTypeV2.CoinFutures ? new[] { TradingMode.DeliveryInverse, TradingMode.PerpetualInverse } : new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear }, new SharedPositionModeResult(result.Data.PositionMode == PositionMode.Hedge ? SharedPositionMode.HedgeMode : SharedPositionMode.OneWay));
         }
 
         SetPositionModeOptions IPositionModeRestClient.SetPositionModeOptions { get; } = new SetPositionModeOptions(true, true, false);
@@ -1001,13 +1003,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionModeResult>(Exchange, validationError);
 
+            var productType = GetProductType(request.Symbol?.ApiType ?? request.ApiType, request.ExchangeParameters);
             var result = await Account.SetPositionModeAsync(
-                GetProductType(request.Symbol?.ApiType ?? request.ApiType, request.ExchangeParameters), 
+                productType, 
                 request.Mode == SharedPositionMode.HedgeMode ? PositionMode.Hedge : PositionMode.OneWay, ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, default);
+                return result.AsExchangeResult<SharedPositionModeResult>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, new SharedPositionModeResult(request.Mode));
+            return result.AsExchangeResult(Exchange, productType == BitgetProductTypeV2.CoinFutures ? new[] { TradingMode.DeliveryInverse, TradingMode.PerpetualInverse } : new[] { TradingMode.DeliveryLinear, TradingMode.PerpetualLinear }, new SharedPositionModeResult(request.Mode));
         }
         #endregion
 
@@ -1038,14 +1041,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ct: ct
                 ).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedPositionHistory>>(Exchange, default);
+                return orders.AsExchangeResult<IEnumerable<SharedPositionHistory>>(Exchange, null, default);
 
             // Get next token
             FromIdToken? nextToken = null;
             if (!string.IsNullOrEmpty(orders.Data.EndId))
                 nextToken = new FromIdToken(orders.Data.EndId);
 
-            return orders.AsExchangeResult<IEnumerable<SharedPositionHistory>>(Exchange, orders.Data.Entries.Select(x => new SharedPositionHistory(
+            return orders.AsExchangeResult<IEnumerable<SharedPositionHistory>>(Exchange, request.Symbol.ApiType, orders.Data.Entries.Select(x => new SharedPositionHistory(
                 x.Symbol,
                 x.Side == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 x.AverageOpenPrice,
@@ -1059,9 +1062,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
         #endregion
 
-        private BitgetProductTypeV2 GetProductType(ApiType? apiType, ExchangeParameters? exchangeParameters)
+        private BitgetProductTypeV2 GetProductType(TradingMode? apiType, ExchangeParameters? exchangeParameters)
         {
-            if (apiType == ApiType.PerpetualInverse || apiType == ApiType.DeliveryInverse)
+            if (apiType == TradingMode.PerpetualInverse || apiType == TradingMode.DeliveryInverse)
             {
                 return BitgetProductTypeV2.CoinFutures;
             }
