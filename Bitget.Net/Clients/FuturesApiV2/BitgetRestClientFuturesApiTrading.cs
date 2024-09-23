@@ -253,7 +253,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/orders-pending", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<BitgetFuturesOrders>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetFuturesOrders>(request, parameters, ct).ConfigureAwait(false);
+            if (result.Data.Orders == null)
+                result.Data.Orders = Array.Empty<BitgetFuturesOrder>();
+
+            return result.As(result.Data);
         }
 
         /// <inheritdoc />

@@ -3314,6 +3314,11 @@
             Endpoints related to account settings, info or actions
             </summary>
         </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi.SharedClient">
+            <summary>
+            Get the shared rest requests client
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount">
             <summary>
             Bitget account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
@@ -3607,6 +3612,11 @@
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiShared">
+            <summary>
+            Shared interface for Spot rest API usage
+            </summary>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading">
             <summary>
@@ -3973,6 +3983,11 @@
             Bitget futures streams
             </summary>
         </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SharedClient">
+            <summary>
+            Get the shared socket subscription client
+            </summary>
+        </member>
         <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetFuturesTickerUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to ticker updates for a symbol
@@ -4125,6 +4140,11 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientFuturesApiShared">
+            <summary>
+            Shared interface for Futures socket API usage
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi">
             <summary>
             Spot API endpoints
@@ -4150,6 +4170,11 @@
             Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.SharedClient">
+            <summary>
+            Get the shared rest requests client
+            </summary>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount">
             <summary>
@@ -4452,6 +4477,11 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiShared">
+            <summary>
+            Shared interface for Spot rest API usage
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading">
             <summary>
             Bitget trading endpoints, placing and mananging orders.
@@ -4659,6 +4689,11 @@
             Bitget spot streams
             </summary>
         </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SharedClient">
+            <summary>
+            Get the shared socket subscription client
+            </summary>
+        </member>
         <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to ticker updates for a symbol
@@ -4778,6 +4813,11 @@
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApiShared">
+            <summary>
+            Shared interface for Spot socket API usage
+            </summary>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApi">
             <summary>

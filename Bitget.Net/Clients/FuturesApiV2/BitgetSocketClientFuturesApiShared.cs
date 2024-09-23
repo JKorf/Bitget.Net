@@ -189,8 +189,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         x.CreateTime)
                     {
                         ClientOrderId = x.ClientOrderId?.ToString(),
-#warning check?
-                        Quantity = x.Quantity, // For a market buy order the OrderQuantity is the quote quantity
+                        Quantity = x.Quantity,
                         QuantityFilled = x.QuantityFilled,
                         QuoteQuantity = x.QuoteQuantity,
                         TimeInForce = x.TimeInForce == Enums.V2.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.V2.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,

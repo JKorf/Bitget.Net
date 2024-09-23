@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 {
+    /// <summary>
+    /// Shared interface for Futures socket API usage
+    /// </summary>
     public interface IBitgetSocketClientFuturesApiShared :
         ITickerSocketClient,
         ITradeSocketClient,

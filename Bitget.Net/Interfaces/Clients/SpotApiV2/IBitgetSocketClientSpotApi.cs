@@ -13,6 +13,9 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
     /// </summary>
     public interface IBitgetSocketClientSpotApi : ISocketApiClient, IDisposable
     {
+        /// <summary>
+        /// Get the shared socket subscription client
+        /// </summary>
         public IBitgetSocketClientSpotApiShared SharedClient { get; }
 
         /// <summary>
