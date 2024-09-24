@@ -1,20 +1,7 @@
 ﻿using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.SharedApis.Enums;
-using CryptoExchange.Net.SharedApis.Interfaces;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
-using CryptoExchange.Net.SharedApis.Models;
-using CryptoExchange.Net.SharedApis.Models.Options.Endpoints;
-using CryptoExchange.Net.SharedApis.Models.Rest;
-using CryptoExchange.Net.SharedApis.ResponseModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {
@@ -356,6 +343,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
+                x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                 x.Quantity,
                 x.Price,
                 x.CreateTime)
@@ -397,6 +385,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
+                x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                 x.Quantity,
                 x.Price,
                 x.CreateTime)

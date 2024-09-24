@@ -1,17 +1,13 @@
-﻿using Bitget.Net.Enums;
-using Bitget.Net.Interfaces.Clients.FuturesApiV2;
-using Bitget.Net.Interfaces.Clients.SpotApiV2;
+﻿using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 

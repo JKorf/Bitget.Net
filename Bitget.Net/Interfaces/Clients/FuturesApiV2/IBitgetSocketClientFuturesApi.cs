@@ -1,5 +1,4 @@
 ﻿using Bitget.Net.Enums;
-using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net.Interfaces;

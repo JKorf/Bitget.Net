@@ -1,20 +1,8 @@
 ﻿using Bitget.Net.Interfaces.Clients.SpotApiV2;
-using Bitget.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
-using CryptoExchange.Net.SharedApis.Interfaces.Socket;
-using CryptoExchange.Net.SharedApis.Models.Socket;
-using CryptoExchange.Net.SharedApis.ResponseModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using CryptoExchange.Net.SharedApis.Enums;
-using CryptoExchange.Net.SharedApis.Models;
-using CryptoExchange.Net.SharedApis.Interfaces.Socket.Spot;
-using CryptoExchange.Net.SharedApis.Models.Options.Subscriptions;
-using CryptoExchange.Net.SharedApis.Models.Options.Endpoints;
+using CryptoExchange.Net.SharedApis;
+using Bitget.Net.Enums.V2;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {
@@ -124,7 +112,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                         FeeAsset = x.FeeAsset,
                         QuoteQuantity = x.Notional,
                         OrderPrice = x.Price,
-                        LastTrade = x.TradeId == null ? null : new SharedUserTrade(x.Symbol, x.OrderId, x.TradeId, x.BaseVolume!.Value, x.LastTradePrice!.Value, x.LastTradeTime!.Value)
+                        LastTrade = x.TradeId == null ? null : new SharedUserTrade(x.Symbol, x.OrderId, x.TradeId, x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, x.BaseVolume!.Value, x.LastTradePrice!.Value, x.LastTradeTime!.Value)
                         {
                             Fee = x.LastTradeFee,
                             FeeAsset = x.FeeAsset,
@@ -153,6 +141,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                         x.Symbol,
                         x.OrderId.ToString(),
                         x.TradeId.ToString(),
+                        x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                         x.Quantity,
                         x.Price,
                         x.UpdateTime ?? x.CreateTime)

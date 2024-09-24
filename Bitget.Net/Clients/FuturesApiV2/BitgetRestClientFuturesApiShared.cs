@@ -1,27 +1,10 @@
 ﻿using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
-using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis;
-using CryptoExchange.Net.SharedApis.Enums;
-using CryptoExchange.Net.SharedApis.Interfaces;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest.Futures;
-using CryptoExchange.Net.SharedApis.Interfaces.Rest.Spot;
-using CryptoExchange.Net.SharedApis.Models;
-using CryptoExchange.Net.SharedApis.Models.Options;
-using CryptoExchange.Net.SharedApis.Models.Options.Endpoints;
-using CryptoExchange.Net.SharedApis.Models.Rest;
-using CryptoExchange.Net.SharedApis.ResponseModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {
@@ -774,6 +757,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId,
+                x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                 x.Quantity,
                 x.Price,
                 x.CreateTime)
@@ -824,6 +808,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.TradeId.ToString(),
+                x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                 x.Quantity,
                 x.Price,
                 x.CreateTime)
@@ -895,7 +880,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 LiquidationPrice = x.LiquidationPrice,
                 AverageOpenPrice = x.AverageOpenPrice,
                 Leverage = x.Leverage,
-#warning check if x.PositionSide is never OneWay
                 PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
             }).ToArray());
         }

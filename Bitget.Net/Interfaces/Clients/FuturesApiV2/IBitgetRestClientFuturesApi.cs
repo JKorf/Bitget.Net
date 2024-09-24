@@ -1,5 +1,4 @@
 ﻿using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
 
 namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 {

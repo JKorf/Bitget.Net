@@ -1,22 +1,9 @@
 ﻿using Bitget.Net.Interfaces.Clients.SpotApiV2;
-using Bitget.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
-using CryptoExchange.Net.SharedApis.Interfaces.Socket;
-using CryptoExchange.Net.SharedApis.Models.Socket;
-using CryptoExchange.Net.SharedApis.ResponseModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using CryptoExchange.Net.SharedApis.Enums;
-using CryptoExchange.Net.SharedApis.Models;
+using CryptoExchange.Net.SharedApis;
 using Bitget.Net.Enums;
-using CryptoExchange.Net.SharedApis.Interfaces.Socket.Futures;
-using CryptoExchange.Net.SharedApis.Models.Options.Endpoints;
-using CryptoExchange.Net.SharedApis.Models.Options.Subscriptions;
-using CryptoExchange.Net.SharedApis.Models.Options;
+using Bitget.Net.Enums.V2;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {
@@ -201,7 +188,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         Leverage = x.Leverage,
                         PositionSide = x.PositionSide == Enums.V2.PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                         ReduceOnly = x.ReduceOnly,
-                        LastTrade = x.LastTradeId == null ? null : new SharedUserTrade(x.Symbol, x.OrderId, x.LastTradeId, x.LastTradeQuantity ?? 0, x.LastTradeFillPrice ?? 0, x.LastTradeFillTime!.Value)
+                        LastTrade = x.LastTradeId == null ? null : new SharedUserTrade(x.Symbol, x.OrderId, x.LastTradeId, x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, x.LastTradeQuantity ?? 0, x.LastTradeFillPrice ?? 0, x.LastTradeFillTime!.Value)
                         {
                             Fee = Math.Abs(x.LastTradeFee),
                             FeeAsset = x.LastTradeFeeAsset,
@@ -232,6 +219,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         x.Symbol,
                         x.OrderId.ToString(),
                         x.TradeId.ToString(),
+                        x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                         x.Quantity,
                         x.Price,
                         x.UpdateTime ?? x.CreateTime)
@@ -261,7 +249,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     handler(update.AsExchangeEvent<IEnumerable<SharedPosition>>(Exchange, update.Data.Select(x => new SharedPosition(x.Symbol, x.Total, x.UpdateTime)
                     {
                         AverageOpenPrice = x.AverageOpenPrice,
-#warning check if x.PositionSide is never OneWay
                         PositionSide = x.PositionSide == Enums.V2.PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
                         UnrealizedPnl = x.UnrealizedProfitAndLoss,
                         Leverage = x.Leverage,
