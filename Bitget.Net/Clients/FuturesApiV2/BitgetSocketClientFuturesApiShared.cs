@@ -262,9 +262,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #endregion
 
-        private BitgetProductTypeV2 GetProductType(TradingMode? apiType, ExchangeParameters? exchangeParameters)
+        private BitgetProductTypeV2 GetProductType(TradingMode? tradingMode, ExchangeParameters? exchangeParameters)
         {
-            if (apiType == TradingMode.PerpetualInverse || apiType == TradingMode.DeliveryInverse)
+            if (tradingMode == TradingMode.PerpetualInverse || tradingMode == TradingMode.DeliveryInverse)
             {
                 return BitgetProductTypeV2.CoinFutures;
             }
