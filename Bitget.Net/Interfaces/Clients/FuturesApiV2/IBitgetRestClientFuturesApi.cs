@@ -23,7 +23,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         public IBitgetRestClientFuturesApiTrading Trading { get; }
 
         /// <summary>
-        /// Get the shared rest requests client
+        /// Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
         /// </summary>
         public IBitgetRestClientFuturesApiShared SharedClient { get; }
     }

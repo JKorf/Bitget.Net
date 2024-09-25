@@ -3316,7 +3316,7 @@
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi.SharedClient">
             <summary>
-            Get the shared rest requests client
+            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount">
@@ -3985,7 +3985,7 @@
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SharedClient">
             <summary>
-            Get the shared socket subscription client
+            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetFuturesTickerUpdate}},System.Threading.CancellationToken)">
@@ -4167,12 +4167,12 @@
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.CommonSpotClient">
             <summary>
-            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="SHAREDDOCSURL" /> for more info.
+            DEPRECATED; use <see cref="T:CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="https://jkorf.github.io/CryptoExchange.Net/docs/index.html#shared" /> for more info.
             </summary>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.SharedClient">
             <summary>
-            Get the shared rest requests client
+            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount">
@@ -4690,7 +4690,7 @@
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SharedClient">
             <summary>
-            Get the shared socket subscription client
+            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
