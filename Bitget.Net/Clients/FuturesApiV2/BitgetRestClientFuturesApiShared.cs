@@ -284,7 +284,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Trading.GetPositionAsync(
                 GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
                 symbol: request.Symbol.GetSymbol(FormatSymbol),
-                marginAsset: request.ExchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
+                marginAsset: ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedLeverage>(Exchange, null, default);
@@ -311,7 +311,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Account.SetLeverageAsync(
                 GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
                 symbol: request.Symbol.GetSymbol(FormatSymbol),
-                marginAsset: request.ExchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
+                marginAsset: ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
                 (int)request.Leverage,
                 side: request.Side == null ? null : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long,
                 ct: ct).ConfigureAwait(false);
@@ -583,7 +583,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Trading.PlaceOrderAsync(
                 GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
                 request.Symbol.GetSymbol(FormatSymbol),
-                request.ExchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
+                ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
                 side,
                 request.OrderType == SharedOrderType.Limit ? OrderType.Limit : OrderType.Market,
                 request.MarginMode == SharedMarginMode.Isolated ? MarginMode.IsolatedMargin : MarginMode.CrossMargin,
@@ -861,7 +861,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 result = await Trading.GetPositionAsync(
                     GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
                     symbol: request.Symbol.GetSymbol(FormatSymbol),
-                    marginAsset: request.ExchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!,
+                    marginAsset: ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
                     ct: ct).ConfigureAwait(false);
                 if (!result)
                     return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, null, default);
@@ -869,7 +869,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             else
             {
                 var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
-                result = await Trading.GetPositionsAsync(productType, request.ExchangeParameters!.GetValue<string>(Exchange, "MarginAsset")!, ct: ct).ConfigureAwait(false);
+                result = await Trading.GetPositionsAsync(productType, ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!, ct: ct).ConfigureAwait(false);
                 if (!result)
                     return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, null, default);
             }
