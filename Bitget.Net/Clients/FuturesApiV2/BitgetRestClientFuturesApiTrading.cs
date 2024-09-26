@@ -368,11 +368,16 @@ namespace Bitget.Net.Clients.FuturesApiV2
             decimal triggerPrice,
             decimal? orderPrice = null,
             TriggerPriceType? triggerPriceType = null,
-            PositionSide? positionSide = null,
+            PositionSide? hedgeModePositionSide = null,
+            OrderSide? oneWaySide = null,
             decimal? trailingStopRate = null,
             string? clientOrderId = null,
             CancellationToken ct = default)
         {
+            if ((oneWaySide != null && hedgeModePositionSide != null)
+                || (oneWaySide == null && hedgeModePositionSide == null))
+                throw new ArgumentException("Either hedgeModePositionSide (for two way position mode) or onWaySide (for one way position mode) should be provided");
+
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
             parameters.AddEnum("planType", planType);
@@ -380,7 +385,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.Add("marginCoin", marginAsset);
             parameters.AddString("size", quantity);
             parameters.AddString("triggerPrice", triggerPrice);
-            parameters.AddOptionalEnum("holdSide", positionSide);
+            parameters.AddOptionalEnum("holdSide", hedgeModePositionSide);
+            parameters.AddOptionalEnum("holdSide", oneWaySide);
             parameters.AddOptionalEnum("triggerType", triggerPriceType);
             parameters.AddOptionalString("rangeRate", trailingStopRate);
             parameters.AddOptional("clientOid", clientOrderId);

@@ -317,7 +317,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.ClosePositionsAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PlanType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PlanType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{Bitget.Net.Enums.V2.OrderSide},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceTriggerOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.TriggerPlanType,Bitget.Net.Enums.V2.MarginMode,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.TradeSide},System.Nullable{System.Decimal},System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Threading.CancellationToken)">
@@ -3832,7 +3832,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.PlaceTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PlanType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.PlaceTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PlanType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{Bitget.Net.Enums.V2.OrderSide},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <summary>
             Place a take profit / stop loss order
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /></para>
@@ -3845,7 +3845,8 @@
             <param name="triggerPrice">Trigger price</param>
             <param name="orderPrice">Order limit price</param>
             <param name="triggerPriceType">Trigger price type</param>
-            <param name="positionSide">Position side</param>
+            <param name="hedgeModePositionSide">Position side for when in hedge mode, either this or oneWaySide should be provided</param>
+            <param name="oneWaySide">Order side for when in one way mode, either this or hedgeModePositionSide should be provided</param>
             <param name="trailingStopRate">Tailing stop rate</param>
             <param name="clientOrderId">Client order id</param>
             <param name="ct">Cancellation token</param>

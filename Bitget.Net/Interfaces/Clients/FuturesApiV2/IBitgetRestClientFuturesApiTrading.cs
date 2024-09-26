@@ -321,7 +321,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="triggerPrice">Trigger price</param>
         /// <param name="orderPrice">Order limit price</param>
         /// <param name="triggerPriceType">Trigger price type</param>
-        /// <param name="positionSide">Position side</param>
+        /// <param name="hedgeModePositionSide">Position side for when in hedge mode, either this or oneWaySide should be provided</param>
+        /// <param name="oneWaySide">Order side for when in one way mode, either this or hedgeModePositionSide should be provided</param>
         /// <param name="trailingStopRate">Tailing stop rate</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="ct">Cancellation token</param>
@@ -335,7 +336,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
            decimal triggerPrice,
            decimal? orderPrice = null,
            TriggerPriceType? triggerPriceType = null,
-           PositionSide? positionSide = null,
+           PositionSide? hedgeModePositionSide = null,
+           OrderSide? oneWaySide = null,
            decimal? trailingStopRate = null,
            string? clientOrderId = null,
            CancellationToken ct = default);
