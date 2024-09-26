@@ -173,7 +173,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.TradingMode,System.Nullable{System.DateTime})">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -350,7 +350,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.CreateSerializer">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.TradingMode,System.Nullable{System.DateTime})">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -419,7 +419,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.TradingMode,System.Nullable{System.DateTime})">
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApi.BitgetRestClientFuturesApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -479,7 +479,7 @@
         <member name="T:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.TradingMode,System.Nullable{System.DateTime})">
+        <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApi.BitgetSocketClientFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -692,7 +692,7 @@
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.TradingMode,System.Nullable{System.DateTime})">
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetRestClientSpotApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -875,7 +875,7 @@
         <member name="T:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.TradingMode,System.Nullable{System.DateTime})">
+        <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApi.BitgetSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -956,7 +956,7 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.TradingMode,System.Nullable{System.DateTime})">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -1160,7 +1160,7 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.CreateSerializer">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.Objects.TradingMode,System.Nullable{System.DateTime})">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
