@@ -1,5 +1,4 @@
 ﻿using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
 
 namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 {
@@ -22,5 +21,10 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// Endpoints related to account settings, info or actions
         /// </summary>
         public IBitgetRestClientFuturesApiTrading Trading { get; }
+
+        /// <summary>
+        /// Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// </summary>
+        public IBitgetRestClientFuturesApiShared SharedClient { get; }
     }
 }

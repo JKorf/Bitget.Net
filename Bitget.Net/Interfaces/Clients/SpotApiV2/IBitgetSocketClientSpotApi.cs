@@ -1,5 +1,6 @@
 ﻿using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
+using Bitget.Net.Interfaces.Clients.SpotApi;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -12,6 +13,11 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
     /// </summary>
     public interface IBitgetSocketClientSpotApi : ISocketApiClient, IDisposable
     {
+        /// <summary>
+        /// Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// </summary>
+        public IBitgetSocketClientSpotApiShared SharedClient { get; }
+
         /// <summary>
         /// Subscribe to ticker updates for a symbol
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>

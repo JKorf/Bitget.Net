@@ -12,12 +12,13 @@ using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {
     /// <inheritdoc />
-    internal class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi, ISpotClient
+    internal partial class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi, ISpotClient
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 
@@ -30,6 +31,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         /// <inheritdoc />
         public ISpotClient CommonSpotClient => this;
+        public IBitgetRestClientSpotApiShared SharedClient => this;
 
         /// <inheritdoc />
         public string ExchangeName => "Bitget";
@@ -64,7 +66,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             => new BitgetAuthenticationProviderV2((BitgetApiCredentials)credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
 
         internal async Task<WebCallResult> SendAsync(string path, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? parameterPosition = null)
         {

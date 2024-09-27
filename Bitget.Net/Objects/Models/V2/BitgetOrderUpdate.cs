@@ -28,15 +28,15 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
         /// <summary>
-        /// Order amount. When Side = Buy, it represents the amount of quote asset; When Side = Sell, it represents the amount of base asset.
-        /// </summary>
-        [JsonPropertyName("size")]
-        public decimal Quantity { get; set; }
-        /// <summary>
         /// Order price
         /// </summary>
         [JsonPropertyName("price")]
         public decimal? Price { get; set; }
+        /// <summary>
+        /// Order amount. When Side = Buy, it represents the amount of quote asset; When Side = Sell, it represents the amount of base asset.
+        /// </summary>
+        [JsonPropertyName("size")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Order quantity
         /// </summary>

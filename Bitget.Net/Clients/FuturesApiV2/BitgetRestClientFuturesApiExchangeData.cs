@@ -195,7 +195,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/market/funding-time", BitgetExchange.RateLimiter.Overal, 1, false,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<IEnumerable<BitgetFundingTime>>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<BitgetFundingTime>(result.Data?.First());
+            return result.As<BitgetFundingTime>(result.Data?.FirstOrDefault());
         }
 
         /// <inheritdoc />

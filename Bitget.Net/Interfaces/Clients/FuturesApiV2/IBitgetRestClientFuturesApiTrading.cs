@@ -36,14 +36,14 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <para><a href="https://www.bitget.com/api-doc/contract/position/Get-History-Position" /></para>
         /// </summary>
         /// <param name="productType">Filter by product type</param>
-        /// <param name="marginAsset">Filter by margin asset, for example `USDT`</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="idLessThan">Return results before this id</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? marginAsset = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new order
@@ -321,7 +321,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="triggerPrice">Trigger price</param>
         /// <param name="orderPrice">Order limit price</param>
         /// <param name="triggerPriceType">Trigger price type</param>
-        /// <param name="positionSide">Position side</param>
+        /// <param name="hedgeModePositionSide">Position side for when in hedge mode, either this or oneWaySide should be provided</param>
+        /// <param name="oneWaySide">Order side for when in one way mode, either this or hedgeModePositionSide should be provided</param>
         /// <param name="trailingStopRate">Tailing stop rate</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="ct">Cancellation token</param>
@@ -335,7 +336,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
            decimal triggerPrice,
            decimal? orderPrice = null,
            TriggerPriceType? triggerPriceType = null,
-           PositionSide? positionSide = null,
+           PositionSide? hedgeModePositionSide = null,
+           OrderSide? oneWaySide = null,
            decimal? trailingStopRate = null,
            string? clientOrderId = null,
            CancellationToken ct = default);

@@ -3,6 +3,7 @@ using Bitget.Net.Interfaces;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
 using Bitget.Net.SymbolOrderBooks;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
 using System.Net;
@@ -59,6 +60,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBitgetOrderBookFactory, BitgetOrderBookFactory>();
             services.AddTransient(x => x.GetRequiredService<IBitgetRestClient>().SpotApi.CommonSpotClient);
+
+            services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedClient);
+            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedClient);
+            services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().FuturesApiV2.SharedClient);
+            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().FuturesApiV2.SharedClient);
+
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBitgetSocketClient, BitgetSocketClient>();
             else

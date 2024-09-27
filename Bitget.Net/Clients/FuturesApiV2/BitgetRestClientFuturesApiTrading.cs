@@ -45,11 +45,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? marginAsset = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalEnum("productType", productType);
-            parameters.AddOptional("marginCoin", marginAsset);
+            parameters.AddOptional("symbol", symbol);
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);
@@ -253,7 +253,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/orders-pending", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<BitgetFuturesOrders>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetFuturesOrders>(request, parameters, ct).ConfigureAwait(false);
+            if (result.Data.Orders == null)
+                result.Data.Orders = Array.Empty<BitgetFuturesOrder>();
+
+            return result.As(result.Data);
         }
 
         /// <inheritdoc />
@@ -280,7 +284,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/orders-history", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<BitgetFuturesOrders>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetFuturesOrders>(request, parameters, ct).ConfigureAwait(false);
+            if (result.Data.Orders == null)
+                result.Data.Orders = Array.Empty<BitgetFuturesOrder>();
+
+            return result.As(result.Data);
         }
 
         /// <inheritdoc />
@@ -360,11 +368,16 @@ namespace Bitget.Net.Clients.FuturesApiV2
             decimal triggerPrice,
             decimal? orderPrice = null,
             TriggerPriceType? triggerPriceType = null,
-            PositionSide? positionSide = null,
+            PositionSide? hedgeModePositionSide = null,
+            OrderSide? oneWaySide = null,
             decimal? trailingStopRate = null,
             string? clientOrderId = null,
             CancellationToken ct = default)
         {
+            if ((oneWaySide != null && hedgeModePositionSide != null)
+                || (oneWaySide == null && hedgeModePositionSide == null))
+                throw new ArgumentException("Either hedgeModePositionSide (for two way position mode) or onWaySide (for one way position mode) should be provided");
+
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
             parameters.AddEnum("planType", planType);
@@ -372,7 +385,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.Add("marginCoin", marginAsset);
             parameters.AddString("size", quantity);
             parameters.AddString("triggerPrice", triggerPrice);
-            parameters.AddOptionalEnum("holdSide", positionSide);
+            parameters.AddOptionalEnum("holdSide", hedgeModePositionSide);
+            parameters.AddOptionalEnum("holdSide", oneWaySide);
             parameters.AddOptionalEnum("triggerType", triggerPriceType);
             parameters.AddOptionalString("rangeRate", trailingStopRate);
             parameters.AddOptional("clientOid", clientOrderId);

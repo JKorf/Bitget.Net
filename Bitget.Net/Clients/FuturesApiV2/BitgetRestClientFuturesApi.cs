@@ -1,24 +1,21 @@
-﻿using Bitget.Net.Enums;
-using Bitget.Net.Interfaces.Clients.FuturesApiV2;
-using Bitget.Net.Interfaces.Clients.SpotApiV2;
+﻿using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {
     /// <inheritdoc />
-    internal class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
+    internal partial class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Futures Api");
 
@@ -52,12 +49,17 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
+        public IBitgetRestClientFuturesApiShared SharedClient => this;
+
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new BitgetAuthenticationProviderV2((BitgetApiCredentials)credentials);
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
+        {
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
+        }
 
         internal async Task<WebCallResult> SendAsync(string path, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? parameterPosition = null)
         {

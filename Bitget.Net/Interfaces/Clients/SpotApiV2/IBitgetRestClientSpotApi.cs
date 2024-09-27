@@ -24,9 +24,14 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         public IBitgetRestClientSpotApiTrading Trading { get; }
 
         /// <summary>
-        /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+        /// DEPRECATED; use <see cref="CryptoExchange.Net.SharedApis.ISharedClient" /> instead for common/shared functionality. See <see href="https://jkorf.github.io/CryptoExchange.Net/docs/index.html#shared" /> for more info.
         /// </summary>
-        /// <returns></returns>
         ISpotClient CommonSpotClient { get; }
+
+        /// <summary>
+        /// Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// </summary>
+        IBitgetRestClientSpotApiShared SharedClient { get; }
+
     }
 }

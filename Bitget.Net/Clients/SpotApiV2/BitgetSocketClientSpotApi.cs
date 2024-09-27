@@ -9,20 +9,19 @@ using Bitget.Net.Objects.Socket.Subscriptions;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {
     /// <inheritdoc />
-    internal class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
+    internal partial class BitgetSocketClientSpotApi : SocketApiClient, IBitgetSocketClientSpotApi
     {
         private static readonly MessagePath _eventPath = MessagePath.Get().Property("event");
         private static readonly MessagePath _actionPath = MessagePath.Get().Property("action");
@@ -44,7 +43,9 @@ namespace Bitget.Net.Clients.SpotApiV2
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null) => baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant();
+
+        public IBitgetSocketClientSpotApiShared SharedClient => this;
 
         /// <inheritdoc />
         public override string GetListenerIdentifier(IMessageAccessor message)

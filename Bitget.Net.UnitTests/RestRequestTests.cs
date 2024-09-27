@@ -165,7 +165,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetUserTrades", ignoreProperties: new List<string> { "deduction" });
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetHistoricalUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetHistoricalUserTrades", ignoreProperties: new List<string> { "deduction" });
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.ClosePositionsAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "ClosePosition");
-            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceTpSlOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", PlanType.TailingStop, 1, 1), "PlaceTpSlOrder");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceTpSlOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", PlanType.TailingStop, 1, 1, oneWaySide: OrderSide.Buy), "PlaceTpSlOrder");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceTriggerOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", TriggerPlanType.Normal, MarginMode.CrossMargin, OrderSide.Buy, OrderType.Market, 1, 1), "PlaceTriggerOrder");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetTriggerSubOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "1", TriggerPlanType.Normal), "GetTriggerSubOrders");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.EditTriggerOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures), "EditTriggerOrder");

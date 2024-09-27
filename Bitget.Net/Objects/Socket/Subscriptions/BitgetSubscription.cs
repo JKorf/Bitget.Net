@@ -25,7 +25,7 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
             if (arg.ContainsKey("instId"))
                 return new[] { $"snapshot-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}", $"update-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}" };
 
-            return new[] { $"snapshot-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-", $"update-{arg["channel"].ToLower()}-" };
+            return new[] { $"snapshot-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-", $"update-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-" };
         }
 
         public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false);
