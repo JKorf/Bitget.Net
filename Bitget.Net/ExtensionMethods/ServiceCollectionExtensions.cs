@@ -63,6 +63,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedClient);
+            services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().FuturesApiV2.SharedClient);
+            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().FuturesApiV2.SharedClient);
 
             if (socketClientLifeTime == null)
                 services.AddSingleton<IBitgetSocketClient, BitgetSocketClient>();
