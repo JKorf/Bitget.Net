@@ -153,6 +153,22 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.10.0 - 27 Sep 2024
+    * Updated CryptoExchange.Net to version 8.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.0
+    * Added Shared client interfaces implementation for Spot Rest and Socket clients
+    * Added oneWaySide parameter to FuturesV2.Trading.PlaceTpSlOrderAsync and renamed positionSide parameter to hedgeModePositionSide
+    * Updated QuoteQuantityFilled property name to QuoteQuantity on BitgetFuturesOrderUpdate
+    * Updated LastTradeId property type from decimal to string? on BitgetFuturesOrderUpdate
+    * Updated LastTradeQuantity, AveragePrice, LastTradeFillPrice and LastTradeFillTime property types from decimal to decimal? on BitgetFuturesOrderUpdate
+    * Updated BitgetStreamKlineIntervalV2 Enum values to match number of seconds
+    * Updated QuantityDecimals and PriceDecimals property types from decimal to int on BitgetContract model
+    * Updated Sourcelink package version
+    * Fixed FuturesV2.ExchangeData.GetNextFundingTimeAsync potentially throwing InvalidOperationException
+    * Fixed various endpoints on FuturesV2.Trading returning null data instead of empty collection
+    * Fixed typo in IsolatedMarginProfitAndLoss property on BitgetFuturesBalance model
+    * Fixed websocket message identification on subscriptions without symbol parameter
+    * Marked ISpotClient references as deprecated
+
 * Version 1.9.5 - 19 Sep 2024
     * Fixed ClientOrderId websocket order update deserialization
 
