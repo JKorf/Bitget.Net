@@ -21,6 +21,12 @@ namespace Bitget.Net.Enums
         /// Online
         /// </summary>
         [Map("online")]
-        Online
+        Online,
+
+        /// <summary>
+        /// Halt
+        /// </summary>
+        [Map("halt")]
+        Halt
     }
 }
