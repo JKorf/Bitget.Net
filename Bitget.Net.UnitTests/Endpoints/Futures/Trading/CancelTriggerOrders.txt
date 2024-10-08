@@ -1,4 +1,4 @@
-GET
+POST
 /api/v2/mix/order/cancel-plan-order
 true
 {
