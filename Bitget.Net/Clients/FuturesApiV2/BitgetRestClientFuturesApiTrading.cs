@@ -201,7 +201,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
             parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("marginCoin", marginAsset);;
+            parameters.AddOptional("marginCoin", marginAsset?.ToUpperInvariant());
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/cancel-all-orders", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
