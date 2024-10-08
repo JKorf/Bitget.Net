@@ -605,9 +605,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddEnum("productType", productType);
             parameters.AddOptionalEnum("planType", planType);
             parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("orderIdList", orderIds == null ? null : orderIds!);
+            parameters.AddOptional("orderIdList", orderIds == null ? null : orderIds.ToArray()!);
             parameters.AddOptional("marginCoin", marginCoin);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/cancel-plan-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/cancel-plan-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
         }

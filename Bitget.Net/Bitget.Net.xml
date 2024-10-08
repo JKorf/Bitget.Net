@@ -2214,6 +2214,11 @@
             Online
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.BitgetSymbolStatus.Halt">
+            <summary>
+            Halt
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.BitgetTimeInForce">
             <summary>
             Time in force
