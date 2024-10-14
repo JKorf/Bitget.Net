@@ -154,6 +154,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.10.2 - 14 Oct 2024
+    * Fixed V1 request signing where query parameters contain special characters
+
 * Version 1.10.1 - 08 Oct 2024
     * Added BitgetSymbolStatus.Halt Enum value
     * Added converting to uppercase for CancelAllOrdersAsync marginAsset parameter
