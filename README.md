@@ -154,6 +154,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.10.4 - 15 Oct 2024
+    * Fixed V1 GET request signing without parameters
+    * Fixed request signing V2 with special characters
+    * Fixed restClient.SpotApi.Trading.GetOrderAsync exception when order not found
+
 * Version 1.10.3 - 14 Oct 2024
     * Updated CryptoExchange.Net to version 8.0.3, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.3
     * Fixed TypeLoadException during initialization
