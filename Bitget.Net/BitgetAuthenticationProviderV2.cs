@@ -34,7 +34,7 @@ namespace Bitget.Net
             var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonSerializer.Serialize(bodyParameters) : "";
             string? query = null;
             if (uriParameters != null)
-                query = uriParameters.ToFormData();
+                query = uriParameters.CreateParamString(false, arraySerialization);
 
             headers ??= new Dictionary<string, string>();
             var timestamp = GetMillisecondTimestamp(apiClient);

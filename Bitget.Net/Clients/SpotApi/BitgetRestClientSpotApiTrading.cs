@@ -81,6 +81,9 @@ namespace Bitget.Net.Clients.SpotApi
             if (!result)
                 return result.As<BitgetOrder>(default);
 
+            if (!result.Data.Any())
+                return result.AsError<BitgetOrder>(new ServerError("Not found"));
+
             return result.As(result.Data.First());
         }
 
