@@ -1,7 +1,9 @@
-﻿using CryptoExchange.Net.Objects;
+﻿using CryptoExchange.Net;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiting;
 using CryptoExchange.Net.RateLimiting.Guards;
 using CryptoExchange.Net.RateLimiting.Interfaces;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bitget.Net
 {
@@ -27,6 +29,19 @@ namespace Bitget.Net
             "https://bitgetlimited.github.io/apidoc/en/mix/#welcome",
             "https://www.bitget.com/api-doc"
             };
+
+        /// <summary>
+        /// Format a base and quote asset to a Bitget recognized symbol 
+        /// </summary>
+        /// <param name="baseAsset">Base asset</param>
+        /// <param name="quoteAsset">Quote asset</param>
+        /// <param name="tradingMode">Trading mode</param>
+        /// <param name="deliverTime">Delivery time for delivery futures</param>
+        /// <returns></returns>
+        public static string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
+        {
+            return baseAsset.ToUpperInvariant() + quoteAsset.ToUpperInvariant() + (deliverTime == null ? string.Empty : (ExchangeHelpers.GetDeliveryMonthSymbol(deliverTime.Value) + deliverTime.Value.ToString("yy")));
+        }
 
         /// <summary>
         /// Rate limiter configuration for the Bitget API

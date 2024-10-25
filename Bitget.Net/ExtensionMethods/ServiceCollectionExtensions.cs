@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Clients;
+﻿using Bitget.Net;
+using Bitget.Net.Clients;
 using Bitget.Net.Interfaces;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
@@ -59,6 +60,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICryptoRestClient, CryptoRestClient>();
             services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBitgetOrderBookFactory, BitgetOrderBookFactory>();
+            services.AddTransient<IBitgetTrackerFactory, BitgetTrackerFactory>();
             services.AddTransient(x => x.GetRequiredService<IBitgetRestClient>().SpotApi.CommonSpotClient);
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedClient);
