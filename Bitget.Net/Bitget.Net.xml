@@ -81,6 +81,11 @@
         <member name="T:Bitget.Net.BitgetTrackerFactory">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
         <member name="M:Bitget.Net.BitgetTrackerFactory.#ctor(System.IServiceProvider)">
             <summary>
             ctor
