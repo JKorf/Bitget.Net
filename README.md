@@ -155,6 +155,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.11.0 - 28 Oct 2024
+    * Updated CryptoExchange.Net to version 8.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.1.0
+    * Moved FormatSymbol to BitgetExchange class
+    * Added support Side setting on SharedTrade model
+    * Added BitgetTrackerFactory for creating trackers
+    * Added overload to Create method on BitgetOrderBookFactory support SharedSymbol parameter
+
 * Version 1.10.4 - 15 Oct 2024
     * Fixed V1 GET request signing without parameters
     * Fixed request signing V2 with special characters
