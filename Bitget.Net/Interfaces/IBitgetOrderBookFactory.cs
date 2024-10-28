@@ -1,6 +1,7 @@
 ﻿using Bitget.Net.Enums;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.SharedApis;
 
 namespace Bitget.Net.Interfaces
 {
@@ -28,6 +29,15 @@ namespace Bitget.Net.Interfaces
         /// Usdc futures order book factory methods
         /// </summary>
         public IOrderBookFactory<BitgetOrderBookOptions> UsdcFutures { get; }
+
+        /// <summary>
+        /// Create a SymbolOrderBook for the symbol
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="productType">Product type (for linear futures)</param>
+        /// <param name="options">Book options</param>
+        /// <returns></returns>
+        ISymbolOrderBook Create(SharedSymbol symbol, BitgetProductTypeV2? productType = null, Action<BitgetOrderBookOptions>? options = null);
 
         /// <summary>
         /// Create a SymbolOrderBook for a spot symbol

@@ -53,6 +53,16 @@
             Urls to the API documentation
             </summary>
         </member>
+        <member name="M:Bitget.Net.BitgetExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
+            <summary>
+            Format a base and quote asset to a Bitget recognized symbol 
+            </summary>
+            <param name="baseAsset">Base asset</param>
+            <param name="quoteAsset">Quote asset</param>
+            <param name="tradingMode">Trading mode</param>
+            <param name="deliverTime">Delivery time for delivery futures</param>
+            <returns></returns>
+        </member>
         <member name="P:Bitget.Net.BitgetExchange.RateLimiter">
             <summary>
             Rate limiter configuration for the Bitget API
@@ -67,6 +77,26 @@
             <summary>
             Event for when a rate limit is triggered
             </summary>
+        </member>
+        <member name="T:Bitget.Net.BitgetTrackerFactory">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.#ctor(System.IServiceProvider)">
+            <summary>
+            ctor
+            </summary>
+            <param name="serviceProvider">Service provider for resolving logging and clients</param>
+        </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.BitgetRestClient">
             <inheritdoc />
@@ -6358,6 +6388,15 @@
             Usdc futures order book factory methods
             </summary>
         </member>
+        <member name="M:Bitget.Net.Interfaces.IBitgetOrderBookFactory.Create(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{Bitget.Net.Enums.BitgetProductTypeV2},System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
+            <summary>
+            Create a SymbolOrderBook for the symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="productType">Product type (for linear futures)</param>
+            <param name="options">Book options</param>
+            <returns></returns>
+        </member>
         <member name="M:Bitget.Net.Interfaces.IBitgetOrderBookFactory.CreateSpot(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
             <summary>
             Create a SymbolOrderBook for a spot symbol
@@ -6373,6 +6412,30 @@
             <param name="productType">The product type</param>
             <param name="symbol">The symbol</param>
             <param name="options">Book options</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.IBitgetTrackerFactory">
+            <summary>
+            Tracker factory
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateKlineTracker(CryptoExchange.Net.SharedApis.SharedSymbol,CryptoExchange.Net.SharedApis.SharedKlineInterval,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <summary>
+            Create a new kline tracker
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="interval">Kline interval</param>
+            <param name="limit">The max amount of klines to retain</param>
+            <param name="period">The max period the data should be retained</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
+            <summary>
+            Create a new trade tracker for a symbol
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="limit">The max amount of klines to retain</param>
+            <param name="period">The max period the data should be retained</param>
             <returns></returns>
         </member>
         <member name="T:Bitget.Net.Objects.BitgetApiAddresses">
@@ -13801,6 +13864,9 @@
             ctor
             </summary>
             <param name="serviceProvider">Service provider for resolving logging and clients</param>
+        </member>
+        <member name="M:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.Create(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{Bitget.Net.Enums.BitgetProductTypeV2},System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
+            <inheritdoc />
         </member>
         <member name="M:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.CreateSpot(System.String,System.Action{Bitget.Net.Objects.Options.BitgetOrderBookOptions})">
             <inheritdoc />

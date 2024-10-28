@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums.V2;
+﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis;
@@ -149,7 +150,10 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray());
+            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
+            {
+                Side = x.Side == BitgetOrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
+            }).ToArray());
         }
 
         #endregion
@@ -610,7 +614,10 @@ namespace Bitget.Net.Clients.SpotApiV2
                 nextToken = new FromIdToken(result.Data.Min(x => x.TradeId).ToString());
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Where(x => x.Timestamp >= request.StartTime).Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Where(x => x.Timestamp >= request.StartTime).Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
+            {
+                Side = x.Side == BitgetOrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
+            }).ToArray(), nextToken);
         }
         #endregion
 
