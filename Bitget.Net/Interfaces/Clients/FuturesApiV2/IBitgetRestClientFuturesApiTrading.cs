@@ -316,7 +316,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="marginAsset">Margin asset, for example `USDT`</param>
-        /// <param name="planType">Plan type</param>
+        /// <param name="planType">Plan type, TakeProfit, StopLoss, TailingStop, PositionTakeProfit or PositionStopLoss</param>
         /// <param name="quantity">Quantity</param>
         /// <param name="triggerPrice">Trigger price</param>
         /// <param name="orderPrice">Order limit price</param>

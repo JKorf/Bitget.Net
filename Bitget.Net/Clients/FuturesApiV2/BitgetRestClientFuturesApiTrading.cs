@@ -378,8 +378,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 || (oneWaySide == null && hedgeModePositionSide == null))
                 throw new ArgumentException("Either hedgeModePositionSide (for two way position mode) or onWaySide (for one way position mode) should be provided");
 
+            if (planType == PlanType.TriggerOrder || planType == PlanType.TailingTpSl)
+                throw new ArgumentException("Invalid plan type, only TakeProfit, StopLoss, TailingStop, PositionTakeProfit or PositionStopLoss allowed");
+            
             var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
+            parameters.AddEnum("productType", productType); 
             parameters.AddEnum("planType", planType);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
