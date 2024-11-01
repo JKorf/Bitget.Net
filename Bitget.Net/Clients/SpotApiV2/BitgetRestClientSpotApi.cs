@@ -25,6 +25,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         /// <inheritdoc />
         public IBitgetRestClientSpotApiAccount Account { get; }
         /// <inheritdoc />
+        public IBitgetRestClientSpotApiMargin Margin { get; }
+        /// <inheritdoc />
         public IBitgetRestClientSpotApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IBitgetRestClientSpotApiTrading Trading { get; }
@@ -46,6 +48,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.SpotOptions)
         {
             Account = new BitgetRestClientSpotApiAccount(this);
+            Margin = new BitgetRestClientSpotApiMargin(this);
             ExchangeData = new BitgetRestClientSpotApiExchangeData(this);
             Trading = new BitgetRestClientSpotApiTrading(this);
 

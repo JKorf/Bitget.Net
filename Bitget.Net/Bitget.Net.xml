@@ -959,6 +959,9 @@
         <member name="P:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.Account">
             <inheritdoc />
         </member>
+        <member name="P:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.Margin">
+            <inheritdoc />
+        </member>
         <member name="P:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.ExchangeData">
             <inheritdoc />
         </member>
@@ -1128,6 +1131,48 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData.GetTradesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetMarginSymbolsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossBorrowHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossRepayHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossInterestHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossLiquidationHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossFinancialHistoryAsync(System.Nullable{Bitget.Net.Enums.V2.MarginType},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossBalancesAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.CrossBorrowAsync(System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.CrossRepayAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossRiskRateAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossMaxBorrowableAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossMaxTransferableAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossInterestAndLimitAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading">
@@ -2574,6 +2619,21 @@
             USDC futures
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.V2.BorrowType">
+            <summary>
+            Type of borrowing
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.BorrowType.AutoLoan">
+            <summary>
+            Auto loan
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.BorrowType.ManualLoan">
+            <summary>
+            Manual loan
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.BusinessType">
             <summary>
             Business type
@@ -2729,6 +2789,21 @@
             Other
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.V2.InterestType">
+            <summary>
+            Interest type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.InterestType.First">
+            <summary>
+            Interest on initial borrowing
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.InterestType.Scheduled">
+            <summary>
+            Scheduled
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.KlineInterval">
             <summary>
             Kline interval
@@ -2857,6 +2932,91 @@
         <member name="F:Bitget.Net.Enums.V2.MarginMode.IsolatedMargin">
             <summary>
             Isolated margin
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.MarginSymbolStatus">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginSymbolStatus.Tradable">
+            <summary>
+            Tradable
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginSymbolStatus.Maintenance">
+            <summary>
+            Under maintenance
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.MarginType">
+            <summary>
+            Margin type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.TransferIn">
+            <summary>
+            Assets transferred in
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.TransferOut">
+            <summary>
+            Assets transferred out
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.Borrow">
+            <summary>
+            Borrow
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.Repay">
+            <summary>
+            Repay
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.LiquidationFee">
+            <summary>
+            Liquidation fee
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.Compensate">
+            <summary>
+            Collateral shortfall compensation from risk fund
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.DealIn">
+            <summary>
+            Trade and deposit (buy
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.DealOut">
+            <summary>
+            Trade and withdraw (sell
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.Confiscated">
+            <summary>
+            Deduction for collateral shortfall
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.ExchangeIn">
+            <summary>
+            Exchange income, charged from the system account
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.ExchangeOut">
+            <summary>
+            Exchange expense, charged to the system account
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.SysExchangeIn">
+            <summary>
+            Exchange income of the system account, with exchange expense appearing at the same time
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.MarginType.SysExchangeOut">
+            <summary>
+            Exchange expense of the system account, with exchange income appearing at the same time
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.V2.OrderSide">
@@ -3012,6 +3172,31 @@
         <member name="F:Bitget.Net.Enums.V2.QuantityType.QuoteAsset">
             <summary>
             Quote asset quantity
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.RepayType">
+            <summary>
+            Repay type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.RepayType.AutoRepay">
+            <summary>
+            Auto repayment
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.RepayType.ManualRepay">
+            <summary>
+            Manual repayment
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.RepayType.LiquidationRepay">
+            <summary>
+            Liquidation repayment
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.RepayType.ForcedRepay">
+            <summary>
+            Forced repayment
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.V2.Role">
@@ -3875,7 +4060,7 @@
             <param name="productType">Product type</param>
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="marginAsset">Margin asset, for example `USDT`</param>
-            <param name="planType">Plan type</param>
+            <param name="planType">Plan type, TakeProfit, StopLoss, TailingStop, PositionTakeProfit or PositionStopLoss</param>
             <param name="quantity">Quantity</param>
             <param name="triggerPrice">Trigger price</param>
             <param name="orderPrice">Order limit price</param>
@@ -4189,6 +4374,11 @@
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.Account">
             <summary>
             Endpoints related to account settings, info or actions
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.Margin">
+            <summary>
+            Endpoints related to margin trading
             </summary>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.ExchangeData">
@@ -4511,6 +4701,138 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin">
+            <summary>
+            Bitget margin endpoints
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetMarginSymbolsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get margin symbols
+            <para><a href="https://www.bitget.com/api-doc/margin/common/support-currencies" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossBorrowHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin borrow history
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Loan-Records" /></para>
+            </summary>
+            <param name="loanId">Filter by loanId</param>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">return results less than this id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossRepayHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin repay history
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Repay-History" /></para>
+            </summary>
+            <param name="repayId">Filter by repayId</param>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">return results less than this id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossInterestHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin interest history
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Interest-Records" /></para>
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">return results less than this id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossLiquidationHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin liquidation history
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Liquidation-Records" /></para>
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">return results less than this id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossFinancialHistoryAsync(System.Nullable{Bitget.Net.Enums.V2.MarginType},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin financial history
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Finance-Flow-History" /></para>
+            </summary>
+            <param name="marginType">Filter by margin type</param>
+            <param name="asset">Filter by asset</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">return results less than this id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossBalancesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin balances
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Assets" /></para>
+            </summary>
+            <param name="asset">Filter by asset, for example `ETH`</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.CrossBorrowAsync(System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cross margin borrow
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Borrow" /></para>
+            </summary>
+            <param name="asset">The asset, for example `ETH`</param>
+            <param name="quantity">Quantity to borrow</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.CrossRepayAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Cross margin repay
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Repay" /></para>
+            </summary>
+            <param name="asset">The asset, for example `ETH`</param>
+            <param name="quantity">Quantity to repay</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossRiskRateAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin risk rate
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Risk-Rate" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossMaxBorrowableAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin max borrowable amount
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Max-Borrowable-Amount" /></para>
+            </summary>
+            <param name="asset">The asset, for example `ETH`</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossMaxTransferableAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin max transferable amount
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Max-Transfer-Out-Amount" /></para>
+            </summary>
+            <param name="asset">The asset, for example `ETH`</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossInterestAndLimitAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get cross margin interest rates and borrow limits
+            <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Margin-Interest-Rate-And-Borrowable" /></para>
+            </summary>
+            <param name="asset">The asset, for example `ETH`</param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiShared">
             <summary>
@@ -10140,6 +10462,396 @@
             Planned maintenance time
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossBalance">
+            <summary>
+            Cross margin balance
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.TotalQuantity">
+            <summary>
+            Total quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.Available">
+            <summary>
+            Available
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.Frozen">
+            <summary>
+            Frozen
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.Borrow">
+            <summary>
+            Borrow
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.Interest">
+            <summary>
+            Interest
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.Net">
+            <summary>
+            Net
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBalance.Coupon">
+            <summary>
+            Coupon
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowHistory">
+            <summary>
+            Borrow history
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowHistory.LoanId">
+            <summary>
+            Loan id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowHistory.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowHistory.BorrowQuantity">
+            <summary>
+            Borrow quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowHistory.BorrowType">
+            <summary>
+            Borrow type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowHistory.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowHistory.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowResult">
+            <summary>
+            Borrow result
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowResult.LoanId">
+            <summary>
+            Loan id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowResult.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossBorrowResult.BorrowQuantity">
+            <summary>
+            Borrow quantity
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossFinancial">
+            <summary>
+            Financial info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossFinancial.MarginId">
+            <summary>
+            Margin id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossFinancial.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossFinancial.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossFinancial.Balance">
+            <summary>
+            Balance
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossFinancial.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossFinancial.MarginType">
+            <summary>
+            Margin type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossFinancial.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossFinancial.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossInterest">
+            <summary>
+            Interest
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterest.InterestId">
+            <summary>
+            Interest id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterest.LoanAsset">
+            <summary>
+            Loan asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterest.InterestAsset">
+            <summary>
+            Interest asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterest.DailyInterestRate">
+            <summary>
+            Daily interest rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterest.InterestQuantity">
+            <summary>
+            Interest quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterest.InterestType">
+            <summary>
+            Interest type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterest.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterest.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimit">
+            <summary>
+            Interest limit
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimit.Transferable">
+            <summary>
+            Transferable
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimit.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimit.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimit.Borrowable">
+            <summary>
+            Borrowable
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimit.DailyInterestRate">
+            <summary>
+            Daily interest rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimit.AnnualInterestRate">
+            <summary>
+            Annual interest rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimit.MaxBorrowableQuantity">
+            <summary>
+            Max borrowable quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimit.VipList">
+            <summary>
+            Vip list
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimitVip">
+            <summary>
+            Vip limits
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimitVip.Level">
+            <summary>
+            Level
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimitVip.Limit">
+            <summary>
+            Limit
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimitVip.DailyInterestRate">
+            <summary>
+            Daily interest rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimitVip.AnnualInterestRate">
+            <summary>
+            Annual interest rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossInterestLimitVip.DiscountRate">
+            <summary>
+            Discount rate
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation">
+            <summary>
+            Liquidation info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation.LiquidationId">
+            <summary>
+            Liquidation id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation.LiquidationStartTime">
+            <summary>
+            Liquidation start time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation.LiquidationEndTime">
+            <summary>
+            Liquidation end time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation.LiquidationRiskRatio">
+            <summary>
+            Liquidation risk ratio
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation.TotalAssets">
+            <summary>
+            Total assets
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation.TotalDebt">
+            <summary>
+            Total debt
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation.LiquidationFee">
+            <summary>
+            Liquidation fee
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossLiquidation.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossMaxBorrowable">
+            <summary>
+            Max borrowable
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossMaxBorrowable.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossMaxBorrowable.MaxBorrowableQuantity">
+            <summary>
+            Max borrowable quantity
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossMaxTransferable">
+            <summary>
+            Max transferable
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossMaxTransferable.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossMaxTransferable.MaxTransferOutQuantity">
+            <summary>
+            Max transfer out quantity
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossRepayResult">
+            <summary>
+            Repayment result
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossRepayResult.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossRepayResult.RepayId">
+            <summary>
+            Repay id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossRepayResult.RemainDebtQuantity">
+            <summary>
+            Remain debt quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossRepayResult.RepayQuantity">
+            <summary>
+            Repay quantity
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossRiskRate">
+            <summary>
+            Risk rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossRiskRate.RiskRateRatio">
+            <summary>
+            Risk rate ratio
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetDepositAddress">
             <summary>
             Deposit address
@@ -11795,6 +12507,127 @@
             Volume in USDT
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol">
+            <summary>
+            Margin Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.MaxCrossedLeverage">
+            <summary>
+            Max crossed leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.MaxIsolatedLeverage">
+            <summary>
+            Max isolated leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.WarningRiskRatio">
+            <summary>
+            Warning risk ratio
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.LiquidationRiskRatio">
+            <summary>
+            Liquidation risk ratio
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.MinTradeQuantity">
+            <summary>
+            Min trade quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.MaxTradeQuantity">
+            <summary>
+            Max trade quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.TakerFeeRate">
+            <summary>
+            Taker fee rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.MakerFeeRate">
+            <summary>
+            Maker fee rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.PricePrecision">
+            <summary>
+            Price precision
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.QuantityPrecision">
+            <summary>
+            Quantity precision
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.MinTradeUSDT">
+            <summary>
+            Min trade USDT
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.UserMinBorrow">
+            <summary>
+            User min borrow
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.IsIsolatedBaseBorrowable">
+            <summary>
+            Is isolated base borrowable
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.IsIsolatedQuoteBorrowable">
+            <summary>
+            Is isolated quote borrowable
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginSymbol.IsCrossBorrowable">
+            <summary>
+            Is cross borrowable
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetMinMaxResult`1">
+            <summary>
+            Result
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMinMaxResult`1.MinId">
+            <summary>
+            Min id in the results
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMinMaxResult`1.MaxId">
+            <summary>
+            Max id in the results
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMinMaxResult`1.Result">
+            <summary>
+            Results
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetOpenInterest">
             <summary>
             Open interest
@@ -12768,6 +13601,51 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionUpdate.AutoMargin">
             <summary>
             Auto margin
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetRepayHistory">
+            <summary>
+            Repay history
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetRepayHistory.RepayId">
+            <summary>
+            Repay id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetRepayHistory.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetRepayHistory.RepayQuantity">
+            <summary>
+            Repay quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetRepayHistory.RepayType">
+            <summary>
+            Repay type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetRepayHistory.RepayInterest">
+            <summary>
+            Repay interest
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetRepayHistory.RepayPrincipal">
+            <summary>
+            Repay principal
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetRepayHistory.CreateTime">
+            <summary>
+            Create time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetRepayHistory.UpdateTime">
+            <summary>
+            Update time
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetSpotBalance">

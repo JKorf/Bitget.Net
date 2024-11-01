@@ -45,6 +45,30 @@ namespace Bitget.Net.UnitTests
         }
 
         [Test]
+        public async Task ValidateSpotMarginCalls()
+        {
+            var client = new BitgetRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new BitgetApiCredentials("123", "456", "789");
+            });
+            var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/Margin", "https://api.bitget.com", IsAuthenticated, stjCompare: true, nestedPropertyForCompare: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetMarginSymbolsAsync(), "GetMarginSymbols", nestedJsonProperty: "data", ignoreProperties: new List<string> { "isBorrowable" });
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossBorrowHistoryAsync(), "GetCrossBorrowHistory", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossRepayHistoryAsync(), "GetCrossRepayHistory", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossInterestHistoryAsync(), "GetCrossInterestHistory", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossLiquidationHistoryAsync(), "GetCrossLiquidationHistory", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossFinancialHistoryAsync(), "GetCrossFinancialHistory", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossBalancesAsync(), "GetCrossBalances", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.CrossBorrowAsync("123", 0.1m, "123"), "CrossBorrow", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.CrossRepayAsync("123", 0.1m), "CrossRepay", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossRiskRateAsync(), "GetCrossRiskRate", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossMaxBorrowableAsync("123"), "GetCrossMaxBorrowable", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossMaxTransferableAsync("123"), "GetCrossMaxTransferable", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossInterestAndLimitAsync("123"), "GetCrossInterestAndLimit", nestedJsonProperty: "data");
+        }
+
+        [Test]
         public async Task ValidateSpotExchangeDataCalls()
         {
             var client = new BitgetRestClient(opts =>

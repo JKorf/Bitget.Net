@@ -1,0 +1,24 @@
+GET
+/api/v2/margin/crossed/repay-history
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695636829522,
+    "data": {
+        "resultList": [
+            {
+                "repayId": "1",
+                "coin": "USDT",
+                "repayAmount": "12.1",
+                "repayType": "manual_repay",
+                "repayInterest": "0.0001",
+                "repayPrincipal": "0.1",
+                "cTime": "1695629859821",
+                "uTime": "1695629890839"
+            }
+        ],
+        "maxId": "1",
+        "minId": "1"
+    }
+}

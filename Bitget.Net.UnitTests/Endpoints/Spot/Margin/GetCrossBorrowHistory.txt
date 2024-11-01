@@ -1,0 +1,22 @@
+GET
+/api/v2/margin/crossed/borrow-history
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695636829522,
+    "data": {
+        "resultList": [
+            {
+                "loanId": "1",
+                "coin": "USDT",
+                "borrowAmount": "12.1",
+                "borrowType": "manual_loan",
+                "cTime": "1695629859821",
+                "uTime": "1695629890839"
+            }
+        ],
+        "maxId": "1",
+        "minId": "1"
+    }
+}

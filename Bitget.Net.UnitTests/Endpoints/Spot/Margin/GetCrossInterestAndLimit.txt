@@ -1,0 +1,28 @@
+GET
+/api/v2/margin/crossed/interest-rate-and-limit
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695167748916,
+    "data": [
+        {
+            "transferable": true,
+            "leverage": "3",
+            "coin": "ETH",
+            "borrowable": true,
+            "dailyInterestRate": "0.0005",
+            "annualInterestRate": "0.05",
+            "maxBorrowableAmount": "100000",
+            "vipList": [
+                {
+                    "level":"0",
+                    "limit":"1000",
+                    "dailyInterestRate":"0.00001",
+                    "annualInterestRate":"0.01",
+                    "discountRate":"1"
+                }
+            ]
+        }
+    ]
+}

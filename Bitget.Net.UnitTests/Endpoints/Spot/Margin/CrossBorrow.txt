@@ -1,0 +1,13 @@
+POST
+/api/v2/margin/crossed/account/borrow
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1679384491703,
+  "data": {
+    "loanId": "2342332432",
+    "coin": "USDT",
+    "borrowAmount": "1.00000000"
+  }
+}
