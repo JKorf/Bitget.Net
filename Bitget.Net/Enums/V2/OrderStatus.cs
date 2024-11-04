@@ -39,6 +39,11 @@ namespace Bitget.Net.Enums.V2
         /// Canceled
         /// </summary>
         [Map("cancelled")]
-        Canceled
+        Canceled,
+        /// <summary>
+        /// Reject
+        /// </summary>
+        [Map("reject")]
+        Rejected
     }
 }

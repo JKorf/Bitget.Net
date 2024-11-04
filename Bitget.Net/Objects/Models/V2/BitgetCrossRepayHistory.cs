@@ -9,7 +9,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Repay history
     /// </summary>
-    public record BitgetRepayHistory
+    public record BitgetCrossRepayHistory
     {
         /// <summary>
         /// Repay id

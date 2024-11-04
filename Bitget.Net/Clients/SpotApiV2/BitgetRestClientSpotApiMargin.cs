@@ -1,6 +1,7 @@
 ﻿using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Converters;
@@ -64,7 +65,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Cross Repay History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetMinMaxResult<BitgetRepayHistory>>> GetCrossRepayHistoryAsync(
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetCrossRepayHistory>>> GetCrossRepayHistoryAsync(
             string? repayId = null,
             string? asset = null,
             DateTime? startTime = null,
@@ -81,7 +82,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/repay-history", BitgetExchange.RateLimiter.Overal, 1, true);
-            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetRepayHistory>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossRepayHistory>>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -258,5 +259,658 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         #endregion
 
+        #region Get Cross Tier Config
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetCrossTierConfig>>> GetCrossTierConfigAsync(string asset, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("coin", asset);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/tier-data", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetCrossTierConfig>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Cross Flash Repay
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetCrossFlashRepayResult>> CrossFlashRepayAsync(string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("coin", asset);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/flash-repay", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetCrossFlashRepayResult>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Cross Flash Repay Status
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetCrossFlashRepayStatus>>> GetCrossFlashRepayStatusAsync(string ids, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("idList", ids);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/query-flash-repay-status", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetCrossFlashRepayStatus>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Place Cross Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderId>> PlaceCrossOrderAsync(
+            string symbol,
+            LoanType loanType,
+            OrderSide orderSide,
+            OrderType orderType, 
+            TimeInForce timeInForce,
+            decimal? price = null,
+            decimal? quantity = null,
+            string? quoteQuantity = null,
+            string? clientOrderId = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddEnum("loanType", loanType);
+            parameters.AddEnum("side", orderSide);
+            parameters.AddEnum("orderType", orderType);
+            parameters.AddEnum("force", timeInForce);
+            parameters.AddOptional("price", price);
+            parameters.AddOptionalString("baseSize", quantity);
+            parameters.AddOptional("quoteSize", quoteQuantity);
+            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.AddOptionalEnum("stpMode", selfTradePreventionMode);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/place-order", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Place Multiple Cross Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetOrderResult>>> PlaceMultipleCrossOrdersAsync(
+            string symbol,
+            IEnumerable<BitgetCrossOrderRequest> requests,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderList", requests);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/batch-place-order", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetOrderResult>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Cancel Cross Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderId>> CancelCrossOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("clientOid", clientOrderId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/cancel-order", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Cancel Multiple Cross Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderMultipleResult>> CancelMultipleCrossOrdersAsync(
+            string symbol,
+            IEnumerable<BitgetCancelOrderRequest> orders,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderList", orders);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Cross Open Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetCrossOpenOrdersAsync(string symbol, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/open-orders", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Cross Closed Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetCrossClosedOrdersAsync(string symbol, string? orderId = null, string? enterPointSource = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("enterPointSource", enterPointSource);
+            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/history-orders", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Cross User Trades
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetCrossUserTrade>>> GetCrossUserTradesAsync(string symbol, string? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/fills", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossUserTrade>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Cross Liquidation Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>> GetCrossLiquidationOrdersAsync(string? symbol = null, LiquidationType? type = null, string? fromAsset = null, string? toAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptionalEnum("type", type);
+            parameters.AddOptional("fromCoin", fromAsset);
+            parameters.AddOptional("toCoin", toAsset);
+            parameters.AddOptionalMillisecondsString("startTime", startTime);
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/liquidation-order", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+
+        #region Get Isolated Borrow History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedBorrowHistory>>> GetIsolatedBorrowHistoryAsync(
+            string symbol,
+            string? loanId = null,
+            string? asset = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? idLessThan = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("loanId", loanId);
+            parameters.AddOptional("coin", asset);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/borrow-history", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedBorrowHistory>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Repay History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedRepayHistory>>> GetIsolatedRepayHistoryAsync(
+            string symbol,
+            string? repayId = null,
+            string? asset = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? idLessThan = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("repayId", repayId);
+            parameters.AddOptional("coin", asset);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/repay-history", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedRepayHistory>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Interest History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedInterest>>> GetIsolatedInterestHistoryAsync(string symbol, string? asset = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? idLessThan = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("coin", asset);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/interest-history", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedInterest>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Liquidation History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedLiquidation>>> GetIsolatedLiquidationHistoryAsync(
+            string symbol,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? idLessThan = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/liquidation-history", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedLiquidation>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Financial History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedFinancial>>> GetIsolatedFinancialHistoryAsync(
+            string symbol,
+            MarginType? marginType = null,
+            string? asset = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? idLessThan = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptionalEnum("marginType", marginType);
+            parameters.AddOptional("coin", asset);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/financial-records", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedFinancial>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Balances
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetIsolatedBalance>>> GetIsolatedBalancesAsync(string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("coin", asset);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/assets", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedBalance>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Isolated Borrow
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetIsolatedBorrowResult>> IsolatedBorrowAsync(string asset, decimal quantity, string clientOrderId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("coin", asset);
+            parameters.AddString("borrowAmount", quantity);
+            parameters.Add("clientOid", clientOrderId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/borrow", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetIsolatedBorrowResult>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Isolated Repay
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetIsolatedRepayResult>> IsolatedRepayAsync(string asset, decimal quantity, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("coin", asset);
+            parameters.AddString("repayAmount", quantity);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/repay", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetIsolatedRepayResult>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Risk Rate
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetIsolatedRiskRate>> GetIsolatedRiskRateAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/risk-rate", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetIsolatedRiskRate>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Interest And Limit
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetIsolatedInterestLimit>>> GetIsolatedInterestAndLimitAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/interest-rate-and-limit", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedInterestLimit>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Tier Config
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetIsolatedTierConfig>>> GetIsolatedTierConfigAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/tier-data", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedTierConfig>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Max Borrowable
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetIsolatedMaxBorrowable>> GetIsolatedMaxBorrowableAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/max-borrowable-amount", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetIsolatedMaxBorrowable>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Max Transferable
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetIsolatedMaxTransferable>> GetIsolatedMaxTransferableAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/max-transfer-out-amount", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetIsolatedMaxTransferable>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Cross Isolated Repay
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetIsolatedFlashRepayResult>>> IsolatedFlashRepayAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbolList", symbols);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/flash-repay", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedFlashRepayResult>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Flash Repay Status
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetCrossFlashRepayStatus>>> GetIsolatedFlashRepayStatusAsync(string ids, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("idList", ids);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/query-flash-repay-status", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetCrossFlashRepayStatus>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Place Isolated Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderId>> PlaceIsolatedOrderAsync(
+            string symbol,
+            LoanType loanType,
+            OrderSide orderSide,
+            OrderType orderType,
+            TimeInForce timeInForce,
+            decimal? price = null,
+            decimal? quantity = null,
+            string? quoteQuantity = null,
+            string? clientOrderId = null,
+            SelfTradePreventionMode? selfTradePreventionMode = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddEnum("loanType", loanType);
+            parameters.AddEnum("side", orderSide);
+            parameters.AddEnum("orderType", orderType);
+            parameters.AddEnum("force", timeInForce);
+            parameters.AddOptional("price", price);
+            parameters.AddOptionalString("baseSize", quantity);
+            parameters.AddOptional("quoteSize", quoteQuantity);
+            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.AddOptionalEnum("stpMode", selfTradePreventionMode);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/place-order", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Place Multiple Cross Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetOrderResult>>> PlaceMultipleIsolatedOrdersAsync(
+            string symbol,
+            IEnumerable<BitgetCrossOrderRequest> requests,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderList", requests);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/batch-place-order", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetOrderResult>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Cancel Isolated Order
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderId>> CancelIsolatedOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("clientOid", clientOrderId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/cancel-order", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Cancel Multiple Isolated Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderMultipleResult>> CancelMultipleIsolatedOrdersAsync(
+            string symbol,
+            IEnumerable<BitgetCancelOrderRequest> orders,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderList", orders);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Open Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetIsolatedOpenOrdersAsync(string symbol, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/open-orders", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Closed Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetIsolatedClosedOrdersAsync(string symbol, string? orderId = null, string? enterPointSource = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddOptional("enterPointSource", enterPointSource);
+            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/history-orders", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+
+        #region Get Isolated User Trades
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetCrossUserTrade>>> GetIsolatedUserTradesAsync(string symbol, string? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("symbol", symbol);
+            parameters.AddOptional("orderId", orderId);
+            parameters.AddMillisecondsString("startTime", startTime ?? DateTime.UtcNow.AddDays(-30));
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/fills", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossUserTrade>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Isolated Liquidation Orders
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>> GetIsolatedLiquidationOrdersAsync(string? symbol = null, LiquidationType? type = null, string? fromAsset = null, string? toAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptionalEnum("type", type);
+            parameters.AddOptional("fromCoin", fromAsset);
+            parameters.AddOptional("toCoin", toAsset);
+            parameters.AddOptionalMillisecondsString("startTime", startTime);
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/liquidation-order", BitgetExchange.RateLimiter.Overal, 1, true);
+            var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
     }
 }

@@ -1,0 +1,12 @@
+POST
+/api/v2/margin/crossed/account/query-flash-repay-status
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1679384491703,
+  "data": [{
+    "repayId": "2342332432",
+    "status": "FINISH"
+  }]
+}

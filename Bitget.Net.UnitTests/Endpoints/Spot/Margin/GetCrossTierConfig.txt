@@ -1,0 +1,17 @@
+GET
+/api/v2/margin/crossed/tier-data
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695167748916,
+    "data": [
+        {
+            "tier": "1",
+            "leverage": "3",
+            "coin": "ETH",
+            "maxBorrowableAmount": "6",
+            "maintainMarginRate": "0.05"
+        }
+    ]
+}

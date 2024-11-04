@@ -66,6 +66,15 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossMaxBorrowableAsync("123"), "GetCrossMaxBorrowable", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossMaxTransferableAsync("123"), "GetCrossMaxTransferable", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossInterestAndLimitAsync("123"), "GetCrossInterestAndLimit", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossTierConfigAsync("123"), "GetCrossTierConfig", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.CrossFlashRepayAsync(), "CrossFlashRepay", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossFlashRepayStatusAsync("123"), "GetCrossFlashRepayStatus", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.PlaceCrossOrderAsync("123", LoanType.Normal, OrderSide.Buy, OrderType.Limit, TimeInForce.PostOnly), "PlaceCrossOrder", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.CancelCrossOrderAsync("123"), "CancelCrossOrder", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossOpenOrdersAsync("123"), "GetCrossOpenOrders", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossClosedOrdersAsync("123"), "GetCrossClosedOrders", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossUserTradesAsync("123"), "GetCrossUserTrades", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossLiquidationOrdersAsync(), "GetCrossLiquidationOrders", nestedJsonProperty: "data.resultList");
         }
 
         [Test]

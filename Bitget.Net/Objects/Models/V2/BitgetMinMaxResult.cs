@@ -26,5 +26,9 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("resultList")]
         public IEnumerable<T> Result { get; set; } = [];
+        [JsonInclude, JsonPropertyName("orderList")]
+        internal IEnumerable<T> ResultOrder { set => Result = value; }
+        [JsonInclude, JsonPropertyName("fills")]
+        internal IEnumerable<T> ResultTrade { set => Result = value; }
     }
 }

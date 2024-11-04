@@ -1,0 +1,32 @@
+GET
+/api/v2/margin/crossed/fills
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695636829522,
+    "data": {
+        "fills": [
+            {
+                "orderId": "121211212122",
+                "tradeId": "121211212122",
+                "orderType": "limit",
+                "side": "buy",
+                "priceAvg": "32111",
+                "size": "0.01",
+                "amount": "1000",
+                "tradeScope": "taker",
+                "cTime": "1695629859821",
+                "uTime": "1695629890839",
+                "feeDetail": {
+                        "deduction": "yes",
+                        "feeCoin": "BGB",
+                        "totalDeductionFee": "-0.017118519726",
+                        "totalFee": "-0.017118519726"
+                    }
+            }
+        ],
+        "maxId": "121211212122",
+        "minId": "121211212122"
+    }
+}

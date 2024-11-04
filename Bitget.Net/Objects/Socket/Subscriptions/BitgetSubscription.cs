@@ -28,7 +28,7 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
             return new[] { $"snapshot-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-", $"update-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-" };
         }
 
-        public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false);
+        public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false) { RequiredResponses = _args.Count() };
         public override Query? GetUnsubQuery() => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "unsubscribe" }, false);
 
         public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)

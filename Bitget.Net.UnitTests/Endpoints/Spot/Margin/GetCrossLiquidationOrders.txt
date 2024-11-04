@@ -1,0 +1,30 @@
+GET
+/api/v2/margin/crossed/liquidation-order
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1708654712083,
+    "data": {
+        "resultList": [
+            {
+                "symbol": "BTCUSDT",
+                "orderType": "market",
+                "side": "liquidation-sell",
+                "priceAvg": "43024.762472",
+                "price": "43024.762472",
+                "fillSize": "1",
+                "size": "1",
+                "amount": "43024.762472",
+                "orderId": "1131405566368010241",
+                "fromCoin": "",
+                "toCoin": "",
+                "fromSize": "",
+                "toSize": "",
+                "cTime": "1705474028200",
+                "uTime": "1705474028398"
+            }
+        ],
+        "idLessThan": "1131405566368010241"
+    }
+}
