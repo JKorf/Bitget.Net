@@ -116,6 +116,14 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 |Websocket Public|✓|`socketClient.FuturesApiV2`|
 |Websocket Private|✓|`socketClient.FuturesApiV2`|
 
+#### Margin
+|API|Supported|Location|
+|--|--:|--|
+|Common|✓|`restClient.SpotApiV2.Margin`|
+|Rest Cross|✓|`restClient.SpotApiV2.Margin`|
+|Rest Isolated|✓|`restClient.SpotApiV2.Margin`|
+|Websocket|✓|`socketClient.SpotApiV2`|
+
 ### V1  
 #### Spot
 |API|Supported|Location|
