@@ -1,0 +1,13 @@
+POST
+/api/v2/margin/crossed/account/flash-repay
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695619576187,
+  "data": 
+    {
+      "repayId": "3423423",
+      "coin": "ETH"
+    }
+}

@@ -1,0 +1,11 @@
+GET
+/api/v2/margin/crossed/account/risk-rate
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695636742119,
+  "data": {
+    "riskRateRatio": "0"
+  }
+}

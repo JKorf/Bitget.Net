@@ -1,0 +1,14 @@
+POST
+/api/v2/margin/crossed/account/repay
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695636742119,
+  "data": {
+    "coin": "USDT",
+    "repayId": "12313123213",
+    "remainDebtAmount": "0.2",
+    "repayAmount": "0.1"
+  }
+}

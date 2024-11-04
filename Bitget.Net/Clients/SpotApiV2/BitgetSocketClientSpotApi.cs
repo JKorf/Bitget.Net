@@ -147,6 +147,18 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToMarginIndexPriceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetIndexPriceUpdate>>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), [new Dictionary<string, string>
+                    {
+                        { "instType", "MARGIN" },
+                        { "channel", "index-price" },
+                        { "instId", "default" },
+                    }]
+            , false, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BitgetOrderUpdate>>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
@@ -191,6 +203,54 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "channel", "account" },
                         { "coin", "default" },
                     } }
+            , true, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginAccountUpdatesAsync(Action<DataEvent<IEnumerable<BitgetCrossAccountUpdate>>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), [new Dictionary<string, string>
+                    {
+                        { "instType", "MARGIN" },
+                        { "channel", "account-crossed" },
+                        { "coin", "default" },
+                    }]
+            , true, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetMarginOrderUpdate>>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), symbols.Select(x => new Dictionary<string, string>
+                    {
+                        { "instType", "MARGIN" },
+                        { "channel", "orders-crossed" },
+                        { "instId", x },
+                    }).ToArray()
+            , true, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginAccountUpdatesAsync(Action<DataEvent<IEnumerable<BitgetIsolatedAccountUpdate>>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), [new Dictionary<string, string>
+                    {
+                        { "instType", "MARGIN" },
+                        { "channel", "account-isolated" },
+                        { "coin", "default" },
+                    }]
+            , true, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetMarginOrderUpdate>>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), symbols.Select(x => new Dictionary<string, string>
+                    {
+                        { "instType", "MARGIN" },
+                        { "channel", "orders-isolated" },
+                        { "instId", x },
+                    }).ToArray()
             , true, handler, ct).ConfigureAwait(false);
         }
 

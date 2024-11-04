@@ -34,7 +34,7 @@ namespace Bitget.Net
             var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonConvert.SerializeObject(bodyParameters) : "";
             headers ??= new Dictionary<string, string>();
             var timestamp = GetMillisecondTimestamp(apiClient);
-            var signString = timestamp + method.ToString().ToUpperInvariant() + uri.AbsolutePath + ((parameterPosition == HttpMethodParameterPosition.InUri && uriParameters.Any()) ? "?" + uriParameters?.CreateParamString(false, arraySerialization) : "") + body;
+            var signString = timestamp + method.ToString().ToUpperInvariant() + uri.AbsolutePath + ((parameterPosition == HttpMethodParameterPosition.InUri && uriParameters?.Any() == true) ? "?" + uriParameters?.CreateParamString(false, arraySerialization) : "") + body;
             if (_credentials.CredentialType == ApiCredentialsType.Hmac)
             {
                 headers["ACCESS-SIGN"] = SignHMACSHA256(signString, SignOutputType.Base64);

@@ -1,0 +1,12 @@
+GET
+/api/v2/margin/crossed/account/max-borrowable-amount
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695636742119,
+  "data": {
+    "coin": "USDT",
+    "maxBorrowableAmount": "3976070.21616"
+  }
+}

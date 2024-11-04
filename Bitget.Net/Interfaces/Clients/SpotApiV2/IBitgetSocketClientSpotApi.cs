@@ -103,6 +103,15 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, int? limit, Action<DataEvent<BitgetOrderBookUpdate>> handler, CancellationToken ct = default);
 
         /// <summary>
+        /// Subscribe to margin index price updates
+        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/websocket/public/Margin-Index-Price" /></para>
+        /// </summary>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToMarginIndexPriceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetIndexPriceUpdate>>> handler, CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribe to user order updates
         /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Order-Channel" /></para>
         /// </summary>
@@ -137,5 +146,39 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
         Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetBalanceUpdate>>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to cross margin account updates
+        /// </summary>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginAccountUpdatesAsync(Action<DataEvent<IEnumerable<BitgetCrossAccountUpdate>>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to cross margin order updates
+        /// </summary>
+        /// <param name="symbols">Symbols to subscribe</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetMarginOrderUpdate>>> handler, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Subscribe to isolated margin account updates
+        /// </summary>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginAccountUpdatesAsync(Action<DataEvent<IEnumerable<BitgetIsolatedAccountUpdate>>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to isolated margin order updates
+        /// </summary>
+        /// <param name="symbols">Symbols to subscribe</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetMarginOrderUpdate>>> handler, CancellationToken ct = default);
     }
 }

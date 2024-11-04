@@ -1,0 +1,33 @@
+GET
+/api/v2/margin/crossed/history-orders
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1695636829522,
+    "data": {
+        "orderList": [
+            {
+                "orderId": "121211212122",
+                "symbol": "BTCUSDT",
+                "orderType": "limit",
+                "enterPointSource": "API",
+                "clientOid": "myClientOid001",
+                "loanType": "normal",
+                "price": "32111",
+                "side": "buy",
+                "status": "filled",
+                "baseSize": "0.01",
+                "quoteSize": "1000",
+                "priceAvg": "32111",
+                "size": "0.01",
+                "amount": "1000",
+                "force": "gtc",
+                "cTime": "1695629859821",
+                "uTime": "1695629890839"
+            }
+        ],
+        "maxId": "121211212122",
+        "minId": "121211212122"
+    }
+}

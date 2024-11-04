@@ -1,0 +1,32 @@
+GET
+/api/v2/margin/currencies
+false
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1679383565084,
+    "data": [
+        {
+            "symbol": "ETHUSDT",
+            "baseCoin": "ETH",
+            "quoteCoin": "USDT",
+            "maxCrossedLeverage": "3",
+            "maxIsolatedLeverage": "10",
+            "warningRiskRatio": "0.80000000",
+            "liquidationRiskRatio": "1.00000000",
+            "minTradeAmount": "0.00010000",
+            "maxTradeAmount": "10000.00000000",
+            "takerFeeRate": "0.00100000",
+            "makerFeeRate": "0.00100000",
+            "pricePrecision": "4",
+            "quantityPrecision": "4",
+            "minTradeUSDT": "5.00000000",
+            "isBorrowable": true,
+            "userMinBorrow": "0.00000001",
+            "status": "1",
+            "isIsolatedBaseBorrowable": true,
+            "isIsolatedQuoteBorrowable": true,
+            "isCrossBorrowable": true
+        }
+    ]
+}

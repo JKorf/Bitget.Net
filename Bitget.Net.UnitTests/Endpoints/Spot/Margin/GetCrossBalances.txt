@@ -1,0 +1,20 @@
+GET
+/api/v2/margin/crossed/account/assets
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695636742119,
+  "data": [{
+    "coin": "USDT",
+    "totalAmount": "12",
+    "available": "2",
+    "frozen": "0",
+    "borrow": "0.1",
+    "interest": "0.000001",
+    "net": "0.1",
+    "cTime":"1734567744432",
+    "uTime":"1734567744432",
+    "coupon": "0"
+  }]
+}
