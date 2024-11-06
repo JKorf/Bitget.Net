@@ -233,7 +233,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
 
         /// <inheritdoc />
-        protected override Query GetAuthenticationRequest(SocketConnection connection)
+        protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection)
         {
             var time = CryptoExchange.Net.Converters.SystemTextJson.DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
             var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;
@@ -254,7 +254,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 }
             };
 
-            return new BitgetAuthQuery(socketRequest);
+            return Task.FromResult<Query?>(new BitgetAuthQuery(socketRequest));
         }
     }
 }
