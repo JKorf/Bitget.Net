@@ -332,7 +332,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
            string symbol,
            string marginAsset,
            PlanType planType,
-           decimal quantity,
+           decimal? quantity,
            decimal triggerPrice,
            decimal? orderPrice = null,
            TriggerPriceType? triggerPriceType = null,
@@ -491,7 +491,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesTriggerOrders>> GetOpenTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
-            BitgetFuturesPlanType planType,
+            TriggerPlanTypeFilter planType,
             string? symbol = null,
             string? orderId = null,
             string? clientOrderId = null,
@@ -518,7 +518,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesTriggerOrders>> GetClosedTriggerOrdersAsync(
            BitgetProductTypeV2 productType,
-           BitgetFuturesPlanType planType,
+           TriggerPlanTypeFilter planType,
            string? symbol = null,
            string? orderId = null,
            string? clientOrderId = null,
@@ -541,7 +541,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> CancelTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
-            BitgetFuturesPlanType? planType = null,
+            CancelTriggerPlanTypeFilter? planType = null,
             string? symbol = null,
             string? marginCoin = null,
             IEnumerable<BitgetCancelOrderRequest>? orderIds = null,

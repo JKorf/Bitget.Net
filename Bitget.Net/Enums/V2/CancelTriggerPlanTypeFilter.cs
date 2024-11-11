@@ -6,10 +6,15 @@ using System.Text;
 namespace Bitget.Net.Enums.V2
 {
     /// <summary>
-    /// Plan type
+    /// Trigger plan type
     /// </summary>
-    public enum PlanType
+    public enum CancelTriggerPlanTypeFilter
     {
+        /// <summary>
+        /// Trigger order
+        /// </summary>
+        [Map("normal_plan")]
+        Trigger,
         /// <summary>
         /// Take profit
         /// </summary>
@@ -21,11 +26,6 @@ namespace Bitget.Net.Enums.V2
         [Map("loss_plan")]
         StopLoss,
         /// <summary>
-        /// Trailing stop
-        /// </summary>
-        [Map("moving_plan")]
-        TailingStop,
-        /// <summary>
         /// Position take profit
         /// </summary>
         [Map("pos_profit")]
@@ -34,6 +34,11 @@ namespace Bitget.Net.Enums.V2
         /// Position stop loss
         /// </summary>
         [Map("pos_loss")]
-        PositionStopLoss
+        PositionStopLoss,
+        /// <summary>
+        /// Trailing order
+        /// </summary>
+        [Map("moving_plan")]
+        Trailing
     }
 }

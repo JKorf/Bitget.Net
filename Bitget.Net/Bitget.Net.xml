@@ -347,7 +347,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.ClosePositionsAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PlanType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{Bitget.Net.Enums.V2.OrderSide},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PlanType,System.Nullable{System.Decimal},System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{Bitget.Net.Enums.V2.OrderSide},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceTriggerOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.TriggerPlanType,Bitget.Net.Enums.V2.MarginMode,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.TradeSide},System.Nullable{System.Decimal},System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Threading.CancellationToken)">
@@ -362,13 +362,13 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.EditTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetOpenTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.BitgetFuturesPlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetOpenTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.TriggerPlanTypeFilter,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.BitgetFuturesPlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.TriggerPlanTypeFilter,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.BitgetFuturesPlanType},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi">
@@ -2826,6 +2826,41 @@
             Inner address withdraw in
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter">
+            <summary>
+            Trigger plan type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter.Trigger">
+            <summary>
+            Trigger order
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter.TakeProfit">
+            <summary>
+            Take profit
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter.StopLoss">
+            <summary>
+            Stop loss
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter.PositionTakeProfit">
+            <summary>
+            Position take profit
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter.PositionStopLoss">
+            <summary>
+            Position stop loss
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter.Trailing">
+            <summary>
+            Trailing order
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.ContractType">
             <summary>
             Contract type
@@ -3286,11 +3321,6 @@
             Plan type
             </summary>
         </member>
-        <member name="F:Bitget.Net.Enums.V2.PlanType.TriggerOrder">
-            <summary>
-            Trigger order
-            </summary>
-        </member>
         <member name="F:Bitget.Net.Enums.V2.PlanType.TakeProfit">
             <summary>
             Take profit
@@ -3304,11 +3334,6 @@
         <member name="F:Bitget.Net.Enums.V2.PlanType.TailingStop">
             <summary>
             Trailing stop
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.V2.PlanType.TailingTpSl">
-            <summary>
-            Trailing TP/SL
             </summary>
         </member>
         <member name="F:Bitget.Net.Enums.V2.PlanType.PositionTakeProfit">
@@ -3706,6 +3731,26 @@
             Trailing stop
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.V2.TriggerPlanTypeFilter">
+            <summary>
+            Trigger plan type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerPlanTypeFilter.Trigger">
+            <summary>
+            Trigger order
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerPlanTypeFilter.TrailingStop">
+            <summary>
+            Trailing stop order
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerPlanTypeFilter.ProfitLoss">
+            <summary>
+            Take profit and stop loss orders
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.TriggerPriceType">
             <summary>
             Trigger order price type
@@ -3719,6 +3764,46 @@
         <member name="F:Bitget.Net.Enums.V2.TriggerPriceType.MarkPrice">
             <summary>
             Mark price
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.UpdatePlanType">
+            <summary>
+            Update plan type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.UpdatePlanType.TriggerOrder">
+            <summary>
+            Trigger order
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.UpdatePlanType.PartialTakeProfit">
+            <summary>
+            Partial take profit
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.UpdatePlanType.PartialStopLoss">
+            <summary>
+            Partial stop loss
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.UpdatePlanType.PositionTakeProfit">
+            <summary>
+            Position take profit
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.UpdatePlanType.PositionStopLoss">
+            <summary>
+            Position stop loss 
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.UpdatePlanType.TrailingStop">
+            <summary>
+            Trailing stop
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.UpdatePlanType.TrailingTpSl">
+            <summary>
+            Trailing TP/SL
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.V2.BitgetCancelOrderRequest">
@@ -4274,7 +4359,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.PlaceTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PlanType,System.Decimal,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{Bitget.Net.Enums.V2.OrderSide},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.PlaceTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PlanType,System.Nullable{System.Decimal},System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{Bitget.Net.Enums.V2.OrderSide},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <summary>
             Place a take profit / stop loss order
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /></para>
@@ -4374,7 +4459,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetOpenTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.BitgetFuturesPlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetOpenTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.TriggerPlanTypeFilter,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get open trigger orders
             <para><a href="https://www.bitget.com/api-doc/contract/plan/get-orders-plan-pending" /></para>
@@ -4391,7 +4476,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.BitgetFuturesPlanType,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.TriggerPlanTypeFilter,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get closed trigger orders
             <para><a href="https://www.bitget.com/api-doc/contract/plan/orders-plan-history" /></para>
@@ -4408,7 +4493,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.BitgetFuturesPlanType},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
             <summary>
             Cancel trigger orders matching the parameters
             <para><a href="https://www.bitget.com/api-doc/contract/plan/Cancel-Plan-Order" /></para>

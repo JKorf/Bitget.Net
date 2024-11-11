@@ -15,7 +15,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Plan type
         /// </summary>
         [JsonPropertyName("planType")]
-        public PlanType PlanType { get; set; }
+        public UpdatePlanType PlanType { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>

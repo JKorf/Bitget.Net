@@ -285,7 +285,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/orders-history", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetFuturesOrders>(request, parameters, ct).ConfigureAwait(false);
-            if (result.Data.Orders == null)
+            if (!result)
+                return result.As<BitgetFuturesOrders>(default);
+            
+            if (result.Data?.Orders == null)
                 result.Data.Orders = Array.Empty<BitgetFuturesOrder>();
 
             return result.As(result.Data);
@@ -364,7 +367,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             string symbol,
             string marginAsset,
             PlanType planType,
-            decimal quantity,
+            decimal? quantity,
             decimal triggerPrice,
             decimal? orderPrice = null,
             TriggerPriceType? triggerPriceType = null,
@@ -376,17 +379,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             if ((oneWaySide != null && hedgeModePositionSide != null)
                 || (oneWaySide == null && hedgeModePositionSide == null))
-                throw new ArgumentException("Either hedgeModePositionSide (for two way position mode) or onWaySide (for one way position mode) should be provided");
+                throw new ArgumentException("Either hedgeModePositionSide (for two way position mode) or oneWaySide (for one way position mode) should be provided");
 
-            if (planType == PlanType.TriggerOrder || planType == PlanType.TailingTpSl)
-                throw new ArgumentException("Invalid plan type, only TakeProfit, StopLoss, TailingStop, PositionTakeProfit or PositionStopLoss allowed");
-            
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType); 
             parameters.AddEnum("planType", planType);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            parameters.AddString("size", quantity);
+            parameters.AddOptionalString("size", quantity);
             parameters.AddString("triggerPrice", triggerPrice);
             parameters.AddOptionalEnum("holdSide", hedgeModePositionSide);
             parameters.AddOptionalEnum("holdSide", oneWaySide);
@@ -436,7 +436,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddString("size", quantity);
             parameters.AddOptionalString("price", orderPrice);
             parameters.AddString("triggerPrice", triggerPrice);
-            parameters.AddOptionalEnum("triggerType", triggerPriceType);
+            parameters.AddEnum("triggerType", triggerPriceType ?? TriggerPriceType.LastPrice);
             parameters.AddOptionalString("callbackRatio", trailingStopRate);
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptional("reduceOnly", reduceOnly == null ? null : reduceOnly == true ? "YES" : "NO");
@@ -542,7 +542,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         public async Task<WebCallResult<BitgetFuturesTriggerOrders>> GetOpenTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
-            BitgetFuturesPlanType planType,
+            TriggerPlanTypeFilter planType,
             string? symbol = null,
             string? orderId = null,
             string? clientOrderId = null,
@@ -570,7 +570,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         public async Task<WebCallResult<BitgetFuturesTriggerOrders>> GetClosedTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
-            BitgetFuturesPlanType planType,
+            TriggerPlanTypeFilter planType,
             string? symbol = null,
             string? orderId = null,
             string? clientOrderId = null,
@@ -598,7 +598,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         public async Task<WebCallResult<BitgetOrderMultipleResult>> CancelTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
-            BitgetFuturesPlanType? planType = null,
+            CancelTriggerPlanTypeFilter? planType = null,
             string? symbol = null,
             string? marginCoin = null,
             IEnumerable<BitgetCancelOrderRequest>? orderIds = null,
