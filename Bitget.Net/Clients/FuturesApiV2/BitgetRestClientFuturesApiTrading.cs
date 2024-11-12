@@ -288,7 +288,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!result)
                 return result.As<BitgetFuturesOrders>(default);
             
-            if (result.Data?.Orders == null)
+            if (result.Data.Orders == null)
                 result.Data.Orders = Array.Empty<BitgetFuturesOrder>();
 
             return result.As(result.Data);

@@ -12,10 +12,10 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetFuturesLedger
     {
         /// <summary>
-        /// The final transaction order ID.
+        /// The final transaction ID.
         /// </summary>
         [JsonPropertyName("endId")]
-        public string EndId { get; set; } = string.Empty;
+        public long? EndId { get; set; }
         /// <summary>
         /// Entries
         /// </summary>
@@ -28,6 +28,11 @@ namespace Bitget.Net.Objects.Models.V2
     /// </summary>
     public record BitgetFuturesLedgerEntry
     {
+        /// <summary>
+        /// Bill id
+        /// </summary>
+        [JsonPropertyName("billId")]
+        public long Id { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
@@ -64,14 +69,9 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("feeByCoupon")]
         public decimal? CouponFees { get; set; }
         /// <summary>
-        /// Fee asset
+        /// Balance
         /// </summary>
-        [JsonPropertyName("feeCoin")]
-        public string FeeAsset { get; set; } = string.Empty;
-        /// <summary>
-        /// Order id
-        /// </summary>
-        [JsonPropertyName("orderId")]
-        public string OrderId { get; set; } = string.Empty;
+        [JsonPropertyName("balance")]
+        public decimal Balance { get; set; }
     }
 }

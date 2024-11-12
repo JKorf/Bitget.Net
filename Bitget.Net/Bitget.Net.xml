@@ -12364,7 +12364,7 @@
         </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedger.EndId">
             <summary>
-            The final transaction order ID.
+            The final transaction ID.
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedger.Entries">
@@ -12375,6 +12375,11 @@
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry">
             <summary>
             Ledger entry
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.Id">
+            <summary>
+            Bill id
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.Timestamp">
@@ -12412,14 +12417,9 @@
             Fees paid with coupon
             </summary>
         </member>
-        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.FeeAsset">
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.Balance">
             <summary>
-            Fee asset
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesLedgerEntry.OrderId">
-            <summary>
-            Order id
+            Balance
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesOrders">
