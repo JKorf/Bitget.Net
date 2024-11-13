@@ -291,7 +291,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (result.Data.Orders == null)
                 result.Data.Orders = Array.Empty<BitgetFuturesOrder>();
 
-            return result.As(result.Data);
+            return result;
         }
 
         /// <inheritdoc />
@@ -574,6 +574,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             string? symbol = null,
             string? orderId = null,
             string? clientOrderId = null,
+            ClosedPlanFilter? status = null,
             string? idLessThan = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
@@ -590,9 +591,19 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("limit", limit);
+            parameters.AddOptionalEnum("planStatus", status);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/orders-plan-history", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<BitgetFuturesTriggerOrders>(request, parameters, ct).ConfigureAwait(false);
+
+            var result = await _baseClient.SendAsync<BitgetFuturesTriggerOrders>(request, parameters, ct).ConfigureAwait(false);
+
+            if (!result)
+                return result.As<BitgetFuturesTriggerOrders>(default);
+
+            if (result.Data.Orders == null)
+                result.Data.Orders = Array.Empty<BitgetFuturesTriggerOrder>();
+
+            return result;
         }
 
         /// <inheritdoc />

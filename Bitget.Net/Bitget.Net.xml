@@ -365,7 +365,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetOpenTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.TriggerPlanTypeFilter,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.TriggerPlanTypeFilter,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.TriggerPlanTypeFilter,System.String,System.String,System.String,System.Nullable{Bitget.Net.Enums.V2.ClosedPlanFilter},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Enums.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
@@ -2861,6 +2861,26 @@
             Trailing order
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.V2.ClosedPlanFilter">
+            <summary>
+            Closed plan status filter
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.ClosedPlanFilter.Executed">
+            <summary>
+            Executed
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.ClosedPlanFilter.Failed">
+            <summary>
+            Trigger failed
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.ClosedPlanFilter.Canceled">
+            <summary>
+            Canceled
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.ContractType">
             <summary>
             Contract type
@@ -4476,7 +4496,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.TriggerPlanTypeFilter,System.String,System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.GetClosedTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.Enums.V2.TriggerPlanTypeFilter,System.String,System.String,System.String,System.Nullable{Bitget.Net.Enums.V2.ClosedPlanFilter},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get closed trigger orders
             <para><a href="https://www.bitget.com/api-doc/contract/plan/orders-plan-history" /></para>
@@ -4486,6 +4506,7 @@
             <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="clientOrderId">Filter by client order id</param>
+            <param name="status">Filter by status</param>
             <param name="idLessThan">Return results before this id</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>

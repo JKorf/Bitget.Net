@@ -510,6 +510,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="clientOrderId">Filter by client order id</param>
+        /// <param name="status">Filter by status</param>
         /// <param name="idLessThan">Return results before this id</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -522,6 +523,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
            string? symbol = null,
            string? orderId = null,
            string? clientOrderId = null,
+           ClosedPlanFilter? status = null,
            string? idLessThan = null,
            DateTime? startTime = null,
            DateTime? endTime = null,
