@@ -164,6 +164,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.15.0 - 14 Nov 2024
+    * Added status filter to restClient.FuturesApiV2.Trading.GetClosedTriggerOrdersAsync
+    * Updated restClient.FuturesApiV2.Account.GetLedgerAsync response model
+
 * Version 1.14.0 - 11 Nov 2024
     * Split and corrected futures trigger plan type parameters
 
