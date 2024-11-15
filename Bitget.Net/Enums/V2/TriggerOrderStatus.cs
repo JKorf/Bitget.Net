@@ -24,6 +24,16 @@ namespace Bitget.Net.Enums.V2
         /// Order executed
         /// </summary>
         [Map("executed")]
-        Executed
+        Executed,
+        /// <summary>
+        /// Canceled
+        /// </summary>
+        [Map("cancelled")]
+        Canceled,
+        /// <summary>
+        /// Failed to execute
+        /// </summary>
+        [Map("fail_execute")]
+        FailedExecute
     }
 }
