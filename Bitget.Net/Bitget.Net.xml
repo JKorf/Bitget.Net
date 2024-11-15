@@ -3736,6 +3736,16 @@
             Order executed
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderStatus.Canceled">
+            <summary>
+            Canceled
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderStatus.FailedExecute">
+            <summary>
+            Failed to execute
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.TriggerPlanType">
             <summary>
             Trigger plan type
