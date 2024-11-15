@@ -19,6 +19,16 @@
             Base socket API address
             </summary>
         </member>
+        <member name="M:Bitget.Net.BitgetEnvironment.#ctor">
+            <summary>
+            ctor for DI, use <see cref="M:Bitget.Net.BitgetEnvironment.CreateCustom(System.String,System.String,System.String)"/> for creating a custom environment
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.BitgetEnvironment.GetEnvironmentByName(System.String)">
+            <summary>
+            Get the Bitget environment by name
+            </summary>
+        </member>
         <member name="P:Bitget.Net.BitgetEnvironment.Live">
             <summary>
             Live environment
@@ -119,11 +129,11 @@
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
+        <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Options.IOptions{Bitget.Net.Objects.Options.BitgetRestOptions})">
             <summary>
             Create a new instance of BitgetRestClient
             </summary>
-            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="options">Option configuration</param>
             <param name="loggerFactory">The logger factory</param>
             <param name="httpClient">Http client for this client</param>
         </member>
@@ -151,24 +161,18 @@
         <member name="P:Bitget.Net.Clients.BitgetSocketClient.FuturesApiV2">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
-            <summary>
-            Create a new instance of the BitgetSocketClient
-            </summary>
-            <param name="loggerFactory">The logger factory</param>
-        </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions})">
             <summary>
             Create a new instance of the BitgetSocketClient
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+        <member name="M:Bitget.Net.Clients.BitgetSocketClient.#ctor(Microsoft.Extensions.Options.IOptions{Bitget.Net.Objects.Options.BitgetSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             Create a new instance of the BitgetSocketClient
             </summary>
             <param name="loggerFactory">The logger factory</param>
-            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="options">Option configuration</param>
         </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.SetDefaultOptions(System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions})">
             <summary>
@@ -7550,12 +7554,12 @@
             <summary>
             Creates new api credentials. Keep this information safe.
             </summary>
-            <param name="apiKey">The API key</param>
-            <param name="apiSecret">The API secret</param>
-            <param name="apiPassPhrase">The API passPhrase</param>
-            <param name="credentialsType">The type of credentials</param>
+            <param name="key">The API key</param>
+            <param name="secret">The API secret</param>
+            <param name="passPhrase">The API passPhrase</param>
+            <param name="credentialType">The type of credentials</param>
         </member>
-        <member name="M:Bitget.Net.Objects.BitgetApiCredentials.#ctor(System.IO.Stream,System.String,System.String,System.String)">
+        <member name="M:Bitget.Net.Objects.BitgetApiCredentials.FromStream(System.IO.Stream,System.String,System.String,System.String)">
             <summary>
             Create Api credentials providing a stream containing json data. The json data should include three values: apiKey, apiSecret and apiPassPhrase
             </summary>
@@ -16259,6 +16263,36 @@
             Client order id
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Options.BitgetOptions">
+            <summary>
+            Bitget options
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.Rest">
+            <summary>
+            Rest client options
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.Socket">
+            <summary>
+            Socket client options
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.Environment">
+            <summary>
+            Trade environment. Contains info about URL's to use to connect to the API. Use `BitgetEnvironment` to swap environment, for example `Environment = BitgetEnvironment.Live`
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.ApiCredentials">
+            <summary>
+            The api credentials used for signing requests.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.SocketClientLifeTime">
+            <summary>
+            The DI service lifetime for the IBitgetSocketClient
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Options.BitgetOrderBookOptions">
             <summary>
             Order book options
@@ -16284,6 +16318,11 @@
             Default options for new clients
             </summary>
         </member>
+        <member name="M:Bitget.Net.Objects.Options.BitgetRestOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.ChannelCode">
             <summary>
             Channel code
@@ -16307,6 +16346,11 @@
         <member name="P:Bitget.Net.Objects.Options.BitgetSocketOptions.Default">
             <summary>
             Default options for new clients
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Objects.Options.BitgetSocketOptions.#ctor">
+            <summary>
+            ctor
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Options.BitgetSocketOptions.SpotOptions">
@@ -16447,13 +16491,27 @@
             Extensions for DI
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBitget(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Bitget.Net.Objects.Options.BitgetRestOptions},System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBitget(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add services such as the IBitgetRestClient and IBitgetSocketClient. Configures the services based on the provided configuration.
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="configuration">The configuration(section) containing the options</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBitget(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Bitget.Net.Objects.Options.BitgetOptions})">
+            <summary>
+            Add services such as the IBitgetRestClient and IBitgetSocketClient. Services will be configured based on the provided options.
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="optionsDelegate">Set options for the Bitget services</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBitgetCore(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
             <summary>
             Add the IBitgetClient and IBitgetSocketClient to the sevice collection so they can be injected
             </summary>
             <param name="services">The service collection</param>
-            <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
-            <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
             <param name="socketClientLifeTime">The lifetime of the IBitgetSocketClient for the service collection. Defaults to Singleton.</param>
             <returns></returns>
         </member>

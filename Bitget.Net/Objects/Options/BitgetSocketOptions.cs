@@ -10,12 +10,20 @@ namespace Bitget.Net.Objects.Options
         /// <summary>
         /// Default options for new clients
         /// </summary>
-        public static BitgetSocketOptions Default { get; set; } = new BitgetSocketOptions()
+        internal static BitgetSocketOptions Default { get; set; } = new BitgetSocketOptions()
         {
             Environment = BitgetEnvironment.Live,
             SocketSubscriptionsCombineTarget = 10,
             MaxSocketConnections = 100
         };
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BitgetSocketOptions()
+        {
+            Default?.Set(this);
+        }
 
         /// <summary>
         /// Spot API options
@@ -27,12 +35,12 @@ namespace Bitget.Net.Objects.Options
         /// </summary>
         public SocketApiOptions FuturesOptions { get; private set; } = new SocketApiOptions();
 
-        internal BitgetSocketOptions Copy()
+        internal BitgetSocketOptions Set(BitgetSocketOptions targetOptions)
         {
-            var options = Copy<BitgetSocketOptions>();
-            options.SpotOptions = SpotOptions.Copy<SocketApiOptions>();
-            options.FuturesOptions = FuturesOptions.Copy<SocketApiOptions>();
-            return options;
+            targetOptions = base.Set<BitgetSocketOptions>(targetOptions);
+            targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
+            targetOptions.FuturesOptions = FuturesOptions.Set(targetOptions.FuturesOptions);
+            return targetOptions;
         }
     }
 }

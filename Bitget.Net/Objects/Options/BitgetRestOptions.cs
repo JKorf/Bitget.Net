@@ -10,10 +10,18 @@ namespace Bitget.Net.Objects.Options
         /// <summary>
         /// Default options for new clients
         /// </summary>
-        public static BitgetRestOptions Default { get; set; } = new BitgetRestOptions()
+        internal static BitgetRestOptions Default { get; set; } = new BitgetRestOptions()
         {
             Environment = BitgetEnvironment.Live
         };
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BitgetRestOptions()
+        {
+            Default?.Set(this);
+        }
 
         /// <summary>
         /// Channel code
@@ -30,12 +38,13 @@ namespace Bitget.Net.Objects.Options
         /// </summary>
         public RestApiOptions FuturesOptions { get; private set; } = new RestApiOptions();
 
-        internal BitgetRestOptions Copy()
+        internal BitgetRestOptions Set(BitgetRestOptions targetOptions)
         {
-            var options = Copy<BitgetRestOptions>();
-            options.FuturesOptions = FuturesOptions.Copy<RestApiOptions>();
-            options.SpotOptions = SpotOptions.Copy<RestApiOptions>();
-            return options;
+            targetOptions = base.Set<BitgetRestOptions>(targetOptions);
+            targetOptions.ChannelCode = ChannelCode;
+            targetOptions.FuturesOptions = FuturesOptions.Set(targetOptions.FuturesOptions);
+            targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
+            return targetOptions;
         }
     }
 }

@@ -3,6 +3,7 @@ using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Bitget.Net.Clients
 {
@@ -24,27 +25,25 @@ namespace Bitget.Net.Clients
         /// Create a new instance of BitgetRestClient
         /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public BitgetRestClient(Action<BitgetRestOptions>? optionsDelegate = null) : this(null, null, optionsDelegate)
+        public BitgetRestClient(Action<BitgetRestOptions>? optionsDelegate = null)
+            : this(null, null, Options.Create(ApplyOptionsDelegate(optionsDelegate)))
         {
         }
 
         /// <summary>
         /// Create a new instance of BitgetRestClient
         /// </summary>
-        /// <param name="optionsDelegate">Option configuration delegate</param>
+        /// <param name="options">Option configuration</param>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="httpClient">Http client for this client</param>
-        public BitgetRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, Action<BitgetRestOptions>? optionsDelegate = null) : base(loggerFactory, "Bitget")
+        public BitgetRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, IOptions<BitgetRestOptions> options) : base(loggerFactory, "Bitget")
         {
-            var options = BitgetRestOptions.Default.Copy();
-            if (optionsDelegate != null)
-                optionsDelegate(options);
-            Initialize(options);
+            Initialize(options.Value);
 
-            SpotApi = AddApiClient(new SpotApi.BitgetRestClientSpotApi(_logger, httpClient, this, options));
-            SpotApiV2 = AddApiClient(new SpotApiV2.BitgetRestClientSpotApi(_logger, httpClient, this, options));
-            FuturesApi = AddApiClient(new FuturesApi.BitgetRestClientFuturesApi(_logger, httpClient, this, options));
-            FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options));
+            SpotApi = AddApiClient(new SpotApi.BitgetRestClientSpotApi(_logger, httpClient, this, options.Value));
+            SpotApiV2 = AddApiClient(new SpotApiV2.BitgetRestClientSpotApi(_logger, httpClient, this, options.Value));
+            FuturesApi = AddApiClient(new FuturesApi.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
+            FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
         }
 
         /// <inheritdoc />
@@ -62,9 +61,7 @@ namespace Bitget.Net.Clients
         /// <param name="optionsFunc">Option configuration delegate</param>
         public static void SetDefaultOptions(Action<BitgetRestOptions> optionsFunc)
         {
-            var options = BitgetRestOptions.Default.Copy();
-            optionsFunc(options);
-            BitgetRestOptions.Default = options;
+            BitgetRestOptions.Default = ApplyOptionsDelegate(optionsFunc);
         }
     }
 }
