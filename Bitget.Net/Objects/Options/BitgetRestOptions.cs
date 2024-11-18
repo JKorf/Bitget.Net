@@ -31,12 +31,12 @@ namespace Bitget.Net.Objects.Options
         /// <summary>
         /// Spot API options
         /// </summary>
-        public RestApiOptions SpotOptions { get; private set; } = new RestApiOptions();
+        public RestApiOptions<BitgetApiCredentials> SpotOptions { get; private set; } = new RestApiOptions<BitgetApiCredentials>();
 
         /// <summary>
         /// Futures API options
         /// </summary>
-        public RestApiOptions FuturesOptions { get; private set; } = new RestApiOptions();
+        public RestApiOptions<BitgetApiCredentials> FuturesOptions { get; private set; } = new RestApiOptions<BitgetApiCredentials>();
 
         internal BitgetRestOptions Set(BitgetRestOptions targetOptions)
         {

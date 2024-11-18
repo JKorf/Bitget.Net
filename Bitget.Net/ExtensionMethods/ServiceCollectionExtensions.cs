@@ -82,6 +82,21 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
+        /// DEPRECATED; use <see cref="AddBitget(IServiceCollection, Action{BitgetOptions}?)" /> instead
+        /// </summary>
+        public static IServiceCollection AddBitget(
+            this IServiceCollection services,
+            Action<BitgetRestOptions> restDelegate,
+            Action<BitgetSocketOptions>? socketDelegate = null,
+            ServiceLifetime? socketClientLifeTime = null)
+        {
+            services.Configure<BitgetRestOptions>((x) => { restDelegate?.Invoke(x); });
+            services.Configure<BitgetSocketOptions>((x) => { socketDelegate?.Invoke(x); });
+
+            return AddBitgetCore(services, socketClientLifeTime);
+        }
+
+        /// <summary>
         /// Add the IBitgetClient and IBitgetSocketClient to the sevice collection so they can be injected
         /// </summary>
         /// <param name="services">The service collection</param>

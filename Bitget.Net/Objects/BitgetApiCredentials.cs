@@ -42,7 +42,7 @@ namespace Bitget.Net.Objects
 
             var key = accessor.GetValue<string>(MessagePath.Get().Property(identifierKey ?? "apiKey"));
             var secret = accessor.GetValue<string>(MessagePath.Get().Property(identifierSecret ?? "apiSecret"));
-            var pass = accessor.GetValue<string>(MessagePath.Get().Property(identifierPassPhrase ?? "apiPassPhrase")) ?? throw new ArgumentException("apiKey or apiSecret value not found in Json credential file");
+            var pass = accessor.GetValue<string>(MessagePath.Get().Property(identifierPassPhrase ?? "apiPassPhrase"));
             if (key == null || secret == null || pass == null)
                 throw new ArgumentException("apiKey or apiSecret value not found in Json credential file");
 
