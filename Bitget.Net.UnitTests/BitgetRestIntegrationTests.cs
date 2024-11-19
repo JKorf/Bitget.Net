@@ -2,6 +2,7 @@
 using Bitget.Net.Objects;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,11 @@ namespace Bitget.Net.UnitTests
             var pass = Environment.GetEnvironmentVariable("APIPASS");
 
             Authenticated = key != null && sec != null;
-            return new BitgetRestClient(null, loggerFactory, opts =>
+            return new BitgetRestClient(null, loggerFactory, Options.Create(new Objects.Options.BitgetRestOptions
             {
-                opts.OutputOriginalData = true;
-                opts.ApiCredentials = Authenticated ? new BitgetApiCredentials(key, sec, pass) : null;
-            });
+                OutputOriginalData = true,
+                ApiCredentials = Authenticated ? new BitgetApiCredentials(key, sec, pass) : null
+            }));
         }
 
         [Test]

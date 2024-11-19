@@ -10,7 +10,7 @@ namespace Bitget.Net.Objects.Options
         /// <summary>
         /// Default options for new clients
         /// </summary>
-        public static BitgetSocketOptions Default { get; set; } = new BitgetSocketOptions()
+        internal static BitgetSocketOptions Default { get; set; } = new BitgetSocketOptions()
         {
             Environment = BitgetEnvironment.Live,
             SocketSubscriptionsCombineTarget = 10,
@@ -18,21 +18,29 @@ namespace Bitget.Net.Objects.Options
         };
 
         /// <summary>
+        /// ctor
+        /// </summary>
+        public BitgetSocketOptions()
+        {
+            Default?.Set(this);
+        }
+
+        /// <summary>
         /// Spot API options
         /// </summary>
-        public SocketApiOptions SpotOptions { get; private set; } = new SocketApiOptions();
+        public SocketApiOptions<BitgetApiCredentials> SpotOptions { get; private set; } = new SocketApiOptions<BitgetApiCredentials>();
 
         /// <summary>
         /// Futures API options
         /// </summary>
-        public SocketApiOptions FuturesOptions { get; private set; } = new SocketApiOptions();
+        public SocketApiOptions<BitgetApiCredentials> FuturesOptions { get; private set; } = new SocketApiOptions<BitgetApiCredentials>();
 
-        internal BitgetSocketOptions Copy()
+        internal BitgetSocketOptions Set(BitgetSocketOptions targetOptions)
         {
-            var options = Copy<BitgetSocketOptions>();
-            options.SpotOptions = SpotOptions.Copy<SocketApiOptions>();
-            options.FuturesOptions = FuturesOptions.Copy<SocketApiOptions>();
-            return options;
+            targetOptions = base.Set<BitgetSocketOptions>(targetOptions);
+            targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
+            targetOptions.FuturesOptions = FuturesOptions.Set(targetOptions.FuturesOptions);
+            return targetOptions;
         }
     }
 }
