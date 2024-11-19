@@ -53,6 +53,16 @@
             Exchange name
             </summary>
         </member>
+        <member name="P:Bitget.Net.BitgetExchange.DisplayName">
+            <summary>
+            Exchange name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.BitgetExchange.ImageUrl">
+            <summary>
+            Url to exchange image
+            </summary>
+        </member>
         <member name="P:Bitget.Net.BitgetExchange.Url">
             <summary>
             Url to the main website

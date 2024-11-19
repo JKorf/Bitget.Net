@@ -190,16 +190,22 @@
           
 		  <p>Bitget.Net can be configured using Dotnet dependency injection, after which the clients can be injected into your services. It also correctly configures logging and HttpClient usage.</p>
 		  
-		  <pre><code>builder.Services.AddBitget(options => {
-  // Options can be configured here, for example:
-  options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET");
+		  <pre><code>// Configure options from config file
+// see https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples/example-config.json for an example
+builder.Services.AddBitget(builder.Configuration.GetSection("Bitget"));
+		  
+// OR
+		  
+ builder.Services.AddBitget(options => {
+  // Configure options in code
+  options.ApiCredentials = new BitgetApiCredentials("APIKEY", "APISECRET", "PASSPHRASE");
 });</code></pre>
 		  
 		  <p>The <code>IBitgetRestClient</code> and <code>IBitgetSocketClient</code> can then be injected.</p>
 		  <p>Alternatively the rest and socket client can be constructed directly</p>
 		  <pre><code>var restClient = new BitgetRestClient(options => {
   // Options can be configured here, for example:
-  options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET");
+  options.ApiCredentials = new BitgetApiCredentials("APIKEY", "APISECRET", "PASSPHRASE");
 });
 var socketClient = new BitgetSocketClient();</code></pre>
 		  

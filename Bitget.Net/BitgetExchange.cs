@@ -18,6 +18,16 @@ namespace Bitget.Net
         public static string ExchangeName => "Bitget";
 
         /// <summary>
+        /// Exchange name
+        /// </summary>
+        public static string DisplayName => "Bitget";
+
+        /// <summary>
+        /// Url to exchange image
+        /// </summary>
+        public static string ImageUrl { get; } = "https://raw.githubusercontent.com/JKorf/Bitget.Net/master/Bitget.Net/Icon/icon.png";
+
+        /// <summary>
         /// Url to the main website
         /// </summary>
         public static string Url { get; } = "https://www.bitget.com";
