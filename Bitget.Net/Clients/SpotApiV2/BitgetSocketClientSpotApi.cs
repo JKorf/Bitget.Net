@@ -33,6 +33,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         internal BitgetSocketClientSpotApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.SpotOptions)
         {
+            RateLimiter = BitgetExchange.RateLimiter.Websocket;
+
             RegisterPeriodicQuery("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
         }
         #endregion

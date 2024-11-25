@@ -34,6 +34,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
         internal BitgetSocketClientFuturesApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.FuturesOptions)
         {
+            RateLimiter = BitgetExchange.RateLimiter.Websocket;
+
             RegisterPeriodicQuery("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
         }
         #endregion

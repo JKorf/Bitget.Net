@@ -1,6 +1,7 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiting;
+using CryptoExchange.Net.RateLimiting.Filters;
 using CryptoExchange.Net.RateLimiting.Guards;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
@@ -81,10 +82,17 @@ namespace Bitget.Net
             Overal = new RateLimitGate("Overal")
                                     .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, Array.Empty<IGuardFilter>(), 6000, TimeSpan.FromSeconds(60), RateLimitWindowType.FixedAfterFirst)); // Overall limit of 6000 per ip per minute
 
+            Websocket = new RateLimitGate("Websocket")
+                                    .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Connection), 300, TimeSpan.FromSeconds(300), RateLimitWindowType.FixedAfterFirst)) // Limit of 300 connection requests per 5 min
+                                    .AddGuard(new RateLimitGuard(RateLimitGuard.PerConnection, new LimitItemTypeFilter(RateLimitItemType.Request), 240, TimeSpan.FromMinutes(60), RateLimitWindowType.FixedAfterFirst)) // Limit of 240 (subscription) requests per hour
+                                    .AddGuard(new RateLimitGuard(RateLimitGuard.PerConnection, new LimitItemTypeFilter(RateLimitItemType.Request), 10, TimeSpan.FromSeconds(1), RateLimitWindowType.FixedAfterFirst)); // Limit of 10 messages per second
+
             Overal.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            Websocket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
         }
 
 
         internal IRateLimitGate Overal { get; private set; }
+        internal IRateLimitGate Websocket { get; private set; }
     }
 }
