@@ -1,4 +1,5 @@
 ﻿using Bitget.Net.Interfaces.Clients;
+using Bitget.Net.Objects;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
@@ -47,7 +48,7 @@ namespace Bitget.Net.Clients
         }
 
         /// <inheritdoc />
-        public void SetApiCredentials(ApiCredentials credentials)
+        public void SetApiCredentials(BitgetApiCredentials credentials)
         {
             SpotApi.SetApiCredentials(credentials);
             SpotApiV2.SetApiCredentials(credentials);

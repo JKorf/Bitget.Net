@@ -147,7 +147,7 @@
             <param name="loggerFactory">The logger factory</param>
             <param name="httpClient">Http client for this client</param>
         </member>
-        <member name="M:Bitget.Net.Clients.BitgetRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+        <member name="M:Bitget.Net.Clients.BitgetRestClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.BitgetRestClient.SetDefaultOptions(System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
@@ -1112,6 +1112,21 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetDepositHistoryAsync(System.DateTime,System.DateTime,System.String,System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.TransferSubAccountAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,Bitget.Net.Enums.V2.TransferAccountType,System.Decimal,System.Int64,System.Int64,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetSubAccountBalancesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetSubAccountTransferHistoryAsync(System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetSubAccountDepositAddressAsync(System.Int64,System.String,System.String,System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetSubAccountDepositHistoryAsync(System.Int64,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData">
@@ -2748,6 +2763,21 @@
         <member name="F:Bitget.Net.Enums.V2.AccountType.UsdcFutures">
             <summary>
             USDC futures
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.AccountType.P2P">
+            <summary>
+            P2P account
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.AccountType.CrossMargin">
+            <summary>
+            Cross margin account
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.AccountType.IsolatedMargin">
+            <summary>
+            Isolated margin account
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.V2.BorrowType">
@@ -4947,6 +4977,68 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.TransferSubAccountAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,Bitget.Net.Enums.V2.TransferAccountType,System.Decimal,System.Int64,System.Int64,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Transfer assets between subaccounts or parent and subaccount
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Sub-Transfer" /></para>
+            </summary>
+            <param name="asset">Asset, for example `ETH`</param>
+            <param name="fromAccount">From account</param>
+            <param name="toAccount">To account</param>
+            <param name="quantity">Quantity to transfer</param>
+            <param name="symbol">Symbol, required when transferring to or from an account type that is a leveraged position-by-position account.</param>
+            <param name="clientId">Client order id</param>
+            <param name="fromUserId">From user id</param>
+            <param name="toUserId">To user id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetSubAccountBalancesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get subaccount balances
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Subaccount-Assets" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetSubAccountTransferHistoryAsync(System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get transfer history between master and sub account
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-TransferRecords" /></para>
+            </summary>
+            <param name="asset">Filter by asset, for example `ETH`</param>
+            <param name="role">Filter by role</param>
+            <param name="subAccountId">Filter by sub account id</param>
+            <param name="clientOrderID">Filter by client id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Max number of results</param>
+            <param name="idLessThan">Id less than this</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetSubAccountDepositAddressAsync(System.Int64,System.String,System.String,System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Get sub account deposit address
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Address" /></para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="asset">The asset, for example `ETH`</param>
+            <param name="network">Filter by network</param>
+            <param name="lightningNetworkQuantity">Bitcoin Lightning Network withdrawal amount</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetSubAccountDepositHistoryAsync(System.Int64,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get deposit records for a sub account
+            <para><a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Record" /></para>
+            </summary>
+            <param name="subAccountId">Sub account id</param>
+            <param name="asset">Filter by asset, for example `ETH`</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="idLessThan">Return ids less than this</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData">
             <summary>
             Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
@@ -6815,7 +6907,7 @@
             Futures API endpoints
             </summary>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
             <summary>
             Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
             </summary>
@@ -15376,6 +15468,111 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetSpotLedgerEntry.Id">
             <summary>
             Id
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalances">
+            <summary>
+            Sub account balances
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalances.UserId">
+            <summary>
+            User id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalances.Assets">
+            <summary>
+            Assets
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalance">
+            <summary>
+            Sub account balance
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalance.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalance.Available">
+            <summary>
+            Available
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalance.LimitAvailable">
+            <summary>
+            Restricted availability, for spot copy trading
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalance.Frozen">
+            <summary>
+            Frozen
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalance.Locked">
+            <summary>
+            Locked
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalance.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.ToType">
+            <summary>
+            To account type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.FromType">
+            <summary>
+            From account type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.ClientOid">
+            <summary>
+            Client oid
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.TransferId">
+            <summary>
+            Transfer id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.FromUserId">
+            <summary>
+            From user id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountTransfer.ToUserId">
+            <summary>
+            To user id
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetSymbol">

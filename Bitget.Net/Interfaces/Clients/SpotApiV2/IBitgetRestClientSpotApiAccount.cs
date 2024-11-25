@@ -196,5 +196,68 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<BitgetDepositRecord>>> GetDepositHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Transfer assets between subaccounts or parent and subaccount
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Sub-Transfer" /></para>
+        /// </summary>
+        /// <param name="asset">Asset, for example `ETH`</param>
+        /// <param name="fromAccount">From account</param>
+        /// <param name="toAccount">To account</param>
+        /// <param name="quantity">Quantity to transfer</param>
+        /// <param name="symbol">Symbol, required when transferring to or from an account type that is a leveraged position-by-position account.</param>
+        /// <param name="clientId">Client order id</param>
+        /// <param name="fromUserId">From user id</param>
+        /// <param name="toUserId">To user id</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetTransferResult>> TransferSubAccountAsync(string asset, Enums.V2.TransferAccountType fromAccount, Enums.V2.TransferAccountType toAccount, decimal quantity, long fromUserId, long toUserId, string? symbol = null, string? clientId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get subaccount balances
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Subaccount-Assets" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<BitgetSubAccountBalances>>> GetSubAccountBalancesAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get transfer history between master and sub account
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-TransferRecords" /></para>
+        /// </summary>
+        /// <param name="asset">Filter by asset, for example `ETH`</param>
+        /// <param name="role">Filter by role</param>
+        /// <param name="subAccountId">Filter by sub account id</param>
+        /// <param name="clientOrderID">Filter by client id</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="idLessThan">Id less than this</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<BitgetSubAccountTransfer>>> GetSubAccountTransferHistoryAsync(string? asset = null, string? role = null, long? subAccountId = null, string? clientOrderID = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? idLessThan = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get sub account deposit address
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Address" /></para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="asset">The asset, for example `ETH`</param>
+        /// <param name="network">Filter by network</param>
+        /// <param name="lightningNetworkQuantity">Bitcoin Lightning Network withdrawal amount</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BitgetDepositAddress>> GetSubAccountDepositAddressAsync(long subAccountId, string asset, string? network = null, decimal? lightningNetworkQuantity = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get deposit records for a sub account
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Record" /></para>
+        /// </summary>
+        /// <param name="subAccountId">Sub account id</param>
+        /// <param name="asset">Filter by asset, for example `ETH`</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="idLessThan">Return ids less than this</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<BitgetDepositRecord>>> GetSubAccountDepositHistoryAsync(long subAccountId, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int? limit = null, CancellationToken ct = default);
+
     }
 }

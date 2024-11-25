@@ -226,5 +226,93 @@ namespace Bitget.Net.Clients.SpotApiV2
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<IEnumerable<BitgetDepositRecord>>(request, parameters, ct).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetTransferResult>> TransferSubAccountAsync(string asset, Enums.V2.TransferAccountType fromAccount, Enums.V2.TransferAccountType toAccount, decimal quantity, long fromUserId, long toUserId, string? symbol = null, string? clientId = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("coin", asset);
+            parameters.AddEnum("fromType", fromAccount);
+            parameters.AddEnum("toType", toAccount);
+            parameters.AddString("amount", quantity);
+            parameters.AddString("fromUserId", fromUserId);
+            parameters.AddString("toUserId", toUserId);
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddOptional("clientOid", clientId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/wallet/subaccount-transfer", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BitgetTransferResult>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #region Get Sub Account Balances
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetSubAccountBalances>>> GetSubAccountBalancesAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/subaccount-assets", BitgetExchange.RateLimiter.Overal, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetSubAccountBalances>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Sub Account Transfer History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetSubAccountTransfer>>> GetSubAccountTransferHistoryAsync(string? asset = null, string? role = null, long? subAccountId = null, string? clientOrderID = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? idLessThan = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("coin", asset);
+            parameters.AddOptional("role", role);
+            parameters.AddOptionalString("subUid", subAccountId);
+            parameters.AddOptional("clientOid", clientOrderID);
+            parameters.AddOptionalMillisecondsString("startTime", startTime);
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("limit", limit);
+            parameters.AddOptional("idLessThan", idLessThan);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/sub-main-trans-record", BitgetExchange.RateLimiter.Overal, 1, true, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetSubAccountTransfer>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Sub Account Deposit Address
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetDepositAddress>> GetSubAccountDepositAddressAsync(long subAccountId, string asset, string? network = null, decimal? lightningNetworkQuantity = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddString("subUid", subAccountId);
+            parameters.Add("coin", asset);
+            parameters.AddOptional("chain", network);
+            parameters.AddOptional("size", lightningNetworkQuantity);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/subaccount-deposit-address", BitgetExchange.RateLimiter.Overal, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<BitgetDepositAddress>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Sub Account Deposit History
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetDepositRecord>>> GetSubAccountDepositHistoryAsync(long subAccountId, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int? limit = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddString("subUid", subAccountId);
+            parameters.AddOptional("coin", asset);
+            parameters.AddOptionalMillisecondsString("startTime", startTime);
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("idLessThan", idLessThan);
+            parameters.AddOptional("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/wallet/subaccount-deposit-records", BitgetExchange.RateLimiter.Overal, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetDepositRecord>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
     }
 }
