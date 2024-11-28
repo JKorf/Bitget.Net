@@ -173,9 +173,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Klines client
 
-        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, false)
+        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 1000, false)
         {
-            MaxRequestDataPoints = 1000,
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
@@ -330,9 +329,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Mark Klines client
 
-        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, false)
+        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 200, false)
         {
-            MaxRequestDataPoints = 200,
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
@@ -394,9 +392,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Index Klines client
 
-        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, false)
+        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 200, false)
         {
-            MaxRequestDataPoints = 200,
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
@@ -508,7 +505,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         #endregion
 
         #region Funding Rate client
-        GetFundingRateHistoryOptions IFundingRateRestClient.GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(SharedPaginationSupport.Descending, false)
+        GetFundingRateHistoryOptions IFundingRateRestClient.GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(SharedPaginationSupport.Descending, true, 100, false)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -683,7 +680,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Descending, true)
+        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Descending, true, 100, true)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -773,7 +770,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationSupport.Descending, true)
+        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationSupport.Descending, true, 100, true)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -795,7 +792,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var orders = await Trading.GetUserTradesAsync(GetProductType(request.Symbol.TradingMode, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
-                limit: request.Limit ?? 500,
+                limit: request.Limit ?? 100,
                 idLessThan: fromId,
                 ct: ct
                 ).ConfigureAwait(false);
@@ -1012,7 +1009,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Position History client
 
-        GetPositionHistoryOptions IPositionHistoryRestClient.GetPositionHistoryOptions { get; } = new GetPositionHistoryOptions(SharedPaginationSupport.Descending);
+        GetPositionHistoryOptions IPositionHistoryRestClient.GetPositionHistoryOptions { get; } = new GetPositionHistoryOptions(SharedPaginationSupport.Descending, true, 100);
         async Task<ExchangeWebResult<IEnumerable<SharedPositionHistory>>> IPositionHistoryRestClient.GetPositionHistoryAsync(GetPositionHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((IPositionHistoryRestClient)this).GetPositionHistoryOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, SupportedTradingModes);
@@ -1024,7 +1021,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (pageToken is FromIdToken token)
                 fromId = token.FromToken;
 
-            int limit = request.Limit ?? 1000;
+            int limit = request.Limit ?? 100;
 
             // Get data
             var orders = await Trading.GetPositionHistoryAsync(
@@ -1055,6 +1052,25 @@ namespace Bitget.Net.Clients.FuturesApiV2
             {
                 PositionId = x.PositionId
             }).ToArray(), nextToken);
+        }
+        #endregion
+
+        #region Fee Client
+        EndpointOptions<GetFeeRequest> IFeeRestClient.GetFeeOptions { get; } = new EndpointOptions<GetFeeRequest>(false);
+
+        async Task<ExchangeWebResult<SharedFee>> IFeeRestClient.GetFeesAsync(GetFeeRequest request, CancellationToken ct)
+        {
+            var validationError = ((IFeeRestClient)this).GetFeeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedFee>(Exchange, validationError);
+
+            // Get data
+            var result = await ExchangeData.GetVipFeeRatesAsync(ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedFee>(Exchange, null, default);
+
+            // Return
+            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFee(result.Data.First().MakerFeeRate * 100, result.Data.First().TakerFeeRate * 100));
         }
         #endregion
 

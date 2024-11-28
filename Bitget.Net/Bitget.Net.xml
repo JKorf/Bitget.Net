@@ -16475,31 +16475,6 @@
             Bitget options
             </summary>
         </member>
-        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.Rest">
-            <summary>
-            Rest client options
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.Socket">
-            <summary>
-            Socket client options
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.Environment">
-            <summary>
-            Trade environment. Contains info about URL's to use to connect to the API. Use `BitgetEnvironment` to swap environment, for example `Environment = BitgetEnvironment.Live`
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.ApiCredentials">
-            <summary>
-            The api credentials used for signing requests.
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Objects.Options.BitgetOptions.SocketClientLifeTime">
-            <summary>
-            The DI service lifetime for the IBitgetSocketClient
-            </summary>
-        </member>
         <member name="T:Bitget.Net.Objects.Options.BitgetOrderBookOptions">
             <summary>
             Order book options
