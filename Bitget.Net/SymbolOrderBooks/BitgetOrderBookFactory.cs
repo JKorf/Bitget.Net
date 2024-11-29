@@ -35,24 +35,23 @@ namespace Bitget.Net.SymbolOrderBooks
         {
             _serviceProvider = serviceProvider;
 
-            Spot = new OrderBookFactory<BitgetOrderBookOptions>(
-                (symbol, options) => CreateSpot(symbol, options),
+            Spot = new OrderBookFactory<BitgetOrderBookOptions>(CreateSpot,
                 (sharedSymbol, options) => CreateSpot(BitgetExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
             UsdtFutures = new OrderBookFactory<BitgetOrderBookOptions>(
                 (symbol, options) => CreateFutures(BitgetProductTypeV2.UsdtFutures, symbol, options),
-                (sharedSymbol, options) => CreateFutures(BitgetProductTypeV2.UsdtFutures, BitgetExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+                (sharedSymbol, options) => CreateFutures(BitgetProductTypeV2.UsdtFutures, sharedSymbol.GetSymbol(BitgetExchange.FormatSymbol), options));
             UsdcFutures = new OrderBookFactory<BitgetOrderBookOptions>(
                 (symbol, options) => CreateFutures(BitgetProductTypeV2.UsdcFutures, symbol, options),
-                (sharedSymbol, options) => CreateFutures(BitgetProductTypeV2.UsdcFutures, BitgetExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+                (sharedSymbol, options) => CreateFutures(BitgetProductTypeV2.UsdcFutures, sharedSymbol.GetSymbol(BitgetExchange.FormatSymbol), options));
             CoinFutures = new OrderBookFactory<BitgetOrderBookOptions>(
                 (symbol, options) => CreateFutures(BitgetProductTypeV2.CoinFutures, symbol, options),
-                (sharedSymbol, options) => CreateFutures(BitgetProductTypeV2.CoinFutures, BitgetExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+                (sharedSymbol, options) => CreateFutures(BitgetProductTypeV2.CoinFutures, sharedSymbol.GetSymbol(BitgetExchange.FormatSymbol), options));
         }
 
         /// <inheritdoc />
         public ISymbolOrderBook Create(SharedSymbol symbol, BitgetProductTypeV2? productType = null, Action<BitgetOrderBookOptions>? options = null)
         {
-            var symbolName = BitgetExchange.FormatSymbol(symbol.BaseAsset, symbol.QuoteAsset, symbol.TradingMode, symbol.DeliverTime);
+            var symbolName = symbol.GetSymbol(BitgetExchange.FormatSymbol);
             if (symbol.TradingMode == TradingMode.Spot)
                 return CreateSpot(symbolName, options);
 
