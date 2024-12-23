@@ -1099,7 +1099,7 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.WithdrawAsync(System.String,Bitget.Net.Enums.V2.TransferType,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetTransferHistoryAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetTransferHistoryAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.SetBgbDeductEnabledAsync(System.Boolean,System.Threading.CancellationToken)">
@@ -4903,7 +4903,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetTransferHistoryAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetTransferHistoryAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             Get transfer history
             <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
@@ -4913,8 +4913,9 @@
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
             <param name="clientOrderId">Filter by client order id</param>
+            <param name="page">Page number</param>
             <param name="limit">Max number of results</param>
-            <param name="idLessThan">Return results before this id</param>
+            <param name="idLessThan">[Deprecated] Use page instead</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>

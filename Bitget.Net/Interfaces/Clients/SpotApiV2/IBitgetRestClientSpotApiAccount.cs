@@ -126,11 +126,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
         /// <param name="clientOrderId">Filter by client order id</param>
+        /// <param name="page">Page number</param>
         /// <param name="limit">Max number of results</param>
-        /// <param name="idLessThan">Return results before this id</param>
+        /// <param name="idLessThan">[Deprecated] Use page instead</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetTransferRecord>>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType fromAccount, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BitgetTransferRecord>>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType fromAccount, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? page = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set BGB fee deduction enabled status

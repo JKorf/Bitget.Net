@@ -57,7 +57,7 @@ namespace Bitget.Net.UnitTests
             await RunAndCheckResult(client => client.SpotApiV2.Account.GetSpotBalancesAsync(default), true);
             await RunAndCheckResult(client => client.SpotApiV2.Account.GetLedgerAsync(default, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApiV2.Account.GetTransferableAssetsAsync(Enums.V2.TransferAccountType.UsdcFutures, Enums.V2.TransferAccountType.UsdtFutures, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetTransferHistoryAsync("ETH", Enums.V2.TransferAccountType.Spot, default, default, default, default, default, default), true);
+            await RunAndCheckResult(client => client.SpotApiV2.Account.GetTransferHistoryAsync("ETH", Enums.V2.TransferAccountType.Spot, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApiV2.Account.GetBgbDeductEnabledAsync(default), true);
             await RunAndCheckResult(client => client.SpotApiV2.Account.GetWithdrawalHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.SpotApiV2.Account.GetDepositHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default), true);
