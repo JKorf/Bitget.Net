@@ -165,6 +165,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.19.0 - 23 Dec 2024
+    * Updated CryptoExchange.Net to version 8.5.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added SetOptions methods on Rest and Socket clients
+    * Added setting of DefaultProxyCredentials to CredentialCache.DefaultCredentials on the DI http client
+    * Added page parameter to restClient.SpotApi.Account.GetTransferHistoryAsync, marked idLessThan as deprecated
+    * Improved websocket disconnect detection
+
 * Version 1.18.1 - 03 Dec 2024
     * Updated CryptoExchange.Net to version 8.4.3, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Fixed orderbook creation via BitgetOrderBookFactory
