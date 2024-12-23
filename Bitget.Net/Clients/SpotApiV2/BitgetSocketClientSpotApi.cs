@@ -35,7 +35,19 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             RateLimiter = BitgetExchange.RateLimiter.Websocket;
 
-            RegisterPeriodicQuery("Ping", TimeSpan.FromSeconds(30), x => new BitgetPingQuery(), null);
+            RegisterPeriodicQuery(
+                "Ping",
+                TimeSpan.FromSeconds(30),
+                x => new BitgetPingQuery(),
+                (connection, result) =>
+                {
+                    if (result.Error?.Message.Equals("Query timeout") == true)
+                    {
+                        // Ping timeout, reconnect
+                        _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
+                        _ = connection.TriggerReconnectAsync();
+                    }
+                });
         }
         #endregion
 

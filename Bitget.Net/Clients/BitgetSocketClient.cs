@@ -2,6 +2,7 @@
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Objects.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -46,6 +47,15 @@ namespace Bitget.Net.Clients
         }
 
         #endregion
+
+        /// <inheritdoc />
+        public void SetOptions(UpdateOptions options)
+        {
+            SpotApi.SetOptions(options);
+            SpotApiV2.SetOptions(options);
+            FuturesApi.SetOptions(options);
+            FuturesApiV2.SetOptions(options);
+        }
 
         /// <summary>
         /// Set the default options to be used when creating new clients

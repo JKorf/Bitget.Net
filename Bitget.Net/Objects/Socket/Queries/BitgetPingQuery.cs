@@ -8,6 +8,7 @@ namespace Bitget.Net.Objects.Socket.Queries
 
         public BitgetPingQuery() : base("ping", false, 0)
         {
+            RequestTimeout = TimeSpan.FromSeconds(5);
         }
     }
 }

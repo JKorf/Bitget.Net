@@ -3,6 +3,7 @@ using Bitget.Net.Objects;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Objects.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -45,6 +46,15 @@ namespace Bitget.Net.Clients
             SpotApiV2 = AddApiClient(new SpotApiV2.BitgetRestClientSpotApi(_logger, httpClient, this, options.Value));
             FuturesApi = AddApiClient(new FuturesApi.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
             FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
+        }
+
+        /// <inheritdoc />
+        public void SetOptions(UpdateOptions options)
+        {
+            SpotApi.SetOptions(options);
+            SpotApiV2.SetOptions(options);
+            FuturesApi.SetOptions(options);
+            FuturesApiV2.SetOptions(options);
         }
 
         /// <inheritdoc />

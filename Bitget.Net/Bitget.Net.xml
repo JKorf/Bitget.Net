@@ -147,6 +147,9 @@
             <param name="loggerFactory">The logger factory</param>
             <param name="httpClient">Http client for this client</param>
         </member>
+        <member name="M:Bitget.Net.Clients.BitgetRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.BitgetRestClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
             <inheritdoc />
         </member>
@@ -183,6 +186,9 @@
             </summary>
             <param name="loggerFactory">The logger factory</param>
             <param name="options">Option configuration</param>
+        </member>
+        <member name="M:Bitget.Net.Clients.BitgetSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.SetDefaultOptions(System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions})">
             <summary>
@@ -6907,6 +6913,12 @@
             Futures API endpoints
             </summary>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <summary>
+            Update specific options
+            </summary>
+            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+        </member>
         <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
             <summary>
             Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
@@ -6937,6 +6949,12 @@
             <summary>
             Futures streams
             </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <summary>
+            Update specific options
+            </summary>
+            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
             <summary>
