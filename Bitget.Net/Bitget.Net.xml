@@ -73,6 +73,11 @@
             Urls to the API documentation
             </summary>
         </member>
+        <member name="P:Bitget.Net.BitgetExchange.Type">
+            <summary>
+            Type of exchange
+            </summary>
+        </member>
         <member name="M:Bitget.Net.BitgetExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <summary>
             Format a base and quote asset to a Bitget recognized symbol 

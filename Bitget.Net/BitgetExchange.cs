@@ -42,6 +42,11 @@ namespace Bitget.Net
             };
 
         /// <summary>
+        /// Type of exchange
+        /// </summary>
+        public static ExchangeType Type { get; } = ExchangeType.CEX;
+
+        /// <summary>
         /// Format a base and quote asset to a Bitget recognized symbol 
         /// </summary>
         /// <param name="baseAsset">Base asset</param>
