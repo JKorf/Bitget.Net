@@ -138,6 +138,9 @@
         <member name="P:Bitget.Net.Clients.BitgetRestClient.FuturesApiV2">
             <inheritdoc />
         </member>
+        <member name="P:Bitget.Net.Clients.BitgetRestClient.CopyTradingV2">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
             <summary> 
             Create a new instance of BitgetRestClient
@@ -202,6 +205,39 @@
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
         <member name="M:Bitget.Net.Clients.BitgetSocketClient.SetApiCredentials(Bitget.Net.Objects.BitgetApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.Trader">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.ExchangeName">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.CreateAccessor">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.CreateSerializer">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.ParseErrorResponse(System.Int32,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.GetTimeSyncInfo">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApiTrader">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi">
@@ -1449,6 +1485,24 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Converters.IntConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.Int32},System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Converters.OnOffConverter">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Converters.OnOffConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Converters.OnOffConverter.Write(System.Text.Json.Utf8JsonWriter,System.Boolean,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Converters.YesNoConverter">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Converters.YesNoConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Converters.YesNoConverter.Write(System.Text.Json.Utf8JsonWriter,System.Boolean,System.Text.Json.JsonSerializerOptions)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Enums.BitgetAccountType">
@@ -3905,6 +3959,30 @@
             <summary>
             Client order id. Either this or OrderId should be provided
             </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApi">
+            <summary>
+            CopyTrading API endpoints
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApi.Trader">
+            <summary>
+            Endpoints related to copy trading settings, info or actions
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiTrader">
+            <summary>
+            Bitget copy trading endpoints.
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiTrader.GetCopyTradeSymbolSettings(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <summary>
+            Get balance
+            <para><a href="https://www.bitget.com/api-doc/copytrading/future-copytrade/trader/Trader-Get-Config-Query-Symbols" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi">
             <summary>
@@ -11348,6 +11426,41 @@
             Planned maintenance time
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCopyTradingSymbolSettings">
+            <summary>
+            Copy Trade Symbol Settings
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingSymbolSettings.Symbol">
+            <summary>
+            Trading pair
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingSymbolSettings.OpenTrader">
+            <summary>
+            Activates copy trading or not
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingSymbolSettings.MinOpenCount">
+            <summary>
+            Minimum opening amount of elite traders
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingSymbolSettings.MaxLeverage">
+            <summary>
+            Maximum leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingSymbolSettings.StopSurplusRatio">
+            <summary>
+            Value set for take profit (value is a positive integer, 120 means 120%)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingSymbolSettings.StopLossRatio">
+            <summary>
+            Value set for stop-loss ratio (the value is a positive integer, 40 means 40%)
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetCrossAccountUpdate">
             <summary>
             Cross margin account update
@@ -16534,6 +16647,11 @@
             Channel code
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.Locale">
+            <summary>
+            Support language such as: Chinese (zh-CN), English (en-US)
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.SpotOptions">
             <summary>
             Spot API options
@@ -16542,6 +16660,11 @@
         <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.FuturesOptions">
             <summary>
             Futures API options
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.CopyTradingOptions">
+            <summary>
+            Copy Trading API options
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Options.BitgetSocketOptions">
