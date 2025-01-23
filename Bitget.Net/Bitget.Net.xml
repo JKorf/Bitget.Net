@@ -240,6 +240,9 @@
         <member name="T:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApiTrader">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApiTrader.GetCopyTradeSymbolSettings(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi">
             <inheritdoc />
         </member>
@@ -3977,7 +3980,7 @@
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiTrader.GetCopyTradeSymbolSettings(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
             <summary>
-            Get balance
+            Get Copy Trade Symbol Settings
             <para><a href="https://www.bitget.com/api-doc/copytrading/future-copytrade/trader/Trader-Get-Config-Query-Symbols" /></para>
             </summary>
             <param name="productType">Product type</param>
