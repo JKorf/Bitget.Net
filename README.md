@@ -166,6 +166,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.19.2 - 25 Jan 2025
+    * Fixed an issue with data not being parsed correctly for certain models
+
 * Version 1.19.1 - 07 Jan 2025
     * Updated CryptoExchange.Net version
     * Added Type property to BitgetExchange class
