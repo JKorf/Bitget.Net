@@ -7,45 +7,40 @@ using Bitget.Net.Enums.V2;
 namespace Bitget.Net.Objects.Models.V2
 {
     /// <summary>
-    /// Order request
+    /// Replace order request
     /// </summary>
-    public class BitgetPlaceOrderRequest
+    public class BitgetReplaceOrderRequest
     {
         /// <summary>
-        /// Order side
+        /// Symbol
         /// </summary>
-        [JsonPropertyName("side"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
-        public OrderSide Side { get; set; }
-        /// <summary>
-        /// Order type
-        /// </summary>
-        [JsonPropertyName("orderType"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
-        public OrderType OrderType { get; set; }
-        /// <summary>
-        /// Time in force
-        /// </summary>
-        [JsonPropertyName("force"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
-        public TimeInForce TimeInForce { get; set; }
+        [JsonPropertyName("symbol")]
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Price
         /// </summary>
-        [JsonPropertyName("price"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter)), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        public decimal? Price { get; set; }
+        [JsonPropertyName("price"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter))]
+        public decimal Price { get; set; }
         /// <summary>
         /// Quantity
         /// </summary>
         [JsonPropertyName("size"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter))]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Client order id
+        /// Order id of order to cancel
+        /// </summary>
+        [JsonPropertyName("orderId"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string? OrderId { get; set; }
+        /// <summary>
+        /// Client order id of order to cancel
         /// </summary>
         [JsonPropertyName("clientOid"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? ClientOrderId { get; set; }
         /// <summary>
-        /// Self Trade Prevention mode
+        /// Client order id for the new order
         /// </summary>
-        [JsonPropertyName("stpMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
-        public SelfTradePreventionMode? StpMode { get; set; }
+        [JsonPropertyName("newClientOid"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string? NewClientOrderId { get; set; }
         /// <summary>
         /// Take profit price
         /// </summary>

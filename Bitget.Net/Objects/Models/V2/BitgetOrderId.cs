@@ -21,4 +21,27 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
     }
+
+    /// <summary>
+    /// Order id
+    /// </summary>
+    public record BitgetOrderIdResult: BitgetOrderId
+    {
+        /// <summary>
+        /// Is success
+        /// </summary>
+        [JsonIgnore]
+        public bool Success => Status == "success";
+
+        /// <summary>
+        /// Status
+        /// </summary>
+        [JsonPropertyName("success")]
+        public string Status { get; set; } = string.Empty;
+        /// <summary>
+        /// Error message
+        /// </summary>
+        [JsonPropertyName("msg")]
+        public string? ErrorMessage { get; set; }
+    }
 }

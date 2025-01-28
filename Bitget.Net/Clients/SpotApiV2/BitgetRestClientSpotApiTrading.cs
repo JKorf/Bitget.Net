@@ -31,6 +31,11 @@ namespace Bitget.Net.Clients.SpotApiV2
             string? clientOrderId = null,
             decimal? triggerPrice = null,
             TakeProfitStopLossType? tpslType = null,
+            SelfTradePreventionMode? stpMode = null,
+            decimal? presetTakeProfitPrice = null,
+            decimal? executeTakeProfitPrice = null,
+            decimal? presetStopLossPrice = null,
+            decimal? executeStopLossPrice = null,
             CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
@@ -43,6 +48,11 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalString("triggerPrice", triggerPrice);
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptionalEnum("tpslType", tpslType);
+            parameters.AddOptionalEnum("stpMode", stpMode);
+            parameters.AddOptionalString("presetTakeProfitPrice", presetTakeProfitPrice);
+            parameters.AddOptionalString("executeTakeProfitPrice", executeTakeProfitPrice);
+            parameters.AddOptionalString("presetStopLossPrice", presetStopLossPrice);
+            parameters.AddOptionalString("executeStopLossPrice", executeStopLossPrice);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/place-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
@@ -80,6 +90,60 @@ namespace Bitget.Net.Clients.SpotApiV2
                     SourceObject = item
                 });
             }
+            return result;
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOrderId>> CancelReplaceOrderAsync(
+            string? orderId,
+            string? clientOrderId,
+            string symbol,
+            decimal quantity,
+            decimal price,
+            string? newClientOrderId = null,
+            decimal? presetTakeProfitPrice = null,
+            decimal? executeTakeProfitPrice = null,
+            decimal? presetStopLossPrice = null,
+            decimal? executeStopLossPrice = null,
+            CancellationToken ct = default)
+        {
+            if ((orderId == null) == (clientOrderId == null))
+                throw new ArgumentException("Either orderId or clientOrderId should be provided");
+
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.AddOptional("orderId", orderId);
+
+            parameters.Add("symbol", symbol);
+            parameters.AddString("size", quantity);
+            parameters.AddString("price", price);
+            parameters.AddOptional("newClientOid", newClientOrderId);
+            parameters.AddOptionalString("presetTakeProfitPrice", presetTakeProfitPrice);
+            parameters.AddOptionalString("executeTakeProfitPrice", executeTakeProfitPrice);
+            parameters.AddOptionalString("presetStopLossPrice", presetStopLossPrice);
+            parameters.AddOptionalString("executeStopLossPrice", executeStopLossPrice);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-replace-order", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            var result = await _baseClient.SendAsync<BitgetOrderIdResult>(request, parameters, ct).ConfigureAwait(false);
+            if (!result)
+                return result.As<BitgetOrderId>(result.Data);
+
+            if (!result.Data.Success)
+                return result.AsError<BitgetOrderId>(new ServerError(result.Data.ErrorMessage!));
+
+            return result.As<BitgetOrderId>(result.Data);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<BitgetOrderIdResult>>> CancelReplaceMultipleOrdersAsync(
+            IEnumerable<BitgetReplaceOrderRequest> orders,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("orderList", orders);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-replace-order", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetOrderIdResult>>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 

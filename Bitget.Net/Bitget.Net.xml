@@ -1320,10 +1320,16 @@
         <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.PlaceOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,Bitget.Net.Enums.V2.TimeInForce,System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.PlaceOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,Bitget.Net.Enums.V2.TimeInForce,System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{Bitget.Net.Enums.V2.SelfTradePreventionMode},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.PlaceMultipleOrdersAsync(System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.CancelReplaceOrderAsync(System.String,System.String,System.String,System.Decimal,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.CancelReplaceMultipleOrdersAsync(System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiTrading.CancelOrderAsync(System.String,System.String,System.String,System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
@@ -5675,7 +5681,7 @@
             Bitget trading endpoints, placing and mananging orders.
             </summary>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,Bitget.Net.Enums.V2.TimeInForce,System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.PlaceOrderAsync(System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,System.Decimal,Bitget.Net.Enums.V2.TimeInForce,System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TakeProfitStopLossType},System.Nullable{Bitget.Net.Enums.V2.SelfTradePreventionMode},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <summary>
             Place a new order
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Place-Order" /></para>
@@ -5689,6 +5695,11 @@
             <param name="clientOrderId">Client order id</param>
             <param name="triggerPrice">Trigger price</param>
             <param name="tpslType">Tpsl type</param>
+            <param name="stpMode">Self trade prevention mode</param>
+            <param name="presetTakeProfitPrice">Take profit price</param>
+            <param name="executeTakeProfitPrice">Take profit execute price</param>
+            <param name="presetStopLossPrice">Stop loss price</param>
+            <param name="executeStopLossPrice">Stop loss execute price</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -5699,6 +5710,33 @@
             </summary>
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="orders">Orders to place</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelReplaceOrderAsync(System.String,System.String,System.String,System.Decimal,System.Decimal,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Cancel an existing order and replace it with a new order
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Cancel-Replace-Order" /></para>
+            </summary>
+            <param name="orderId">Order id of order to cancel. Either this or clientOrderId should be provided</param>
+            <param name="clientOrderId">Client order id of order to cancel. Either this or orderId should be provided</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="quantity">Quantity</param>
+            <param name="price">Limit price</param>
+            <param name="newClientOrderId">New client order id</param>
+            <param name="presetTakeProfitPrice">Take profit price</param>
+            <param name="executeTakeProfitPrice">Take profit execute price</param>
+            <param name="presetStopLossPrice">Stop loss price</param>
+            <param name="executeStopLossPrice">Stop loss execute price</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading.CancelReplaceMultipleOrdersAsync(System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest},System.Threading.CancellationToken)">
+            <summary>
+            Cancel and replace multiple orders. Make sure to check the response model to see if each order was successfully replaced
+            <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Replace-Order" /></para>
+            </summary>
+            <param name="orders">Orders to cancel and replace</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -14669,6 +14707,26 @@
             Client order id
             </summary>
         </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderIdResult">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderIdResult.Success">
+            <summary>
+            Is success
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderIdResult.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderIdResult.ErrorMessage">
+            <summary>
+            Error message
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderList">
             <summary>
             Order list
@@ -14902,6 +14960,31 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.ClientOrderId">
             <summary>
             Client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.StpMode">
+            <summary>
+            Self Trade Prevention mode
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.PresetTakeProfitPrice">
+            <summary>
+            Take profit price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.ExecuteTakeProfitPrice">
+            <summary>
+            Execute take profit price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.PresetStopLossPrice">
+            <summary>
+            Stop loss price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPlaceOrderRequest.ExecuteStopLossPrice">
+            <summary>
+            Execute stop loss price
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetPosition">
@@ -15412,6 +15495,61 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionUpdate.AutoMargin">
             <summary>
             Auto margin
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest">
+            <summary>
+            Replace order request
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.OrderId">
+            <summary>
+            Order id of order to cancel
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.ClientOrderId">
+            <summary>
+            Client order id of order to cancel
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.NewClientOrderId">
+            <summary>
+            Client order id for the new order
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.PresetTakeProfitPrice">
+            <summary>
+            Take profit price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.ExecuteTakeProfitPrice">
+            <summary>
+            Execute take profit price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.PresetStopLossPrice">
+            <summary>
+            Stop loss price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetReplaceOrderRequest.ExecuteStopLossPrice">
+            <summary>
+            Execute stop loss price
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetSpotBalance">

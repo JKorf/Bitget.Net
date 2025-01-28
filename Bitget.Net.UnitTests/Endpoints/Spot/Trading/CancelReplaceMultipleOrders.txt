@@ -1,0 +1,16 @@
+POST
+/api/v2/spot/trade/batch-cancel-replace-order
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1725341809524,
+    "data": [
+        {
+            "orderId": "xxxxxxxxxxxxxxxxxxxxxx",
+            "clientOid": null,
+            "success": "failure",
+            "msg": "xxxxxx"
+        }
+    ]
+}

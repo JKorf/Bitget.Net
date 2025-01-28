@@ -124,6 +124,8 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.GetClosedTriggerOrdersAsync("ETHUSDT", DateTime.UtcNow, DateTime.UtcNow), "GetClosedTriggerOrders");
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.CancelAllTriggerOrdersAsync(), "CancelAllTriggerOrders");
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.GetTriggerSubOrdersAsync("123"), "GetTriggerSubOrders");
+            await tester.ValidateAsync(client => client.SpotApiV2.Trading.CancelReplaceOrderAsync("123", null, "ETHUSDT", 1, 1), "CancelReplaceOrder");
+            await tester.ValidateAsync(client => client.SpotApiV2.Trading.CancelReplaceMultipleOrdersAsync([new BitgetReplaceOrderRequest { }]), "CancelReplaceMultipleOrders");
 
         }
 

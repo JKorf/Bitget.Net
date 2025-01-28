@@ -23,6 +23,11 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="triggerPrice">Trigger price</param>
         /// <param name="tpslType">Tpsl type</param>
+        /// <param name="stpMode">Self trade prevention mode</param>
+        /// <param name="presetTakeProfitPrice">Take profit price</param>
+        /// <param name="executeTakeProfitPrice">Take profit execute price</param>
+        /// <param name="presetStopLossPrice">Stop loss price</param>
+        /// <param name="executeStopLossPrice">Stop loss execute price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> PlaceOrderAsync(
@@ -35,6 +40,11 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
             string? clientOrderId = null,
             decimal? triggerPrice = null,
             TakeProfitStopLossType? tpslType = null,
+            SelfTradePreventionMode? stpMode = null,
+            decimal? presetTakeProfitPrice = null,
+            decimal? executeTakeProfitPrice = null,
+            decimal? presetStopLossPrice = null,
+            decimal? executeStopLossPrice = null,
             CancellationToken ct = default);
 
         /// <summary>
@@ -48,6 +58,46 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         Task<WebCallResult<BitgetOrderMultipleResult>> PlaceMultipleOrdersAsync(
             string symbol,
             IEnumerable<BitgetPlaceOrderRequest> orders,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel an existing order and replace it with a new order
+        /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Cancel-Replace-Order" /></para>
+        /// </summary>
+        /// <param name="orderId">Order id of order to cancel. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">Client order id of order to cancel. Either this or orderId should be provided</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="quantity">Quantity</param>
+        /// <param name="price">Limit price</param>
+        /// <param name="newClientOrderId">New client order id</param>
+        /// <param name="presetTakeProfitPrice">Take profit price</param>
+        /// <param name="executeTakeProfitPrice">Take profit execute price</param>
+        /// <param name="presetStopLossPrice">Stop loss price</param>
+        /// <param name="executeStopLossPrice">Stop loss execute price</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOrderId>> CancelReplaceOrderAsync(
+            string? orderId,
+            string? clientOrderId,
+            string symbol,
+            decimal quantity,
+            decimal price,
+            string? newClientOrderId = null,
+            decimal? presetTakeProfitPrice = null,
+            decimal? executeTakeProfitPrice = null,
+            decimal? presetStopLossPrice = null,
+            decimal? executeStopLossPrice = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel and replace multiple orders. Make sure to check the response model to see if each order was successfully replaced
+        /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Batch-Cancel-Replace-Order" /></para>
+        /// </summary>
+        /// <param name="orders">Orders to cancel and replace</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<BitgetOrderIdResult>>> CancelReplaceMultipleOrdersAsync(
+            IEnumerable<BitgetReplaceOrderRequest> orders,
             CancellationToken ct = default);
 
         /// <summary>
