@@ -166,6 +166,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.20.0 - 28 Jan 2025
+    * Added restClient.SpotApiV2.Trading.CancelReplaceOrderAsync endpoint
+    * Added restClient.SpotApiV2.Trading.CancelReplaceMultipleOrdersAsync endpoint
+    * Added TakeProfit/StopLoss parameters to SpotApiV2 place order endpoints
+    * Fixed restClient.SpotApiV2.Margin.GetIsolatedRiskRateAsync response parsing
+
 * Version 1.19.2 - 25 Jan 2025
     * Fixed an issue with data not being parsed correctly for certain models
 
