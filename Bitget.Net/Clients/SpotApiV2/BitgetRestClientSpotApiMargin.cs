@@ -681,12 +681,12 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Isolated Risk Rate
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetIsolatedRiskRate>> GetIsolatedRiskRateAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<BitgetIsolatedRiskRate>>> GetIsolatedRiskRateAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/risk-rate", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<BitgetIsolatedRiskRate>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedRiskRate>>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 

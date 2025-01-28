@@ -447,7 +447,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Risk-Rate" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedRiskRate>> GetIsolatedRiskRateAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<BitgetIsolatedRiskRate>>> GetIsolatedRiskRateAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get isolated margin interest rates and limits
