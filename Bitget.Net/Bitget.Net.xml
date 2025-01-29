@@ -138,7 +138,7 @@
         <member name="P:Bitget.Net.Clients.BitgetRestClient.FuturesApiV2">
             <inheritdoc />
         </member>
-        <member name="P:Bitget.Net.Clients.BitgetRestClient.CopyTradingV2">
+        <member name="P:Bitget.Net.Clients.BitgetRestClient.CopyTradingFuturesV2">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
@@ -1488,24 +1488,6 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Converters.IntConverter.Write(System.Text.Json.Utf8JsonWriter,System.Nullable{System.Int32},System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:Bitget.Net.Converters.OnOffConverter">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Converters.OnOffConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Converters.OnOffConverter.Write(System.Text.Json.Utf8JsonWriter,System.Boolean,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="T:Bitget.Net.Converters.YesNoConverter">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Converters.YesNoConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Converters.YesNoConverter.Write(System.Text.Json.Utf8JsonWriter,System.Boolean,System.Text.Json.JsonSerializerOptions)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Enums.BitgetAccountType">
@@ -6998,6 +6980,11 @@
         <member name="P:Bitget.Net.Interfaces.Clients.IBitgetRestClient.FuturesApiV2">
             <summary>
             Futures API endpoints
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.IBitgetRestClient.CopyTradingFuturesV2">
+            <summary>
+            Copy Trading Futures API endpoints
             </summary>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">

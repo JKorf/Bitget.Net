@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using Bitget.Net.Converters;
 
 namespace Bitget.Net.Objects.Models.V2
 {
@@ -16,7 +15,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Activates copy trading or not
         /// </summary>
-        [JsonPropertyName("openTrader"), JsonConverter(typeof(YesNoConverter))]
+        [JsonPropertyName("openTrader")]
         public bool OpenTrader { get; set; }
         /// <summary>
         /// Minimum opening amount of elite traders
