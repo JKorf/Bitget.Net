@@ -22,6 +22,8 @@ namespace Bitget.Net.Clients
         public Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApi FuturesApi { get; }
         /// <inheritdoc />
         public Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi FuturesApiV2 { get; }
+        /// <inheritdoc />
+        public Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApi CopyTradingFuturesV2 { get; }
 
         /// <summary> 
         /// Create a new instance of BitgetRestClient
@@ -46,6 +48,7 @@ namespace Bitget.Net.Clients
             SpotApiV2 = AddApiClient(new SpotApiV2.BitgetRestClientSpotApi(_logger, httpClient, this, options.Value));
             FuturesApi = AddApiClient(new FuturesApi.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
             FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
+            CopyTradingFuturesV2 = AddApiClient(new CopyTradingApiV2.BitgetRestClientCopyTradingApi(_logger, httpClient, this, options.Value));
         }
 
         /// <inheritdoc />
@@ -55,6 +58,7 @@ namespace Bitget.Net.Clients
             SpotApiV2.SetOptions(options);
             FuturesApi.SetOptions(options);
             FuturesApiV2.SetOptions(options);
+            CopyTradingFuturesV2.SetOptions(options);
         }
 
         /// <inheritdoc />
@@ -64,6 +68,7 @@ namespace Bitget.Net.Clients
             SpotApiV2.SetApiCredentials(credentials);
             FuturesApi.SetApiCredentials(credentials);
             FuturesApiV2.SetApiCredentials(credentials);
+            CopyTradingFuturesV2.SetApiCredentials(credentials);
         }
 
         /// <summary>

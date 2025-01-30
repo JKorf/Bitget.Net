@@ -26,6 +26,10 @@ namespace Bitget.Net.Interfaces.Clients
         /// Futures API endpoints
         /// </summary>
         FuturesApiV2.IBitgetRestClientFuturesApi FuturesApiV2 { get; }
+        /// <summary>
+        /// Copy Trading Futures API endpoints
+        /// </summary>
+        CopyTradingApiV2.IBitgetRestClientCopyTradingApi CopyTradingFuturesV2 { get; }
 
         /// <summary>
         /// Update specific options

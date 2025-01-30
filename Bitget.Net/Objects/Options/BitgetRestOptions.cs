@@ -29,6 +29,11 @@ namespace Bitget.Net.Objects.Options
         public string? ChannelCode { get; set; }
 
         /// <summary>
+        /// Support language such as: Chinese (zh-CN), English (en-US)
+        /// </summary>
+        public string Locale { get; set; } = "en-US";
+
+        /// <summary>
         /// Spot API options
         /// </summary>
         public RestApiOptions<BitgetApiCredentials> SpotOptions { get; private set; } = new RestApiOptions<BitgetApiCredentials>();
@@ -38,12 +43,18 @@ namespace Bitget.Net.Objects.Options
         /// </summary>
         public RestApiOptions<BitgetApiCredentials> FuturesOptions { get; private set; } = new RestApiOptions<BitgetApiCredentials>();
 
+        /// <summary>
+        /// Copy Trading API options
+        /// </summary>
+        public RestApiOptions<BitgetApiCredentials> CopyTradingOptions { get; private set; } = new RestApiOptions<BitgetApiCredentials>();
+
         internal BitgetRestOptions Set(BitgetRestOptions targetOptions)
         {
             targetOptions = base.Set<BitgetRestOptions>(targetOptions);
             targetOptions.ChannelCode = ChannelCode;
             targetOptions.FuturesOptions = FuturesOptions.Set(targetOptions.FuturesOptions);
             targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
+            targetOptions.CopyTradingOptions = CopyTradingOptions.Set(targetOptions.CopyTradingOptions);
             return targetOptions;
         }
     }

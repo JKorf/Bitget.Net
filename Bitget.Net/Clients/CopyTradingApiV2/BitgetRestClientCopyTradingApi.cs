@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Interfaces.Clients.FuturesApiV2;
+﻿using Bitget.Net.Interfaces.Clients.CopyTradingApiV2;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
@@ -12,30 +12,23 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
 
-namespace Bitget.Net.Clients.FuturesApiV2
+namespace Bitget.Net.Clients.CopyTradingApiV2
 {
     /// <inheritdoc />
-    internal partial class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
+    internal partial class BitgetRestClientCopyTradingApi : RestApiClient, IBitgetRestClientCopyTradingApi
     {
-        internal static TimeSyncState _timeSyncState = new TimeSyncState("Futures Api");
+        internal static TimeSyncState _timeSyncState = new TimeSyncState("CopyTrading Api");
 
         /// <inheritdoc />
-        public IBitgetRestClientFuturesApiAccount Account { get; }
-        /// <inheritdoc />
-        public IBitgetRestClientFuturesApiExchangeData ExchangeData { get; }
-        /// <inheritdoc />
-        public IBitgetRestClientFuturesApiTrading Trading { get; }
-
+        public IBitgetRestClientCopyTradingApiTrader Trader { get; }
         /// <inheritdoc />
         public string ExchangeName => "Bitget";
 
 
-        internal BitgetRestClientFuturesApi(ILogger logger, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
-            : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.FuturesOptions)
+        internal BitgetRestClientCopyTradingApi(ILogger logger, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
+            : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.CopyTradingOptions)
         {
-            Account = new BitgetRestClientFuturesApiAccount(this);
-            ExchangeData = new BitgetRestClientFuturesApiExchangeData(this);
-            Trading = new BitgetRestClientFuturesApiTrading(this);
+            Trader = new BitgetRestClientCopyTradingApiTrader(this);
 
             StandardRequestHeaders = new Dictionary<string, string>
             {
@@ -49,7 +42,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
-        public IBitgetRestClientFuturesApiShared SharedClient => this;
+        public BitgetRestClientCopyTradingApi SharedClient => this;
+
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
@@ -120,16 +114,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
-            => ExchangeData.GetServerTimeAsync();
-
-        /// <inheritdoc />
         public override TimeSyncInfo? GetTimeSyncInfo()
             => new TimeSyncInfo(_logger, (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp), (ApiOptions.TimestampRecalculationInterval ?? ClientOptions.TimestampRecalculationInterval), _timeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan? GetTimeOffset()
             => _timeSyncState.TimeOffset;
-
     }
 }
