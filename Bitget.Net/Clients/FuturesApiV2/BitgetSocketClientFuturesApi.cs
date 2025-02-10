@@ -93,7 +93,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var internalHandler = (DataEvent<IEnumerable<BitgetFuturesTickerUpdate>> data) =>
             {
                 foreach (var item in data.Data)
-                    handler(data.As(item));
+                    handler(data.As(item).WithDataTimestamp(data.DataTime));
             };
 
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
@@ -148,7 +148,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var internalHandler = (DataEvent<IEnumerable<BitgetOrderBookUpdate>> data) =>
             {
                 foreach (var item in data.Data)
-                    handler(data.As(item));
+                    handler(data.As(item).WithDataTimestamp(data.DataTime));
             };
 
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>

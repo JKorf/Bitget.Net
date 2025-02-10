@@ -50,5 +50,8 @@ namespace Bitget.Net.Objects.Socket
         [JsonProperty("data")]
         [JsonPropertyName("data")]
         public T Data { get; set; } = default!;
+        [JsonProperty("ts")]
+        [JsonPropertyName("ts")]
+        public DateTime Timestamp { get; set; }
     }
 }

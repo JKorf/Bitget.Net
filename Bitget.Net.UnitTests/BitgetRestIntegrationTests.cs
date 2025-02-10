@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Bitget.Net.UnitTests
 {
     [NonParallelizable]
-    internal class BitgetRestIntegrationTests : RestIntergrationTest<BitgetRestClient>
+    internal class BitgetRestIntegrationTests : RestIntegrationTest<BitgetRestClient>
     {
         public override bool Run { get; set; }
 
