@@ -1,0 +1,4 @@
+GET
+/api/v2/mix/order/orders-plan-pending
+true
+{"code":"00000","msg":"success","requestTime":1739199910573,"data":{"entrustedList":[{"planType":"pos_profit","symbol":"BNBUSDT","size":"0","orderId":"1272849518383902721","clientOid":"1272849518383902720","price":"634.59","executePrice":"634.59","callbackRatio":"","triggerPrice":"634.59","triggerType":"fill_price","planStatus":"live","side":"buy","posSide":"long","marginCoin":"USDT","marginMode":"","enterPointSource":"API","tradeSide":"close","posMode":"hedge_mode","orderType":"limit","stopSurplusTriggerPrice":"634.59","stopSurplusExecutePrice":null,"stopSurplusTriggerType":"fill_price","stopLossTriggerPrice":null,"stopLossExecutePrice":null,"stopLossTriggerType":null,"cTime":"1739196894260","uTime":"1739196894260"}]}}

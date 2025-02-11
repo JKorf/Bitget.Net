@@ -54,6 +54,11 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
         /// <summary>
+        /// Execute price
+        /// </summary>
+        [JsonPropertyName("executePrice")]
+        public decimal? ExecutePrice { get; set; }
+        /// <summary>
         /// Quantity
         /// </summary>
         [JsonPropertyName("size")]
@@ -161,6 +166,11 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("stopSurplusTriggerPrice")]
         public decimal? TakeProfitTriggerPrice { get; set; }
         /// <summary>
+        /// Take profit execute price
+        /// </summary>
+        [JsonPropertyName("stopSurplusExecutePrice")]
+        public decimal? TakeProfitExecutePrice { get; set; }
+        /// <summary>
         /// Take profit trigger type
         /// </summary>
         [JsonPropertyName("stopSurplusTriggerType")]
@@ -175,6 +185,11 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("stopLossTriggerPrice")]
         public decimal? StopLossTriggerPrice { get; set; }
+        /// <summary>
+        /// Stop loss execute price
+        /// </summary>
+        [JsonPropertyName("stopLossExecutePrice")]
+        public decimal? StopLossExecutePrice { get; set; }
         /// <summary>
         /// Stop loss trigger type
         /// </summary>

@@ -13469,6 +13469,11 @@
             Client order id
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTriggerOrder.ExecutePrice">
+            <summary>
+            Execute price
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTriggerOrder.Quantity">
             <summary>
             Quantity
@@ -13574,6 +13579,11 @@
             Take profit trigger price
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTriggerOrder.TakeProfitExecutePrice">
+            <summary>
+            Take profit execute price
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTriggerOrder.TakeProfitTriggerType">
             <summary>
             Take profit trigger type
@@ -13587,6 +13597,11 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTriggerOrder.StopLossTriggerPrice">
             <summary>
             Stop loss trigger price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTriggerOrder.StopLossExecutePrice">
+            <summary>
+            Stop loss execute price
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTriggerOrder.StopLossTriggerType">
