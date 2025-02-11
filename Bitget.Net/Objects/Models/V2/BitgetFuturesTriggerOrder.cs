@@ -32,7 +32,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Plan type
         /// </summary>
         [JsonPropertyName("planType")]
-        public TriggerPlanType PlanType { get; set; }
+        public TriggerOrderPlanType PlanType { get; set; }
         /// <summary>
         /// Symbol
         /// </summary>
@@ -117,7 +117,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Margin mode
         /// </summary>
         [JsonPropertyName("marginMode")]
-        public MarginMode MarginMode { get; set; }
+        public MarginMode? MarginMode { get; set; }
         /// <summary>
         /// Entry point
         /// </summary>

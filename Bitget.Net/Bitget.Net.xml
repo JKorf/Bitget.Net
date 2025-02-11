@@ -3816,6 +3816,31 @@
             Withdraw to another Bitget user
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.V2.TriggerOrderPlanType">
+            <summary>
+            Trigger order plan type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderPlanType.Normal">
+            <summary>
+            Normal trigger order
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderPlanType.TrailingStop">
+            <summary>
+            Trailing stop
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderPlanType.PosProfit">
+            <summary>
+            Position profit
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderPlanType.PosLoss">
+            <summary>
+            Position loss
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.TriggerOrderStatus">
             <summary>
             Trigger order status
