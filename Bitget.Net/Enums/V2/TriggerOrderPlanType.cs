@@ -29,6 +29,16 @@ namespace Bitget.Net.Enums.V2
         /// Position loss
         /// </summary>
         [Map("pos_loss")]
-        PosLoss
+        PosLoss,
+        /// <summary>
+        /// Partial profit
+        /// </summary>
+        [Map("profit_plan")]
+        PartialProfit,
+        /// <summary>
+        /// Partial loss
+        /// </summary>
+        [Map("loss_plan")]
+        PartialLoss
     }
 }
