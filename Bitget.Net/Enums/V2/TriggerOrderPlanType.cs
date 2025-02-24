@@ -18,7 +18,7 @@ namespace Bitget.Net.Enums.V2
         /// <summary>
         /// Trailing stop
         /// </summary>
-        [Map("track_plan")]
+        [Map("track_plan", "moving_plan")]
         TrailingStop,
         /// <summary>
         /// Position profit
