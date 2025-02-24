@@ -18,7 +18,7 @@ namespace Bitget.Net.Enums.V2
         /// <summary>
         /// Trailing stop
         /// </summary>
-        [Map("track_plan")]
+        [Map("track_plan", "moving_plan")]
         TrailingStop,
         /// <summary>
         /// Position profit
@@ -29,6 +29,16 @@ namespace Bitget.Net.Enums.V2
         /// Position loss
         /// </summary>
         [Map("pos_loss")]
-        PosLoss
+        PosLoss,
+        /// <summary>
+        /// Partial profit
+        /// </summary>
+        [Map("profit_plan")]
+        PartialProfit,
+        /// <summary>
+        /// Partial loss
+        /// </summary>
+        [Map("loss_plan")]
+        PartialLoss
     }
 }
