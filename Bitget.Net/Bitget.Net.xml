@@ -3841,6 +3841,16 @@
             Position loss
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderPlanType.PartialProfit">
+            <summary>
+            Partial profit
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.TriggerOrderPlanType.PartialLoss">
+            <summary>
+            Partial loss
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.TriggerOrderStatus">
             <summary>
             Trigger order status
