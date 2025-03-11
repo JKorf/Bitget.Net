@@ -1,4 +1,6 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using Bitget.Net.Converters;
+using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -32,7 +34,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Order book entry
     /// </summary>
-    [JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.ArrayConverter))]
+    [JsonConverter(typeof(ArrayConverter<BitgetOrderBookEntry, BitgetSourceGenerationContext>))]
     public record BitgetOrderBookEntry : ISymbolOrderBookEntry
     {
         /// <summary>

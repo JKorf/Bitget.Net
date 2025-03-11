@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net;
+﻿using Bitget.Net.Converters;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiting;
 using CryptoExchange.Net.RateLimiting.Filters;
 using CryptoExchange.Net.RateLimiting.Guards;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net
 {
@@ -45,6 +47,8 @@ namespace Bitget.Net
         /// Type of exchange
         /// </summary>
         public static ExchangeType Type { get; } = ExchangeType.CEX;
+
+        internal static JsonSerializerContext SerializerContext = new BitgetSourceGenerationContext();
 
         /// <summary>
         /// Format a base and quote asset to a Bitget recognized symbol 

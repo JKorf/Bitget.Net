@@ -15,11 +15,7 @@ namespace Bitget.Net.Clients
         internal readonly string _defaultChannelCode = "6x21p";
 
         /// <inheritdoc />
-        public Interfaces.Clients.SpotApi.IBitgetRestClientSpotApi SpotApi { get; }
-        /// <inheritdoc />
         public Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi SpotApiV2 { get; }
-        /// <inheritdoc />
-        public Interfaces.Clients.FuturesApi.IBitgetRestClientFuturesApi FuturesApi { get; }
         /// <inheritdoc />
         public Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi FuturesApiV2 { get; }
         /// <inheritdoc />
@@ -44,9 +40,7 @@ namespace Bitget.Net.Clients
         {
             Initialize(options.Value);
 
-            SpotApi = AddApiClient(new SpotApi.BitgetRestClientSpotApi(_logger, httpClient, this, options.Value));
             SpotApiV2 = AddApiClient(new SpotApiV2.BitgetRestClientSpotApi(_logger, httpClient, this, options.Value));
-            FuturesApi = AddApiClient(new FuturesApi.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
             FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
             CopyTradingFuturesV2 = AddApiClient(new CopyTradingApiV2.BitgetRestClientCopyTradingApi(_logger, httpClient, this, options.Value));
         }
@@ -54,9 +48,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public void SetOptions(UpdateOptions options)
         {
-            SpotApi.SetOptions(options);
             SpotApiV2.SetOptions(options);
-            FuturesApi.SetOptions(options);
             FuturesApiV2.SetOptions(options);
             CopyTradingFuturesV2.SetOptions(options);
         }
@@ -64,9 +56,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public void SetApiCredentials(BitgetApiCredentials credentials)
         {
-            SpotApi.SetApiCredentials(credentials);
             SpotApiV2.SetApiCredentials(credentials);
-            FuturesApi.SetApiCredentials(credentials);
             FuturesApiV2.SetApiCredentials(credentials);
             CopyTradingFuturesV2.SetApiCredentials(credentials);
         }

@@ -12,11 +12,7 @@ namespace Bitget.Net.Clients
     public class BitgetSocketClient : BaseSocketClient, IBitgetSocketClient
     {
         /// <inheritdoc />
-        public Interfaces.Clients.SpotApi.IBitgetSocketClientSpotApi SpotApi { get; set; }
-        /// <inheritdoc />
         public Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi SpotApiV2 { get; set; }
-        /// <inheritdoc />
-        public Interfaces.Clients.FuturesApi.IBitgetSocketClientFuturesApi FuturesApi { get; set; }
         /// <inheritdoc />
         public Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi FuturesApiV2 { get; set; }
 
@@ -40,9 +36,7 @@ namespace Bitget.Net.Clients
         {
             Initialize(options.Value);
 
-            SpotApi = AddApiClient(new SpotApi.BitgetSocketClientSpotApi(_logger, options.Value));
             SpotApiV2 = AddApiClient(new SpotApiV2.BitgetSocketClientSpotApi(_logger, options.Value));
-            FuturesApi = AddApiClient(new FuturesApi.BitgetSocketClientFuturesApi(_logger, options.Value));
             FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetSocketClientFuturesApi(_logger, options.Value));
         }
 
@@ -51,9 +45,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public void SetOptions(UpdateOptions options)
         {
-            SpotApi.SetOptions(options);
             SpotApiV2.SetOptions(options);
-            FuturesApi.SetOptions(options);
             FuturesApiV2.SetOptions(options);
         }
 
@@ -69,9 +61,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public void SetApiCredentials(BitgetApiCredentials credentials)
         {
-            SpotApi.SetApiCredentials(credentials);
             SpotApiV2.SetApiCredentials(credentials);
-            FuturesApi.SetApiCredentials(credentials);
             FuturesApiV2.SetApiCredentials(credentials);
         }
     }

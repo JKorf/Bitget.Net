@@ -13,15 +13,7 @@ namespace Bitget.Net.Interfaces.Clients
         /// <summary>
         /// Spot API endpoints
         /// </summary>
-        SpotApi.IBitgetRestClientSpotApi SpotApi { get; }
-        /// <summary>
-        /// Spot API endpoints
-        /// </summary>
         SpotApiV2.IBitgetRestClientSpotApi SpotApiV2 { get; }
-        /// <summary>
-        /// Futures API endpoints
-        /// </summary>
-        FuturesApi.IBitgetRestClientFuturesApi FuturesApi { get; }
         /// <summary>
         /// Futures API endpoints
         /// </summary>
@@ -34,7 +26,7 @@ namespace Bitget.Net.Interfaces.Clients
         /// <summary>
         /// Update specific options
         /// </summary>
-        /// <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+        /// <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
         void SetOptions(UpdateOptions options);
 
         /// <summary>
