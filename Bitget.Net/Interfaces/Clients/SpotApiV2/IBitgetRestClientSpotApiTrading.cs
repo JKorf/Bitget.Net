@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Enums.V2;
 using CryptoExchange.Net.Objects;
@@ -96,7 +96,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="orders">Orders to cancel and replace</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetOrderIdResult>>> CancelReplaceMultipleOrdersAsync(
+        Task<WebCallResult<BitgetOrderIdResult[]>> CancelReplaceMultipleOrdersAsync(
             IEnumerable<BitgetReplaceOrderRequest> orders,
             CancellationToken ct = default);
 
@@ -149,7 +149,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOrderAsync(
+        Task<WebCallResult<BitgetOrder[]>> GetOrderAsync(
             string? orderId = null,
             string? clientOrderId = null,
             CancellationToken ct = default);
@@ -167,7 +167,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOpenOrdersAsync(
+        Task<WebCallResult<BitgetOrder[]>> GetOpenOrdersAsync(
             string? symbol = null,
             string? orderId = null,
             DateTime? startTime = null,
@@ -190,7 +190,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetOrder>>> GetClosedOrdersAsync(
+        Task<WebCallResult<BitgetOrder[]>> GetClosedOrdersAsync(
             string? symbol = null,
             string? orderId = null,
             DateTime? startTime = null,
@@ -212,7 +212,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetUserTrade>>> GetUserTradesAsync(
+        Task<WebCallResult<BitgetUserTrade[]>> GetUserTradesAsync(
             string symbol,
             string? orderId = null,
             DateTime? startTime = null,
@@ -321,7 +321,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="triggerOrderId">Trigger order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetTriggerSubOrder>>> GetTriggerSubOrdersAsync(
+        Task<WebCallResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
             string triggerOrderId,
             CancellationToken ct = default);
 

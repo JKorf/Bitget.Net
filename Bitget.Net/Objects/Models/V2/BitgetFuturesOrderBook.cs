@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,19 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Order book info
     /// </summary>
+    [SerializationModel]
     public record BitgetFuturesOrderBook
     {
         /// <summary>
         /// Asks
         /// </summary>
         [JsonPropertyName("asks")]
-        public IEnumerable<BitgetOrderBookEntry> Asks { get; set; } = Array.Empty<BitgetOrderBookEntry>();
+        public BitgetOrderBookEntry[] Asks { get; set; } = Array.Empty<BitgetOrderBookEntry>();
         /// <summary>
         /// Bids
         /// </summary>
         [JsonPropertyName("bids")]
-        public IEnumerable<BitgetOrderBookEntry> Bids { get; set; } = Array.Empty<BitgetOrderBookEntry>();
+        public BitgetOrderBookEntry[] Bids { get; set; } = Array.Empty<BitgetOrderBookEntry>();
         /// <summary>
         /// Timestamp
         /// </summary>

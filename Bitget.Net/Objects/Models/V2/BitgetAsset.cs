@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Converters;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
@@ -6,6 +7,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Asset info
     /// </summary>
+    [SerializationModel]
     public record BitgetAsset
     {
         /// <summary>
@@ -30,12 +32,13 @@ namespace Bitget.Net.Objects.Models.V2
         /// Supported networks
         /// </summary>
         [JsonPropertyName("chains")]
-        public IEnumerable<BitgetAssetNetwork> Networks { get; set; } = Array.Empty<BitgetAssetNetwork>();
+        public BitgetAssetNetwork[] Networks { get; set; } = Array.Empty<BitgetAssetNetwork>();
     }
 
     /// <summary>
     /// Network info
     /// </summary>
+    [SerializationModel]
     public record BitgetAssetNetwork
     {
         /// <summary>

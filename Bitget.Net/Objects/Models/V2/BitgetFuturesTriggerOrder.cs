@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums.V2;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Enums.V2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Futures orders
     /// </summary>
+    [SerializationModel]
     public record BitgetFuturesTriggerOrders
     {
         /// <summary>
@@ -20,12 +22,13 @@ namespace Bitget.Net.Objects.Models.V2
         /// Order list
         /// </summary>
         [JsonPropertyName("entrustedList")]
-        public IEnumerable<BitgetFuturesTriggerOrder> Orders { get; set; } = Array.Empty<BitgetFuturesTriggerOrder>();
+        public BitgetFuturesTriggerOrder[] Orders { get; set; } = Array.Empty<BitgetFuturesTriggerOrder>();
     }
 
     /// <summary>
     /// Future order info
     /// </summary>
+    [SerializationModel]
     public record BitgetFuturesTriggerOrder
     {
         /// <summary>

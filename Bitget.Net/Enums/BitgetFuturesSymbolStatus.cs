@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bitget.Net.Enums
 {
     /// <summary>
     /// Symbol status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<BitgetFuturesSymbolStatus>))]
     public enum BitgetFuturesSymbolStatus
     {
         /// <summary>

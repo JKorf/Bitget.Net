@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects.Models.V2;
@@ -34,13 +34,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetFuturesBalance>>> GetBalancesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetFuturesBalance[]>> GetBalancesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/accounts", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<IEnumerable<BitgetFuturesBalance>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BitgetFuturesBalance[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums.V2;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Enums.V2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Position history
     /// </summary>
+    [SerializationModel]
     public record BitgetPositionHistory
     {
         /// <summary>
@@ -20,12 +22,13 @@ namespace Bitget.Net.Objects.Models.V2
         /// Entries
         /// </summary>
         [JsonPropertyName("list")]
-        public IEnumerable<BitgetPositionHistoryEntry> Entries { get; set; } = Array.Empty<BitgetPositionHistoryEntry>();
+        public BitgetPositionHistoryEntry[] Entries { get; set; } = Array.Empty<BitgetPositionHistoryEntry>();
     }
 
     /// <summary>
     /// Position history entry
     /// </summary>
+    [SerializationModel]
     public record BitgetPositionHistoryEntry
     {
         /// <summary>

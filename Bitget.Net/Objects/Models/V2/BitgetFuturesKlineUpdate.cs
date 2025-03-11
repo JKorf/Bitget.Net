@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Converters;
+using Bitget.Net.Converters;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using System;
@@ -12,6 +12,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// Kline/candlestick info
     /// </summary>
     [JsonConverter(typeof(ArrayConverter<BitgetFuturesKlineUpdate, BitgetSourceGenerationContext>))]
+    [SerializationModel]
     public record BitgetFuturesKlineUpdate
     {
         /// <summary>

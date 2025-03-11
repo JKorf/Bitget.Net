@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Enums.V2;
@@ -135,7 +135,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetOrderIdResult>>> CancelReplaceMultipleOrdersAsync(
+        public async Task<WebCallResult<BitgetOrderIdResult[]>> CancelReplaceMultipleOrdersAsync(
             IEnumerable<BitgetReplaceOrderRequest> orders,
             CancellationToken ct = default)
         {
@@ -143,7 +143,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("orderList", orders);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-replace-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetOrderIdResult>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetOrderIdResult[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -213,7 +213,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOrderAsync(
+        public async Task<WebCallResult<BitgetOrder[]>> GetOrderAsync(
             string? orderId = null,
             string? clientOrderId = null,
             CancellationToken ct = default)
@@ -223,11 +223,11 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("clientOid", clientOrderId);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/orderInfo", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<IEnumerable<BitgetOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BitgetOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetOrder>>> GetOpenOrdersAsync(
+        public async Task<WebCallResult<BitgetOrder[]>> GetOpenOrdersAsync(
             string? symbol = null,
             string? orderId = null,
             DateTime? startTime = null,
@@ -247,11 +247,11 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/unfilled-orders", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<IEnumerable<BitgetOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BitgetOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetOrder>>> GetClosedOrdersAsync(
+        public async Task<WebCallResult<BitgetOrder[]>> GetClosedOrdersAsync(
             string? symbol = null,
             string? orderId = null,
             DateTime? startTime = null,
@@ -271,11 +271,11 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/history-orders", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<IEnumerable<BitgetOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BitgetOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetUserTrade>>> GetUserTradesAsync(
+        public async Task<WebCallResult<BitgetUserTrade[]>> GetUserTradesAsync(
             string symbol,
             string? orderId = null,
             DateTime? startTime = null,
@@ -293,7 +293,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/fills", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<IEnumerable<BitgetUserTrade>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BitgetUserTrade[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -395,7 +395,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetTriggerSubOrder>>> GetTriggerSubOrdersAsync(
+        public async Task<WebCallResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
             string triggerOrderId,
             CancellationToken ct = default)
         {
@@ -403,7 +403,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("planOrderId", triggerOrderId);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/plan-sub-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<IEnumerable<BitgetTriggerSubOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BitgetTriggerSubOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bitget.Net.Enums
 {
     /// <summary>
     /// Kline type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<BitgetKlineType>))]
     public enum BitgetKlineType
     {
         /// <summary>

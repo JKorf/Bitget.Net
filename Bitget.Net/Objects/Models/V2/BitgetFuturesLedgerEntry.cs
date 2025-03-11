@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums.V2;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Enums.V2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Ledger
     /// </summary>
+    [SerializationModel]
     public record BitgetFuturesLedger
     {
         /// <summary>
@@ -20,12 +22,13 @@ namespace Bitget.Net.Objects.Models.V2
         /// Entries
         /// </summary>
         [JsonPropertyName("bills")]
-        public IEnumerable<BitgetFuturesLedgerEntry> Entries { get; set; } = Array.Empty<BitgetFuturesLedgerEntry>();
+        public BitgetFuturesLedgerEntry[] Entries { get; set; } = Array.Empty<BitgetFuturesLedgerEntry>();
     }
 
     /// <summary>
     /// Ledger entry
     /// </summary>
+    [SerializationModel]
     public record BitgetFuturesLedgerEntry
     {
         /// <summary>

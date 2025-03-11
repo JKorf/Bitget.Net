@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Enums.V2;
 using CryptoExchange.Net.Objects;
@@ -28,7 +28,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="productType">Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetFuturesBalance>>> GetBalancesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
+        Task<WebCallResult<BitgetFuturesBalance[]>> GetBalancesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
 
         /// <summary>
         /// Set leverage

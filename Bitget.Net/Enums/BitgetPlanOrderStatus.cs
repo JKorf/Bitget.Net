@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bitget.Net.Enums
 {
     /// <summary>
     /// Plan order status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<BitgetPlanOrderStatus>))]
     public enum BitgetPlanOrderStatus
     {
         /// <summary>

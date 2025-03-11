@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums.V2;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Enums.V2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// User trade info
     /// </summary>
+    [SerializationModel]
     public record BitgetUserTrade
     {
         /// <summary>
@@ -81,6 +83,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Trade fee
     /// </summary>
+    [SerializationModel]
     public record BitgetTradeFee
     {
         /// <summary>

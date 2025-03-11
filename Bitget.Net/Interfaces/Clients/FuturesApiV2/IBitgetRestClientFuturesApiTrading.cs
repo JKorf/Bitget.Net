@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Enums.V2;
 using CryptoExchange.Net.Objects;
@@ -19,7 +19,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetPosition>>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
+        Task<WebCallResult<BitgetPosition[]>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
 
         /// <summary>
         /// Get all positions
@@ -29,7 +29,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetPosition>>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default);
+        Task<WebCallResult<BitgetPosition[]>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default);
 
         /// <summary>
         /// Get position history
@@ -402,7 +402,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="planType">Plan type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetTriggerSubOrder>>> GetTriggerSubOrdersAsync(
+        Task<WebCallResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
             BitgetProductTypeV2 productType,
             string triggerOrderId,
             TriggerPlanType planType,

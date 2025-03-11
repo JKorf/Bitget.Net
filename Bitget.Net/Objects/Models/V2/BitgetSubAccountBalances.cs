@@ -1,4 +1,5 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -8,6 +9,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Sub account balances
     /// </summary>
+    [SerializationModel]
     public record BitgetSubAccountBalances
     {
         /// <summary>
@@ -19,12 +21,13 @@ namespace Bitget.Net.Objects.Models.V2
         /// Assets
         /// </summary>
         [JsonPropertyName("assetsList")]
-        public IEnumerable<BitgetSubAccountBalance> Assets { get; set; } = Array.Empty<BitgetSubAccountBalance>();
+        public BitgetSubAccountBalance[] Assets { get; set; } = Array.Empty<BitgetSubAccountBalance>();
     }
 
     /// <summary>
     /// Sub account balance
     /// </summary>
+    [SerializationModel]
     public record BitgetSubAccountBalance
     {
         /// <summary>

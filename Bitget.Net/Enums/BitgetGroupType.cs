@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bitget.Net.Enums
 {
     /// <summary>
     /// Group type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<BitgetGroupType>))]
     public enum BitgetGroupType
     {
         /// <summary>

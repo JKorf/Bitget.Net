@@ -1,4 +1,5 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -8,6 +9,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Interest limit
     /// </summary>
+    [SerializationModel]
     public record BitgetCrossInterestLimit
     {
         /// <summary>
@@ -49,12 +51,13 @@ namespace Bitget.Net.Objects.Models.V2
         /// Vip list
         /// </summary>
         [JsonPropertyName("vipList")]
-        public IEnumerable<BitgetCrossInterestLimitVip> VipList { get; set; } = Array.Empty<BitgetCrossInterestLimitVip>();
+        public BitgetCrossInterestLimitVip[] VipList { get; set; } = Array.Empty<BitgetCrossInterestLimitVip>();
     }
 
     /// <summary>
     /// Vip limits
     /// </summary>
+    [SerializationModel]
     public record BitgetCrossInterestLimitVip
     {
         /// <summary>

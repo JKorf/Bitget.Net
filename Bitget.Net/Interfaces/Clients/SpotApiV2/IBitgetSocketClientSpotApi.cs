@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -44,7 +44,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BitgetTradeUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BitgetTradeUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to trade updates for multiple symbols
@@ -54,7 +54,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetTradeUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetTradeUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to kline/candlestick updates for a symbol
@@ -65,7 +65,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<IEnumerable<BitgetKlineUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<BitgetKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to kline/candlestick updates for multiple symbols
@@ -76,7 +76,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<IEnumerable<BitgetKlineUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<BitgetKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to order book updates for a symbol
@@ -107,7 +107,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToMarginIndexPriceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetIndexPriceUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToMarginIndexPriceUpdatesAsync(Action<DataEvent<BitgetIndexPriceUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user order updates
@@ -116,7 +116,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BitgetOrderUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BitgetOrderUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user trade updates
@@ -125,7 +125,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BitgetUserTradeUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BitgetUserTradeUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user trigger order updates
@@ -134,7 +134,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTriggerOrderUpdatesAsync(Action<DataEvent<IEnumerable<BitgetTriggerOrderUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToTriggerOrderUpdatesAsync(Action<DataEvent<BitgetTriggerOrderUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user balance updates
@@ -143,7 +143,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetBalanceUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<BitgetBalanceUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to cross margin account updates
@@ -151,7 +151,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginAccountUpdatesAsync(Action<DataEvent<IEnumerable<BitgetCrossAccountUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginAccountUpdatesAsync(Action<DataEvent<BitgetCrossAccountUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to cross margin order updates
@@ -160,7 +160,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetMarginOrderUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetMarginOrderUpdate[]>> handler, CancellationToken ct = default);
         
         /// <summary>
         /// Subscribe to isolated margin account updates
@@ -168,7 +168,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginAccountUpdatesAsync(Action<DataEvent<IEnumerable<BitgetIsolatedAccountUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginAccountUpdatesAsync(Action<DataEvent<BitgetIsolatedAccountUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to isolated margin order updates
@@ -177,6 +177,6 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetMarginOrderUpdate>>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetMarginOrderUpdate[]>> handler, CancellationToken ct = default);
     }
 }

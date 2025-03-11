@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bitget.Net.Enums
 {
     /// <summary>
     /// Time in force
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<BitgetTimeInForce>))]
     public enum BitgetTimeInForce
     {
         /// <summary>

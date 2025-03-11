@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Converters;
+using Bitget.Net.Converters;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using System.Text.Json.Serialization;
@@ -9,6 +9,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// Kline update
     /// </summary>
     [JsonConverter(typeof(ArrayConverter<BitgetKlineUpdate, BitgetSourceGenerationContext>))]
+    [SerializationModel]
     public record BitgetKlineUpdate
     {
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Enums.V2;
@@ -22,7 +22,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetPosition>>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetPosition[]>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
@@ -30,18 +30,18 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.Add("marginCoin", marginAsset);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/position/single-position", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<IEnumerable<BitgetPosition>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BitgetPosition[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetPosition>>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetPosition[]>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
             parameters.Add("marginCoin", marginAsset);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/position/all-position", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<IEnumerable<BitgetPosition>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BitgetPosition[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -457,7 +457,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetTriggerSubOrder>>> GetTriggerSubOrdersAsync(
+        public async Task<WebCallResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
             BitgetProductTypeV2 productType,
             string triggerOrderId,
             TriggerPlanType planType,
@@ -469,7 +469,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddEnum("planType", planType);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/plan-sub-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<IEnumerable<BitgetTriggerSubOrder>>(request, parameters, ct).ConfigureAwait(false);
+            return await _baseClient.SendAsync<BitgetTriggerSubOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
