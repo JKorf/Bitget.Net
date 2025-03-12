@@ -18,7 +18,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         ITradeHistoryRestClient,
         IWithdrawalRestClient,
         IWithdrawRestClient,
-        IFeeRestClient
+        IFeeRestClient,
+        ISpotOrderClientIdClient
     {
     }
 }

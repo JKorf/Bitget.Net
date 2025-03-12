@@ -362,7 +362,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", requests);
+            parameters.Add("orderList", requests.ToArray());
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/batch-place-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetOrderResult[]>(request, parameters, ct).ConfigureAwait(false);
@@ -398,7 +398,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", orders);
+            parameters.Add("orderList", orders.ToArray());
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
@@ -827,7 +827,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", requests);
+            parameters.Add("orderList", requests.ToArray());
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/batch-place-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetOrderResult[]>(request, parameters, ct).ConfigureAwait(false);
@@ -863,7 +863,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", orders);
+            parameters.Add("orderList", orders.ToArray());
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
