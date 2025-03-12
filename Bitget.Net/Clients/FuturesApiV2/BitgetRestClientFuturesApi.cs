@@ -53,24 +53,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
-            => new BitgetAuthenticationProviderV2((BitgetApiCredentials)credentials);
+            => new BitgetAuthenticationProviderV2(credentials);
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
                 => BitgetExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
-
-        internal async Task<WebCallResult> SendAsync(string path, HttpMethod method, CancellationToken ct, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? parameterPosition = null)
-        {
-            var uri = new Uri(BaseAddress.AppendPath(path));
-            var result = await SendRequestAsync<BitgetResponse>(uri, method, ct, parameters, signed, parameterPosition: parameterPosition, requestWeight: 0).ConfigureAwait(false);
-            if (!result)
-                return result.AsDatalessError(result.Error!);
-
-            if (result.Data.Code != 0)
-                return result.AsDatalessError(new ServerError(result.Data.Code, result.Data.Message ?? "-"));
-
-            return result.AsDataless();
-        }
 
         internal Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, Dictionary<string, string>? requestHeaders = null) where T : class
             => SendToAddressAsync<T>(BaseAddress, definition, parameters, cancellationToken, weight, requestHeaders);

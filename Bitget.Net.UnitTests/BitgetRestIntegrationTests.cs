@@ -1,13 +1,10 @@
 ﻿using Bitget.Net.Clients;
-using Bitget.Net.Objects;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Bitget.Net.UnitTests
@@ -31,7 +28,7 @@ namespace Bitget.Net.UnitTests
             return new BitgetRestClient(null, loggerFactory, Options.Create(new Objects.Options.BitgetRestOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new BitgetApiCredentials(key, sec, pass) : null
+                ApiCredentials = Authenticated ? new ApiCredentials(key, sec, pass) : null
             }));
         }
 
@@ -41,7 +38,7 @@ namespace Bitget.Net.UnitTests
             if (!ShouldRun())
                 return;
 
-            var result = await CreateClient().SpotApi.ExchangeData.GetOrderBookAsync("TSTTST", default);
+            var result = await CreateClient().SpotApiV2.ExchangeData.GetOrderBookAsync("TSTTST", default);
 
             Assert.That(result.Success, Is.False);
             Assert.That(result.Error.Code, Is.EqualTo(40034));

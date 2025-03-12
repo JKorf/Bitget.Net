@@ -2,19 +2,14 @@
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Sockets;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Bitget.Net.UnitTests
@@ -41,10 +36,10 @@ namespace Bitget.Net.UnitTests
                 Message = "Error occured"
             };
 
-            TestHelpers.SetResponse((BitgetRestClient)client, JsonConvert.SerializeObject(resultObj));
+            TestHelpers.SetResponse((BitgetRestClient)client, JsonSerializer.Serialize(resultObj, SerializerOptions.WithConverters(BitgetExchange.SerializerContext)));
 
             // act
-            var result = await client.SpotApi.ExchangeData.GetAssetsAsync();
+            var result = await client.SpotApiV2.ExchangeData.GetAssetsAsync();
 
             // assert
             ClassicAssert.IsFalse(result.Success);
@@ -61,7 +56,7 @@ namespace Bitget.Net.UnitTests
             TestHelpers.SetResponse((BitgetRestClient)client, "", System.Net.HttpStatusCode.BadRequest);
 
             // act
-            var result = await client.SpotApi.ExchangeData.GetAssetsAsync();
+            var result = await client.SpotApiV2.ExchangeData.GetAssetsAsync();
 
             // assert
             ClassicAssert.IsFalse(result.Success);
@@ -73,22 +68,22 @@ namespace Bitget.Net.UnitTests
         {
             // arrange
             var client = TestHelpers.CreateClient();
-            var resultObj = new BitgetResponse<object>()
+            var resultObj = new BitgetResponse<string[]>()
             {
                 Code = 400001,
-                Message = "Error occured"
+                Message = "Error occurred"
             };
 
-            TestHelpers.SetResponse((BitgetRestClient)client, JsonConvert.SerializeObject(resultObj), System.Net.HttpStatusCode.BadRequest);
+            TestHelpers.SetResponse((BitgetRestClient)client, JsonSerializer.Serialize(resultObj, SerializerOptions.WithConverters(BitgetExchange.SerializerContext)), System.Net.HttpStatusCode.BadRequest);
 
             // act
-            var result = await client.SpotApi.ExchangeData.GetAssetsAsync();
+            var result = await client.SpotApiV2.ExchangeData.GetAssetsAsync();
 
             // assert
             ClassicAssert.IsFalse(result.Success);
             ClassicAssert.IsNotNull(result.Error);
             Assert.That(result.Error!.Code == 400001);
-            Assert.That(result.Error.Message == "Error occured");
+            Assert.That(result.Error.Message == "Error occurred");
         }
 
         [Test]
@@ -108,7 +103,7 @@ namespace Bitget.Net.UnitTests
 
             var client = provider.GetRequiredService<IBitgetRestClient>();
 
-            var address = client.SpotApi.BaseAddress;
+            var address = client.SpotApiV2.BaseAddress;
 
             Assert.That(address, Is.EqualTo(expected));
         }
@@ -128,7 +123,7 @@ namespace Bitget.Net.UnitTests
 
             var client = provider.GetRequiredService<IBitgetRestClient>();
 
-            var address = client.SpotApi.BaseAddress;
+            var address = client.SpotApiV2.BaseAddress;
 
             Assert.That(address, Is.EqualTo("https://api.bitget.com"));
         }
@@ -149,7 +144,7 @@ namespace Bitget.Net.UnitTests
 
             var client = provider.GetRequiredService<IBitgetRestClient>();
 
-            var address = client.SpotApi.BaseAddress;
+            var address = client.SpotApiV2.BaseAddress;
 
             Assert.That(address, Is.EqualTo("https://api.bitget.com"));
         }
@@ -162,10 +157,10 @@ namespace Bitget.Net.UnitTests
                 {
                     { "ApiCredentials:Key", "123" },
                     { "ApiCredentials:Secret", "456" },
-                    { "ApiCredentials:PassPhrase", "000" },
+                    { "ApiCredentials:Pass", "000" },
                     { "Socket:ApiCredentials:Key", "456" },
                     { "Socket:ApiCredentials:Secret", "789" },
-                    { "Socket:ApiCredentials:PassPhrase", "xxx" },
+                    { "Socket:ApiCredentials:Pass", "xxx" },
                     { "Rest:OutputOriginalData", "true" },
                     { "Socket:OutputOriginalData", "false" },
                     { "Rest:Proxy:Host", "host" },
@@ -181,14 +176,14 @@ namespace Bitget.Net.UnitTests
             var restClient = provider.GetRequiredService<IBitgetRestClient>();
             var socketClient = provider.GetRequiredService<IBitgetSocketClient>();
 
-            Assert.That(((BaseApiClient)restClient.SpotApi).OutputOriginalData, Is.True);
-            Assert.That(((BaseApiClient)socketClient.SpotApi).OutputOriginalData, Is.False);
-            Assert.That(((BaseApiClient)restClient.SpotApi).AuthenticationProvider.ApiKey, Is.EqualTo("123"));
-            Assert.That(((BaseApiClient)socketClient.SpotApi).AuthenticationProvider.ApiKey, Is.EqualTo("456"));
-            Assert.That(((BaseApiClient)restClient.SpotApi).ClientOptions.Proxy.Host, Is.EqualTo("host"));
-            Assert.That(((BaseApiClient)restClient.SpotApi).ClientOptions.Proxy.Port, Is.EqualTo(80));
-            Assert.That(((BaseApiClient)socketClient.SpotApi).ClientOptions.Proxy.Host, Is.EqualTo("host2"));
-            Assert.That(((BaseApiClient)socketClient.SpotApi).ClientOptions.Proxy.Port, Is.EqualTo(81));
+            Assert.That(((BaseApiClient)restClient.SpotApiV2).OutputOriginalData, Is.True);
+            Assert.That(((BaseApiClient)socketClient.SpotApiV2).OutputOriginalData, Is.False);
+            Assert.That(((BaseApiClient)restClient.SpotApiV2).AuthenticationProvider.ApiKey, Is.EqualTo("123"));
+            Assert.That(((BaseApiClient)socketClient.SpotApiV2).AuthenticationProvider.ApiKey, Is.EqualTo("456"));
+            Assert.That(((BaseApiClient)restClient.SpotApiV2).ClientOptions.Proxy.Host, Is.EqualTo("host"));
+            Assert.That(((BaseApiClient)restClient.SpotApiV2).ClientOptions.Proxy.Port, Is.EqualTo(80));
+            Assert.That(((BaseApiClient)socketClient.SpotApiV2).ClientOptions.Proxy.Host, Is.EqualTo("host2"));
+            Assert.That(((BaseApiClient)socketClient.SpotApiV2).ClientOptions.Proxy.Port, Is.EqualTo(81));
         }
     }
 }

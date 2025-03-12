@@ -52,9 +52,9 @@ namespace Bitget.Net.Clients.SpotApiV2
         #endregion
 
         /// <inheritdoc />
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BitgetExchange.SerializerContext));
         /// <inheritdoc />
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange.SerializerContext));
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
@@ -130,7 +130,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", "SPOT" },
-                        { "channel", "candle" + CryptoExchange.Net.Converters.SystemTextJson.EnumConverter.GetString(interval) },
+                        { "channel", "candle" + EnumConverter.GetString(interval) },
                         { "instId", s },
                     }).ToArray()
             , false, handler, ct).ConfigureAwait(false);
@@ -280,13 +280,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProviderV2(credentials);
 
         /// <inheritdoc />
         protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection)
         {
-            var time = CryptoExchange.Net.Converters.SystemTextJson.DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
-            var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;
+            var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
+            var authProvider = (BitgetAuthenticationProviderV2)AuthenticationProvider!;
             var signature = authProvider.GetWebsocketSignature(time);
 
             var socketRequest = new BitgetSocketRequest

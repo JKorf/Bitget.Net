@@ -1,10 +1,7 @@
 using Bitget.Net.Enums;
-using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Enums.V2;
-using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Objects;
-using System.Collections.Generic;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using CryptoExchange.Net.RateLimiting.Guards;
 
@@ -115,7 +112,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
             parameters.AddEnum("marginMode", marginMode);
-            parameters.Add("orderList", orders);
+            parameters.Add("orderList", orders.ToArray());
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/batch-place-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
@@ -184,7 +181,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddEnum("productType", productType);
             parameters.AddOptional("symbol", symbol);
             parameters.AddOptional("marginCoin", marginAsset);
-            parameters.AddOptional("orderIdList", orders);
+            parameters.AddOptional("orderIdList", orders.ToArray());
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/batch-cancel-orders", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));

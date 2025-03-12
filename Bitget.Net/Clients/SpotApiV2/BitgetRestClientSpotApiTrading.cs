@@ -1,10 +1,7 @@
-using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Enums.V2;
-using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Objects;
-using System.Collections.Generic;
 using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Bitget.Net.Clients.SpotApiV2
@@ -55,15 +52,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalString("executeStopLossPrice", executeStopLossPrice);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/place-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
-                return result;
-
-            _baseClient.InvokeOrderPlaced(new OrderId
-            {
-                Id = result.Data.OrderId!,
-                SourceObject = result.Data
-            });
+            var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);            
             return result;
         }
 
@@ -75,21 +64,10 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", orders);
+            parameters.Add("orderList", orders.ToArray());
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-orders", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
-                return result;
-
-            foreach (var item in result.Data.Success)
-            {
-                _baseClient.InvokeOrderPlaced(new OrderId
-                {
-                    Id = item.OrderId!,
-                    SourceObject = item
-                });
-            }
+            var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);            
             return result;
         }
 
@@ -140,7 +118,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.Add("orderList", orders);
+            parameters.Add("orderList", orders.ToArray());
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-replace-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderIdResult[]>(request, parameters, ct).ConfigureAwait(false);
@@ -163,14 +141,6 @@ namespace Bitget.Net.Clients.SpotApiV2
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
-                return result;
-
-            _baseClient.InvokeOrderCanceled(new OrderId
-            {
-                Id = result.Data.OrderId!,
-                SourceObject = result.Data
-            });
             return result;
         }
 
@@ -182,21 +152,10 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", orders);
+            parameters.Add("orderList", orders.ToArray());
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
-                return result;
-
-            foreach (var item in result.Data.Success)
-            {
-                _baseClient.InvokeOrderPlaced(new OrderId
-                {
-                    Id = item.OrderId!,
-                    SourceObject = item
-                });
-            }
             return result;
         }
 

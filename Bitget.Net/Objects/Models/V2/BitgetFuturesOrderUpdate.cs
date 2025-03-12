@@ -185,4 +185,21 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("feeDetail")]
         public BitgetOrderFeeQuantity[] Fees { get; set; } = Array.Empty<BitgetOrderFeeQuantity>();
     }
+
+    /// <summary>
+    /// Fee info
+    /// </summary>
+    public class BitgetOrderFeeQuantity
+    {
+        /// <summary>
+        /// Fee asset
+        /// </summary>
+        [JsonPropertyName("feeCoin")]
+        public string FeeAsset { get; set; } = string.Empty;
+        /// <summary>
+        /// Fee
+        /// </summary>
+        [JsonPropertyName("fee")]
+        public decimal Fee { get; set; }
+    }
 }

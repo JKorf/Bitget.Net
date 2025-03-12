@@ -54,7 +54,7 @@ namespace Bitget.Net.Clients
         }
 
         /// <inheritdoc />
-        public void SetApiCredentials(BitgetApiCredentials credentials)
+        public void SetApiCredentials(ApiCredentials credentials)
         {
             SpotApiV2.SetApiCredentials(credentials);
             FuturesApiV2.SetApiCredentials(credentials);

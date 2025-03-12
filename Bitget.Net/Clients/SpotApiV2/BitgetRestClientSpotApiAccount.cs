@@ -202,7 +202,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("coin", asset);
-            parameters.AddOptionalEnum("orderId", orderId);
+            parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddMilliseconds("startTime", startTime);
             parameters.AddMilliseconds("endTime", endTime);
@@ -218,7 +218,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("coin", asset);
-            parameters.AddOptionalEnum("orderId", orderId);
+            parameters.AddOptional("orderId", orderId);
             parameters.AddMilliseconds("startTime", startTime);
             parameters.AddMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);

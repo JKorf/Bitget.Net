@@ -26,8 +26,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
-            parameters.AddEnum("symbol", symbol);
-            parameters.AddEnum("marginCoin", marginAsset);
+            parameters.Add("symbol", symbol);
+            parameters.Add("marginCoin", marginAsset);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/account", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetFuturesBalance>(request, parameters, ct).ConfigureAwait(false);
@@ -78,7 +78,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
             parameters.AddEnum("productType", productType);
-            parameters.AddEnum("marginMode", mode);
+            parameters.AddOptionalEnum("marginMode", mode);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-margin-mode", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetPositionLeverage>(request, parameters, ct).ConfigureAwait(false);

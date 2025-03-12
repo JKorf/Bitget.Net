@@ -8,12 +8,14 @@ using System.Text.Json;
 
 namespace Bitget.Net
 {
-    internal class BitgetAuthenticationProviderV2 : AuthenticationProvider<BitgetApiCredentials>
+    internal class BitgetAuthenticationProviderV2 : AuthenticationProvider
     {
-        public string Passphrase => _credentials.PassPhrase;
+        public string Passphrase => _credentials.Pass!;
 
-        public BitgetAuthenticationProviderV2(BitgetApiCredentials credentials) : base(credentials)
+        public BitgetAuthenticationProviderV2(ApiCredentials credentials) : base(credentials)
         {
+            if (string.IsNullOrEmpty(credentials.Pass))
+                throw new ArgumentNullException(nameof(ApiCredentials.Pass), "Passphrase is required for Bitget authentication");
         }
 
         public override void AuthenticateRequest(
@@ -50,7 +52,7 @@ namespace Bitget.Net
 
             headers["ACCESS-KEY"] = _credentials.Key!;
             headers["ACCESS-TIMESTAMP"] = timestamp;
-            headers["ACCESS-PASSPHRASE"] = _credentials.PassPhrase;
+            headers["ACCESS-PASSPHRASE"] = _credentials.Pass!;
         }
 
         public string GetWebsocketSignature(long timestamp)

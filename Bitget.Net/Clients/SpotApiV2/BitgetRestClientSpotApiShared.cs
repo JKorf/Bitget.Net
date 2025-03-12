@@ -1,6 +1,7 @@
 using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.SharedApis;
 
@@ -8,6 +9,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetRestClientSpotApi : IBitgetRestClientSpotApiShared
     {
+        private const string _topicId = "BitgetSpot";
         public string Exchange => BitgetExchange.ExchangeName;
         public TradingMode[] SupportedTradingModes { get; } = new[] { TradingMode.Spot };
 
@@ -94,7 +96,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (!result)
                 return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
 
-            return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, TradingMode.Spot, result.Data.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol, s.Status == Enums.SymbolStatus.Online)
+            var response = result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, TradingMode.Spot, result.Data.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol, s.Status == Enums.SymbolStatus.Online)
             {
                 MinTradeQuantity = s.MinOrderQuantity,
                 MinNotionalValue = s.MinOrderValue,
@@ -102,6 +104,9 @@ namespace Bitget.Net.Clients.SpotApiV2
                 QuantityDecimals = s.QuantityPrecision,
                 PriceDecimals = s.PricePrecision
             }).ToArray());
+
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, response.Data);
+            return response;
         }
 
         #endregion
@@ -120,7 +125,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return result.AsExchangeResult<SharedSpotTicker>(Exchange, null, default);
 
             var ticker = result.Data.Single();
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(ticker.Symbol, ticker.LastPrice, ticker.HighPrice, ticker.LowPrice, ticker.Volume, ticker.ChangePercentage24H * 100));
+            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, ticker.Symbol), ticker.Symbol, ticker.LastPrice, ticker.HighPrice, ticker.LowPrice, ticker.Volume, ticker.ChangePercentage24H * 100));
         }
 
         EndpointOptions<GetTickersRequest> ISpotTickerRestClient.GetSpotTickersOptions { get; } = new EndpointOptions<GetTickersRequest>(false);
@@ -134,7 +139,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (!result)
                 return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, null, default);
 
-            return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, TradingMode.Spot, result.Data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.ChangePercentage24H * 100)).ToArray());
+            return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, TradingMode.Spot, result.Data.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.ChangePercentage24H * 100)).ToArray());
         }
 
         #endregion
@@ -197,6 +202,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 SharedQuantityType.QuoteAsset,
                 SharedQuantityType.BaseAsset);
 
+        string ISpotOrderRestClient.GenerateClientOrderId() => ExchangeHelpers.RandomString(32);
+
         PlaceSpotOrderOptions ISpotOrderRestClient.PlaceSpotOrderOptions { get; } = new PlaceSpotOrderOptions();
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
         {
@@ -218,7 +225,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 quantity: (request.OrderType == SharedOrderType.Market && request.Side == SharedOrderSide.Buy ? request.QuoteQuantity : request.Quantity) ?? 0,
                 price: request.Price,
                 timeInForce: GetTimeInForce(request.OrderType, request.TimeInForce),
-                clientOrderId: request.ClientOrderId).ConfigureAwait(false);
+                clientOrderId: request.ClientOrderId,
+                ct: ct).ConfigureAwait(false);
 
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
@@ -242,6 +250,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             var order = orders.Data.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicId, order.Symbol),
                 order.Symbol,
                 order.OrderId.ToString(),
                 ParseOrderType(order.OrderType, null),
@@ -274,6 +283,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, null, default);
 
             return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType, null),
@@ -322,6 +332,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 nextToken = new FromIdToken(orders.Data.OrderBy(d => d.CreateTime).First().OrderId);
 
             return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType, null),
@@ -353,6 +364,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return trades.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
             return trades.AsExchangeResult<SharedUserTrade[]>(Exchange, TradingMode.Spot, trades.Data.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), 
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -396,6 +408,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 nextToken = new FromIdToken(trades.Data.Min(o => o.TradeId).ToString());
 
             return trades.AsExchangeResult<SharedUserTrade[]>(Exchange, TradingMode.Spot, trades.Data.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), 
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -475,7 +488,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                     MinWithdrawQuantity = x.MinWithdrawQuantity,
                     WithdrawEnabled = x.Withdrawable,
                     WithdrawFee = x.WithdrawFee
-                })
+                }).ToArray()
             }).ToArray());
         }
 
@@ -503,7 +516,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                     MinWithdrawQuantity = x.MinWithdrawQuantity,
                     WithdrawEnabled = x.Withdrawable,
                     WithdrawFee = x.WithdrawFee
-                })
+                }).ToArray()
             });
         }
 
