@@ -926,6 +926,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.SymbolStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.AccountType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -962,6 +967,11 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.NullableDeliveryStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.FuturesSymbolStatus">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -1092,11 +1102,6 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.NullableSubTriggerOrderStatus">
-            <summary>
-            Defines the source generated JSON serialization contract metadata for a given type.
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.SymbolStatus">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2966,6 +2971,106 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetBalanceUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetCrossAccountUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetFuturesBalanceUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetFuturesKlineUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetFuturesOrderUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetFuturesTickerUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetFuturesTriggerOrderUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetFuturesUserTradeUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetIndexPriceUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetIsolatedAccountUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetKlineUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetMarginOrderUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetOrderBookUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetOrderUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetPositionHistoryUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetPositionUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetTickerUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetTradeUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetTriggerOrderUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetUserTradeUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.DictionaryStringString">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -3045,46 +3150,6 @@
         <member name="M:Bitget.Net.Converters.BitgetSourceGenerationContext.GetTypeInfo(System.Type)">
             <inheritdoc/>
         </member>
-        <member name="T:Bitget.Net.Enums.BitgetAccountType">
-            <summary>
-            Account type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetAccountType.Exchange">
-            <summary>
-            Spot account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetAccountType.Contract">
-            <summary>
-            Contract account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetAccountType.UsdtMix">
-            <summary>
-            USDT futures account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetAccountType.UsdMix">
-            <summary>
-            USD futures account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetAccountType.UsdcMix">
-            <summary>
-            USDC futures account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetAccountType.MarginCross">
-            <summary>
-            Cross margin account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetAccountType.MarginIsolated">
-            <summary>
-            Isolated margin account
-            </summary>
-        </member>
         <member name="T:Bitget.Net.Enums.BitgetBusinessType">
             <summary>
             Business type
@@ -3103,21 +3168,6 @@
         <member name="F:Bitget.Net.Enums.BitgetBusinessType.SpotMargin">
             <summary>
             Spot margin
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetExecutionType">
-            <summary>
-            Execution type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetExecutionType.Taker">
-            <summary>
-            Taker
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetExecutionType.Maker">
-            <summary>
-            Maker
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetFuturesKlineInterval">
@@ -3220,401 +3270,6 @@
             1 month UTC 0
             </summary>
         </member>
-        <member name="T:Bitget.Net.Enums.BitgetFuturesOrderSide">
-            <summary>
-            Order side
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesOrderSide.OpenLong">
-            <summary>
-            Open long position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesOrderSide.OpenShort">
-            <summary>
-            Open short position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesOrderSide.CloseLong">
-            <summary>
-            Close long position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesOrderSide.CloseShort">
-            <summary>
-            Close short position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesOrderSide.BuySingle">
-            <summary>
-            Buy under SingleHold mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesOrderSide.SellSingle">
-            <summary>
-            Sell under SingleHold mode
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetFuturesPlanType">
-            <summary>
-            Plan type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesPlanType.ProfitPlan">
-            <summary>
-            Profit order
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesPlanType.LossPlan">
-            <summary>
-            Loss order
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesPlanType.NormalPlan">
-            <summary>
-            Plan order
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesPlanType.PositionProfitPlan">
-            <summary>
-            Position profit
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesPlanType.PositionLossPlan">
-            <summary>
-            Position loss
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesPlanType.MovingPlan">
-            <summary>
-            Trailing TP/SL
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesPlanType.TrackPlan">
-            <summary>
-            Trailing Stop
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetFuturesSymbolStatus">
-            <summary>
-            Symbol status
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.Normal">
-            <summary>
-            Normal
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.Maintainance">
-            <summary>
-            Maintenance
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.Offline">
-            <summary>
-            Offline
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.Restricted">
-            <summary>
-            Restricted API
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolStatus.NoNewOrders">
-            <summary>
-            No new openings
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetFuturesSymbolType">
-            <summary>
-            Symbol type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolType.Perpetual">
-            <summary>
-            Perpetual contract
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetFuturesSymbolType.Delivery">
-            <summary>
-            Delivery contract
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetGroupType">
-            <summary>
-            Group type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetGroupType.Deposit">
-            <summary>
-            Deposit
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetGroupType.Withdrawal">
-            <summary>
-            Withdrawal
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetGroupType.Trade">
-            <summary>
-            Trade
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetGroupType.Transfer">
-            <summary>
-            Transfer
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetGroupType.Other">
-            <summary>
-            Other
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetHoldMode">
-            <summary>
-            Hold mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetHoldMode.SingleHold">
-            <summary>
-            Single hold
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetHoldMode.DoubleHold">
-            <summary>
-            Double hold
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetInstrumentType">
-            <summary>
-            Instrument type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetInstrumentType.UsdtPerpetual">
-            <summary>
-            USDT Perpetual Contract
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetInstrumentType.CoinPerpetual">
-            <summary>
-            Coin Margin Perpetual Contract
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetInstrumentType.UsdcPerpetual">
-            <summary>
-            USDC margin Perpetual Contract
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetInstrumentType.UsdtPerpetualSimulated">
-            <summary>
-            USDT simulation perpetual contract
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetInstrumentType.CoinPerpetualSimulated">
-            <summary>
-            Universal margin simulation perpetual contract
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetInstrumentType.UsdcPerpetualSimulated">
-            <summary>
-            USDC simulation perpetual contract
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetKlineInterval">
-            <summary>
-            Kline interval
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneMinute">
-            <summary>
-            1 minute
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.FiveMinutes">
-            <summary>
-            5 minutes
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.FifteenMinutes">
-            <summary>
-            15 minutes
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.ThirtyMinutes">
-            <summary>
-            30 minutes
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneHour">
-            <summary>
-            1 hour
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.FourHours">
-            <summary>
-            4 hours
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.SixHours">
-            <summary>
-            6 hours
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.TwelveHours">
-            <summary>
-            12 hours
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneDay">
-            <summary>
-            1 day
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.ThreeDays">
-            <summary>
-            3 days
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneWeek">
-            <summary>
-            1 week
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneMonth">
-            <summary>
-            1 month
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.SixHourUtc">
-            <summary>
-            6 hour UTC 0
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.TwelfHourUtc">
-            <summary>
-            12 hour UTC 0
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneDayUtc">
-            <summary>
-            1 day UTC 0
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.ThreeDayUTC">
-            <summary>
-            3 day UTC 0
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneWeekUtc">
-            <summary>
-            1 week UTC 0
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineInterval.OneMonthUtc">
-            <summary>
-            1 month UTC 0
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetKlineType">
-            <summary>
-            Kline type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineType.Market">
-            <summary>
-            Market price
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineType.Mark">
-            <summary>
-            Mark price
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetKlineType.Index">
-            <summary>
-            Index price
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetMarginMode">
-            <summary>
-            Margin mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetMarginMode.IsolatedMargin">
-            <summary>
-            Isolated margin
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetMarginMode.CrossMargin">
-            <summary>
-            Cross margin
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetOrderForce">
-            <summary>
-            Order force
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderForce.Normal">
-            <summary>
-            Normal
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderForce.Twap">
-            <summary>
-            Twap
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderForce.Adl">
-            <summary>
-            Adl
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderForce.FullLiquidation">
-            <summary>
-            Full liquidation
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderForce.PartialLiquidation">
-            <summary>
-            Partial liquidation
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetOrderPlacementSource">
-            <summary>
-            Placement source
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Web">
-            <summary>
-            Web
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.App">
-            <summary>
-            App
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Api">
-            <summary>
-            Api
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Sys">
-            <summary>
-            Sys
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Android">
-            <summary>
-            Android
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderPlacementSource.Ios">
-            <summary>
-            Ios
-            </summary>
-        </member>
         <member name="T:Bitget.Net.Enums.BitgetOrderSide">
             <summary>
             Order side
@@ -3628,216 +3283,6 @@
         <member name="F:Bitget.Net.Enums.BitgetOrderSide.Sell">
             <summary>
             Sell
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetOrderStatus">
-            <summary>
-            Order status
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.Initial">
-            <summary>
-            Initial
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.New">
-            <summary>
-            New
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.PartiallyFilled">
-            <summary>
-            Partially filled
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.Filled">
-            <summary>
-            Filled
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderStatus.Cancelled">
-            <summary>
-            Cancelled
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetOrderType">
-            <summary>
-            Order type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderType.Limit">
-            <summary>
-            Limit
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetOrderType.Market">
-            <summary>
-            Market
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetPlanFilter">
-            <summary>
-            Plan filter
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanFilter.TrailingStop">
-            <summary>
-            Trailing stop plan
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanFilter.Other">
-            <summary>
-            profit order, loss order, position profit, position loss, Trailing TP/SL
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetPlanOrderStatus">
-            <summary>
-            Plan order status
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanOrderStatus.NotTriggered">
-            <summary>
-            Not triggered
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanOrderStatus.Triggered">
-            <summary>
-            Triggered
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanOrderStatus.FailTrigger">
-            <summary>
-            Failed trigger
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanOrderStatus.Cancel">
-            <summary>
-            Canceled
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetPlanType">
-            <summary>
-            Plan type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanType.Profit">
-            <summary>
-            Profit plan
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanType.Loss">
-            <summary>
-            Loss plan
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanType.Moving">
-            <summary>
-            Moving plan
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanType.PositionProfit">
-            <summary>
-            Position profit
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanType.PositionLoss">
-            <summary>
-            Position loss
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanType.TrailingStop">
-            <summary>
-            Trailing stop
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanType.NormalPlan">
-            <summary>
-            Plan order
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetPlanOrderEvent">
-            <summary>
-            Plan type 
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanOrderEvent.PlanOrderEvent">
-            <summary>
-            Whenever a plan order is created/cancelled/modified/triggered
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanOrderEvent.TakeProfitEvent">
-            <summary>
-            When a take profit order(partial position) is created/cancelled/modified/triggered
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanOrderEvent.StopLossEvent">
-            <summary>
-            When a stop loss order(partial position) is created/cancelled/modified/triggered
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanOrderEvent.PositionTakeProfitEvent">
-            <summary>
-            When a position take profit order(whole position) is created/cancelled/modified/triggered
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPlanOrderEvent.PositionStopLossEvent">
-            <summary>
-            When a position stop loss order(whole position) is created/cancelled/modified/triggered
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetPositionSide">
-            <summary>
-            Position side
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPositionSide.Long">
-            <summary>
-            Long position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPositionSide.Short">
-            <summary>
-            Short position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetPositionSide.Net">
-            <summary>
-            Net
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetProductType">
-            <summary>
-            Product type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetProductType.UsdtPerpetual">
-            <summary>
-            Usdt perpetual contracts
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetProductType.UniversalMarginPerpetual">
-            <summary>
-            Universal margin perpetual contracts
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetProductType.UsdcPerpetual">
-            <summary>
-            Usdc perpetual contracts
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetProductType.SimUsdtPerpetual">
-            <summary>
-            Simulation usdt perpetual contracts
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetProductType.SimUniversalMarginPerpetual">
-            <summary>
-            Simulation universal margin perpetual contracts
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetProductType.SimUsdcPerpetual">
-            <summary>
-            Simulation usdc perpetual contracts
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetProductTypeV2">
@@ -3873,56 +3318,6 @@
         <member name="F:Bitget.Net.Enums.BitgetProductTypeV2.SimUsdcFutures">
             <summary>
             DEMO USDC futures
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetStreamKlineInterval">
-            <summary>
-            Kline interval
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.OneMinute">
-            <summary>
-            One minute
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.FiveMinutes">
-            <summary>
-            Five minute
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.FifteenMinutes">
-            <summary>
-            Fifteen minutes
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.ThirtyMinutes">
-            <summary>
-            Thirty minutes
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.OneHour">
-            <summary>
-            One hour
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.FourHours">
-            <summary>
-            Four hours
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.TwelveHours">
-            <summary>
-            Twelve hours
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.OneDay">
-            <summary>
-            One day
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetStreamKlineInterval.OneWeek">
-            <summary>
-            One week
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetStreamKlineIntervalV2">
@@ -4018,301 +3413,6 @@
         <member name="F:Bitget.Net.Enums.BitgetStreamKlineIntervalV2.OneMonthUtc">
             <summary>
             One month UTC
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetSymbolStatus">
-            <summary>
-            Status of a symbol
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetSymbolStatus.Offline">
-            <summary>
-            Offline
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetSymbolStatus.Gray">
-            <summary>
-            Gray
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetSymbolStatus.Online">
-            <summary>
-            Online
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetSymbolStatus.Halt">
-            <summary>
-            Halt
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetTimeInForce">
-            <summary>
-            Time in force
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTimeInForce.GoodTillCanceled">
-            <summary>
-            Good till canceled
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTimeInForce.PostOnly">
-            <summary>
-            Post only
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTimeInForce.FillOrKill">
-            <summary>
-            Fill or kill
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTimeInForce.ImmediatOrCancel">
-            <summary>
-            Immediate or cancel
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetTradeSide">
-            <summary>
-            Trade side
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.OpenLong">
-            <summary>
-            Open long
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.OpenShot">
-            <summary>
-            Open short
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.CloseLong">
-            <summary>
-            Close long
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.CloseShort">
-            <summary>
-            Close short
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.ReduceCloseLong">
-            <summary>
-            Force reduce long position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.ReduceCloseShort">
-            <summary>
-            Force reduce short position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.OffSetCloseLong">
-            <summary>
-            Force netting: close long position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.OffsetCloseShort">
-            <summary>
-            Force netting: close short position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.BurstCloseLong">
-            <summary>
-            Force liquidation: close long position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.BurstCloseShort">
-            <summary>
-            Force liquidation: close short position
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.DeliveryCloseLong">
-            <summary>
-            Future delivery close long
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.DeliveryCloseShort">
-            <summary>
-            Future delivery close short
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.BuySingle">
-            <summary>
-            Buy in SingleHold mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.SellSingle">
-            <summary>
-            Sell in SingleHold mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.ReduceBuySingle">
-            <summary>
-            Force reduce buy in SingleHold mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.ReduceSellSingle">
-            <summary>
-            Force reduce sell in SingleHold mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.BurstBuySingle">
-            <summary>
-            Force liquidation: buy in SingleHold mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.BurstSellSingle">
-            <summary>
-            Force liquidation: sell in SingleHold mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.DeliveryBuySingle">
-            <summary>
-            Future delivery buy in SingleHold mode
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTradeSide.DeliverySellSingle">
-            <summary>
-            Future delivery sell in SingleHold mode
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetTransferAccountType">
-            <summary>
-            Account type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTransferAccountType.Spot">
-            <summary>
-            Spot account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTransferAccountType.UsdtMix">
-            <summary>
-            USDT futures account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTransferAccountType.UsdMix">
-            <summary>
-            USD futures account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTransferAccountType.UsdcMix">
-            <summary>
-            USDC futures account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTransferAccountType.MarginCross">
-            <summary>
-            Cross margin account
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTransferAccountType.MarginIsolated">
-            <summary>
-            Isolated margin account
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetTransferStatus">
-            <summary>
-            Transfer status
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTransferStatus.Successful">
-            <summary>
-            Success
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTransferStatus.Failed">
-            <summary>
-            Failed
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTransferStatus.Processing">
-            <summary>
-            In progress
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BitgetTriggerType">
-            <summary>
-            Trigger type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTriggerType.FillPrice">
-            <summary>
-            Fill price
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BitgetTriggerType.MarkPrice">
-            <summary>
-            Mark price
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.BizType">
-            <summary>
-            Biz type
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.Deposit">
-            <summary>
-            Deposit
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.Withdrawal">
-            <summary>
-            Withdrawal
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.Buy">
-            <summary>
-            Buy
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.Sell">
-            <summary>
-            Sell
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.DeductionFeeHandling">
-            <summary>
-            Deduction of handling fee
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.TransferIn">
-            <summary>
-            Transfer in
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.TransferOut">
-            <summary>
-            Transfer out
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.RebateRewards">
-            <summary>
-            Rebate rewards
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.AirdropRewards">
-            <summary>
-            Airdrop rewards
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.UsdtContractRewards">
-            <summary>
-            Usdt contract rewards
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.MixContractRewards">
-            <summary>
-            Mix contract rewards
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.SystemLock">
-            <summary>
-            System lock
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.BizType.UserLock">
-            <summary>
-            User lock
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.SymbolStatus">
@@ -4578,6 +3678,31 @@
         <member name="F:Bitget.Net.Enums.V2.DeliveryStatus.DeliveryPeriod">
             <summary>
             Delivery, opening, closing, and canceling orders are prohibited
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Enums.V2.FuturesSymbolStatus">
+            <summary>
+            Symbol status
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.FuturesSymbolStatus.Normal">
+            <summary>
+            Normal
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.FuturesSymbolStatus.Maintenance">
+            <summary>
+            In maintenance
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.FuturesSymbolStatus.Limited">
+            <summary>
+            Order placement restricted
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.FuturesSymbolStatus.RestrictedApi">
+            <summary>
+            API order placement restricted
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.V2.GroupType">
@@ -5158,31 +4283,6 @@
         <member name="F:Bitget.Net.Enums.V2.SubTriggerOrderStatus.InProgressTracking">
             <summary>
             Tracking in progress
-            </summary>
-        </member>
-        <member name="T:Bitget.Net.Enums.V2.SymbolStatus">
-            <summary>
-            Symbol status
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.V2.SymbolStatus.Normal">
-            <summary>
-            Normal
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.V2.SymbolStatus.Maintainance">
-            <summary>
-            In maintenance
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.V2.SymbolStatus.Limited">
-            <summary>
-            Order placement restricted
-            </summary>
-        </member>
-        <member name="F:Bitget.Net.Enums.V2.SymbolStatus.RestrictedApi">
-            <summary>
-            API order placement restricted
             </summary>
         </member>
         <member name="T:Bitget.Net.Enums.V2.TakeProfitStopLossType">

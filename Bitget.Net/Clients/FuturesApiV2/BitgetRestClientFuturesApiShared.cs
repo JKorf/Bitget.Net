@@ -161,7 +161,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 s.BaseAsset,
                 s.QuoteAsset,
                 s.Symbol, 
-                s.Status == Enums.V2.SymbolStatus.Normal)
+                s.Status == Enums.V2.FuturesSymbolStatus.Normal)
             {
                 MinTradeQuantity = s.MinOrderQuantity,
                 PriceDecimals = s.PriceDecimals,

@@ -118,7 +118,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Status
         /// </summary>
         [JsonPropertyName("symbolStatus")]
-        public SymbolStatus Status { get; set; }
+        public FuturesSymbolStatus Status { get; set; }
         /// <summary>
         /// Removal time
         /// </summary>

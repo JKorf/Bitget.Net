@@ -2,13 +2,13 @@ using System.Text.Json.Serialization;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
 
-namespace Bitget.Net.Enums
+namespace Bitget.Net.Enums.V2
 {
     /// <summary>
     /// Symbol status
     /// </summary>
-    [JsonConverter(typeof(EnumConverter<BitgetFuturesSymbolStatus>))]
-    public enum BitgetFuturesSymbolStatus
+    [JsonConverter(typeof(EnumConverter<FuturesSymbolStatus>))]
+    public enum FuturesSymbolStatus
     {
         /// <summary>
         /// Normal
@@ -16,24 +16,19 @@ namespace Bitget.Net.Enums
         [Map("normal")]
         Normal,
         /// <summary>
-        /// Maintenance
+        /// In maintenance
         /// </summary>
         [Map("maintain")]
-        Maintainance,
+        Maintenance,
         /// <summary>
-        /// Offline
-        /// </summary>
-        [Map("off")]
-        Offline,
-        /// <summary>
-        /// Restricted API
-        /// </summary>
-        [Map("restrictedAPI")]
-        Restricted,
-        /// <summary>
-        /// No new openings
+        /// Order placement restricted
         /// </summary>
         [Map("limit_open")]
-        NoNewOrders
+        Limited,
+        /// <summary>
+        /// API order placement restricted
+        /// </summary>
+        [Map("restrictedAPI")]
+        RestrictedApi
     }
 }
