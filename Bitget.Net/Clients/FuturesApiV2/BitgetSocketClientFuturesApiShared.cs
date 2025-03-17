@@ -320,7 +320,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }
 
             var productTypeStr = exchangeParameters!.GetValue<string>(Exchange, "ProductType");
-            return (BitgetProductTypeV2)Enum.Parse(typeof(BitgetProductTypeV2), productTypeStr);
+            return (BitgetProductTypeV2)Enum.Parse(typeof(BitgetProductTypeV2), productTypeStr!);
         }
     }
 }

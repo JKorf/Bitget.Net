@@ -148,9 +148,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             IEnumerable<BitgetContract> data = result.Data;
             if (request.TradingMode != null)
+            {
                 data = data
                     .Where(x => ((request.TradingMode == TradingMode.PerpetualInverse || request.TradingMode == TradingMode.PerpetualLinear) && x.ContractType == ContractType.Perpetual)
                              || ((request.TradingMode == TradingMode.DeliveryLinear || request.TradingMode == TradingMode.DeliveryInverse) && x.ContractType == ContractType.Delivery));
+            }
 
             var response = result.AsExchangeResult<SharedFuturesSymbol[]>(Exchange, request.TradingMode == null ? SupportedTradingModes: new[] { request.TradingMode.Value }, data.Select(s => 
             new SharedFuturesSymbol(
@@ -791,7 +793,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Fee = Math.Abs(x.Fees.Sum(x => x.TotalFee)),
-                FeeAsset = x.Fees.FirstOrDefault().FeeAsset,
+                FeeAsset = x.Fees.FirstOrDefault()?.FeeAsset,
                 Role = x.Role == Role.Maker ? SharedRole.Maker : SharedRole.Taker
             }).ToArray());
         }
@@ -843,7 +845,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 Price = x.Price,
                 Quantity = x.Quantity,
                 Fee = Math.Abs(x.Fees.Sum(x => x.TotalFee)),
-                FeeAsset = x.Fees.FirstOrDefault().FeeAsset,
+                FeeAsset = x.Fees.FirstOrDefault()?.FeeAsset,
                 Role = x.Role == Role.Maker ? SharedRole.Maker : SharedRole.Taker
             }).ToArray(), nextToken);
         }
@@ -1161,7 +1163,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }
 
             var productTypeStr = ExchangeParameters.GetValue<string>(exchangeParameters, Exchange, "ProductType");
-            return (BitgetProductTypeV2)Enum.Parse(typeof(BitgetProductTypeV2), productTypeStr);
+            return (BitgetProductTypeV2)Enum.Parse(typeof(BitgetProductTypeV2), productTypeStr!);
         }
 
         public static DateTime RoundUp(DateTime dt, TimeSpan d)

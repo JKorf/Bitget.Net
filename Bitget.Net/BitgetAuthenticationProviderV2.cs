@@ -2,6 +2,7 @@
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Objects;
 using System.Text;
 using System.Text.Json;
@@ -33,7 +34,7 @@ namespace Bitget.Net
             if (!auth)
                 return;
 
-            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonSerializer.Serialize(bodyParameters) : "";
+            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonSerializer.Serialize(bodyParameters, SerializerOptions.WithConverters(BitgetExchange.SerializerContext)) : "";
             string? query = null;
             if (uriParameters != null)
                 query = uriParameters.CreateParamString(false, arraySerialization);

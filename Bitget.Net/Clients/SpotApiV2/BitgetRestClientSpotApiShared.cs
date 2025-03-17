@@ -405,7 +405,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             // Get next token
             FromIdToken? nextToken = null;
             if (trades.Data.Count() == limit)
-                nextToken = new FromIdToken(trades.Data.Min(o => o.TradeId).ToString());
+                nextToken = new FromIdToken(trades.Data.Min(o => o.TradeId)!.ToString());
 
             return trades.AsExchangeResult<SharedUserTrade[]>(Exchange, TradingMode.Spot, trades.Data.Select(x => new SharedUserTrade(
                 ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), 
@@ -623,7 +623,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             // Determine next token
             FromIdToken? nextToken = null;
             if (deposits.Data.Count() == limit)
-                nextToken = new FromIdToken(deposits.Data.Min(x => x.OrderId));
+                nextToken = new FromIdToken(deposits.Data.Min(x => x.OrderId)!);
 
             return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, TradingMode.Spot, deposits.Data.Select(x => new SharedDeposit(x.Asset, x.Quantity, x.Status == TransferStatus.Success, x.CreateTime)
             {
@@ -687,7 +687,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             FromIdToken? nextToken = null;
             if (result.Data.Count() == limit && result.Data.Last().Timestamp > request.StartTime)
-                nextToken = new FromIdToken(result.Data.Min(x => x.TradeId).ToString());
+                nextToken = new FromIdToken(result.Data.Min(x => x.TradeId)!.ToString());
 
             // Return
             return result.AsExchangeResult<SharedTrade[]>(Exchange, request.Symbol.TradingMode, result.Data.Where(x => x.Timestamp >= request.StartTime).Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
@@ -726,7 +726,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             // Determine next token
             FromIdToken? nextToken = null;
             if (withdrawals.Data.Count() == limit)
-                nextToken = new FromIdToken(withdrawals.Data.Min(x => x.OrderId));
+                nextToken = new FromIdToken(withdrawals.Data.Min(x => x.OrderId)!);
 
             return withdrawals.AsExchangeResult<SharedWithdrawal[]>(Exchange, TradingMode.Spot, withdrawals.Data.Select(x => new SharedWithdrawal(x.Asset, x.ToAddress, x.Quantity, x.Status == TransferStatus.Success, x.CreateTime)
             {
