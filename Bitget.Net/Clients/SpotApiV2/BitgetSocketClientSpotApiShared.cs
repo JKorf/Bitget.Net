@@ -116,14 +116,13 @@ namespace Bitget.Net.Clients.SpotApiV2
                         x.CreateTime)
                     {
                         ClientOrderId = x.ClientOrderId?.ToString(),
-                        Quantity = x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.OrderQuantity, // For a market buy order the OrderQuantity is the quote quantity
-                        QuantityFilled = x.QuantityFilled,
+                        OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.Notional),
+                        QuantityFilled = new SharedOrderQuantity(x.QuantityFilled),
                         TimeInForce = x.TimeInForce == TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill: SharedTimeInForce.GoodTillCanceled,
                         AveragePrice = x.AveragePrice,
                         UpdateTime = x.UpdateTime,
                         Fee = x.Fees.Any() ? x.Fees.Sum(f => f.Fee) : 0,
                         FeeAsset = x.FeeAsset,
-                        QuoteQuantity = x.Notional,
                         OrderPrice = x.Price,
                         LastTrade = x.TradeId == null ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.OrderId, x.TradeId, x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, x.BaseVolume!.Value, x.LastTradePrice!.Value, x.LastTradeTime!.Value)
                         {

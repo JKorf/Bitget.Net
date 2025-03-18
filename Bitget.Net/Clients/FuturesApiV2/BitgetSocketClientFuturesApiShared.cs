@@ -213,9 +213,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         x.CreateTime)
                     {
                         ClientOrderId = x.ClientOrderId?.ToString(),
-                        Quantity = x.Quantity,
-                        QuantityFilled = x.QuantityFilled,
-                        QuoteQuantity = x.QuoteQuantity,
+                        OrderQuantity = new SharedOrderQuantity(x.Quantity, x.QuoteQuantity, x.Quantity),
+                        QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, contractQuantity: x.QuantityFilled),
                         TimeInForce = x.TimeInForce == TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
                         AveragePrice = x.AveragePrice,
                         UpdateTime = x.UpdateTime,
