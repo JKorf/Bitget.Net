@@ -19,7 +19,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         IWithdrawalRestClient,
         IWithdrawRestClient,
         IFeeRestClient,
-        ISpotOrderClientIdClient
+        ISpotOrderClientIdClient,
+        ISpotTriggerOrderRestClient
     {
     }
 }
