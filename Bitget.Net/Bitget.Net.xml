@@ -34,6 +34,11 @@
             Live environment
             </summary>
         </member>
+        <member name="P:Bitget.Net.BitgetEnvironment.DemoTrading">
+            <summary>
+            Demo trading environment
+            </summary>
+        </member>
         <member name="M:Bitget.Net.BitgetEnvironment.CreateCustom(System.String,System.String,System.String)">
             <summary>
             Create a custom environment

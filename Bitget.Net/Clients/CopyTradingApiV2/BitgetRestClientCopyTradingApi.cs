@@ -35,6 +35,9 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
                 { "X-CHANNEL-API-CODE", !string.IsNullOrEmpty(options.ChannelCode) ? options.ChannelCode! : baseClient._defaultChannelCode },
                 { "locale", options.Locale }
             };
+
+            if (options.Environment.Name == "DemoTrading")
+                StandardRequestHeaders.Add("paptrading", "1");
         }
 
         /// <inheritdoc />
