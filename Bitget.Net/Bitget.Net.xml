@@ -368,6 +368,9 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetPositionTiersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetOiLimitsAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading">
             <inheritdoc />
         </member>
@@ -4328,6 +4331,16 @@
             <summary>
             Get position tiers
             <para><a href="https://www.bitget.com/api-doc/contract/position/Get-Query-Position-Lever" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetOiLimitsAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get contracts notional position value limits
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Contracts-Oi" /></para>
             </summary>
             <param name="productType">Product type</param>
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -12619,6 +12632,16 @@
             Usdt equity
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalanceUpdate.CrossRiskRate">
+            <summary>
+            Risk ratio in cross margin
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesBalanceUpdate.UnrealizedPnl">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesKline">
             <summary>
             Kline/candlestick info
@@ -14633,6 +14656,26 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetMinMaxResult`1.Result">
             <summary>
             Results
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetOiLimit">
+            <summary>
+            OI contract limit
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOiLimit.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOiLimit.NotionalValue">
+            <summary>
+            Individual user position notional value
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOiLimit.TotalNotionalValue">
+            <summary>
+            Sub-account and Main-account position notional value
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetOpenInterest">
