@@ -45,5 +45,15 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("usdtEquity")]
         public decimal UsdtEquity { get; set; }
+        /// <summary>
+        /// Risk ratio in cross margin
+        /// </summary>
+        [JsonPropertyName("crossedRiskRate")]
+        public decimal CrossRiskRate { get; set; }
+        /// <summary>
+        /// Unrealized profit and loss
+        /// </summary>
+        [JsonPropertyName("unrealizedPL")]
+        public decimal UnrealizedPnl { get; set; }
     }
 }
