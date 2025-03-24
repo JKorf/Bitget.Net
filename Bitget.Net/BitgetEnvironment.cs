@@ -50,6 +50,11 @@ namespace Bitget.Net
         public static BitgetEnvironment Live { get; } = new BitgetEnvironment(TradeEnvironmentNames.Live, BitgetApiAddresses.Default.RestBaseAddress, BitgetApiAddresses.Default.SocketBaseAddress);
 
         /// <summary>
+        /// Demo trading environment
+        /// </summary>
+        public static BitgetEnvironment DemoTrading { get; } = new BitgetEnvironment("DemoTrading", BitgetApiAddresses.Default.RestBaseAddress, BitgetApiAddresses.Default.SocketBaseAddress);
+
+        /// <summary>
         /// Create a custom environment
         /// </summary>
         /// <param name="name"></param>

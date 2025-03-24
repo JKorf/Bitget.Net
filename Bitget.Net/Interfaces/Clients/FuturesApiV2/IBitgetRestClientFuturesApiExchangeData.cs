@@ -210,5 +210,15 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetPositionTier[]>> GetPositionTiersAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get contracts notional position value limits
+        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Contracts-Oi" /></para>
+        /// </summary>
+        /// <param name="productType">Product type</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetOiLimit[]>> GetOiLimitsAsync(BitgetProductTypeV2 productType, string? symbol = null, CancellationToken ct = default);
     }
 }

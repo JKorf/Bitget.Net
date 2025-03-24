@@ -245,5 +245,16 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             return await _baseClient.SendAsync<BitgetPositionTier[]>(request, parameters, ct).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetOiLimit[]>> GetOiLimitsAsync(BitgetProductTypeV2 productType, string? symbol = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("symbol", symbol);
+            parameters.AddEnum("productType", productType);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/market/oi-limit", BitgetExchange.RateLimiter.Overal, 1, false,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            return await _baseClient.SendAsync<BitgetOiLimit[]>(request, parameters, ct).ConfigureAwait(false);
+        }
     }
 }
