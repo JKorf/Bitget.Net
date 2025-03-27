@@ -1159,22 +1159,26 @@ namespace Bitget.Net.Clients.FuturesApiV2
         #endregion
 
         #region Trigger Order Client
-        //EndpointOptions<GetFeeRequest> IFeeRestClient.GetFeeOptions { get; } = new EndpointOptions<GetFeeRequest>(true);
-        //{
-        //    RequiredExchangeParameters = new List<ParameterDescription>
-        //    {
-        //        new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-        //        new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC"),
-        //        new ParameterDescription("PositionMode", typeof(SharedPositionMode), "The margin asset to be used", "SharedPositionMode."),
-        //    }
-        //};
+        PlaceFuturesTriggerOrderOptions IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(false)
+        {
+            RequiredOptionalParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription(nameof(PlaceFuturesTriggerOrderRequest.PositionMode), typeof(SharedPositionMode), "PositionMode the account is in", SharedPositionMode.OneWay)
+            }
+            ,
+            RequiredExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
+                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
+            }
+        };
         async Task<ExchangeWebResult<SharedId>> IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
         {
-            //var validationError = ((IFuturesTriggerOrderRestClient)this).GetFeeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
-            //if (validationError != null)
-            //    return new ExchangeWebResult<SharedFee>(Exchange, validationError);
-
             var (side, tradeSide) = GetTradeSide(request);
+            var validationError = ((IFuturesTriggerOrderRestClient)this).PlaceFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes, side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, ((IFuturesOrderRestClient)this).FuturesSupportedOrderQuantity);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
             var result = await Trading.PlaceTriggerOrderAsync(
                 GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
                 request.Symbol.GetSymbol(FormatSymbol),
@@ -1187,12 +1191,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 quantity: request.Quantity?.QuantityInBaseAsset ?? request.Quantity?.QuantityInContracts ?? 0,
                 triggerPrice: request.TriggerPrice,
                 tradeSide: tradeSide,
+                clientOrderId: request.ClientOrderId,
+                //triggerPriceType: request.TriggerPriceType == null ? null : request.TriggerPriceType == SharedTriggerPriceType.LastPrice ? TriggerPriceType.LastPrice : TriggerPriceType.MarkPrice,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(result.Data.OrderId.ToString()));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(result.Data.OrderId.ToString()));
         }
 
         EndpointOptions<GetOrderRequest> IFuturesTriggerOrderRestClient.GetFuturesTriggerOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true);
@@ -1224,24 +1230,37 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var order = orders.Data.Orders.Single();
 
-            return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFuturesTriggerOrder(
+            return orders.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesTriggerOrder(
                 ExchangeSymbolCache.ParseSymbol(_topicId, order.Symbol),
                 order.Symbol,
                 order.OrderId.ToString(),
                 order.OrderType == OrderType.Market ? SharedOrderType.Market : SharedOrderType.Limit,
                 order.TradeSide == null ? null : order.TradeSide == TradeSide.Open ? SharedTriggerOrderDirection.Enter : SharedTriggerOrderDirection.Exit,
-                ParseOrderStatus(order.Status),
+                ParseTriggerOrderStatus(order.Status),
                 order.TriggerPrice ?? 0,
                 null,
                 order.CreateTime)
             {
+                PlacedOrderId = order.OrderId,
                 AveragePrice = order.AveragePrice,
                 OrderPrice = order.Price,
                 OrderQuantity = new SharedOrderQuantity(order.Quantity, contractQuantity: order.Quantity),
                 QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, null, contractQuantity: order.QuantityFilled),
                 UpdateTime = order.UpdateTime,
                 PositionSide = order.PositionSide == PositionSide.Oneway ? null : order.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
+                ClientOrderId = order.ClientOrderId
             });
+        }
+
+        private SharedTriggerOrderStatus ParseTriggerOrderStatus(TriggerOrderStatus? status)
+        {
+            if (status == TriggerOrderStatus.Executed)
+                return SharedTriggerOrderStatus.Filled;
+
+            if (status == TriggerOrderStatus.FailedExecute || status == TriggerOrderStatus.Canceled)
+                return SharedTriggerOrderStatus.CanceledOrRejected;
+
+            return SharedTriggerOrderStatus.Active;
         }
 
         EndpointOptions<CancelOrderRequest> IFuturesTriggerOrderRestClient.CancelFuturesTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
@@ -1258,7 +1277,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(request.OrderId));
+            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(request.OrderId));
         }
 
 

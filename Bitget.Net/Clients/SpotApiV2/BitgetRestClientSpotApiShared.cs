@@ -780,22 +780,22 @@ namespace Bitget.Net.Clients.SpotApiV2
         #endregion
 
         #region Trigger Order Client
-        //EndpointOptions<GetFeeRequest> IFeeRestClient.GetFeeOptions { get; } = new EndpointOptions<GetFeeRequest>(true);
-
+        PlaceSpotTriggerOrderOptions ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(true);
         async Task<ExchangeWebResult<SharedId>> ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
         {
-            //var validationError = ((ITriggerOrderRestClient)this).GetFeeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
-            //if (validationError != null)
-            //    return new ExchangeWebResult<SharedFee>(Exchange, validationError);
+            var validationError = ((ISpotTriggerOrderRestClient)this).PlaceSpotTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes, ((ISpotOrderRestClient)this).SpotSupportedOrderQuantity);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var result = await Trading.PlaceOrderAsync(
                 request.Symbol.GetSymbol(FormatSymbol),
-                request.OrderDirection == SharedTriggerOrderDirection.Enter ? OrderSide.Buy : OrderSide.Sell,
+                request.OrderSide == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 request.OrderPrice == null ? OrderType.Market : OrderType.Limit,
                 timeInForce: request.OrderPrice == null ? TimeInForce.ImmediateOrCancel : TimeInForce.GoodTillCanceled,
                 quantity: request.Quantity.QuantityInBaseAsset ?? 0,
                 price: request.OrderPrice,
-                triggerPrice: request.TriggerPrice,
+                clientOrderId: request.ClientOrderId,
+                triggerPrice: request.TriggerPrice,                
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
@@ -825,7 +825,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 order.OrderId.ToString(),
                 ParseOrderType(order.OrderType, null),
                 order.Side == OrderSide.Buy ? SharedTriggerOrderDirection.Enter: SharedTriggerOrderDirection.Exit,
-                ParseOrderStatus(order.Status),
+                ParseTriggerOrderStatus(order.Status),
                 order.TriggerPrice ?? 0,
                 order.CreateTime)
             {
@@ -835,7 +835,19 @@ namespace Bitget.Net.Clients.SpotApiV2
                 Fee = order.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(order.Fees.NewFees.TotalFee),
                 AveragePrice = order.AveragePrice,
                 UpdateTime = order.UpdateTime,
+                ClientOrderId = order.ClientOrderId
             });
+        }
+
+        private SharedTriggerOrderStatus ParseTriggerOrderStatus(OrderStatus status)
+        {
+            if (status == OrderStatus.Filled)
+                return SharedTriggerOrderStatus.Filled;
+
+            if (status == OrderStatus.Canceled || status == OrderStatus.Rejected)
+                return SharedTriggerOrderStatus.CanceledOrRejected;
+
+            return SharedTriggerOrderStatus.Active;
         }
 
         EndpointOptions<CancelOrderRequest> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
