@@ -582,7 +582,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         string IFuturesOrderRestClient.GenerateClientOrderId() => ExchangeHelpers.RandomString(32);
 
-        PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions()
+        PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions(true)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -617,6 +617,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 reduceOnly: request.ReduceOnly,
                 timeInForce: request.TimeInForce == SharedTimeInForce.FillOrKill ? TimeInForce.FillOrKill : request.TimeInForce == SharedTimeInForce.ImmediateOrCancel ? TimeInForce.ImmediateOrCancel : request.TimeInForce == SharedTimeInForce.GoodTillCanceled ? TimeInForce.GoodTillCanceled : null,
                 clientOrderId: request.ClientOrderId,
+                takeProfitPrice: request.TakeProfitPrice,
+                stopLossPrice: request.StopLossPrice,
                 ct: ct).ConfigureAwait(false);
 
             if (!result)
@@ -660,7 +662,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 UpdateTime = order.Data.UpdateTime,
                 PositionSide = order.Data.PositionSide == PositionSide.Oneway ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = order.Data.ReduceOnly,
-                Fee = order.Data.Fee == null ? null : Math.Abs(order.Data.Fee.Value)
+                Fee = order.Data.Fee == null ? null : Math.Abs(order.Data.Fee.Value),
+                TakeProfitPrice = order.Data.StopLossPrice,
+                StopLossPrice = order.Data.TakeProfitPrice
             });
         }
 
@@ -700,7 +704,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 UpdateTime = x.UpdateTime,
                 PositionSide = x.PositionSide == PositionSide.Oneway ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
-                Fee = x.Fee == null ? null : Math.Abs(x.Fee.Value)
+                Fee = x.Fee == null ? null : Math.Abs(x.Fee.Value),
+                TakeProfitPrice = x.StopLossPrice,
+                StopLossPrice = x.TakeProfitPrice
             }).ToArray());
         }
 
@@ -756,7 +762,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 UpdateTime = x.UpdateTime,
                 PositionSide = x.PositionSide == PositionSide.Oneway ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
-                Fee = x.Fee == null ? null : Math.Abs(x.Fee.Value)
+                Fee = x.Fee == null ? null : Math.Abs(x.Fee.Value),
+                TakeProfitPrice = x.StopLossPrice,
+                StopLossPrice = x.TakeProfitPrice
             }).ToArray(), nextToken);
         }
 
@@ -1305,6 +1313,74 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return (OrderSide.Sell, TradeSide.Open);
             return (OrderSide.Sell, TradeSide.Close);
         }
+        #endregion
+
+        #region Tp/SL Client
+        EndpointOptions<SetTpSlRequest> IFuturesTpSlRestClient.SetTpSlOptions { get; } = new EndpointOptions<SetTpSlRequest>(true)
+        {
+            RequiredOptionalParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription(nameof(PlaceFuturesTriggerOrderRequest.PositionMode), typeof(SharedPositionMode), "PositionMode the account is in", SharedPositionMode.OneWay)
+            },
+            RequiredExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
+                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
+            }
+        };
+
+        async Task<ExchangeWebResult<SharedId>> IFuturesTpSlRestClient.SetTpSlAsync(SetTpSlRequest request, CancellationToken ct)
+        {
+            var validationError = ((IFuturesTpSlRestClient)this).SetTpSlOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
+            var result = await Trading.PlaceTpSlOrderAsync(
+                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
+                request.Symbol.GetSymbol(FormatSymbol),
+                ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
+                request.TpSlSide == SharedTpSlSide.TakeProfit ? PlanType.PositionTakeProfit : PlanType.PositionStopLoss,
+                null,
+                request.TriggerPrice,
+                hedgeModePositionSide: request.PositionMode != SharedPositionMode.HedgeMode ? null : request.PositionSide == SharedPositionSide.Long ? PositionSide.Long : PositionSide.Short,
+                oneWaySide: request.PositionMode != SharedPositionMode.OneWay ? null : request.PositionSide == SharedPositionSide.Long ? OrderSide.Buy: OrderSide.Sell,
+                ct: ct).ConfigureAwait(false);
+           
+            if (!result)
+                return result.AsExchangeResult<SharedId>(Exchange, null, default);
+
+            // Return
+            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(result.Data.OrderId.ToString()));
+        }
+
+        EndpointOptions<CancelTpSlRequest> IFuturesTpSlRestClient.CancelTpSlOptions { get; } = new EndpointOptions<CancelTpSlRequest>(true)
+        {
+            RequiredExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
+            }
+        };
+
+        async Task<ExchangeWebResult<bool>> IFuturesTpSlRestClient.CancelTpSlAsync(CancelTpSlRequest request, CancellationToken ct)
+        {
+            var validationError = ((IFuturesTpSlRestClient)this).CancelTpSlOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<bool>(Exchange, validationError);
+
+            var result = await Trading.CancelTriggerOrdersAsync(
+                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
+                symbol: request.Symbol.GetSymbol(FormatSymbol),
+                orderIds: [new BitgetCancelOrderRequest {
+                    OrderId = request.OrderId
+                }],
+                ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<bool>(Exchange, null, default);
+
+            // Return
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, true);
+        }
+
         #endregion
 
         private BitgetProductTypeV2 GetProductType(TradingMode? tradingMode, ExchangeParameters? exchangeParameters)

@@ -22,7 +22,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         IPositionHistoryRestClient,
         IFeeRestClient,
         IFuturesOrderClientIdClient,
-        IFuturesTriggerOrderRestClient
+        IFuturesTriggerOrderRestClient,
+        IFuturesTpSlRestClient
     {
     }
 }
