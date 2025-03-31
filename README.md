@@ -168,6 +168,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 1.22.1 - 28 Mar 2025
+    * Fixed ProductType parsing for shared socket subscriptions
+
 * Version 1.22.0 - 24 Mar 2025
     * Added demo trading environment
     * Added restClient.FuturesApiV2.ExchangeData.GetOiLimitsAsync endpoint
