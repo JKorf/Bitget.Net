@@ -23,7 +23,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         IFeeRestClient,
         IFuturesOrderClientIdClient,
         IFuturesTriggerOrderRestClient,
-        IFuturesTpSlRestClient
+        IFuturesTpSlRestClient,
+        IBookTickerRestClient
     {
     }
 }

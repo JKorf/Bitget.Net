@@ -97,7 +97,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Add the IBitgetClient and IBitgetSocketClient to the sevice collection so they can be injected
+        /// Add the IBitgetClient and IBitgetSocketClient to the service collection so they can be injected
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="socketClientLifeTime">The lifetime of the IBitgetSocketClient for the service collection. Defaults to Singleton.</param>

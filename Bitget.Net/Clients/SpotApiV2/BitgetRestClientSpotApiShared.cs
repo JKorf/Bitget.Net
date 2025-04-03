@@ -144,6 +144,35 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         #endregion
 
+        #region Book Ticker client
+
+        EndpointOptions<GetBookTickerRequest> IBookTickerRestClient.GetBookTickerOptions { get; } = new EndpointOptions<GetBookTickerRequest>(false);
+        async Task<ExchangeWebResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
+        {
+            var validationError = ((IBookTickerRestClient)this).GetBookTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedBookTicker>(Exchange, validationError);
+
+            var symbol = request.Symbol.GetSymbol(FormatSymbol);
+            var resultTicker = await ExchangeData.GetOrderBookAsync(
+                symbol,
+                null,
+                1,
+                ct: ct).ConfigureAwait(false);
+            if (!resultTicker)
+                return resultTicker.AsExchangeResult<SharedBookTicker>(Exchange, null, default);
+
+            return resultTicker.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedBookTicker(
+                ExchangeSymbolCache.ParseSymbol(_topicId, symbol),
+                symbol,
+                resultTicker.Data.Asks[0].Price,
+                resultTicker.Data.Asks[0].Quantity,
+                resultTicker.Data.Bids[0].Price,
+                resultTicker.Data.Bids[0].Quantity));
+        }
+
+        #endregion
+
         #region Recent Trade client
 
         GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(500, false);
@@ -190,7 +219,6 @@ namespace Bitget.Net.Clients.SpotApiV2
         #endregion
 
         #region Spot Order client
-
 
         SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         SharedFeeAssetType ISpotOrderRestClient.SpotFeeAssetType => SharedFeeAssetType.OutputAsset;
@@ -265,6 +293,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 Fee = order.Fees?.NewFees?.TotalFee == null? null : Math.Abs(order.Fees.NewFees.TotalFee),
                 AveragePrice = order.AveragePrice,
                 UpdateTime = order.UpdateTime,
+                TriggerPrice = order.TriggerPrice,
+                IsTriggerOrder = order.TriggerPrice != null
             });
         }
 
@@ -296,6 +326,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 Fee = x.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(x.Fees.NewFees.TotalFee),
                 AveragePrice = x.AveragePrice,
                 UpdateTime = x.UpdateTime,
+                TriggerPrice = x.TriggerPrice,
+                IsTriggerOrder = x.TriggerPrice != null
             }).ToArray());
         }
 
@@ -343,6 +375,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 Fee = x.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(x.Fees.NewFees.TotalFee),
                 AveragePrice = x.AveragePrice,
                 UpdateTime = x.UpdateTime,
+                TriggerPrice = x.TriggerPrice,
+                IsTriggerOrder = x.TriggerPrice != null
             }).ToArray(), nextToken);
         }
 
@@ -493,6 +527,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 Fee = order.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(order.Fees.NewFees.TotalFee),
                 AveragePrice = order.AveragePrice,
                 UpdateTime = order.UpdateTime,
+                TriggerPrice = order.TriggerPrice,
+                IsTriggerOrder = order.TriggerPrice != null
             });
         }
 
@@ -792,7 +828,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 request.OrderSide == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 request.OrderPrice == null ? OrderType.Market : OrderType.Limit,
                 timeInForce: request.OrderPrice == null ? TimeInForce.ImmediateOrCancel : TimeInForce.GoodTillCanceled,
-                quantity: request.Quantity.QuantityInBaseAsset ?? 0,
+                quantity: request.Quantity.QuantityInBaseAsset ?? request.Quantity.QuantityInQuoteAsset ?? 0,
                 price: request.OrderPrice,
                 clientOrderId: request.ClientOrderId,
                 triggerPrice: request.TriggerPrice,                

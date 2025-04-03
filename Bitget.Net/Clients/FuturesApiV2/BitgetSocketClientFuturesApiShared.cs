@@ -224,6 +224,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         Leverage = x.Leverage,
                         PositionSide = x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                         ReduceOnly = x.ReduceOnly,
+                        StopLossPrice = x.StopLossPrice,
+                        TakeProfitPrice = x.TakeProfitPrice,
                         LastTrade = x.LastTradeId == null ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.OrderId, x.LastTradeId, x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, x.LastTradeQuantity ?? 0, x.LastTradeFillPrice ?? 0, x.LastTradeFillTime!.Value)
                         {
                             Fee = Math.Abs(x.LastTradeFee),
