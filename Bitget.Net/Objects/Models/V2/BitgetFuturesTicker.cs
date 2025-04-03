@@ -121,5 +121,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("deliveryStatus")]
         public DeliveryStatus? DeliveryStatus { get; set; }
+        /// <summary>
+        /// Mark price
+        /// </summary>
+        [JsonPropertyName("markPrice")]
+        public decimal MarkPrice { get; set; }
     }
 }
