@@ -83,9 +83,9 @@ namespace Bitget.Net.Clients.SpotApiV2
         public async Task<WebCallResult<IEnumerable<BitgetSpotLedgerEntry>>> GetLedgerAsync(string? asset = null, Enums.V2.GroupType? groupType = null, Enums.V2.BusinessType? businessType = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.AddOptional("coin", asset); ;
-            parameters.AddOptionalEnum("groupType", groupType); ;
-            parameters.AddOptionalEnum("businessType", businessType); ;
+            parameters.AddOptional("coin", asset); 
+            parameters.AddOptionalEnum("groupType", groupType);
+            parameters.AddOptionalEnum("businessType", businessType);
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);

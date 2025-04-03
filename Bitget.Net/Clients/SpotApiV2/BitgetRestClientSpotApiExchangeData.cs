@@ -122,7 +122,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         public async Task<WebCallResult<IEnumerable<BitgetTrade>>> GetTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.Add("symbol", symbol); ;
+            parameters.Add("symbol", symbol);
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);

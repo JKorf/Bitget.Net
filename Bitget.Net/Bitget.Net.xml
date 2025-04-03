@@ -13289,6 +13289,11 @@
             Delivery status
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesTicker.MarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesTickerUpdate">
             <summary>
             Ticker info
