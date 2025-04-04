@@ -5,6 +5,7 @@ using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
 using CryptoExchange.Net;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
+using Bitget.Net.Objects.Models.V2;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {
@@ -208,7 +209,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         x.Symbol,
                         x.OrderId.ToString(),
                         x.OrderType == OrderType.Limit ? SharedOrderType.Limit : x.OrderType == OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
-                        x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
+                        ParseSide(x),
                         x.Status == OrderStatus.Canceled ? SharedOrderStatus.Canceled : (x.Status == OrderStatus.Live || x.Status == OrderStatus.New || x.Status == OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
                         x.CreateTime)
                     {
@@ -237,6 +238,17 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        private SharedOrderSide ParseSide(BitgetFuturesOrderUpdate x)
+        {
+            if (x.TradeSide == TradeSide.Open)
+                return x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell;
+
+            if (x.TradeSide == TradeSide.Close)
+                return x.Side == OrderSide.Buy ? SharedOrderSide.Sell : SharedOrderSide.Buy;
+
+            return x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell;
         }
         #endregion
 

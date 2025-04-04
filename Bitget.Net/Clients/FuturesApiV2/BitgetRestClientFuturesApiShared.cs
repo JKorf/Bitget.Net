@@ -679,7 +679,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 order.Data.Symbol,
                 order.Data.OrderId.ToString(),
                 ParseOrderType(order.Data.OrderType),
-                order.Data.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
+                ParseSide(order.Data),
                 ParseOrderStatus(order.Data.Status),
                 order.Data.CreateTime)
             {
@@ -693,8 +693,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 PositionSide = order.Data.PositionSide == PositionSide.Oneway ? null : order.Data.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = order.Data.ReduceOnly,
                 Fee = order.Data.Fee == null ? null : Math.Abs(order.Data.Fee.Value),
-                TakeProfitPrice = order.Data.StopLossPrice,
-                StopLossPrice = order.Data.TakeProfitPrice
+                TakeProfitPrice = order.Data.TakeProfitPrice,
+                StopLossPrice = order.Data.StopLossPrice
             });
         }
 
@@ -721,7 +721,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
-                x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
+                ParseSide(x),
                 ParseOrderStatus(x.Status),
                 x.CreateTime)
             {
@@ -735,8 +735,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 PositionSide = x.PositionSide == PositionSide.Oneway ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.Fee == null ? null : Math.Abs(x.Fee.Value),
-                TakeProfitPrice = x.StopLossPrice,
-                StopLossPrice = x.TakeProfitPrice
+                TakeProfitPrice = x.TakeProfitPrice,
+                StopLossPrice = x.StopLossPrice
             }).ToArray());
         }
 
@@ -779,7 +779,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 x.Symbol,
                 x.OrderId.ToString(),
                 ParseOrderType(x.OrderType),
-                x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
+                ParseSide(x),
                 ParseOrderStatus(x.Status),
                 x.CreateTime)
             {
@@ -793,8 +793,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 PositionSide = x.PositionSide == PositionSide.Oneway ? null : x.PositionSide == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                 ReduceOnly = x.ReduceOnly,
                 Fee = x.Fee == null ? null : Math.Abs(x.Fee.Value),
-                TakeProfitPrice = x.StopLossPrice,
-                StopLossPrice = x.TakeProfitPrice
+                TakeProfitPrice = x.TakeProfitPrice,
+                StopLossPrice = x.StopLossPrice
             }).ToArray(), nextToken);
         }
 
@@ -965,17 +965,21 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(result.Data.Success.Single().OrderId.ToString()));
         }
 
+        private SharedOrderSide ParseSide(BitgetFuturesOrder x)
+        {
+            if (x.TradeSide == TradeSide.Open)
+                return x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell;
+
+            if (x.TradeSide == TradeSide.Close)
+                return x.Side == OrderSide.Buy ? SharedOrderSide.Sell : SharedOrderSide.Buy;
+
+            return x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell;
+        }
+
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
             if (status == OrderStatus.New || status == OrderStatus.PartiallyFilled || status == OrderStatus.Initial || status == OrderStatus.Live) return SharedOrderStatus.Open;
             if (status == OrderStatus.Canceled) return SharedOrderStatus.Canceled;
-            return SharedOrderStatus.Filled;
-        }
-
-        private SharedOrderStatus ParseOrderStatus(TriggerOrderStatus? status)
-        {
-            if (status == null || status == TriggerOrderStatus.Live || status == TriggerOrderStatus.Executing) return SharedOrderStatus.Open;
-            if (status == TriggerOrderStatus.FailedExecute || status == TriggerOrderStatus.Canceled) return SharedOrderStatus.Canceled;
             return SharedOrderStatus.Filled;
         }
 
@@ -1010,12 +1014,12 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 // Hedge mode long
                 if (request.Side == SharedOrderSide.Buy)
                     return (OrderSide.Buy, TradeSide.Open);
-                return (OrderSide.Sell, TradeSide.Close);
+                return (OrderSide.Buy, TradeSide.Close);
             }
 
             // Hedge mode short
             if (request.Side == SharedOrderSide.Buy)
-                return (OrderSide.Buy, TradeSide.Close);
+                return (OrderSide.Sell, TradeSide.Close);
             return (OrderSide.Sell, TradeSide.Open);
         }
 
@@ -1039,7 +1043,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 order.Data.Symbol,
                 order.Data.OrderId.ToString(),
                 ParseOrderType(order.Data.OrderType),
-                order.Data.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
+                ParseSide(order.Data),
                 ParseOrderStatus(order.Data.Status),
                 order.Data.CreateTime)
             {

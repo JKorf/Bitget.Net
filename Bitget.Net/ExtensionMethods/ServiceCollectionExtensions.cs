@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfiguration configuration)
         {
             var options = new BitgetOptions();
-            // Reset environment so we know if theyre overriden
+            // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
             configuration.Bind(options);
@@ -63,7 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<BitgetOptions>? optionsDelegate = null)
         {
             var options = new BitgetOptions();
-            // Reset environment so we know if theyre overriden
+            // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
             optionsDelegate?.Invoke(options);
@@ -79,21 +79,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(x => Options.Options.Create(options.Socket));
 
             return AddBitgetCore(services, options.SocketClientLifeTime);
-        }
-
-        /// <summary>
-        /// DEPRECATED; use <see cref="AddBitget(IServiceCollection, Action{BitgetOptions}?)" /> instead
-        /// </summary>
-        public static IServiceCollection AddBitget(
-            this IServiceCollection services,
-            Action<BitgetRestOptions> restDelegate,
-            Action<BitgetSocketOptions>? socketDelegate = null,
-            ServiceLifetime? socketClientLifeTime = null)
-        {
-            services.Configure<BitgetRestOptions>((x) => { restDelegate?.Invoke(x); });
-            services.Configure<BitgetSocketOptions>((x) => { socketDelegate?.Invoke(x); });
-
-            return AddBitgetCore(services, socketClientLifeTime);
         }
 
         /// <summary>

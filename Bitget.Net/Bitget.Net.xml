@@ -12992,11 +12992,6 @@
             <param name="optionsDelegate">Set options for the Bitget services</param>
             <returns></returns>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBitget(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Bitget.Net.Objects.Options.BitgetRestOptions},System.Action{Bitget.Net.Objects.Options.BitgetSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
-            <summary>
-            DEPRECATED; use <see cref="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBitget(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Bitget.Net.Objects.Options.BitgetOptions})" /> instead
-            </summary>
-        </member>
         <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBitgetCore(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
             <summary>
             Add the IBitgetClient and IBitgetSocketClient to the service collection so they can be injected
