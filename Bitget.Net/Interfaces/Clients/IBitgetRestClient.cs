@@ -1,4 +1,7 @@
-﻿using Bitget.Net.Objects;
+﻿using Bitget.Net.Interfaces.Clients.CopyTradingApiV2;
+using Bitget.Net.Interfaces.Clients.FuturesApiV2;
+using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Objects;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Options;
@@ -13,15 +16,18 @@ namespace Bitget.Net.Interfaces.Clients
         /// <summary>
         /// Spot API endpoints
         /// </summary>
-        SpotApiV2.IBitgetRestClientSpotApi SpotApiV2 { get; }
+        /// <see cref="IBitgetRestClientSpotApi"/>
+        IBitgetRestClientSpotApi SpotApiV2 { get; }
         /// <summary>
         /// Futures API endpoints
         /// </summary>
-        FuturesApiV2.IBitgetRestClientFuturesApi FuturesApiV2 { get; }
+        /// <see cref="IBitgetRestClientFuturesApi"/>
+        IBitgetRestClientFuturesApi FuturesApiV2 { get; }
         /// <summary>
         /// Copy Trading Futures API endpoints
         /// </summary>
-        CopyTradingApiV2.IBitgetRestClientCopyTradingApi CopyTradingFuturesV2 { get; }
+        /// <see cref="IBitgetRestClientCopyTradingApi"/>
+        IBitgetRestClientCopyTradingApi CopyTradingFuturesV2 { get; }
 
         /// <summary>
         /// Update specific options

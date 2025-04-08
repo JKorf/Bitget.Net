@@ -4637,6 +4637,7 @@
             <summary>
             Endpoints related to copy trading settings, info or actions
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiTrader"/>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiTrader">
             <summary>
@@ -4661,20 +4662,23 @@
             <summary>
             Endpoints related to account settings, info or actions
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi.ExchangeData">
             <summary>
             Endpoints related to retrieving market and system data
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi.Trading">
             <summary>
             Endpoints related to account settings, info or actions
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi.SharedClient">
             <summary>
-            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount">
@@ -5524,16 +5528,19 @@
             <summary>
             Spot API endpoints
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.IBitgetRestClient.FuturesApiV2">
             <summary>
             Futures API endpoints
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApi"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.IBitgetRestClient.CopyTradingFuturesV2">
             <summary>
             Copy Trading Futures API endpoints
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApi"/>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.IBitgetRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
             <summary>
@@ -5556,11 +5563,13 @@
             <summary>
             Spot streams
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.FuturesApiV2">
             <summary>
             Futures streams
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi"/>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.IBitgetSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
             <summary>
@@ -5583,21 +5592,25 @@
             <summary>
             Endpoints related to account settings, info or actions
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.Margin">
             <summary>
             Endpoints related to margin trading
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.ExchangeData">
             <summary>
             Endpoints related to retrieving market and system data
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.Trading">
             <summary>
             Endpoints related to account settings, info or actions
             </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiTrading"/>
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi.SharedClient">
             <summary>

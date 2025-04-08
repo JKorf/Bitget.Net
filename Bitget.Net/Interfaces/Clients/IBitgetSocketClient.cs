@@ -1,4 +1,6 @@
-﻿using Bitget.Net.Objects;
+﻿using Bitget.Net.Interfaces.Clients.FuturesApiV2;
+using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Objects;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Options;
@@ -13,11 +15,13 @@ namespace Bitget.Net.Interfaces.Clients
         /// <summary>
         /// Spot streams
         /// </summary>
-        SpotApiV2.IBitgetSocketClientSpotApi SpotApiV2 { get; set; }
+        /// <see cref="IBitgetSocketClientSpotApi"/>
+        IBitgetSocketClientSpotApi SpotApiV2 { get; set; }
         /// <summary>
         /// Futures streams
         /// </summary>
-        FuturesApiV2.IBitgetSocketClientFuturesApi FuturesApiV2 { get; set; }
+        /// <see cref="IBitgetSocketClientFuturesApi"/>
+        IBitgetSocketClientFuturesApi FuturesApiV2 { get; set; }
 
         /// <summary>
         /// Update specific options

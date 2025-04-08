@@ -10,21 +10,25 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>
+        /// <see cref="IBitgetRestClientSpotApiAccount"/>
         public IBitgetRestClientSpotApiAccount Account { get; }
 
         /// <summary>
         /// Endpoints related to margin trading
         /// </summary>
+        /// <see cref="IBitgetRestClientSpotApiMargin"/>
         public IBitgetRestClientSpotApiMargin Margin { get; }
 
         /// <summary>
         /// Endpoints related to retrieving market and system data
         /// </summary>
+        /// <see cref="IBitgetRestClientSpotApiExchangeData"/>
         public IBitgetRestClientSpotApiExchangeData ExchangeData { get; }
 
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>
+        /// <see cref="IBitgetRestClientSpotApiTrading"/>
         public IBitgetRestClientSpotApiTrading Trading { get; }
 
         /// <summary>
