@@ -116,7 +116,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.GetOpenOrdersAsync("ETHUSDT"), "GetOpenOrders");
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.GetClosedOrdersAsync("ETHUSDT"), "GetClosedOrders", ignoreProperties: new List<string> { "feeDetail" });
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.GetUserTradesAsync("ETHUSDT"), "GetUserTrades", ignoreProperties: new List<string> { "deduction" });
-            await tester.ValidateAsync(client => client.SpotApiV2.Trading.PlaceMultipleOrdersAsync("ETHUSDT", new[] { new BitgetPlaceOrderRequest() }), "PlaceMultipleOrders");
+            await tester.ValidateAsync(client => client.SpotApiV2.Trading.PlaceMultipleOrdersAsync("ETHUSDT", new[] { new BitgetPlaceOrderRequest() }), "PlaceMultipleOrders", skipResponseValidation: true);
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.CancelMultipleOrdersAsync("ETHUSDT", new[] { new BitgetCancelOrderRequest() }), "CancelMultipleOrders");
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.PlaceTriggerOrderAsync("ETHUSDT", OrderSide.Sell, OrderType.Market, 1, 1), "PlaceTriggerOrder");
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.EditTriggerOrderAsync(1, OrderType.Market, 1), "EditTriggerOrder");
@@ -189,7 +189,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetPositionsAsync(Enums.BitgetProductTypeV2.UsdtFutures, "USDT"), "GetPositions");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetPositionHistoryAsync(Enums.BitgetProductTypeV2.UsdtFutures, "USDT"), "GetPositionHistory");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", OrderSide.Sell, OrderType.Market, MarginMode.CrossMargin, 1), "PlaceOrder");
-            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceMultipleOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", MarginMode.IsolatedMargin, new[] { new BitgetFuturesPlaceOrderRequest() }), "PlaceMultipleOrders");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.PlaceMultipleOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", MarginMode.IsolatedMargin, new[] { new BitgetFuturesPlaceOrderRequest() }), "PlaceMultipleOrders", skipResponseValidation: true);
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.EditOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT"), "EditOrder");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.CancelOrderAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT"), "CancelOrder");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.CancelMultipleOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, new[] { new BitgetCancelOrderRequest() }), "CancelMultipleOrders");

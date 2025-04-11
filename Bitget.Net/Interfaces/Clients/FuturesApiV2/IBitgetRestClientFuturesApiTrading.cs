@@ -93,7 +93,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="orders">Orders</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderMultipleResult>> PlaceMultipleOrdersAsync(
+        Task<WebCallResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,

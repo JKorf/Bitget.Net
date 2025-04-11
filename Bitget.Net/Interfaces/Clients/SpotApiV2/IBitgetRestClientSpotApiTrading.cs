@@ -55,7 +55,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="orders">Orders to place</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderMultipleResult>> PlaceMultipleOrdersAsync(
+        Task<WebCallResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
             string symbol,
             IEnumerable<BitgetPlaceOrderRequest> orders,
             CancellationToken ct = default);

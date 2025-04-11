@@ -99,7 +99,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderMultipleResult>> PlaceMultipleOrdersAsync(
+        public async Task<WebCallResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -116,7 +116,21 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/batch-place-order", BitgetExchange.RateLimiter.Overal, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-            return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
+            var resultData = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
+            if (!resultData)
+                return resultData.As<CallResult<BitgetOrderId>[]>(default);
+
+            var result = new List<CallResult<BitgetOrderId>>();
+            foreach (var item in resultData.Data.Success)
+                result.Add(new CallResult<BitgetOrderId>(item!));
+
+            foreach (var item in resultData.Data.Failed)
+                result.Add(new CallResult<BitgetOrderId>(new ServerError(item.ErrorCode!.Value, item.ErrorMessage!)));
+
+            if (result.All(x => !x.Success))
+                return resultData.AsErrorWithData(new ServerError("All orders failed"), result.ToArray());
+
+            return resultData.As(result.ToArray());
         }
 
         /// <inheritdoc />
@@ -379,7 +393,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             if ((oneWaySide != null && hedgeModePositionSide != null)
                 || (oneWaySide == null && hedgeModePositionSide == null))
+            {
                 throw new ArgumentException("Either hedgeModePositionSide (for two way position mode) or oneWaySide (for one way position mode) should be provided");
+            }
 
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType); 
