@@ -84,5 +84,25 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("sellLimitPriceRatio")]
         public decimal? SellLimitPriceRatio { get; set; }
+        /// <summary>
+        /// Max number of orders allowed
+        /// </summary>
+        [JsonPropertyName("orderQuantity")]
+        public int? MaxOrders { get; set; }
+        /// <summary>
+        /// Area symbol
+        /// </summary>
+        [JsonPropertyName("areaSymbol")]
+        public bool? AreaSymbol { get; set; }
+        /// <summary>
+        /// Open time
+        /// </summary>
+        [JsonPropertyName("openTime")]
+        public DateTime? OpenTime { get; set; }
+        /// <summary>
+        /// Offline time
+        /// </summary>
+        [JsonPropertyName("offTime")]
+        public DateTime? OfflineTime { get; set; }
     }
 }

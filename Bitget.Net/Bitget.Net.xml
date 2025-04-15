@@ -922,6 +922,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.NullableBoolean">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.Decimal">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -12046,6 +12051,26 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetSymbol.SellLimitPriceRatio">
             <summary>
             Max percentage spread between sell limit price and current price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSymbol.MaxOrders">
+            <summary>
+            Max number of orders allowed
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSymbol.AreaSymbol">
+            <summary>
+            Area symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSymbol.OpenTime">
+            <summary>
+            Open time
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSymbol.OfflineTime">
+            <summary>
+            Offline time
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetTicker">
