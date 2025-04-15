@@ -199,7 +199,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFundingRate>> GetFundingRateAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+        Task<WebCallResult<BitgetCurrentFundingRate>> GetFundingRateAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get position tiers

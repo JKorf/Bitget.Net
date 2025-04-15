@@ -1284,6 +1284,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetCurrentFundingRateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetDepositAddress">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -1935,6 +1940,16 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetCrossUserTradeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetCurrentFundingRate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetCurrentFundingRateArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -8288,6 +8303,36 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetCrossUserTrade.FeeDetail">
             <summary>
             Fee detail
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCurrentFundingRate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCurrentFundingRate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCurrentFundingRate.FundingRate">
+            <summary>
+            Current funding rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCurrentFundingRate.FundingInterval">
+            <summary>
+            Funding interval in hours
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCurrentFundingRate.FundingRateLowerLimit">
+            <summary>
+            Lower limit of funding rate, 0.025 represents 2.5%
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCurrentFundingRate.FundingRateUpperLimit">
+            <summary>
+            Upper limit of funding rate, 0.025 represents 2.5%
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetDepositAddress">

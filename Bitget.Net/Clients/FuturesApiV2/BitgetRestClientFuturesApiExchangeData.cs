@@ -224,15 +224,15 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFundingRate>> GetFundingRateAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetCurrentFundingRate>> GetFundingRateAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
             parameters.AddEnum("productType", productType);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/market/current-fund-rate", BitgetExchange.RateLimiter.Overal, 1, false,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<BitgetFundingRate[]>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<BitgetFundingRate>(result.Data?.First());
+            var result = await _baseClient.SendAsync<BitgetCurrentFundingRate[]>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<BitgetCurrentFundingRate>(result.Data?.First());
         }
 
         /// <inheritdoc />
