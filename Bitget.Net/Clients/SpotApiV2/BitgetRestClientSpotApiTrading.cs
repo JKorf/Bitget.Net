@@ -248,7 +248,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         /// <inheritdoc />
         public async Task<WebCallResult<BitgetUserTrade[]>> GetUserTradesAsync(
-            string symbol,
+            string? symbol = null,
             string? orderId = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
@@ -257,7 +257,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.Add("symbol", symbol);
+            parameters.AddOptional("symbol", symbol);
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);

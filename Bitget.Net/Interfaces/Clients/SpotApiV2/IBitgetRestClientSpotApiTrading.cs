@@ -204,7 +204,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get user trade history
         /// <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Fills" /></para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -213,7 +213,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetUserTrade[]>> GetUserTradesAsync(
-            string symbol,
+            string? symbol = null,
             string? orderId = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
