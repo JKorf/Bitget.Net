@@ -111,5 +111,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return await _baseClient.SendAsync<BitgetFuturesLedger>(request, parameters, ct).ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetFuturesAdlRank[]>> GetAdlRankAsync(BitgetProductTypeV2 productType, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("productType", productType);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/position/adlRank", BitgetExchange.RateLimiter.Overal, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BitgetFuturesAdlRank[]>(request, parameters, ct).ConfigureAwait(false);
+        }
     }
 }

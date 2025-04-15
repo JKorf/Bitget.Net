@@ -299,6 +299,9 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.GetLedgerAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.GetAdlRankAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData">
             <inheritdoc />
         </member>
@@ -1309,6 +1312,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetFuturesAdlRankArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetFuturesBalanceArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -1990,6 +1998,16 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetFundingTimeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetFuturesAdlRank">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetFuturesAdlRankArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -4784,6 +4802,15 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.GetAdlRankAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <summary>
+            Get Auto deleverage rank
+            <para><a href="https://www.bitget.com/api-doc/contract/position/Get-ADL-Rank" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData">
             <summary>
             Bitget exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
@@ -6648,7 +6675,7 @@
             Get user trade history
             <para><a href="https://www.bitget.com/api-doc/spot/trade/Get-Fills" /></para>
             </summary>
-            <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
             <param name="orderId">Filter by order id</param>
             <param name="startTime">Filter by start time</param>
             <param name="endTime">Filter by end time</param>
@@ -8463,6 +8490,26 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFundingTime.RatePeriod">
             <summary>
             Rate settlement cycle in hours
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesAdlRank">
+            <summary>
+            Auto deleverage rank
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesAdlRank.MarginAsset">
+            <summary>
+            Margin asset
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesAdlRank.Symbol">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesAdlRank.AdlRank">
+            <summary>
+            Auto deleverage rank
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance">

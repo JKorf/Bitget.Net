@@ -1,9 +1,0 @@
-{
-  "code":"00000",
-  "data":{
-    "orderId":"1627293504612",
-    "clientOid":"BITGET#1627293504612"
-  },
-  "msg":"success",
-  "requestTime":1627293504612
-}

@@ -146,6 +146,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.FuturesApiV2.Account.SetMarginModeAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", MarginMode.IsolatedMargin), "SetMarginMode");
             await tester.ValidateAsync(client => client.FuturesApiV2.Account.SetPositionModeAsync(Enums.BitgetProductTypeV2.UsdtFutures, PositionMode.OneWay), "SetPositionMode");
             await tester.ValidateAsync(client => client.FuturesApiV2.Account.GetLedgerAsync(Enums.BitgetProductTypeV2.UsdtFutures), "GetLedger");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Account.GetAdlRankAsync(Enums.BitgetProductTypeV2.UsdtFutures), "GetAdlRank");
         }
 
         [Test]

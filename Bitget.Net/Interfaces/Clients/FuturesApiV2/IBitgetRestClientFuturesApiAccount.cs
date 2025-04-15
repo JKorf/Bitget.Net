@@ -93,5 +93,13 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesLedger>> GetLedgerAsync(BitgetProductTypeV2 productType, string? asset = null, string? businessType = null, DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int? limit = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Get Auto deleverage rank
+        /// <para><a href="https://www.bitget.com/api-doc/contract/position/Get-ADL-Rank" /></para>
+        /// </summary>
+        /// <param name="productType">Product type</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetFuturesAdlRank[]>> GetAdlRankAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
     }
 }
