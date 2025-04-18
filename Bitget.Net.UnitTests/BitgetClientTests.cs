@@ -36,7 +36,7 @@ namespace Bitget.Net.UnitTests
                 Message = "Error occured"
             };
 
-            TestHelpers.SetResponse((BitgetRestClient)client, JsonSerializer.Serialize(resultObj, SerializerOptions.WithConverters(BitgetExchange.SerializerContext)));
+            TestHelpers.SetResponse((BitgetRestClient)client, JsonSerializer.Serialize(resultObj, SerializerOptions.WithConverters(BitgetExchange._serializerContext)));
 
             // act
             var result = await client.SpotApiV2.ExchangeData.GetAssetsAsync();
@@ -74,7 +74,7 @@ namespace Bitget.Net.UnitTests
                 Message = "Error occurred"
             };
 
-            TestHelpers.SetResponse((BitgetRestClient)client, JsonSerializer.Serialize(resultObj, SerializerOptions.WithConverters(BitgetExchange.SerializerContext)), System.Net.HttpStatusCode.BadRequest);
+            TestHelpers.SetResponse((BitgetRestClient)client, JsonSerializer.Serialize(resultObj, SerializerOptions.WithConverters(BitgetExchange._serializerContext)), System.Net.HttpStatusCode.BadRequest);
 
             // act
             var result = await client.SpotApiV2.ExchangeData.GetAssetsAsync();

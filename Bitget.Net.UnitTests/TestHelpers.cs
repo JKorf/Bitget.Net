@@ -74,7 +74,7 @@ namespace Bitget.Net.UnitTests
         public static IBitgetRestClient CreateResponseClient<T>(T response, Action<BitgetRestOptions> options = null)
         {
             var client = (BitgetRestClient)CreateClient(options);
-            SetResponse(client, JsonSerializer.Serialize(response, SerializerOptions.WithConverters(BitgetExchange.SerializerContext)));
+            SetResponse(client, JsonSerializer.Serialize(response, SerializerOptions.WithConverters(BitgetExchange._serializerContext)));
             return client;
         }
 

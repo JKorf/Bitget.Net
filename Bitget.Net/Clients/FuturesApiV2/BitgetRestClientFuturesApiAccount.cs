@@ -28,7 +28,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddEnum("productType", productType);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/account", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/account", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetFuturesBalance>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -38,7 +38,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/accounts", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/accounts", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetFuturesBalance[]>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -52,7 +52,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddString("leverage", leverage);
             parameters.AddEnum("productType", productType);
             parameters.AddOptionalEnum("holdSide", side);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-leverage", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-leverage", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetPositionLeverage>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -66,7 +66,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddString("amount", quantity);
             parameters.AddEnum("productType", productType);
             parameters.AddOptionalEnum("holdSide", side);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-margin", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-margin", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
@@ -79,7 +79,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.Add("marginCoin", marginAsset);
             parameters.AddEnum("productType", productType);
             parameters.AddOptionalEnum("marginMode", mode);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-margin-mode", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-margin-mode", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetPositionLeverage>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -90,7 +90,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
             parameters.AddEnum("posMode", mode);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-position-mode", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-position-mode", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetPositionMode>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -106,7 +106,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/bill", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/bill", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetFuturesLedger>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -116,7 +116,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/position/adlRank", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/position/adlRank", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetFuturesAdlRank[]>(request, parameters, ct).ConfigureAwait(false);
         }

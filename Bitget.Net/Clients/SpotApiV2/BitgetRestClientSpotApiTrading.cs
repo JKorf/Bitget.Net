@@ -50,7 +50,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalString("executeTakeProfitPrice", executeTakeProfitPrice);
             parameters.AddOptionalString("presetStopLossPrice", presetStopLossPrice);
             parameters.AddOptionalString("executeStopLossPrice", executeStopLossPrice);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/place-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/place-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);            
             return result;
@@ -65,7 +65,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
             parameters.Add("orderList", orders.ToArray());
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-orders", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-orders", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var resultData = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
             if (!resultData)
@@ -113,7 +113,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalString("executeTakeProfitPrice", executeTakeProfitPrice);
             parameters.AddOptionalString("presetStopLossPrice", presetStopLossPrice);
             parameters.AddOptionalString("executeStopLossPrice", executeStopLossPrice);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-replace-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-replace-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderIdResult>(request, parameters, ct).ConfigureAwait(false);
             if (!result)
@@ -132,7 +132,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("orderList", orders.ToArray());
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-replace-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-replace-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderIdResult[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -151,7 +151,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptionalEnum("tpslType", tpslType);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -166,7 +166,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
             parameters.Add("orderList", orders.ToArray());
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -179,7 +179,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-symbol-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-symbol-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
@@ -193,7 +193,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("clientOid", clientOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/orderInfo", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/orderInfo", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -217,7 +217,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalEnum("tpslType", tpslType);
             parameters.AddOptional("idLessThan", idLessThan);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/unfilled-orders", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/unfilled-orders", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -241,7 +241,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalEnum("tpslType", tpslType);
             parameters.AddOptional("idLessThan", idLessThan);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/history-orders", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/history-orders", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -263,7 +263,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/fills", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/fills", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetUserTrade[]>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -293,7 +293,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalEnum("force", timeInForce);
             parameters.AddOptionalEnum("planType", quantityType);
             parameters.AddOptionalEnum("triggerType", triggerPriceType);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/place-plan-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/place-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -315,7 +315,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalString("executePrice", orderPrice);
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("clientOid", clientOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/modify-plan-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/modify-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -329,7 +329,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("clientOid", clientOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-plan-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/cancel-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
         }
@@ -341,7 +341,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("symbols", symbols?.ToArray());
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-plan-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/spot/trade/batch-cancel-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -361,7 +361,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddOptional("idLessThan", idLessThan);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/current-plan-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/current-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderList>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -373,7 +373,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("planOrderId", triggerOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/plan-sub-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/plan-sub-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetTriggerSubOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -391,7 +391,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddMilliseconds("startTime", startTime);
             parameters.AddMilliseconds("endTime", endTime);
             parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/history-plan-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/trade/history-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderList>(request, parameters, ct).ConfigureAwait(false);
         }

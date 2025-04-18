@@ -39,7 +39,7 @@ namespace Bitget.Net
             if (!auth)
                 return;
 
-            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonSerializer.Serialize(bodyParameters, SerializerOptions.WithConverters(BitgetExchange.SerializerContext)) : "";
+            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonSerializer.Serialize(bodyParameters, SerializerOptions.WithConverters(BitgetExchange._serializerContext)) : "";
             string? query = null;
             if (uriParameters != null)
                 query = uriParameters.CreateParamString(false, arraySerialization);
