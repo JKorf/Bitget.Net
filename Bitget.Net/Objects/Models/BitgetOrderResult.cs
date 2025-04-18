@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models
 {
@@ -10,15 +10,15 @@ namespace Bitget.Net.Objects.Models
         /// <summary>
         /// Order id
         /// </summary>
-        [JsonProperty("orderId")]
+        [JsonPropertyName("orderId")]
         public string? OrderId { get; set; } = string.Empty;
         /// <summary>
         /// Client order id
         /// </summary>
-        [JsonProperty("clientOrderId")]
+        [JsonPropertyName("clientOrderId")]
         public string? ClientOrderId { get; set; }
 
-        [JsonProperty("clientOid")]
+        [JsonPropertyName("clientOid")]
         internal string? IntClientOrderId { get => ClientOrderId; set => ClientOrderId = value; }
     }
 }

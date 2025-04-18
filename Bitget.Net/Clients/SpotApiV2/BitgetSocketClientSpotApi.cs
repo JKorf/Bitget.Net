@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models.V2;
@@ -52,9 +52,9 @@ namespace Bitget.Net.Clients.SpotApiV2
         #endregion
 
         /// <inheritdoc />
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
         /// <inheritdoc />
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
@@ -89,7 +89,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetTickerUpdate>> handler, CancellationToken ct = default)
         {
-            var internalHandler = (DataEvent<IEnumerable<BitgetTickerUpdate>> data) =>
+            var internalHandler = (DataEvent<BitgetTickerUpdate[]> data) =>
             {
                 foreach (var item in data.Data)
                     handler(data.As(item).WithDataTimestamp(data.DataTime));
@@ -105,11 +105,11 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<BitgetTradeUpdate>>> handler, CancellationToken ct = default)
+        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<BitgetTradeUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToTradeUpdatesAsync(new[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetTradeUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetTradeUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
@@ -121,16 +121,16 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<IEnumerable<BitgetKlineUpdate>>> handler, CancellationToken ct = default)
+        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<BitgetKlineUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToKlineUpdatesAsync(new[] { symbol }, interval, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<IEnumerable<BitgetKlineUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<BitgetKlineUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", "SPOT" },
-                        { "channel", "candle" + CryptoExchange.Net.Converters.SystemTextJson.EnumConverter.GetString(interval) },
+                        { "channel", "candle" + EnumConverter.GetString(interval) },
                         { "instId", s },
                     }).ToArray()
             , false, handler, ct).ConfigureAwait(false);
@@ -145,7 +145,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             limit?.ValidateIntValues(nameof(limit), 1, 5, 15);
 
-            var internalHandler = (DataEvent<IEnumerable<BitgetOrderBookUpdate>> data) =>
+            var internalHandler = (DataEvent<BitgetOrderBookUpdate[]> data) =>
             {
                 foreach (var item in data.Data)
                     handler(data.As(item).WithDataTimestamp(data.DataTime));
@@ -161,7 +161,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToMarginIndexPriceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetIndexPriceUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToMarginIndexPriceUpdatesAsync(Action<DataEvent<BitgetIndexPriceUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), [new Dictionary<string, string>
                     {
@@ -173,7 +173,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<IEnumerable<BitgetOrderUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BitgetOrderUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
                     {
@@ -185,7 +185,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<IEnumerable<BitgetUserTradeUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BitgetUserTradeUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
                     {
@@ -197,7 +197,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTriggerOrderUpdatesAsync(Action<DataEvent<IEnumerable<BitgetTriggerOrderUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTriggerOrderUpdatesAsync(Action<DataEvent<BitgetTriggerOrderUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
                     {
@@ -209,7 +209,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<IEnumerable<BitgetBalanceUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(Action<DataEvent<BitgetBalanceUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
                     {
@@ -221,7 +221,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginAccountUpdatesAsync(Action<DataEvent<IEnumerable<BitgetCrossAccountUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginAccountUpdatesAsync(Action<DataEvent<BitgetCrossAccountUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), [new Dictionary<string, string>
                     {
@@ -233,7 +233,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetMarginOrderUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToCrossMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetMarginOrderUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), symbols.Select(x => new Dictionary<string, string>
                     {
@@ -245,7 +245,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginAccountUpdatesAsync(Action<DataEvent<IEnumerable<BitgetIsolatedAccountUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginAccountUpdatesAsync(Action<DataEvent<BitgetIsolatedAccountUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), [new Dictionary<string, string>
                     {
@@ -257,7 +257,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<BitgetMarginOrderUpdate>>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToIsolatedMarginOrderUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetMarginOrderUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), symbols.Select(x => new Dictionary<string, string>
                     {
@@ -280,13 +280,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProvider((BitgetApiCredentials)credentials);
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProviderV2(credentials);
 
         /// <inheritdoc />
         protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection)
         {
-            var time = CryptoExchange.Net.Converters.SystemTextJson.DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
-            var authProvider = (BitgetAuthenticationProvider)AuthenticationProvider!;
+            var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
+            var authProvider = (BitgetAuthenticationProviderV2)AuthenticationProvider!;
             var signature = authProvider.GetWebsocketSignature(time);
 
             var socketRequest = new BitgetSocketRequest

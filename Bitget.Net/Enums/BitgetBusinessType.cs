@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bitget.Net.Enums
 {
     /// <summary>
     /// Business type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<BitgetBusinessType>))]
     public enum BitgetBusinessType
     {
         /// <summary>

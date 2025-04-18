@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums.V2;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Enums.V2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Margin order update
     /// </summary>
+    [SerializationModel]
     public record BitgetMarginOrderUpdate
     {
         /// <summary>
@@ -40,7 +42,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Fee detail
         /// </summary>
         [JsonPropertyName("feeDetail")]
-        public IEnumerable<BitgetTradeFee> FeeDetail { get; set; } = Array.Empty<BitgetTradeFee>();
+        public BitgetTradeFee[] FeeDetail { get; set; } = Array.Empty<BitgetTradeFee>();
         /// <summary>
         /// Enter point source
         /// </summary>

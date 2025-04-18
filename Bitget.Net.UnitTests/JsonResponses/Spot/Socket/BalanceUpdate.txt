@@ -1,9 +1,0 @@
-[{
-        "coinId": "2",
-        "coinName": "USDT",
-        "available": "1000.0000"
-    }, {
-        "coinId": "1",
-        "coinName": "BTC",
-        "available": "1.35000"
-    }]

@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Converters;
 using Bitget.Net.Enums.V2;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Order info
     /// </summary>
+    [SerializationModel]
     public record BitgetOrder
     {
         /// <summary>
@@ -118,6 +120,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Order fees
     /// </summary>
+    [SerializationModel]
     public record BitgetOrderFees
     {
         /// <summary>
@@ -130,6 +133,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Order fee info
     /// </summary>
+    [SerializationModel]
     public record BitgetOrderNewFees
     {
         /// <summary>

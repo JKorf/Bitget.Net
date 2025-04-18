@@ -1,6 +1,6 @@
 ﻿using CryptoExchange.Net.SharedApis;
 
-namespace Bitget.Net.Interfaces.Clients.SpotApiV2
+namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 {
     /// <summary>
     /// Shared interface for Futures socket API usage

@@ -1,8 +1,0 @@
-{
-  "code": "00000",
-  "msg": "success",
-  "data": {
-    "orderId":"888291686266343424",
-    "clientOrderId":"123"
-  }
-}

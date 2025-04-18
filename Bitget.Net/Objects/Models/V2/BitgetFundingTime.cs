@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Converters;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Funding time info
     /// </summary>
+    [SerializationModel]
     public record BitgetFundingTime
     {
         /// <summary>

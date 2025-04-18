@@ -1,13 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Bitget.Net.Enums.V2
 {
     /// <summary>
     /// Tirgger sub order status
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<SubTriggerOrderStatus>))]
     public enum SubTriggerOrderStatus
     {
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net.Objects;
 
@@ -15,7 +15,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetBalance>>> GetFundingBalancesAsync(CancellationToken ct = default);
+        Task<WebCallResult<BitgetBalance[]>> GetFundingBalancesAsync(CancellationToken ct = default);
         /// <summary>
         /// Get trading fee for a symbol
         /// <para><a href="https://www.bitget.com/api-doc/common/public/Get-Trade-Rate" /></para>
@@ -32,7 +32,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetAssetValue>>> GetAssetsValuationAsync(CancellationToken ct = default);
+        Task<WebCallResult<BitgetAssetValue[]>> GetAssetsValuationAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get account info
@@ -48,7 +48,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetSpotBalance>>> GetSpotBalancesAsync(CancellationToken ct = default);
+        Task<WebCallResult<BitgetSpotBalance[]>> GetSpotBalancesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Set the account to receive deposits in for an asset
@@ -73,7 +73,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetSpotLedgerEntry>>> GetLedgerAsync(string? asset = null, Enums.V2.GroupType? groupType = null, Enums.V2.BusinessType? businessType = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetSpotLedgerEntry[]>> GetLedgerAsync(string? asset = null, Enums.V2.GroupType? groupType = null, Enums.V2.BusinessType? businessType = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Transfer funds between accounts
@@ -97,7 +97,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="toAccount">To account</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<string>>> GetTransferableAssetsAsync(Enums.V2.TransferAccountType fromAccount, Enums.V2.TransferAccountType toAccount, CancellationToken ct = default);
+        Task<WebCallResult<string[]>> GetTransferableAssetsAsync(Enums.V2.TransferAccountType fromAccount, Enums.V2.TransferAccountType toAccount, CancellationToken ct = default);
 
         /// <summary>
         /// Withdraw asset
@@ -131,7 +131,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="idLessThan">[Deprecated] Use page instead</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetTransferRecord>>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType fromAccount, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? page = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetTransferRecord[]>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType fromAccount, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? page = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set BGB fee deduction enabled status
@@ -182,7 +182,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="idLessThan">Return results before this id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetWithdrawalRecord>>> GetWithdrawalHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, string? clientOrderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetWithdrawalRecord[]>> GetWithdrawalHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, string? clientOrderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get deposit history
@@ -196,7 +196,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="idLessThan">Return results before this id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetDepositRecord>>> GetDepositHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetDepositRecord[]>> GetDepositHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Transfer assets between subaccounts or parent and subaccount
@@ -219,7 +219,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Subaccount-Assets" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BitgetSubAccountBalances>>> GetSubAccountBalancesAsync(CancellationToken ct = default);
+        Task<WebCallResult<BitgetSubAccountBalances[]>> GetSubAccountBalancesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get transfer history between master and sub account
@@ -234,7 +234,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">Id less than this</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BitgetSubAccountTransfer>>> GetSubAccountTransferHistoryAsync(string? asset = null, string? role = null, long? subAccountId = null, string? clientOrderID = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? idLessThan = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetSubAccountTransfer[]>> GetSubAccountTransferHistoryAsync(string? asset = null, string? role = null, long? subAccountId = null, string? clientOrderID = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get sub account deposit address
@@ -258,7 +258,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="idLessThan">Return ids less than this</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<BitgetDepositRecord>>> GetSubAccountDepositHistoryAsync(long subAccountId, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetDepositRecord[]>> GetSubAccountDepositHistoryAsync(long subAccountId, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int? limit = null, CancellationToken ct = default);
 
     }
 }

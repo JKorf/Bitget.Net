@@ -1,0 +1,15 @@
+GET
+/api/v2/mix/position/adlRank
+true
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 21312312312321,
+    "data": [
+        {
+            "marginCoin": "USDT",
+            "symbol": "BTCUSDT",
+            "adlRank": "0.0009"
+        }
+    ]
+}

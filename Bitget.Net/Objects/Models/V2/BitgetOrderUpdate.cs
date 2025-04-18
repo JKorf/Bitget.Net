@@ -1,4 +1,5 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Order update
     /// </summary>
+    [SerializationModel]
     public record BitgetOrderUpdate
     {
         /// <summary>
@@ -123,7 +125,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Fees
         /// </summary>
         [JsonPropertyName("feeDetail")]
-        public IEnumerable<BitgetOrderUpdateFee> Fees { get; set; } = Array.Empty<BitgetOrderUpdateFee>();
+        public BitgetOrderUpdateFee[] Fees { get; set; } = Array.Empty<BitgetOrderUpdateFee>();
         /// <summary>
         /// Create time
         /// </summary>
@@ -139,6 +141,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Trade fee
     /// </summary>
+    [SerializationModel]
     public record BitgetOrderUpdateFee
     {
         /// <summary>

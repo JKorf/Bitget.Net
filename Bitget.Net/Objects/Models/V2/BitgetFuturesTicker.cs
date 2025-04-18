@@ -1,4 +1,5 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -9,6 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Ticker info
     /// </summary>
+    [SerializationModel]
     public record BitgetFuturesTicker
     {
         /// <summary>
