@@ -1204,7 +1204,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return result.AsExchangeResult<SharedFee>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFee(result.Data.First().MakerFeeRate * 100, result.Data.First().TakerFeeRate * 100));
+            return result.AsExchangeResult(Exchange, SupportedTradingModes, new SharedFee(result.Data.First().MakerFeeRate * 100, result.Data.First().TakerFeeRate * 100));
         }
         #endregion
 
@@ -1392,7 +1392,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(result.Data.OrderId.ToString()));
+            return result.AsExchangeResult(Exchange, SupportedTradingModes, new SharedId(result.Data.OrderId.ToString()));
         }
 
         EndpointOptions<CancelTpSlRequest> IFuturesTpSlRestClient.CancelFuturesTpSlOptions { get; } = new EndpointOptions<CancelTpSlRequest>(true)
