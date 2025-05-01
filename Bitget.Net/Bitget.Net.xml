@@ -29,6 +29,12 @@
             Get the Bitget environment by name
             </summary>
         </member>
+        <member name="P:Bitget.Net.BitgetEnvironment.All">
+            <summary>
+            Available environment names
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:Bitget.Net.BitgetEnvironment.Live">
             <summary>
             Live environment
