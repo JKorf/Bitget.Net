@@ -39,10 +39,17 @@ namespace Bitget.Net
          => name switch
          {
              TradeEnvironmentNames.Live => Live,
+             "demo" => DemoTrading,
              "" => Live,
              null => Live,
              _ => default
          };
+
+        /// <summary>
+        /// Available environment names
+        /// </summary>
+        /// <returns></returns>
+        public static string[] All => [Live.Name, DemoTrading.Name];
 
         /// <summary>
         /// Live environment
@@ -52,7 +59,7 @@ namespace Bitget.Net
         /// <summary>
         /// Demo trading environment
         /// </summary>
-        public static BitgetEnvironment DemoTrading { get; } = new BitgetEnvironment("DemoTrading", BitgetApiAddresses.Default.RestBaseAddress, BitgetApiAddresses.Default.SocketBaseAddress);
+        public static BitgetEnvironment DemoTrading { get; } = new BitgetEnvironment("demo", BitgetApiAddresses.Default.RestBaseAddress, BitgetApiAddresses.Default.SocketBaseAddress);
 
         /// <summary>
         /// Create a custom environment

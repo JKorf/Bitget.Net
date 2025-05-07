@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net;
+﻿using Bitget.Net.Converters;
+using CryptoExchange.Net;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiting;
 using CryptoExchange.Net.RateLimiting.Filters;
 using CryptoExchange.Net.RateLimiting.Guards;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.SharedApis;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net
 {
@@ -46,6 +49,8 @@ namespace Bitget.Net
         /// </summary>
         public static ExchangeType Type { get; } = ExchangeType.CEX;
 
+        internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<BitgetSourceGenerationContext>();
+
         /// <summary>
         /// Format a base and quote asset to a Bitget recognized symbol 
         /// </summary>
@@ -75,6 +80,11 @@ namespace Bitget.Net
         /// </summary>
         public event Action<RateLimitEvent> RateLimitTriggered;
 
+        /// <summary>
+        /// Event when the rate limit is updated. Note that it's only updated when a request is send, so there are no specific updates when the current usage is decaying.
+        /// </summary>
+        public event Action<RateLimitUpdateEvent> RateLimitUpdated;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal BitgetRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -84,7 +94,7 @@ namespace Bitget.Net
 
         private void Initialize()
         {
-            Overal = new RateLimitGate("Overal")
+            Overall = new RateLimitGate("Overall")
                                     .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, Array.Empty<IGuardFilter>(), 6000, TimeSpan.FromSeconds(60), RateLimitWindowType.FixedAfterFirst)); // Overall limit of 6000 per ip per minute
 
             Websocket = new RateLimitGate("Websocket")
@@ -92,12 +102,14 @@ namespace Bitget.Net
                                     .AddGuard(new RateLimitGuard(RateLimitGuard.PerConnection, new LimitItemTypeFilter(RateLimitItemType.Request), 240, TimeSpan.FromMinutes(60), RateLimitWindowType.FixedAfterFirst)) // Limit of 240 (subscription) requests per hour
                                     .AddGuard(new RateLimitGuard(RateLimitGuard.PerConnection, new LimitItemTypeFilter(RateLimitItemType.Request), 10, TimeSpan.FromSeconds(1), RateLimitWindowType.FixedAfterFirst)); // Limit of 10 messages per second
 
-            Overal.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            Overall.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            Overall.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
             Websocket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            Websocket.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
         }
 
 
-        internal IRateLimitGate Overal { get; private set; }
+        internal IRateLimitGate Overall { get; private set; }
         internal IRateLimitGate Websocket { get; private set; }
     }
 }

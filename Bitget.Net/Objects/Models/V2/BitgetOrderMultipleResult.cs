@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Converters;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,23 +10,25 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Multiple orders result
     /// </summary>
+    [SerializationModel]
     public record BitgetOrderMultipleResult
     {
         /// <summary>
         /// Successful orders
         /// </summary>
         [JsonPropertyName("successList")]
-        public IEnumerable<BitgetOrderId> Success { get; set; } = Array.Empty<BitgetOrderId>();
+        public BitgetOrderId[] Success { get; set; } = Array.Empty<BitgetOrderId>();
         /// <summary>
         /// Failed orders
         /// </summary>
         [JsonPropertyName("failureList")]
-        public IEnumerable<BitgetPlaceFailure> Failed { get; set; } = Array.Empty<BitgetPlaceFailure>();
+        public BitgetPlaceFailure[] Failed { get; set; } = Array.Empty<BitgetPlaceFailure>();
     }
 
     /// <summary>
     /// Place order failure info
     /// </summary>
+    [SerializationModel]
     public record BitgetPlaceFailure
     {
         /// <summary>

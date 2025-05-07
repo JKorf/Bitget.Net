@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Converters;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
@@ -6,6 +7,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Ticker update
     /// </summary>
+    [SerializationModel]
     public record BitgetTickerUpdate
     {
         /// <summary>

@@ -1,19 +1,22 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
 {
+    [SerializationModel]
     internal record BitgetOpenInterestResult
     {
         [JsonPropertyName("openInterestList")]
-        public IEnumerable<BitgetOpenInterest> OpenInterest { get; set; } = Array.Empty<BitgetOpenInterest>();
+        public BitgetOpenInterest[] OpenInterest { get; set; } = Array.Empty<BitgetOpenInterest>();
     }
 
     /// <summary>
     /// Open interest
     /// </summary>
+    [SerializationModel]
     public record BitgetOpenInterest
     {
         /// <summary>

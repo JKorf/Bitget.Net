@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Converters;
 using Bitget.Net.Enums.V2;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Withdrawal record
     /// </summary>
+    [SerializationModel]
     public record BitgetWithdrawalRecord
     {
         /// <summary>

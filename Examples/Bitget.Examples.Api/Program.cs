@@ -13,13 +13,10 @@ builder.Services.AddBitget();
 
 // OR to provide API credentials for accessing private endpoints, or setting other options:
 /*
-builder.Services.AddBitget(restOptions =>
-{
-    restOptions.ApiCredentials = new BitgetApiCredentials("<APIKEY>", "<APISECRET>", "<PASS>");
-    restOptions.RequestTimeout = TimeSpan.FromSeconds(5);
-}, socketOptions =>
-{
-    socketOptions.ApiCredentials = new BitgetApiCredentials("<APIKEY>", "<APISECRET>", "<PASS>");
+builder.Services.AddBitget(options =>
+{    
+   options.ApiCredentials = new ApiCredentials("<APIKEY>", "<APISECRET>", "<PASS>");
+   options.Rest.RequestTimeout = TimeSpan.FromSeconds(5);
 });
 */
 
@@ -31,14 +28,14 @@ app.UseHttpsRedirection();
 // Map the endpoints and inject the Bitget rest client
 app.MapGet("/{Symbol}", async ([FromServices] IBitgetRestClient client, string symbol) =>
 {
-    var result = await client.SpotApi.ExchangeData.GetTickerAsync(symbol);
-    return (object)(result.Success ? result.Data : result.Error!);
+    var result = await client.SpotApiV2.ExchangeData.GetTickersAsync(symbol);
+    return (object)(result.Success ? result.Data.Single() : result.Error!);
 })
 .WithOpenApi();
 
 app.MapGet("/Balances", async ([FromServices] IBitgetRestClient client) =>
 {
-    var result = await client.SpotApi.Account.GetBalancesAsync();
+    var result = await client.SpotApiV2.Account.GetSpotBalancesAsync();
     return (object)(result.Success ? result.Data : result.Error!);
 })
 .WithOpenApi();

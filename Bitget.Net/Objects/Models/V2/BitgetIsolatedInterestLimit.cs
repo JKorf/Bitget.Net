@@ -1,4 +1,5 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -8,6 +9,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// 
     /// </summary>
+    [SerializationModel]
     public record BitgetIsolatedInterestLimit
     {
         /// <summary>
@@ -54,7 +56,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Base vip list
         /// </summary>
         [JsonPropertyName("baseVipList")]
-        public IEnumerable<BitgetIsolatedInterestLimitVip> BaseVipList { get; set; } = Array.Empty<BitgetIsolatedInterestLimitVip>();
+        public BitgetIsolatedInterestLimitVip[] BaseVipList { get; set; } = Array.Empty<BitgetIsolatedInterestLimitVip>();
         /// <summary>
         /// Quote asset
         /// </summary>
@@ -89,12 +91,13 @@ namespace Bitget.Net.Objects.Models.V2
         /// Quote list
         /// </summary>
         [JsonPropertyName("quoteList")]
-        public IEnumerable<BitgetIsolatedInterestLimitQuote> QuoteList { get; set; } = Array.Empty<BitgetIsolatedInterestLimitQuote>();
+        public BitgetIsolatedInterestLimitQuote[] QuoteList { get; set; } = Array.Empty<BitgetIsolatedInterestLimitQuote>();
     }
 
     /// <summary>
     /// VIP level
     /// </summary>
+    [SerializationModel]
     public record BitgetIsolatedInterestLimitVip
     {
         /// <summary>
@@ -127,6 +130,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Quote level
     /// </summary>
+    [SerializationModel]
     public record BitgetIsolatedInterestLimitQuote
     {
         /// <summary>

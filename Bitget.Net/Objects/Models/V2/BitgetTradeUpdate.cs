@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Converters;
 using System.Text.Json.Serialization;
 using Bitget.Net.Enums.V2;
 
@@ -7,6 +8,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Trade update
     /// </summary>
+    [SerializationModel]
     public record BitgetTradeUpdate
     {
         /// <summary>

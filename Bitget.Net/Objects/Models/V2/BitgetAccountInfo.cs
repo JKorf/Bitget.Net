@@ -1,4 +1,5 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -8,6 +9,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Account information
     /// </summary>
+    [SerializationModel]
     public record BitgetAccountInfo
     {
         /// <summary>
@@ -29,7 +31,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Premissions list
         /// </summary>
         [JsonPropertyName("authorities")]
-        public IEnumerable<string> Permissions { get; set; } = Array.Empty<string>();
+        public string[] Permissions { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Main account id
         /// </summary>

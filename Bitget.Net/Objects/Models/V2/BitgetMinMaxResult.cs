@@ -1,4 +1,5 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -9,6 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// Result
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [SerializationModel]
     public record BitgetMinMaxResult<T>
     {
         /// <summary>
@@ -25,10 +27,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// Results
         /// </summary>
         [JsonPropertyName("resultList")]
-        public IEnumerable<T> Result { get; set; } = [];
+        public T[] Result { get; set; } = [];
         [JsonInclude, JsonPropertyName("orderList")]
-        internal IEnumerable<T> ResultOrder { set => Result = value; get => Result; }
+        internal T[] ResultOrder { set => Result = value; get => Result; }
         [JsonInclude, JsonPropertyName("fills")]
-        internal IEnumerable<T> ResultTrade { set => Result = value; get => Result; }
+        internal T[] ResultTrade { set => Result = value; get => Result; }
     }
 }

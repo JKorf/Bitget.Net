@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums.V2;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Bitget.Net.Enums.V2;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,32 +10,33 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Cross margin order request
     /// </summary>
+    [SerializationModel]
     public record BitgetCrossOrderRequest
     {
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonPropertyName("orderType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
         /// Loan type
         /// </summary>
-        [JsonPropertyName("loanType"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("loanType")]
         public LoanType LoanType { get; set; }
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonPropertyName("side"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("side")]
         public OrderSide OrderSide { get; set; }
         /// <summary>
         /// Time in force
         /// </summary>
-        [JsonPropertyName("force"), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("force")]
         public TimeInForce TimeInForce { get; set; }
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonPropertyName("stpMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull), JsonConverter(typeof(EnumConverter))]
+        [JsonPropertyName("stpMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public SelfTradePreventionMode? SelfTradePreventionMode { get; set; }
         /// <summary>
         /// Order price
