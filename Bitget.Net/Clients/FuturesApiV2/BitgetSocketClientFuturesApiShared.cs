@@ -220,7 +220,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         OrderQuantity = new SharedOrderQuantity(x.Quantity, x.QuoteQuantity, x.Quantity),
                         QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, contractQuantity: x.QuantityFilled),
                         TimeInForce = x.TimeInForce == TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
-                        AveragePrice = x.AveragePrice,
+                        AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                         UpdateTime = x.UpdateTime,
                         Fee = Math.Abs(x.Fees.Any() ? x.Fees.Sum(f => f.Fee) : 0),
                         FeeAsset = x.Fees.FirstOrDefault()?.FeeAsset,

@@ -690,7 +690,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 order.Data.CreateTime)
             {
                 ClientOrderId = order.Data.ClientOrderId,
-                AveragePrice = order.Data.AveragePrice,
+                AveragePrice = order.Data.AveragePrice == 0 ? null : order.Data.AveragePrice,
                 OrderPrice = order.Data.Price,
                 OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, contractQuantity: order.Data.Quantity),
                 QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled, contractQuantity: order.Data.QuantityFilled),
@@ -732,7 +732,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 x.CreateTime)
             {
                 ClientOrderId = x.ClientOrderId,
-                AveragePrice = x.AveragePrice,
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 OrderPrice = x.Price,
                 OrderQuantity = new SharedOrderQuantity(x.Quantity, contractQuantity: x.Quantity),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled, x.QuantityFilled),
@@ -790,7 +790,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 x.CreateTime)
             {
                 ClientOrderId = x.ClientOrderId,
-                AveragePrice = x.AveragePrice,
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 OrderPrice = x.Price,
                 OrderQuantity = new SharedOrderQuantity(x.Quantity, contractQuantity: x.Quantity),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled, x.QuantityFilled),
@@ -1054,7 +1054,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 order.Data.CreateTime)
             {
                 ClientOrderId = order.Data.ClientOrderId,
-                AveragePrice = order.Data.AveragePrice,
+                AveragePrice = order.Data.AveragePrice == 0 ? null : order.Data.AveragePrice,
                 OrderPrice = order.Data.Price,
                 OrderQuantity = new SharedOrderQuantity(order.Data.Quantity, contractQuantity: order.Data.Quantity),
                 QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled, order.Data.QuantityFilled),
@@ -1292,7 +1292,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 order.CreateTime)
             {
                 PlacedOrderId = order.OrderId,
-                AveragePrice = order.AveragePrice,
+                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice,
                 OrderPrice = order.Price,
                 OrderQuantity = new SharedOrderQuantity(order.Quantity, contractQuantity: order.Quantity),
                 QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, null, contractQuantity: order.QuantityFilled),

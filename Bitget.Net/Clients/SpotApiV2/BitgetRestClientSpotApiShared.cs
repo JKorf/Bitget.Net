@@ -297,7 +297,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 OrderQuantity = new SharedOrderQuantity(order.OrderType == OrderType.Market && order.Side == OrderSide.Buy ? null : order.Quantity, order.OrderType == OrderType.Market && order.Side == OrderSide.Buy ? order.Quantity : null),
                 QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, order.QuoteQuantityFilled),                
                 Fee = order.Fees?.NewFees?.TotalFee == null? null : Math.Abs(order.Fees.NewFees.TotalFee),
-                AveragePrice = order.AveragePrice,
+                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice,
                 UpdateTime = order.UpdateTime,
                 TriggerPrice = order.TriggerPrice,
                 IsTriggerOrder = order.TriggerPrice != null
@@ -330,7 +330,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? x.Quantity : null),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),                
                 Fee = x.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(x.Fees.NewFees.TotalFee),
-                AveragePrice = x.AveragePrice,
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 UpdateTime = x.UpdateTime,
                 TriggerPrice = x.TriggerPrice,
                 IsTriggerOrder = x.TriggerPrice != null
@@ -379,7 +379,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? x.Quantity : null),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 Fee = x.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(x.Fees.NewFees.TotalFee),
-                AveragePrice = x.AveragePrice,
+                AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 UpdateTime = x.UpdateTime,
                 TriggerPrice = x.TriggerPrice,
                 IsTriggerOrder = x.TriggerPrice != null
@@ -531,7 +531,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 OrderQuantity = new SharedOrderQuantity(order.OrderType == OrderType.Market && order.Side == OrderSide.Buy ? null : order.Quantity, order.OrderType == OrderType.Market && order.Side == OrderSide.Buy ? order.Quantity : null),
                 QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, order.QuoteQuantityFilled),
                 Fee = order.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(order.Fees.NewFees.TotalFee),
-                AveragePrice = order.AveragePrice,
+                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice,
                 UpdateTime = order.UpdateTime,
                 TriggerPrice = order.TriggerPrice,
                 IsTriggerOrder = order.TriggerPrice != null
@@ -875,7 +875,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 OrderQuantity = new SharedOrderQuantity(order.OrderType == OrderType.Market && order.Side == OrderSide.Buy ? null : order.Quantity, order.OrderType == OrderType.Market && order.Side == OrderSide.Buy ? order.Quantity : null),
                 QuantityFilled = new SharedOrderQuantity(order.QuantityFilled, order.QuoteQuantityFilled),
                 Fee = order.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(order.Fees.NewFees.TotalFee),
-                AveragePrice = order.AveragePrice,
+                AveragePrice = order.AveragePrice == 0 ? null : order.AveragePrice,
                 UpdateTime = order.UpdateTime,
                 ClientOrderId = order.ClientOrderId
             });
