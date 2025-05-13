@@ -35,6 +35,9 @@ namespace Bitget.Net.Clients.SpotApiV2
         /// <inheritdoc />
         public string ExchangeName => "Bitget";
 
+        /// <inheritdoc />
+        public new BitgetRestOptions ClientOptions => (BitgetRestOptions)base.ClientOptions;
+
         internal BitgetRestClientSpotApi(ILogger logger, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
             : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.SpotOptions)
         {

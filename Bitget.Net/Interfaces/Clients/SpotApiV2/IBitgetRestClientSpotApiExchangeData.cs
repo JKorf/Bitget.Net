@@ -1,3 +1,4 @@
+using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net.Objects;
@@ -16,6 +17,25 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get announcements
+        /// </summary>
+        /// <param name="type">Filter by type</param>
+        /// <param name="language">Language</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="cursor">Page cursor</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BitgetAnnouncement[]>> GetAnnouncementsAsync(
+            AnnouncementType? type = null,
+            string? language = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            string? cursor = null,
+            int? limit = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get list of supported assets and their networks

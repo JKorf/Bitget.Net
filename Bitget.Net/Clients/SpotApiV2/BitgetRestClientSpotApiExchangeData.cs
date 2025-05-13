@@ -5,6 +5,7 @@ using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Enums.V2;
 using CryptoExchange.Net.RateLimiting.Guards;
+using Bitget.Net.Enums;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {
@@ -26,6 +27,30 @@ namespace Bitget.Net.Clients.SpotApiV2
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetServerTime>(request, null, ct).ConfigureAwait(false);
             return result.As(result.Data.ServerTime);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetAnnouncement[]>> GetAnnouncementsAsync(
+            AnnouncementType? type = null,
+            string? language = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            string? cursor = null,
+            int? limit = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("language", language ?? _baseClient.ClientOptions.Locale);
+            parameters.AddOptionalEnum("annType", type);
+            parameters.AddOptionalMillisecondsString("startTime", startTime);
+            parameters.AddOptionalMillisecondsString("endTime", endTime);
+            parameters.AddOptional("cursor", cursor);
+            parameters.AddOptional("limit", limit);
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/public/annoucements", BitgetExchange.RateLimiter.Overall, 1, false, preventCaching: true,
+                limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<BitgetAnnouncement[]>(request, parameters, ct).ConfigureAwait(false);
+            return result;
         }
 
         /// <inheritdoc />

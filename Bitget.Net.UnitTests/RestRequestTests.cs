@@ -89,6 +89,7 @@ namespace Bitget.Net.UnitTests
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetServerTimeAsync(), "GetServerTime", "data.serverTime");
+            await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetAnnouncementsAsync(), "GetAnnouncements");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetAssetsAsync(), "GetAssets");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetSymbolsAsync(), "GetSymbols");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetVipFeeRatesAsync(), "GetVipFeeRates");

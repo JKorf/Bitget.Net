@@ -529,6 +529,9 @@
         <member name="P:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.ExchangeName">
             <inheritdoc />
         </member>
+        <member name="P:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.ClientOptions">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.CreateAccessor">
             <inheritdoc />
         </member>
@@ -626,6 +629,9 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData.GetAnnouncementsAsync(System.Nullable{Bitget.Net.Enums.AnnouncementType},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiExchangeData.GetAssetsAsync(System.String,System.Threading.CancellationToken)">
@@ -951,6 +957,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.AnnouncementType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetOrderSide">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -1222,6 +1233,11 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetAccountInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetAnnouncementArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -1672,6 +1688,16 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetAccountInfoArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetAnnouncement">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetAnnouncementArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -3219,6 +3245,46 @@
         </member>
         <member name="M:Bitget.Net.Converters.BitgetSourceGenerationContext.GetTypeInfo(System.Type)">
             <inheritdoc/>
+        </member>
+        <member name="T:Bitget.Net.Enums.AnnouncementType">
+            <summary>
+            Announcement type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.AnnouncementType.LatestNews">
+            <summary>
+            Latest news
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.AnnouncementType.CoinListing">
+            <summary>
+            Coin listing
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.AnnouncementType.ProductUpdates">
+            <summary>
+            Product updates
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.AnnouncementType.Security">
+            <summary>
+            Security update
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.AnnouncementType.ApiTrading">
+            <summary>
+            Api trading update
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.AnnouncementType.MaintenanceSystemUpdates">
+            <summary>
+            Maintenance update
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.AnnouncementType.SymbolDelisting">
+            <summary>
+            Delisting update
+            </summary>
         </member>
         <member name="T:Bitget.Net.Enums.BitgetBusinessType">
             <summary>
@@ -5960,6 +6026,18 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetAnnouncementsAsync(System.Nullable{Bitget.Net.Enums.AnnouncementType},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get announcements
+            </summary>
+            <param name="type">Filter by type</param>
+            <param name="language">Language</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="cursor">Page cursor</param>
+            <param name="limit">Max number of results</param>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiExchangeData.GetAssetsAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get list of supported assets and their networks
@@ -7144,6 +7222,51 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetAccountInfo.RegistrationTime">
             <summary>
             Registration time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetAnnouncement">
+            <summary>
+            Announcement
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAnnouncement.AnnouncementId">
+            <summary>
+            Announcement id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAnnouncement.Title">
+            <summary>
+            Title
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAnnouncement.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAnnouncement.Language">
+            <summary>
+            Language
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAnnouncement.Url">
+            <summary>
+            Url
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAnnouncement.Type">
+            <summary>
+            Announcement type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAnnouncement.SubType">
+            <summary>
+            Sub type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAnnouncement.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetAsset">

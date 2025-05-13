@@ -65,6 +65,7 @@ namespace Bitget.Net.UnitTests
         public async Task TestSpotExchangeData()
         {
             await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetServerTimeAsync(default), false);
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAnnouncementsAsync(default, default, default, default, default, default, default), false);
             await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAssetsAsync(default, default), false);
             await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetSymbolsAsync(default, default), false);
             await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetVipFeeRatesAsync(default), false);
