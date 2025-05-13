@@ -72,6 +72,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
             bool? reduceOnly = null,
             decimal? takeProfitPrice = null,
             decimal? stopLossPrice = null,
+            decimal? takeProfitLimitPrice = null,
+            decimal? stopLossLimitPrice = null,
             CancellationToken ct = default)
         {
             if (tradeSide.HasValue && (tradeSide != TradeSide.Open && tradeSide != TradeSide.Close))
@@ -92,6 +94,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddOptional("reduceOnly", reduceOnly == null ? null : reduceOnly == true ? "YES" : "NO");
             parameters.AddOptionalString("presetStopSurplusPrice", takeProfitPrice);
             parameters.AddOptionalString("presetStopLossPrice", stopLossPrice);
+            parameters.AddOptionalString("presetStopSurplusExecutePrice", takeProfitLimitPrice);
+            parameters.AddOptionalString("presetStopLossExecutePrice", stopLossLimitPrice);
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/place-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));

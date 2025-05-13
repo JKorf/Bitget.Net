@@ -63,6 +63,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="reduceOnly">Reduce only order</param>
         /// <param name="takeProfitPrice">Take profit price</param>
         /// <param name="stopLossPrice">Stop loss price</param>
+        /// <param name="takeProfitLimitPrice">Take profit limit order price</param>
+        /// <param name="stopLossLimitPrice">Stop loss limit order price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> PlaceOrderAsync(
@@ -80,6 +82,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
             bool? reduceOnly = null,
             decimal? takeProfitPrice = null,
             decimal? stopLossPrice = null,
+            decimal? takeProfitLimitPrice = null,
+            decimal? stopLossLimitPrice = null,
             CancellationToken ct = default);
 
         /// <summary>

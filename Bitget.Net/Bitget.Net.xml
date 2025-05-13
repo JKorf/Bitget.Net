@@ -385,7 +385,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.GetPositionHistoryAsync(System.Nullable{Bitget.Net.Enums.BitgetProductTypeV2},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,Bitget.Net.Enums.V2.MarginMode,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TimeInForce},System.Nullable{Bitget.Net.Enums.V2.TradeSide},System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,Bitget.Net.Enums.V2.MarginMode,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TimeInForce},System.Nullable{Bitget.Net.Enums.V2.TradeSide},System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.PlaceMultipleOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.MarginMode,System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetFuturesPlaceOrderRequest},System.Threading.CancellationToken)">
@@ -5088,7 +5088,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.PlaceOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,Bitget.Net.Enums.V2.MarginMode,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TimeInForce},System.Nullable{Bitget.Net.Enums.V2.TradeSide},System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.PlaceOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.OrderSide,Bitget.Net.Enums.V2.OrderType,Bitget.Net.Enums.V2.MarginMode,System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TimeInForce},System.Nullable{Bitget.Net.Enums.V2.TradeSide},System.String,System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <summary>
             Place a new order
             <para><a href="https://www.bitget.com/api-doc/contract/trade/Place-Order" /></para>
@@ -5107,6 +5107,8 @@
             <param name="reduceOnly">Reduce only order</param>
             <param name="takeProfitPrice">Take profit price</param>
             <param name="stopLossPrice">Stop loss price</param>
+            <param name="takeProfitLimitPrice">Take profit limit order price</param>
+            <param name="stopLossLimitPrice">Stop loss limit order price</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
