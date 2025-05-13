@@ -694,7 +694,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         GetTradeHistoryOptions ITradeHistoryRestClient.GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(SharedPaginationSupport.Descending, true, 1000, false)
         {
-            MaxAge = TimeSpan.FromDays(30)
+            MaxAge = TimeSpan.FromDays(90)
         };
 
         async Task<ExchangeWebResult<SharedTrade[]>> ITradeHistoryRestClient.GetTradeHistoryAsync(GetTradeHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
