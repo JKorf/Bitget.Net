@@ -25,7 +25,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageReleaseNotes>https://github.com/JKorf/Bitget.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
   </PropertyGroup>
-  <PropertyGroup Label="AOT" Condition=" '$(TargetFramework)' == 'NET8_0' Or '$(TargetFramework)' == 'NET9_0' ">
+  <PropertyGroup Label="AOT" Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
     <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
   <PropertyGroup>
