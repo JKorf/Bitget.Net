@@ -169,6 +169,46 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 2.0.0 - 13 May 2025
+    * Updated CryptoExchange.Net to version 9.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added support for Native AOT compilation
+    * Added RateLimitUpdated event
+    * Added SharedSymbol response property to all Shared interfaces response models returning a symbol name
+    * Added GenerateClientOrderId method to Futures and Spot Shared clients
+    * Added OptionalExchangeParameters and Supported properties to EndpointOptions
+    * Added IBookTickerRestClient implementation to Futures and Spot Shared clients
+    * Added IFuturesOrderClientIdClient implementation to Futures Shared client
+    * Added IFuturesTriggerOrderRestClient implementation to Futures Shared client
+    * Added IFuturesTpSlRestClient implementation to Futures Shared client
+    * Added ISpotOrderClientIdClient implementation to Spot Shared client
+    * Added ISpotTriggerOrderRestClient implementation to Futures Shared client
+    * Added MaxShortLeverage and MaxLongLeverage to SharedFuturesSymbol response model
+    * Added support for takeProfitPrice and StopLossPrice to Futures Shared PlaceOrderAsync endpoint
+    * Added TakeProfitPrice and StopLossPrice properties to SharedFuturesOrder response model
+    * Added TriggerPrice and IsTriggerOrder properties to SharedFuturesOrder response model
+    * Added QuoteVolume property mapping to SharedSpotTicker response model
+    * Added restClient.FuturesApiV2.Account.GetAdlRankAsync endpoint
+    * Added restClient.FuturesApiV2.ExchangeData.GetFundingRatesAsync endpoint
+    * Added restClient.SpotApiV2.Margin.GetInterestRatesAsync endpoint
+    * Added restClient.SpotApiV2.ExchangeData.GetAnnouncementsAsync endpoint
+    * Added All property to retrieve all available environment on BitgetEnvironment
+    * Added takeProfitLimitPrice, stopLossLimitPrice parameters to restClient.FuturesApiV2.Trading.PlaceOrderAsync endpoint
+    * Added UpdateTime to BitgetMarginOrderUpdate model
+    * Added idLessThan, limit parameters to restClient.SpotApiV2.Account.GetSubAccountBalancesAsync
+    * Refactored Shared clients quantity parameters and responses to use SharedQuantity
+    * Updated all IEnumerable response and model types to array response types
+    * Updated PlaceMultipleOrdersAsync methods to return a list of CallResult models and an error if all orders fail to place
+    * Updated restClient.FuturesApiV2.ExchangeData.GetFundingRateAsync response model
+    * Updated restClient.SpotApiV2.Trading.GetUserTradesAsync symbol parameter to nullable
+    * Updated Shared Spot GetTradeHistoryAsync max age from 30 to 90 days
+    * Replaced BitgetApiCredentials with ApiCredentials
+    * Fixed incorrect DataTradeMode on certain Shared interface responses
+    * Fixed Shared interfaces AveragePrice property being 0 instead of null
+    * Removed V1 API support
+    * Removed Newtonsoft.Json dependency
+    * Removed legacy AddBitget(restOptions, socketOptions) DI overload
+    * Fixed some typos
+
 * Version 2.0.0-beta3 - 01 May 2025
     * Updated CryptoExchange.Net version to 9.0.0-beta5
     * Added property to retrieve all available API environments
