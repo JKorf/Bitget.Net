@@ -192,7 +192,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         Task<WebCallResult<BitgetFundingRate[]>> GetHistoricalFundingRateAsync(BitgetProductTypeV2 productType, string symbol, int? pageSize = null, int? page = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Get current funding rate
+        /// Get current funding rate for a symbol
         /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
@@ -200,6 +200,15 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetCurrentFundingRate>> GetFundingRateAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get current funding rate for all symbols
+        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /></para>
+        /// </summary>
+        /// <param name="productType">Product type</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<BitgetCurrentFundingRate[]>> GetFundingRatesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
 
         /// <summary>
         /// Get position tiers

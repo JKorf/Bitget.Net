@@ -367,6 +367,9 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetFundingRateAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetFundingRatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiExchangeData.GetPositionTiersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -613,7 +616,7 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.TransferSubAccountAsync(System.String,Bitget.Net.Enums.V2.TransferAccountType,Bitget.Net.Enums.V2.TransferAccountType,System.Decimal,System.Int64,System.Int64,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetSubAccountBalancesAsync(System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetSubAccountBalancesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount.GetSubAccountTransferHistoryAsync(System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -5094,11 +5097,20 @@
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetFundingRateAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Threading.CancellationToken)">
             <summary>
-            Get current funding rate
+            Get current funding rate for a symbol
             <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /></para>
             </summary>
             <param name="productType">Product type</param>
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiExchangeData.GetFundingRatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
+            <summary>
+            Get current funding rate for all symbols
+            <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /></para>
+            </summary>
+            <param name="productType">Product type</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
@@ -5967,11 +5979,13 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetSubAccountBalancesAsync(System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetSubAccountBalancesAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get subaccount balances
             <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Subaccount-Assets" /></para>
             </summary>
+            <param name="idLessThan">Return results with id less than this</param>
+            <param name="limit">Max number of results, max 50</param>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiAccount.GetSubAccountTransferHistoryAsync(System.String,System.String,System.Nullable{System.Int64},System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int64},System.Threading.CancellationToken)">
@@ -12063,6 +12077,11 @@
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalances">
             <summary>
             Sub account balances
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalances.CursorId">
+            <summary>
+            Cursor id
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetSubAccountBalances.UserId">

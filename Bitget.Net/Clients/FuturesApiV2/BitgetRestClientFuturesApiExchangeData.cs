@@ -236,6 +236,17 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
+        public async Task<WebCallResult<BitgetCurrentFundingRate[]>> GetFundingRatesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("productType", productType);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/market/current-fund-rate", BitgetExchange.RateLimiter.Overall, 1, false,
+                limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<BitgetCurrentFundingRate[]>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        /// <inheritdoc />
         public async Task<WebCallResult<BitgetPositionTier[]>> GetPositionTiersAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
