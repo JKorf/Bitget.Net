@@ -55,6 +55,7 @@ namespace Bitget.Net.UnitTests
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/Margin", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetMarginSymbolsAsync(), "GetMarginSymbols", nestedJsonProperty: "data", ignoreProperties: new List<string> { "isBorrowable" });
+            await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetInterestRatesAsync("ETH"), "GetInterestRates", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossBorrowHistoryAsync(), "GetCrossBorrowHistory", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossRepayHistoryAsync(), "GetCrossRepayHistory", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossInterestHistoryAsync(), "GetCrossInterestHistory", nestedJsonProperty: "data");

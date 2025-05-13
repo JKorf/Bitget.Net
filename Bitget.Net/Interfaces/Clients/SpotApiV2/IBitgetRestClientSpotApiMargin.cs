@@ -20,6 +20,14 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         Task<WebCallResult<BitgetMarginSymbol[]>> GetMarginSymbolsAsync(CancellationToken ct = default);
 
         /// <summary>
+        /// Get interest rate
+        /// <para><a href="https://www.bitget.com/api-doc/margin/common/interest-rate-record" /></para>
+        /// </summary>
+        /// <param name="asset">Asset name</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BitgetInterestRate>> GetInterestRatesAsync(string asset, CancellationToken ct = default);
+
+        /// <summary>
         /// Get cross margin borrow history
         /// <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Loan-Records" /></para>
         /// </summary>

@@ -661,6 +661,9 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetMarginSymbolsAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetInterestRatesAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiMargin.GetCrossBorrowHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1384,6 +1387,11 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetFuturesUserTrades">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetInterestRate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2234,6 +2242,11 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetIndexPriceUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetInterestRate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -6051,6 +6064,14 @@
             Get margin symbols
             <para><a href="https://www.bitget.com/api-doc/margin/common/support-currencies" /></para>
             </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetInterestRatesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get interest rate
+            <para><a href="https://www.bitget.com/api-doc/margin/common/interest-rate-record" /></para>
+            </summary>
+            <param name="asset">Asset name</param>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApiMargin.GetCrossBorrowHistoryAsync(System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
@@ -10033,6 +10054,31 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetIndexPriceUpdate.Timestamp">
             <summary>
             Timestamp
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetInterestRate">
+            <summary>
+            Interest rate info
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetInterestRate.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetInterestRate.DailyInterestRate">
+            <summary>
+            Daily interest rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetInterestRate.AnnualInterestRate">
+            <summary>
+            Annual interest rate
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetInterestRate.UpdateTime">
+            <summary>
+            Update time
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetIsolatedAccountUpdate">

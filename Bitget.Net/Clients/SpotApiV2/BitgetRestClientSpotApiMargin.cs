@@ -37,6 +37,21 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         #endregion
 
+        #region Get Margin Symbols
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetInterestRate>> GetInterestRatesAsync(string asset, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("coin", asset);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/interest-rate-record", BitgetExchange.RateLimiter.Overall, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<BitgetInterestRate>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
         #region Get Cross Borrow History
 
         /// <inheritdoc />

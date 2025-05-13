@@ -201,6 +201,8 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(decimal))]
     [JsonSerializable(typeof(DateTime))]
     [JsonSerializable(typeof(DateTime?))]
+
+    [JsonSerializable(typeof(BitgetResponse<BitgetInterestRate>))]
     internal partial class BitgetSourceGenerationContext : JsonSerializerContext
     {
     }
