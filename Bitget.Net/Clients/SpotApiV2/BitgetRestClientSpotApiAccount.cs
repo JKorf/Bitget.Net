@@ -248,9 +248,14 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Sub Account Balances
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetSubAccountBalances[]>> GetSubAccountBalancesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetSubAccountBalances[]>> GetSubAccountBalancesAsync(
+            string? idLessThan = null,
+            int? limit = null,
+            CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
+            parameters.AddOptional("idLessThan", idLessThan);
+            parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/spot/account/subaccount-assets", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetSubAccountBalances[]>(request, parameters, ct).ConfigureAwait(false);
             return result;

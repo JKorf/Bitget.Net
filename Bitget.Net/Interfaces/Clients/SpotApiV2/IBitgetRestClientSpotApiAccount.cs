@@ -218,8 +218,13 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get subaccount balances
         /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Subaccount-Assets" /></para>
         /// </summary>
+        /// <param name="idLessThan">Return results with id less than this</param>
+        /// <param name="limit">Max number of results, max 50</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetSubAccountBalances[]>> GetSubAccountBalancesAsync(CancellationToken ct = default);
+        Task<WebCallResult<BitgetSubAccountBalances[]>> GetSubAccountBalancesAsync(
+            string? idLessThan = null,
+            int? limit = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Get transfer history between master and sub account

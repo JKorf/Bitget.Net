@@ -13,6 +13,11 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetSubAccountBalances
     {
         /// <summary>
+        /// Cursor id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string? CursorId { get; set; }
+        /// <summary>
         /// User id
         /// </summary>
         [JsonPropertyName("userId")]
