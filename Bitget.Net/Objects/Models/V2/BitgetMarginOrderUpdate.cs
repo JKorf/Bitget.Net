@@ -64,6 +64,11 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
+        /// Update time
+        /// </summary>
+        [JsonPropertyName("uTime")]
+        public DateTime? UpdateTime { get; set; }
+        /// <summary>
         /// Client oid
         /// </summary>
         [JsonPropertyName("clientOid")]

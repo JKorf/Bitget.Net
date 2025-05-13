@@ -10555,6 +10555,11 @@
             Create time
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginOrderUpdate.UpdateTime">
+            <summary>
+            Update time
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetMarginOrderUpdate.ClientOid">
             <summary>
             Client oid
