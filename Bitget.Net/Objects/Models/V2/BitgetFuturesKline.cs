@@ -1,8 +1,6 @@
-﻿using CryptoExchange.Net.Converters;
+using Bitget.Net.Converters;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Converters.SystemTextJson;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
@@ -10,13 +8,14 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Kline/candlestick info
     /// </summary>
-    [JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.ArrayConverter))]
+    [JsonConverter(typeof(ArrayConverter<BitgetFuturesKline>))]
+    [SerializationModel]
     public record BitgetFuturesKline
     {
         /// <summary>
         /// Open time
         /// </summary>
-        [ArrayProperty(0), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DateTimeConverter))]
+        [ArrayProperty(0), JsonConverter(typeof(DateTimeConverter))]
         public DateTime OpenTime { get; set; }
         /// <summary>
         /// Open price

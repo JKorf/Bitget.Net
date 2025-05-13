@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace Bitget.Net.Enums.V2
+namespace Bitget.Net.Objects.Models.V2
 {
     /// <summary>
     /// Order cancel request

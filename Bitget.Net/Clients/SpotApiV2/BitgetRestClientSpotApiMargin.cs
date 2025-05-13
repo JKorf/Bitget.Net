@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects.Models;
@@ -26,12 +26,27 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Margin Symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetMarginSymbol>>> GetMarginSymbolsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetMarginSymbol[]>> GetMarginSymbolsAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/currencies", BitgetExchange.RateLimiter.Overal, 1, false,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/currencies", BitgetExchange.RateLimiter.Overall, 1, false,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetMarginSymbol>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetMarginSymbol[]>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Margin Symbols
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetInterestRate>> GetInterestRatesAsync(string asset, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("coin", asset);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/interest-rate-record", BitgetExchange.RateLimiter.Overall, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<BitgetInterestRate>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -56,7 +71,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/borrow-history", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/borrow-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossBorrowHistory>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -83,7 +98,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/repay-history", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/repay-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossRepayHistory>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -107,7 +122,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/interest-history", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/interest-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossInterest>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -130,7 +145,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/liquidation-history", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/liquidation-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossLiquidation>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -157,7 +172,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/financial-records", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/financial-records", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossFinancial>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -168,13 +183,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Cross Balances
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetCrossBalance>>> GetCrossBalancesAsync(string? asset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetCrossBalance[]>> GetCrossBalancesAsync(string? asset = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/account/assets", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/account/assets", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetCrossBalance>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetCrossBalance[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -189,7 +204,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("coin", asset);
             parameters.AddString("borrowAmount", quantity);
             parameters.Add("clientOid", clientOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/borrow", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/borrow", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetCrossBorrowResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -205,7 +220,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.Add("coin", asset);
             parameters.AddString("repayAmount", quantity);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/repay", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/repay", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetCrossRepayResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -219,7 +234,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         public async Task<WebCallResult<BitgetCrossRiskRate>> GetCrossRiskRateAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/account/risk-rate", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/account/risk-rate", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetCrossRiskRate>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -234,7 +249,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/account/max-borrowable-amount", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/account/max-borrowable-amount", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetCrossMaxBorrowable>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -249,7 +264,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/account/max-transfer-out-amount", BitgetExchange.RateLimiter.Overal, 1, false,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/account/max-transfer-out-amount", BitgetExchange.RateLimiter.Overall, 1, false,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetCrossMaxTransferable>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -260,13 +275,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Cross Interest And Limit
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetCrossInterestLimit>>> GetCrossInterestAndLimitAsync(string asset, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetCrossInterestLimit[]>> GetCrossInterestAndLimitAsync(string asset, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/interest-rate-and-limit", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/interest-rate-and-limit", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetCrossInterestLimit>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetCrossInterestLimit[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -275,13 +290,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Cross Tier Config
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetCrossTierConfig>>> GetCrossTierConfigAsync(string asset, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetCrossTierConfig[]>> GetCrossTierConfigAsync(string asset, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/tier-data", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/tier-data", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetCrossTierConfig>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetCrossTierConfig[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -294,7 +309,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/flash-repay", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/flash-repay", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetCrossFlashRepayResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -305,13 +320,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Cross Flash Repay Status
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetCrossFlashRepayStatus>>> GetCrossFlashRepayStatusAsync(string ids, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetCrossFlashRepayStatus[]>> GetCrossFlashRepayStatusAsync(string ids, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("idList", ids);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/query-flash-repay-status", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/account/query-flash-repay-status", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetCrossFlashRepayStatus>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetCrossFlashRepayStatus[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -344,7 +359,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("quoteSize", quoteQuantity);
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptionalEnum("stpMode", selfTradePreventionMode);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/place-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/place-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -355,17 +370,17 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Place Multiple Cross Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetOrderResult>>> PlaceMultipleCrossOrdersAsync(
+        public async Task<WebCallResult<BitgetOrderResult[]>> PlaceMultipleCrossOrdersAsync(
             string symbol,
             IEnumerable<BitgetCrossOrderRequest> requests,
             CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", requests);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/batch-place-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            parameters.Add("orderList", requests.ToArray());
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/batch-place-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetOrderResult>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetOrderResult[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -380,7 +395,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("symbol", symbol);
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("clientOid", clientOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/cancel-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -398,8 +413,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", orders);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            parameters.Add("orderList", orders.ToArray());
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/crossed/batch-cancel-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -420,7 +435,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/open-orders", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/open-orders", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossOrder>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -442,7 +457,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/history-orders", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/history-orders", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossOrder>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -462,7 +477,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/fills", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/fills", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossUserTrade>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -484,7 +499,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/liquidation-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/crossed/liquidation-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -514,7 +529,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/borrow-history", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/borrow-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedBorrowHistory>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -543,7 +558,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/repay-history", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/repay-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedRepayHistory>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -568,7 +583,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/interest-history", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/interest-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedInterest>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -593,7 +608,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/liquidation-history", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/liquidation-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedLiquidation>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -622,7 +637,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/financial-records", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/financial-records", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetIsolatedFinancial>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -633,13 +648,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Isolated Balances
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetIsolatedBalance>>> GetIsolatedBalancesAsync(string? asset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetIsolatedBalance[]>> GetIsolatedBalancesAsync(string? asset = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/assets", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/assets", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedBalance>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetIsolatedBalance[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -654,7 +669,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("coin", asset);
             parameters.AddString("borrowAmount", quantity);
             parameters.Add("clientOid", clientOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/borrow", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/borrow", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetIsolatedBorrowResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -670,7 +685,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var parameters = new ParameterCollection();
             parameters.Add("coin", asset);
             parameters.AddString("repayAmount", quantity);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/repay", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/repay", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetIsolatedRepayResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -681,12 +696,12 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Isolated Risk Rate
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetIsolatedRiskRate>>> GetIsolatedRiskRateAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetIsolatedRiskRate[]>> GetIsolatedRiskRateAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/risk-rate", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/risk-rate", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedRiskRate>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetIsolatedRiskRate[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -695,13 +710,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Isolated Interest And Limit
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetIsolatedInterestLimit>>> GetIsolatedInterestAndLimitAsync(string symbol, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetIsolatedInterestLimit[]>> GetIsolatedInterestAndLimitAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/interest-rate-and-limit", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/interest-rate-and-limit", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedInterestLimit>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetIsolatedInterestLimit[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -710,13 +725,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Isolated Tier Config
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetIsolatedTierConfig>>> GetIsolatedTierConfigAsync(string symbol, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetIsolatedTierConfig[]>> GetIsolatedTierConfigAsync(string symbol, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/tier-data", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/tier-data", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedTierConfig>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetIsolatedTierConfig[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -729,7 +744,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/max-borrowable-amount", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/max-borrowable-amount", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetIsolatedMaxBorrowable>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -744,7 +759,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/max-transfer-out-amount", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/account/max-transfer-out-amount", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetIsolatedMaxTransferable>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -755,13 +770,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Cross Isolated Repay
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetIsolatedFlashRepayResult>>> IsolatedFlashRepayAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetIsolatedFlashRepayResult[]>> IsolatedFlashRepayAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("symbolList", symbols);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/flash-repay", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/flash-repay", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetIsolatedFlashRepayResult>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetIsolatedFlashRepayResult[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -770,13 +785,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Get Isolated Flash Repay Status
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetCrossFlashRepayStatus>>> GetIsolatedFlashRepayStatusAsync(string ids, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetCrossFlashRepayStatus[]>> GetIsolatedFlashRepayStatusAsync(string ids, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("idList", ids);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/query-flash-repay-status", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/account/query-flash-repay-status", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetCrossFlashRepayStatus>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetCrossFlashRepayStatus[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -809,7 +824,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptional("quoteSize", quoteQuantity);
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptionalEnum("stpMode", selfTradePreventionMode);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/place-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/place-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -820,17 +835,17 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Place Multiple Cross Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<BitgetOrderResult>>> PlaceMultipleIsolatedOrdersAsync(
+        public async Task<WebCallResult<BitgetOrderResult[]>> PlaceMultipleIsolatedOrdersAsync(
             string symbol,
             IEnumerable<BitgetCrossOrderRequest> requests,
             CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", requests);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/batch-place-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            parameters.Add("orderList", requests.ToArray());
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/batch-place-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
-            var result = await _baseClient.SendAsync<IEnumerable<BitgetOrderResult>>(request, parameters, ct).ConfigureAwait(false);
+            var result = await _baseClient.SendAsync<BitgetOrderResult[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 
@@ -845,7 +860,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("symbol", symbol);
             parameters.AddOptional("orderId", orderId);
             parameters.AddOptional("clientOid", clientOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/cancel-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -863,8 +878,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
-            parameters.Add("orderList", orders);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/batch-cancel-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            parameters.Add("orderList", orders.ToArray());
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/margin/isolated/batch-cancel-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -885,7 +900,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/open-orders", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/open-orders", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossOrder>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -907,7 +922,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/history-orders", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/history-orders", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossOrder>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -928,7 +943,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/fills", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/fills", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossUserTrade>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -950,7 +965,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.AddOptionalMillisecondsString("endTime", endTime);
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("idLessThan", idLessThan);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/liquidation-order", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/margin/isolated/liquidation-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>(request, parameters, ct).ConfigureAwait(false);
             return result;

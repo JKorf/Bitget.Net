@@ -1,9 +1,0 @@
-{
-
-  "code":"00000",
-   "message":"success",
-  "data": {
-    "orderId":"34923828881",
-    "clientOrderId":"xx001"
-  }
-} 

@@ -1,8 +1,0 @@
-{
-  "code":"00000",
-  "data":{
-    "openCount":"2000"
-  },
-  "msg":"success",
-  "requestTime":1627293049406
-}

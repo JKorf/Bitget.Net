@@ -1,0 +1,14 @@
+GET
+/api/v2/margin/interest-rate-record
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1746692917537,
+  "data": {
+    "coin": "BTC",
+    "dailyInterestRate": "0.00003000",
+    "annualInterestRate": "0.01095000",
+    "updatedTime": "1746690900381"
+  }
+}

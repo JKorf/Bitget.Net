@@ -10,7 +10,7 @@ namespace Bitget.Net.Objects.Options
     /// <summary>
     /// Bitget options
     /// </summary>
-    public class BitgetOptions : LibraryOptions<BitgetRestOptions, BitgetSocketOptions, BitgetApiCredentials, BitgetEnvironment>
+    public class BitgetOptions : LibraryOptions<BitgetRestOptions, BitgetSocketOptions, ApiCredentials, BitgetEnvironment>
     {
     }
 }

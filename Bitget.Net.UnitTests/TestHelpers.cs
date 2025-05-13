@@ -7,16 +7,15 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Bitget.Net.Clients;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Sockets;
-using Microsoft.Extensions.Logging;
 using Moq;
-using Newtonsoft.Json;
 
 namespace Bitget.Net.UnitTests
 {
@@ -56,25 +55,12 @@ namespace Bitget.Net.UnitTests
             return self == to;
         }
 
-        //public static IBinanceSocketClient CreateSocketClient(IWebsocket socket, Action<BinanceSocketOptions> options = null)
-        //{
-        //    BinanceSocketClient client;
-        //    client = options != null ? new BinanceSocketClient(options) : new BinanceSocketClient();
-        //    client.SpotApi.SocketFactory = Mock.Of<IWebsocketFactory>();
-        //    client.UsdFuturesApi.SocketFactory = Mock.Of<IWebsocketFactory>();
-        //    client.CoinFuturesApi.SocketFactory = Mock.Of<IWebsocketFactory>();
-        //    Mock.Get(client.SpotApi.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<ILogger>(), It.IsAny<WebSocketParameters>())).Returns(socket);
-        //    Mock.Get(client.UsdFuturesApi.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<ILogger>(), It.IsAny<WebSocketParameters>())).Returns(socket);
-        //    Mock.Get(client.CoinFuturesApi.SocketFactory).Setup(f => f.CreateWebsocket(It.IsAny<ILogger>(), It.IsAny<WebSocketParameters>())).Returns(socket);
-        //    return client;
-        //}
-
         public static IBitgetRestClient CreateClient(Action<BitgetRestOptions> options = null)
         {
             IBitgetRestClient client;
             client = options != null ? new BitgetRestClient(options) : new BitgetRestClient();
-            client.SpotApi.RequestFactory = Mock.Of<IRequestFactory>();
-            client.FuturesApi.RequestFactory = Mock.Of<IRequestFactory>();
+            client.SpotApiV2.RequestFactory = Mock.Of<IRequestFactory>();
+            client.FuturesApiV2.RequestFactory = Mock.Of<IRequestFactory>();
             return client;
         }
 
@@ -88,7 +74,7 @@ namespace Bitget.Net.UnitTests
         public static IBitgetRestClient CreateResponseClient<T>(T response, Action<BitgetRestOptions> options = null)
         {
             var client = (BitgetRestClient)CreateClient(options);
-            SetResponse(client, JsonConvert.SerializeObject(response));
+            SetResponse(client, JsonSerializer.Serialize(response, SerializerOptions.WithConverters(BitgetExchange._serializerContext)));
             return client;
         }
 
@@ -106,13 +92,13 @@ namespace Bitget.Net.UnitTests
 
             var request = new Mock<IRequest>();
             request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
-            request.Setup(c => c.GetHeaders()).Returns(new Dictionary<string, IEnumerable<string>>());
+            request.Setup(c => c.GetHeaders()).Returns(new KeyValuePair<string, string[]>[0]);
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
-            var factory = Mock.Get(client.SpotApi.RequestFactory);
+            var factory = Mock.Get(client.SpotApiV2.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
-            factory = Mock.Get(client.FuturesApi.RequestFactory);
+            factory = Mock.Get(client.FuturesApiV2.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }

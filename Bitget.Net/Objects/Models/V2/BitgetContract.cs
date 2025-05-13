@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +11,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Contract info
     /// </summary>
+    [SerializationModel]
     public record BitgetContract
     {
         /// <summary>
@@ -62,7 +63,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Supported margin assets
         /// </summary>
         [JsonPropertyName("supportMarginCoins")]
-        public IEnumerable<string> SupportMarginAsset { get; set; } = Array.Empty<string>();
+        public string[] SupportMarginAsset { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Minimal position open quantity
         /// </summary>
@@ -117,7 +118,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Status
         /// </summary>
         [JsonPropertyName("symbolStatus")]
-        public SymbolStatus Status { get; set; }
+        public FuturesSymbolStatus Status { get; set; }
         /// <summary>
         /// Removal time
         /// </summary>

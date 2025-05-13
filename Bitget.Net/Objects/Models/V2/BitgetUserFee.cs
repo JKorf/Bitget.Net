@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
@@ -6,6 +6,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// User fee info
     /// </summary>
+    [SerializationModel]
     public record BitgetUserFee
     {
         /// <summary>

@@ -1,13 +1,11 @@
 ﻿using Bitget.Net.Clients;
-using Bitget.Net.Objects;
+using Bitget.Net.SymbolOrderBooks;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Bitget.Net.UnitTests
@@ -31,7 +29,7 @@ namespace Bitget.Net.UnitTests
             return new BitgetRestClient(null, loggerFactory, Options.Create(new Objects.Options.BitgetRestOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new BitgetApiCredentials(key, sec, pass) : null
+                ApiCredentials = Authenticated ? new ApiCredentials(key, sec, pass) : null
             }));
         }
 
@@ -41,7 +39,7 @@ namespace Bitget.Net.UnitTests
             if (!ShouldRun())
                 return;
 
-            var result = await CreateClient().SpotApi.ExchangeData.GetOrderBookAsync("TSTTST", default);
+            var result = await CreateClient().SpotApiV2.ExchangeData.GetOrderBookAsync("TSTTST", default);
 
             Assert.That(result.Success, Is.False);
             Assert.That(result.Error.Code, Is.EqualTo(40034));
@@ -67,6 +65,7 @@ namespace Bitget.Net.UnitTests
         public async Task TestSpotExchangeData()
         {
             await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetServerTimeAsync(default), false);
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAnnouncementsAsync(default, default, default, default, default, default, default), false);
             await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAssetsAsync(default, default), false);
             await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetSymbolsAsync(default, default), false);
             await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetVipFeeRatesAsync(default), false);
@@ -131,6 +130,13 @@ namespace Bitget.Net.UnitTests
             await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetHistoricalUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetOpenTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, Enums.V2.TriggerPlanTypeFilter.Trigger, default, default, default, default, default, default, default, default), true);
             await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetClosedTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, Enums.V2.TriggerPlanTypeFilter.Trigger, default, default, default, default, default, default, default, default, default), true);
+        }
+
+        [Test]
+        public async Task TestOrderBooks()
+        {
+            await TestOrderBook(new BitgetSpotSymbolOrderBook("ETHUSDT"));
+            await TestOrderBook(new BitgetFuturesSymbolOrderBook(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"));
         }
     }
 }

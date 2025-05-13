@@ -14,17 +14,17 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Order side
         /// </summary>
-        [JsonPropertyName("side"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
+        [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
         /// Order type
         /// </summary>
-        [JsonPropertyName("orderType"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
+        [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
         /// Time in force
         /// </summary>
-        [JsonPropertyName("force"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
+        [JsonPropertyName("force")]
         public TimeInForce TimeInForce { get; set; }
         /// <summary>
         /// Price
@@ -44,7 +44,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// <summary>
         /// Self Trade Prevention mode
         /// </summary>
-        [JsonPropertyName("stpMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.EnumConverter))]
+        [JsonPropertyName("stpMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SelfTradePreventionMode? StpMode { get; set; }
         /// <summary>
         /// Take profit price

@@ -1,8 +1,0 @@
-{
-  "code":"00000",
-  "data":{
-    "result":true
-  },
-  "msg":"success",
-  "requestTime":1627293357336
-}

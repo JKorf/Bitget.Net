@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Enums.V2;
 using CryptoExchange.Net.Objects;
@@ -19,7 +19,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetPosition>>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
+        Task<WebCallResult<BitgetPosition[]>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
 
         /// <summary>
         /// Get all positions
@@ -29,7 +29,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetPosition>>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default);
+        Task<WebCallResult<BitgetPosition[]>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default);
 
         /// <summary>
         /// Get position history
@@ -63,6 +63,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="reduceOnly">Reduce only order</param>
         /// <param name="takeProfitPrice">Take profit price</param>
         /// <param name="stopLossPrice">Stop loss price</param>
+        /// <param name="takeProfitLimitPrice">Take profit limit order price</param>
+        /// <param name="stopLossLimitPrice">Stop loss limit order price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> PlaceOrderAsync(
@@ -80,6 +82,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
             bool? reduceOnly = null,
             decimal? takeProfitPrice = null,
             decimal? stopLossPrice = null,
+            decimal? takeProfitLimitPrice = null,
+            decimal? stopLossLimitPrice = null,
             CancellationToken ct = default);
 
         /// <summary>
@@ -93,7 +97,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="orders">Orders</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderMultipleResult>> PlaceMultipleOrdersAsync(
+        Task<WebCallResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -402,7 +406,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="planType">Plan type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<BitgetTriggerSubOrder>>> GetTriggerSubOrdersAsync(
+        Task<WebCallResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
             BitgetProductTypeV2 productType,
             string triggerOrderId,
             TriggerPlanType planType,

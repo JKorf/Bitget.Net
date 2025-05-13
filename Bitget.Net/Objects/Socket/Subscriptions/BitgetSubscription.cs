@@ -36,7 +36,7 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
             var data = (BitgetSocketUpdate<T>)message.Data;
             var symbol = data.Args.InstrumentId;
             _handler.Invoke(message.As(data.Data, data.Args.Channel, symbol == "default" ? null : symbol, string.Equals(data.Action, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(data.Timestamp));
-            return new CallResult(null);
+            return CallResult.SuccessResult;
         }
 
         public override Type? GetMessageType(IMessageAccessor message) => typeof(BitgetSocketUpdate<T>);

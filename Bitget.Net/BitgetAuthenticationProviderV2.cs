@@ -2,20 +2,28 @@
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Objects;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json;
 
 namespace Bitget.Net
 {
-    internal class BitgetAuthenticationProviderV2 : AuthenticationProvider<BitgetApiCredentials>
+    internal class BitgetAuthenticationProviderV2 : AuthenticationProvider
     {
-        public string Passphrase => _credentials.PassPhrase;
+        public string Passphrase => _credentials.Pass!;
 
-        public BitgetAuthenticationProviderV2(BitgetApiCredentials credentials) : base(credentials)
+        public BitgetAuthenticationProviderV2(ApiCredentials credentials) : base(credentials)
         {
+            if (string.IsNullOrEmpty(credentials.Pass))
+                throw new ArgumentNullException(nameof(ApiCredentials.Pass), "Passphrase is required for Bitget authentication");
         }
 
+#if NET5_0_OR_GREATER
+        [UnconditionalSuppressMessage("AssemblyLoadTrimming", "IL3050:RequiresUnreferencedCode", Justification = "JsonSerializerOptions provided here has TypeInfoResolver set")]
+        [UnconditionalSuppressMessage("AssemblyLoadTrimming", "IL2026:RequiresUnreferencedCode", Justification = "JsonSerializerOptions provided here has TypeInfoResolver set")]
+#endif
         public override void AuthenticateRequest(
             RestApiClient apiClient,
             Uri uri,
@@ -31,7 +39,7 @@ namespace Bitget.Net
             if (!auth)
                 return;
 
-            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonSerializer.Serialize(bodyParameters) : "";
+            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonSerializer.Serialize(bodyParameters, SerializerOptions.WithConverters(BitgetExchange._serializerContext)) : "";
             string? query = null;
             if (uriParameters != null)
                 query = uriParameters.CreateParamString(false, arraySerialization);
@@ -50,7 +58,7 @@ namespace Bitget.Net
 
             headers["ACCESS-KEY"] = _credentials.Key!;
             headers["ACCESS-TIMESTAMP"] = timestamp;
-            headers["ACCESS-PASSPHRASE"] = _credentials.PassPhrase;
+            headers["ACCESS-PASSPHRASE"] = _credentials.Pass!;
         }
 
         public string GetWebsocketSignature(long timestamp)

@@ -22,7 +22,7 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("productType", productType);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/copy/mix-trader/config-query-symbols", BitgetExchange.RateLimiter.Overal, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/copy/mix-trader/config-query-symbols", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetCopyTradingSymbolSettings[]>(request, parameters, ct).ConfigureAwait(false);
         }

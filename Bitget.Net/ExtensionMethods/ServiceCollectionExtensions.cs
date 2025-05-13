@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfiguration configuration)
         {
             var options = new BitgetOptions();
-            // Reset environment so we know if theyre overriden
+            // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
             configuration.Bind(options);
@@ -63,7 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<BitgetOptions>? optionsDelegate = null)
         {
             var options = new BitgetOptions();
-            // Reset environment so we know if theyre overriden
+            // Reset environment so we know if they're overridden
             options.Rest.Environment = null!;
             options.Socket.Environment = null!;
             optionsDelegate?.Invoke(options);
@@ -82,22 +82,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// DEPRECATED; use <see cref="AddBitget(IServiceCollection, Action{BitgetOptions}?)" /> instead
-        /// </summary>
-        public static IServiceCollection AddBitget(
-            this IServiceCollection services,
-            Action<BitgetRestOptions> restDelegate,
-            Action<BitgetSocketOptions>? socketDelegate = null,
-            ServiceLifetime? socketClientLifeTime = null)
-        {
-            services.Configure<BitgetRestOptions>((x) => { restDelegate?.Invoke(x); });
-            services.Configure<BitgetSocketOptions>((x) => { socketDelegate?.Invoke(x); });
-
-            return AddBitgetCore(services, socketClientLifeTime);
-        }
-
-        /// <summary>
-        /// Add the IBitgetClient and IBitgetSocketClient to the sevice collection so they can be injected
+        /// Add the IBitgetClient and IBitgetSocketClient to the service collection so they can be injected
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="socketClientLifeTime">The lifetime of the IBitgetSocketClient for the service collection. Defaults to Singleton.</param>
@@ -138,7 +123,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBitgetOrderBookFactory, BitgetOrderBookFactory>();
             services.AddTransient<IBitgetTrackerFactory, BitgetTrackerFactory>();
-            services.AddTransient(x => x.GetRequiredService<IBitgetRestClient>().SpotApi.CommonSpotClient);
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedClient);
