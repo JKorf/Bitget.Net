@@ -35,7 +35,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Order book entry
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BitgetOrderBookEntry, BitgetSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BitgetOrderBookEntry>))]
     [SerializationModel]
     public record BitgetOrderBookEntry : ISymbolOrderBookEntry
     {

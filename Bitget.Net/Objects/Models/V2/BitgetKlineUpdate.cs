@@ -8,7 +8,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Kline update
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BitgetKlineUpdate, BitgetSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BitgetKlineUpdate>))]
     [SerializationModel]
     public record BitgetKlineUpdate
     {

@@ -11,7 +11,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Kline/candlestick info
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BitgetFuturesKlineUpdate, BitgetSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BitgetFuturesKlineUpdate>))]
     [SerializationModel]
     public record BitgetFuturesKlineUpdate
     {

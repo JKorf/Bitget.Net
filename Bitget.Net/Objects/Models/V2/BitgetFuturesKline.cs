@@ -8,7 +8,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Kline/candlestick info
     /// </summary>
-    [JsonConverter(typeof(ArrayConverter<BitgetFuturesKline, BitgetSourceGenerationContext>))]
+    [JsonConverter(typeof(ArrayConverter<BitgetFuturesKline>))]
     [SerializationModel]
     public record BitgetFuturesKline
     {
