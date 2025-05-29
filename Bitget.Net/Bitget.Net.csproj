@@ -23,6 +23,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
     <PackageReleaseNotes>https://github.com/JKorf/Bitget.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup Label="AOT" Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
@@ -50,7 +51,7 @@
     <None Include="Interfaces\Clients\CopyTradingApiV2\IBitgetRestClientCopyTradingApiTrader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CryptoExchange.Net" Version="9.0.0" />
+    <PackageReference Include="CryptoExchange.Net" Version="9.1.0" />
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
