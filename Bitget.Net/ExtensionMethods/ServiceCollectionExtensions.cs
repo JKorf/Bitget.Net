@@ -123,6 +123,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<IBitgetOrderBookFactory, BitgetOrderBookFactory>();
             services.AddTransient<IBitgetTrackerFactory, BitgetTrackerFactory>();
+            services.AddSingleton<IBitgetUserClientProvider, BitgetUserClientProvider>(x =>
+            new BitgetUserClientProvider(
+                x.GetRequiredService<HttpClient>(),
+                x.GetRequiredService<ILoggerFactory>(),
+                x.GetRequiredService<IOptions<BitgetRestOptions>>(),
+                x.GetRequiredService<IOptions<BitgetSocketOptions>>()));
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedClient);
