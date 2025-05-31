@@ -43,7 +43,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 { "locale", options.Locale }
             };
 
-            if (options.Environment.Name == "DemoTrading")
+            if (options.Environment.Name == BitgetEnvironment.DemoTrading.Name)
                 StandardRequestHeaders.Add("paptrading", "1");
         }
 
