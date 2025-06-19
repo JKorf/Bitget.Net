@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bitget.Net.Enums.V2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,5 +28,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("adlRank")]
         public decimal AdlRank { get; set; }
+        /// <summary>
+        /// Position side
+        /// </summary>
+        [JsonPropertyName("holdSide")]
+        public PositionSide HoldSide { get; set; }
     }
 }
