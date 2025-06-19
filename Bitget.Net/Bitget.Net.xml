@@ -7705,6 +7705,16 @@
             Planned maintenance time
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MaxMarketOrderQuantity">
+            <summary>
+            Max size for a market order
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MaxLimitOrderQuantity">
+            <summary>
+            Max size for a limit order
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetCopyTradingSymbolSettings">
             <summary>
             Copy Trade Symbol Settings

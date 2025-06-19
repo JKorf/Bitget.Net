@@ -174,5 +174,15 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("maintainTime")]
         public DateTime? MaintenanceTime { get; set; }
+        /// <summary>
+        /// Max size for a market order
+        /// </summary>
+        [JsonPropertyName("maxMarketOrderQty")]
+        public decimal? MaxMarketOrderQuantity { get; set; }
+        /// <summary>
+        /// Max size for a limit order
+        /// </summary>
+        [JsonPropertyName("maxOrderQty")]
+        public decimal? MaxLimitOrderQuantity { get; set; }
     }
 }

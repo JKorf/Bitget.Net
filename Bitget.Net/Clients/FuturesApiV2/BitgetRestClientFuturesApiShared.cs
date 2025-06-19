@@ -209,7 +209,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 QuantityStep = s.QuantityStep,
                 ContractSize = 1,
                 MaxShortLeverage = s.MaxLeverage,
-                MaxLongLeverage = s.MaxLeverage
+                MaxLongLeverage = s.MaxLeverage,
+                MaxTradeQuantity = s.MaxLimitOrderQuantity == null && s.MaxLimitOrderQuantity == null ? null : Math.Min(s.MaxLimitOrderQuantity ?? decimal.MaxValue, s.MaxMarketOrderQuantity ?? decimal.MaxValue)
             }).ToArray());
 
             ExchangeSymbolCache.UpdateSymbolInfo(_topicId, response.Data);
