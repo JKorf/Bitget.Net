@@ -32,6 +32,6 @@ namespace Bitget.Net.Objects.Models.V2
         /// Position side
         /// </summary>
         [JsonPropertyName("holdSide")]
-        public PositionSide HoldSide { get; set; }
+        public PositionSide PositionSide { get; set; }
     }
 }

@@ -8750,6 +8750,11 @@
             Auto deleverage rank
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesAdlRank.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetFuturesBalance">
             <summary>
             Futures balance
