@@ -315,7 +315,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Place a take profit / stop loss order
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /></para>
+        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Place-Tpsl-Order" /></para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>

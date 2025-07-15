@@ -124,6 +124,11 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("marginRatio")]
         public decimal MarginRatio { get; set; }
         /// <summary>
+        /// Mark price
+        /// </summary>
+        [JsonPropertyName("markPrice")]
+        public decimal MarkPrice { get; set; }
+        /// <summary>
         /// Create time
         /// </summary>
         [JsonPropertyName("cTime")]

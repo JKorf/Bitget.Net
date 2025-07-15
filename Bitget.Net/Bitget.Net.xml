@@ -5381,7 +5381,7 @@
         <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.PlaceTpSlOrderAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PlanType,System.Nullable{System.Decimal},System.Decimal,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{Bitget.Net.Enums.V2.OrderSide},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <summary>
             Place a take profit / stop loss order
-            <para><a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /></para>
+            <para><a href="https://www.bitget.com/api-doc/contract/plan/Place-Tpsl-Order" /></para>
             </summary>
             <param name="productType">Product type</param>
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -11994,6 +11994,11 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionUpdate.MarginRatio">
             <summary>
             Margin ratio
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionUpdate.MarkPrice">
+            <summary>
+            Mark price
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionUpdate.CreateTime">
