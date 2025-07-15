@@ -44,12 +44,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetPositionLeverage>> SetLeverageAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, decimal leverage, PositionSide? side = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetPositionLeverage>> SetLeverageAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, decimal? leverage = null, PositionSide? side = null, decimal? longLeverage = null, decimal? shortLeverage = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            parameters.AddString("leverage", leverage);
+            parameters.AddOptionalString("leverage", leverage);
+            parameters.AddOptionalString("longLeverage", longLeverage);
+            parameters.AddOptionalString("shortLeverage", shortLeverage);
             parameters.AddEnum("productType", productType);
             parameters.AddOptionalEnum("holdSide", side);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/account/set-leverage", BitgetExchange.RateLimiter.Overall, 1, true,

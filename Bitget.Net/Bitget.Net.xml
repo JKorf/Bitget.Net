@@ -318,7 +318,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.GetBalancesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.SetLeverageAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.SetLeverageAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount.AdjustMarginAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Threading.CancellationToken)">
@@ -4878,7 +4878,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.SetLeverageAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Decimal,System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiAccount.SetLeverageAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.PositionSide},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <summary>
             Set leverage
             <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Leverage" /></para>
@@ -4887,6 +4887,8 @@
             <param name="symbol">Symbol, for example `ETHUSDT`</param>
             <param name="marginAsset">Margin asset, for example `USDT`</param>
             <param name="leverage">New leverage</param>
+            <param name="longLeverage">New long leverage</param>
+            <param name="shortLeverage">New short leverage</param>
             <param name="side">Position side</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>

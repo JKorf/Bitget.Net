@@ -38,10 +38,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="marginAsset">Margin asset, for example `USDT`</param>
         /// <param name="leverage">New leverage</param>
+        /// <param name="longLeverage">New long leverage</param>
+        /// <param name="shortLeverage">New short leverage</param>
         /// <param name="side">Position side</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPositionLeverage>> SetLeverageAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, decimal leverage, PositionSide? side = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetPositionLeverage>> SetLeverageAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, decimal? leverage = null, PositionSide? side = null, decimal? longLeverage = null, decimal? shortLeverage = null, CancellationToken ct = default);
 
         /// <summary>
         /// Adjust margin
