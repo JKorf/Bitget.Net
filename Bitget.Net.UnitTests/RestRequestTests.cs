@@ -213,6 +213,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetOpenTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, TriggerPlanTypeFilter.Trigger), "GetOpenTriggerOrders2");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetClosedTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, TriggerPlanTypeFilter.Trigger), "GetClosedTriggerOrders");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.CancelTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, CancelTriggerPlanTypeFilter.Trigger), "CancelTriggerOrders");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.SetPositionTpSlAsync(Enums.BitgetProductTypeV2.CoinFutures, "123", "123", PositionSide.Oneway), "SetPositionTpSl", nestedJsonProperty: "data");
         }
 
         private bool IsAuthenticated(WebCallResult result)

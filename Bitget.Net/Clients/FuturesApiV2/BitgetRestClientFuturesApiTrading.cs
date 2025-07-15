@@ -645,5 +645,34 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
         }
+
+        #region Set Position Tp Sl
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitMartPositionTpSl[]>> SetPositionTpSlAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, PositionSide holdSide, decimal? tpTriggerPrice = null, decimal? tpTriggerQuantity = null, TriggerPriceType? tpTriggerType = null, decimal? tpLimitPrice = null, decimal? slTriggerPrice = null, decimal? slTriggerQuantity = null, TriggerPriceType? slTriggerType = null, decimal? slLimitPrice = null, SelfTradePreventionMode? stpMode = null, string? tpClientOrderId = null, string? slClientOrderId = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("productType", productType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("marginCoin", marginAsset);
+            parameters.AddEnum("holdSide", holdSide);
+            parameters.AddOptionalString("stopSurplusTriggerPrice", tpTriggerPrice);
+            parameters.AddOptionalString("stopSurplusSize", tpTriggerQuantity);
+            parameters.AddOptionalEnum("stopSurplusTriggerType", tpTriggerType);
+            parameters.AddOptionalString("stopSurplusExecutePrice", tpLimitPrice);
+            parameters.AddOptionalString("stopLossTriggerPrice", slTriggerPrice);
+            parameters.AddOptionalString("stopLossSize", slTriggerQuantity);
+            parameters.AddOptionalEnum("stopLossTriggerType", slTriggerType);
+            parameters.AddOptionalString("stopLossExecutePrice", slLimitPrice);
+            parameters.AddOptionalEnum("stpMode", stpMode);
+            parameters.AddOptional("stopSurplusClientOid", tpClientOrderId);
+            parameters.AddOptional("stopLossClientOid", slClientOrderId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/place-pos-tpsl", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<BitMartPositionTpSl[]>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
     }
 }

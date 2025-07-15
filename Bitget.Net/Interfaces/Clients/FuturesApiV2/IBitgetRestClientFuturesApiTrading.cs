@@ -552,5 +552,28 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
             string? marginCoin = null,
             IEnumerable<BitgetCancelOrderRequest>? orderIds = null,
             CancellationToken ct = default);
+
+        /// <summary>
+        /// Set the Tp/Sl for an open position
+        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Place-Pos-Tpsl-Order" /></para>
+        /// </summary>
+        /// <param name="productType">Product type</param>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="holdSide"></param>
+        /// <param name="tpTriggerPrice">Take profit trigger price</param>
+        /// <param name="tpTriggerQuantity">Take profit quantity</param>
+        /// <param name="tpTriggerType">Take profit trigger type</param>
+        /// <param name="tpLimitPrice">Take profit limit price</param>
+        /// <param name="slTriggerPrice">Stop loss trigger price</param>
+        /// <param name="slTriggerQuantity">Stop loss trigger quantity</param>
+        /// <param name="slTriggerType">Stop loss trigger type</param>
+        /// <param name="slLimitPrice">Stop loss limit price</param>
+        /// <param name="stpMode">Self trade prevention mode</param>
+        /// <param name="tpClientOrderId">Take profit client order id</param>
+        /// <param name="slClientOrderId">Stop loss client order id</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BitMartPositionTpSl[]>> SetPositionTpSlAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, PositionSide holdSide, decimal? tpTriggerPrice = null, decimal? tpTriggerQuantity = null, TriggerPriceType? tpTriggerType = null, decimal? tpLimitPrice = null, decimal? slTriggerPrice = null, decimal? slTriggerQuantity = null, TriggerPriceType? slTriggerType = null, decimal? slLimitPrice = null, SelfTradePreventionMode? stpMode = null, string? tpClientOrderId = null, string? slClientOrderId = null, CancellationToken ct = default);
+
     }
 }

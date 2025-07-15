@@ -1,0 +1,20 @@
+POST
+/api/v2/mix/order/place-pos-tpsl
+true
+{
+  "code": "00000",
+  "data": [
+    {
+      "orderId": "xxxxxxxx",
+      "stopSurplusClientOid": "xxxxxxxx",
+      "stopLossClientOid": "xxxxxxxx"
+    },
+    {
+      "orderId": "xxxxxxxx",
+      "stopSurplusClientOid": "xxxxxxxx",
+      "stopLossClientOid": "xxxxxxxx"
+    }
+  ],
+  "msg": "success",
+  "requestTime": 1627293504612
+}

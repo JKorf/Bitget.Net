@@ -471,6 +471,9 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.CancelTriggerOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Nullable{Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter},System.String,System.String,System.Collections.Generic.IEnumerable{Bitget.Net.Objects.Models.V2.BitgetCancelOrderRequest},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiTrading.SetPositionTpSlAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PositionSide,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.SelfTradePreventionMode},System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi">
             <inheritdoc />
         </member>
@@ -1699,6 +1702,11 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetWithdrawResult">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitMartPositionTpSlArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -3074,6 +3082,16 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetWithdrawResultArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitMartPositionTpSl">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitMartPositionTpSlArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -5525,6 +5543,28 @@
             <param name="orderIds">Order ids</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetRestClientFuturesApiTrading.SetPositionTpSlAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,Bitget.Net.Enums.V2.PositionSide,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.TriggerPriceType},System.Nullable{System.Decimal},System.Nullable{Bitget.Net.Enums.V2.SelfTradePreventionMode},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Set the Tp/Sl for an open position
+            <para><a href="https://www.bitget.com/api-doc/contract/plan/Place-Pos-Tpsl-Order" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="symbol">The symbol, for example `ETHUSDT`</param>
+            <param name="marginAsset">Margin asset</param>
+            <param name="holdSide"></param>
+            <param name="tpTriggerPrice">Take profit trigger price</param>
+            <param name="tpTriggerQuantity">Take profit quantity</param>
+            <param name="tpTriggerType">Take profit trigger type</param>
+            <param name="tpLimitPrice">Take profit limit price</param>
+            <param name="slTriggerPrice">Stop loss trigger price</param>
+            <param name="slTriggerQuantity">Stop loss trigger quantity</param>
+            <param name="slTriggerType">Stop loss trigger type</param>
+            <param name="slLimitPrice">Stop loss limit price</param>
+            <param name="stpMode">Self trade prevention mode</param>
+            <param name="tpClientOrderId">Take profit client order id</param>
+            <param name="slClientOrderId">Stop loss client order id</param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi">
             <summary>
@@ -13179,6 +13219,26 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetWithdrawResult.ClientOrderId">
             <summary>
             Client order id
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitMartPositionTpSl">
+            <summary>
+            Position Tp/Sl result
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitMartPositionTpSl.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitMartPositionTpSl.TakeProfitClientOrderId">
+            <summary>
+            Take profit client order id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitMartPositionTpSl.StopLossClientOrderId">
+            <summary>
+            Stop loss client order id
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Options.BitgetOptions">
