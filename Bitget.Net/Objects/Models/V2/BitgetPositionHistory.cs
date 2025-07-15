@@ -102,6 +102,11 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("closeFee")]
         public decimal CloseFee { get; set; }
         /// <summary>
+        /// Position mode
+        /// </summary>
+        [JsonPropertyName("posMode")]
+        public PositionMode PositionMode { get; set; }
+        /// <summary>
         /// Create time
         /// </summary>
         [JsonPropertyName("ctime")]

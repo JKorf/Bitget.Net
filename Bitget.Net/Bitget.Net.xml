@@ -11706,6 +11706,11 @@
             Close fee
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionHistoryEntry.PositionMode">
+            <summary>
+            Position mode
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetPositionHistoryEntry.CreateTime">
             <summary>
             Create time
