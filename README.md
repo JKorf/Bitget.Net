@@ -171,6 +171,13 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 2.2.0 - 15 Jul 2025
+    * Updated CryptoExchange.Net to version 9.2.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added MarkPrice property to socketClient.FuturesApiV2.SubscribeToPositionUpdatesAsync update model
+    * Added PositionMode property to estClient.FuturesApiV2.Trading.GetPositionHistoryAsync response model
+    * Added restClient.FuturesApiV2.Trading.SetPositionTpSlAsync endpoint
+    * Added longLeverage, shortLeverage parameters to restClient.FuturesApiV2.Account.SetLeverageAsync endpoint
+
 * Version 2.1.1 - 20 Jun 2025
     * Added MaxMarketOrderQuantity and MaxLimitOrderQuantity properties to BitgetContract model
     * Added PositionSide to BitgetFuturesAdlRank model
