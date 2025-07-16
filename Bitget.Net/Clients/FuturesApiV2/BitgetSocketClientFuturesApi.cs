@@ -36,6 +36,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             RateLimiter = BitgetExchange.RateLimiter.Websocket;
 
+            ProcessUnparsableMessages = true;
+
             RegisterPeriodicQuery(
                 "Ping",
                 TimeSpan.FromSeconds(30),
