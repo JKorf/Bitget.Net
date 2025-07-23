@@ -23,9 +23,9 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         private string[] GetIdentifier(Dictionary<string, string> arg)
         {
             if (arg.ContainsKey("instId"))
-                return new[] { $"snapshot-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}", $"update-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-{arg["instId"].ToLower()}" };
+                return new[] { $"snapshot-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}", $"update-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}" };
 
-            return new[] { $"snapshot-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-", $"update-{arg["instType"].ToLower()}-{arg["channel"].ToLower()}-" };
+            return new[] { $"snapshot-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-", $"update-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-" };
         }
 
         public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false) { RequiredResponses = _args.Count() };
