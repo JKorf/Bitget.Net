@@ -11,13 +11,13 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
     {
         private readonly Dictionary<string, string>[] _args;
         private readonly Action<DataEvent<T>> _handler;
-        public override HashSet<string> ListenerIdentifiers { get; set; }
 
         public BitgetSubscription(ILogger logger, Dictionary<string, string>[] args, Action<DataEvent<T>> handler, bool authenticated) : base(logger, authenticated)
         {
             _args = args;
             _handler = handler;
-            ListenerIdentifiers = new HashSet<string>(args.SelectMany(GetIdentifier));
+
+            MessageMatcher = MessageMatcher.Create<BitgetSocketUpdate<T>>(args.SelectMany(GetIdentifier), DoHandleMessage);
         }
 
         private string[] GetIdentifier(Dictionary<string, string> arg)
@@ -31,14 +31,12 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false) { RequiredResponses = _args.Count() };
         public override Query? GetUnsubQuery() => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "unsubscribe" }, false);
 
-        public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BitgetSocketUpdate<T>> message)
         {
-            var data = (BitgetSocketUpdate<T>)message.Data;
-            var symbol = data.Args.InstrumentId;
-            _handler.Invoke(message.As(data.Data, data.Args.Channel, symbol == "default" ? null : symbol, string.Equals(data.Action, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(data.Timestamp));
+            var symbol = message.Data.Args.InstrumentId;
+            _handler.Invoke(message.As(message.Data.Data, message.Data.Args.Channel, symbol == "default" ? null : symbol, string.Equals(message.Data.Action, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(message.Data.Timestamp));
             return CallResult.SuccessResult;
         }
 
-        public override Type? GetMessageType(IMessageAccessor message) => typeof(BitgetSocketUpdate<T>);
     }
 }
