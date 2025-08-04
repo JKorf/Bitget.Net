@@ -54,18 +54,19 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedFuturesTicker>> IFuturesTickerRestClient.GetFuturesTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickerOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesTicker>(Exchange, validationError);
 
-            var productType = GetProductType(request.Symbol.TradingMode, request.ExchangeParameters);
+            var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
 
-            var resultTicker = ExchangeData.GetTickerAsync(productType, request.Symbol.GetSymbol(FormatSymbol), ct);
+            var resultTicker = ExchangeData.GetTickerAsync(productType, request.Symbol!.GetSymbol(FormatSymbol), ct);
             Task<WebCallResult<BitgetFundingTime>> resultFunding = Task.FromResult<WebCallResult<BitgetFundingTime>>(default!);
             if (!request.Symbol.TradingMode.IsDelivery())
                 resultFunding = ExchangeData.GetNextFundingTimeAsync(productType, request.Symbol.GetSymbol(FormatSymbol), ct);
             var resultPrices = ExchangeData.GetPricesAsync(productType, request.Symbol.GetSymbol(FormatSymbol), ct);
             await Task.WhenAll(resultTicker, resultFunding, resultPrices).ConfigureAwait(false);
+
             if (!resultTicker.Result)
                 return resultTicker.Result.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
             if (resultFunding.Result?.Success == false)
@@ -135,11 +136,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
         {
-            var validationError = ((IBookTickerRestClient)this).GetBookTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IBookTickerRestClient)this).GetBookTickerOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedBookTicker>(Exchange, validationError);
 
-            var symbol = request.Symbol.GetSymbol(FormatSymbol);
+            var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var resultTicker = await ExchangeData.GetOrderBookAsync(
                 GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
                 symbol,
@@ -246,7 +247,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!Enum.IsDefined(typeof(Enums.BitgetFuturesKlineInterval), interval))
                 return new ExchangeWebResult<SharedKline[]>(Exchange, new ArgumentError("Interval not supported"));
 
-            var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedKline[]>(Exchange, validationError);
 
@@ -268,8 +269,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 startTime = request.StartTime;
 
             var result = await ExchangeData.GetKlinesAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                request.Symbol!.GetSymbol(FormatSymbol),
                 interval,
                 KlineType.Market,
                 startTime,
@@ -305,13 +306,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedTrade[]>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
-            var validationError = ((IRecentTradeRestClient)this).GetRecentTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IRecentTradeRestClient)this).GetRecentTradesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedTrade[]>(Exchange, validationError);
 
             var result = await ExchangeData.GetRecentTradesAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                request.Symbol!.GetSymbol(FormatSymbol),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -338,13 +339,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedLeverage>> ILeverageRestClient.GetLeverageAsync(GetLeverageRequest request, CancellationToken ct)
         {
-            var validationError = ((ILeverageRestClient)this).GetLeverageOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((ILeverageRestClient)this).GetLeverageOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedLeverage>(Exchange, validationError);
 
             var result = await Trading.GetPositionAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                symbol: request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                symbol: request.Symbol!.GetSymbol(FormatSymbol),
                 marginAsset: ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -365,13 +366,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedLeverage>> ILeverageRestClient.SetLeverageAsync(SetLeverageRequest request, CancellationToken ct)
         {
-            var validationError = ((ILeverageRestClient)this).SetLeverageOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((ILeverageRestClient)this).SetLeverageOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedLeverage>(Exchange, validationError);
 
             var result = await Account.SetLeverageAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                symbol: request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                symbol: request.Symbol!.GetSymbol(FormatSymbol),
                 marginAsset: ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
                 (int)request.Leverage,
                 side: request.Side == null ? null : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long,
@@ -402,7 +403,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!Enum.IsDefined(typeof(Enums.BitgetFuturesKlineInterval), interval))
                 return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, new ArgumentError("Interval not supported"));
 
-            var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, validationError);
 
@@ -424,8 +425,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 startTime = request.StartTime;
 
             var result = await ExchangeData.GetHistoricalMarkPriceKlinesAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                request.Symbol!.GetSymbol(FormatSymbol),
                 interval,
                 startTime,
                 endTime,
@@ -465,7 +466,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!Enum.IsDefined(typeof(Enums.BitgetFuturesKlineInterval), interval))
                 return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, new ArgumentError("Interval not supported"));
 
-            var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, validationError);
 
@@ -487,8 +488,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 startTime = request.StartTime;
 
             var result = await ExchangeData.GetHistoricalIndexPriceKlinesAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                request.Symbol!.GetSymbol(FormatSymbol),
                 interval,
                 startTime,
                 endTime,
@@ -522,13 +523,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedOrderBook>> IOrderBookRestClient.GetOrderBookAsync(GetOrderBookRequest request, CancellationToken ct)
         {
-            var validationError = ((IOrderBookRestClient)this).GetOrderBookOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IOrderBookRestClient)this).GetOrderBookOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedOrderBook>(Exchange, validationError);
 
             var result = await ExchangeData.GetOrderBookAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                request.Symbol!.GetSymbol(FormatSymbol),
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -550,11 +551,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedOpenInterest>> IOpenInterestRestClient.GetOpenInterestAsync(GetOpenInterestRequest request, CancellationToken ct)
         {
-            var validationError = ((IOpenInterestRestClient)this).GetOpenInterestOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IOpenInterestRestClient)this).GetOpenInterestOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedOpenInterest>(Exchange, validationError);
 
-            var result = await ExchangeData.GetOpenInterestAsync(GetProductType(request.Symbol.TradingMode, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
+            var result = await ExchangeData.GetOpenInterestAsync(GetProductType(request.TradingMode, request.ExchangeParameters), request.Symbol!.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedOpenInterest>(Exchange, null, default);
 
@@ -574,7 +575,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         async Task<ExchangeWebResult<SharedFundingRate[]>> IFundingRateRestClient.GetFundingRateHistoryAsync(GetFundingRateHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((IFundingRateRestClient)this).GetFundingRateHistoryOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFundingRateRestClient)this).GetFundingRateHistoryOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFundingRate[]>(Exchange, validationError);
 
@@ -588,8 +589,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             // Get data
             var result = await ExchangeData.GetHistoricalFundingRateAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                request.Symbol!.GetSymbol(FormatSymbol),
                 page: page,
                 pageSize: pageSize,
                 ct: ct).ConfigureAwait(false);
@@ -632,7 +633,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var validationError = ((IFuturesOrderRestClient)this).PlaceFuturesOrderOptions.ValidateRequest(
                 Exchange,
                 request,
-                request.Symbol.TradingMode,
+                request.TradingMode,
                 SupportedTradingModes,
                 ((IFuturesOrderRestClient)this).FuturesSupportedOrderTypes,
                 ((IFuturesOrderRestClient)this).FuturesSupportedTimeInForce,
@@ -642,7 +643,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var (side, posSide) = GetTradeSide(request);
             var result = await Trading.PlaceOrderAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
+                GetProductType(request.Symbol!.TradingMode, request.ExchangeParameters),
                 request.Symbol.GetSymbol(FormatSymbol),
                 ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
                 side,
@@ -673,11 +674,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedFuturesOrder>> IFuturesOrderRestClient.GetFuturesOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesOrder>(Exchange, validationError);
 
-            var order = await Trading.GetOrderAsync(GetProductType(request.Symbol.TradingMode, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), request.OrderId, ct: ct).ConfigureAwait(false);
+            var order = await Trading.GetOrderAsync(GetProductType(request.TradingMode, request.ExchangeParameters), request.Symbol!.GetSymbol(FormatSymbol), request.OrderId, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedFuturesOrder>(Exchange, null, default);
 
@@ -756,7 +757,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedFuturesOrder[]>> IFuturesOrderRestClient.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetClosedFuturesOrdersOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesOrderRestClient)this).GetClosedFuturesOrdersOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesOrder[]>(Exchange, validationError);
 
@@ -767,7 +768,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             // Get data
             var limit = request.Limit ?? 1000;
-            var orders = await Trading.GetClosedOrdersAsync(GetProductType(request.Symbol.TradingMode, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol),
+            var orders = await Trading.GetClosedOrdersAsync(GetProductType(request.TradingMode, request.ExchangeParameters), request.Symbol!.GetSymbol(FormatSymbol),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: limit,
@@ -814,11 +815,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderTradesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedUserTrade[]>(Exchange, validationError);
 
-            var orders = await Trading.GetUserTradesAsync(GetProductType(request.Symbol.TradingMode, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), orderId: request.OrderId, ct: ct).ConfigureAwait(false);
+            var orders = await Trading.GetUserTradesAsync(GetProductType(request.TradingMode, request.ExchangeParameters), request.Symbol!.GetSymbol(FormatSymbol), orderId: request.OrderId, ct: ct).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
@@ -849,7 +850,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetFuturesUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesOrderRestClient)this).GetFuturesUserTradesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedUserTrade[]>(Exchange, validationError);
 
@@ -859,7 +860,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 fromId = fromIdToken.FromToken;
 
             // Get data
-            var orders = await Trading.GetUserTradesAsync(GetProductType(request.Symbol.TradingMode, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol),
+            var orders = await Trading.GetUserTradesAsync(GetProductType(request.TradingMode, request.ExchangeParameters), request.Symbol!.GetSymbol(FormatSymbol),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit ?? 100,
@@ -901,11 +902,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         };
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.CancelFuturesOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).CancelFuturesOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesOrderRestClient)this).CancelFuturesOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var order = await Trading.CancelOrderAsync(GetProductType(request.Symbol.TradingMode, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), request.OrderId, ct: ct).ConfigureAwait(false);
+            var order = await Trading.CancelOrderAsync(GetProductType(request.TradingMode, request.ExchangeParameters), request.Symbol!.GetSymbol(FormatSymbol), request.OrderId, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, null, default);
 
@@ -958,13 +959,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
         EndpointOptions<ClosePositionRequest> IFuturesOrderRestClient.ClosePositionOptions { get; } = new EndpointOptions<ClosePositionRequest>(true);
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.ClosePositionAsync(ClosePositionRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).ClosePositionOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesOrderRestClient)this).ClosePositionOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var result = await Trading.ClosePositionsAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                symbol: request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                symbol: request.Symbol!.GetSymbol(FormatSymbol),
                 side: request.PositionSide == null ? null : request.PositionSide == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
@@ -1037,11 +1038,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         EndpointOptions<GetOrderRequest> IFuturesOrderClientIdRestClient.GetFuturesOrderByClientOrderIdOptions { get; } = new EndpointOptions<GetOrderRequest>(true);
         async Task<ExchangeWebResult<SharedFuturesOrder>> IFuturesOrderClientIdRestClient.GetFuturesOrderByClientOrderIdAsync(GetOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesOrder>(Exchange, validationError);
 
-            var order = await Trading.GetOrderAsync(GetProductType(request.Symbol.TradingMode, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), clientOrderId: request.OrderId, ct: ct).ConfigureAwait(false);
+            var order = await Trading.GetOrderAsync(GetProductType(request.TradingMode, request.ExchangeParameters), request.Symbol!.GetSymbol(FormatSymbol), clientOrderId: request.OrderId, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedFuturesOrder>(Exchange, null, default);
 
@@ -1072,11 +1073,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
         EndpointOptions<CancelOrderRequest> IFuturesOrderClientIdRestClient.CancelFuturesOrderByClientOrderIdOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderClientIdRestClient.CancelFuturesOrderByClientOrderIdAsync(CancelOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderRestClient)this).CancelFuturesOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesOrderRestClient)this).CancelFuturesOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
-            var order = await Trading.CancelOrderAsync(GetProductType(request.Symbol.TradingMode, request.ExchangeParameters), request.Symbol.GetSymbol(FormatSymbol), clientOrderId: request.OrderId, ct: ct).ConfigureAwait(false);
+            var order = await Trading.CancelOrderAsync(GetProductType(request.TradingMode, request.ExchangeParameters), request.Symbol!.GetSymbol(FormatSymbol), clientOrderId: request.OrderId, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, null, default);
 
@@ -1195,7 +1196,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         async Task<ExchangeWebResult<SharedFee>> IFeeRestClient.GetFeesAsync(GetFeeRequest request, CancellationToken ct)
         {
-            var validationError = ((IFeeRestClient)this).GetFeeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFeeRestClient)this).GetFeeOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFee>(Exchange, validationError);
 
@@ -1226,13 +1227,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
         async Task<ExchangeWebResult<SharedId>> IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
         {
             var (side, tradeSide) = GetTradeSide(request);
-            var validationError = ((IFuturesTriggerOrderRestClient)this).PlaceFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes, side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, ((IFuturesOrderRestClient)this).FuturesSupportedOrderQuantity);
+            var validationError = ((IFuturesTriggerOrderRestClient)this).PlaceFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes, side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, ((IFuturesOrderRestClient)this).FuturesSupportedOrderQuantity);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var result = await Trading.PlaceTriggerOrderAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                request.Symbol!.GetSymbol(FormatSymbol),
                 ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
                 TriggerPlanType.Normal,
                 request.MarginMode == SharedMarginMode.Isolated ? MarginMode.IsolatedMargin : MarginMode.CrossMargin,
@@ -1255,12 +1256,12 @@ namespace Bitget.Net.Clients.FuturesApiV2
         EndpointOptions<GetOrderRequest> IFuturesTriggerOrderRestClient.GetFuturesTriggerOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true);
         async Task<ExchangeWebResult<SharedFuturesTriggerOrder>> IFuturesTriggerOrderRestClient.GetFuturesTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesTriggerOrderRestClient)this).GetFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesTriggerOrderRestClient)this).GetFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesTriggerOrder>(Exchange, validationError);
 
             var orders = await Trading.GetOpenTriggerOrdersAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
                 TriggerPlanTypeFilter.Trigger,
                 orderId: request.OrderId).ConfigureAwait(false);
             if (!orders)
@@ -1269,7 +1270,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!orders.Data.Orders.Any())
             {
                 orders = await Trading.GetClosedTriggerOrdersAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
                 TriggerPlanTypeFilter.Trigger,
                 orderId: request.OrderId).ConfigureAwait(false);
                 if (!orders)
@@ -1281,7 +1282,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var order = orders.Data.Orders.Single();
 
-            return orders.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesTriggerOrder(
+            return orders.AsExchangeResult(Exchange, request.TradingMode, new SharedFuturesTriggerOrder(
                 ExchangeSymbolCache.ParseSymbol(_topicId, order.Symbol),
                 order.Symbol,
                 order.OrderId.ToString(),
@@ -1317,18 +1318,18 @@ namespace Bitget.Net.Clients.FuturesApiV2
         EndpointOptions<CancelOrderRequest> IFuturesTriggerOrderRestClient.CancelFuturesTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
         async Task<ExchangeWebResult<SharedId>> IFuturesTriggerOrderRestClient.CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesTriggerOrderRestClient)this).CancelFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesTriggerOrderRestClient)this).CancelFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var order = await Trading.CancelTriggerOrdersAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
                 orderIds: [new BitgetCancelOrderRequest { OrderId = request.OrderId }],
                 ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.AsExchangeResult<SharedId>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(request.OrderId));
+            return order.AsExchangeResult(Exchange, request.TradingMode, new SharedId(request.OrderId));
         }
 
 
@@ -1374,13 +1375,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         async Task<ExchangeWebResult<SharedId>> IFuturesTpSlRestClient.SetFuturesTpSlAsync(SetTpSlRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesTpSlRestClient)this).SetFuturesTpSlOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesTpSlRestClient)this).SetFuturesTpSlOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var result = await Trading.PlaceTpSlOrderAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                request.Symbol!.GetSymbol(FormatSymbol),
                 ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
                 request.TpSlSide == SharedTpSlSide.TakeProfit ? PlanType.PositionTakeProfit : PlanType.PositionStopLoss,
                 null,
@@ -1406,13 +1407,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         async Task<ExchangeWebResult<bool>> IFuturesTpSlRestClient.CancelFuturesTpSlAsync(CancelTpSlRequest request, CancellationToken ct)
         {
-            var validationError = ((IFuturesTpSlRestClient)this).CancelFuturesTpSlOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesTpSlRestClient)this).CancelFuturesTpSlOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<bool>(Exchange, validationError);
 
             var result = await Trading.CancelTriggerOrdersAsync(
-                GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
-                symbol: request.Symbol.GetSymbol(FormatSymbol),
+                GetProductType(request.TradingMode, request.ExchangeParameters),
+                symbol: request.Symbol!.GetSymbol(FormatSymbol),
                 orderIds: [new BitgetCancelOrderRequest {
                     OrderId = request.OrderId
                 }],
