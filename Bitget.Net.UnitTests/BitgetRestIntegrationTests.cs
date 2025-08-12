@@ -1,6 +1,7 @@
 ﻿using Bitget.Net.Clients;
 using Bitget.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -42,7 +43,8 @@ namespace Bitget.Net.UnitTests
             var result = await CreateClient().SpotApiV2.ExchangeData.GetOrderBookAsync("TSTTST", default);
 
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Error.Code, Is.EqualTo(40034));
+            Assert.That(result.Error.ErrorCode, Is.EqualTo(40034));
+            Assert.That(result.Error.ErrorType, Is.EqualTo(ErrorType.UnknownSymbol));
         }
 
         [Test]

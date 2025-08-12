@@ -1,4 +1,5 @@
 ﻿using Bitget.Net.Objects.Socket.Queries;
+using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
@@ -9,11 +10,13 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
 {
     internal class BitgetSubscription<T> : Subscription<BitgetSocketEvent, BitgetSocketEvent>
     {
+        private readonly SocketApiClient _client;
         private readonly Dictionary<string, string>[] _args;
         private readonly Action<DataEvent<T>> _handler;
 
-        public BitgetSubscription(ILogger logger, Dictionary<string, string>[] args, Action<DataEvent<T>> handler, bool authenticated) : base(logger, authenticated)
+        public BitgetSubscription(ILogger logger, SocketApiClient client, Dictionary<string, string>[] args, Action<DataEvent<T>> handler, bool authenticated) : base(logger, authenticated)
         {
+            _client = client;
             _args = args;
             _handler = handler;
 
@@ -28,8 +31,8 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
             return new[] { $"snapshot-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-", $"update-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-" };
         }
 
-        public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false) { RequiredResponses = _args.Count() };
-        public override Query? GetUnsubQuery() => new BitgetQuery(new BitgetSocketRequest { Args = _args, Op = "unsubscribe" }, false);
+        public override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(_client, new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false) { RequiredResponses = _args.Count() };
+        public override Query? GetUnsubQuery() => new BitgetQuery(_client, new BitgetSocketRequest { Args = _args, Op = "unsubscribe" }, false);
 
         public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BitgetSocketUpdate<T>> message)
         {

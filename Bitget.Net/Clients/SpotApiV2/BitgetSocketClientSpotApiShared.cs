@@ -204,7 +204,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var interval = (Enums.BitgetStreamKlineIntervalV2)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.BitgetStreamKlineIntervalV2), interval))
-                return new ExchangeResult<UpdateSubscription>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeResult<UpdateSubscription>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var validationError = ((IKlineSocketClient)this).SubscribeKlineOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)

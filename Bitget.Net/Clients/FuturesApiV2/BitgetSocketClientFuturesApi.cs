@@ -13,6 +13,7 @@ using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
@@ -44,7 +45,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 x => new BitgetPingQuery(),
                 (connection, result) =>
                 {
-                    if (result.Error?.Message.Equals("Query timeout") == true)
+                    if (result.Error?.ErrorType == ErrorType.Timeout)
                     {
                         // Ping timeout, reconnect
                         _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
@@ -241,7 +242,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             Action<DataEvent<T>> handler,
             CancellationToken ct)
         {
-            var subscription = new BitgetSubscription<T>(_logger, request, handler, authenticated);
+            var subscription = new BitgetSubscription<T>(_logger, this, request, handler, authenticated);
             return await SubscribeAsync(url, subscription, ct).ConfigureAwait(false);
         }
 
@@ -270,7 +271,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 }
             };
 
-            return Task.FromResult<Query?>(new BitgetAuthQuery(socketRequest));
+            return Task.FromResult<Query?>(new BitgetAuthQuery(this, socketRequest));
         }
     }
 }

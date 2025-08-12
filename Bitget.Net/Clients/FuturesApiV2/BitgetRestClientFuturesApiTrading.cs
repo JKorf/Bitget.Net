@@ -4,6 +4,7 @@ using Bitget.Net.Enums.V2;
 using CryptoExchange.Net.Objects;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using CryptoExchange.Net.RateLimiting.Guards;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {
@@ -129,10 +130,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 result.Add(new CallResult<BitgetOrderId>(item!));
 
             foreach (var item in resultData.Data.Failed)
-                result.Add(new CallResult<BitgetOrderId>(new ServerError(item.ErrorCode!.Value, item.ErrorMessage!)));
+                result.Add(new CallResult<BitgetOrderId>(new ServerError(item.ErrorCode!.Value.ToString(), _baseClient.GetErrorInfo(item.ErrorCode!.Value, item.ErrorMessage!))));
 
             if (result.All(x => !x.Success))
-                return resultData.AsErrorWithData(new ServerError("All orders failed"), result.ToArray());
+                return resultData.AsErrorWithData(new ServerError(null, new ErrorInfo(ErrorType.AllOrdersFailed, "All orders failed")), result.ToArray());
 
             return resultData.As(result.ToArray());
         }
