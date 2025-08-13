@@ -106,8 +106,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 new ErrorInfo(ErrorType.QuantityInvalid, false, "Order quantity too large",["43038", "45112"]),
                 new ErrorInfo(ErrorType.QuantityInvalid, false, "Max order value exceeded",["43041", "43007", "45103", "45104", "45113"]),
 
-                new ErrorInfo(ErrorType.OrderTypeInvalid, false, "Market order not currently allowed", "40824"),
-                new ErrorInfo(ErrorType.OrderTypeInvalid, false, "Currently only market orders can be placed", "45123"),
+                new ErrorInfo(ErrorType.OrderConfigurationRejected, false, "Market order not currently allowed", "40824"),
+                new ErrorInfo(ErrorType.OrderConfigurationRejected, false, "Currently only market orders can be placed", "45123"),
 
                 new ErrorInfo(ErrorType.StopParametersInvalid, false, "Long position take profit price should be greater than the average open price",["40735", "40829", "45064"]),
                 new ErrorInfo(ErrorType.StopParametersInvalid, false, "Long position take profit price should be greater than current price",["40736", "40830", "40915", "43013", "45060", "31004"]),
