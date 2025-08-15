@@ -281,7 +281,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return orders.AsExchangeResult<SharedSpotOrder>(Exchange, null, default);
 
             if (!orders.Data.Any())
-                return orders.AsExchangeError<SharedSpotOrder>(Exchange, new ServerError(null, new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
+                return orders.AsExchangeError<SharedSpotOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
@@ -515,7 +515,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return orders.AsExchangeResult<SharedSpotOrder>(Exchange, null, default);
 
             if (!orders.Data.Any())
-                return orders.AsExchangeError<SharedSpotOrder>(Exchange, new ServerError(null, new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
+                return orders.AsExchangeError<SharedSpotOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
@@ -593,7 +593,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             var asset = assets.Data.SingleOrDefault();
             if (asset == null)
-                return assets.AsExchangeError<SharedAsset>(Exchange, new ServerError(null, new ErrorInfo(ErrorType.UnknownAsset, "Asset not found")));
+                return assets.AsExchangeError<SharedAsset>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownAsset, "Asset not found")));
 
             return assets.AsExchangeResult(Exchange, TradingMode.Spot, new SharedAsset(asset.Name)
             {
@@ -859,7 +859,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return orders.AsExchangeResult<SharedSpotTriggerOrder>(Exchange, null, default);
 
             if (!orders.Data.Any())
-                return orders.AsExchangeError<SharedSpotTriggerOrder>(Exchange, new ServerError(null, new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
+                return orders.AsExchangeError<SharedSpotTriggerOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTriggerOrder(

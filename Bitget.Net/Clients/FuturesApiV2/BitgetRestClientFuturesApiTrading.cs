@@ -133,7 +133,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 result.Add(new CallResult<BitgetOrderId>(new ServerError(item.ErrorCode!.Value.ToString(), _baseClient.GetErrorInfo(item.ErrorCode!.Value, item.ErrorMessage!))));
 
             if (result.All(x => !x.Success))
-                return resultData.AsErrorWithData(new ServerError(null, new ErrorInfo(ErrorType.AllOrdersFailed, "All orders failed")), result.ToArray());
+                return resultData.AsErrorWithData(new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All orders failed")), result.ToArray());
 
             return resultData.As(result.ToArray());
         }

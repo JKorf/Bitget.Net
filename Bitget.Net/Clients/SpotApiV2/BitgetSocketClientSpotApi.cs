@@ -31,22 +31,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         private static readonly MessagePath _channelPath = MessagePath.Get().Property("arg").Property("channel");
         private static readonly MessagePath _instIdPath = MessagePath.Get().Property("arg").Property("instId");
 
-
-        protected override ErrorCollection ErrorMapping { get; } = new ErrorCollection(
-            [
-                new ErrorInfo(ErrorType.InvalidParameter, false, "Channel does not exist", "30001"), 
-                new ErrorInfo(ErrorType.InvalidParameter, false, "Parameter error", "30016"),
-
-                new ErrorInfo(ErrorType.SignatureInvalid, false, "Login failed", "30005"),
-                new ErrorInfo(ErrorType.SignatureInvalid, false, "Invalid API key", "30011"),
-                new ErrorInfo(ErrorType.SignatureInvalid, false, "Invalid passphrase", "30012"),
-                new ErrorInfo(ErrorType.SignatureInvalid, false, "Invalid signature", "30015"),
-
-                new ErrorInfo(ErrorType.TimestampInvalid, false, "Invalid timestamp", "30013"),
-                new ErrorInfo(ErrorType.TimestampInvalid, false, "Timestamp expired", "30014"),
-
-                new ErrorInfo(ErrorType.RequestRateLimited, false, "Request rate limit reached", "30006", "30007"),
-            ]);
+        protected override ErrorCollection ErrorMapping => BitgetErrors.SpotSocketErrors;
 
         #region ctor
         internal BitgetSocketClientSpotApi(ILogger logger, BitgetSocketOptions options) :

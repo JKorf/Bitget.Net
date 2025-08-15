@@ -1279,7 +1279,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }
 
             if (!orders.Data.Orders.Any())
-                return orders.AsExchangeError<SharedFuturesTriggerOrder>(Exchange, new ServerError(null, new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
+                return orders.AsExchangeError<SharedFuturesTriggerOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.Orders.Single();
 

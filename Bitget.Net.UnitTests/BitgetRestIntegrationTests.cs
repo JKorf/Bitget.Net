@@ -40,11 +40,11 @@ namespace Bitget.Net.UnitTests
             if (!ShouldRun())
                 return;
 
-            var result = await CreateClient().SpotApiV2.ExchangeData.GetOrderBookAsync("TSTTST", default);
+            var result = await CreateClient().SpotApiV2.ExchangeData.GetOrderBookAsync("TST-TST", default);
 
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Error.ErrorCode, Is.EqualTo(40034));
-            Assert.That(result.Error.ErrorType, Is.EqualTo(ErrorType.UnknownSymbol));
+            Assert.That(result.Error.ErrorCode, Is.EqualTo("40034"));
+            Assert.That(result.Error.ErrorType, Is.EqualTo(ErrorType.InvalidParameter));
         }
 
         [Test]
