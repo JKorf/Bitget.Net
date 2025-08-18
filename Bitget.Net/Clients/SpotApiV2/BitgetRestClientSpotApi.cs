@@ -21,7 +21,7 @@ namespace Bitget.Net.Clients.SpotApiV2
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 
-        protected override ErrorCollection ErrorMapping => BitgetErrors.SpotRestErrors;
+        protected override ErrorCollection ErrorMapping => BitgetErrors.RestErrors;
         /// <inheritdoc />
         public IBitgetRestClientSpotApiAccount Account { get; }
         /// <inheritdoc />

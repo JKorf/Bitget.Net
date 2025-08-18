@@ -9,7 +9,7 @@ namespace Bitget.Net
 {
     internal static class BitgetErrors
     {
-        public static ErrorCollection SpotRestErrors { get; } = new ErrorCollection(
+        public static ErrorCollection RestErrors { get; } = new ErrorCollection(
             [
                 new ErrorInfo(ErrorType.Unauthorized, false, "API Key empty", "40001"),
                 new ErrorInfo(ErrorType.Unauthorized, false, "Sign empty", "40002"),
@@ -136,7 +136,7 @@ namespace Bitget.Net
             ]
         );
 
-        public static ErrorCollection SpotSocketErrors { get; } = new ErrorCollection(
+        public static ErrorCollection SocketErrors { get; } = new ErrorCollection(
             [
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Channel does not exist", "30001"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Parameter error", "30016"),
