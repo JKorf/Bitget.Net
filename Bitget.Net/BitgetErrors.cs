@@ -9,7 +9,7 @@ namespace Bitget.Net
 {
     internal static class BitgetErrors
     {
-        public static ErrorCollection RestErrors { get; } = new ErrorCollection(
+        public static ErrorMapping RestErrors { get; } = new ErrorMapping(
             [
                 new ErrorInfo(ErrorType.Unauthorized, false, "API Key empty", "40001"),
                 new ErrorInfo(ErrorType.Unauthorized, false, "Sign empty", "40002"),
@@ -124,6 +124,8 @@ namespace Bitget.Net
                 new ErrorInfo(ErrorType.NoPosition, false, "No position found",["40709", "40838", "43043", "22002"]),
                 new ErrorInfo(ErrorType.NoPosition, false, "No position found, can't set tp/sl", "40837"),
 
+                new ErrorInfo(ErrorType.MaxPosition, false, "Max position count exceeded", "45116", "59016", "22029"),
+
                 new ErrorInfo(ErrorType.InsufficientBalance, false, "Insufficient balance",["43132", "59042", "59022", "59011", "60013", "40711", "40798", "43012", "45002", "49023", "40754", "50020"]),
                 new ErrorInfo(ErrorType.InsufficientBalance, false, "Insufficient margin", "40712"),
                 new ErrorInfo(ErrorType.InsufficientBalance, false, "Not enough open position",["40757", "45003", "45005", "45006"]),
@@ -136,7 +138,7 @@ namespace Bitget.Net
             ]
         );
 
-        public static ErrorCollection SocketErrors { get; } = new ErrorCollection(
+        public static ErrorMapping SocketErrors { get; } = new ErrorMapping(
             [
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Channel does not exist", "30001"),
                 new ErrorInfo(ErrorType.InvalidParameter, false, "Parameter error", "30016"),

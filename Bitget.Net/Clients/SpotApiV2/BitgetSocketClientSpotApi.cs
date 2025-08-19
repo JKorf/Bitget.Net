@@ -31,7 +31,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         private static readonly MessagePath _channelPath = MessagePath.Get().Property("arg").Property("channel");
         private static readonly MessagePath _instIdPath = MessagePath.Get().Property("arg").Property("instId");
 
-        protected override ErrorCollection ErrorMapping => BitgetErrors.SocketErrors;
+        protected override ErrorMapping ErrorMapping => BitgetErrors.SocketErrors;
 
         #region ctor
         internal BitgetSocketClientSpotApi(ILogger logger, BitgetSocketOptions options) :

@@ -20,7 +20,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Futures Api");
 
-        protected override ErrorCollection ErrorMapping => BitgetErrors.RestErrors;
+        protected override ErrorMapping ErrorMapping => BitgetErrors.RestErrors;
 
         /// <inheritdoc />
         public IBitgetRestClientFuturesApiAccount Account { get; }
