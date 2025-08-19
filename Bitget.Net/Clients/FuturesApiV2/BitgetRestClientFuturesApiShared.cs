@@ -4,6 +4,7 @@ using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
 using System.Linq;
 
@@ -245,7 +246,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             var interval = (Enums.BitgetFuturesKlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.BitgetFuturesKlineInterval), interval))
-                return new ExchangeWebResult<SharedKline[]>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<SharedKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -401,7 +402,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             var interval = (Enums.BitgetFuturesKlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.BitgetFuturesKlineInterval), interval))
-                return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -464,7 +465,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             var interval = (Enums.BitgetFuturesKlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.BitgetFuturesKlineInterval), interval))
-                return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var validationError = ((IMarkPriceKlineRestClient)this).GetMarkPriceKlinesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -1278,7 +1279,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }
 
             if (!orders.Data.Orders.Any())
-                return orders.AsExchangeError<SharedFuturesTriggerOrder>(Exchange, new ServerError("Order not found"));
+                return orders.AsExchangeError<SharedFuturesTriggerOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.Orders.Single();
 

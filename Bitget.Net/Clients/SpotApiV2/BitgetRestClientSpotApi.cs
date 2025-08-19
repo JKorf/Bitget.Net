@@ -10,6 +10,7 @@ using CryptoExchange.Net.Converters.MessageParsing;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
 
@@ -20,6 +21,7 @@ namespace Bitget.Net.Clients.SpotApiV2
     {
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
 
+        protected override ErrorMapping ErrorMapping => BitgetErrors.RestErrors;
         /// <inheritdoc />
         public IBitgetRestClientSpotApiAccount Account { get; }
         /// <inheritdoc />
@@ -79,7 +81,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return result.As<T>(default);
 
             if (result.Data.Code != 0)
-                return result.AsError<T>(new ServerError(result.Data.Code, result.Data.Message!));
+                return result.AsError<T>(new ServerError(result.Data.Code.ToString(), GetErrorInfo(result.Data.Code, result.Data.Message!)));
 
             return result.As<T>(result.Data.Data);
         }
@@ -94,7 +96,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return result.AsDataless();
 
             if (result.Data.Code != 0)
-                return result.AsDatalessError(new ServerError(result.Data.Code, result.Data.Message!));
+                return result.AsDatalessError(new ServerError(result.Data.Code.ToString(), GetErrorInfo(result.Data.Code, result.Data.Message!)));
 
             return result.AsDataless();
         }
@@ -103,17 +105,17 @@ namespace Bitget.Net.Clients.SpotApiV2
         protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
-                return new ServerError(null, "Unknown request error", exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
             var code = accessor.GetValue<string>(MessagePath.Get().Property("code"));
             var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
             if (msg == null)
-                return new ServerError(null, "Unknown request error", exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
             if (code == null)
-                return new ServerError(null, msg, exception);
+                return new ServerError(ErrorInfo.Unknown with { Message = msg }, exception);
 
-            return new ServerError(int.Parse(code), msg, exception);
+            return new ServerError(code, GetErrorInfo(int.Parse(code), msg), exception);
         }
 
         /// <inheritdoc />

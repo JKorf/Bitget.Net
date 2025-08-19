@@ -3,6 +3,7 @@ using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
 
 namespace Bitget.Net.Clients.SpotApiV2
@@ -35,7 +36,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var interval = (Enums.V2.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.V2.KlineInterval), interval))
-                return new ExchangeWebResult<SharedKline[]>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<SharedKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -280,7 +281,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return orders.AsExchangeResult<SharedSpotOrder>(Exchange, null, default);
 
             if (!orders.Data.Any())
-                return orders.AsExchangeError<SharedSpotOrder>(Exchange, new ServerError("Order not found"));
+                return orders.AsExchangeError<SharedSpotOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
@@ -514,7 +515,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return orders.AsExchangeResult<SharedSpotOrder>(Exchange, null, default);
 
             if (!orders.Data.Any())
-                return orders.AsExchangeError<SharedSpotOrder>(Exchange, new ServerError("Order not found"));
+                return orders.AsExchangeError<SharedSpotOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
@@ -592,7 +593,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             var asset = assets.Data.SingleOrDefault();
             if (asset == null)
-                return assets.AsExchangeError<SharedAsset>(Exchange, new ServerError("Asset not found"));
+                return assets.AsExchangeError<SharedAsset>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownAsset, "Asset not found")));
 
             return assets.AsExchangeResult(Exchange, TradingMode.Spot, new SharedAsset(asset.Name)
             {
@@ -858,7 +859,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return orders.AsExchangeResult<SharedSpotTriggerOrder>(Exchange, null, default);
 
             if (!orders.Data.Any())
-                return orders.AsExchangeError<SharedSpotTriggerOrder>(Exchange, new ServerError("Order not found"));
+                return orders.AsExchangeError<SharedSpotTriggerOrder>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             var order = orders.Data.Single();
             return orders.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTriggerOrder(

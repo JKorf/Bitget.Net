@@ -44,7 +44,7 @@ namespace Bitget.Net.UnitTests
             // assert
             ClassicAssert.IsFalse(result.Success);
             ClassicAssert.IsNotNull(result.Error);
-            Assert.That(result.Error!.Code == 400001);
+            Assert.That(result.Error!.ErrorCode == "400001");
             Assert.That(result.Error.Message == "Error occured");
         }
 
@@ -82,7 +82,7 @@ namespace Bitget.Net.UnitTests
             // assert
             ClassicAssert.IsFalse(result.Success);
             ClassicAssert.IsNotNull(result.Error);
-            Assert.That(result.Error!.Code == 400001);
+            Assert.That(result.Error!.ErrorCode == "400001");
             Assert.That(result.Error.Message == "Error occurred");
         }
 

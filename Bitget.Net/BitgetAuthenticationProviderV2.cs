@@ -3,7 +3,9 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json;
@@ -12,6 +14,8 @@ namespace Bitget.Net
 {
     internal class BitgetAuthenticationProviderV2 : AuthenticationProvider
     {
+        private static IStringMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
+
         public string Passphrase => _credentials.Pass!;
 
         public BitgetAuthenticationProviderV2(ApiCredentials credentials) : base(credentials)
@@ -20,45 +24,29 @@ namespace Bitget.Net
                 throw new ArgumentNullException(nameof(ApiCredentials.Pass), "Passphrase is required for Bitget authentication");
         }
 
-#if NET5_0_OR_GREATER
-        [UnconditionalSuppressMessage("AssemblyLoadTrimming", "IL3050:RequiresUnreferencedCode", Justification = "JsonSerializerOptions provided here has TypeInfoResolver set")]
-        [UnconditionalSuppressMessage("AssemblyLoadTrimming", "IL2026:RequiresUnreferencedCode", Justification = "JsonSerializerOptions provided here has TypeInfoResolver set")]
-#endif
-        public override void AuthenticateRequest(
-            RestApiClient apiClient,
-            Uri uri,
-            HttpMethod method,
-            ref IDictionary<string, object>? uriParameters,
-            ref IDictionary<string, object>? bodyParameters,
-            ref Dictionary<string, string>? headers,
-            bool auth,
-            ArrayParametersSerialization arraySerialization,
-            HttpMethodParameterPosition parameterPosition,
-            RequestBodyFormat requestBodyFormat)
+        public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
-            if (!auth)
+            if (!request.Authenticated)
                 return;
 
-            var body = parameterPosition == HttpMethodParameterPosition.InBody ? JsonSerializer.Serialize(bodyParameters, SerializerOptions.WithConverters(BitgetExchange._serializerContext)) : "";
-            string? query = null;
-            if (uriParameters != null)
-                query = uriParameters.CreateParamString(false, arraySerialization);
+            var body = request.ParameterPosition == HttpMethodParameterPosition.InBody ? GetSerializedBody(_serializer, request.BodyParameters) : "";
+            var query = request.GetQueryString(false);
+            if (!string.IsNullOrEmpty(query))
+                query = $"?{query}";
 
-            headers ??= new Dictionary<string, string>();
             var timestamp = GetMillisecondTimestamp(apiClient);
-            var signString = timestamp + method.ToString().ToUpperInvariant() +  uri.AbsolutePath + (string.IsNullOrEmpty(query) ? "" : ("?" +query)) + body;
-            if (_credentials.CredentialType == ApiCredentialsType.Hmac)
-            {
-                headers["ACCESS-SIGN"] = SignHMACSHA256(signString, SignOutputType.Base64);
-            }
-            else
-            {
-                headers["ACCESS-SIGN"] = SignRSASHA256(Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
-            }
+            var signString = timestamp + request.Method.ToString().ToUpperInvariant() + request.Path + query + body;
+            var signature = _credentials.CredentialType == ApiCredentialsType.Hmac 
+                ? SignHMACSHA256(signString, SignOutputType.Base64) 
+                : SignRSASHA256(Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
+            
+            request.Headers["ACCESS-SIGN"] = signature;
+            request.Headers["ACCESS-KEY"] = _credentials.Key!;
+            request.Headers["ACCESS-TIMESTAMP"] = timestamp;
+            request.Headers["ACCESS-PASSPHRASE"] = _credentials.Pass!;
 
-            headers["ACCESS-KEY"] = _credentials.Key!;
-            headers["ACCESS-TIMESTAMP"] = timestamp;
-            headers["ACCESS-PASSPHRASE"] = _credentials.Pass!;
+            request.SetQueryString(query);
+            request.SetBodyContent(body);
         }
 
         public string GetWebsocketSignature(long timestamp)
@@ -74,5 +62,6 @@ namespace Bitget.Net
                 //return SignRSASHA256(Encoding.UTF8.GetBytes(timestamp + "GET" + "/user/verify"), SignOutputType.Base64);
             }
         }
+
     }
 }

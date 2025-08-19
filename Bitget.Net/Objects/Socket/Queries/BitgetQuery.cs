@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Objects;
+﻿using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 
@@ -7,10 +8,12 @@ namespace Bitget.Net.Objects.Socket.Queries
     internal class BitgetQuery : Query<BitgetSocketEvent>
     {
         private readonly Dictionary<string, string>[] _args;
+        private readonly SocketApiClient _client;
 
-        public BitgetQuery(BitgetSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
+        public BitgetQuery(SocketApiClient client, BitgetSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
             _args = request.Args;
+            _client = client;
 
             var checkers = new List<MessageHandlerLink>();
             foreach(var arg in _args)
@@ -42,7 +45,7 @@ namespace Bitget.Net.Objects.Socket.Queries
         public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DataEvent<BitgetSocketEvent> message)
         {
             if (message.Data.Code != null)
-                return new CallResult<BitgetSocketEvent>(new ServerError(message.Data.Code.Value, message.Data.Message!), message.OriginalData);
+                return new CallResult<BitgetSocketEvent>(new ServerError(message.Data.Code.Value.ToString(), _client.GetErrorInfo(message.Data.Code.Value, message.Data.Message!)), message.OriginalData);
 
             return message.ToCallResult();
         }
