@@ -78,7 +78,13 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (string.Equals(evnt, "login", StringComparison.Ordinal))
                 return evnt!;
 
-            var channel = message.GetValue<string>(_channelPath);
+            var channel = message.GetValue<string?>(_channelPath);
+            if (string.Equals(evnt, "error", StringComparison.Ordinal))
+            {
+                if (channel == null)
+                    return evnt!;
+            }
+
             var instType = message.GetValue<string>(_instTypePath);
             var instId = message.GetValue<string>(_instIdPath);
             if (evnt != null)
