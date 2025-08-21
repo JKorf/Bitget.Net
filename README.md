@@ -172,6 +172,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 2.5.1 - 21 Aug 2025
+    * Fixed websocket login error check
+
 * Version 2.5.0 - 20 Aug 2025
     * Updated CryptoExchange.Net to version 9.5.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added improved error parsing
