@@ -228,6 +228,9 @@
         <member name="M:Bitget.Net.Clients.BitgetUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.BitgetEnvironment)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.BitgetUserClientProvider.ClearUserClients(System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.BitgetUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.BitgetEnvironment)">
             <inheritdoc />
         </member>
@@ -5811,6 +5814,11 @@
             <param name="userIdentifier">The identifier for the user</param>
             <param name="credentials">The credentials for the user</param>
             <param name="environment">The environment to use</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.IBitgetUserClientProvider.ClearUserClients(System.String)">
+            <summary>
+            Reset the cached clients for a user. This can be useful when a user changes API credentials.
+            </summary>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.IBitgetUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.BitgetEnvironment)">
             <summary>
