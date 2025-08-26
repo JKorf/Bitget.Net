@@ -129,7 +129,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                         x.CreateTime)
                     {
                         ClientOrderId = x.ClientOrderId?.ToString(),
-                        OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.Notional),
+                        OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.OrderQuantity, x.Notional),
                         QuantityFilled = new SharedOrderQuantity(x.QuantityFilled),
                         TimeInForce = x.TimeInForce == TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill: SharedTimeInForce.GoodTillCanceled,
                         AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
