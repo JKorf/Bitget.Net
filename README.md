@@ -172,6 +172,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 2.6.1 - 30 Aug 2025
+    * Fixed incorrect base order quantity in Shared Spot order update
+    * Fixed restClient.FuturesApiV2.Trading.EditOrderAsync quantity parameter serialization
+
 * Version 2.6.0 - 25 Aug 2025
     * Updated CryptoExchange.Net version to 9.6.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added ClearUserClients method to user client provider
