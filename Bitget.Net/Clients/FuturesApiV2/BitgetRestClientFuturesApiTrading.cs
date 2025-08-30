@@ -158,7 +158,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptional("newClientOid", newClientOrderId);
             parameters.AddOptionalString("newPrice", newPrice);
-            parameters.AddOptionalString("newQuantity", newQuantity);
+            parameters.AddOptionalString("newSize", newQuantity);
             parameters.AddOptionalString("newPresetStopSurplusPrice", newTakeProfit);
             parameters.AddOptionalString("newPresetStopLossPrice", newStopLossPrice);
 
