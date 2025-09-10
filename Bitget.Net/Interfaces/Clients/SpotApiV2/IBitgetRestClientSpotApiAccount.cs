@@ -119,7 +119,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get transfer history
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
+        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-TransferRecords" /></para>
         /// </summary>
         /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="fromAccount">From account</param>
@@ -131,7 +131,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="idLessThan">[Deprecated] Use page instead</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetTransferRecord[]>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType fromAccount, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? page = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<WebCallResult<BitgetTransferRecord[]>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType? fromAccount = null, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? page = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set BGB fee deduction enabled status

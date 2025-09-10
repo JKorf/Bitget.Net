@@ -141,11 +141,11 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetTransferRecord[]>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType fromAccount, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? page = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetTransferRecord[]>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType? fromAccount = null, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? page = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("coin", asset);
-            parameters.AddEnum("fromType", fromAccount);
+            parameters.AddOptionalEnum("fromType", fromAccount);
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptionalMilliseconds("startTime", startTime);
             parameters.AddOptionalMilliseconds("endTime", endTime);
