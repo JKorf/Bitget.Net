@@ -575,7 +575,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                     DepositEnabled = x.Depositable,
                     MinWithdrawQuantity = x.MinWithdrawQuantity,
                     WithdrawEnabled = x.Withdrawable,
-                    WithdrawFee = x.WithdrawFee
+                    WithdrawFee = x.WithdrawFee,
+                    ContractAddress = x.ContractAddress
                 }).ToArray()
             }).ToArray());
         }
@@ -603,7 +604,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                     DepositEnabled = x.Depositable,
                     MinWithdrawQuantity = x.MinWithdrawQuantity,
                     WithdrawEnabled = x.Withdrawable,
-                    WithdrawFee = x.WithdrawFee
+                    WithdrawFee = x.WithdrawFee,
+                    ContractAddress = x.ContractAddress
                 }).ToArray()
             });
         }

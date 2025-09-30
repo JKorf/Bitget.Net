@@ -32,6 +32,17 @@ namespace Bitget.Net
         }
 
         /// <inheritdoc />
+        public bool CanCreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval)
+        {
+            var client = (_serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient());
+            SubscribeKlineOptions klineOptions = symbol.TradingMode == TradingMode.Spot ? client.SpotApiV2.SharedClient.SubscribeKlineOptions : client.FuturesApiV2.SharedClient.SubscribeKlineOptions;
+            return klineOptions.IsSupported(interval);
+        }
+
+        /// <inheritdoc />
+        public bool CanCreateTradeTracker(SharedSymbol symbol) => true;
+
+        /// <inheritdoc />
         public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null)
         {
             var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
@@ -67,22 +78,22 @@ namespace Bitget.Net
             var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
 
-            IRecentTradeRestClient sharedrestClient;
+            IRecentTradeRestClient sharedRestClient;
             ITradeSocketClient sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                sharedrestClient = restClient.SpotApiV2.SharedClient;
+                sharedRestClient = restClient.SpotApiV2.SharedClient;
                 sharedSocketClient = socketClient.SpotApiV2.SharedClient;
             }
             else
             {
-                sharedrestClient = restClient.FuturesApiV2.SharedClient;
+                sharedRestClient = restClient.FuturesApiV2.SharedClient;
                 sharedSocketClient = socketClient.FuturesApiV2.SharedClient;
             }
 
             return new TradeTracker(
                 _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
-                sharedrestClient,
+                sharedRestClient,
                 null,
                 sharedSocketClient,
                 symbol,
