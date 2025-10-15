@@ -21,7 +21,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         IFeeRestClient,
         ISpotOrderClientIdRestClient,
         ISpotTriggerOrderRestClient,
-        IBookTickerRestClient
+        IBookTickerRestClient,
+        ITransferRestClient
     {
     }
 }

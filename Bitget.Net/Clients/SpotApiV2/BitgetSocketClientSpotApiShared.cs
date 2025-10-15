@@ -141,7 +141,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         {
                             Fee = x.LastTradeFee,
                             FeeAsset = x.FeeAsset,
-                            Role = x.LastTradeRole == Role.Taker ? SharedRole.Taker : SharedRole.Maker
+                            Role = x.LastTradeRole == Role.Taker ? SharedRole.Taker : SharedRole.Maker,
+                            ClientOrderId = x.ClientOrderId
                         }
                     }
                 ).ToArray())),

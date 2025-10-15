@@ -240,7 +240,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         {
                             Fee = Math.Abs(x.LastTradeFee),
                             FeeAsset = x.LastTradeFeeAsset,
-                            Role = x.LastTradeRole == Role.Taker ? SharedRole.Taker : SharedRole.Maker
+                            Role = x.LastTradeRole == Role.Taker ? SharedRole.Taker : SharedRole.Maker,
+                            ClientOrderId = x.ClientOrderId
                         }
                     }
                 ).ToArray())),
