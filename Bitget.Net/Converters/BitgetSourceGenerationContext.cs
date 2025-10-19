@@ -54,6 +54,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetResponse<BitgetMinMaxResult<BitgetIsolatedLiquidation>>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetMinMaxResult<BitgetIsolatedFinancial>>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetCopyTradingSymbolSettings[]>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetCopyTradingMyTrader[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetFuturesBalance[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetContract[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetVipFeeRate[]>))]
