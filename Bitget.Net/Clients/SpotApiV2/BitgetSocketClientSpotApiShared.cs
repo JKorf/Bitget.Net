@@ -139,7 +139,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                         OrderPrice = x.Price,
                         LastTrade = x.TradeId == null ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.OrderId, x.TradeId, x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, x.BaseVolume!.Value, x.LastTradePrice!.Value, x.LastTradeTime!.Value)
                         {
-                            Fee = x.LastTradeFee,
+                            Fee = x.LastTradeFee == null ? null : Math.Abs(x.LastTradeFee.Value),
                             FeeAsset = x.FeeAsset,
                             Role = x.LastTradeRole == Role.Taker ? SharedRole.Taker : SharedRole.Maker,
                             ClientOrderId = x.ClientOrderId
@@ -173,7 +173,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                         x.Price,
                         x.UpdateTime ?? x.CreateTime)
                     {
-                        Fee = x.Fees.First().TotalFee,
+                        Fee = Math.Abs(x.Fees.First().TotalFee),
                         FeeAsset = x.Fees.First().FeeAsset,
                         Role = x.Role == Role.Maker ? SharedRole.Maker : SharedRole.Taker
                     }
