@@ -23,6 +23,8 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
         /// <inheritdoc />
         public IBitgetRestClientCopyTradingApiTrader Trader { get; }
         /// <inheritdoc />
+        public IBitgetRestClientCopyTradingApiFollower Follower { get; }
+        /// <inheritdoc />
         public string ExchangeName => "Bitget";
 
 
@@ -30,6 +32,7 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
             : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.CopyTradingOptions)
         {
             Trader = new BitgetRestClientCopyTradingApiTrader(this);
+            Follower = new BitgetRestClientCopyTradingApiFollower(this);
 
             StandardRequestHeaders = new Dictionary<string, string>
             {

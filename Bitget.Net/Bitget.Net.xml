@@ -249,6 +249,9 @@
         <member name="P:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.Trader">
             <inheritdoc />
         </member>
+        <member name="P:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.Follower">
+            <inheritdoc />
+        </member>
         <member name="P:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.ExchangeName">
             <inheritdoc />
         </member>
@@ -271,6 +274,15 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApiFollower">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApiFollower.GetMyTradersAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApiFollower.GetCurrentOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApiTrader">
@@ -1025,6 +1037,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.CertificationType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.ContractType">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -1301,6 +1318,21 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetContractArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetCopyTradingCurrentOrders">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetCopyTradingCurrentOrdersTrackingItemArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetCopyTradingMyTraderArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -1821,6 +1853,31 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetContractArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetCopyTradingCurrentOrders">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetCopyTradingCurrentOrdersTrackingItem">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetCopyTradingCurrentOrdersTrackingItemArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetCopyTradingMyTrader">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetCopyTradingMyTraderArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -3799,6 +3856,21 @@
             Trailing order
             </summary>
         </member>
+        <member name="T:Bitget.Net.Enums.V2.CertificationType">
+            <summary>
+            Certification Type
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.CertificationType.Uncertified">
+            <summary>
+            Uncertified
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.CertificationType.Certified">
+            <summary>
+            Certified
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.ClosedPlanFilter">
             <summary>
             Closed plan status filter
@@ -4816,9 +4888,48 @@
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApi.Trader">
             <summary>
-            Endpoints related to copy trading settings, info or actions
+            Endpoints related to copy trading lead settings, info or actions
             </summary>
             <see cref="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiTrader"/>
+        </member>
+        <member name="P:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApi.Follower">
+            <summary>
+            Endpoints related to copy trading follow settings, info or actions
+            </summary>
+            <see cref="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiTrader"/>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiFollower">
+            <summary>
+            Bitget copy trading endpoints.
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiFollower.GetMyTradersAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get My Traders
+            <para><a href="https://www.bitget.com/api-doc/copytrading/future-copytrade/follower/Query-Traders" /></para>
+            </summary>
+            <param name="startTime">Start time (The maximum time span supported is three months. The default end time is three months if no value is set for the end time. )</param>
+            <param name="endTime">End time (The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. )</param>
+            <param name="pageNo">Current page number</param>
+            <param name="pageSize">Number of quiries</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiFollower.GetCurrentOrdersAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get Current Tracking Orders
+            <para><a href="https://www.bitget.com/api-doc/copytrading/future-copytrade/follower/Query-Current-Orders" /></para>
+            </summary>
+            <param name="productType">Product type</param>
+            <param name="idLessThan">Separate page content before this ID is requested (older data), and the value input should be the end ID of the corresponding interface.</param>
+            <param name="idGreaterThan">Separate page content after this ID is requested (newer data), and the value input should be the end ID of the corresponding interface.</param>
+            <param name="startTime">Start timestamp (Copy trade creation time) Milliseconds format of timestamp Unix.</param>
+            <param name="endTime">End timestamp (Copy trade creation time) Milliseconds format of timestamp Unix</param>
+            <param name="limit">Number of queries: Default: 20, maximum: 50.</param>
+            <param name="symbol">Trading pairs, case sensitive</param>
+            <param name="traderId">Trader ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApiTrader">
             <summary>
@@ -7750,6 +7861,171 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.MaxLimitOrderQuantity">
             <summary>
             Max size for a limit order
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrders">
+            <summary>
+            Current Tracking Orders
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrders.TrackingList">
+            <summary>
+            Order tracking list
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrders.EndId">
+            <summary>
+            Current page end Id
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem">
+            <summary>
+            Current tracking order list item
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.TrackingNo">
+            <summary>
+            Track order number
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.TraderId">
+            <summary>
+            Trader user ID
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.OpenOrderId">
+            <summary>
+            Opening order ID
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.CloseOrderId">
+            <summary>
+            Closing order ID
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.Symbol">
+            <summary>
+            Trading pair
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.PositionSide">
+            <summary>
+            Position direction
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.OpenLeverage">
+            <summary>
+            Leverage for opening position
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.OpenAveragePrice">
+            <summary>
+            Average entry price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.OpenTime">
+            <summary>
+            Position opening time (millisecond timestamp)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.OpenSize">
+            <summary>
+            Opening volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.OpenFee">
+            <summary>
+            Opening fee (excluding discounts)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.OpenMarginSize">
+            <summary>
+            Margin amount
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.CloseAveragePrice">
+            <summary>
+            Margin amount
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.CloseSize">
+            <summary>
+            Closing volume
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.CloseTime">
+            <summary>
+            Position closing time (millisecond timestamp)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrdersTrackingItem.TraderName">
+            <summary>
+            Trader alias
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader">
+            <summary>
+            My trader
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.CertificationType">
+            <summary>
+            Certification type
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.TraderId">
+            <summary>
+            Trader ID
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.TraderName">
+            <summary>
+            Trader alias
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.MaxFollowLimit">
+            <summary>
+            Maximum number of elite traders to follow
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.FollowCount">
+            <summary>
+            Number of elite traders that you have followed
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.TraceTotalMarginAmount">
+            <summary>
+            Total opening margin
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.TraceTotalNetProfit">
+            <summary>
+            Total net profit
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.TraceTotalProfit">
+            <summary>
+            Total profit
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.CurrentTradingPairs">
+            <summary>
+            Current underlying assets for copy trading
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.FollowerTime">
+            <summary>
+            Following date (take the first following date)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.BgbMaxFollowLimit">
+            <summary>
+            Maximum number of elite traders to follow granted by BGB holdings
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetCopyTradingMyTrader.BgbFollowCount">
+            <summary>
+            Number of elite traders that you have followed granted by BGB holdings
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetCopyTradingSymbolSettings">
