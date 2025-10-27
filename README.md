@@ -175,6 +175,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 2.10.0 - 27 Oct 2025
+    * Added CopyTrading follower endpoints
+    * Fixed fee from Shared SpotApi websocket updates being negative
+
 * Version 2.9.0 - 16 Oct 2025
     * Updated CryptoExchange.Net version to 9.10.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added ClientOrderId mapping on SharedUserTrade models
