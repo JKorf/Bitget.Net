@@ -42,7 +42,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             StandardRequestHeaders = new Dictionary<string, string>
             {
-                { "X-CHANNEL-API-CODE", !string.IsNullOrEmpty(options.ChannelCode) ? options.ChannelCode! : baseClient._defaultChannelCode },
+                { "X-CHANNEL-API-CODE", LibraryHelpers.GetClientReference(() => options.ChannelCode, Exchange) },
                 { "locale", options.Locale }
             };
 
