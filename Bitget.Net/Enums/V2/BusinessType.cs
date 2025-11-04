@@ -79,6 +79,11 @@ namespace Bitget.Net.Enums.V2
         /// Inner address withdraw in
         /// </summary>
         [Map("INNER_ADDRESS_WITHDRAW_IN")]
-        InnerAddressWithdrawIn
+        InnerAddressWithdrawIn,
+        /// <summary>
+        /// Deduction handling fee
+        /// </summary>
+        [Map("DEDUCTION_HANDLING_FEE")]
+        DeductionHandlingFee
     }
 }

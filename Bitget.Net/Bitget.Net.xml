@@ -3826,6 +3826,11 @@
             Inner address withdraw in
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.V2.BusinessType.DeductionHandlingFee">
+            <summary>
+            Deduction handling fee
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter">
             <summary>
             Trigger plan type
