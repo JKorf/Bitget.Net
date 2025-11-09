@@ -3831,6 +3831,16 @@
             Deduction handling fee
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.V2.BusinessType.OrderExchangeIn">
+            <summary>
+            Order exchange in
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.BusinessType.OrderExchangeOut">
+            <summary>
+            Order exchange out
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter">
             <summary>
             Trigger plan type

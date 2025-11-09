@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Converters.SystemTextJson;
 
 namespace Bitget.Net.Enums.V2
 {
@@ -84,6 +84,16 @@ namespace Bitget.Net.Enums.V2
         /// Deduction handling fee
         /// </summary>
         [Map("DEDUCTION_HANDLING_FEE")]
-        DeductionHandlingFee
+        DeductionHandlingFee,
+        /// <summary>
+        /// Order exchange in
+        /// </summary>
+        [Map("ORDER_EXCHANGE_IN")]
+        OrderExchangeIn,
+        /// <summary>
+        /// Order exchange out
+        /// </summary>
+        [Map("ORDER_EXCHANGE_OUT")]
+        OrderExchangeOut
     }
 }
