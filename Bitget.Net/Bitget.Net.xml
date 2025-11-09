@@ -3841,6 +3841,11 @@
             Order exchange out
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.V2.BusinessType.ActivityAssetRewardUserIn">
+            <summary>
+            Activity asset reward user in
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter">
             <summary>
             Trigger plan type

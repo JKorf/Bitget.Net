@@ -94,6 +94,11 @@ namespace Bitget.Net.Enums.V2
         /// Order exchange out
         /// </summary>
         [Map("ORDER_EXCHANGE_OUT")]
-        OrderExchangeOut
+        OrderExchangeOut,
+        /// <summary>
+        /// Activity asset reward user in
+        /// </summary>
+        [Map("ACTIVITY_ASSET_REWARD_USER_IN")]
+        ActivityAssetRewardUserIn,
     }
 }
