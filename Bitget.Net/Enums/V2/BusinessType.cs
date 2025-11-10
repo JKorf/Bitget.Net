@@ -33,7 +33,7 @@ namespace Bitget.Net.Enums.V2
         /// <summary>
         /// Deduction of spot trading transaction fee
         /// </summary>
-        [Map("deduction of handling fee")]
+        [Map("deduction of handling fee", "DEDUCTION_HANDLING_FEE")]
         FeeDeduction,
         /// <summary>
         /// Transfer-in
@@ -80,11 +80,6 @@ namespace Bitget.Net.Enums.V2
         /// </summary>
         [Map("INNER_ADDRESS_WITHDRAW_IN")]
         InnerAddressWithdrawIn,
-        /// <summary>
-        /// Deduction handling fee
-        /// </summary>
-        [Map("DEDUCTION_HANDLING_FEE")]
-        DeductionHandlingFee,
         /// <summary>
         /// Order exchange in
         /// </summary>
