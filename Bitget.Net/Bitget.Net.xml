@@ -225,6 +225,9 @@
         <member name="T:Bitget.Net.Clients.BitgetUserClientProvider">
             <inheritdoc />
         </member>
+        <member name="P:Bitget.Net.Clients.BitgetUserClientProvider.Exchange">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.BitgetUserClientProvider.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetOptions})">
             <summary>
             ctor
@@ -13645,6 +13648,9 @@
             <summary>
             Bitget order book factory
             </summary>
+        </member>
+        <member name="P:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.Exchange">
+            <inheritdoc />
         </member>
         <member name="P:Bitget.Net.SymbolOrderBooks.BitgetOrderBookFactory.Spot">
             <inheritdoc />

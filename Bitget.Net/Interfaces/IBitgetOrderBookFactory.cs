@@ -8,7 +8,7 @@ namespace Bitget.Net.Interfaces
     /// <summary>
     /// Bitget order book factory
     /// </summary>
-    public interface IBitgetOrderBookFactory
+    public interface IBitgetOrderBookFactory : IExchangeService
     {
         /// <summary>
         /// Spot order book factory methods
