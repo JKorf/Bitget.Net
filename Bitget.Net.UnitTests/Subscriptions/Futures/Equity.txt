@@ -1,0 +1,23 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "USDT-FUTURES", "channel": "equity", "instId": "default" }]}
+< { "event": "subscribe", "arg": { "instType": "USDT-FUTURES", "channel": "equity", "instId": "default" }}
+= 
+{
+  "action": "snapshot",
+  "arg": {
+    "instType": "USDT-FUTURES",
+    "channel": "equity"
+  },
+  "data": [
+    {
+      "btcEquity": "0.0021",
+      "usdtEquity": "13.985457617660",
+      "unrealizedPL": "0.000000000000",
+      "unionTotalMargin": "100",
+      "unionAvailable": "11",
+      "unionMm": "11"
+    }
+  ],
+  "ts": 1695717225146
+}
