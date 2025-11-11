@@ -146,5 +146,27 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 limitGuard: new SingleLimitGuard(3, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetLiquidationPrice>(request, parameters, ct).ConfigureAwait(false);
         }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<BitgetMaxOpenQuantity>> GetOpenableQuantityAsync(
+            BitgetProductTypeV2 productType,
+            string symbol,
+            string marginAsset,
+            PositionSide side,
+            OrderType orderType,
+            decimal? openPrice = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("productType", productType);
+            parameters.AddEnum("posSide", side);
+            parameters.AddEnum("orderType", orderType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("marginCoin", marginAsset);
+            parameters.AddOptionalString("openPrice", openPrice);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/account/max-open", BitgetExchange.RateLimiter.Overall, 1, true,
+                limitGuard: new SingleLimitGuard(3, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BitgetMaxOpenQuantity>(request, parameters, ct).ConfigureAwait(false);
+        }
     }
 }

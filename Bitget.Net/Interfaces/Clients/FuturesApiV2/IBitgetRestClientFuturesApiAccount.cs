@@ -125,5 +125,24 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
             decimal openQuantity,
             decimal? openPrice = null,
             CancellationToken ct = default);
+
+        /// <summary>
+        /// Get max openable quantity
+        /// </summary>
+        /// <param name="productType">Product type</param>
+        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">The margin asset, for example `USDT`</param>
+        /// <param name="side">Position side</param>
+        /// <param name="orderType">Order type</param>
+        /// <param name="openPrice">Open price for limit order</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BitgetMaxOpenQuantity>> GetOpenableQuantityAsync(
+            BitgetProductTypeV2 productType,
+            string symbol,
+            string marginAsset,
+            PositionSide side,
+            OrderType orderType,
+            decimal? openPrice = null,
+            CancellationToken ct = default);
     }
 }

@@ -39,6 +39,7 @@ namespace Bitget.Net.Converters
     // End manual defined attributes
 
     [JsonSerializable(typeof(BitgetResponse<BitgetLiquidationPrice>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetMaxOpenQuantity>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetCurrentFundingRate[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetFuturesAdlRank[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetMinMaxResult<BitgetCrossBorrowHistory>>))]
