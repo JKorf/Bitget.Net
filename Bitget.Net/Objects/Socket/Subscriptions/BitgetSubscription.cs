@@ -43,10 +43,15 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         protected override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(_client, new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false) { RequiredResponses = _args.Count() };
         protected override Query? GetUnsubQuery(SocketConnection connection) => new BitgetQuery(_client, new BitgetSocketRequest { Args = _args, Op = "unsubscribe" }, false);
 
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<BitgetSocketUpdate<T>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketUpdate<T> message)
         {
-            var symbol = message.Data.Args.InstrumentId;
-            _handler.Invoke(message.As(message.Data.Data, message.Data.Args.Channel, symbol == "default" ? null : symbol, string.Equals(message.Data.Action, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update).WithDataTimestamp(message.Data.Timestamp));
+            _handler?.Invoke(
+                new DataEvent<T>(message.Data, receiveTime, originalData)
+                    .WithUpdateType(string.Equals(message.Action, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                    .WithSymbol(message.Args.InstrumentId)
+                    .WithStreamId(message.Args.Channel)
+                    .WithDataTimestamp(message.Timestamp)
+                );
             return CallResult.SuccessResult;
         }
 

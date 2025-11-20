@@ -10,6 +10,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -62,6 +63,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
+        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BitgetSocketClientSpotApiMessageConverter();
+
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
                 => BitgetExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
@@ -101,19 +104,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetTickerUpdate>> handler, CancellationToken ct = default)
         {
-            var internalHandler = (DataEvent<BitgetTickerUpdate[]> data) =>
-            {
-                foreach (var item in data.Data)
-                    handler(data.As(item).WithDataTimestamp(data.DataTime));
-            };
-
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", "SPOT" },
                         { "channel", "ticker" },
                         { "instId", s },
                     }).ToArray()
-            , false, internalHandler, ct).ConfigureAwait(false);
+            , false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -157,19 +154,13 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             limit?.ValidateIntValues(nameof(limit), 1, 5, 15);
 
-            var internalHandler = (DataEvent<BitgetOrderBookUpdate[]> data) =>
-            {
-                foreach (var item in data.Data)
-                    handler(data.As(item).WithDataTimestamp(data.DataTime));
-            };
-
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", "SPOT" },
                         { "channel", "books" + limit?.ToString() },
                         { "instId", s },
                     }).ToArray()
-            , false, internalHandler, ct).ConfigureAwait(false);
+            , false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

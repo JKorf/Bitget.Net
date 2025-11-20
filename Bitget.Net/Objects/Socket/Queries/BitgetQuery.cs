@@ -42,12 +42,12 @@ namespace Bitget.Net.Objects.Socket.Queries
             return $"{op}-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-";
         }
 
-        public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DataEvent<BitgetSocketEvent> message)
+        public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketEvent message)
         {
-            if (message.Data.Code != null)
-                return new CallResult<BitgetSocketEvent>(new ServerError(message.Data.Code.Value.ToString(), _client.GetErrorInfo(message.Data.Code.Value, message.Data.Message!)), message.OriginalData);
+            if (message.Code != null)
+                return new CallResult<BitgetSocketEvent>(new ServerError(message.Code.Value.ToString(), _client.GetErrorInfo(message.Code.Value, message.Message!)), originalData);
 
-            return message.ToCallResult();
+            return new CallResult<BitgetSocketEvent>(message, originalData, null);
         }
     }
 }

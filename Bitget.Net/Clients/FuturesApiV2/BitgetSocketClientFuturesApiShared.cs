@@ -36,10 +36,23 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
-            var result = await SubscribeToTickerUpdatesAsync(productType, symbols, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice, update.Data.LowPrice, update.Data.Volume, update.Data.ChangePercentage24H * 100)
+            var result = await SubscribeToTickerUpdatesAsync(productType, symbols, update =>
             {
-                QuoteVolume = update.Data.QuoteVolume
-            })), ct).ConfigureAwait(false);
+                foreach (var item in update.Data)
+                {
+                    handler(update.AsExchangeEvent(Exchange,
+                        new SharedSpotTicker(
+                            ExchangeSymbolCache.ParseSymbol(_topicId, item.Symbol), 
+                            item.Symbol, 
+                            item.LastPrice, 
+                            item.HighPrice, 
+                            item.LowPrice,
+                            item.Volume, 
+                            item.ChangePercentage24H * 100)
+                        ));
+                }
+            }
+            , ct).ConfigureAwait(false);
             
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -92,8 +105,21 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
-            var result = await SubscribeToTickerUpdatesAsync(productType, symbols, update => handler(update.AsExchangeEvent(Exchange,
-                new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.BestAskPrice ?? 0, update.Data.BestAskQuantity ?? 0, update.Data.BestBidPrice ?? 0, update.Data.BestBidQuantity ?? 0))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(productType, symbols, update =>
+            {
+                foreach (var item in update.Data)
+                {
+                    handler(update.AsExchangeEvent(Exchange,
+                        new SharedBookTicker(
+                            ExchangeSymbolCache.ParseSymbol(_topicId, item.Symbol),
+                            item.Symbol,
+                            item.BestAskPrice ?? 0,
+                            item.BestAskQuantity ?? 0,
+                            item.BestBidPrice ?? 0,
+                            item.BestBidQuantity ?? 0)
+                        ));
+                }
+            }, ct).ConfigureAwait(false);
             
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -191,7 +217,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
-            var result = await SubscribeToOrderBookUpdatesAsync(productType, symbols, request.Limit ?? 15, update => handler(update.AsExchangeEvent(Exchange, new SharedOrderBook(update.Data.Asks, update.Data.Bids))), ct).ConfigureAwait(false);
+            var result = await SubscribeToOrderBookUpdatesAsync(productType, symbols, request.Limit ?? 15, update =>
+            {
+                foreach(var item in update.Data)
+                    handler(update.AsExchangeEvent(Exchange, new SharedOrderBook(item.Asks, item.Bids)));
+            }, ct).ConfigureAwait(false);
             
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }

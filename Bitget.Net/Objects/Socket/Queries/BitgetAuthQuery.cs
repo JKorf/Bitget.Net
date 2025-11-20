@@ -15,13 +15,12 @@ namespace Bitget.Net.Objects.Socket.Queries
             MessageMatcher = MessageMatcher.Create<BitgetSocketEvent>(["login", "error"], HandleMessage);
         }
 
-        public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DataEvent<BitgetSocketEvent> message)
+        public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketEvent message)
         {
-            var evnt = message.Data;
-            if (evnt.Code == 0)
-                return new CallResult<BitgetSocketEvent>(evnt);
+            if (message.Code == 0)
+                return new CallResult<BitgetSocketEvent>(message, originalData, null);
 
-            return new CallResult<BitgetSocketEvent>(new ServerError(evnt.Code!.Value.ToString(), _client.GetErrorInfo(evnt.Code!.Value, evnt.Message!)));
+            return new CallResult<BitgetSocketEvent>(new ServerError(message.Code!.Value.ToString(), _client.GetErrorInfo(message.Code!.Value, message.Message!)), originalData);
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Bitget.Net.UnitTests
             await RunAndCheckUpdate<BitgetTickerUpdate>((client, updateHandler) => client.SpotApiV2.SubscribeToTickerUpdatesAsync("ETHUSDT", updateHandler, default), true, false);
 
             await RunAndCheckUpdate<BitgetTickerUpdate>((client, updateHandler) => client.FuturesApiV2.SubscribeToBalanceUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default), false, true);
-            await RunAndCheckUpdate<BitgetFuturesTickerUpdate>((client, updateHandler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", updateHandler, default), true, false);
+            await RunAndCheckUpdate<BitgetFuturesTickerUpdate[]>((client, updateHandler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", updateHandler, default), true, false);
         } 
     }
 }

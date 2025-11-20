@@ -16,13 +16,19 @@ namespace Bitget.Net.UnitTests
     [TestFixture]
     public class SocketSubscriptionTests
     {
-        [Test]
-        public async Task ValidateSpotSubscriptions()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateSpotSubscriptions(bool newDeserialization)
         {
-            var client = new BitgetSocketClient(opts =>
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
-                opts.ApiCredentials = new ApiCredentials("123", "456", "789");
-            });
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Spot", "https://api.bitget.com", "data");
             await tester.ValidateAsync<BitgetTickerUpdate>((client, handler) => client.SpotApiV2.SubscribeToTickerUpdatesAsync("ETHUSDT", handler), "Ticker", useFirstUpdateItem: true);
             await tester.ValidateAsync<BitgetTradeUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
@@ -34,20 +40,24 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync<BitgetBalanceUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToBalanceUpdatesAsync(handler), "Balance");
         }
 
-        [Test]
-        public async Task ValidateFuturesSubscriptions()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateFuturesSubscriptions(bool newDeserialization)
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider());
+
             var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
-                ApiCredentials = new ApiCredentials("123", "456", "789")
+                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
             }), logger);
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Futures", "https://api.bitget.com", "data");
-            await tester.ValidateAsync<BitgetFuturesTickerUpdate>((client, handler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", handler), "Ticker", useFirstUpdateItem: true, ignoreProperties: new List<string> { "symbol" });
+            await tester.ValidateAsync<BitgetFuturesTickerUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", handler), "Ticker", ignoreProperties: new List<string> { "symbol" });
             await tester.ValidateAsync<BitgetTradeUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToTradeUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", handler), "Trade");
             await tester.ValidateAsync<BitgetFuturesKlineUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToKlineUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", Enums.BitgetStreamKlineIntervalV2.TwelveHours, handler), "Kline");
-            await tester.ValidateAsync<BitgetOrderBookUpdate>((client, handler) => client.FuturesApiV2.SubscribeToOrderBookUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", 5, handler), "OrderBook", useFirstUpdateItem: true);
+            await tester.ValidateAsync<BitgetOrderBookUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToOrderBookUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", 5, handler), "OrderBook");
             await tester.ValidateAsync<BitgetFuturesBalanceUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToBalanceUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "Balance");
             await tester.ValidateAsync<BitgetPositionUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToPositionUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "Position", ignoreProperties: new List<string> { "autoMargin" });
             await tester.ValidateAsync<BitgetFuturesUserTradeUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToUserTradeUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "UserTrade", ignoreProperties: new List<string> { "deduction" });
