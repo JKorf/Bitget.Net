@@ -30,10 +30,16 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
-            var result = await SubscribeToTickerUpdatesAsync(symbols, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice24h, update.Data.LowPrice24h, update.Data.BaseVolume, update.Data.ChangePercentage * 100)
+            var result = await SubscribeToTickerUpdatesAsync(symbols, update =>
             {
-                QuoteVolume = update.Data.QuoteVolume
-            })), ct).ConfigureAwait(false);
+                foreach (var item in update.Data)
+                {
+                    handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, item.Symbol), item.Symbol, item.LastPrice, item.HighPrice24h, item.LowPrice24h, item.BaseVolume, item.ChangePercentage * 100)
+                    {
+                        QuoteVolume = item.QuoteVolume
+                    }));
+                }
+            }, ct).ConfigureAwait(false);
             
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -82,7 +88,19 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
-            var result = await SubscribeToTickerUpdatesAsync(symbols, update => handler(update.AsExchangeEvent(Exchange, new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, update.Data.Symbol), update.Data.Symbol, update.Data.BestAskPrice, update.Data.BestAskQuantity, update.Data.BestBidPrice, update.Data.BestBidQuantity))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(symbols, update =>
+            {
+                foreach (var item in update.Data)
+                {
+                    handler(update.AsExchangeEvent(Exchange, 
+                        new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, item.Symbol), 
+                        item.Symbol,
+                        item.BestAskPrice,
+                        item.BestAskQuantity,
+                        item.BestBidPrice,
+                        item.BestBidQuantity)));
+                }
+            }, ct).ConfigureAwait(false);
             
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -238,7 +256,11 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
-            var result = await SubscribeToOrderBookUpdatesAsync(symbols, request.Limit ?? 15, update => handler(update.AsExchangeEvent(Exchange, new SharedOrderBook(update.Data.Asks, update.Data.Bids))), ct).ConfigureAwait(false);
+            var result = await SubscribeToOrderBookUpdatesAsync(symbols, request.Limit ?? 15, update =>
+            {
+                foreach(var item in update.Data)
+                    handler(update.AsExchangeEvent(Exchange, new SharedOrderBook(item.Asks, item.Bids)));
+            }, ct).ConfigureAwait(false);
             
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }

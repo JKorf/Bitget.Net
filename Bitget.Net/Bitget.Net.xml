@@ -947,10 +947,10 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTradeUpdate[]}},System.Threading.CancellationToken)">
@@ -965,10 +965,10 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},Bitget.Net.Enums.BitgetStreamKlineIntervalV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetKlineUpdate[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToMarginIndexPriceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetIndexPriceUpdate[]}},System.Threading.CancellationToken)">
@@ -7231,7 +7231,7 @@
             Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to ticker updates for a symbol
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
@@ -7241,7 +7241,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to ticker updates for multiple symbols
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
@@ -7293,7 +7293,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to order book updates for a symbol
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
@@ -7304,7 +7304,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns></returns>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to order book updates for multiple symbols
             <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>

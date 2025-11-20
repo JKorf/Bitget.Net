@@ -13,16 +13,15 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         protected override MessageEvaluator[] MessageEvaluators { get; } = [
 
-
             new MessageEvaluator {
                 Priority = 1,
                 Fields = [
                     new PropertyFieldReference("action"),
                     new PropertyFieldReference("instType") { Depth = 2 },
                     new PropertyFieldReference("channel") { Depth = 2 },
-                    new PropertyFieldReference("instId") { Depth = 2 },
+                    new PropertyFieldReference("instId") { Depth = 2 }
                 ],
-                IdentifyMessageCallback = x => $"{x.FieldValue("event")}-{x.FieldValue("instType")}-{x.FieldValue("channel")}-{x.FieldValue("instId")}"
+                IdentifyMessageCallback = x => $"{x.FieldValue("action").ToLowerInvariant()}-{x.FieldValue("instType").ToLowerInvariant()}-{x.FieldValue("channel").ToLowerInvariant()}-{x.FieldValue("instId").ToLowerInvariant()}"
             },
 
             new MessageEvaluator {
@@ -33,22 +32,42 @@ namespace Bitget.Net.Clients.SpotApiV2
                     new PropertyFieldReference("channel") { Depth = 2 },
                     new PropertyFieldReference("instId") { Depth = 2 },
                 ],
-                IdentifyMessageCallback = x => $"{x.FieldValue("event")}-{x.FieldValue("instType")}-{x.FieldValue("channel")}-{x.FieldValue("instId")}"
+                IdentifyMessageCallback = x => $"{x.FieldValue("event").ToLowerInvariant()}-{x.FieldValue("instType").ToLowerInvariant()}-{x.FieldValue("channel").ToLowerInvariant()}-{x.FieldValue("instId").ToLowerInvariant()}"
             },
 
             new MessageEvaluator {
                 Priority = 3,
-                ForceIfFound = true,
                 Fields = [
-                    new PropertyFieldReference("event") { Constraint = x => x == "login" },
+                    new PropertyFieldReference("action"),
+                    new PropertyFieldReference("instType") { Depth = 2 },
+                    new PropertyFieldReference("channel") { Depth = 2 }
                 ],
-                StaticIdentifier = "login",
+                IdentifyMessageCallback = x => $"{x.FieldValue("action").ToLowerInvariant()}-{x.FieldValue("instType").ToLowerInvariant()}-{x.FieldValue("channel").ToLowerInvariant()}-"
             },
 
             new MessageEvaluator {
                 Priority = 4,
                 Fields = [
-                    new PropertyFieldReference("event") { Constraint = x => x == "error" },
+                    new PropertyFieldReference("event"),
+                    new PropertyFieldReference("instType") { Depth = 2 },
+                    new PropertyFieldReference("channel") { Depth = 2 },
+                ],
+                IdentifyMessageCallback = x => $"{x.FieldValue("event").ToLowerInvariant()}-{x.FieldValue("instType").ToLowerInvariant()}-{x.FieldValue("channel").ToLowerInvariant()}-"
+            },
+
+            new MessageEvaluator {
+                Priority = 5,
+                ForceIfFound = true,
+                Fields = [
+                    new PropertyFieldReference("event") { Constraint = x => x.Equals("login", StringComparison.Ordinal) },
+                ],
+                StaticIdentifier = "login",
+            },
+
+            new MessageEvaluator {
+                Priority = 6,
+                Fields = [
+                    new PropertyFieldReference("event") { Constraint = x => x.Equals("error", StringComparison.Ordinal) },
                 ],
                 StaticIdentifier = "error",
             },

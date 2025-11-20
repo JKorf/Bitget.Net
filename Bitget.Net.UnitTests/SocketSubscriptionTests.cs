@@ -30,10 +30,10 @@ namespace Bitget.Net.UnitTests
                 UseUpdatedDeserialization = newDeserialization
             }), logger);
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Spot", "https://api.bitget.com", "data");
-            await tester.ValidateAsync<BitgetTickerUpdate>((client, handler) => client.SpotApiV2.SubscribeToTickerUpdatesAsync("ETHUSDT", handler), "Ticker", useFirstUpdateItem: true);
+            await tester.ValidateAsync<BitgetTickerUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToTickerUpdatesAsync("ETHUSDT", handler), "Ticker");
             await tester.ValidateAsync<BitgetTradeUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToTradeUpdatesAsync("BTCUSDT", handler), "Trades");
             await tester.ValidateAsync<BitgetKlineUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToKlineUpdatesAsync("ETHUSDT", Enums.BitgetStreamKlineIntervalV2.OneWeek, handler), "Klines");
-            await tester.ValidateAsync<BitgetOrderBookUpdate>((client, handler) => client.SpotApiV2.SubscribeToOrderBookUpdatesAsync("BTCUSDT", 5, handler), "OrderBook", useFirstUpdateItem: true);
+            await tester.ValidateAsync<BitgetOrderBookUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToOrderBookUpdatesAsync("BTCUSDT", 5, handler), "OrderBook");
             await tester.ValidateAsync<BitgetOrderUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToOrderUpdatesAsync(handler), "Order");
             await tester.ValidateAsync<BitgetUserTradeUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToUserTradeUpdatesAsync(handler), "UserTrade", ignoreProperties: new List<string> { "deduction" });
             await tester.ValidateAsync<BitgetTriggerOrderUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToTriggerOrderUpdatesAsync(handler), "TriggerOrder");
