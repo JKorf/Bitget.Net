@@ -57,10 +57,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             new MessageEvaluator {
                 Priority = 5,
-                ForceIfFound = true,
                 Fields = [
                     new PropertyFieldReference("event") { Constraint = x => x.Equals("login", StringComparison.Ordinal) },
                 ],
+                ForceIfFound = true,
                 StaticIdentifier = "login",
             },
 
