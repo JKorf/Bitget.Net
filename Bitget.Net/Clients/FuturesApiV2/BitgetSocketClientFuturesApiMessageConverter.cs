@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {
-    internal class BitgetSocketClientFuturesApiMessageConverter : DynamicJsonConverter
+    internal class BitgetSocketClientFuturesApiMessageConverter : JsonSocketMessageHandler
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BitgetExchange._serializerContext);
 

@@ -63,7 +63,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BitgetSocketClientSpotApiMessageConverter();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BitgetSocketClientSpotApiMessageConverter();
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

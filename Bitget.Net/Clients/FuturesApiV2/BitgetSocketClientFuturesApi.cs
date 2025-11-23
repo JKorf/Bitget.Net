@@ -62,7 +62,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new BitgetSocketClientFuturesApiMessageConverter();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BitgetSocketClientFuturesApiMessageConverter();
 
         public IBitgetSocketClientFuturesApiShared SharedClient => this;
 
