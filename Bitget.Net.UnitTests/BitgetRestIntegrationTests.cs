@@ -14,13 +14,13 @@ namespace Bitget.Net.UnitTests
     [NonParallelizable]
     internal class BitgetRestIntegrationTests : RestIntegrationTest<BitgetRestClient>
     {
-        public override bool Run { get; set; }
+        public override bool Run { get; set; } = true;
 
         public BitgetRestIntegrationTests()
         {
         }
 
-        public override BitgetRestClient GetClient(ILoggerFactory loggerFactory)
+        public override BitgetRestClient GetClient(ILoggerFactory loggerFactory, bool useUpdatedSerialization)
         {
             var key = Environment.GetEnvironmentVariable("APIKEY");
             var sec = Environment.GetEnvironmentVariable("APISECRET");
@@ -29,109 +29,117 @@ namespace Bitget.Net.UnitTests
             Authenticated = key != null && sec != null;
             return new BitgetRestClient(null, loggerFactory, Options.Create(new Objects.Options.BitgetRestOptions
             {
+                UseUpdatedDeserialization = useUpdatedSerialization,
                 OutputOriginalData = true,
                 ApiCredentials = Authenticated ? new ApiCredentials(key, sec, pass) : null
             }));
         }
 
-        [Test]
-        public async Task TestErrorResponseParsing()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task TestErrorResponseParsing(bool useUpdatedDeserialization)
         {
             if (!ShouldRun())
                 return;
 
-            var result = await CreateClient().SpotApiV2.ExchangeData.GetOrderBookAsync("TST-TST", default);
+            var result = await CreateClient(useUpdatedDeserialization).SpotApiV2.ExchangeData.GetOrderBookAsync("TST-TST", default);
 
             Assert.That(result.Success, Is.False);
             Assert.That(result.Error.ErrorCode, Is.EqualTo("40034"));
             Assert.That(result.Error.ErrorType, Is.EqualTo(ErrorType.InvalidParameter));
         }
 
-        [Test]
-        public async Task TestSpotAccount()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task TestSpotAccount(bool useUpdatedDeserialization)
         {
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetFundingBalancesAsync(default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetAssetsValuationAsync(default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetTradeFeeAsync("ETHUSDT", Enums.BitgetBusinessType.Spot, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetAccountInfoAsync(default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetSpotBalancesAsync(default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetLedgerAsync(default, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetTransferableAssetsAsync(Enums.V2.TransferAccountType.UsdcFutures, Enums.V2.TransferAccountType.UsdtFutures, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetTransferHistoryAsync("ETH", Enums.V2.TransferAccountType.Spot, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetBgbDeductEnabledAsync(default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetWithdrawalHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Account.GetDepositHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetFundingBalancesAsync(default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetAssetsValuationAsync(default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetTradeFeeAsync("ETHUSDT", Enums.BitgetBusinessType.Spot, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetAccountInfoAsync(default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetSpotBalancesAsync(default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetLedgerAsync(default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetTransferableAssetsAsync(Enums.V2.TransferAccountType.UsdcFutures, Enums.V2.TransferAccountType.UsdtFutures, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetTransferHistoryAsync("ETH", Enums.V2.TransferAccountType.Spot, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetBgbDeductEnabledAsync(default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetWithdrawalHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Account.GetDepositHistoryAsync(DateTime.UtcNow.AddDays(-1), DateTime.UtcNow, default, default, default, default, default), true);
         }
 
-        [Test]
-        public async Task TestSpotExchangeData()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task TestSpotExchangeData(bool useUpdatedDeserialization)
         {
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetServerTimeAsync(default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAnnouncementsAsync(default, default, default, default, default, default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAssetsAsync(default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetSymbolsAsync(default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetVipFeeRatesAsync(default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetTickersAsync(default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetOrderBookAsync("ETHUSDT", default, default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay, default, default, default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetHistoricalKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay, DateTime.UtcNow, default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetRecentTradesAsync("ETHUSDT", default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetTradesAsync("ETHUSDT", default, default, default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetServerTimeAsync(default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetAnnouncementsAsync(default, default, default, default, default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetAssetsAsync(default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetSymbolsAsync(default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetVipFeeRatesAsync(default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetTickersAsync(default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetOrderBookAsync("ETHUSDT", default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay, default, default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetHistoricalKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay, DateTime.UtcNow, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetRecentTradesAsync("ETHUSDT", default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.ExchangeData.GetTradesAsync("ETHUSDT", default, default, default, default, default), false);
         }
 
-        [Test]
-        public async Task TestSpotTrading()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task TestSpotTrading(bool useUpdatedDeserialization)
         {
-            await RunAndCheckResult(client => client.SpotApiV2.Trading.GetOpenOrdersAsync(default, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Trading.GetClosedOrdersAsync(default, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Trading.GetUserTradesAsync("ETHUSDT", default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Trading.GetOpenTriggerOrdersAsync("ETHUSDT", default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.SpotApiV2.Trading.GetClosedTriggerOrdersAsync("ETHUSDT", DateTime.UtcNow.AddDays(-1), DateTime.UtcNow.AddHours(-1), default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Trading.GetOpenOrdersAsync(default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Trading.GetClosedOrdersAsync(default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Trading.GetUserTradesAsync("ETHUSDT", default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Trading.GetOpenTriggerOrdersAsync("ETHUSDT", default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.SpotApiV2.Trading.GetClosedTriggerOrdersAsync("ETHUSDT", DateTime.UtcNow.AddDays(-1), DateTime.UtcNow.AddHours(-1), default, default), true);
         }
 
-        [Test]
-        public async Task TestFuturesAccount()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task TestFuturesAccount(bool useUpdatedDeserialization)
         {
-            await RunAndCheckResult(client => client.FuturesApiV2.Account.GetBalanceAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Account.GetBalancesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Account.GetLedgerAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Account.GetBalanceAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Account.GetBalancesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Account.GetLedgerAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default), true);
         }
 
-        [Test]
-        public async Task TestFuturesExchangeData()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task TestFuturesExchangeData(bool useUpdatedDeserialization)
         {
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetServerTimeAsync(default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetContractsAsync(Enums.BitgetProductTypeV2.UsdcFutures, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetVipFeeRatesAsync(default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetOrderBookAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetTickerAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetTickersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetRecentTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalIndexPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalMarkPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetOpenInterestAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetNextFundingTimeAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetPricesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetPositionTiersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetServerTimeAsync(default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetContractsAsync(Enums.BitgetProductTypeV2.UsdcFutures, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetVipFeeRatesAsync(default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetOrderBookAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetTickerAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetTickersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetRecentTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetHistoricalKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetHistoricalIndexPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetHistoricalMarkPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetOpenInterestAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetNextFundingTimeAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetPricesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetHistoricalFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.ExchangeData.GetPositionTiersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
         }
 
-        [Test]
-        public async Task TestFuturesTrading()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task TestFuturesTrading(bool useUpdatedDeserialization)
         {
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetPositionAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetPositionsAsync(Enums.BitgetProductTypeV2.UsdtFutures, "USDT", default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetPositionHistoryAsync(default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetOpenOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetClosedOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetHistoricalUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetOpenTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, Enums.V2.TriggerPlanTypeFilter.Trigger, default, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.FuturesApiV2.Trading.GetClosedTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, Enums.V2.TriggerPlanTypeFilter.Trigger, default, default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Trading.GetPositionAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT", default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Trading.GetPositionsAsync(Enums.BitgetProductTypeV2.UsdtFutures, "USDT", default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Trading.GetPositionHistoryAsync(default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Trading.GetOpenOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Trading.GetClosedOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Trading.GetUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Trading.GetHistoricalUserTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Trading.GetOpenTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, Enums.V2.TriggerPlanTypeFilter.Trigger, default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(useUpdatedDeserialization, client => client.FuturesApiV2.Trading.GetClosedTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, Enums.V2.TriggerPlanTypeFilter.Trigger, default, default, default, default, default, default, default, default, default), true);
         }
 
         [Test]

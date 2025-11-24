@@ -29,7 +29,7 @@ namespace Bitget.Net
             if (!request.Authenticated)
                 return;
 
-            var body = request.ParameterPosition == HttpMethodParameterPosition.InBody ? GetSerializedBody(_serializer, request.BodyParameters) : "";
+            var body = request.ParameterPosition == HttpMethodParameterPosition.InBody ? GetSerializedBody(_serializer, request.BodyParameters ?? new Dictionary<string, object>()) : "";
             var query = request.GetQueryString(false);
             if (!string.IsNullOrEmpty(query))
                 query = $"?{query}";
@@ -40,6 +40,7 @@ namespace Bitget.Net
                 ? SignHMACSHA256(signString, SignOutputType.Base64) 
                 : SignRSASHA256(Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
             
+            request.Headers ??= new Dictionary<string, string>();
             request.Headers["ACCESS-SIGN"] = signature;
             request.Headers["ACCESS-KEY"] = _credentials.Key!;
             request.Headers["ACCESS-TIMESTAMP"] = timestamp;

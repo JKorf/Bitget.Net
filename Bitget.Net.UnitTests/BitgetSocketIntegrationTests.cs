@@ -13,13 +13,9 @@ namespace Bitget.Net.UnitTests
     [NonParallelizable]
     internal class BitgetSocketIntegrationTests : SocketIntegrationTest<BitgetSocketClient>
     {
-        public override bool Run { get; set; } = false;
+        public override bool Run { get; set; } = true;
 
-        public BitgetSocketIntegrationTests()
-        {
-        }
-
-        public override BitgetSocketClient GetClient(ILoggerFactory loggerFactory)
+        public override BitgetSocketClient GetClient(ILoggerFactory loggerFactory, bool useUpdatedDeserialization)
         {
             var key = Environment.GetEnvironmentVariable("APIKEY");
             var sec = Environment.GetEnvironmentVariable("APISECRET");
@@ -29,18 +25,20 @@ namespace Bitget.Net.UnitTests
             return new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
                 OutputOriginalData = true,
+                UseUpdatedDeserialization = useUpdatedDeserialization,
                 ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec, pass) : null
             }), loggerFactory);
         }
 
-        [Test]
-        public async Task TestSubscriptions()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task TestSubscriptions(bool useUpdatedDeserialization)
         {
-            await RunAndCheckUpdate<BitgetTickerUpdate>((client, updateHandler) => client.SpotApiV2.SubscribeToBalanceUpdatesAsync(default , default), false, true);
-            await RunAndCheckUpdate<BitgetTickerUpdate[]>((client, updateHandler) => client.SpotApiV2.SubscribeToTickerUpdatesAsync("ETHUSDT", updateHandler, default), true, false);
+            await RunAndCheckUpdate<BitgetTickerUpdate>(useUpdatedDeserialization , (client, updateHandler) => client.SpotApiV2.SubscribeToBalanceUpdatesAsync(default , default), false, true);
+            await RunAndCheckUpdate<BitgetTickerUpdate[]>(useUpdatedDeserialization, (client, updateHandler) => client.SpotApiV2.SubscribeToTickerUpdatesAsync("ETHUSDT", updateHandler, default), true, false);
 
-            await RunAndCheckUpdate<BitgetTickerUpdate>((client, updateHandler) => client.FuturesApiV2.SubscribeToBalanceUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default), false, true);
-            await RunAndCheckUpdate<BitgetFuturesTickerUpdate[]>((client, updateHandler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", updateHandler, default), true, false);
+            await RunAndCheckUpdate<BitgetTickerUpdate>(useUpdatedDeserialization, (client, updateHandler) => client.FuturesApiV2.SubscribeToBalanceUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default), false, true);
+            await RunAndCheckUpdate<BitgetFuturesTickerUpdate[]>(useUpdatedDeserialization, (client, updateHandler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", updateHandler, default), true, false);
         } 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Enums.V2;
+﻿using Bitget.Net.Clients.MessageHandlers;
+using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models;
@@ -7,12 +8,14 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
+using System.Net.Http.Headers;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {
@@ -39,6 +42,8 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         /// <inheritdoc />
         public new BitgetRestOptions ClientOptions => (BitgetRestOptions)base.ClientOptions;
+
+        protected override IRestMessageHandler MessageHandler { get; } = new BitgetRestMessageHandler(BitgetErrors.RestErrors);
 
         internal BitgetRestClientSpotApi(ILogger logger, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
             : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.SpotOptions)
@@ -102,7 +107,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
+        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
                 return new ServerError(ErrorInfo.Unknown, exception: exception);

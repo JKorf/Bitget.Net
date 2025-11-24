@@ -92,7 +92,7 @@ namespace Bitget.Net.UnitTests
 
             var request = new Mock<IRequest>();
             request.Setup(c => c.Uri).Returns(new Uri("http://www.test.com"));
-            request.Setup(c => c.GetHeaders()).Returns(new KeyValuePair<string, string[]>[0]);
+            request.Setup(c => c.GetHeaders()).Returns(new HttpRequestMessage().Headers);
             request.Setup(c => c.GetResponseAsync(It.IsAny<CancellationToken>())).Returns(Task.FromResult(response.Object));
 
             var factory = Mock.Get(client.SpotApiV2.RequestFactory);

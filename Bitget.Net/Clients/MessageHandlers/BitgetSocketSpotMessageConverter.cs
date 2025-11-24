@@ -1,13 +1,12 @@
-﻿using Bitget.Net;
-using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+﻿using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Text.Json;
 
-namespace Bitget.Net.Clients.FuturesApiV2
+namespace Bitget.Net.Clients.MessageHandlers
 {
-    internal class BitgetSocketClientFuturesApiMessageConverter : JsonSocketMessageHandler
+    internal class BitgetSocketSpotMessageConverter : JsonSocketMessageHandler
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BitgetExchange._serializerContext);
 
@@ -57,17 +56,17 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             new MessageEvaluator {
                 Priority = 5,
-                Fields = [
-                    new PropertyFieldReference("event") { Constraint = x => x.Equals("login", StringComparison.Ordinal) },
-                ],
                 ForceIfFound = true,
+                Fields = [
+                    new PropertyFieldReference("event") { Constraint = x => x!.Equals("login", StringComparison.Ordinal) },
+                ],
                 StaticIdentifier = "login",
             },
 
             new MessageEvaluator {
                 Priority = 6,
                 Fields = [
-                    new PropertyFieldReference("event") { Constraint = x => x.Equals("error", StringComparison.Ordinal) },
+                    new PropertyFieldReference("event") { Constraint = x => x!.Equals("error", StringComparison.Ordinal) },
                 ],
                 StaticIdentifier = "error",
             },
