@@ -16,12 +16,14 @@ namespace Bitget.Net.UnitTests
     [TestFixture]
     public class RestRequestTests
     {
-        [Test]
-        public async Task ValidateSpotAccountCalls()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateSpotAccountCalls(bool newDeserialization)
         {
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
+                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.ApiCredentials = new ApiCredentials("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/Account", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
@@ -45,12 +47,14 @@ namespace Bitget.Net.UnitTests
 
         }
 
-        [Test]
-        public async Task ValidateSpotMarginCalls()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateSpotMarginCalls(bool newDeserialization)
         {
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
+                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.ApiCredentials = new ApiCredentials("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/Margin", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
@@ -79,12 +83,14 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetCrossLiquidationOrdersAsync(), "GetCrossLiquidationOrders", nestedJsonProperty: "data.resultList");
         }
 
-        [Test]
-        public async Task ValidateSpotExchangeDataCalls()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateSpotExchangeDataCalls(bool newDeserialization)
         {
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
+                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.ApiCredentials = new ApiCredentials("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
@@ -102,12 +108,14 @@ namespace Bitget.Net.UnitTests
 
         }
 
-        [Test]
-        public async Task ValidateSpotTradingCalls()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateSpotTradingCalls(bool newDeserialization)
         {
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
+                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.ApiCredentials = new ApiCredentials("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/Trading", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
@@ -132,12 +140,14 @@ namespace Bitget.Net.UnitTests
 
         }
 
-        [Test]
-        public async Task ValidateFuturesAccountCalls()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateFuturesAccountCalls(bool newDeserialization)
         {
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
+                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.ApiCredentials = new ApiCredentials("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Futures/Account", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
@@ -151,12 +161,14 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.FuturesApiV2.Account.GetAdlRankAsync(Enums.BitgetProductTypeV2.UsdtFutures), "GetAdlRank");
         }
 
-        [Test]
-        public async Task ValidateFuturesExchangeDataCalls()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateFuturesExchangeDataCalls(bool newDeserialization)
         {
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
+                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.ApiCredentials = new ApiCredentials("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Futures/ExchangeData", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
@@ -179,12 +191,14 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetPositionTiersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT"), "GetPositionTiers");
         }
 
-        [Test]
-        public async Task ValidateFuturesTradingCalls()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateFuturesTradingCalls(bool newDeserialization)
         {
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
+                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.ApiCredentials = new ApiCredentials("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Futures/Trading", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
