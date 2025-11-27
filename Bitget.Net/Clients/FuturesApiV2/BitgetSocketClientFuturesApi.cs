@@ -103,8 +103,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "ticker" },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -119,8 +119,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "trade" },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(BitgetProductTypeV2 productType, string symbol, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<BitgetFuturesKlineUpdate[]>> handler, CancellationToken ct = default)
@@ -134,8 +134,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "candle" + EnumConverter.GetString(interval) },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -152,8 +152,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "books" + limit?.ToString() },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -164,8 +164,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "account" },
                         { "coin", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -176,8 +176,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "positions" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -188,8 +188,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "fill" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -200,8 +200,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "orders" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -212,8 +212,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "orders-algo" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -224,8 +224,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "positions-history" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -236,18 +236,19 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "equity" },
                         { "instId", "default" }
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(
             string url,
             Dictionary<string, string>[] request,
+            IEnumerable<string>? symbols,
             bool authenticated,
             Action<DataEvent<T>> handler,
             CancellationToken ct)
         {
-            var subscription = new BitgetSubscription<T>(_logger, this, request, handler, authenticated);
+            var subscription = new BitgetSubscription<T>(_logger, this, request, symbols?.ToArray(), handler, authenticated);
             return await SubscribeAsync(url, subscription, ct).ConfigureAwait(false);
         }
 

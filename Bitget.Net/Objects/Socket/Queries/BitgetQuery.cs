@@ -15,15 +15,23 @@ namespace Bitget.Net.Objects.Socket.Queries
             _args = request.Args;
             _client = client;
 
+            var routes = new List<MessageRoute>();
             var checkers = new List<MessageHandlerLink>();
-            foreach(var arg in _args)
+            foreach (var arg in _args)
             {
                 checkers.Add(new MessageHandlerLink<BitgetSocketEvent>(GetErrorIdentifier(arg), HandleMessage));
                 checkers.Add(new MessageHandlerLink<BitgetSocketEvent>(GetIdentifier(request.Op, arg), HandleMessage));
+                routes.Add(new MessageRoute<BitgetSocketEvent>("SubResponse", GetRouteIdentifier(arg), HandleMessage));
             }
 
             MessageMatcher = MessageMatcher.Create(checkers.ToArray());
+            MessageRouter = MessageRouter.Create(routes.ToArray());
 
+        }
+
+        private string? GetRouteIdentifier(Dictionary<string, string> arg)
+        {
+            return arg.TryGetValue("instId", out var symbol) ? symbol : null;
         }
 
         private string GetErrorIdentifier(Dictionary<string, string> arg)

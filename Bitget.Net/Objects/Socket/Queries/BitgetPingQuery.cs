@@ -8,6 +8,7 @@ namespace Bitget.Net.Objects.Socket.Queries
         {
             RequestTimeout = TimeSpan.FromSeconds(5);
             MessageMatcher = MessageMatcher.Create<string>("pong");
+            MessageRouter = MessageRouter.Create<string>("pong");
         }
     }
 }

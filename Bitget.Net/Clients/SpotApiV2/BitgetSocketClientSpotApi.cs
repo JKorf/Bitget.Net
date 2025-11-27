@@ -110,8 +110,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "SPOT" },
                         { "channel", "ticker" },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -126,8 +126,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "SPOT" },
                         { "channel", "trade" },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -142,8 +142,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "SPOT" },
                         { "channel", "candle" + EnumConverter.GetString(interval) },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -160,8 +160,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "SPOT" },
                         { "channel", "books" + limit?.ToString() },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -172,8 +172,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "MARGIN" },
                         { "channel", "index-price" },
                         { "instId", "default" },
-                    }]
-            , false, handler, ct).ConfigureAwait(false);
+                    }],
+            null, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -184,8 +184,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "SPOT" },
                         { "channel", "orders" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -196,8 +196,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "SPOT" },
                         { "channel", "fill" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -208,8 +208,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "SPOT" },
                         { "channel", "orders-algo" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -220,8 +220,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "SPOT" },
                         { "channel", "account" },
                         { "coin", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -232,8 +232,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "MARGIN" },
                         { "channel", "account-crossed" },
                         { "coin", "default" },
-                    }]
-            , true, handler, ct).ConfigureAwait(false);
+                    }],
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -244,8 +244,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "MARGIN" },
                         { "channel", "orders-crossed" },
                         { "instId", x },
-                    }).ToArray()
-            , true, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -256,8 +256,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "MARGIN" },
                         { "channel", "account-isolated" },
                         { "coin", "default" },
-                    }]
-            , true, handler, ct).ConfigureAwait(false);
+                    }],
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -268,18 +268,19 @@ namespace Bitget.Net.Clients.SpotApiV2
                         { "instType", "MARGIN" },
                         { "channel", "orders-isolated" },
                         { "instId", x },
-                    }).ToArray()
-            , true, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, true, handler, ct).ConfigureAwait(false);
         }
 
         private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(
             string url,
             Dictionary<string, string>[] request,
+            IEnumerable<string>? symbols,
             bool authenticated,
             Action<DataEvent<T>> handler,
             CancellationToken ct)
         {
-            var subscription = new BitgetSubscription<T>(_logger, this, request, handler, authenticated);
+            var subscription = new BitgetSubscription<T>(_logger, this, request, symbols?.ToArray(), handler, authenticated);
             return await SubscribeAsync(url, subscription, ct).ConfigureAwait(false);
         }
 

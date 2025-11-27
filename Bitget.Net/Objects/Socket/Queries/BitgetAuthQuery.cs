@@ -13,6 +13,7 @@ namespace Bitget.Net.Objects.Socket.Queries
         {
             _client = client;
             MessageMatcher = MessageMatcher.Create<BitgetSocketEvent>(["login", "error"], HandleMessage);
+            MessageRouter = MessageRouter.Create<BitgetSocketEvent>(["login", "error"], HandleMessage);
         }
 
         public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketEvent message)

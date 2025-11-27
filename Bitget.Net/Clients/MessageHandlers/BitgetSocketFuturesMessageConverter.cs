@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+﻿using Bitget.Net.Objects.Socket;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using System.Collections.Generic;
 using System.Net.WebSockets;
@@ -10,56 +11,39 @@ namespace Bitget.Net.Clients.MessageHandlers
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BitgetExchange._serializerContext);
 
-        protected override MessageEvaluator[] MessageEvaluators { get; } = [
+        public BitgetSocketFuturesMessageConverter()
+        {
+            AddTopicMapping<BitgetSocketEvent>(x => x.Args?.InstrumentId);
+            AddTopicMapping<BitgetSocketUpdate>(x => x.Args.InstrumentId);
+        }
+
+        protected override MessageEvaluator[] TypeEvaluators { get; } = [
 
             new MessageEvaluator {
                 Priority = 1,
                 Fields = [
-                    new PropertyFieldReference("action"),
-                    new PropertyFieldReference("instType") { Depth = 2 },
-                    new PropertyFieldReference("channel") { Depth = 2 },
-                    new PropertyFieldReference("instId") { Depth = 2 }
+                    new PropertyFieldReference("event") { Constraint = x => x!.Equals("subscribe") },
                 ],
-                IdentifyMessageCallback = x => $"{x.FieldValue("action").ToLowerInvariant()}-{x.FieldValue("instType").ToLowerInvariant()}-{x.FieldValue("channel").ToLowerInvariant()}-{x.FieldValue("instId").ToLowerInvariant()}"
+                IdentifyMessageCallback = x => "SubResponse"
             },
 
             new MessageEvaluator {
                 Priority = 2,
                 Fields = [
-                    new PropertyFieldReference("event"),
-                    new PropertyFieldReference("instType") { Depth = 2 },
-                    new PropertyFieldReference("channel") { Depth = 2 },
-                    new PropertyFieldReference("instId") { Depth = 2 },
-                ],
-                IdentifyMessageCallback = x => $"{x.FieldValue("event").ToLowerInvariant()}-{x.FieldValue("instType").ToLowerInvariant()}-{x.FieldValue("channel").ToLowerInvariant()}-{x.FieldValue("instId").ToLowerInvariant()}"
-            },
-
-            new MessageEvaluator {
-                Priority = 3,
-                Fields = [
-                    new PropertyFieldReference("action"),
-                    new PropertyFieldReference("instType") { Depth = 2 },
-                    new PropertyFieldReference("channel") { Depth = 2 }
-                ],
-                IdentifyMessageCallback = x => $"{x.FieldValue("action").ToLowerInvariant()}-{x.FieldValue("instType").ToLowerInvariant()}-{x.FieldValue("channel").ToLowerInvariant()}-"
-            },
-
-            new MessageEvaluator {
-                Priority = 4,
-                Fields = [
-                    new PropertyFieldReference("event"),
+                    new PropertyFieldReference("action") { Constraint = x => x!.Equals("snapshot") || x!.Equals("update") },
                     new PropertyFieldReference("instType") { Depth = 2 },
                     new PropertyFieldReference("channel") { Depth = 2 },
                 ],
-                IdentifyMessageCallback = x => $"{x.FieldValue("event").ToLowerInvariant()}-{x.FieldValue("instType").ToLowerInvariant()}-{x.FieldValue("channel").ToLowerInvariant()}-"
+                IdentifyMessageCallback = x => $"{x.FieldValue("instType")}{x.FieldValue("channel")}"
             },
+
 
             new MessageEvaluator {
                 Priority = 5,
+                ForceIfFound = true,
                 Fields = [
                     new PropertyFieldReference("event") { Constraint = x => x!.Equals("login", StringComparison.Ordinal) },
                 ],
-                ForceIfFound = true,
                 StaticIdentifier = "login",
             },
 
@@ -72,12 +56,12 @@ namespace Bitget.Net.Clients.MessageHandlers
             },
         ];
 
-        public override string? GetMessageIdentifier(ReadOnlySpan<byte> data, WebSocketMessageType? webSocketMessageType)
+        public override string? GetTypeIdentifier(ReadOnlySpan<byte> data, WebSocketMessageType? webSocketMessageType)
         {
             if (data.Length == 4)
                 return "pong";
 
-            return base.GetMessageIdentifier(data, webSocketMessageType);
+            return base.GetTypeIdentifier(data, webSocketMessageType);
         }
     }
 }

@@ -14,13 +14,19 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         private readonly Dictionary<string, string>[] _args;
         private readonly Action<DataEvent<T>> _handler;
 
-        public BitgetSubscription(ILogger logger, SocketApiClient client, Dictionary<string, string>[] args, Action<DataEvent<T>> handler, bool authenticated) : base(logger, authenticated)
+        public BitgetSubscription(ILogger logger, SocketApiClient client, Dictionary<string, string>[] args, string[]? symbols, Action<DataEvent<T>> handler, bool authenticated) : base(logger, authenticated)
         {
             _client = client;
             _args = args;
             _handler = handler;
 
             MessageMatcher = MessageMatcher.Create<BitgetSocketUpdate<T>>(args.SelectMany(GetIdentifier), DoHandleMessage);
+            MessageRouter = MessageRouter.Create<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), symbols, DoHandleMessage);
+        }
+
+        private string GetRouteParams(Dictionary<string, string> arg)
+        {
+            return $"{arg["instType"]}{arg["channel"]}";
         }
 
         private string[] GetIdentifier(Dictionary<string, string> arg)
