@@ -236,6 +236,18 @@ namespace Bitget.Net.Clients.FuturesApiV2
             , true, handler, ct).ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToEquityUpdatesAsync(BitgetProductTypeV2 productType, Action<DataEvent<BitgetEquityUpdate[]>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
+                    {
+                        { "instType", EnumConverter.GetString(productType) },
+                        { "channel", "equity" },
+                        { "instId", "default" }
+                    } }
+            , true, handler, ct).ConfigureAwait(false);
+        }
+
         private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(
             string url,
             Dictionary<string, string>[] request,

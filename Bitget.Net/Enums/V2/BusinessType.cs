@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Converters.SystemTextJson;
 
 namespace Bitget.Net.Enums.V2
 {
@@ -33,7 +33,7 @@ namespace Bitget.Net.Enums.V2
         /// <summary>
         /// Deduction of spot trading transaction fee
         /// </summary>
-        [Map("deduction of handling fee")]
+        [Map("deduction of handling fee", "DEDUCTION_HANDLING_FEE")]
         FeeDeduction,
         /// <summary>
         /// Transfer-in
@@ -79,6 +79,21 @@ namespace Bitget.Net.Enums.V2
         /// Inner address withdraw in
         /// </summary>
         [Map("INNER_ADDRESS_WITHDRAW_IN")]
-        InnerAddressWithdrawIn
+        InnerAddressWithdrawIn,
+        /// <summary>
+        /// Order exchange in
+        /// </summary>
+        [Map("ORDER_EXCHANGE_IN")]
+        OrderExchangeIn,
+        /// <summary>
+        /// Order exchange out
+        /// </summary>
+        [Map("ORDER_EXCHANGE_OUT")]
+        OrderExchangeOut,
+        /// <summary>
+        /// Activity asset reward user in
+        /// </summary>
+        [Map("ACTIVITY_ASSET_REWARD_USER_IN")]
+        ActivityAssetRewardUserIn,
     }
 }

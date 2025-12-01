@@ -34,10 +34,13 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetTickerUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetOrderBookUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetFuturesTickerUpdate[]>))]
+    [JsonSerializable(typeof(BitgetSocketUpdate<BitgetEquityUpdate[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitMartPositionTpSl[]>))]
 
     // End manual defined attributes
 
+    [JsonSerializable(typeof(BitgetResponse<BitgetLiquidationPrice>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetMaxOpenQuantity>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetCurrentFundingRate[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetFuturesAdlRank[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetMinMaxResult<BitgetCrossBorrowHistory>>))]

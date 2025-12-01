@@ -36,7 +36,7 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
 
             StandardRequestHeaders = new Dictionary<string, string>
             {
-                { "X-CHANNEL-API-CODE", !string.IsNullOrEmpty(options.ChannelCode) ? options.ChannelCode! : baseClient._defaultChannelCode },
+                { "X-CHANNEL-API-CODE", LibraryHelpers.GetClientReference(() => options.ChannelCode, ExchangeName) },
                 { "locale", options.Locale }
             };
 

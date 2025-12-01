@@ -19,6 +19,9 @@ namespace Bitget.Net.SymbolOrderBooks
         private readonly IServiceProvider _serviceProvider;
 
         /// <inheritdoc />
+        public string ExchangeName => BitgetExchange.ExchangeName;
+
+        /// <inheritdoc />
         public IOrderBookFactory<BitgetOrderBookOptions> Spot { get; }
         /// <inheritdoc />
         public IOrderBookFactory<BitgetOrderBookOptions> UsdtFutures { get; }

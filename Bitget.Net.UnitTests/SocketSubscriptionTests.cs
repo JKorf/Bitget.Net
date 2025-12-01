@@ -1,8 +1,12 @@
 ﻿using Bitget.Net.Clients;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models.V2;
+using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Testing;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -33,10 +37,12 @@ namespace Bitget.Net.UnitTests
         [Test]
         public async Task ValidateFuturesSubscriptions()
         {
-            var client = new BitgetSocketClient(opts =>
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+            var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
-                opts.ApiCredentials = new ApiCredentials("123", "456", "789");
-            });
+                ApiCredentials = new ApiCredentials("123", "456", "789")
+            }), logger);
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Futures", "https://api.bitget.com", "data");
             await tester.ValidateAsync<BitgetFuturesTickerUpdate>((client, handler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", handler), "Ticker", useFirstUpdateItem: true, ignoreProperties: new List<string> { "symbol" });
             await tester.ValidateAsync<BitgetTradeUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToTradeUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", handler), "Trade");
@@ -48,6 +54,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync<BitgetFuturesOrderUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToOrderUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "Order", ignoreProperties: new List<string> { "deduction", "reduceOnly" });
             await tester.ValidateAsync<BitgetFuturesTriggerOrderUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToTriggerOrderUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "TriggerOrder", ignoreProperties: new List<string> { "deduction", "reduceOnly" });
             await tester.ValidateAsync<BitgetPositionHistoryUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToPositionHistoryUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "PositionClose", ignoreProperties: new List<string> { "deduction", "reduceOnly" });
+            await tester.ValidateAsync<BitgetEquityUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToEquityUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "Equity");
         }
     }
 }

@@ -167,5 +167,14 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
         Task<CallResult<UpdateSubscription>> SubscribeToPositionHistoryUpdatesAsync(BitgetProductTypeV2 productType, Action<DataEvent<BitgetPositionHistoryUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to equity updates
+        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/Equity-Channel" /></para>
+        /// </summary>
+        /// <param name="productType">Product type</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        Task<CallResult<UpdateSubscription>> SubscribeToEquityUpdatesAsync(BitgetProductTypeV2 productType, Action<DataEvent<BitgetEquityUpdate[]>> handler, CancellationToken ct = default);
     }
 }

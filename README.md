@@ -94,6 +94,7 @@ CryptoExchange.Net also allows for [easy access to different exchange API's](htt
 |Mexc|[JKorf/Mexc.Net](https://github.com/JKorf/Mexc.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.Mexc.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.Mexc.Net)|
 |OKX|[JKorf/OKX.Net](https://github.com/JKorf/OKX.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.OKX.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.OKX.Net)|
 |Toobit|[JKorf/Toobit.Net](https://github.com/JKorf/Toobit.Net)|[![Nuget version](https://img.shields.io/nuget/v/Toobit.net.svg?style=flat-square)](https://www.nuget.org/packages/Toobit.Net)|
+|Upbit|[JKorf/Upbit.Net](https://github.com/JKorf/Upbit.Net)|[![Nuget version](https://img.shields.io/nuget/v/JKorf.Upbit.net.svg?style=flat-square)](https://www.nuget.org/packages/JKorf.Upbit.Net)|
 |WhiteBit|[JKorf/WhiteBit.Net](https://github.com/JKorf/WhiteBit.Net)|[![Nuget version](https://img.shields.io/nuget/v/WhiteBit.net.svg?style=flat-square)](https://www.nuget.org/packages/WhiteBit.Net)|
 |XT|[JKorf/XT.Net](https://github.com/JKorf/XT.Net)|[![Nuget version](https://img.shields.io/nuget/v/XT.net.svg?style=flat-square)](https://www.nuget.org/packages/XT.Net)|
 
@@ -174,6 +175,23 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 2.12.0 - 11 Nov 2025
+    * Updated CryptoExchange.Net version to 9.13.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added restClient.FuturesApiV2.Account.GetLiquidationPriceAsync endpoint
+    * Added restClient.FuturesApiV2.Account.GetOpenableQuantityAsync endpoint
+    * Added socketClient.FuturesApiV2.SubscribeToEquityUpdatesAsync subscription
+    * Added BusinessType enum values
+
+* Version 2.11.0 - 03 Nov 2025
+    * Updated CryptoExchange.Net to version 9.12.0
+    * Added support for using SharedSymbol.UsdOrStable in Shared APIs
+    * Fixed exception when initial trade snapshot has no items in TradeTracker
+    * Removed some unhelpful verbose logs
+
+* Version 2.10.0 - 27 Oct 2025
+    * Added CopyTrading follower endpoints
+    * Fixed fee from Shared SpotApi websocket updates being negative
+
 * Version 2.9.0 - 16 Oct 2025
     * Updated CryptoExchange.Net version to 9.10.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added ClientOrderId mapping on SharedUserTrade models
