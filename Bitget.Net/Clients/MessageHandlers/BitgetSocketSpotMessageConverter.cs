@@ -22,9 +22,11 @@ namespace Bitget.Net.Clients.MessageHandlers
             new MessageEvaluator {
                 Priority = 1,
                 Fields = [
-                    new PropertyFieldReference("event") { Constraint = x => x!.Equals("subscribe") },
+                    new PropertyFieldReference("event"),
+                    new PropertyFieldReference("instType") { Depth = 2 },
+                    new PropertyFieldReference("channel") { Depth = 2 },
                 ],
-                IdentifyMessageCallback = x => "SubResponse"
+                IdentifyMessageCallback = x => $"{x.FieldValue("event")}{x.FieldValue("instType")}{x.FieldValue("channel")}"
             },
 
             new MessageEvaluator {

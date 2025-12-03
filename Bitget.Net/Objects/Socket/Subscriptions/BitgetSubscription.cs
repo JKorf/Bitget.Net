@@ -21,7 +21,7 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
             _handler = handler;
 
             MessageMatcher = MessageMatcher.Create<BitgetSocketUpdate<T>>(args.SelectMany(GetIdentifier), DoHandleMessage);
-            MessageRouter = MessageRouter.Create<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), symbols, DoHandleMessage);
+            MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), symbols, DoHandleMessage);
         }
 
         private string GetRouteParams(Dictionary<string, string> arg)

@@ -21,7 +21,11 @@ namespace Bitget.Net.Objects.Socket.Queries
             {
                 checkers.Add(new MessageHandlerLink<BitgetSocketEvent>(GetErrorIdentifier(arg), HandleMessage));
                 checkers.Add(new MessageHandlerLink<BitgetSocketEvent>(GetIdentifier(request.Op, arg), HandleMessage));
-                routes.Add(new MessageRoute<BitgetSocketEvent>("SubResponse", GetRouteIdentifier(arg), HandleMessage));
+
+                routes.Add(MessageRoute<BitgetSocketEvent>.CreateWithOptionalTopicFilter(
+                    $"{request.Op}{arg["instType"]}{arg["channel"]}",
+                    GetRouteIdentifier(arg),
+                    HandleMessage));
             }
 
             MessageMatcher = MessageMatcher.Create(checkers.ToArray());
