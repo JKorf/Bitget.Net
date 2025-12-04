@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Bitget.Net.Objects.Socket.Subscriptions
 {
-    internal class BitgetSubscription<T> : Subscription<BitgetSocketEvent, BitgetSocketEvent>
+    internal class BitgetSubscription<T> : Subscription
     {
         private readonly SocketApiClient _client;
         private readonly Dictionary<string, string>[] _args;
