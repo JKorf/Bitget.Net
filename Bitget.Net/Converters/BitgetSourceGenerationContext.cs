@@ -35,7 +35,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetOrderBookUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetFuturesTickerUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetEquityUpdate[]>))]
-    [JsonSerializable(typeof(BitgetResponse<BitMartPositionTpSl[]>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetPositionTpSl[]>))]
 
     // End manual defined attributes
 

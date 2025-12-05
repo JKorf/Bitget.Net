@@ -10,7 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Position Tp/Sl result
     /// </summary>
-    public record BitMartPositionTpSl
+    public record BitgetPositionTpSl
     {
         /// <summary>
         /// Order id

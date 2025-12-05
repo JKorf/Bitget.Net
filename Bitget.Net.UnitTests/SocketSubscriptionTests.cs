@@ -1,4 +1,5 @@
 ﻿using Bitget.Net.Clients;
+using Bitget.Net.Enums;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Options;
@@ -16,6 +17,46 @@ namespace Bitget.Net.UnitTests
     [TestFixture]
     public class SocketSubscriptionTests
     {
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateConcurrentSpotSubscriptions(bool newDeserialization)
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
+            {
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
+
+            var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Spot", "https://api.bitget.com", "data");
+            await tester.ValidateConcurrentAsync<BitgetKlineUpdate[]>(
+                (client, handler) => client.SpotApiV2.SubscribeToKlineUpdatesAsync("ETHUSDT", BitgetStreamKlineIntervalV2.OneDay, handler),
+                (client, handler) => client.SpotApiV2.SubscribeToKlineUpdatesAsync("ETHUSDT", BitgetStreamKlineIntervalV2.OneHour, handler),
+                "Concurrent");
+        }
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateConcurrentFuturesSubscriptions(bool newDeserialization)
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
+            {
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
+
+            var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Futures", "https://api.bitget.com", "data");
+            await tester.ValidateConcurrentAsync<BitgetFuturesKlineUpdate[]>(
+                (client, handler) => client.FuturesApiV2.SubscribeToKlineUpdatesAsync(BitgetProductTypeV2.UsdtFutures, "ETHUSDT", BitgetStreamKlineIntervalV2.OneDay, handler),
+                (client, handler) => client.FuturesApiV2.SubscribeToKlineUpdatesAsync(BitgetProductTypeV2.UsdtFutures, "ETHUSDT", BitgetStreamKlineIntervalV2.OneHour, handler),
+                "Concurrent");
+        }
+
         [TestCase(false)]
         [TestCase(true)]
         public async Task ValidateSpotSubscriptions(bool newDeserialization)
