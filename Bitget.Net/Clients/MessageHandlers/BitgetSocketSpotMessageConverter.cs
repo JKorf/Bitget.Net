@@ -9,6 +9,12 @@ namespace Bitget.Net.Clients.MessageHandlers
 {
     internal class BitgetSocketSpotMessageConverter : JsonSocketMessageHandler
     {
+        private static readonly HashSet<string?> _typeUpdates = new HashSet<string?>()
+        {
+            "snapshot",
+            "update"
+        };
+
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(BitgetExchange._serializerContext);
 
         public BitgetSocketSpotMessageConverter()
@@ -17,42 +23,38 @@ namespace Bitget.Net.Clients.MessageHandlers
             AddTopicMapping<BitgetSocketUpdate>(x => x.Args.InstrumentId);
         }
 
-        protected override MessageEvaluator[] TypeEvaluators { get; } = [
+        protected override MessageTypeDefinition[] TypeEvaluators { get; } = [
 
-            new MessageEvaluator {
-                Priority = 1,
+            new MessageTypeDefinition {
                 Fields = [
                     new PropertyFieldReference("event"),
                     new PropertyFieldReference("instType") { Depth = 2 },
                     new PropertyFieldReference("channel") { Depth = 2 },
                 ],
-                IdentifyMessageCallback = x => $"{x.FieldValue("event")}{x.FieldValue("instType")}{x.FieldValue("channel")}"
+                TypeIdentifierCallback = x => $"{x.FieldValue("event")}{x.FieldValue("instType")}{x.FieldValue("channel")}"
             },
 
-            new MessageEvaluator {
-                Priority = 2,
+            new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("action") { Constraint = x => x!.Equals("snapshot") || x!.Equals("update") },
+                    new PropertyFieldReference("action").WithFilterContstraint(_typeUpdates),
                     new PropertyFieldReference("instType") { Depth = 2 },
                     new PropertyFieldReference("channel") { Depth = 2 },
                 ],
-                IdentifyMessageCallback = x => $"{x.FieldValue("instType")}{x.FieldValue("channel")}"
+                TypeIdentifierCallback = x => $"{x.FieldValue("instType")}{x.FieldValue("channel")}"
             },
 
 
-            new MessageEvaluator {
-                Priority = 5,
+            new MessageTypeDefinition {
                 ForceIfFound = true,
                 Fields = [
-                    new PropertyFieldReference("event") { Constraint = x => x!.Equals("login", StringComparison.Ordinal) },
+                    new PropertyFieldReference("event").WithEqualContstraint("login"),
                 ],
                 StaticIdentifier = "login",
             },
 
-            new MessageEvaluator {
-                Priority = 6,
+            new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("event") { Constraint = x => x!.Equals("error", StringComparison.Ordinal) },
+                    new PropertyFieldReference("event").WithEqualContstraint("error"),
                 ],
                 StaticIdentifier = "error",
             },
