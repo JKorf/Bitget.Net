@@ -1,6 +1,5 @@
 ﻿using Bitget.Net.Clients.MessageHandlers;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
-using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;

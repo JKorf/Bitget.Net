@@ -1,14 +1,9 @@
-﻿using Bitget.Net.Objects;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
+﻿using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using System.Text.Json;
 
 namespace Bitget.Net
 {

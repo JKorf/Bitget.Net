@@ -1,7 +1,7 @@
 ﻿using Bitget.Net.Objects.Socket;
 using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
-using System.Collections.Generic;
+using CryptoExchange.Net.Converters.SystemTextJson.MessageHandlers;
 using System.Net.WebSockets;
 using System.Text.Json;
 

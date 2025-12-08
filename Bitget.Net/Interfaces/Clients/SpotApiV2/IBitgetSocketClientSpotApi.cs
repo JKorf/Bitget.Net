@@ -1,6 +1,6 @@
 using Bitget.Net.Enums;
 using Bitget.Net.Objects.Models.V2;
-using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 

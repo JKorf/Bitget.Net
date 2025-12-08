@@ -1,8 +1,7 @@
 ﻿using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
-using Bitget.Net.Objects;
 using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects.Options;
 
 namespace Bitget.Net.Interfaces.Clients

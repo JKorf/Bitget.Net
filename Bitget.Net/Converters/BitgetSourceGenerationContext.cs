@@ -1,9 +1,6 @@
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Socket;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Converters

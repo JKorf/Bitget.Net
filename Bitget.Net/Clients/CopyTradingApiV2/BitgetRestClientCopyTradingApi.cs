@@ -1,6 +1,5 @@
 ﻿using Bitget.Net.Clients.MessageHandlers;
 using Bitget.Net.Interfaces.Clients.CopyTradingApiV2;
-using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
@@ -14,7 +13,6 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
-using System.Net;
 using System.Net.Http.Headers;
 
 namespace Bitget.Net.Clients.CopyTradingApiV2

@@ -1,4 +1,3 @@
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net;
 using Bitget.Net.Objects.Models.V2;

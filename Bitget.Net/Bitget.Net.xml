@@ -572,7 +572,7 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi">
@@ -1001,7 +1001,7 @@
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.Boolean">
@@ -5788,7 +5788,7 @@
         </member>
         <member name="P:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SharedClient">
             <summary>
-            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetFuturesTickerUpdate[]}},System.Threading.CancellationToken)">
@@ -13868,14 +13868,14 @@
             Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
             </summary>
         </member>
-        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Bitget(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Bitget(CryptoExchange.Net.Interfaces.Clients.ICryptoRestClient)">
             <summary>
             Get the Bitget REST Api client
             </summary>
             <param name="baseClient"></param>
             <returns></returns>
         </member>
-        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Bitget(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Bitget(CryptoExchange.Net.Interfaces.Clients.ICryptoSocketClient)">
             <summary>
             Get the Bitget Websocket Api client
             </summary>

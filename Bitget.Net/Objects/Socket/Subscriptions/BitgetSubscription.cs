@@ -1,9 +1,9 @@
 ﻿using Bitget.Net.Objects.Socket.Queries;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using Microsoft.Extensions.Logging;
 
 namespace Bitget.Net.Objects.Socket.Subscriptions

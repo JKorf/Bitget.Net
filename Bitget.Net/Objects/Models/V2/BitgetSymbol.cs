@@ -1,9 +1,5 @@
 using CryptoExchange.Net.Converters.SystemTextJson;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
-using Bitget.Net.Converters;
 using Bitget.Net.Enums;
 
 namespace Bitget.Net.Objects.Models.V2

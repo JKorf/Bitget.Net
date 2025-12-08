@@ -1,7 +1,6 @@
 using Bitget.Net.Clients.MessageHandlers;
 using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
-using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Options;
 using Bitget.Net.Objects.Socket;
@@ -19,6 +18,7 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using Microsoft.Extensions.Logging;
 using System.Net.WebSockets;
 

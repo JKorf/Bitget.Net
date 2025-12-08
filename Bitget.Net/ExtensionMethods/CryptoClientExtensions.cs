@@ -1,6 +1,6 @@
 ﻿using Bitget.Net.Clients;
 using Bitget.Net.Interfaces.Clients;
-using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.Clients;
 
 namespace CryptoExchange.Net.Interfaces
 {
