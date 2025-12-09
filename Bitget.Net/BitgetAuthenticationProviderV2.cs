@@ -11,6 +11,7 @@ namespace Bitget.Net
     {
         private static IStringMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.RsaXml, ApiCredentialsType.RsaPem];
         public string Passphrase => _credentials.Pass!;
 
         public BitgetAuthenticationProviderV2(ApiCredentials credentials) : base(credentials)
