@@ -186,7 +186,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Fee info
     /// </summary>
-    public class BitgetOrderFeeQuantity
+    public record BitgetOrderFeeQuantity
     {
         /// <summary>
         /// Fee asset

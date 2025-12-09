@@ -6,7 +6,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Order request
     /// </summary>
-    public class BitgetPlaceOrderRequest
+    public record BitgetPlaceOrderRequest
     {
         /// <summary>
         /// Order side

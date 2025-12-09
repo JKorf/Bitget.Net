@@ -34,6 +34,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         private static readonly MessagePath _instIdPath = MessagePath.Get().Property("arg").Property("instId");
 
         protected override ErrorMapping ErrorMapping => BitgetErrors.SocketErrors;
+
         #region ctor
         internal BitgetSocketClientFuturesApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.FuturesOptions)

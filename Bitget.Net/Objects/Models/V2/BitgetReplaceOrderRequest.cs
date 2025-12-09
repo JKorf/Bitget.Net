@@ -5,7 +5,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Replace order request
     /// </summary>
-    public class BitgetReplaceOrderRequest
+    public record BitgetReplaceOrderRequest
     {
         /// <summary>
         /// Symbol
