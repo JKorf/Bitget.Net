@@ -105,23 +105,6 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
-        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
-        {
-            if (!accessor.IsValid)
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-
-            var code = accessor.GetValue<string>(MessagePath.Get().Property("code"));
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("msg"));
-            if (msg == null)
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-
-            if (code == null)
-                return new ServerError(ErrorInfo.Unknown with { Message = msg }, exception);
-
-            return new ServerError(code, GetErrorInfo(int.Parse(code), msg), exception);
-        }
-
-        /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
             => ExchangeData.GetServerTimeAsync();
 

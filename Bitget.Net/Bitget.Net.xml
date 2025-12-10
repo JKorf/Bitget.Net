@@ -275,9 +275,6 @@
         <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.ParseErrorResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor,System.Exception)">
-            <inheritdoc />
-        </member>
         <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.GetTimeSyncInfo">
             <inheritdoc />
         </member>
@@ -324,9 +321,6 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.ParseErrorResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor,System.Exception)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.GetServerTimestampAsync">
@@ -609,9 +603,6 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.ParseErrorResponse(System.Int32,System.Net.Http.Headers.HttpResponseHeaders,CryptoExchange.Net.Interfaces.IMessageAccessor,System.Exception)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.GetServerTimestampAsync">
