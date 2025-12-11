@@ -26,6 +26,10 @@ namespace Bitget.Net.Objects.Socket.Queries
                     $"{request.Op}{arg["instType"]}{arg["channel"]}",
                     GetRouteIdentifier(arg),
                     HandleMessage));
+                routes.Add(MessageRoute<BitgetSocketEvent>.CreateWithOptionalTopicFilter(
+                    $"error{arg["instType"]}{arg["channel"]}",
+                    GetRouteIdentifier(arg),
+                    HandleMessage));
             }
 
             MessageMatcher = MessageMatcher.Create(checkers.ToArray());

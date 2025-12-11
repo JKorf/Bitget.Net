@@ -36,7 +36,7 @@ namespace Bitget.Net.Clients.MessageHandlers
 
             new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("action").WithFilterContstraint(_typeUpdates),
+                    new PropertyFieldReference("action").WithFilterConstraint(_typeUpdates),
                     new PropertyFieldReference("instType") { Depth = 2 },
                     new PropertyFieldReference("channel") { Depth = 2 },
                 ],
@@ -47,14 +47,14 @@ namespace Bitget.Net.Clients.MessageHandlers
             new MessageTypeDefinition {
                 ForceIfFound = true,
                 Fields = [
-                    new PropertyFieldReference("event").WithEqualContstraint("login"),
+                    new PropertyFieldReference("event").WithEqualConstraint("login"),
                 ],
                 StaticIdentifier = "login",
             },
 
             new MessageTypeDefinition {
                 Fields = [
-                    new PropertyFieldReference("event").WithEqualContstraint("error")
+                    new PropertyFieldReference("event").WithEqualConstraint("error")
                 ],
                 StaticIdentifier = "error",
             },
