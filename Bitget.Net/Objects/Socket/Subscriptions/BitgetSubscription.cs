@@ -20,6 +20,8 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
             _args = args;
             _handler = handler;
 
+            IndividualSubscriptionCount = args.Length;
+
             MessageMatcher = MessageMatcher.Create<BitgetSocketUpdate<T>>(args.SelectMany(GetIdentifier), DoHandleMessage);
             MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), symbols, DoHandleMessage);
         }
