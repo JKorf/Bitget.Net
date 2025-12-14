@@ -23,7 +23,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             SupportsMultipleSymbols = true,
             
         };
-        async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(SubscribeTickerRequest request, Action<ExchangeEvent<SharedSpotTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(SubscribeTickerRequest request, Action<DataEvent<SharedSpotTicker>> handler, CancellationToken ct)
         {
             var validationError = ((ITickerSocketClient)this).SubscribeTickerOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -34,7 +34,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             {
                 foreach (var item in update.Data)
                 {
-                    handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, item.Symbol), item.Symbol, item.LastPrice, item.HighPrice24h, item.LowPrice24h, item.BaseVolume, item.ChangePercentage * 100)
+                    handler(update.ToType(new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, item.Symbol), item.Symbol, item.LastPrice, item.HighPrice24h, item.LowPrice24h, item.BaseVolume, item.ChangePercentage * 100)
                     {
                         QuoteVolume = item.QuoteVolume
                     }));
@@ -52,7 +52,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             SupportsMultipleSymbols = true
         };
-        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<ExchangeEvent<SharedTrade[]>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<DataEvent<SharedTrade[]>> handler, CancellationToken ct)
         {
             var validationError = ((ITradeSocketClient)this).SubscribeTradeOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -64,7 +64,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 if (update.UpdateType == SocketUpdateType.Snapshot)
                     return;
 
-                handler(update.AsExchangeEvent<SharedTrade[]>(Exchange, update.Data.Select(x => 
+                handler(update.ToType<SharedTrade[]>(update.Data.Select(x => 
                 new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, update.Symbol), update.Symbol!, x.Quantity, x.Price, x.Timestamp)
                 {
                     Side = x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
@@ -81,7 +81,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             SupportsMultipleSymbols = true
         };
-        async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(SubscribeBookTickerRequest request, Action<ExchangeEvent<SharedBookTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(SubscribeBookTickerRequest request, Action<DataEvent<SharedBookTicker>> handler, CancellationToken ct)
         {
             var validationError = ((IBookTickerSocketClient)this).SubscribeBookTickerOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -92,7 +92,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             {
                 foreach (var item in update.Data)
                 {
-                    handler(update.AsExchangeEvent(Exchange, 
+                    handler(update.ToType(
                         new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, item.Symbol), 
                         item.Symbol,
                         item.BestAskPrice,
@@ -108,7 +108,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         #region Balance client
         EndpointOptions<SubscribeBalancesRequest> IBalanceSocketClient.SubscribeBalanceOptions { get; } = new EndpointOptions<SubscribeBalancesRequest>(false);
-        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<ExchangeEvent<SharedBalance[]>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<DataEvent<SharedBalance[]>> handler, CancellationToken ct)
         {
             var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -119,7 +119,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                     if (update.UpdateType == SocketUpdateType.Snapshot)
                         return;
 
-                    handler(update.AsExchangeEvent<SharedBalance[]>(Exchange, update.Data.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + (x.Locked ?? 0) + (x.Frozen ?? 0))).ToArray()));
+                    handler(update.ToType<SharedBalance[]>(update.Data.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + (x.Locked ?? 0) + (x.Frozen ?? 0))).ToArray()));
                 },
                 ct: ct).ConfigureAwait(false);
 
@@ -130,14 +130,14 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Spot Order client
 
         EndpointOptions<SubscribeSpotOrderRequest> ISpotOrderSocketClient.SubscribeSpotOrderOptions { get; } = new EndpointOptions<SubscribeSpotOrderRequest>(false);
-        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<ExchangeEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<DataEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
         {
             var validationError = ((ISpotOrderSocketClient)this).SubscribeSpotOrderOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await SubscribeToOrderUpdatesAsync(
-                update => handler(update.AsExchangeEvent<SharedSpotOrder[]>(Exchange, update.Data.Select(x =>
+                update => handler(update.ToType<SharedSpotOrder[]>(update.Data.Select(x =>
                     new SharedSpotOrder(
                         ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                         x.Symbol,
@@ -174,14 +174,14 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region User Trade client
 
         EndpointOptions<SubscribeUserTradeRequest> IUserTradeSocketClient.SubscribeUserTradeOptions { get; } = new EndpointOptions<SubscribeUserTradeRequest>(false);
-        async Task<ExchangeResult<UpdateSubscription>> IUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(SubscribeUserTradeRequest request, Action<ExchangeEvent<SharedUserTrade[]>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(SubscribeUserTradeRequest request, Action<DataEvent<SharedUserTrade[]>> handler, CancellationToken ct)
         {
             var validationError = ((IUserTradeSocketClient)this).SubscribeUserTradeOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var result = await SubscribeToUserTradeUpdatesAsync(
-                update => handler(update.AsExchangeEvent<SharedUserTrade[]>(Exchange, update.Data.Select(x =>
+                update => handler(update.ToType<SharedUserTrade[]>(update.Data.Select(x =>
                     new SharedUserTrade(
                         ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                         x.Symbol,
@@ -220,7 +220,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             SupportsMultipleSymbols = true
         };
-        async Task<ExchangeResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<ExchangeEvent<SharedKline>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<DataEvent<SharedKline>> handler, CancellationToken ct)
         {
             var interval = (Enums.BitgetStreamKlineIntervalV2)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.BitgetStreamKlineIntervalV2), interval))
@@ -237,7 +237,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                     return;
 
                 foreach (var item in update.Data)
-                    handler(update.AsExchangeEvent(Exchange, new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, update.Symbol), update.Symbol!, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
+                    handler(update.ToType(new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, update.Symbol), update.Symbol!, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
             }, ct).ConfigureAwait(false);            
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -249,7 +249,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             SupportsMultipleSymbols = true
         };
-        async Task<ExchangeResult<UpdateSubscription>> IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(SubscribeOrderBookRequest request, Action<ExchangeEvent<SharedOrderBook>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(SubscribeOrderBookRequest request, Action<DataEvent<SharedOrderBook>> handler, CancellationToken ct)
         {
             var validationError = ((IOrderBookSocketClient)this).SubscribeOrderBookOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -259,7 +259,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var result = await SubscribeToOrderBookUpdatesAsync(symbols, request.Limit ?? 15, update =>
             {
                 foreach(var item in update.Data)
-                    handler(update.AsExchangeEvent(Exchange, new SharedOrderBook(item.Asks, item.Bids)));
+                    handler(update.ToType(new SharedOrderBook(item.Asks, item.Bids)));
             }, ct).ConfigureAwait(false);
             
             return new ExchangeResult<UpdateSubscription>(Exchange, result);

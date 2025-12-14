@@ -28,7 +28,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(SubscribeTickerRequest request, Action<ExchangeEvent<SharedSpotTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(SubscribeTickerRequest request, Action<DataEvent<SharedSpotTicker>> handler, CancellationToken ct)
         {
             var validationError = ((ITickerSocketClient)this).SubscribeTickerOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -40,8 +40,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             {
                 foreach (var item in update.Data)
                 {
-                    handler(update.AsExchangeEvent(Exchange,
-                        new SharedSpotTicker(
+                    handler(update.ToType(new SharedSpotTicker(
                             ExchangeSymbolCache.ParseSymbol(_topicId, item.Symbol), 
                             item.Symbol, 
                             item.LastPrice, 
@@ -69,7 +68,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<ExchangeEvent<SharedTrade[]>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<DataEvent<SharedTrade[]>> handler, CancellationToken ct)
         {
             var validationError = ((ITradeSocketClient)this).SubscribeTradeOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -77,7 +76,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
-            var result = await SubscribeToTradeUpdatesAsync(productType, symbols, update => handler(update.AsExchangeEvent<SharedTrade[]>(Exchange, update.Data.Select(x => 
+            var result = await SubscribeToTradeUpdatesAsync(productType, symbols, update => handler(update.ToType(update.Data.Select(x => 
             new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, update.Symbol), update.Symbol!, x.Quantity, x.Price, x.Timestamp)
             {
                 Side = x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
@@ -97,7 +96,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(SubscribeBookTickerRequest request, Action<ExchangeEvent<SharedBookTicker>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(SubscribeBookTickerRequest request, Action<DataEvent<SharedBookTicker>> handler, CancellationToken ct)
         {
             var validationError = ((IBookTickerSocketClient)this).SubscribeBookTickerOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -109,7 +108,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             {
                 foreach (var item in update.Data)
                 {
-                    handler(update.AsExchangeEvent(Exchange,
+                    handler(update.ToType(
                         new SharedBookTicker(
                             ExchangeSymbolCache.ParseSymbol(_topicId, item.Symbol),
                             item.Symbol,
@@ -133,7 +132,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<ExchangeEvent<SharedBalance[]>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IBalanceSocketClient.SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<DataEvent<SharedBalance[]>> handler, CancellationToken ct)
         {
             var validationError = ((IBalanceSocketClient)this).SubscribeBalanceOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -145,7 +144,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     if (update.UpdateType == SocketUpdateType.Snapshot)
                         return;
 
-                    handler(update.AsExchangeEvent<SharedBalance[]>(Exchange, update.Data.Select(x => new SharedBalance(x.MarginAsset, x.Available, x.Equity)).ToArray()));
+                    handler(update.ToType(update.Data.Select(x => new SharedBalance(x.MarginAsset, x.Available, x.Equity)).ToArray()));
                 },
                 ct: ct).ConfigureAwait(false);
 
@@ -174,7 +173,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<ExchangeEvent<SharedKline>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<DataEvent<SharedKline>> handler, CancellationToken ct)
         {
             var interval = (Enums.BitgetStreamKlineIntervalV2)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.BitgetStreamKlineIntervalV2), interval))
@@ -193,7 +192,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     return;
 
                 foreach (var item in update.Data)
-                    handler(update.AsExchangeEvent(Exchange, new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, update.Symbol), update.Symbol!, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
+                    handler(update.ToType(new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, update.Symbol), update.Symbol!, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
             }, ct).ConfigureAwait(false);
             
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -209,7 +208,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(SubscribeOrderBookRequest request, Action<ExchangeEvent<SharedOrderBook>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(SubscribeOrderBookRequest request, Action<DataEvent<SharedOrderBook>> handler, CancellationToken ct)
         {
             var validationError = ((IOrderBookSocketClient)this).SubscribeOrderBookOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -220,7 +219,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await SubscribeToOrderBookUpdatesAsync(productType, symbols, request.Limit ?? 15, update =>
             {
                 foreach(var item in update.Data)
-                    handler(update.AsExchangeEvent(Exchange, new SharedOrderBook(item.Asks, item.Bids)));
+                    handler(update.ToType(new SharedOrderBook(item.Asks, item.Bids)));
             }, ct).ConfigureAwait(false);
             
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -235,7 +234,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<ExchangeEvent<SharedFuturesOrder[]>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<DataEvent<SharedFuturesOrder[]>> handler, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderSocketClient)this).SubscribeFuturesOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -244,7 +243,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
             var result = await SubscribeToOrderUpdatesAsync(
                 productType,
-                update => handler(update.AsExchangeEvent<SharedFuturesOrder[]>(Exchange, update.Data.Select(x =>
+                update => handler(update.ToType<SharedFuturesOrder[]>(update.Data.Select(x =>
                     new SharedFuturesOrder(
                         ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                         x.Symbol,
@@ -303,7 +302,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(SubscribeUserTradeRequest request, Action<ExchangeEvent<SharedUserTrade[]>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IUserTradeSocketClient.SubscribeToUserTradeUpdatesAsync(SubscribeUserTradeRequest request, Action<DataEvent<SharedUserTrade[]>> handler, CancellationToken ct)
         {
             var validationError = ((IUserTradeSocketClient)this).SubscribeUserTradeOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -312,7 +311,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
             var result = await SubscribeToUserTradeUpdatesAsync(
                 productType,
-                update => handler(update.AsExchangeEvent<SharedUserTrade[]>(Exchange, update.Data.Select(x =>
+                update => handler(update.ToType<SharedUserTrade[]>(update.Data.Select(x =>
                     new SharedUserTrade(
                         ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol),
                         x.Symbol,
@@ -342,7 +341,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<ExchangeEvent<SharedPosition[]>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<DataEvent<SharedPosition[]>> handler, CancellationToken ct)
         {
             var validationError = ((IPositionSocketClient)this).SubscribePositionOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -351,7 +350,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
             var result = await SubscribeToPositionUpdatesAsync(productType!,
                 update => {
-                    handler(update.AsExchangeEvent<SharedPosition[]>(Exchange, update.Data.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.Total, x.UpdateTime)
+                    handler(update.ToType<SharedPosition[]>(update.Data.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.Total, x.UpdateTime)
                     {
                         AverageOpenPrice = x.AverageOpenPrice,
                         PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,

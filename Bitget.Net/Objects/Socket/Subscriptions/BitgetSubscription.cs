@@ -54,7 +54,7 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketUpdate<T> message)
         {
             _handler?.Invoke(
-                new DataEvent<T>(message.Data, receiveTime, originalData)
+                new DataEvent<T>(BitgetExchange.ExchangeName, message.Data, receiveTime, originalData)
                     .WithUpdateType(string.Equals(message.Action, "snapshot", StringComparison.Ordinal) ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                     .WithSymbol(message.Args.InstrumentId)
                     .WithStreamId(message.Args.Channel)
