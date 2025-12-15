@@ -10,7 +10,8 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetPlaceOrderRequest[]))]
     [JsonSerializable(typeof(BitgetCancelOrderRequest[]))]
     [JsonSerializable(typeof(BitgetReplaceOrderRequest[]))]
-
+    
+    [JsonSerializable(typeof(BitgetSocketUpdate<BitgetAdlNotification[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetTradeUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetFuturesKlineUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetFuturesBalanceUpdate[]>))]

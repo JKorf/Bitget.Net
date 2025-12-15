@@ -176,5 +176,14 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         Task<CallResult<UpdateSubscription>> SubscribeToEquityUpdatesAsync(BitgetProductTypeV2 productType, Action<DataEvent<BitgetEquityUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to ADL notification updates
+        /// </summary>
+        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/ADL-Notification-Channel" /></para>
+        /// <param name="productType">Product type</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        Task<CallResult<UpdateSubscription>> SubscribeToAdlUpdatesAsync(BitgetProductTypeV2 productType, Action<DataEvent<BitgetAdlNotification[]>> handler, CancellationToken ct = default);
     }
 }

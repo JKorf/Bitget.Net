@@ -563,6 +563,9 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToEquityUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetEquityUpdate[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToAdlUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetAdlNotification[]}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
@@ -5943,6 +5946,15 @@
             <param name="handler">The handler for the data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
         </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi.SubscribeToAdlUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetAdlNotification[]}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to ADL notification updates
+            </summary>
+            <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/ADL-Notification-Channel" /></para>
+            <param name="productType">Product type</param>
+            <param name="handler">The handler for the data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+        </member>
         <member name="T:Bitget.Net.Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApiShared">
             <summary>
             Shared interface for Futures socket API usage
@@ -7529,6 +7541,41 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetAccountInfo.RegistrationTime">
             <summary>
             Registration time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetAdlNotification">
+            <summary>
+            ADL notification
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAdlNotification.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAdlNotification.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAdlNotification.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAdlNotification.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAdlNotification.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetAdlNotification.Timestamp">
+            <summary>
+            Timestamp
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetAnnouncement">

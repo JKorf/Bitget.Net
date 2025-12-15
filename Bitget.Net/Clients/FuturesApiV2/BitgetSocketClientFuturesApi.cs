@@ -241,6 +241,18 @@ namespace Bitget.Net.Clients.FuturesApiV2
             null, true, handler, ct).ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAdlUpdatesAsync(BitgetProductTypeV2 productType, Action<DataEvent<BitgetAdlNotification[]>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
+                    {
+                        { "instType", EnumConverter.GetString(productType) },
+                        { "channel", "adl-noti" },
+                        { "instId", "default" },
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
+        }
+
         private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(
             string url,
             Dictionary<string, string>[] request,
