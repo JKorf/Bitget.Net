@@ -1788,6 +1788,16 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetAdlNotification">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetAdlNotificationArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetAnnouncement">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -3214,6 +3224,11 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketRequest">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetSocketUpdateBitgetAdlNotificationArray">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -9656,6 +9671,11 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrder.Leverage">
             <summary>
             Leverage
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrder.LiquidationPrice">
+            <summary>
+            Liquidation price (only available for historic orders)
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetFuturesOrder.MarginMode">
