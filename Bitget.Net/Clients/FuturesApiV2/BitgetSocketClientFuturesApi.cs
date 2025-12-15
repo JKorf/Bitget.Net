@@ -43,19 +43,19 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             ProcessUnparsableMessages = true;
 
-            //RegisterPeriodicQuery(
-            //    "Ping",
-            //    TimeSpan.FromSeconds(30),
-            //    x => new BitgetPingQuery(),
-            //    (connection, result) =>
-            //    {
-            //        if (result.Error?.ErrorType == ErrorType.Timeout)
-            //        {
-            //            // Ping timeout, reconnect
-            //            _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
-            //            _ = connection.TriggerReconnectAsync();
-            //        }
-            //    });
+            RegisterPeriodicQuery(
+                "Ping",
+                TimeSpan.FromSeconds(30),
+                x => new BitgetPingQuery(),
+                (connection, result) =>
+                {
+                    if (result.Error?.ErrorType == ErrorType.Timeout)
+                    {
+                        // Ping timeout, reconnect
+                        _logger.LogWarning("[Sckt {SocketId}] Ping response timeout, reconnecting", connection.SocketId);
+                        _ = connection.TriggerReconnectAsync();
+                    }
+                });
         }
         #endregion
 
