@@ -7956,6 +7956,11 @@
             Max size for a limit order
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetContract.IsRwa">
+            <summary>
+            Is RWA
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetCopyTradingCurrentOrders">
             <summary>
             Current Tracking Orders

@@ -180,5 +180,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("maxOrderQty")]
         public decimal? MaxLimitOrderQuantity { get; set; }
+        /// <summary>
+        /// Is RWA
+        /// </summary>
+        [JsonPropertyName("isRwa")]
+        public bool IsRwa { get; set; }
     }
 }
