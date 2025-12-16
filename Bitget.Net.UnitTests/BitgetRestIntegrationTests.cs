@@ -14,7 +14,7 @@ namespace Bitget.Net.UnitTests
     [NonParallelizable]
     internal class BitgetRestIntegrationTests : RestIntegrationTest<BitgetRestClient>
     {
-        public override bool Run { get; set; } = true;
+        public override bool Run { get; set; } = false;
 
         public BitgetRestIntegrationTests()
         {
