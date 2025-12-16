@@ -23,6 +23,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         SubscribeTickerOptions ITickerSocketClient.SubscribeTickerOptions { get; } = new SubscribeTickerOptions()
         {
             SupportsMultipleSymbols = true,
+            MaxSymbolCount = 50,
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
@@ -63,6 +64,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         EndpointOptions<SubscribeTradeRequest> ITradeSocketClient.SubscribeTradeOptions { get; } = new EndpointOptions<SubscribeTradeRequest>(false)
         {
             SupportsMultipleSymbols = true,
+            MaxSymbolCount = 50,
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
@@ -91,6 +93,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         EndpointOptions<SubscribeBookTickerRequest> IBookTickerSocketClient.SubscribeBookTickerOptions { get; } = new EndpointOptions<SubscribeBookTickerRequest>(false)
         {
             SupportsMultipleSymbols = true,
+            MaxSymbolCount = 50,
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
@@ -168,6 +171,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             SharedKlineInterval.OneMonth)
         {
             SupportsMultipleSymbols = true,
+            MaxSymbolCount = 50,
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
@@ -203,6 +207,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         SubscribeOrderBookOptions IOrderBookSocketClient.SubscribeOrderBookOptions { get; } = new SubscribeOrderBookOptions(false, new[] { 1, 5, 15 })
         {
             SupportsMultipleSymbols = true,
+            MaxSymbolCount = 50,
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")

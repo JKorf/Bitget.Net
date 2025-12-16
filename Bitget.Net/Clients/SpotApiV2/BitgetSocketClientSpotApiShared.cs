@@ -21,7 +21,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         SubscribeTickerOptions ITickerSocketClient.SubscribeTickerOptions { get; } = new SubscribeTickerOptions()
         {
             SupportsMultipleSymbols = true,
-            
+            MaxSymbolCount = 50
         };
         async Task<ExchangeResult<UpdateSubscription>> ITickerSocketClient.SubscribeToTickerUpdatesAsync(SubscribeTickerRequest request, Action<DataEvent<SharedSpotTicker>> handler, CancellationToken ct)
         {
@@ -50,7 +50,8 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         EndpointOptions<SubscribeTradeRequest> ITradeSocketClient.SubscribeTradeOptions { get; } = new EndpointOptions<SubscribeTradeRequest>(false)
         {
-            SupportsMultipleSymbols = true
+            SupportsMultipleSymbols = true,
+            MaxSymbolCount = 50
         };
         async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<DataEvent<SharedTrade[]>> handler, CancellationToken ct)
         {
@@ -79,7 +80,8 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         EndpointOptions<SubscribeBookTickerRequest> IBookTickerSocketClient.SubscribeBookTickerOptions { get; } = new EndpointOptions<SubscribeBookTickerRequest>(false)
         {
-            SupportsMultipleSymbols = true
+            SupportsMultipleSymbols = true,
+            MaxSymbolCount = 50
         };
         async Task<ExchangeResult<UpdateSubscription>> IBookTickerSocketClient.SubscribeToBookTickerUpdatesAsync(SubscribeBookTickerRequest request, Action<DataEvent<SharedBookTicker>> handler, CancellationToken ct)
         {
@@ -218,7 +220,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             SharedKlineInterval.OneWeek,
             SharedKlineInterval.OneMonth)
         {
-            SupportsMultipleSymbols = true
+            SupportsMultipleSymbols = true,
+            MaxSymbolCount = 50
         };
         async Task<ExchangeResult<UpdateSubscription>> IKlineSocketClient.SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<DataEvent<SharedKline>> handler, CancellationToken ct)
         {
@@ -247,7 +250,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Order Book client
         SubscribeOrderBookOptions IOrderBookSocketClient.SubscribeOrderBookOptions { get; } = new SubscribeOrderBookOptions(false, new[] { 1, 5, 15 })
         {
-            SupportsMultipleSymbols = true
+            SupportsMultipleSymbols = true,
+            MaxSymbolCount = 50
         };
         async Task<ExchangeResult<UpdateSubscription>> IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(SubscribeOrderBookRequest request, Action<DataEvent<SharedOrderBook>> handler, CancellationToken ct)
         {
