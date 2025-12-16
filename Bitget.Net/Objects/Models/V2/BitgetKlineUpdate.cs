@@ -1,4 +1,3 @@
-using Bitget.Net.Converters;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using System.Text.Json.Serialization;

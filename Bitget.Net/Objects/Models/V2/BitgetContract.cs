@@ -1,10 +1,6 @@
 using CryptoExchange.Net.Converters.SystemTextJson;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 using Bitget.Net.Enums.V2;
-using Bitget.Net.Converters;
 
 namespace Bitget.Net.Objects.Models.V2
 {
@@ -184,5 +180,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("maxOrderQty")]
         public decimal? MaxLimitOrderQuantity { get; set; }
+        /// <summary>
+        /// Is RWA
+        /// </summary>
+        [JsonPropertyName("isRwa")]
+        public bool IsRwa { get; set; }
     }
 }

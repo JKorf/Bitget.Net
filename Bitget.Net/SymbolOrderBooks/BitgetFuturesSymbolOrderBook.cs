@@ -88,22 +88,22 @@ namespace Bitget.Net.SymbolOrderBooks
             _initial = true;
         }
 
-        private void ProcessUpdate(DataEvent<BitgetOrderBookUpdate> data)
+        private void ProcessUpdate(DataEvent<BitgetOrderBookUpdate[]> data)
         {
             if (Levels != null)
             {
-                SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks);
+                SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Single().Bids, data.Data.Single().Asks);
             }
             else
             {
                 if (_initial)
                 {
                     _initial = false;
-                    SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks);
+                    SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Single().Bids, data.Data.Single().Asks);
                 }
                 else
                 {
-                    UpdateOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks);
+                    UpdateOrderBook(DateTime.UtcNow.Ticks, data.Data.Single().Bids, data.Data.Single().Asks);
                 }
             }
         }

@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Interfaces;
+﻿using CryptoExchange.Net.Interfaces.Clients;
 
 namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 {

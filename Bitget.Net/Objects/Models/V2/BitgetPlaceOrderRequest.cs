@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using Bitget.Net.Enums.V2;
 
 namespace Bitget.Net.Objects.Models.V2
@@ -9,7 +6,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Order request
     /// </summary>
-    public class BitgetPlaceOrderRequest
+    public record BitgetPlaceOrderRequest
     {
         /// <summary>
         /// Order side

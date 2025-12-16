@@ -80,7 +80,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<SharedKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.Reverse().Select(x => 
+            return result.AsExchangeResult<SharedKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.AsEnumerable().Reverse().Select(x => 
             new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 

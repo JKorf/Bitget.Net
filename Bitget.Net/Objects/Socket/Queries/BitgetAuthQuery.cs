@@ -1,7 +1,7 @@
 ﻿using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 
 namespace Bitget.Net.Objects.Socket.Queries
 {
@@ -13,15 +13,15 @@ namespace Bitget.Net.Objects.Socket.Queries
         {
             _client = client;
             MessageMatcher = MessageMatcher.Create<BitgetSocketEvent>(["login", "error"], HandleMessage);
+            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BitgetSocketEvent>(["login", "error"], HandleMessage);
         }
 
-        public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DataEvent<BitgetSocketEvent> message)
+        public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketEvent message)
         {
-            var evnt = message.Data;
-            if (evnt.Code == 0)
-                return new CallResult<BitgetSocketEvent>(evnt);
+            if (message.Code == 0)
+                return new CallResult<BitgetSocketEvent>(message, originalData, null);
 
-            return new CallResult<BitgetSocketEvent>(new ServerError(evnt.Code!.Value.ToString(), _client.GetErrorInfo(evnt.Code!.Value, evnt.Message!)));
+            return new CallResult<BitgetSocketEvent>(new ServerError(message.Code!.Value.ToString(), _client.GetErrorInfo(message.Code!.Value, message.Message!)), originalData);
         }
     }
 }

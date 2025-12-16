@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models
 {
-    internal class BitgetResponse
+    internal record BitgetResponse
     {
         [JsonPropertyName("code")]
         public int Code { get; set; }
@@ -12,7 +13,7 @@ namespace Bitget.Net.Objects.Models
         public DateTime RequestTime { get; set; }
     }
 
-    internal class BitgetResponse<T> : BitgetResponse
+    internal record BitgetResponse<T> : BitgetResponse
     {
         [JsonPropertyName("data")]
         public T? Data { get; set; }
