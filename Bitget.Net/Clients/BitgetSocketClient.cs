@@ -1,5 +1,4 @@
 ﻿using Bitget.Net.Interfaces.Clients;
-using Bitget.Net.Objects;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;

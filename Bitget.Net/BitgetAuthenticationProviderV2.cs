@@ -1,14 +1,9 @@
-﻿using Bitget.Net.Objects;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
+﻿using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using System.Text.Json;
 
 namespace Bitget.Net
 {
@@ -16,6 +11,7 @@ namespace Bitget.Net
     {
         private static IStringMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.RsaXml, ApiCredentialsType.RsaPem];
         public string Passphrase => _credentials.Pass!;
 
         public BitgetAuthenticationProviderV2(ApiCredentials credentials) : base(credentials)
@@ -29,7 +25,7 @@ namespace Bitget.Net
             if (!request.Authenticated)
                 return;
 
-            var body = request.ParameterPosition == HttpMethodParameterPosition.InBody ? GetSerializedBody(_serializer, request.BodyParameters) : "";
+            var body = request.ParameterPosition == HttpMethodParameterPosition.InBody ? GetSerializedBody(_serializer, request.BodyParameters ?? new Dictionary<string, object>()) : "";
             var query = request.GetQueryString(false);
             if (!string.IsNullOrEmpty(query))
                 query = $"?{query}";
@@ -40,6 +36,7 @@ namespace Bitget.Net
                 ? SignHMACSHA256(signString, SignOutputType.Base64) 
                 : SignRSASHA256(Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
             
+            request.Headers ??= new Dictionary<string, string>();
             request.Headers["ACCESS-SIGN"] = signature;
             request.Headers["ACCESS-KEY"] = _credentials.Key!;
             request.Headers["ACCESS-TIMESTAMP"] = timestamp;

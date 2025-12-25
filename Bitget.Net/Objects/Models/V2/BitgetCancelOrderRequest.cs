@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
 {
     /// <summary>
     /// Order cancel request
     /// </summary>
-    public class BitgetCancelOrderRequest
+    public record BitgetCancelOrderRequest
     {
         /// <summary>
         /// Order id. Either this or ClientOrderId should be provided

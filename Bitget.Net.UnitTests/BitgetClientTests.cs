@@ -74,7 +74,7 @@ namespace Bitget.Net.UnitTests
                 Message = "Error occurred"
             };
 
-            TestHelpers.SetResponse((BitgetRestClient)client, JsonSerializer.Serialize(resultObj, SerializerOptions.WithConverters(BitgetExchange._serializerContext)), System.Net.HttpStatusCode.BadRequest);
+            TestHelpers.SetResponse((BitgetRestClient)client, "{\"code\": \"400001\", \"msg\": \"Error occurred\"}", System.Net.HttpStatusCode.BadRequest);
 
             // act
             var result = await client.SpotApiV2.ExchangeData.GetAssetsAsync();

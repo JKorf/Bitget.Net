@@ -1,5 +1,4 @@
 using CryptoExchange.Net.Converters.SystemTextJson;
-using CryptoExchange.Net.Converters;
 using System.Text.Json.Serialization;
 using Bitget.Net.Enums.V2;
 

@@ -1,6 +1,6 @@
+using Bitget.Net.Clients.MessageHandlers;
 using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
-using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Options;
 using Bitget.Net.Objects.Socket;
@@ -10,6 +10,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
@@ -17,6 +18,7 @@ using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using Microsoft.Extensions.Logging;
 using System.Net.WebSockets;
 
@@ -32,6 +34,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         private static readonly MessagePath _instIdPath = MessagePath.Get().Property("arg").Property("instId");
 
         protected override ErrorMapping ErrorMapping => BitgetErrors.SocketErrors;
+
         #region ctor
         internal BitgetSocketClientFuturesApi(ILogger logger, BitgetSocketOptions options) :
             base(logger, options.Environment.SocketBaseAddress, options, options.FuturesOptions)
@@ -61,6 +64,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BitgetSocketFuturesMessageConverter();
+
         public IBitgetSocketClientFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
@@ -88,25 +93,19 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(BitgetProductTypeV2 productType, string symbol, Action<DataEvent<BitgetFuturesTickerUpdate>> handler, CancellationToken ct = default)
+        public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(BitgetProductTypeV2 productType, string symbol, Action<DataEvent<BitgetFuturesTickerUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToTickerUpdatesAsync(productType, new[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(BitgetProductTypeV2 productType, IEnumerable<string> symbols, Action<DataEvent<BitgetFuturesTickerUpdate>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(BitgetProductTypeV2 productType, IEnumerable<string> symbols, Action<DataEvent<BitgetFuturesTickerUpdate[]>> handler, CancellationToken ct = default)
         {
-            var internalHandler = (DataEvent<BitgetFuturesTickerUpdate[]> data) =>
-            {
-                foreach (var item in data.Data)
-                    handler(data.As(item).WithDataTimestamp(data.DataTime));
-            };
-
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "ticker" },
                         { "instId", s },
-                    }).ToArray()
-            , false, internalHandler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -121,8 +120,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "trade" },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(BitgetProductTypeV2 productType, string symbol, BitgetStreamKlineIntervalV2 interval, Action<DataEvent<BitgetFuturesKlineUpdate[]>> handler, CancellationToken ct = default)
@@ -136,32 +135,26 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "candle" + EnumConverter.GetString(interval) },
                         { "instId", s },
-                    }).ToArray()
-            , false, handler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(BitgetProductTypeV2 productType, string symbol, int? limit, Action<DataEvent<BitgetOrderBookUpdate>> handler, CancellationToken ct = default)
+        public Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(BitgetProductTypeV2 productType, string symbol, int? limit, Action<DataEvent<BitgetOrderBookUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToOrderBookUpdatesAsync(productType, new[] { symbol }, limit, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(BitgetProductTypeV2 productType, IEnumerable<string> symbols, int? limit, Action<DataEvent<BitgetOrderBookUpdate>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(BitgetProductTypeV2 productType, IEnumerable<string> symbols, int? limit, Action<DataEvent<BitgetOrderBookUpdate[]>> handler, CancellationToken ct = default)
         {
             limit?.ValidateIntValues(nameof(limit), 1, 5, 15);
-
-            var internalHandler = (DataEvent<BitgetOrderBookUpdate[]> data) =>
-            {
-                foreach (var item in data.Data)
-                    handler(data.As(item).WithDataTimestamp(data.DataTime));
-            };
 
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "books" + limit?.ToString() },
                         { "instId", s },
-                    }).ToArray()
-            , false, internalHandler, ct).ConfigureAwait(false);
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -172,8 +165,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "account" },
                         { "coin", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -184,8 +177,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "positions" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -196,8 +189,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "fill" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -208,8 +201,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "orders" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -220,8 +213,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "orders-algo" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -232,8 +225,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "positions-history" },
                         { "instId", "default" },
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -244,18 +237,31 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "equity" },
                         { "instId", "default" }
-                    } }
-            , true, handler, ct).ConfigureAwait(false);
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToAdlUpdatesAsync(BitgetProductTypeV2 productType, Action<DataEvent<BitgetAdlNotification[]>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/private"), new[] { new Dictionary<string, string>
+                    {
+                        { "instType", EnumConverter.GetString(productType) },
+                        { "channel", "adl-noti" },
+                        { "instId", "default" },
+                    } },
+            null, true, handler, ct).ConfigureAwait(false);
         }
 
         private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(
             string url,
             Dictionary<string, string>[] request,
+            IEnumerable<string>? symbols,
             bool authenticated,
             Action<DataEvent<T>> handler,
             CancellationToken ct)
         {
-            var subscription = new BitgetSubscription<T>(_logger, this, request, handler, authenticated);
+            var subscription = new BitgetSubscription<T>(_logger, this, request, symbols?.ToArray(), handler, authenticated);
             return await SubscribeAsync(url, subscription, ct).ConfigureAwait(false);
         }
 

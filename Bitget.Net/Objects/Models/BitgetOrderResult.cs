@@ -5,7 +5,7 @@ namespace Bitget.Net.Objects.Models
     /// <summary>
     /// Order result
     /// </summary>
-    public class BitgetOrderResult
+    public record BitgetOrderResult
     {
         /// <summary>
         /// Order id

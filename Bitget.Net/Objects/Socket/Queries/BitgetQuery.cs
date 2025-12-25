@@ -1,7 +1,7 @@
 ﻿using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 
 namespace Bitget.Net.Objects.Socket.Queries
 {
@@ -15,15 +15,31 @@ namespace Bitget.Net.Objects.Socket.Queries
             _args = request.Args;
             _client = client;
 
+            var routes = new List<MessageRoute>();
             var checkers = new List<MessageHandlerLink>();
-            foreach(var arg in _args)
+            foreach (var arg in _args)
             {
                 checkers.Add(new MessageHandlerLink<BitgetSocketEvent>(GetErrorIdentifier(arg), HandleMessage));
                 checkers.Add(new MessageHandlerLink<BitgetSocketEvent>(GetIdentifier(request.Op, arg), HandleMessage));
+
+                routes.Add(MessageRoute<BitgetSocketEvent>.CreateWithOptionalTopicFilter(
+                    $"{request.Op}{arg["instType"]}{arg["channel"]}",
+                    GetRouteIdentifier(arg),
+                    HandleMessage));
+                routes.Add(MessageRoute<BitgetSocketEvent>.CreateWithOptionalTopicFilter(
+                    $"error{arg["instType"]}{arg["channel"]}",
+                    GetRouteIdentifier(arg),
+                    HandleMessage));
             }
 
             MessageMatcher = MessageMatcher.Create(checkers.ToArray());
+            MessageRouter = MessageRouter.Create(routes.ToArray());
 
+        }
+
+        private string? GetRouteIdentifier(Dictionary<string, string> arg)
+        {
+            return arg.TryGetValue("instId", out var symbol) ? symbol : null;
         }
 
         private string GetErrorIdentifier(Dictionary<string, string> arg)
@@ -42,12 +58,12 @@ namespace Bitget.Net.Objects.Socket.Queries
             return $"{op}-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-";
         }
 
-        public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DataEvent<BitgetSocketEvent> message)
+        public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketEvent message)
         {
-            if (message.Data.Code != null)
-                return new CallResult<BitgetSocketEvent>(new ServerError(message.Data.Code.Value.ToString(), _client.GetErrorInfo(message.Data.Code.Value, message.Data.Message!)), message.OriginalData);
+            if (message.Code != null)
+                return new CallResult<BitgetSocketEvent>(new ServerError(message.Code.Value.ToString(), _client.GetErrorInfo(message.Code.Value, message.Message!)), originalData);
 
-            return message.ToCallResult();
+            return new CallResult<BitgetSocketEvent>(message, originalData, null);
         }
     }
 }

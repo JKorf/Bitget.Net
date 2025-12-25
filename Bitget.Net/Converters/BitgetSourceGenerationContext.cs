@@ -1,9 +1,6 @@
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Socket;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Converters
@@ -13,7 +10,8 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetPlaceOrderRequest[]))]
     [JsonSerializable(typeof(BitgetCancelOrderRequest[]))]
     [JsonSerializable(typeof(BitgetReplaceOrderRequest[]))]
-
+    
+    [JsonSerializable(typeof(BitgetSocketUpdate<BitgetAdlNotification[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetTradeUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetFuturesKlineUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetFuturesBalanceUpdate[]>))]
@@ -35,7 +33,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetOrderBookUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetFuturesTickerUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetEquityUpdate[]>))]
-    [JsonSerializable(typeof(BitgetResponse<BitMartPositionTpSl[]>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetPositionTpSl[]>))]
 
     // End manual defined attributes
 

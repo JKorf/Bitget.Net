@@ -1,11 +1,8 @@
 using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Objects.Models.V2;
-using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.RateLimiting.Guards;
-using System.Globalization;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {

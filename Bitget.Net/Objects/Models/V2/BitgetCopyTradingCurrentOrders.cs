@@ -5,7 +5,7 @@ namespace Bitget.Net.Objects.Models.V2
     /// <summary>
     /// Current Tracking Orders
     /// </summary>
-    public class BitgetCopyTradingCurrentOrders
+    public record BitgetCopyTradingCurrentOrders
     {
         /// <summary>
         /// Order tracking list

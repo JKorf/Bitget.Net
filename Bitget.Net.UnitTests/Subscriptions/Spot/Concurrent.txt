@@ -1,0 +1,6 @@
+>1 { "op": "subscribe", "args": [{ "instType": "SPOT", "channel": "candle1H", "instId": "ETHUSDT" }]}
+>2 { "op": "subscribe", "args": [{ "instType": "SPOT", "channel": "candle1D", "instId": "ETHUSDT" }]}
+<1 { "event": "subscribe", "arg": { "instType": "SPOT", "channel": "candle1H", "instId": "ETHUSDT" }}
+<2 { "event": "subscribe", "arg": { "instType": "SPOT", "channel": "candle1D", "instId": "ETHUSDT" }}
+=1 { "action": "snapshot", "arg": { "instType": "SPOT", "channel": "candle1H", "instId": "ETHUSDT" }, "data": [[ "1695672780000" ]], "ts": 1695702747821}
+=2 { "action": "snapshot", "arg": { "instType": "SPOT", "channel": "candle1D", "instId": "ETHUSDT" }, "data": [[ "1695672780000" ]], "ts": 1695702747821}
