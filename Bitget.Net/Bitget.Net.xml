@@ -3897,6 +3897,16 @@
             Activity asset reward user in
             </summary>
         </member>
+        <member name="F:Bitget.Net.Enums.V2.BusinessType.SmallExchangeUserIn">
+            <summary>
+            Small exchange user in
+            </summary>
+        </member>
+        <member name="F:Bitget.Net.Enums.V2.BusinessType.SmallExchangeUserOut">
+            <summary>
+            Small exchange user out
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Enums.V2.CancelTriggerPlanTypeFilter">
             <summary>
             Trigger plan type
