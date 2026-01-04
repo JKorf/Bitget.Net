@@ -20,8 +20,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
     /// <inheritdoc />
     internal partial class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
     {
-        internal static TimeSyncState _timeSyncState = new TimeSyncState("Futures Api");
-
         protected override ErrorMapping ErrorMapping => BitgetErrors.RestErrors;
 
         /// <inheritdoc />
@@ -101,14 +99,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
             => ExchangeData.GetServerTimeAsync();
-
-        /// <inheritdoc />
-        public override TimeSyncInfo? GetTimeSyncInfo()
-            => new TimeSyncInfo(_logger, (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp), (ApiOptions.TimestampRecalculationInterval ?? ClientOptions.TimestampRecalculationInterval), _timeSyncState);
-
-        /// <inheritdoc />
-        public override TimeSpan? GetTimeOffset()
-            => _timeSyncState.TimeOffset;
 
     }
 }

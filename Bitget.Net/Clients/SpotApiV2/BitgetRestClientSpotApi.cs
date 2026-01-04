@@ -20,8 +20,6 @@ namespace Bitget.Net.Clients.SpotApiV2
     /// <inheritdoc />
     internal partial class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi
     {
-        internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
-
         protected override ErrorMapping ErrorMapping => BitgetErrors.RestErrors;
         /// <inheritdoc />
         public IBitgetRestClientSpotApiAccount Account { get; }
@@ -107,14 +105,6 @@ namespace Bitget.Net.Clients.SpotApiV2
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
             => ExchangeData.GetServerTimeAsync();
-
-        /// <inheritdoc />
-        public override TimeSyncInfo? GetTimeSyncInfo()
-            => new TimeSyncInfo(_logger, (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp), (ApiOptions.TimestampRecalculationInterval ?? ClientOptions.TimestampRecalculationInterval), _timeSyncState);
-
-        /// <inheritdoc />
-        public override TimeSpan? GetTimeOffset()
-            => _timeSyncState.TimeOffset;
 
     }
 }
