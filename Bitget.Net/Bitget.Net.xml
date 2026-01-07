@@ -275,12 +275,6 @@
         <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.GetTimeSyncInfo">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.GetTimeOffset">
-            <inheritdoc />
-        </member>
         <member name="T:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApiFollower">
             <inheritdoc />
         </member>
@@ -324,12 +318,6 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.GetServerTimestampAsync">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.GetTimeSyncInfo">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.GetTimeOffset">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApiAccount">
@@ -569,9 +557,6 @@
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
-            <inheritdoc />
-        </member>
         <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi">
             <inheritdoc />
         </member>
@@ -609,12 +594,6 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.GetServerTimestampAsync">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.GetTimeSyncInfo">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.GetTimeOffset">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApiAccount">
@@ -993,9 +972,6 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.Boolean">
@@ -11747,6 +11723,11 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate.Checksum">
             <summary>
             Checksum
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrderBookUpdate.Sequence">
+            <summary>
+            Sequence number
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetOrderId">
