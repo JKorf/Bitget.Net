@@ -50,7 +50,7 @@ namespace Bitget.Net
             request.SetBodyContent(body);
         }
 
-        public override Query? GetAuthenticationQuery(SocketApiClient apiClient, SocketConnection connection)
+        public override Query? GetAuthenticationQuery(SocketApiClient apiClient, SocketConnection connection, Dictionary<string, object?>? context = null)
         {
             if (_credentials.CredentialType != ApiCredentialsType.Hmac)
                 throw new NotSupportedException("Only Hmac credentials are supported for websocket");
