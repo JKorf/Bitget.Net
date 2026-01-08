@@ -268,29 +268,5 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProviderV2(credentials);
 
-        /// <inheritdoc />
-        protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection)
-        {
-            var time = DateTimeConverter.ConvertToSeconds(DateTime.UtcNow).Value;
-            var authProvider = (BitgetAuthenticationProviderV2)AuthenticationProvider!;
-            var signature = authProvider.GetWebsocketSignature(time);
-
-            var socketRequest = new BitgetSocketRequest
-            {
-                Op = "login",
-                Args = new[]
-                {
-                    new Dictionary<string, string>
-                    {
-                        { "apiKey", authProvider.ApiKey },
-                        { "passphrase", authProvider.Passphrase },
-                        { "timestamp", time.ToString() },
-                        { "sign", signature },
-                    }
-                }
-            };
-
-            return Task.FromResult<Query?>(new BitgetAuthQuery(this, socketRequest));
-        }
     }
 }

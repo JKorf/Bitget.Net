@@ -90,20 +90,22 @@ namespace Bitget.Net.SymbolOrderBooks
 
         private void ProcessUpdate(DataEvent<BitgetOrderBookUpdate[]> data)
         {
+            var eventData = data.Data.Single();
+            var sequence = eventData.Sequence ?? DateTime.UtcNow.Ticks;
             if (Levels != null)
             {
-                SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Single().Bids, data.Data.Single().Asks);
+                SetInitialOrderBook(sequence, eventData.Bids, eventData.Asks);
             }
             else
             {
                 if (_initial)
                 {
                     _initial = false;
-                    SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Single().Bids, data.Data.Single().Asks);
+                    SetInitialOrderBook(sequence, eventData.Bids, eventData.Asks);
                 }
                 else
                 {
-                    UpdateOrderBook(DateTime.UtcNow.Ticks, data.Data.Single().Bids, data.Data.Single().Asks);
+                    UpdateOrderBook(sequence, eventData.Bids, eventData.Asks);
                 }
             }
         }

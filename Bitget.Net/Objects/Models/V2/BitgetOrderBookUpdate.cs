@@ -29,5 +29,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("checksum")]
         public long Checksum { get; set; }
+        /// <summary>
+        /// Sequence number
+        /// </summary>
+        [JsonPropertyName("seq")]
+        public long? Sequence { get; set; }
     }
 }

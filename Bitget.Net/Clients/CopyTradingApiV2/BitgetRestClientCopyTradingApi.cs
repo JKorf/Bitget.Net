@@ -20,8 +20,6 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
     /// <inheritdoc />
     internal partial class BitgetRestClientCopyTradingApi : RestApiClient, IBitgetRestClientCopyTradingApi
     {
-        internal static TimeSyncState _timeSyncState = new TimeSyncState("CopyTrading Api");
-
         /// <inheritdoc />
         public IBitgetRestClientCopyTradingApiTrader Trader { get; }
         /// <inheritdoc />
@@ -92,13 +90,5 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
 
             return result.AsDataless();
         }
-
-        /// <inheritdoc />
-        public override TimeSyncInfo? GetTimeSyncInfo()
-            => new TimeSyncInfo(_logger, (ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp), (ApiOptions.TimestampRecalculationInterval ?? ClientOptions.TimestampRecalculationInterval), _timeSyncState);
-
-        /// <inheritdoc />
-        public override TimeSpan? GetTimeOffset()
-            => _timeSyncState.TimeOffset;
     }
 }

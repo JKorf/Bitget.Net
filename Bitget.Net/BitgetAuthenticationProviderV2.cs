@@ -1,8 +1,12 @@
-﻿using CryptoExchange.Net.Authentication;
+﻿using Bitget.Net.Objects.Socket;
+using Bitget.Net.Objects.Socket.Queries;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using System.Text;
 
 namespace Bitget.Net
@@ -46,19 +50,31 @@ namespace Bitget.Net
             request.SetBodyContent(body);
         }
 
-        public string GetWebsocketSignature(long timestamp)
+        public override Query? GetAuthenticationQuery(SocketApiClient apiClient, SocketConnection connection, Dictionary<string, object?>? context = null)
         {
-            if (_credentials.CredentialType == ApiCredentialsType.Hmac)
-            {
-                return SignHMACSHA256(timestamp + "GET" + "/user/verify", SignOutputType.Base64);
-            }
-            else
-            {
-                // Bitget doesn't seem to support RSA signing for the socket API..
-                throw new NotSupportedException("RSA signing for websocket is not supported by Bitget, use hmac credentials instead");
-                //return SignRSASHA256(Encoding.UTF8.GetBytes(timestamp + "GET" + "/user/verify"), SignOutputType.Base64);
-            }
-        }
+            if (_credentials.CredentialType != ApiCredentialsType.Hmac)
+                throw new NotSupportedException("Only Hmac credentials are supported for websocket");
 
+
+            var time = DateTimeConverter.ConvertToSeconds(GetTimestamp(apiClient));
+            var signature = SignHMACSHA256(time + "GET" + "/user/verify", SignOutputType.Base64);
+
+            var socketRequest = new BitgetSocketRequest
+            {
+                Op = "login",
+                Args = new[]
+                {
+                    new Dictionary<string, string>
+                    {
+                        { "apiKey", ApiKey },
+                        { "passphrase", Passphrase },
+                        { "timestamp", time.ToString()! },
+                        { "sign", signature },
+                    }
+                }
+            };
+
+            return new BitgetAuthQuery(apiClient, socketRequest);
+        }
     }
 }

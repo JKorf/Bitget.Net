@@ -95,5 +95,15 @@ namespace Bitget.Net.Enums.V2
         /// </summary>
         [Map("ACTIVITY_ASSET_REWARD_USER_IN")]
         ActivityAssetRewardUserIn,
+        /// <summary>
+        /// Small exchange user in
+        /// </summary>
+        [Map("SMALL_EXCHANGE_USER_IN")]
+        SmallExchangeUserIn,
+        /// <summary>
+        /// Small exchange user out
+        /// </summary>
+        [Map("SMALL_EXCHANGE_USER_OUT")]
+        SmallExchangeUserOut
     }
 }
