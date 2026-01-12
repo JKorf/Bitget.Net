@@ -87,14 +87,14 @@ namespace Bitget.Net.SymbolOrderBooks
             var sequence = eventData.Sequence ?? DateTime.UtcNow.Ticks;
             if (Levels != null)
             {
-                SetInitialOrderBook(sequence, eventData.Bids, eventData.Asks, data.DataTime, data.DataTimeLocal);
+                SetSnapshot(sequence, eventData.Bids, eventData.Asks, data.DataTime, data.DataTimeLocal);
             }
             else
             {
                 if (_initial)
                 {
                     _initial = false;
-                    SetInitialOrderBook(sequence, eventData.Bids, eventData.Asks, data.DataTime, data.DataTimeLocal);
+                    SetSnapshot(sequence, eventData.Bids, eventData.Asks, data.DataTime, data.DataTimeLocal);
                 }
                 else
                 {

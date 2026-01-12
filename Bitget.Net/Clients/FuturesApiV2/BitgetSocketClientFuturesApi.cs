@@ -148,13 +148,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
         {
             limit?.ValidateIntValues(nameof(limit), 1, 5, 15);
 
-            return await SubscribeInternalAsync(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
+            return await SubscribeInternalAsync<BitgetOrderBookUpdate[]>(BaseAddress.AppendPath("v2/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", EnumConverter.GetString(productType) },
                         { "channel", "books" + limit?.ToString() },
                         { "instId", s },
                     }).ToArray(),
-            symbols, false, handler, ct).ConfigureAwait(false);
+            symbols, false, x => handler(x.WithSequenceNumber(x.Data.Max(x => x.Sequence))), ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
