@@ -22,30 +22,12 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
 
             IndividualSubscriptionCount = args.Length;
 
-            MessageMatcher = MessageMatcher.Create<BitgetSocketUpdate<T>>(args.SelectMany(GetIdentifier), DoHandleMessage);
             MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), symbols, DoHandleMessage);
         }
 
         private string GetRouteParams(Dictionary<string, string> arg)
         {
             return $"{arg["instType"]}{arg["channel"]}";
-        }
-
-        private string[] GetIdentifier(Dictionary<string, string> arg)
-        {
-            var result = new List<string>
-            {
-                $"snapshot-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-",
-                $"update-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-"
-            };
-
-            if (arg.ContainsKey("instId"))
-            {
-                result.Add($"snapshot-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}");
-                result.Add($"update-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}");
-            }
-
-            return result.ToArray();
         }
 
         protected override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(_client, new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false) { RequiredResponses = _args.Count() };

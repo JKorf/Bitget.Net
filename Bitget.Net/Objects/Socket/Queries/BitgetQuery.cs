@@ -16,12 +16,8 @@ namespace Bitget.Net.Objects.Socket.Queries
             _client = client;
 
             var routes = new List<MessageRoute>();
-            var checkers = new List<MessageHandlerLink>();
             foreach (var arg in _args)
             {
-                checkers.Add(new MessageHandlerLink<BitgetSocketEvent>(GetErrorIdentifier(arg), HandleMessage));
-                checkers.Add(new MessageHandlerLink<BitgetSocketEvent>(GetIdentifier(request.Op, arg), HandleMessage));
-
                 routes.Add(MessageRoute<BitgetSocketEvent>.CreateWithOptionalTopicFilter(
                     $"{request.Op}{arg["instType"]}{arg["channel"]}",
                     GetRouteIdentifier(arg),
@@ -32,30 +28,12 @@ namespace Bitget.Net.Objects.Socket.Queries
                     HandleMessage));
             }
 
-            MessageMatcher = MessageMatcher.Create(checkers.ToArray());
             MessageRouter = MessageRouter.Create(routes.ToArray());
-
         }
 
         private string? GetRouteIdentifier(Dictionary<string, string> arg)
         {
             return arg.TryGetValue("instId", out var symbol) ? symbol : null;
-        }
-
-        private string GetErrorIdentifier(Dictionary<string, string> arg)
-        {
-            if (arg.ContainsKey("instId"))
-                return $"error-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}";
-
-            return $"error-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-";
-        }
-
-        private string GetIdentifier(string op, Dictionary<string, string> arg)
-        {
-            if (arg.ContainsKey("instId"))
-                return $"{op}-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-{arg["instId"].ToLowerInvariant()}";
-
-            return $"{op}-{arg["instType"].ToLowerInvariant()}-{arg["channel"].ToLowerInvariant()}-";
         }
 
         public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketEvent message)

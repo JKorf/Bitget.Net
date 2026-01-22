@@ -12,7 +12,7 @@ namespace Bitget.Net.Objects.Socket.Queries
         public BitgetAuthQuery(SocketApiClient client, BitgetSocketRequest request) : base(request, false)
         {
             _client = client;
-            MessageMatcher = MessageMatcher.Create<BitgetSocketEvent>(["login", "error"], HandleMessage);
+
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<BitgetSocketEvent>(["login", "error"], HandleMessage);
         }
 

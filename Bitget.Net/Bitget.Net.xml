@@ -59,6 +59,11 @@
             Bitget exchange information and configuration
             </summary>
         </member>
+        <member name="P:Bitget.Net.BitgetExchange.Metadata">
+            <summary>
+            Platform metadata
+            </summary>
+        </member>
         <member name="P:Bitget.Net.BitgetExchange.ExchangeName">
             <summary>
             Exchange name
@@ -263,9 +268,6 @@
         <member name="P:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.ExchangeName">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.CreateAccessor">
-            <inheritdoc />
-        </member>
         <member name="M:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi.CreateSerializer">
             <inheritdoc />
         </member>
@@ -303,9 +305,6 @@
             <inheritdoc />
         </member>
         <member name="P:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.ExchangeName">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.CreateAccessor">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetRestClientFuturesApi.CreateSerializer">
@@ -494,16 +493,10 @@
         <member name="T:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.CreateAccessor(System.Net.WebSockets.WebSocketMessageType)">
-            <inheritdoc />
-        </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.CreateSerializer">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.FuturesApiV2.BitgetSocketClientFuturesApi.SubscribeToTickerUpdatesAsync(Bitget.Net.Enums.BitgetProductTypeV2,System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetFuturesTickerUpdate[]}},System.Threading.CancellationToken)">
@@ -579,9 +572,6 @@
             <inheritdoc />
         </member>
         <member name="P:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.ClientOptions">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.CreateAccessor">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetRestClientSpotApi.CreateSerializer">
@@ -908,16 +898,10 @@
         <member name="T:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.CreateAccessor(System.Net.WebSockets.WebSocketMessageType)">
-            <inheritdoc />
-        </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.CreateSerializer">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
-            <inheritdoc />
-        </member>
-        <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.SpotApiV2.BitgetSocketClientSpotApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Bitget.Net.Objects.Models.V2.BitgetTickerUpdate[]}},System.Threading.CancellationToken)">

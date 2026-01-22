@@ -27,12 +27,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
     /// <inheritdoc />
     internal partial class BitgetSocketClientFuturesApi : SocketApiClient, IBitgetSocketClientFuturesApi
     {
-        private static readonly MessagePath _eventPath = MessagePath.Get().Property("event");
-        private static readonly MessagePath _actionPath = MessagePath.Get().Property("action");
-        private static readonly MessagePath _instTypePath = MessagePath.Get().Property("arg").Property("instType");
-        private static readonly MessagePath _channelPath = MessagePath.Get().Property("arg").Property("channel");
-        private static readonly MessagePath _instIdPath = MessagePath.Get().Property("arg").Property("instId");
-
         protected override ErrorMapping ErrorMapping => BitgetErrors.SocketErrors;
 
         #region ctor
@@ -40,8 +34,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
             base(logger, options.Environment.SocketBaseAddress, options, options.FuturesOptions)
         {
             RateLimiter = BitgetExchange.RateLimiter.Websocket;
-
-            ProcessUnparsableMessages = true;
 
             RegisterPeriodicQuery(
                 "Ping",
@@ -60,8 +52,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
         #endregion
 
         /// <inheritdoc />
-        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
-        /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BitgetSocketFuturesMessageConverter();
@@ -71,26 +61,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
                 => BitgetExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
-
-        /// <inheritdoc />
-        public override string GetListenerIdentifier(IMessageAccessor message)
-        {
-            if (!message.IsValid)
-                return "pong";
-
-            var evnt = message.GetValue<string>(_eventPath);
-            if (string.Equals(evnt, "login", StringComparison.Ordinal))
-                return evnt!;
-
-            var channel = message.GetValue<string>(_channelPath);
-            var instType = message.GetValue<string>(_instTypePath);
-            var instId = message.GetValue<string>(_instIdPath);
-            if (evnt != null)
-                return $"{evnt}-{instType?.ToLowerInvariant()}-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
-
-            var action = message.GetValue<string>(_actionPath);
-            return $"{action}-{instType?.ToLowerInvariant()}-{channel?.ToLowerInvariant()}-{instId?.ToLowerInvariant()}";
-        }
 
         /// <inheritdoc />
         public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(BitgetProductTypeV2 productType, string symbol, Action<DataEvent<BitgetFuturesTickerUpdate[]>> handler, CancellationToken ct = default)

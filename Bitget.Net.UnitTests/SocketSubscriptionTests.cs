@@ -17,17 +17,15 @@ namespace Bitget.Net.UnitTests
     [TestFixture]
     public class SocketSubscriptionTests
     {
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateConcurrentSpotSubscriptions(bool newDeserialization)
+        [Test]
+        public async Task ValidateConcurrentSpotSubscriptions()
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider());
 
             var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
-                OutputOriginalData = true,
-                UseUpdatedDeserialization = newDeserialization
+                OutputOriginalData = true
             }), logger);
 
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Spot", "https://api.bitget.com", "data");
@@ -37,17 +35,15 @@ namespace Bitget.Net.UnitTests
                 "Concurrent");
         }
 
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateConcurrentFuturesSubscriptions(bool newDeserialization)
+        [Test]
+        public async Task ValidateConcurrentFuturesSubscriptions()
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider());
 
             var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
-                OutputOriginalData = true,
-                UseUpdatedDeserialization = newDeserialization
+                OutputOriginalData = true
             }), logger);
 
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Futures", "https://api.bitget.com", "data");
@@ -57,9 +53,8 @@ namespace Bitget.Net.UnitTests
                 "Concurrent");
         }
 
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateSpotSubscriptions(bool newDeserialization)
+        [Test]
+        public async Task ValidateSpotSubscriptions()
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider());
@@ -67,8 +62,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
                 ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
-                OutputOriginalData = true,
-                UseUpdatedDeserialization = newDeserialization
+                OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Spot", "https://api.bitget.com", "data");
             await tester.ValidateAsync<BitgetTickerUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToTickerUpdatesAsync("ETHUSDT", handler), "Ticker");
@@ -81,9 +75,8 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync<BitgetBalanceUpdate[]>((client, handler) => client.SpotApiV2.SubscribeToBalanceUpdatesAsync(handler), "Balance");
         }
 
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateFuturesSubscriptions(bool newDeserialization)
+        [Test]
+        public async Task ValidateFuturesSubscriptions()
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider());
@@ -91,8 +84,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
                 ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
-                OutputOriginalData = true,
-                UseUpdatedDeserialization = newDeserialization
+                OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Futures", "https://api.bitget.com", "data");
             await tester.ValidateAsync<BitgetFuturesTickerUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "BTCUSDT", handler), "Ticker", ignoreProperties: new List<string> { "symbol" });
