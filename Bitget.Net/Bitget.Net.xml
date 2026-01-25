@@ -11539,6 +11539,11 @@
             Order price
             </summary>
         </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.AveragePrice">
+            <summary>
+            Average fill price
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.BasePrice">
             <summary>
             Base price
@@ -11572,11 +11577,6 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.TpslType">
             <summary>
             Take profit / stop loss type
-            </summary>
-        </member>
-        <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.AveragePrice">
-            <summary>
-            Average fill price
             </summary>
         </member>
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetOrder.QuantityFilled">

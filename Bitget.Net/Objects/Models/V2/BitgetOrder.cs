@@ -31,16 +31,34 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
+
+        // When requesting open orders:
+        //   BasePrice = Avg Fill Price
+        //   PriceAvg = Order price
+        // Else
+        //   PriceAvg = Avg Fill Price
+        //   Price = Order price
+
         /// <summary>
         /// Order price
         /// </summary>
-        [JsonPropertyName("price")]
-        public decimal? Price { get; set; }
+        public decimal? Price => PriceInt ?? AveragePriceInt;
+        /// <summary>
+        /// Average fill price
+        /// </summary>
+        public decimal? AveragePrice => BasePrice ?? AveragePriceInt;
+
+        [JsonInclude, JsonPropertyName("price")]
+        internal decimal? PriceInt { get; set; }
+        [JsonInclude, JsonPropertyName("priceAvg")]
+        internal decimal? AveragePriceInt { get; set; }
+
         /// <summary>
         /// Base price
         /// </summary>
-        [JsonPropertyName("basePrice")]
+        [JsonInclude, JsonPropertyName("basePrice")]
         public decimal? BasePrice { get; set; }
+
         /// <summary>
         /// Trigger price
         /// </summary>
@@ -71,11 +89,6 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("tpslType")]
         public TakeProfitStopLossType? TpslType { get; set; }
-        /// <summary>
-        /// Average fill price
-        /// </summary>
-        [JsonPropertyName("priceAvg")]
-        public decimal? AveragePrice { get; set; }
         /// <summary>
         /// Base volume
         /// </summary>
