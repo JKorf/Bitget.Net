@@ -996,6 +996,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 LiquidationPrice = x.LiquidationPrice,
                 AverageOpenPrice = x.AverageOpenPrice,
                 Leverage = x.Leverage,
+                PositionMode = x.PositionSide == PositionSide.Oneway ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
                 PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
             }).ToArray());
         }

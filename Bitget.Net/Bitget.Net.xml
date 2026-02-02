@@ -155,6 +155,12 @@
         <member name="M:Bitget.Net.BitgetTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.UserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.BitgetEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.UserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.BitgetEnvironment)">
+            <inheritdoc />
+        </member>
         <member name="T:Bitget.Net.Clients.BitgetRestClient">
             <inheritdoc />
         </member>

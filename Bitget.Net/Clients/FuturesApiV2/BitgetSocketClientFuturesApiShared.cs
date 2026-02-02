@@ -144,9 +144,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await SubscribeToBalanceUpdatesAsync(
                 productType,
                 update => {
-                    if (update.UpdateType == SocketUpdateType.Snapshot)
-                        return;
-
                     handler(update.ToType(update.Data.Select(x => new SharedBalance(x.MarginAsset, x.Available, x.Equity)).ToArray()));
                 },
                 ct: ct).ConfigureAwait(false);
@@ -358,6 +355,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     handler(update.ToType<SharedPosition[]>(update.Data.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), x.Symbol, x.Total, x.UpdateTime)
                     {
                         AverageOpenPrice = x.AverageOpenPrice,
+                        PositionMode = x.PositionSide == PositionSide.Oneway ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
                         PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
                         UnrealizedPnl = x.UnrealizedProfitAndLoss,
                         Leverage = x.Leverage,
