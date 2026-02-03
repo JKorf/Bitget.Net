@@ -218,7 +218,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return response;
         }
 
-        public async Task<ExchangeResult<SharedSymbol[]>> GetFuturesSymbolsForBaseAssetAsync(string baseAsset)
+        async Task<ExchangeResult<SharedSymbol[]>> IFuturesSymbolRestClient.GetFuturesSymbolsForBaseAssetAsync(string baseAsset)
         {
             if (!ExchangeSymbolCache.HasCached(_topicId))
             {
@@ -230,7 +230,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return new ExchangeResult<SharedSymbol[]>(Exchange, ExchangeSymbolCache.GetSymbolsForBaseAsset(_topicId, baseAsset));
         }
 
-        public async Task<ExchangeResult<bool>> SupportsFuturesSymbolAsync(SharedSymbol symbol)
+        async Task<ExchangeResult<bool>> IFuturesSymbolRestClient.SupportsFuturesSymbolAsync(SharedSymbol symbol)
         {
             if (symbol.TradingMode == TradingMode.Spot)
                 throw new ArgumentException(nameof(symbol), "Spot symbols not allowed");
@@ -245,7 +245,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return new ExchangeResult<bool>(Exchange, ExchangeSymbolCache.SupportsSymbol(_topicId, symbol));
         }
 
-        public async Task<ExchangeResult<bool>> SupportsFuturesSymbolAsync(string symbolName)
+        async Task<ExchangeResult<bool>> IFuturesSymbolRestClient.SupportsFuturesSymbolAsync(string symbolName)
         {
             if (!ExchangeSymbolCache.HasCached(_topicId))
             {
