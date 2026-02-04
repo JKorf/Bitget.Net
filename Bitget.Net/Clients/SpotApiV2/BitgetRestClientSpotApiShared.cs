@@ -715,7 +715,14 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (deposits.Data.Count() == limit)
                 nextToken = new FromIdToken(deposits.Data.Min(x => x.OrderId)!);
 
-            return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, TradingMode.Spot, deposits.Data.Select(x => new SharedDeposit(x.Asset, x.Quantity, x.Status == TransferStatus.Success, x.CreateTime)
+            return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, TradingMode.Spot, deposits.Data.Select(x => 
+            new SharedDeposit(
+                x.Asset,
+                x.Quantity,
+                x.Status == TransferStatus.Success,
+                x.CreateTime,
+                x.Status == TransferStatus.Success ? SharedTransferStatus.Completed :
+                x.Status == TransferStatus.Failed ? SharedTransferStatus.Failed: SharedTransferStatus.InProgress)
             {
                 Id = x.OrderId,
                 Network = x.Network,
