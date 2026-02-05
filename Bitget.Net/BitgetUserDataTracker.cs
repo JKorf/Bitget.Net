@@ -17,7 +17,7 @@ namespace Bitget.Net
             IBitgetRestClient restClient,
             IBitgetSocketClient socketClient,
             string? userIdentifier,
-            SpotUserDataTrackerConfig config) : base(
+            SpotUserDataTrackerConfig? config) : base(
                 logger,
                 restClient.SpotApiV2.SharedClient,
                 null,
@@ -27,7 +27,7 @@ namespace Bitget.Net
                 socketClient.SpotApiV2.SharedClient,
                 socketClient.SpotApiV2.SharedClient,
                 userIdentifier,
-                config)
+                config ?? new SpotUserDataTrackerConfig())
         {
         }
     }
@@ -46,7 +46,7 @@ namespace Bitget.Net
             IBitgetRestClient restClient,
             IBitgetSocketClient socketClient,
             string? userIdentifier,
-            FuturesUserDataTrackerConfig config,
+            FuturesUserDataTrackerConfig? config,
             ExchangeParameters exchangeParameters) : base(logger,
                 restClient.FuturesApiV2.SharedClient,
                 null,
@@ -57,7 +57,7 @@ namespace Bitget.Net
                 socketClient.FuturesApiV2.SharedClient,
                 socketClient.FuturesApiV2.SharedClient,
                 userIdentifier,
-                config)
+                config ?? new FuturesUserDataTrackerConfig())
         {
         }
     }

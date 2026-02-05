@@ -19,12 +19,12 @@ namespace Bitget.Net.Interfaces
         /// <param name="config">Configuration</param>
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
-        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, SpotUserDataTrackerConfig config, ApiCredentials credentials, BitgetEnvironment? environment = null);
+        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null);
         /// <summary>
         /// Create a new spot user data tracker
         /// </summary>
         /// <param name="config">Configuration</param>
-        IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig config);
+        IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig? config = null);
 
         /// <summary>
         /// Create a new futures user data tracker
@@ -34,12 +34,12 @@ namespace Bitget.Net.Interfaces
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
         /// <param name="productType">Product type</param>
-        IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, FuturesUserDataTrackerConfig config, ApiCredentials credentials, BitgetProductTypeV2 productType, BitgetEnvironment? environment = null);
+        IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, ApiCredentials credentials, BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null);
         /// <summary>
         /// Create a new futures user data tracker
         /// </summary>
         /// <param name="config">Configuration</param>
         /// <param name="productType">Product type</param>
-        IUserFuturesDataTracker CreateUserFuturesDataTracker(FuturesUserDataTrackerConfig config, BitgetProductTypeV2 productType);
+        IUserFuturesDataTracker CreateUserFuturesDataTracker(BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null);
     }
 }

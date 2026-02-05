@@ -158,13 +158,13 @@
         <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserSpotDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.BitgetEnvironment)">
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Bitget.Net.BitgetEnvironment)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserFuturesDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Bitget.Net.Enums.BitgetProductTypeV2)">
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserFuturesDataTracker(Bitget.Net.Enums.BitgetProductTypeV2,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
             <inheritdoc />
         </member>
-        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.BitgetEnvironment)">
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.Enums.BitgetProductTypeV2,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Bitget.Net.BitgetEnvironment)">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.BitgetUserSpotDataTracker">
@@ -7474,7 +7474,7 @@
             Tracker factory
             </summary>
         </member>
-        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.BitgetEnvironment)">
+        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Bitget.Net.BitgetEnvironment)">
             <summary>
             Create a new Spot user data tracker
             </summary>
@@ -7489,7 +7489,7 @@
             </summary>
             <param name="config">Configuration</param>
         </member>
-        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.Enums.BitgetProductTypeV2,Bitget.Net.BitgetEnvironment)">
+        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.Enums.BitgetProductTypeV2,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Bitget.Net.BitgetEnvironment)">
             <summary>
             Create a new futures user data tracker
             </summary>
@@ -7499,7 +7499,7 @@
             <param name="environment">Environment</param>
             <param name="productType">Product type</param>
         </member>
-        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserFuturesDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Bitget.Net.Enums.BitgetProductTypeV2)">
+        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserFuturesDataTracker(Bitget.Net.Enums.BitgetProductTypeV2,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
             <summary>
             Create a new futures user data tracker
             </summary>
