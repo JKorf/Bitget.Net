@@ -1,11 +1,17 @@
 ﻿using Bitget.Net.Clients;
+using Bitget.Net.Enums;
 using Bitget.Net.Interfaces;
 using Bitget.Net.Interfaces.Clients;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Trackers.Klines;
 using CryptoExchange.Net.Trackers.Trades;
+using CryptoExchange.Net.Trackers.UserData;
+using CryptoExchange.Net.Trackers.UserData.Interfaces;
+using CryptoExchange.Net.Trackers.UserData.Objects;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Bitget.Net
 {
@@ -98,6 +104,70 @@ namespace Bitget.Net
                 symbol,
                 limit,
                 period
+                );
+        }
+
+        /// <inheritdoc />
+        public IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig? config = null)
+        {
+            var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
+            return new BitgetUserSpotDataTracker(
+                _serviceProvider?.GetRequiredService<ILogger<BitgetUserSpotDataTracker>>() ?? new NullLogger<BitgetUserSpotDataTracker>(),
+                restClient,
+                socketClient,
+                null,
+                config
+                );
+        }
+
+        /// <inheritdoc />
+        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null)
+        {
+            var clientProvider = _serviceProvider?.GetRequiredService<IBitgetUserClientProvider>() ?? new BitgetUserClientProvider();
+            var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
+            var socketClient = clientProvider.GetSocketClient(userIdentifier, credentials, environment);
+            return new BitgetUserSpotDataTracker(
+                _serviceProvider?.GetRequiredService<ILogger<BitgetUserSpotDataTracker>>() ?? new NullLogger<BitgetUserSpotDataTracker>(),
+                restClient,
+                socketClient,
+                userIdentifier,
+                config
+                );
+        }
+
+        /// <inheritdoc />
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null)
+        {
+            var exchangeParams = new ExchangeParameters(new ExchangeParameter("Bitget", "ProductType", productType.ToString()));
+
+            var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
+            return new BitgetUserFuturesDataTracker(
+                _serviceProvider?.GetRequiredService<ILogger<BitgetUserFuturesDataTracker>>() ?? new NullLogger<BitgetUserFuturesDataTracker>(),
+                restClient,
+                socketClient,
+                null,
+                config,
+                exchangeParams
+                );
+        }
+
+        /// <inheritdoc />
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, ApiCredentials credentials, BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null)
+        {
+            var exchangeParams = new ExchangeParameters(new ExchangeParameter("Bitget", "ProductType", productType.ToString()));
+
+            var clientProvider = _serviceProvider?.GetRequiredService<IBitgetUserClientProvider>() ?? new BitgetUserClientProvider();
+            var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
+            var socketClient = clientProvider.GetSocketClient(userIdentifier, credentials, environment);
+            return new BitgetUserFuturesDataTracker(
+                _serviceProvider?.GetRequiredService<ILogger<BitgetUserFuturesDataTracker>>() ?? new NullLogger<BitgetUserFuturesDataTracker>(),
+                restClient,
+                socketClient,
+                userIdentifier,
+                config,
+                exchangeParams
                 );
         }
     }

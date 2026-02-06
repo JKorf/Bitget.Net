@@ -62,7 +62,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public IBitgetRestClient GetRestClient(string userIdentifier, ApiCredentials? credentials = null, BitgetEnvironment? environment = null)
         {
-            if (!_restClients.TryGetValue(userIdentifier, out var client))
+            if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateRestClient(userIdentifier, credentials, environment);
 
             return client;
@@ -71,7 +71,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public IBitgetSocketClient GetSocketClient(string userIdentifier, ApiCredentials? credentials = null, BitgetEnvironment? environment = null)
         {
-            if (!_socketClients.TryGetValue(userIdentifier, out var client))
+            if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateSocketClient(userIdentifier, credentials, environment);
 
             return client;

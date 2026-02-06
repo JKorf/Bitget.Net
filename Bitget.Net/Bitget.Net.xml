@@ -155,6 +155,37 @@
         <member name="M:Bitget.Net.BitgetTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
             <inheritdoc />
         </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserSpotDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Bitget.Net.BitgetEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserFuturesDataTracker(Bitget.Net.Enums.BitgetProductTypeV2,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.BitgetTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.Enums.BitgetProductTypeV2,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Bitget.Net.BitgetEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.BitgetUserSpotDataTracker">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.BitgetUserSpotDataTracker.#ctor(Microsoft.Extensions.Logging.ILogger{Bitget.Net.BitgetUserSpotDataTracker},Bitget.Net.Interfaces.Clients.IBitgetRestClient,Bitget.Net.Interfaces.Clients.IBitgetSocketClient,System.String,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.BitgetUserFuturesDataTracker">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.BitgetUserFuturesDataTracker.WebsocketPositionUpdatesAreFullSnapshots">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.BitgetUserFuturesDataTracker.#ctor(Microsoft.Extensions.Logging.ILogger{Bitget.Net.BitgetUserFuturesDataTracker},Bitget.Net.Interfaces.Clients.IBitgetRestClient,Bitget.Net.Interfaces.Clients.IBitgetSocketClient,System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,CryptoExchange.Net.SharedApis.ExchangeParameters)">
+            <summary>
+            ctor
+            </summary>
+        </member>
         <member name="T:Bitget.Net.Clients.BitgetRestClient">
             <inheritdoc />
         </member>
@@ -7442,6 +7473,38 @@
             <summary>
             Tracker factory
             </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Bitget.Net.BitgetEnvironment)">
+            <summary>
+            Create a new Spot user data tracker
+            </summary>
+            <param name="userIdentifier">User identifier</param>
+            <param name="config">Configuration</param>
+            <param name="credentials">Credentials</param>
+            <param name="environment">Environment</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserSpotDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig)">
+            <summary>
+            Create a new spot user data tracker
+            </summary>
+            <param name="config">Configuration</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.Enums.BitgetProductTypeV2,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Bitget.Net.BitgetEnvironment)">
+            <summary>
+            Create a new futures user data tracker
+            </summary>
+            <param name="userIdentifier">User identifier</param>
+            <param name="config">Configuration</param>
+            <param name="credentials">Credentials</param>
+            <param name="environment">Environment</param>
+            <param name="productType">Product type</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.IBitgetTrackerFactory.CreateUserFuturesDataTracker(Bitget.Net.Enums.BitgetProductTypeV2,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
+            <summary>
+            Create a new futures user data tracker
+            </summary>
+            <param name="config">Configuration</param>
+            <param name="productType">Product type</param>
         </member>
         <member name="T:Bitget.Net.Objects.BitgetApiAddresses">
             <summary>
