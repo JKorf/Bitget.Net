@@ -10,8 +10,8 @@ namespace Bitget.Net.Clients
     /// <inheritdoc />
     public class BitgetUserClientProvider : IBitgetUserClientProvider
     {
-        private static ConcurrentDictionary<string, IBitgetRestClient> _restClients = new ConcurrentDictionary<string, IBitgetRestClient>();
-        private static ConcurrentDictionary<string, IBitgetSocketClient> _socketClients = new ConcurrentDictionary<string, IBitgetSocketClient>();
+        private ConcurrentDictionary<string, IBitgetRestClient> _restClients = new ConcurrentDictionary<string, IBitgetRestClient>();
+        private ConcurrentDictionary<string, IBitgetSocketClient> _socketClients = new ConcurrentDictionary<string, IBitgetSocketClient>();
 
         private readonly IOptions<BitgetRestOptions> _restOptions;
         private readonly IOptions<BitgetSocketOptions> _socketOptions;
