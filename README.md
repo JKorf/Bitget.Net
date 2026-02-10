@@ -177,6 +177,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 3.5.0 - 10 Feb 2026
+    * Updated CryptoExchange.Net to version 10.5.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Updated UserClientProvider internal client cache to non-static to prevent cleanup issues
+
 * Version 3.4.0 - 06 Feb 2026
     * Updated CryptoExchange.Net to version 10.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Added BitgetUserSpotDataTracker and BitgetUserFuturesDataTracker
