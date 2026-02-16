@@ -79,6 +79,9 @@ namespace Bitget.Net.SymbolOrderBooks
             Status = OrderBookStatus.Syncing;
 
             var setResult = await WaitForSetOrderBookAsync(TimeSpan.FromMilliseconds(10000), ct).ConfigureAwait(false);
+            if (!setResult)
+                await result.Data.CloseAsync().ConfigureAwait(false);
+
             return setResult ? result : new CallResult<UpdateSubscription>(setResult.Error!);
         }
 
