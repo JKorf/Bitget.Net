@@ -260,7 +260,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Klines client
 
-        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 1000, false,
+        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(false, true, true, 1000, false,
             SharedKlineInterval.OneMinute,
             SharedKlineInterval.FiveMinutes,
             SharedKlineInterval.FifteenMinutes,
@@ -279,7 +279,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }
         };
 
-        async Task<ExchangeWebResult<SharedKline[]>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedKline[]>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var interval = (Enums.BitgetFuturesKlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.BitgetFuturesKlineInterval), interval))
@@ -289,22 +289,22 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<SharedKline[]>(Exchange, validationError);
 
-            // Determine pagination
-            // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
-            DateTime endTime = request.EndTime ?? DateTime.UtcNow;
-            DateTime? startTime = request.StartTime;
-            if (pageToken is DateTimeToken dateTimeToken)
-                endTime = dateTimeToken.LastTime;
+            //// Determine pagination
+            //// Data is normally returned oldest first, so to do newest first pagination we have to do some calc
+            //DateTime endTime = request.EndTime ?? DateTime.UtcNow;
+            //DateTime? startTime = request.StartTime;
+            //if (pageToken is DateTimeToken dateTimeToken)
+            //    endTime = dateTimeToken.LastTime;
 
-            var limit = request.Limit ?? 1000;
-            if (startTime == null || startTime < endTime)
-            {
-                var offset = (int)interval * limit;
-                startTime = endTime.AddSeconds(-offset);
-            }
+            //var limit = request.Limit ?? 1000;
+            //if (startTime == null || startTime < endTime)
+            //{
+            //    var offset = (int)interval * limit;
+            //    startTime = endTime.AddSeconds(-offset);
+            //}
 
-            if (startTime < request.StartTime)
-                startTime = request.StartTime;
+            //if (startTime < request.StartTime)
+            //    startTime = request.StartTime;
 
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var result = await ExchangeData.GetKlinesAsync(
@@ -312,25 +312,25 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 symbol,
                 interval,
                 KlineType.Market,
-                startTime,
-                endTime,
-                limit,
+                //startTime,
+                //endTime,
+                //limit,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedKline[]>(Exchange, null, default);
 
             // Get next token
-            DateTimeToken? nextToken = null;
-            if (result.Data.Count() == limit)
-            {
-                var minOpenTime = result.Data.Min(x => x.OpenTime);
-                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
-                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
-            }
+            //DateTimeToken? nextToken = null;
+            //if (result.Data.Count() == limit)
+            //{
+            //    var minOpenTime = result.Data.Min(x => x.OpenTime);
+            //    if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+            //        nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
+            //}
 
             return result.AsExchangeResult<SharedKline[]>(Exchange, request.Symbol.TradingMode, result.Data.AsEnumerable().Reverse().Select(x => 
-                new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
+                new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray()/*, nextToken*/);
         }
 
         #endregion
@@ -431,7 +431,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Mark Klines client
 
-        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 200, false)
+        GetKlinesOptions IMarkPriceKlineRestClient.GetMarkPriceKlinesOptions { get; } = new GetKlinesOptions(false, true, true, 200, false)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -439,7 +439,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }
         };
 
-        async Task<ExchangeWebResult<SharedFuturesKline[]>> IMarkPriceKlineRestClient.GetMarkPriceKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFuturesKline[]>> IMarkPriceKlineRestClient.GetMarkPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var interval = (Enums.BitgetFuturesKlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.BitgetFuturesKlineInterval), interval))
@@ -449,54 +449,54 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, validationError);
 
-            // Determine pagination
-            // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
-            DateTime endTime = RoundUp(request.EndTime ?? DateTime.UtcNow, TimeSpan.FromSeconds((int)interval));
-            DateTime? startTime = request.StartTime;
-            if (pageToken is DateTimeToken dateTimeToken)
-                endTime = dateTimeToken.LastTime;
+            //// Determine pagination
+            //// Data is normally returned oldest first, so to do newest first pagination we have to do some calc
+            //DateTime endTime = RoundUp(request.EndTime ?? DateTime.UtcNow, TimeSpan.FromSeconds((int)interval));
+            //DateTime? startTime = request.StartTime;
+            //if (pageToken is DateTimeToken dateTimeToken)
+            //    endTime = dateTimeToken.LastTime;
 
-            var limit = request.Limit ?? 200;
-            if (startTime == null || startTime < endTime)
-            {
-                var offset = (int)interval * limit;
-                startTime = endTime.AddSeconds(-offset);
-            }
+            //var limit = request.Limit ?? 200;
+            //if (startTime == null || startTime < endTime)
+            //{
+            //    var offset = (int)interval * limit;
+            //    startTime = endTime.AddSeconds(-offset);
+            //}
 
-            if (startTime < request.StartTime)
-                startTime = request.StartTime;
+            //if (startTime < request.StartTime)
+            //    startTime = request.StartTime;
 
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var result = await ExchangeData.GetHistoricalMarkPriceKlinesAsync(
                 GetProductType(request.TradingMode, request.ExchangeParameters),
                 symbol,
                 interval,
-                startTime,
-                endTime,
-                limit,
+                //startTime,
+                //endTime,
+                //limit,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, null, default);
 
-            // Get next token
-            DateTimeToken? nextToken = null;
-            if (result.Data.Count() == limit)
-            {
-                var minOpenTime = result.Data.Min(x => x.OpenTime);
-                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
-                    nextToken = new DateTimeToken(minOpenTime);
-            }
+            //// Get next token
+            //DateTimeToken? nextToken = null;
+            //if (result.Data.Count() == limit)
+            //{
+            //    var minOpenTime = result.Data.Min(x => x.OpenTime);
+            //    if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+            //        nextToken = new DateTimeToken(minOpenTime);
+            //}
 
             return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, request.Symbol.TradingMode, result.Data.AsEnumerable().Reverse().Select(x => 
-            new SharedFuturesKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            new SharedFuturesKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray()/*, nextToken*/);
         }
 
         #endregion
 
         #region Index Klines client
 
-        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, true, 200, false)
+        GetKlinesOptions IIndexPriceKlineRestClient.GetIndexPriceKlinesOptions { get; } = new GetKlinesOptions(false, true, true, 200, false)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -504,7 +504,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }
         };
 
-        async Task<ExchangeWebResult<SharedFuturesKline[]>> IIndexPriceKlineRestClient.GetIndexPriceKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFuturesKline[]>> IIndexPriceKlineRestClient.GetIndexPriceKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var interval = (Enums.BitgetFuturesKlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.BitgetFuturesKlineInterval), interval))
@@ -514,47 +514,47 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesKline[]>(Exchange, validationError);
 
-            // Determine pagination
-            // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
-            DateTime endTime = RoundUp(request.EndTime ?? DateTime.UtcNow, TimeSpan.FromSeconds((int)interval));
-            DateTime? startTime = request.StartTime;
-            if (pageToken is DateTimeToken dateTimeToken)
-                endTime = dateTimeToken.LastTime;
+            //// Determine pagination
+            //// Data is normally returned oldest first, so to do newest first pagination we have to do some calc
+            //DateTime endTime = RoundUp(request.EndTime ?? DateTime.UtcNow, TimeSpan.FromSeconds((int)interval));
+            //DateTime? startTime = request.StartTime;
+            //if (pageToken is DateTimeToken dateTimeToken)
+            //    endTime = dateTimeToken.LastTime;
 
-            var limit = request.Limit ?? 200;
-            if (startTime == null || startTime < endTime)
-            {
-                var offset = (int)interval * limit;
-                startTime = endTime.AddSeconds(-offset);
-            }
+            //var limit = request.Limit ?? 200;
+            //if (startTime == null || startTime < endTime)
+            //{
+            //    var offset = (int)interval * limit;
+            //    startTime = endTime.AddSeconds(-offset);
+            //}
 
-            if (startTime < request.StartTime)
-                startTime = request.StartTime;
+            //if (startTime < request.StartTime)
+            //    startTime = request.StartTime;
 
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var result = await ExchangeData.GetHistoricalIndexPriceKlinesAsync(
                 GetProductType(request.TradingMode, request.ExchangeParameters),
                 symbol,
                 interval,
-                startTime,
-                endTime,
-                limit,
+                //startTime,
+                //endTime,
+                //limit,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, null, default);
 
             // Get next token
-            DateTimeToken? nextToken = null;
-            if (result.Data.Count() == limit)
-            {
-                var minOpenTime = result.Data.Min(x => x.OpenTime);
-                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
-                    nextToken = new DateTimeToken(minOpenTime);
-            }
+            //DateTimeToken? nextToken = null;
+            //if (result.Data.Count() == limit)
+            //{
+            //    var minOpenTime = result.Data.Min(x => x.OpenTime);
+            //    if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+            //        nextToken = new DateTimeToken(minOpenTime);
+            //}
 
             return result.AsExchangeResult<SharedFuturesKline[]>(Exchange, request.Symbol.TradingMode, result.Data.AsEnumerable().Reverse().Select(x => 
-            new SharedFuturesKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray(), nextToken);
+            new SharedFuturesKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice)).ToArray()/*, nextToke*/);
         }
 
         #endregion
@@ -611,7 +611,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         #endregion
 
         #region Funding Rate client
-        GetFundingRateHistoryOptions IFundingRateRestClient.GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(SharedPaginationSupport.Descending, true, 100, false)
+        GetFundingRateHistoryOptions IFundingRateRestClient.GetFundingRateHistoryOptions { get; } = new GetFundingRateHistoryOptions(false, true, true, 100, false)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -619,36 +619,36 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }
         };
 
-        async Task<ExchangeWebResult<SharedFundingRate[]>> IFundingRateRestClient.GetFundingRateHistoryAsync(GetFundingRateHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFundingRate[]>> IFundingRateRestClient.GetFundingRateHistoryAsync(GetFundingRateHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = ((IFundingRateRestClient)this).GetFundingRateHistoryOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFundingRate[]>(Exchange, validationError);
 
-            int page = 1;
-            int pageSize = request.Limit ?? 100;
-            if (pageToken is PageToken token)
-            {
-                page = token.Page;
-                pageSize = token.PageSize;
-            }
+            //int page = 1;
+            //int pageSize = request.Limit ?? 100;
+            //if (pageToken is PageToken token)
+            //{
+            //    page = token.Page;
+            //    pageSize = token.PageSize;
+            //}
 
             // Get data
             var result = await ExchangeData.GetHistoricalFundingRateAsync(
                 GetProductType(request.TradingMode, request.ExchangeParameters),
                 request.Symbol!.GetSymbol(FormatSymbol),
-                page: page,
-                pageSize: pageSize,
+                //page: page,
+                //pageSize: pageSize,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedFundingRate[]>(Exchange, null, default);
 
-            PageToken? nextToken = null;
-            if (result.Data.Count() == pageSize && (request.StartTime == null || result.Data.Min(x => x.FundingTime) > request.StartTime))
-                nextToken = new PageToken(page + 1, pageSize);
+            //PageToken? nextToken = null;
+            //if (result.Data.Count() == pageSize && (request.StartTime == null || result.Data.Min(x => x.FundingTime) > request.StartTime))
+            //    nextToken = new PageToken(page + 1, pageSize);
 
             // Return
-            return result.AsExchangeResult<SharedFundingRate[]>(Exchange, request.Symbol.TradingMode,result.Data.Where(x => request.StartTime == null ? true : x.FundingTime >= request.StartTime).Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime ?? default)).ToArray(), nextToken);
+            return result.AsExchangeResult<SharedFundingRate[]>(Exchange, request.Symbol.TradingMode,result.Data.Where(x => request.StartTime == null ? true : x.FundingTime >= request.StartTime).Select(x => new SharedFundingRate(x.FundingRate, x.FundingTime ?? default)).ToArray()/*, nextToken*/);
         }
         #endregion
 
@@ -794,23 +794,23 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Descending, true, 100, true)
+        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(true, true, true, 100, true)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeWebResult<SharedFuturesOrder[]>> IFuturesOrderRestClient.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFuturesOrder[]>> IFuturesOrderRestClient.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetClosedFuturesOrdersOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesOrder[]>(Exchange, validationError);
 
-            // Determine page token
-            string? fromId = null;
-            if (pageToken is FromIdToken idToken)
-                fromId = idToken.FromToken;
+            //// Determine page token
+            //string? fromId = null;
+            //if (pageToken is FromIdToken idToken)
+            //    fromId = idToken.FromToken;
 
             // Get data
             var limit = request.Limit ?? 1000;
@@ -818,15 +818,15 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: limit,
-                idLessThan: fromId,
+                //idLessThan: fromId,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, null, default);
 
-            // Get next token
-            FromIdToken? nextToken = null;
-            if (orders.Data.Orders.Count() == limit)
-                nextToken = new FromIdToken(orders.Data.Orders.OrderBy(x => x.CreateTime).First().OrderId);
+            //// Get next token
+            //FromIdToken? nextToken = null;
+            //if (orders.Data.Orders.Count() == limit)
+            //    nextToken = new FromIdToken(orders.Data.Orders.OrderBy(x => x.CreateTime).First().OrderId);
 
             return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, SupportedTradingModes ,orders.Data.Orders.Select(x => new SharedFuturesOrder(
                 ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), 
@@ -849,7 +849,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 Fee = x.Fee == null ? null : Math.Abs(x.Fee.Value),
                 TakeProfitPrice = x.TakeProfitPrice,
                 StopLossPrice = x.StopLossPrice
-            }).ToArray(), nextToken);
+            }).ToArray()/*, nextToken*/);
         }
 
         EndpointOptions<GetOrderTradesRequest> IFuturesOrderRestClient.GetFuturesOrderTradesOptions { get; } = new EndpointOptions<GetOrderTradesRequest>(true)
@@ -885,39 +885,39 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationSupport.Descending, true, 100, true)
+        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(false, true, true, 100, true)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
-        async Task<ExchangeWebResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetFuturesUserTradesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedUserTrade[]>(Exchange, validationError);
 
-            // Determine page token
-            string? fromId = null;
-            if (pageToken is FromIdToken fromIdToken)
-                fromId = fromIdToken.FromToken;
+            //// Determine page token
+            //string? fromId = null;
+            //if (pageToken is FromIdToken fromIdToken)
+            //    fromId = fromIdToken.FromToken;
 
             // Get data
             var orders = await Trading.GetUserTradesAsync(GetProductType(request.TradingMode, request.ExchangeParameters), request.Symbol!.GetSymbol(FormatSymbol),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
                 limit: request.Limit ?? 100,
-                idLessThan: fromId,
+                //idLessThan: fromId,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
-            // Get next token
-            FromIdToken? nextToken = null;
-            if (orders.Data.Trades.Count() == (request.Limit ?? 500))
-                nextToken = new FromIdToken(orders.Data.EndId);
+            //// Get next token
+            //FromIdToken? nextToken = null;
+            //if (orders.Data.Trades.Count() == (request.Limit ?? 500))
+            //    nextToken = new FromIdToken(orders.Data.EndId);
 
             return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, request.Symbol.TradingMode,orders.Data.Trades.Select(x => new SharedUserTrade(
                 ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), 
@@ -934,7 +934,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 Fee = Math.Abs(x.Fees.Sum(x => x.TotalFee)),
                 FeeAsset = x.Fees.FirstOrDefault()?.FeeAsset,
                 Role = x.Role == Role.Maker ? SharedRole.Maker : SharedRole.Taker
-            }).ToArray(), nextToken);
+            }).ToArray()/*, nextToken*/);
         }
 
         EndpointOptions<CancelOrderRequest> IFuturesOrderRestClient.CancelFuturesOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true)
@@ -1189,17 +1189,17 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Position History client
 
-        GetPositionHistoryOptions IPositionHistoryRestClient.GetPositionHistoryOptions { get; } = new GetPositionHistoryOptions(SharedPaginationSupport.Descending, true, 100);
-        async Task<ExchangeWebResult<SharedPositionHistory[]>> IPositionHistoryRestClient.GetPositionHistoryAsync(GetPositionHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
+        GetPositionHistoryOptions IPositionHistoryRestClient.GetPositionHistoryOptions { get; } = new GetPositionHistoryOptions(false, true, true, 100);
+        async Task<ExchangeWebResult<SharedPositionHistory[]>> IPositionHistoryRestClient.GetPositionHistoryAsync(GetPositionHistoryRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = ((IPositionHistoryRestClient)this).GetPositionHistoryOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedPositionHistory[]>(Exchange, validationError);
 
             // Determine page token
-            string? fromId = null;
-            if (pageToken is FromIdToken token)
-                fromId = token.FromToken;
+            //string? fromId = null;
+            //if (pageToken is FromIdToken token)
+            //    fromId = token.FromToken;
 
             int limit = request.Limit ?? 100;
 
@@ -1209,17 +1209,17 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 symbol: request.Symbol?.GetSymbol(FormatSymbol),
                 startTime: request.StartTime,
                 endTime: request.EndTime,
-                idLessThan: fromId,
+                //idLessThan: fromId,
                 limit: limit,
                 ct: ct
                 ).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<SharedPositionHistory[]>(Exchange, null, default);
 
-            // Get next token
-            FromIdToken? nextToken = null;
-            if (!string.IsNullOrEmpty(orders.Data.EndId))
-                nextToken = new FromIdToken(orders.Data.EndId);
+            //// Get next token
+            //FromIdToken? nextToken = null;
+            //if (!string.IsNullOrEmpty(orders.Data.EndId))
+            //    nextToken = new FromIdToken(orders.Data.EndId);
 
             return orders.AsExchangeResult<SharedPositionHistory[]>(Exchange, request.Symbol == null ? SupportedTradingModes : new[] { request.Symbol.TradingMode }, orders.Data.Entries.Select(x => new SharedPositionHistory(
                 ExchangeSymbolCache.ParseSymbol(_topicId, x.Symbol), 
@@ -1232,7 +1232,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 x.UpdateTime)
             {
                 PositionId = x.PositionId
-            }).ToArray(), nextToken);
+            }).ToArray()/*, nextToken*/);
         }
         #endregion
 
