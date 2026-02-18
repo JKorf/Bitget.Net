@@ -794,7 +794,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(true, true, true, 100, true)
+        GetClosedOrdersOptions IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new GetClosedOrdersOptions(true, true, true, 100)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
@@ -885,7 +885,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(false, true, true, 100, true)
+        GetUserTradesOptions IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new GetUserTradesOptions(false, true, true, 100)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
