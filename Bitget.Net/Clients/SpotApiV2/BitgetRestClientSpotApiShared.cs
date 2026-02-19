@@ -45,7 +45,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var direction = DataDirection.Descending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var limit = request.Limit ?? 1000;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
 
             var result = await ExchangeData.GetKlinesAsync(
                 symbol,
@@ -64,8 +64,6 @@ namespace Bitget.Net.Clients.SpotApiV2
                     result.Data.Select(x => x.OpenTime),
                     request.StartTime,
                     request.EndTime ?? DateTime.UtcNow,
-                    limit,
-                    direction,
                     pageParams);
 
             return result.AsExchangeResult(
@@ -404,7 +402,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 100;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, maxPeriod: TimeSpan.FromDays(90));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, maxPeriod: TimeSpan.FromDays(90));
 
             // Get data
             var result = await Trading.GetClosedOrdersAsync(request.Symbol!.GetSymbol(FormatSymbol),
@@ -422,8 +420,6 @@ namespace Bitget.Net.Clients.SpotApiV2
                 result.Data.Select(x => x.CreateTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams,
                 TimeSpan.FromDays(90));
 
@@ -493,7 +489,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 100;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, maxPeriod: TimeSpan.FromDays(90));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, maxPeriod: TimeSpan.FromDays(90));
 
             // Get data
             var result = await Trading.GetUserTradesAsync(request.Symbol!.GetSymbol(FormatSymbol),
@@ -511,8 +507,6 @@ namespace Bitget.Net.Clients.SpotApiV2
                 result.Data.Select(x => x.CreateTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams,
                 TimeSpan.FromDays(90));
 
@@ -722,7 +716,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 100;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
 
             // Get data
             var time = DateTime.UtcNow;
@@ -742,8 +736,6 @@ namespace Bitget.Net.Clients.SpotApiV2
                 result.Data.Select(x => x.CreateTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams,
                 TimeSpan.FromDays(90));
 
@@ -804,12 +796,12 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return new ExchangeWebResult<SharedTrade[]>(Exchange, validationError);
 
             var direction = DataDirection.Descending;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, false);
+            var limit = request.Limit ?? 1000;
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, false);
             if (pageParams.FromId != null)
                 pageParams.EndTime = null; // If filtering using FromId no timestamps should be set
 
             // Get data
-            var limit = request.Limit ?? 1000;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
             var result = await ExchangeData.GetTradesAsync(
                 symbol,
@@ -827,8 +819,6 @@ namespace Bitget.Net.Clients.SpotApiV2
                 result.Data.Select(x => x.Timestamp),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams);
 
             // Return
@@ -856,7 +846,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 100;
-            var pageParams = Pagination.GetPaginationParameters(direction, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(90));
 
             // Get data
             var time = DateTime.UtcNow;
@@ -876,8 +866,6 @@ namespace Bitget.Net.Clients.SpotApiV2
                 result.Data.Select(x => x.CreateTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                limit,
-                direction,
                 pageParams,
                 TimeSpan.FromDays(90));
 
