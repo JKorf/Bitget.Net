@@ -60,12 +60,12 @@ namespace Bitget.Net.Clients.MessageHandlers
             },
         ];
 
-        public override string? GetTypeIdentifier(ReadOnlySpan<byte> data, WebSocketMessageType? webSocketMessageType)
+        protected override string? GetTypeIdentifierNonJson(ReadOnlySpan<byte> data, WebSocketMessageType? webSocketMessageType)
         {
             if (data.Length == 4)
                 return "pong";
 
-            return base.GetTypeIdentifier(data, webSocketMessageType);
+            return null;
         }
     }
 }
