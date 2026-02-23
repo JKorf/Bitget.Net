@@ -796,6 +796,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         GetClosedOrdersOptions IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new GetClosedOrdersOptions(true, true, true, 100)
         {
+            MaxAge = TimeSpan.FromDays(90),
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
@@ -806,8 +807,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var validationError = ((IFuturesOrderRestClient)this).GetClosedFuturesOrdersOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedFuturesOrder[]>(Exchange, validationError);
-
-#warning only 90 days available. All pagination endpoints should be able to specify the max age of the data
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 100;
@@ -829,7 +828,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 result.Data.Orders.Select(x => x.CreateTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                pageParams);
+                pageParams,
+                maxAge: TimeSpan.FromDays(90));
 
             return result.AsExchangeResult(
                        Exchange,
@@ -896,6 +896,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         GetUserTradesOptions IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new GetUserTradesOptions(false, true, true, 100)
         {
+            MaxAge = TimeSpan.FromDays(90),
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
@@ -928,7 +929,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 result.Data.Trades.Select(x => x.CreateTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                pageParams);
+                pageParams,
+                maxAge: TimeSpan.FromDays(90));
 
             return result.AsExchangeResult(
                        Exchange,

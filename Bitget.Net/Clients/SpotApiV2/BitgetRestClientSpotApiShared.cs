@@ -390,19 +390,19 @@ namespace Bitget.Net.Clients.SpotApiV2
             }).ToArray());
         }
 
-        GetClosedOrdersOptions ISpotOrderRestClient.GetClosedSpotOrdersOptions { get; } = new GetClosedOrdersOptions(false, true, true, 100);
+        GetClosedOrdersOptions ISpotOrderRestClient.GetClosedSpotOrdersOptions { get; } = new GetClosedOrdersOptions(false, true, true, 100)
+        {
+            MaxAge = TimeSpan.FromDays(90)
+        };
         async Task<ExchangeWebResult<SharedSpotOrder[]>> ISpotOrderRestClient.GetClosedSpotOrdersAsync(GetClosedOrdersRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = ((ISpotOrderRestClient)this).GetClosedSpotOrdersOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedSpotOrder[]>(Exchange, validationError);
 
-            if (request.StartTime != null && DateTime.UtcNow - request.StartTime > TimeSpan.FromDays(90))
-                return new ExchangeWebResult<SharedSpotOrder[]>(Exchange, ArgumentError.Invalid(nameof(request.StartTime), "Only data for the last 90 days is available"));
-
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 100;
-            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, maxPeriod: TimeSpan.FromDays(90));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest);
 
             // Get data
             var result = await Trading.GetClosedOrdersAsync(request.Symbol!.GetSymbol(FormatSymbol),
@@ -421,7 +421,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
                 pageParams,
-                TimeSpan.FromDays(90));
+                maxAge: TimeSpan.FromDays(90));
 
             return result.AsExchangeResult(
                        Exchange,
@@ -477,19 +477,19 @@ namespace Bitget.Net.Clients.SpotApiV2
             }).ToArray());
         }
 
-        GetUserTradesOptions ISpotOrderRestClient.GetSpotUserTradesOptions { get; } = new GetUserTradesOptions(false, true, true, 100);
+        GetUserTradesOptions ISpotOrderRestClient.GetSpotUserTradesOptions { get; } = new GetUserTradesOptions(false, true, true, 100)
+        {
+            MaxAge = TimeSpan.FromDays(90)
+        };
         async Task<ExchangeWebResult<SharedUserTrade[]>> ISpotOrderRestClient.GetSpotUserTradesAsync(GetUserTradesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
             var validationError = ((ISpotOrderRestClient)this).GetSpotUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedUserTrade[]>(Exchange, validationError);
 
-            if (request.StartTime != null && DateTime.UtcNow - request.StartTime > TimeSpan.FromDays(90))
-                return new ExchangeWebResult<SharedUserTrade[]>(Exchange, ArgumentError.Invalid(nameof(request.StartTime), "Only data for the last 90 days is available"));
-
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 100;
-            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, maxPeriod: TimeSpan.FromDays(90));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest);
 
             // Get data
             var result = await Trading.GetUserTradesAsync(request.Symbol!.GetSymbol(FormatSymbol),
@@ -508,7 +508,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
                 pageParams,
-                TimeSpan.FromDays(90));
+                maxAge: TimeSpan.FromDays(90));
 
             return result.AsExchangeResult(
                        Exchange,
@@ -819,7 +819,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 result.Data.Select(x => x.Timestamp),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                pageParams);
+                pageParams,
+                maxAge: TimeSpan.FromDays(90));
 
             // Return
             return result.AsExchangeResult(
