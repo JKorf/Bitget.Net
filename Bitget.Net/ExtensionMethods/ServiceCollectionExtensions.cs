@@ -98,8 +98,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 return new BitgetRestClient(client, serviceProvider.GetRequiredService<ILoggerFactory>(), serviceProvider.GetRequiredService<IOptions<BitgetRestOptions>>());
             }).ConfigurePrimaryHttpMessageHandler((serviceProvider) => {
                 var options = serviceProvider.GetRequiredService<IOptions<BitgetRestOptions>>().Value;
-                return LibraryHelpers.CreateHttpClientMessageHandler(options.Proxy, options.HttpKeepAliveInterval);
-            });
+                return LibraryHelpers.CreateHttpClientMessageHandler(options);
+            }).SetHandlerLifetime(Timeout.InfiniteTimeSpan);
             services.Add(new ServiceDescriptor(typeof(IBitgetSocketClient), x => { return new BitgetSocketClient(x.GetRequiredService<IOptions<BitgetSocketOptions>>(), x.GetRequiredService<ILoggerFactory>()); }, socketClientLifeTime ?? ServiceLifetime.Singleton));
 
             services.AddTransient<ICryptoRestClient, CryptoRestClient>();
@@ -109,7 +109,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ITrackerFactory, BitgetTrackerFactory>();
             services.AddSingleton<IBitgetUserClientProvider, BitgetUserClientProvider>(x =>
             new BitgetUserClientProvider(
-                x.GetRequiredService<HttpClient>(),
+                x.GetRequiredService<IHttpClientFactory>().CreateClient(typeof(IBitgetRestClient).Name),
                 x.GetRequiredService<ILoggerFactory>(),
                 x.GetRequiredService<IOptions<BitgetRestOptions>>(),
                 x.GetRequiredService<IOptions<BitgetSocketOptions>>()));
