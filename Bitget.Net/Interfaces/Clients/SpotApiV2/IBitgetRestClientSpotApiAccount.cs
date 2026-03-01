@@ -11,14 +11,24 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
     {
         /// <summary>
         /// Get funding balances
-        /// <para><a href="https://www.bitget.com/api-doc/common/account/Funding-Assets" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/common/account/Funding-Assets" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/account/funding-assets
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetBalance[]>> GetFundingBalancesAsync(CancellationToken ct = default);
         /// <summary>
         /// Get trading fee for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/common/public/Get-Trade-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/common/public/Get-Trade-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/common/trade-rate
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="businessType">Business type</param>
@@ -28,7 +38,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get asset valuation per account type
-        /// <para><a href="https://www.bitget.com/api-doc/common/account/All-Account-Balance" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/common/account/All-Account-Balance" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/account/all-account-balance
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -36,7 +51,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get account info
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Info" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Info" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/account/info
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -44,7 +64,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get spot account balances
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Assets" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Assets" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/account/assets
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -52,7 +77,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Set the account to receive deposits in for an asset
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Modify-Deposit-Account" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Modify-Deposit-Account" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/spot/wallet/modify-deposit-account
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="accountType">The account type</param>
@@ -62,7 +92,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get account ledger
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Bills" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Account-Bills" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/account/bills
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="groupType">Filter by group type</param>
@@ -77,7 +112,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Transfer funds between accounts
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Transfer" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Wallet-Transfer" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/spot/wallet/transfer
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="fromAccount">From account</param>
@@ -91,7 +131,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get list of assets that can be transfered between accounts
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Transfer-Coins" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Transfer-Coins" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/wallet/transfer-coin-info
+        /// </para>
         /// </summary>
         /// <param name="fromAccount">From account</param>
         /// <param name="toAccount">To account</param>
@@ -101,7 +146,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Withdraw asset
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Wallet-Withdrawal" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/spot/wallet/withdrawal
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="transferType">Transfer type</param>
@@ -119,7 +169,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get transfer history
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Account-TransferRecords" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Account-TransferRecords" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/account/transferRecords
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="fromAccount">From account</param>
@@ -135,7 +190,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Set BGB fee deduction enabled status
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Switch-Deduct" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Switch-Deduct" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/spot/account/switch-deduct
+        /// </para>
         /// </summary>
         /// <param name="enable">Enabled</param>
         /// <param name="ct">Cancellation token</param>
@@ -144,7 +204,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get BGB deduct status
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deduct-Info" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Deduct-Info" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/account/deduct-info
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -152,7 +217,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get deposit address
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Address" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Address" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/wallet/deposit-address
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="network">Network</param>
@@ -162,7 +232,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Cancel a withdrawal
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Cancel-Withdrawal" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Cancel-Withdrawal" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/spot/wallet/cancel-withdrawal
+        /// </para>
         /// </summary>
         /// <param name="withdrawalOrderId">Withdrawal order id</param>
         /// <param name="ct">Cancellation token</param>
@@ -171,7 +246,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get withdrawal history 
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Withdraw-Record" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Withdraw-Record" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/wallet/withdrawal-records
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="startTime">Filter by start time</param>
@@ -186,7 +266,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get deposit history
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Deposit-Record" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/wallet/deposit-records
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="startTime">Filter by start time</param>
@@ -200,7 +285,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Transfer assets between subaccounts or parent and subaccount
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Sub-Transfer" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Sub-Transfer" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/spot/wallet/subaccount-transfer
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset, for example `ETH`</param>
         /// <param name="fromAccount">From account</param>
@@ -216,7 +306,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get subaccount balances
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-Subaccount-Assets" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-Subaccount-Assets" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/account/subaccount-assets
+        /// </para>
         /// </summary>
         /// <param name="idLessThan">Return results with id less than this</param>
         /// <param name="limit">Max number of results, max 50</param>
@@ -228,7 +323,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get transfer history between master and sub account
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-TransferRecords" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-TransferRecords" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/account/sub-main-trans-record
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="role">Filter by role</param>
@@ -243,7 +343,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get sub account deposit address
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Address" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Address" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/wallet/subaccount-deposit-address
+        /// </para>
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="asset">The asset, for example `ETH`</param>
@@ -254,7 +359,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get deposit records for a sub account
-        /// <para><a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Record" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/account/Get-SubAccount-Deposit-Record" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/wallet/subaccount-deposit-records
+        /// </para>
         /// </summary>
         /// <param name="subAccountId">Sub account id</param>
         /// <param name="asset">Filter by asset, for example `ETH`</param>

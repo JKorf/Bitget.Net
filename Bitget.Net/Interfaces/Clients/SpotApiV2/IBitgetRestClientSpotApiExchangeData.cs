@@ -12,7 +12,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
     {
         /// <summary>
         /// Get the server time
-        /// <para><a href="https://www.bitget.com/api-doc/common/public/Get-Server-Time" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/common/public/Get-Server-Time" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/public/time
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -39,7 +44,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get list of supported assets and their networks
-        /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Coin-List" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-Coin-List" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/public/coins
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -48,7 +58,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get list of supported symbols and their trading rules
-        /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Symbols" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-Symbols" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/public/symbols
+        /// </para>
         /// </summary>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -57,7 +72,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get list of VIP levels and fee rates
-        /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-VIP-Fee-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-VIP-Fee-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/market/vip-fee-rate
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -65,7 +85,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get tickers
-        /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Tickers" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-Tickers" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/market/tickers
+        /// </para>
         /// </summary>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -74,7 +99,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get order book
-        /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Orderbook" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-Orderbook" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/market/orderbook
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="mergeStep">Merge step</param>
@@ -85,7 +115,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get kline/candlestick data
-        /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Candle-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-Candle-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/market/candles
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
@@ -98,7 +133,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get historical kline data
-        /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-History-Candle-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-History-Candle-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/market/history-candles
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
@@ -110,7 +150,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get the most recent trades on the symbol
-        /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Recent-Trades" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-Recent-Trades" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/market/fills
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="limit">Max number of results</param>
@@ -120,7 +165,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get trades
-        /// <para><a href="https://www.bitget.com/api-doc/spot/market/Get-Market-Trades" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-Market-Trades" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/market/fills-history
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Filter by start time</param>

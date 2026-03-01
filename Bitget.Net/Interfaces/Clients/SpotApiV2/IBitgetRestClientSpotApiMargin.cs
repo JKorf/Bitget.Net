@@ -12,14 +12,24 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
     {
         /// <summary>
         /// Get margin symbols
-        /// <para><a href="https://www.bitget.com/api-doc/margin/common/support-currencies" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/common/support-currencies" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/currencies
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetMarginSymbol[]>> GetMarginSymbolsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get interest rate
-        /// <para><a href="https://www.bitget.com/api-doc/margin/common/interest-rate-record" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/common/interest-rate-record" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/interest-rate-record
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset name</param>
         /// <param name="ct">Cancellation token</param>
@@ -27,7 +37,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin borrow history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Loan-Records" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Loan-Records" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/borrow-history
+        /// </para>
         /// </summary>
         /// <param name="loanId">Filter by loanId</param>
         /// <param name="asset">Filter by asset</param>
@@ -46,7 +61,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin repay history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Repay-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Repay-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/repay-history
+        /// </para>
         /// </summary>
         /// <param name="repayId">Filter by repayId</param>
         /// <param name="asset">Filter by asset</param>
@@ -65,7 +85,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin interest history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Interest-Records" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Interest-Records" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/interest-history
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="startTime">Filter by start time</param>
@@ -82,7 +107,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin liquidation history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Liquidation-Records" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Liquidation-Records" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/liquidation-history
+        /// </para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -98,7 +128,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin financial history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Finance-Flow-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/record/Get-Cross-Finance-Flow-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/financial-records
+        /// </para>
         /// </summary>
         /// <param name="marginType">Filter by margin type</param>
         /// <param name="asset">Filter by asset</param>
@@ -118,7 +153,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin balances
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Assets" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Assets" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/account/assets
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -126,7 +166,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Cross margin borrow
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Borrow" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Borrow" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/crossed/account/borrow
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="quantity">Quantity to borrow</param>
@@ -136,7 +181,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Cross margin repay
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Repay" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Repay" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/crossed/account/repay
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="quantity">Quantity to repay</param>
@@ -145,14 +195,24 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin risk rate
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Risk-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Risk-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/account/risk-rate
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetCrossRiskRate>> GetCrossRiskRateAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get cross margin max borrowable amount
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Max-Borrowable-Amount" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Max-Borrowable-Amount" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/account/max-borrowable-amount
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -160,7 +220,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin max transferable amount
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Max-Transfer-Out-Amount" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Max-Transfer-Out-Amount" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/account/max-transfer-out-amount
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -168,7 +233,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin interest rates and borrow limits
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Margin-Interest-Rate-And-Borrowable" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Get-Cross-Margin-Interest-Rate-And-Borrowable" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/interest-rate-and-limit
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -176,7 +246,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin tier configuration
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Tier-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Tier-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/tier-data
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -184,7 +259,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Cross margin flash repay
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Flash-Repay" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Cross-Flash-Repay" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/crossed/account/flash-repay
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`. If not provided cross margin account will be fully repaid.</param>
         /// <param name="ct">Cancellation token</param>
@@ -192,7 +272,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get flash repayment statuses
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/account/Query-Cross-Flash-Repay-Status" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/account/Query-Cross-Flash-Repay-Status" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/crossed/account/query-flash-repay-status
+        /// </para>
         /// </summary>
         /// <param name="ids">Ids to retrieve</param>
         /// <param name="ct">Cancellation token</param>
@@ -200,7 +285,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Place a new cross margin order
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/trade/Cross-Place-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/trade/Cross-Place-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/crossed/place-order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="loanType">Loan type</param>
@@ -239,7 +329,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Cancel cross margin order
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/trade/Cross-Cancel-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/trade/Cross-Cancel-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/crossed/cancel-order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
@@ -249,7 +344,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Cancel multiple orders in a single call
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/trade/Cross-Batch-Cancel-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/trade/Cross-Batch-Cancel-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/crossed/batch-cancel-order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orders">Orders to cancel</param>
@@ -261,7 +361,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin open orders
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/trade/Get-Cross-Open-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/trade/Get-Cross-Open-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/open-orders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
@@ -275,7 +380,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get closed cross margin orders
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/trade/Get-Cross-Order-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/trade/Get-Cross-Order-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/history-orders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
@@ -290,7 +400,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin user trades
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/trade/Get-Cross-Order-Fills" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/trade/Get-Cross-Order-Fills" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/fills
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
@@ -303,7 +418,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get cross margin liquidation history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/trade/Get-Cross-Liquidation-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/trade/Get-Cross-Liquidation-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/crossed/liquidation-order
+        /// </para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="type">Filter by type</param>
@@ -319,7 +439,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get Isolated margin borrow history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Loan-Records" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Loan-Records" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/borrow-history
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="loanId">Filter by loanId</param>
@@ -341,7 +466,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get Isolated margin repay history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Repay-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Repay-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/repay-history
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="repayId">Filter by repayId</param>
@@ -363,7 +493,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get Isolated margin interest history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Interest-Records" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Interest-Records" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/interest-history
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="asset">Filter by asset</param>
@@ -383,7 +518,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get Isolated margin liquidation history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Liquidation-Records" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Liquidation-Records" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/liquidation-history
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="startTime">Filter by start time</param>
@@ -401,7 +541,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get Isolated margin financial history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Finance-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/record/Get-Isolated-Finance-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/financial-records
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="marginType">Filter by margin type</param>
@@ -423,7 +568,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get Isolated margin balances
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Get-Isolated-Assets" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Get-Isolated-Assets" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/account/assets
+        /// </para>
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -431,7 +581,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Isolated margin borrow
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Borrow" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Borrow" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/isolated/account/borrow
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="quantity">Quantity to borrow</param>
@@ -441,7 +596,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Isolated margin repay
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Repay" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Repay" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/isolated/account/repay
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="quantity">Quantity to repay</param>
@@ -450,14 +610,24 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get Isolated margin risk rate
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Risk-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Risk-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/account/risk-rate
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetIsolatedRiskRate[]>> GetIsolatedRiskRateAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get isolated margin interest rates and limits
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Margin-Interest-Rate-And-Max-Borrowable-Amount" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Margin-Interest-Rate-And-Max-Borrowable-Amount" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/interest-rate-and-limit
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -465,7 +635,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get isolated margin tier configuration
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Tier-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Tier-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/tier-data
+        /// </para>
         /// </summary>
         /// <param name="symbol">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
@@ -473,7 +648,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get isolated margin max borrowable
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Max-Borrowable-Amount" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Max-Borrowable-Amount" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/account/max-borrowable-amount
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -481,7 +661,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get isolated margin max transferable
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Get-Isolated-Max-Transfer-Out-Amount" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Get-Isolated-Max-Transfer-Out-Amount" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/account/max-transfer-out-amount
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
@@ -489,7 +674,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Isolated margin flash repay
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Flash-Repay" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Isolated-Flash-Repay" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/isolated/account/flash-repay
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols to repay. If not provided all isolated symbols will be repayed.</param>
         /// <param name="ct">Cancellation token</param>
@@ -497,7 +687,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get flash repayment statuses
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/account/Query-Isolated-Flash-Repay-Status" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/account/Query-Isolated-Flash-Repay-Status" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/isolated/account/query-flash-repay-status
+        /// </para>
         /// </summary>
         /// <param name="ids">Ids to retrieve</param>
         /// <param name="ct">Cancellation token</param>
@@ -505,7 +700,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Place a new isolated margin order
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/trade/Cross-Place-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/trade/Cross-Place-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/isolated/place-order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="loanType">Loan type</param>
@@ -544,7 +744,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Cancel isolated margin order
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/trade/Isolated-Cancel-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/trade/Isolated-Cancel-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/isolated/cancel-order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
@@ -554,7 +759,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Cancel multiple isolated orders in a single call
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/trade/Isolated-Batch-Cancel-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/trade/Isolated-Batch-Cancel-Orders" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/margin/isolated/batch-cancel-order
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orders">Orders to cancel</param>
@@ -566,7 +776,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get isolated margin open orders
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/trade/Isolated-Open-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/trade/Isolated-Open-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/open-orders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
@@ -580,7 +795,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get closed isolated margin orders
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/trade/Get-Isolated-Order-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/trade/Get-Isolated-Order-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/history-orders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
@@ -595,7 +815,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get isolated margin user trades
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/trade/Get-Isolated-Transaction-Details" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/trade/Get-Isolated-Transaction-Details" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/fills
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orderId">Filter by order id</param>
@@ -608,7 +833,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get isolated margin liquidation history
-        /// <para><a href="https://www.bitget.com/api-doc/margin/isolated/trade/Get-Isolated-Liquidation-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/isolated/trade/Get-Isolated-Liquidation-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/margin/isolated/liquidation-order
+        /// </para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="type">Filter by type</param>

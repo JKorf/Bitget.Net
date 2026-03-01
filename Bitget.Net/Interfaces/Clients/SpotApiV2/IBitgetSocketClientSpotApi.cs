@@ -18,7 +18,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to ticker updates for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: ticker)
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
@@ -28,7 +33,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to ticker updates for multiple symbols
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/public/Tickers-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: ticker)
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
@@ -38,7 +48,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to trade updates for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: trade)
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
@@ -48,7 +63,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to trade updates for multiple symbols
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/public/Trades-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: trade)
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="handler">The handler for the data</param>
@@ -58,7 +78,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to kline/candlestick updates for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: candle{interval})
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
@@ -69,7 +94,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to kline/candlestick updates for multiple symbols
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/public/Candlesticks-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: candle{interval})
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="interval">Kline interval</param>
@@ -80,7 +110,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to order book updates for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: books{depth})
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updates after</param>
@@ -91,7 +126,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to order book updates for multiple symbols
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/public/Depth-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: books{depth})
+        /// </para>
         /// </summary>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
         /// <param name="limit">Order book depth. 1, 5 or 15 for full updates of these levels, or null for initial snapshot and only incremental updatesa after</param>
@@ -102,7 +142,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to margin index price updates
-        /// <para><a href="https://www.bitget.com/api-doc/margin/cross/websocket/public/Margin-Index-Price" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/margin/cross/websocket/public/Margin-Index-Price" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: index-price)
+        /// </para>
         /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -111,7 +156,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to user order updates
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Order-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/private/Order-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: orders)
+        /// </para>
         /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -120,7 +170,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to user trade updates
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Fill-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/private/Fill-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: fill)
+        /// </para>
         /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -129,7 +184,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to user trigger order updates
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Plan-Order-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/private/Plan-Order-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: orders-algo)
+        /// </para>
         /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -138,7 +198,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Subscribe to user balance updates
-        /// <para><a href="https://www.bitget.com/api-doc/spot/websocket/private/Account-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/spot/websocket/private/Account-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: account)
+        /// </para>
         /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>

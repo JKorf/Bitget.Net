@@ -12,7 +12,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
     {
         /// <summary>
         /// Get the server time
-        /// <para><a href="https://www.bitget.com/api-doc/common/public/Get-Server-Time" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/common/public/Get-Server-Time" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/public/time
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -20,7 +25,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get list of contracts
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-All-Symbols-Contracts" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/contracts
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="productType">Product type</param>
@@ -30,7 +40,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get list of VIP levels and fee rates
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-VIP-Fee-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-VIP-Fee-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/vip-fee-rate
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -38,7 +53,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get futures order book
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Merge-Depth" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Merge-Depth" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/merge-depth
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="productType">Product type</param>
@@ -50,7 +70,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get futures ticker
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/ticker
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
         /// <param name="productType">Product type</param>
@@ -60,7 +85,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get all futures tickers
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-All-Symbol-Ticker" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-All-Symbol-Ticker" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/tickers
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="ct">Cancellation token</param>
@@ -69,7 +99,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get recent trades
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Recent-Fills" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Recent-Fills" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/fills
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -80,7 +115,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get trades
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Fills-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Fills-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/fills-history
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -94,7 +134,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get kline/candlestick data
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Candle-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Candle-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/candles
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -109,7 +154,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get historical market price kline/candlestick data
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Candle-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-History-Candle-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/history-candles
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -123,7 +173,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get historical index price kline/candlestick data
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Index-Candle-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-History-Index-Candle-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/history-index-candles
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -137,7 +192,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get historical mark price kline/candlestick data
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Mark-Candle-Data" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-History-Mark-Candle-Data" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/history-mark-candles
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -151,7 +211,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get open interest
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Open-Interest" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Open-Interest" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/open-interest
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -161,7 +226,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get next funding time
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Symbol-Next-Funding-Time" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Symbol-Next-Funding-Time" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/funding-time
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -171,7 +241,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get prices
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Symbol-Price" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Symbol-Price" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/symbol-price
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -181,7 +256,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get historical funding rate
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-History-Funding-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-History-Funding-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/history-fund-rate
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -193,7 +273,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get current funding rate for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/current-fund-rate
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -203,7 +288,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get current funding rate for all symbols
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Current-Funding-Rate" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/current-fund-rate
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="ct">Cancellation token</param>
@@ -212,7 +302,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get position tiers
-        /// <para><a href="https://www.bitget.com/api-doc/contract/position/Get-Query-Position-Lever" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/position/Get-Query-Position-Lever" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/query-position-lever
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -222,7 +317,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get contracts notional position value limits
-        /// <para><a href="https://www.bitget.com/api-doc/contract/market/Get-Contracts-Oi" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/market/Get-Contracts-Oi" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/market/oi-limit
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
