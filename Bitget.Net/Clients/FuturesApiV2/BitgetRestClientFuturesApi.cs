@@ -52,8 +52,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
-        /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
         public IBitgetRestClientFuturesApiShared SharedClient => this;

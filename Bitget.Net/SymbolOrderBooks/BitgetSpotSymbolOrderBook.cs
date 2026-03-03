@@ -72,6 +72,9 @@ namespace Bitget.Net.SymbolOrderBooks
             Status = OrderBookStatus.Syncing;
 
             var setResult = await WaitForSetOrderBookAsync(TimeSpan.FromMilliseconds(10000), ct).ConfigureAwait(false);
+            if (!setResult)
+                await result.Data.CloseAsync().ConfigureAwait(false);
+
             return setResult ? result : new CallResult<UpdateSubscription>(setResult.Error!);
         }
 
@@ -87,14 +90,14 @@ namespace Bitget.Net.SymbolOrderBooks
             var sequence = eventData.Sequence ?? DateTime.UtcNow.Ticks;
             if (Levels != null)
             {
-                SetInitialOrderBook(sequence, eventData.Bids, eventData.Asks, data.DataTime, data.DataTimeLocal);
+                SetSnapshot(sequence, eventData.Bids, eventData.Asks, data.DataTime, data.DataTimeLocal);
             }
             else
             {
                 if (_initial)
                 {
                     _initial = false;
-                    SetInitialOrderBook(sequence, eventData.Bids, eventData.Asks, data.DataTime, data.DataTimeLocal);
+                    SetSnapshot(sequence, eventData.Bids, eventData.Asks, data.DataTime, data.DataTimeLocal);
                 }
                 else
                 {

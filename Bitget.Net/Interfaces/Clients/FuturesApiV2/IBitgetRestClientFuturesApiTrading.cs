@@ -12,7 +12,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
     {
         /// <summary>
         /// Get a position
-        /// <para><a href="https://www.bitget.com/api-doc/contract/position/get-single-position" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/position/get-single-position" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/position/single-position
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -23,7 +28,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get all positions
-        /// <para><a href="https://www.bitget.com/api-doc/contract/position/get-all-position" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/position/get-all-position" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/position/all-position
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="marginAsset">Margin asset, for example `USDT`</param>
@@ -33,7 +43,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get position history
-        /// <para><a href="https://www.bitget.com/api-doc/contract/position/Get-History-Position" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/position/Get-History-Position" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/position/history-position
+        /// </para>
         /// </summary>
         /// <param name="productType">Filter by product type</param>
         /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
@@ -47,7 +62,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Place a new order
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Place-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Place-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/place-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -88,7 +108,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Place multiple orders in a single call
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Batch-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Batch-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/batch-place-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -107,7 +132,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Edit an order
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Modify-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Modify-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/modify-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -134,7 +164,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Cancel an order
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Cancel-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Cancel-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/cancel-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -153,7 +188,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Cancel multiple orders. Make sure to check the individual order responses for success
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Batch-Cancel-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Batch-Cancel-Orders" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/batch-cancel-orders
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="orders">Orders to cancel</param>
@@ -170,7 +210,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get order details
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Details" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Details" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/order/detail
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -187,7 +232,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get open orders
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Orders-Pending" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Get-Orders-Pending" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/order/orders-pending
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -214,7 +264,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get closed orders
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Orders-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Get-Orders-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/order/orders-history
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -239,7 +294,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Cancel all orders matching the filters
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Cancel-All-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Cancel-All-Orders" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/cancel-all-orders
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -254,7 +314,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get user trades
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Fills" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Get-Order-Fills" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/order/fills
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -277,7 +342,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get historical user trades
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Get-Fill-History" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Get-Fill-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/order/fill-history
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -300,7 +370,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Close positions by market order
-        /// <para><a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/trade/Flash-Close-Position" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/close-positions
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -315,7 +390,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Place a take profit / stop loss order
-        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Place-Tpsl-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/plan/Place-Tpsl-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/place-tpsl-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -348,7 +428,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Place a new trigger order
-        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Place-Plan-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/plan/Place-Plan-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/place-plan-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -399,7 +484,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get trigger order sub orders
-        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Plan-Sub-Orders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/plan/Plan-Sub-Orders" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/order/plan-sub-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="triggerOrderId">Trigger order id</param>
@@ -414,7 +504,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Edit an existing trigger order
-        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Modify-Plan-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/plan/Modify-Plan-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/modify-plan-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
@@ -451,7 +546,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Edit an existing tp/sl order
-        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Modify-Tpsl-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/plan/Modify-Tpsl-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/modify-tpsl-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -480,7 +580,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get open trigger orders
-        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/get-orders-plan-pending" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/plan/get-orders-plan-pending" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/order/orders-plan-pending
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="planType">Plan type</param>
@@ -507,7 +612,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get closed trigger orders
-        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/orders-plan-history" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/plan/orders-plan-history" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/order/orders-plan-history
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="planType">Plan type</param>
@@ -536,7 +646,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Cancel trigger orders matching the parameters
-        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Cancel-Plan-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/plan/Cancel-Plan-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/cancel-plan-order
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="planType">Plan type</param>
@@ -555,7 +670,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Set the Tp/Sl for an open position
-        /// <para><a href="https://www.bitget.com/api-doc/contract/plan/Place-Pos-Tpsl-Order" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/plan/Place-Pos-Tpsl-Order" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/order/place-pos-tpsl
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>

@@ -17,6 +17,20 @@ namespace Bitget.Net
     public static class BitgetExchange
     {
         /// <summary>
+        /// Platform metadata
+        /// </summary>
+        public static PlatformInfo Metadata { get; } = new PlatformInfo(
+                "Bitget",
+                "Bitget",
+                "https://raw.githubusercontent.com/JKorf/Bitget.Net/master/Bitget.Net/Icon/icon.png",
+                "https://www.bitget.com",
+                ["https://bitgetlimited.github.io/apidoc/en/mix/#welcome",
+                 "https://www.bitget.com/api-doc"],
+                PlatformType.CryptoCurrencyExchange,
+                CentralizationType.Centralized
+                );
+
+        /// <summary>
         /// Exchange name
         /// </summary>
         public static string ExchangeName => "Bitget";

@@ -12,7 +12,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
     {
         /// <summary>
         /// Get balance
-        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Single-Account" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/account/Get-Single-Account" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/account/account
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -23,7 +28,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get balances
-        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-List" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/account/Get-Account-List" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/account/accounts
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="ct">Cancellation token</param>
@@ -32,7 +42,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Set leverage
-        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Leverage" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/account/Change-Leverage" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/account/set-leverage
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -47,7 +62,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Adjust margin
-        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Margin" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/account/Change-Margin" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/account/set-margin
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -60,7 +80,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Set margin mode
-        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Margin-Mode" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/account/Change-Margin-Mode" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/account/set-margin-mode
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -72,7 +97,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Set position mode
-        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Change-Hold-Mode" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/account/Change-Hold-Mode" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/mix/account/set-position-mode
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="mode">Position mode</param>
@@ -82,7 +112,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get account ledger
-        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Account-Bill" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/account/Get-Account-Bill" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/account/bill
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="asset">Filter by asset, for example `USDT`</param>
@@ -97,7 +132,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get Auto deleverage rank
-        /// <para><a href="https://www.bitget.com/api-doc/contract/position/Get-ADL-Rank" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/position/Get-ADL-Rank" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/position/adlRank
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="ct">Cancellation token</param>
@@ -106,7 +146,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Get liquidation price
-        /// <para><a href="https://www.bitget.com/api-doc/contract/account/Get-Liquidation-Price" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/account/Get-Liquidation-Price" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/mix/account/liq-price
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>

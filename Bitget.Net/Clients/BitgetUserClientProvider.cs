@@ -10,8 +10,8 @@ namespace Bitget.Net.Clients
     /// <inheritdoc />
     public class BitgetUserClientProvider : IBitgetUserClientProvider
     {
-        private static ConcurrentDictionary<string, IBitgetRestClient> _restClients = new ConcurrentDictionary<string, IBitgetRestClient>();
-        private static ConcurrentDictionary<string, IBitgetSocketClient> _socketClients = new ConcurrentDictionary<string, IBitgetSocketClient>();
+        private ConcurrentDictionary<string, IBitgetRestClient> _restClients = new ConcurrentDictionary<string, IBitgetRestClient>();
+        private ConcurrentDictionary<string, IBitgetSocketClient> _socketClients = new ConcurrentDictionary<string, IBitgetSocketClient>();
 
         private readonly IOptions<BitgetRestOptions> _restOptions;
         private readonly IOptions<BitgetSocketOptions> _socketOptions;
@@ -40,6 +40,7 @@ namespace Bitget.Net.Clients
             IOptions<BitgetSocketOptions> socketOptions)
         {
             _httpClient = httpClient ?? new HttpClient();
+            _httpClient.Timeout = restOptions.Value.RequestTimeout;
             _loggerFactory = loggerFactory;
             _restOptions = restOptions;
             _socketOptions = socketOptions;
@@ -62,7 +63,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public IBitgetRestClient GetRestClient(string userIdentifier, ApiCredentials? credentials = null, BitgetEnvironment? environment = null)
         {
-            if (!_restClients.TryGetValue(userIdentifier, out var client))
+            if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateRestClient(userIdentifier, credentials, environment);
 
             return client;
@@ -71,7 +72,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public IBitgetSocketClient GetSocketClient(string userIdentifier, ApiCredentials? credentials = null, BitgetEnvironment? environment = null)
         {
-            if (!_socketClients.TryGetValue(userIdentifier, out var client))
+            if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateSocketClient(userIdentifier, credentials, environment);
 
             return client;

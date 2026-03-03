@@ -46,8 +46,6 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
         }
 
         /// <inheritdoc />
-        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
-        /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
         public BitgetRestClientCopyTradingApi SharedClient => this;

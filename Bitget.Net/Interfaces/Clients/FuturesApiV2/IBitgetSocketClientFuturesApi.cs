@@ -18,7 +18,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         
         /// <summary>
         /// Subscribe to ticker updates for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Tickers-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/public/Tickers-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: ticker)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
@@ -29,7 +34,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to ticker updates for multiple symbols
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Tickers-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/public/Tickers-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: ticker)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
@@ -40,7 +50,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to trade updates for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: trade)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
@@ -51,7 +66,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to trade updates for multiple symbols
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/public/New-Trades-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: trade)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
@@ -62,7 +82,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to kline/candlestick updates for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: candle{interval})
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
@@ -74,7 +99,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to kline/candlestick updates for symbols
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/public/Candlesticks-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: candle{interval})
+        /// </para>
         /// </summary>
         /// <param name="productType"></param>
         /// <param name="symbols">Symbols, for example `ETHUSDT`</param>
@@ -86,7 +116,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to order book updates for a symbol
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Order-Book-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/public/Order-Book-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: books{depth})
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbol">Symbols, for example `ETHUSDT`</param>
@@ -98,7 +133,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to order book updates for symbols
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/public/Order-Book-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/public/Order-Book-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/public (channel: books{depth})
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="symbols">Symbols, for example `ETHUSDT`</param>
@@ -110,7 +150,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to account balance updates
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/Account-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/private/Account-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: account)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="handler">The handler for the data</param>
@@ -120,7 +165,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to position updates
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/Positions-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/private/Positions-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: positions)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="handler">The handler for the data</param>
@@ -130,7 +180,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to user trade updates
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/Positions-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/private/Positions-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: fill)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="handler">The handler for the data</param>
@@ -140,7 +195,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to user order updates
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/Positions-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/private/Positions-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: orders)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="handler">The handler for the data</param>
@@ -150,7 +210,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to trigger order updates
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/Plan-Order-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/private/Plan-Order-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: orders-algo)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="handler">The handler for the data</param>
@@ -160,7 +225,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to position history/closing updates
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/History-Positions-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/private/History-Positions-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: positions-history)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="handler">The handler for the data</param>
@@ -170,7 +240,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to equity updates
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/Equity-Channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/private/Equity-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: equity)
+        /// </para>
         /// </summary>
         /// <param name="productType">Product type</param>
         /// <param name="handler">The handler for the data</param>
@@ -179,8 +254,13 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
 
         /// <summary>
         /// Subscribe to ADL notification updates
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/contract/websocket/private/ADL-Notification-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v2/ws/private (channel: adl-noti)
+        /// </para>
         /// </summary>
-        /// <para><a href="https://www.bitget.com/api-doc/contract/websocket/private/ADL-Notification-Channel" /></para>
         /// <param name="productType">Product type</param>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
