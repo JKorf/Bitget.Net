@@ -198,6 +198,9 @@
         <member name="P:Bitget.Net.Clients.BitgetRestClient.CopyTradingFuturesV2">
             <inheritdoc />
         </member>
+        <member name="P:Bitget.Net.Clients.BitgetRestClient.BrokerV2">
+            <inheritdoc />
+        </member>
         <member name="M:Bitget.Net.Clients.BitgetRestClient.#ctor(System.Action{Bitget.Net.Objects.Options.BitgetRestOptions})">
             <summary> 
             Create a new instance of BitgetRestClient
@@ -285,6 +288,21 @@
             <inheritdoc />
         </member>
         <member name="M:Bitget.Net.Clients.BitgetUserClientProvider.GetSocketClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Bitget.Net.BitgetEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="T:Bitget.Net.Clients.BrokerApiV2.BitgetRestClientBrokerApi">
+            <inheritdoc />
+        </member>
+        <member name="P:Bitget.Net.Clients.BrokerApiV2.BitgetRestClientBrokerApi.ExchangeName">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.BrokerApiV2.BitgetRestClientBrokerApi.CreateSerializer">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.BrokerApiV2.BitgetRestClientBrokerApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Bitget.Net.Clients.BrokerApiV2.BitgetRestClientBrokerApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="T:Bitget.Net.Clients.CopyTradingApiV2.BitgetRestClientCopyTradingApi">
@@ -1019,6 +1037,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetProductTypeV2">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.SymbolStatus">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -1315,6 +1338,16 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetBgbDeduct">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetBrokerAgentCustomerArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetResponseBitgetBrokerAgentDirectCommissions">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -1855,6 +1888,31 @@
             </summary>
         </member>
         <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetBgbDeductArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetBrokerAgentCustomer">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetBrokerAgentCustomerArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetBrokerAgentDirectCommissionItem">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetBrokerAgentDirectCommissionItemArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Converters.BitgetSourceGenerationContext.BitgetBrokerAgentDirectCommissions">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -4957,6 +5015,41 @@
             <summary>
             Trailing TP/SL
             </summary>
+        </member>
+        <member name="T:Bitget.Net.Interfaces.Clients.BrokerApiV2.IBitgetRestClientBrokerApi">
+            <summary>
+            Broker API endpoints
+            </summary>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.BrokerApiV2.IBitgetRestClientBrokerApi.GetAgentDirectCommissionsAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Int32,System.Nullable{System.Int64},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get Agent Direct commissions
+            <para><a href="https://www.bitget.com/api-doc/classic/affiliate/customerInfo/GetDirectCommissions" /></para>
+            <para><a href="https://www.bitget.com/zh-CN/api-doc/classic/affiliate/customerInfo/GetDirectCommissions" /></para>
+            </summary>
+            <param name="startTime">Start time (The maximum time span supported is three months. The default end time is three months if no value is set for the end time. )</param>
+            <param name="endTime">End time (The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. )</param>
+            <param name="idLessThan">Retrieve data before this ID</param>
+            <param name="limit">Number of quiries, 100 default, Max 1000</param>
+            <param name="uid">User Id</param>
+            <param name="coin">Coin, e.g: BTC</param>
+            <param name="symbol">Coin, e.g: BGBUSDT_SPBL spot</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Bitget.Net.Interfaces.Clients.BrokerApiV2.IBitgetRestClientBrokerApi.GetAgentCustomerListAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32,System.Nullable{System.Int64},System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Get agent customers
+            <para><a href="https://www.bitget.com/api-doc/classic/affiliate/customerInfo/GetCustomerList" /></para>
+            <para><a href="https://www.bitget.com/zh-CN/api-doc/classic/affiliate/customerInfo/GetCustomerList" /></para>
+            </summary>
+            <param name="startTime">Start time (The maximum time span supported is three months. The default end time is three months if no value is set for the end time. )</param>
+            <param name="endTime">End time (The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. )</param>
+            <param name="pageNo">Current page number</param>
+            <param name="pageSize">Number of quiries, 100 default, Max 1000</param>
+            <param name="uid">User Id</param>
+            <param name="referralCode">Referral code</param>
+            <param name="showSub">Whether to Display Subordinate User Information of Direct Clients</param>
+            <param name="ct">Cancellation token</param>
         </member>
         <member name="T:Bitget.Net.Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApi">
             <summary>
@@ -8749,6 +8842,131 @@
         <member name="P:Bitget.Net.Objects.Models.V2.BitgetBgbDeduct.Enabled">
             <summary>
             Deduct enabled
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentCustomer">
+            <summary>
+            Agent customer
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentCustomer.Uid">
+            <summary>
+            User Id
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentCustomer.RegisterTime">
+            <summary>
+            Register time
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem">
+            <summary>
+            Agent customer
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.Uid">
+            <summary>
+            Referred User UID
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.Date">
+            <summary>
+            Commission return date (UTC+8)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.Coin">
+            <summary>
+            coin
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.Symbol">
+            <summary>
+            symbol
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.ProductType">
+            <summary>
+            productType
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.DealAmount">
+            <summary>
+            Trading amount(maker+taker)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.Fee">
+            <summary>
+            Trading fee(maker+taker)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.FeeDeduction">
+            <summary>
+            Trading fee deducted(maker+taker)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.ActivityBonusDeduct">
+            <summary>
+            Fees offset by experience funds
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.SpotCouponDeduct">
+            <summary>
+            Fees offset by spot cashback coupons
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.FuturesCouponDeduct">
+            <summary>
+            Fees offset by contract airdrop coupons
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.SpotFeeDiscountDeduct">
+            <summary>
+            Fees reduced by spot fee discounts
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.NegativeMakerFeeDeduct">
+            <summary>
+            Fees offset by negative maker fees
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.FeePaid">
+            <summary>
+            Fees actually paid(maker+taker)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.RebateAmount">
+            <summary>
+            Partner's commission(maker+taker)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.UserTotalRebateAmount">
+            <summary>
+            User's commission(maker+taker)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.DayTotalRebateAmount">
+            <summary>
+            Total commission for the day.(maker+taker)
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissionItem.TotalRebateAmount">
+            <summary>
+            Total commission accumulated over all days(maker+taker)
+            </summary>
+        </member>
+        <member name="T:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissions">
+            <summary>
+            Agent customer
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissions.CommissionList">
+            <summary>
+            Commission List
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Models.V2.BitgetBrokerAgentDirectCommissions.EndId">
+            <summary>
+            Last data ID. Used as an index for querying data when making a request
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Models.V2.BitgetCancelOrderRequest">
@@ -14720,6 +14938,11 @@
         <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.CopyTradingOptions">
             <summary>
             Copy Trading API options
+            </summary>
+        </member>
+        <member name="P:Bitget.Net.Objects.Options.BitgetRestOptions.BrokerOptions">
+            <summary>
+            Broker API options
             </summary>
         </member>
         <member name="T:Bitget.Net.Objects.Options.BitgetSocketOptions">
