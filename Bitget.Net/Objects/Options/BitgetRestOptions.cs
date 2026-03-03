@@ -48,6 +48,11 @@ namespace Bitget.Net.Objects.Options
         /// </summary>
         public RestApiOptions CopyTradingOptions { get; private set; } = new RestApiOptions();
 
+        /// <summary>
+        /// Broker API options
+        /// </summary>
+        public RestApiOptions BrokerOptions { get; private set; } = new RestApiOptions();
+
         internal BitgetRestOptions Set(BitgetRestOptions targetOptions)
         {
             targetOptions = base.Set(targetOptions);
@@ -55,6 +60,7 @@ namespace Bitget.Net.Objects.Options
             targetOptions.FuturesOptions = FuturesOptions.Set(targetOptions.FuturesOptions);
             targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
             targetOptions.CopyTradingOptions = CopyTradingOptions.Set(targetOptions.CopyTradingOptions);
+            targetOptions.BrokerOptions = BrokerOptions.Set(targetOptions.BrokerOptions);
             return targetOptions;
         }
     }
