@@ -18,20 +18,20 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/place-order
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="side">Order side</param>
-        /// <param name="type">Order type</param>
-        /// <param name="quantity">Quantity. For limit and market-sell orders this is in base asset, for market-buy orders it is in quote asset.</param>
-        /// <param name="timeInForce">Time in force</param>
-        /// <param name="price">Limit price</param>
-        /// <param name="clientOrderId">Client order id</param>
-        /// <param name="triggerPrice">Trigger price</param>
-        /// <param name="tpslType">Tpsl type</param>
-        /// <param name="stpMode">Self trade prevention mode</param>
-        /// <param name="presetTakeProfitPrice">Take profit price</param>
-        /// <param name="executeTakeProfitPrice">Take profit execute price</param>
-        /// <param name="presetStopLossPrice">Stop loss price</param>
-        /// <param name="executeStopLossPrice">Stop loss execute price</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="side">["<c>side</c>"] Order side</param>
+        /// <param name="type">["<c>orderType</c>"] Order type</param>
+        /// <param name="quantity">["<c>size</c>"] Quantity. For limit and market-sell orders this is in base asset, for market-buy orders it is in quote asset.</param>
+        /// <param name="timeInForce">["<c>force</c>"] Time in force</param>
+        /// <param name="price">["<c>price</c>"] Limit price</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id</param>
+        /// <param name="triggerPrice">["<c>triggerPrice</c>"] Trigger price</param>
+        /// <param name="tpslType">["<c>tpslType</c>"] Tpsl type</param>
+        /// <param name="stpMode">["<c>stpMode</c>"] Self trade prevention mode</param>
+        /// <param name="presetTakeProfitPrice">["<c>presetTakeProfitPrice</c>"] Take profit price</param>
+        /// <param name="executeTakeProfitPrice">["<c>executeTakeProfitPrice</c>"] Take profit execute price</param>
+        /// <param name="presetStopLossPrice">["<c>presetStopLossPrice</c>"] Stop loss price</param>
+        /// <param name="executeStopLossPrice">["<c>executeStopLossPrice</c>"] Stop loss execute price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> PlaceOrderAsync(
@@ -60,8 +60,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/batch-orders
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orders">Orders to place</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orders">["<c>orderList</c>"] Orders to place</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
@@ -78,16 +78,16 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/cancel-replace-order
         /// </para>
         /// </summary>
-        /// <param name="orderId">Order id of order to cancel. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id of order to cancel. Either this or orderId should be provided</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="quantity">Quantity</param>
-        /// <param name="price">Limit price</param>
-        /// <param name="newClientOrderId">New client order id</param>
-        /// <param name="presetTakeProfitPrice">Take profit price</param>
-        /// <param name="executeTakeProfitPrice">Take profit execute price</param>
-        /// <param name="presetStopLossPrice">Stop loss price</param>
-        /// <param name="executeStopLossPrice">Stop loss execute price</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id of order to cancel. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id of order to cancel. Either this or orderId should be provided</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="quantity">["<c>size</c>"] Quantity</param>
+        /// <param name="price">["<c>price</c>"] Limit price</param>
+        /// <param name="newClientOrderId">["<c>newClientOid</c>"] New client order id</param>
+        /// <param name="presetTakeProfitPrice">["<c>presetTakeProfitPrice</c>"] Take profit price</param>
+        /// <param name="executeTakeProfitPrice">["<c>executeTakeProfitPrice</c>"] Take profit execute price</param>
+        /// <param name="presetStopLossPrice">["<c>presetStopLossPrice</c>"] Stop loss price</param>
+        /// <param name="executeStopLossPrice">["<c>executeStopLossPrice</c>"] Stop loss execute price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> CancelReplaceOrderAsync(
@@ -112,7 +112,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/batch-cancel-replace-order
         /// </para>
         /// </summary>
-        /// <param name="orders">Orders to cancel and replace</param>
+        /// <param name="orders">["<c>orderList</c>"] Orders to cancel and replace</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderIdResult[]>> CancelReplaceMultipleOrdersAsync(
@@ -128,10 +128,10 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/cancel-order
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
-        /// <param name="tpslType">Tpsl type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id. Either this or orderId should be provided</param>
+        /// <param name="tpslType">["<c>tpslType</c>"] Tpsl type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> CancelOrderAsync(
@@ -150,8 +150,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/batch-cancel-order
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orders">Orders to cancel</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orders">["<c>orderList</c>"] Orders to cancel</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> CancelMultipleOrdersAsync(
@@ -168,7 +168,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/cancel-symbol-order
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> CancelOrdersBySymbolAsync(
@@ -184,8 +184,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/trade/orderInfo
         /// </para>
         /// </summary>
-        /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id. Either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrder[]>> GetOrderAsync(
@@ -202,13 +202,13 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/trade/unfilled-orders
         /// </para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="tpslType">Tpsl type</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="tpslType">["<c>tpslType</c>"] Tpsl type</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrder[]>> GetOpenOrdersAsync(
@@ -230,13 +230,13 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/trade/history-orders
         /// </para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="tpslType">Tpsl type</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="tpslType">["<c>tpslType</c>"] Tpsl type</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrder[]>> GetClosedOrdersAsync(
@@ -258,12 +258,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/trade/fills
         /// </para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetUserTrade[]>> GetUserTradesAsync(
@@ -284,16 +284,16 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/place-plan-order
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="side">Order side</param>
-        /// <param name="type">Order type</param>
-        /// <param name="quantity">Quantity</param>
-        /// <param name="triggerPrice">Trigger price</param>
-        /// <param name="quantityType">Asset the quantity is in</param>
-        /// <param name="triggerPriceType">Trigger price type</param>
-        /// <param name="orderPrice">Order price (when orderType is limit)</param>
-        /// <param name="timeInForce">Time in force</param>
-        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="side">["<c>side</c>"] Order side</param>
+        /// <param name="type">["<c>orderType</c>"] Order type</param>
+        /// <param name="quantity">["<c>size</c>"] Quantity</param>
+        /// <param name="triggerPrice">["<c>triggerPrice</c>"] Trigger price</param>
+        /// <param name="quantityType">["<c>planType</c>"] Asset the quantity is in</param>
+        /// <param name="triggerPriceType">["<c>triggerType</c>"] Trigger price type</param>
+        /// <param name="orderPrice">["<c>executePrice</c>"] Order price (when orderType is limit)</param>
+        /// <param name="timeInForce">["<c>force</c>"] Time in force</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> PlaceTriggerOrderAsync(
@@ -318,12 +318,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/modify-plan-order
         /// </para>
         /// </summary>
-        /// <param name="triggerPrice">Trigger price</param>
-        /// <param name="orderType">Order type</param>
-        /// <param name="quantity">Quantity</param>
-        /// <param name="orderPrice">Order price for limit orders</param>
-        /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client Order id. Either this or orderId should be provided</param>
+        /// <param name="triggerPrice">["<c>triggerPrice</c>"] Trigger price</param>
+        /// <param name="orderType">["<c>orderType</c>"] Order type</param>
+        /// <param name="quantity">["<c>size</c>"] Quantity</param>
+        /// <param name="orderPrice">["<c>executePrice</c>"] Order price for limit orders</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client Order id. Either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> EditTriggerOrderAsync(
@@ -344,8 +344,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/cancel-plan-order
         /// </para>
         /// </summary>
-        /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client Order id. Either this or orderId should be provided</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client Order id. Either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> CancelTriggerOrderAsync(
@@ -362,7 +362,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/trade/batch-cancel-plan-order
         /// </para>
         /// </summary>
-        /// <param name="symbols">Only cancel trigger orders on these symbols, for example `ETHUSDT`</param>
+        /// <param name="symbols">["<c>symbols</c>"] Only cancel trigger orders on these symbols, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> CancelAllTriggerOrdersAsync(
@@ -378,11 +378,11 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/trade/current-plan-order
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderList>> GetOpenTriggerOrdersAsync(
@@ -402,7 +402,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/trade/plan-sub-order
         /// </para>
         /// </summary>
-        /// <param name="triggerOrderId">Trigger order id</param>
+        /// <param name="triggerOrderId">["<c>planOrderId</c>"] Trigger order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
@@ -418,10 +418,10 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/trade/history-plan-order
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderList>> GetClosedTriggerOrdersAsync(
