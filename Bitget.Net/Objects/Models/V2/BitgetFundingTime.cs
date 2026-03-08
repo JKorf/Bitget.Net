@@ -10,17 +10,17 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetFundingTime
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Next funding time
+        /// ["<c>nextFundingTime</c>"] Next funding time
         /// </summary>
         [JsonPropertyName("nextFundingTime")]
         public DateTime? NextFundingTime { get; set; }
         /// <summary>
-        /// Rate settlement cycle in hours
+        /// ["<c>ratePeriod</c>"] Rate settlement cycle in hours
         /// </summary>
         [JsonPropertyName("ratePeriod"), JsonConverter(typeof(IntConverter))]
         public int? RatePeriod { get; set; }

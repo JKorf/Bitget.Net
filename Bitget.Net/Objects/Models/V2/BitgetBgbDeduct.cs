@@ -10,7 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetBgbDeduct
     {
         /// <summary>
-        /// Deduct enabled
+        /// ["<c>deduct</c>"] Deduct enabled
         /// </summary>
         [JsonPropertyName("deduct")]
         public bool Enabled { get; set; }

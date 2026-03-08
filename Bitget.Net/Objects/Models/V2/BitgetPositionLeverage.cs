@@ -11,32 +11,32 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetPositionLeverage
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Margin asset
+        /// ["<c>marginCoin</c>"] Margin asset
         /// </summary>
         [JsonPropertyName("marginCoin")]
         public string MarginAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Long position leverage
+        /// ["<c>longLeverage</c>"] Long position leverage
         /// </summary>
         [JsonPropertyName("longLeverage")]
         public decimal? LongLeverage { get; set; }
         /// <summary>
-        /// Short position leverage
+        /// ["<c>shortLeverage</c>"] Short position leverage
         /// </summary>
         [JsonPropertyName("shortLeverage")]
         public decimal? ShortLeverage { get; set; }
         /// <summary>
-        /// Cross margin position leverage
+        /// ["<c>crossMarginLeverage</c>"] Cross margin position leverage
         /// </summary>
         [JsonPropertyName("crossMarginLeverage")]
         public decimal? CrossMarginLeverage { get; set; }
         /// <summary>
-        /// Margin mode
+        /// ["<c>marginMode</c>"] Margin mode
         /// </summary>
         [JsonPropertyName("marginMode")]
         public MarginMode MarginMode { get; set; }

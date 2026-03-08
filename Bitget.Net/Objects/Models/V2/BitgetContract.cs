@@ -11,177 +11,177 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetContract
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Base asset
+        /// ["<c>baseCoin</c>"] Base asset
         /// </summary>
         [JsonPropertyName("baseCoin")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset
+        /// ["<c>quoteCoin</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quoteCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Max percentage spread between buy limit price and current price
+        /// ["<c>buyLimitPriceRatio</c>"] Max percentage spread between buy limit price and current price
         /// </summary>
         [JsonPropertyName("buyLimitPriceRatio")]
         public decimal BuyLimitPriceRatio { get; set; }
         /// <summary>
-        /// Max percentage spread between sell limit price and current price
+        /// ["<c>sellLimitPriceRatio</c>"] Max percentage spread between sell limit price and current price
         /// </summary>
         [JsonPropertyName("sellLimitPriceRatio")]
         public decimal SellLimitPriceRatio { get; set; }
         /// <summary>
-        /// Transaction fee increase ratio
+        /// ["<c>feeRateUpRatio</c>"] Transaction fee increase ratio
         /// </summary>
         [JsonPropertyName("feeRateUpRatio")]
         public decimal FeeRateUpRatio { get; set; }
         /// <summary>
-        /// Maker fee rate
+        /// ["<c>makerFeeRate</c>"] Maker fee rate
         /// </summary>
         [JsonPropertyName("makerFeeRate")]
         public decimal MakerFeeRate { get; set; }
         /// <summary>
-        /// Taker fee rate
+        /// ["<c>takerFeeRate</c>"] Taker fee rate
         /// </summary>
         [JsonPropertyName("takerFeeRate")]
         public decimal TakerFeeRate { get; set; }
         /// <summary>
-        /// Opening cost increase ratio
+        /// ["<c>openCostUpRatio</c>"] Opening cost increase ratio
         /// </summary>
         [JsonPropertyName("openCostUpRatio")]
         public decimal OpenCostUpRatio { get; set; }
         /// <summary>
-        /// Supported margin assets
+        /// ["<c>supportMarginCoins</c>"] Supported margin assets
         /// </summary>
         [JsonPropertyName("supportMarginCoins")]
         public string[] SupportMarginAsset { get; set; } = Array.Empty<string>();
         /// <summary>
-        /// Minimal position open quantity
+        /// ["<c>minTradeNum</c>"] Minimal position open quantity
         /// </summary>
         [JsonPropertyName("minTradeNum")]
         public decimal MinOrderQuantity { get; set; }
         /// <summary>
-        /// Price step
+        /// ["<c>priceEndStep</c>"] Price step
         /// </summary>
         [JsonPropertyName("priceEndStep")]
         public decimal PriceStep { get; set; }
         /// <summary>
-        /// Quantity decimal places
+        /// ["<c>volumePlace</c>"] Quantity decimal places
         /// </summary>
         [JsonPropertyName("volumePlace")]
         public int QuantityDecimals { get; set; }
         /// <summary>
-        /// Price decimal places
+        /// ["<c>pricePlace</c>"] Price decimal places
         /// </summary>
         [JsonPropertyName("pricePlace")]
         public int PriceDecimals { get; set; }
         /// <summary>
-        /// Quantity step
+        /// ["<c>sizeMultiplier</c>"] Quantity step
         /// </summary>
         [JsonPropertyName("sizeMultiplier")]
         public decimal QuantityStep { get; set; }
         /// <summary>
-        /// Contract type
+        /// ["<c>symbolType</c>"] Contract type
         /// </summary>
         [JsonPropertyName("symbolType")]
         public ContractType ContractType { get; set; }
         /// <summary>
-        /// Minimal trade value in USDT
+        /// ["<c>minTradeUSDT</c>"] Minimal trade value in USDT
         /// </summary>
         [JsonPropertyName("minTradeUSDT")]
         public decimal MinTradeValue { get; set; }
         /// <summary>
-        /// Max open orders on symbol
+        /// ["<c>maxSymbolOrderNum</c>"] Max open orders on symbol
         /// </summary>
         [JsonPropertyName("maxSymbolOrderNum")]
         public int MaxSymbolOpenOrders { get; set; }
         /// <summary>
-        /// Max open orders on product
+        /// ["<c>maxProductOrderNum</c>"] Max open orders on product
         /// </summary>
         [JsonPropertyName("maxProductOrderNum")]
         public int MaxProductOpenOrders { get; set; }
         /// <summary>
-        /// Max number of positions
+        /// ["<c>maxPositionNum</c>"] Max number of positions
         /// </summary>
         [JsonPropertyName("maxPositionNum")]
         public int MaxPositions { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>symbolStatus</c>"] Status
         /// </summary>
         [JsonPropertyName("symbolStatus")]
         public FuturesSymbolStatus Status { get; set; }
         /// <summary>
-        /// Removal time
+        /// ["<c>offTime</c>"] Removal time
         /// </summary>
         [JsonPropertyName("offTime")]
         public DateTime? OfflineTime { get; set; }
         /// <summary>
-        /// Planned order restriction time
+        /// ["<c>limitOpenTime</c>"] Planned order restriction time
         /// </summary>
         [JsonPropertyName("limitOpenTime")]
         public DateTime? LimitOpenTime { get; set; }
         /// <summary>
-        /// Delivery time
+        /// ["<c>deliveryTime</c>"] Delivery time
         /// </summary>
         [JsonPropertyName("deliveryTime")]
         public DateTime? DeliveryTime { get; set; }
         /// <summary>
-        /// Delivery start time
+        /// ["<c>deliveryStartTime</c>"] Delivery start time
         /// </summary>
         [JsonPropertyName("deliveryStartTime")]
         public DateTime? DeliveryStartTime { get; set; }
         /// <summary>
-        /// Delivery period
+        /// ["<c>deliveryPeriod</c>"] Delivery period
         /// </summary>
         [JsonPropertyName("deliveryPeriod")]
         public DeliveryPeriod? DeliveryPeriod { get; set; }
         /// <summary>
-        /// Listing time
+        /// ["<c>launchTime</c>"] Listing time
         /// </summary>
         [JsonPropertyName("launchTime")]
         public DateTime? LaunchTime { get; set; }
         /// <summary>
-        /// Funding interval
+        /// ["<c>fundInterval</c>"] Funding interval
         /// </summary>
         [JsonPropertyName("fundInterval"), System.Text.Json.Serialization.JsonConverter(typeof(IntConverter))]
         public int? FundingInterval { get; set; }
         /// <summary>
-        /// Minimal leverage
+        /// ["<c>minLever</c>"] Minimal leverage
         /// </summary>
         [JsonPropertyName("minLever")]
         public decimal? MinLeverage { get; set; }
         /// <summary>
-        /// Maximal leverage
+        /// ["<c>maxLever</c>"] Maximal leverage
         /// </summary>
         [JsonPropertyName("maxLever")]
         public decimal? MaxLeverage { get; set; }
         /// <summary>
-        /// Position limit
+        /// ["<c>posLimit</c>"] Position limit
         /// </summary>
         [JsonPropertyName("posLimit")]
         public decimal? PosLimit { get; set; }
         /// <summary>
-        /// Planned maintenance time
+        /// ["<c>maintainTime</c>"] Planned maintenance time
         /// </summary>
         [JsonPropertyName("maintainTime")]
         public DateTime? MaintenanceTime { get; set; }
         /// <summary>
-        /// Max size for a market order
+        /// ["<c>maxMarketOrderQty</c>"] Max size for a market order
         /// </summary>
         [JsonPropertyName("maxMarketOrderQty")]
         public decimal? MaxMarketOrderQuantity { get; set; }
         /// <summary>
-        /// Max size for a limit order
+        /// ["<c>maxOrderQty</c>"] Max size for a limit order
         /// </summary>
         [JsonPropertyName("maxOrderQty")]
         public decimal? MaxLimitOrderQuantity { get; set; }
         /// <summary>
-        /// Is RWA
+        /// ["<c>isRwa</c>"] Is RWA
         /// </summary>
         [JsonPropertyName("isRwa")]
         public bool IsRwa { get; set; }

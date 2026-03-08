@@ -10,12 +10,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetOrderId
     {
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Client order id
+        /// ["<c>clientOid</c>"] Client order id
         /// </summary>
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
@@ -34,12 +34,12 @@ namespace Bitget.Net.Objects.Models.V2
         public bool Success => Status == "success";
 
         /// <summary>
-        /// Status
+        /// ["<c>success</c>"] Status
         /// </summary>
         [JsonPropertyName("success")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// Error message
+        /// ["<c>msg</c>"] Error message
         /// </summary>
         [JsonPropertyName("msg")]
         public string? ErrorMessage { get; set; }

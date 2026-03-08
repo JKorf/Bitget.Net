@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
 {
@@ -8,17 +8,17 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetPositionTpSl
     {
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Take profit client order id
+        /// ["<c>stopSurplusClientOid</c>"] Take profit client order id
         /// </summary>
         [JsonPropertyName("stopSurplusClientOid")]
         public string? TakeProfitClientOrderId { get; set; }
         /// <summary>
-        /// Stop loss client order id
+        /// ["<c>stopLossClientOid</c>"] Stop loss client order id
         /// </summary>
         [JsonPropertyName("stopLossClientOid")]
         public string? StopLossClientOrderId { get; set; }

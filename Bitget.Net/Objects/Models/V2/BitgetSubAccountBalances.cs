@@ -10,17 +10,17 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetSubAccountBalances
     {
         /// <summary>
-        /// Cursor id
+        /// ["<c>id</c>"] Cursor id
         /// </summary>
         [JsonPropertyName("id")]
         public string? CursorId { get; set; }
         /// <summary>
-        /// User id
+        /// ["<c>userId</c>"] User id
         /// </summary>
         [JsonPropertyName("userId")]
         public long UserId { get; set; }
         /// <summary>
-        /// Assets
+        /// ["<c>assetsList</c>"] Assets
         /// </summary>
         [JsonPropertyName("assetsList")]
         public BitgetSubAccountBalance[] Assets { get; set; } = Array.Empty<BitgetSubAccountBalance>();
@@ -33,32 +33,32 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetSubAccountBalance
     {
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Available
+        /// ["<c>available</c>"] Available
         /// </summary>
         [JsonPropertyName("available")]
         public decimal Available { get; set; }
         /// <summary>
-        /// Restricted availability, for spot copy trading
+        /// ["<c>limitAvailable</c>"] Restricted availability, for spot copy trading
         /// </summary>
         [JsonPropertyName("limitAvailable")]
         public decimal LimitAvailable { get; set; }
         /// <summary>
-        /// Frozen
+        /// ["<c>frozen</c>"] Frozen
         /// </summary>
         [JsonPropertyName("frozen")]
         public decimal Frozen { get; set; }
         /// <summary>
-        /// Locked
+        /// ["<c>locked</c>"] Locked
         /// </summary>
         [JsonPropertyName("locked")]
         public decimal Locked { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime UpdateTime { get; set; }

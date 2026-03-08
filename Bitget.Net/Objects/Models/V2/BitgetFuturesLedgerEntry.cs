@@ -10,12 +10,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetFuturesLedger
     {
         /// <summary>
-        /// The final transaction ID.
+        /// ["<c>endId</c>"] The final transaction ID.
         /// </summary>
         [JsonPropertyName("endId")]
         public long? EndId { get; set; }
         /// <summary>
-        /// Entries
+        /// ["<c>bills</c>"] Entries
         /// </summary>
         [JsonPropertyName("bills")]
         public BitgetFuturesLedgerEntry[] Entries { get; set; } = Array.Empty<BitgetFuturesLedgerEntry>();
@@ -28,47 +28,47 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetFuturesLedgerEntry
     {
         /// <summary>
-        /// Bill id
+        /// ["<c>billId</c>"] Bill id
         /// </summary>
         [JsonPropertyName("billId")]
         public long Id { get; set; }
         /// <summary>
-        /// Timestamp
+        /// ["<c>cTime</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Business type
+        /// ["<c>businessType</c>"] Business type
         /// </summary>
         [JsonPropertyName("businessType")]
         public string BusinessType { get; set; } = string.Empty;
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Fees
+        /// ["<c>fee</c>"] Fees
         /// </summary>
         [JsonPropertyName("fee")]
         public decimal Fees { get; set; }
         /// <summary>
-        /// Fees paid with coupon
+        /// ["<c>feeByCoupon</c>"] Fees paid with coupon
         /// </summary>
         [JsonPropertyName("feeByCoupon")]
         public decimal? CouponFees { get; set; }
         /// <summary>
-        /// Balance
+        /// ["<c>balance</c>"] Balance
         /// </summary>
         [JsonPropertyName("balance")]
         public decimal Balance { get; set; }

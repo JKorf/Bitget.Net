@@ -10,27 +10,27 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetOrderBookUpdate
     {
         /// <summary>
-        /// Asks
+        /// ["<c>asks</c>"] Asks
         /// </summary>
         [JsonPropertyName("asks")]
         public BitgetOrderBookEntry[] Asks { get; set; } = Array.Empty<BitgetOrderBookEntry>();
         /// <summary>
-        /// Bids
+        /// ["<c>bids</c>"] Bids
         /// </summary>
         [JsonPropertyName("bids")]
         public BitgetOrderBookEntry[] Bids { get; set; } = Array.Empty<BitgetOrderBookEntry>();
         /// <summary>
-        /// Timestamp
+        /// ["<c>ts</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("ts")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Checksum
+        /// ["<c>checksum</c>"] Checksum
         /// </summary>
         [JsonPropertyName("checksum")]
         public long Checksum { get; set; }
         /// <summary>
-        /// Sequence number
+        /// ["<c>seq</c>"] Sequence number
         /// </summary>
         [JsonPropertyName("seq")]
         public long? Sequence { get; set; }

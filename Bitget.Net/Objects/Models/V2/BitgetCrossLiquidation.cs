@@ -10,47 +10,47 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossLiquidation
     {
         /// <summary>
-        /// Liquidation id
+        /// ["<c>liqId</c>"] Liquidation id
         /// </summary>
         [JsonPropertyName("liqId")]
         public string LiquidationId { get; set; } = string.Empty;
         /// <summary>
-        /// Liquidation start time
+        /// ["<c>liqStartTime</c>"] Liquidation start time
         /// </summary>
         [JsonPropertyName("liqStartTime")]
         public DateTime LiquidationStartTime { get; set; }
         /// <summary>
-        /// Liquidation end time
+        /// ["<c>liqEndTime</c>"] Liquidation end time
         /// </summary>
         [JsonPropertyName("liqEndTime")]
         public DateTime LiquidationEndTime { get; set; }
         /// <summary>
-        /// Liquidation risk ratio
+        /// ["<c>liqRiskRatio</c>"] Liquidation risk ratio
         /// </summary>
         [JsonPropertyName("liqRiskRatio")]
         public decimal LiquidationRiskRatio { get; set; }
         /// <summary>
-        /// Total assets
+        /// ["<c>totalAssets</c>"] Total assets
         /// </summary>
         [JsonPropertyName("totalAssets")]
         public decimal TotalAssets { get; set; }
         /// <summary>
-        /// Total debt
+        /// ["<c>totalDebt</c>"] Total debt
         /// </summary>
         [JsonPropertyName("totalDebt")]
         public decimal TotalDebt { get; set; }
         /// <summary>
-        /// Liquidation fee
+        /// ["<c>liqFee</c>"] Liquidation fee
         /// </summary>
         [JsonPropertyName("liqFee")]
         public decimal LiquidationFee { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }

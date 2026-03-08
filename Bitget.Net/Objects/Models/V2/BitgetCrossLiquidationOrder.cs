@@ -11,77 +11,77 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossLiquidationOrder
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string? Symbol { get; set; }
         /// <summary>
-        /// Order type
+        /// ["<c>orderType</c>"] Order type
         /// </summary>
         [JsonPropertyName("orderType")]
         public OrderType? OrderType { get; set; }
         /// <summary>
-        /// Side
+        /// ["<c>side</c>"] Side
         /// </summary>
         [JsonPropertyName("side")]
         public MarginOrderSide? OrderSide { get; set; }
         /// <summary>
-        /// Price average
+        /// ["<c>priceAvg</c>"] Price average
         /// </summary>
         [JsonPropertyName("priceAvg")]
         public decimal? PriceAverage { get; set; }
         /// <summary>
-        /// Price
+        /// ["<c>price</c>"] Price
         /// </summary>
         [JsonPropertyName("price")]
         public decimal? Price { get; set; }
         /// <summary>
-        /// Fill quantity
+        /// ["<c>fillSize</c>"] Fill quantity
         /// </summary>
         [JsonPropertyName("fillSize")]
         public decimal? QuantityFilled { get; set; }
         /// <summary>
-        /// Order quantity
+        /// ["<c>size</c>"] Order quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal? Quantity { get; set; }
         /// <summary>
-        /// Quantity filled in quote asset
+        /// ["<c>amount</c>"] Quantity filled in quote asset
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal? QuoteQuantityFilled { get; set; }
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// From asset
+        /// ["<c>fromCoin</c>"] From asset
         /// </summary>
         [JsonPropertyName("fromCoin")]
         public string? FromAsset { get; set; }
         /// <summary>
-        /// To asset
+        /// ["<c>toCoin</c>"] To asset
         /// </summary>
         [JsonPropertyName("toCoin")]
         public string? ToAsset { get; set; }
         /// <summary>
-        /// From quantity
+        /// ["<c>fromSize</c>"] From quantity
         /// </summary>
         [JsonPropertyName("fromSize")]
         public string? FromQuantity { get; set; }
         /// <summary>
-        /// To quantity
+        /// ["<c>toSize</c>"] To quantity
         /// </summary>
         [JsonPropertyName("toSize")]
         public string? ToQuantity { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }

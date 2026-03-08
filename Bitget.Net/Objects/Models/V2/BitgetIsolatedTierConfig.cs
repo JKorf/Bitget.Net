@@ -10,47 +10,47 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetIsolatedTierConfig
     {
         /// <summary>
-        /// Tier
+        /// ["<c>tier</c>"] Tier
         /// </summary>
         [JsonPropertyName("tier")]
         public int Tier { get; set; }
         /// <summary>
-        /// Leverage
+        /// ["<c>leverage</c>"] Leverage
         /// </summary>
         [JsonPropertyName("leverage")]
         public decimal Leverage { get; set; }
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Base asset
+        /// ["<c>baseCoin</c>"] Base asset
         /// </summary>
         [JsonPropertyName("baseCoin")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset
+        /// ["<c>quoteCoin</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quoteCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Base asset max borrowable quantity
+        /// ["<c>baseMaxBorrowableAmount</c>"] Base asset max borrowable quantity
         /// </summary>
         [JsonPropertyName("baseMaxBorrowableAmount")]
         public decimal BaseMaxBorrowableQuantity { get; set; }
         /// <summary>
-        /// Quote asset max borrowable quantity
+        /// ["<c>quoteMaxBorrowableAmount</c>"] Quote asset max borrowable quantity
         /// </summary>
         [JsonPropertyName("quoteMaxBorrowableAmount")]
         public decimal QuoteMaxBorrowableQuantity { get; set; }
         /// <summary>
-        /// Maintain margin rate
+        /// ["<c>maintainMarginRate</c>"] Maintain margin rate
         /// </summary>
         [JsonPropertyName("maintainMarginRate")]
         public decimal MaintainMarginRate { get; set; }
         /// <summary>
-        /// Initial margin rate
+        /// ["<c>initRate</c>"] Initial margin rate
         /// </summary>
         [JsonPropertyName("initRate")]
         public decimal InitialMarginRate { get; set; }

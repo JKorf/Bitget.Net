@@ -11,7 +11,7 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetPositionMode
     {
         /// <summary>
-        /// Position mode
+        /// ["<c>posMode</c>"] Position mode
         /// </summary>
         [JsonPropertyName("posMode")]
         public PositionMode PositionMode { get; set; }

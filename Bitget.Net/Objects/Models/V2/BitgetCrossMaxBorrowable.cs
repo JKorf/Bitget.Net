@@ -10,12 +10,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossMaxBorrowable
     {
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Max borrowable quantity
+        /// ["<c>maxBorrowableAmount</c>"] Max borrowable quantity
         /// </summary>
         [JsonPropertyName("maxBorrowableAmount")]
         public decimal MaxBorrowableQuantity { get; set; }

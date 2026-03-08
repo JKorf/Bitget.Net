@@ -10,32 +10,32 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetFuturesOrderBook
     {
         /// <summary>
-        /// Asks
+        /// ["<c>asks</c>"] Asks
         /// </summary>
         [JsonPropertyName("asks")]
         public BitgetOrderBookEntry[] Asks { get; set; } = Array.Empty<BitgetOrderBookEntry>();
         /// <summary>
-        /// Bids
+        /// ["<c>bids</c>"] Bids
         /// </summary>
         [JsonPropertyName("bids")]
         public BitgetOrderBookEntry[] Bids { get; set; } = Array.Empty<BitgetOrderBookEntry>();
         /// <summary>
-        /// Timestamp
+        /// ["<c>ts</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("ts")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Scale
+        /// ["<c>scale</c>"] Scale
         /// </summary>
         [JsonPropertyName("scale")]
         public decimal Scale { get; set; }
         /// <summary>
-        /// Precision
+        /// ["<c>precision</c>"] Precision
         /// </summary>
         [JsonPropertyName("precision")]
         public string? Precision { get; set; }
         /// <summary>
-        /// Is max precision
+        /// ["<c>isMaxPrecision</c>"] Is max precision
         /// </summary>
         [JsonPropertyName("isMaxPrecision")]
         public bool IsMaxPrecision { get; set; }

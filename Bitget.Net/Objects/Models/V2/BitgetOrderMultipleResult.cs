@@ -10,12 +10,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetOrderMultipleResult
     {
         /// <summary>
-        /// Successful orders
+        /// ["<c>successList</c>"] Successful orders
         /// </summary>
         [JsonPropertyName("successList")]
         public BitgetOrderId[] Success { get; set; } = Array.Empty<BitgetOrderId>();
         /// <summary>
-        /// Failed orders
+        /// ["<c>failureList</c>"] Failed orders
         /// </summary>
         [JsonPropertyName("failureList")]
         public BitgetPlaceFailure[] Failed { get; set; } = Array.Empty<BitgetPlaceFailure>();
@@ -28,22 +28,22 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetPlaceFailure
     {
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Client order id
+        /// ["<c>clientOid</c>"] Client order id
         /// </summary>
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
         /// <summary>
-        /// Error message
+        /// ["<c>errorMsg</c>"] Error message
         /// </summary>
         [JsonPropertyName("errorMsg")]
         public string ErrorMessage { get; set; } = string.Empty;
         /// <summary>
-        /// Error code
+        /// ["<c>errorCode</c>"] Error code
         /// </summary>
         [JsonPropertyName("errorCode"), JsonConverter(typeof(IntConverter))]
         public int? ErrorCode { get; set; }

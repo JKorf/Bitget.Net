@@ -11,77 +11,77 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetWithdrawalRecord
     {
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Transaction id
+        /// ["<c>tradeId</c>"] Transaction id
         /// </summary>
         [JsonPropertyName("tradeId")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Destination
+        /// ["<c>dest</c>"] Destination
         /// </summary>
         [JsonPropertyName("dest")]
         public string Destination { get; set; } = string.Empty;
         /// <summary>
-        /// Client order id
+        /// ["<c>clientOid</c>"] Client order id
         /// </summary>
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
         /// <summary>
-        /// Tag
+        /// ["<c>tag</c>"] Tag
         /// </summary>
         [JsonPropertyName("tag")]
         public string? Tag { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>size</c>"] Quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Fee
+        /// ["<c>fee</c>"] Fee
         /// </summary>
         [JsonPropertyName("fee")]
         public decimal Fee { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public TransferStatus Status { get; set; }
         /// <summary>
-        /// Target address
+        /// ["<c>toAddress</c>"] Target address
         /// </summary>
         [JsonPropertyName("toAddress")]
         public string ToAddress { get; set; } = string.Empty;
         /// <summary>
-        /// From address
+        /// ["<c>fromAddress</c>"] From address
         /// </summary>
         [JsonPropertyName("fromAddress")]
         public string FromAddress { get; set; } = string.Empty;
         /// <summary>
-        /// Number of confirmed blocks
+        /// ["<c>confirm</c>"] Number of confirmed blocks
         /// </summary>
         [JsonPropertyName("confirm"), JsonConverter(typeof(IntConverter))]
         public int? Confirmations { get; set; }
         /// <summary>
-        /// Network
+        /// ["<c>chain</c>"] Network
         /// </summary>
         [JsonPropertyName("chain")]
         public string? Network { get; set; }
         /// <summary>
-        /// Creation time
+        /// ["<c>cTime</c>"] Creation time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Last update time
+        /// ["<c>uTime</c>"] Last update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }

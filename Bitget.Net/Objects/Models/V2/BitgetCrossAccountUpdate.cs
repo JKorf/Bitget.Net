@@ -10,42 +10,42 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossAccountUpdate
     {
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime UpdateTime { get; set; }
         /// <summary>
-        /// Id
+        /// ["<c>id</c>"] Id
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Available
+        /// ["<c>available</c>"] Available
         /// </summary>
         [JsonPropertyName("available")]
         public decimal Available { get; set; }
         /// <summary>
-        /// Borrow
+        /// ["<c>borrow</c>"] Borrow
         /// </summary>
         [JsonPropertyName("borrow")]
         public decimal Borrow { get; set; }
         /// <summary>
-        /// Frozen
+        /// ["<c>frozen</c>"] Frozen
         /// </summary>
         [JsonPropertyName("frozen")]
         public decimal Frozen { get; set; }
         /// <summary>
-        /// Interest
+        /// ["<c>interest</c>"] Interest
         /// </summary>
         [JsonPropertyName("interest")]
         public decimal Interest { get; set; }
         /// <summary>
-        /// Coupon
+        /// ["<c>coupon</c>"] Coupon
         /// </summary>
         [JsonPropertyName("coupon")]
         public decimal Coupon { get; set; }

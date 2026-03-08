@@ -10,22 +10,22 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetBalance
     {
         /// <summary>
-        /// Asset name
+        /// ["<c>coin</c>"] Asset name
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Available quantity
+        /// ["<c>available</c>"] Available quantity
         /// </summary>
         [JsonPropertyName("available")]
         public decimal Available { get; set; }
         /// <summary>
-        /// Frozen quantity
+        /// ["<c>frozen</c>"] Frozen quantity
         /// </summary>
         [JsonPropertyName("frozen")]
         public decimal? Frozen { get; set; }
         /// <summary>
-        /// Usdt value
+        /// ["<c>usdtValue</c>"] Usdt value
         /// </summary>
         [JsonPropertyName("usdtValue")]
         public decimal UsdtValue { get; set; }

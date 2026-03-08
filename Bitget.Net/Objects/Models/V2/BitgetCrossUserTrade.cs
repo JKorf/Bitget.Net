@@ -11,57 +11,57 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossUserTrade
     {
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Trade id
+        /// ["<c>tradeId</c>"] Trade id
         /// </summary>
         [JsonPropertyName("tradeId")]
         public string TradeId { get; set; } = string.Empty;
         /// <summary>
-        /// Order type
+        /// ["<c>orderType</c>"] Order type
         /// </summary>
         [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
-        /// Side
+        /// ["<c>side</c>"] Side
         /// </summary>
         [JsonPropertyName("side")]
         public MarginOrderSide OrderSide { get; set; }
         /// <summary>
-        /// Price average
+        /// ["<c>priceAvg</c>"] Price average
         /// </summary>
         [JsonPropertyName("priceAvg")]
         public decimal PriceAverage { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>size</c>"] Quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Quantity in quote asset
+        /// ["<c>amount</c>"] Quantity in quote asset
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// Trade role
+        /// ["<c>tradeScope</c>"] Trade role
         /// </summary>
         [JsonPropertyName("tradeScope")]
         public Role Role { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
-        /// Fee detail
+        /// ["<c>feeDetail</c>"] Fee detail
         /// </summary>
         [JsonPropertyName("feeDetail")]
         public BitgetTradeFee FeeDetail { get; set; } = null!;

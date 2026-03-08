@@ -11,87 +11,87 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossOrder
     {
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Order type
+        /// ["<c>orderType</c>"] Order type
         /// </summary>
         [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
-        /// Enter point source
+        /// ["<c>enterPointSource</c>"] Enter point source
         /// </summary>
         [JsonPropertyName("enterPointSource")]
         public string EnterPointSource { get; set; } = string.Empty;
         /// <summary>
-        /// Client oid
+        /// ["<c>clientOid</c>"] Client oid
         /// </summary>
         [JsonPropertyName("clientOid")]
         public string ClientOid { get; set; } = string.Empty;
         /// <summary>
-        /// Loan type
+        /// ["<c>loanType</c>"] Loan type
         /// </summary>
         [JsonPropertyName("loanType")]
         public LoanType LoanType { get; set; }
         /// <summary>
-        /// Price
+        /// ["<c>price</c>"] Price
         /// </summary>
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Order side
+        /// ["<c>side</c>"] Order side
         /// </summary>
         [JsonPropertyName("side")]
         public MarginOrderSide OrderSide { get; set; }
         /// <summary>
-        /// Order status
+        /// ["<c>status</c>"] Order status
         /// </summary>
         [JsonPropertyName("status")]
         public OrderStatus OrderStatus { get; set; }
         /// <summary>
-        /// Base asset quantity
+        /// ["<c>baseSize</c>"] Base asset quantity
         /// </summary>
         [JsonPropertyName("baseSize")]
         public decimal BaseQuantity { get; set; }
         /// <summary>
-        /// Quote asset quantity
+        /// ["<c>quoteSize</c>"] Quote asset quantity
         /// </summary>
         [JsonPropertyName("quoteSize")]
         public decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// Average fill price
+        /// ["<c>priceAvg</c>"] Average fill price
         /// </summary>
         [JsonPropertyName("priceAvg")]
         public decimal PriceAverage { get; set; }
         /// <summary>
-        /// Quantity filled
+        /// ["<c>size</c>"] Quantity filled
         /// </summary>
         [JsonPropertyName("size")]
         public decimal QuantityFilled { get; set; }
         /// <summary>
-        /// Quantity filled in quote asset
+        /// ["<c>amount</c>"] Quantity filled in quote asset
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal QuoteQuantityFilled { get; set; }
         /// <summary>
-        /// Time in force
+        /// ["<c>force</c>"] Time in force
         /// </summary>
         [JsonPropertyName("force")]
         public TimeInForce TimeInForce { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }

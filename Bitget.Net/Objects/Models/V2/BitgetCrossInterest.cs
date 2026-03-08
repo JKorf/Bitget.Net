@@ -11,42 +11,42 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossInterest
     {
         /// <summary>
-        /// Interest id
+        /// ["<c>interestId</c>"] Interest id
         /// </summary>
         [JsonPropertyName("interestId")]
         public string InterestId { get; set; } = string.Empty;
         /// <summary>
-        /// Loan asset
+        /// ["<c>loanCoin</c>"] Loan asset
         /// </summary>
         [JsonPropertyName("loanCoin")]
         public string LoanAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Interest asset
+        /// ["<c>interestCoin</c>"] Interest asset
         /// </summary>
         [JsonPropertyName("interestCoin")]
         public string InterestAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Daily interest rate
+        /// ["<c>dailyInterestRate</c>"] Daily interest rate
         /// </summary>
         [JsonPropertyName("dailyInterestRate")]
         public decimal DailyInterestRate { get; set; }
         /// <summary>
-        /// Interest quantity
+        /// ["<c>interestAmount</c>"] Interest quantity
         /// </summary>
         [JsonPropertyName("interestAmount")]
         public decimal InterestQuantity { get; set; }
         /// <summary>
-        /// Interest type
+        /// ["<c>interstType</c>"] Interest type
         /// </summary>
         [JsonPropertyName("interstType")]
         public InterestType InterestType { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }

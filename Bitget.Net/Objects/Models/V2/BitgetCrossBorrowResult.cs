@@ -10,17 +10,17 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossBorrowResult
     {
         /// <summary>
-        /// Loan id
+        /// ["<c>loanId</c>"] Loan id
         /// </summary>
         [JsonPropertyName("loanId")]
         public string LoanId { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Borrow quantity
+        /// ["<c>borrowAmount</c>"] Borrow quantity
         /// </summary>
         [JsonPropertyName("borrowAmount")]
         public decimal BorrowQuantity { get; set; }

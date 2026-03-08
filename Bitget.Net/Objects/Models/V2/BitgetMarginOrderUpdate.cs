@@ -11,92 +11,92 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetMarginOrderUpdate
     {
         /// <summary>
-        /// Time in force
+        /// ["<c>force</c>"] Time in force
         /// </summary>
         [JsonPropertyName("force")]
         public TimeInForce TimeInForce { get; set; }
         /// <summary>
-        /// Order type
+        /// ["<c>orderType</c>"] Order type
         /// </summary>
         [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
-        /// Price
+        /// ["<c>price</c>"] Price
         /// </summary>
         [JsonPropertyName("price")]
         public decimal? Price { get; set; }
         /// <summary>
-        /// Quote quantity
+        /// ["<c>quoteSize</c>"] Quote quantity
         /// </summary>
         [JsonPropertyName("quoteSize")]
         public decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// Side
+        /// ["<c>side</c>"] Side
         /// </summary>
         [JsonPropertyName("side")]
         public MarginOrderSide MarginOrderSide { get; set; }
         /// <summary>
-        /// Fee detail
+        /// ["<c>feeDetail</c>"] Fee detail
         /// </summary>
         [JsonPropertyName("feeDetail")]
         public BitgetTradeFee[] FeeDetail { get; set; } = Array.Empty<BitgetTradeFee>();
         /// <summary>
-        /// Enter point source
+        /// ["<c>enterPointSource</c>"] Enter point source
         /// </summary>
         [JsonPropertyName("enterPointSource")]
         public string EnterPointSource { get; set; } = string.Empty;
         /// <summary>
-        /// Order status
+        /// ["<c>status</c>"] Order status
         /// </summary>
         [JsonPropertyName("status")]
         public OrderStatus OrderStatus { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>baseSize</c>"] Quantity
         /// </summary>
         [JsonPropertyName("baseSize")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
-        /// Client oid
+        /// ["<c>clientOid</c>"] Client oid
         /// </summary>
         [JsonPropertyName("clientOid")]
         public string? ClientOid { get; set; }
         /// <summary>
-        /// Average fill price
+        /// ["<c>fillPrice</c>"] Average fill price
         /// </summary>
         [JsonPropertyName("fillPrice")]
         public decimal AveragePrice { get; set; }
         /// <summary>
-        /// Filled quantity
+        /// ["<c>baseVolume</c>"] Filled quantity
         /// </summary>
         [JsonPropertyName("baseVolume")]
         public decimal QuantityFilled { get; set; }
         /// <summary>
-        /// Filled quantity in quote asset
+        /// ["<c>fillTotalAmount</c>"] Filled quantity in quote asset
         /// </summary>
         [JsonPropertyName("fillTotalAmount")]
         public decimal QuoteQuantityFilled { get; set; }
         /// <summary>
-        /// Loan type
+        /// ["<c>loanType</c>"] Loan type
         /// </summary>
         [JsonPropertyName("loanType")]
         public LoanType LoanType { get; set; }
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Self trade prevention mode
+        /// ["<c>stpMode</c>"] Self trade prevention mode
         /// </summary>
         [JsonPropertyName("stpMode")]
         public SelfTradePreventionMode SelfTradePreventionMode { get; set; }
