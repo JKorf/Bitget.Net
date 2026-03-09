@@ -11,27 +11,27 @@ namespace Bitget.Net.Enums.V2
     public enum SubTriggerOrderStatus
     {
         /// <summary>
-        /// Trigger success
+        /// ["<c>success</c>"] Trigger success
         /// </summary>
         [Map("success")]
         Success,
         /// <summary>
-        /// Trigger failed
+        /// ["<c>fail</c>"] Trigger failed
         /// </summary>
         [Map("fail")]
         Fail,
         /// <summary>
-        /// Cancelled
+        /// ["<c>cancelled</c>"] Cancelled
         /// </summary>
         [Map("cancelled")]
         Cancelled,
         /// <summary>
-        /// Placing order
+        /// ["<c>in_progress</c>"] Placing order
         /// </summary>
         [Map("in_progress")]
         InProgress,
         /// <summary>
-        /// Tracking in progress
+        /// ["<c>in_progress_tracking</c>"] Tracking in progress
         /// </summary>
         [Map("in_progress_tracking")]
         InProgressTracking

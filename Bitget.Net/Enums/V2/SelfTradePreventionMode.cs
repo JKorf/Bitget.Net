@@ -11,22 +11,22 @@ namespace Bitget.Net.Enums.V2
     public enum SelfTradePreventionMode
     {
         /// <summary>
-        /// None
+        /// ["<c>none</c>"] None
         /// </summary>
         [Map("none")]
         None,
         /// <summary>
-        /// Cancel taker order
+        /// ["<c>cancel_taker</c>"] Cancel taker order
         /// </summary>
         [Map("cancel_taker")]
         CancelTaker,
         /// <summary>
-        /// Cancel maker order
+        /// ["<c>cancel_maker</c>"] Cancel maker order
         /// </summary>
         [Map("cancel_maker")]
         CancelMaker,
         /// <summary>
-        /// Cancel both 
+        /// ["<c>cancel_both</c>"] Cancel both 
         /// </summary>
         [Map("cancel_both")]
         CancelBoth

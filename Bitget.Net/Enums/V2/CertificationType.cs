@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum CertificationType
     {
         /// <summary>
-        /// Uncertified
+        /// ["<c>uncertified</c>"] Uncertified
         /// </summary>
         [Map("uncertified")]
         Uncertified,
         /// <summary>
-        /// Certified
+        /// ["<c>certified</c>"] Certified
         /// </summary>
         [Map("certified")]
         Certified

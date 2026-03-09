@@ -11,97 +11,97 @@ namespace Bitget.Net.Enums.V2
     public enum BusinessType
     {
         /// <summary>
-        /// Deposit
+        /// ["<c>deposit</c>"] Deposit
         /// </summary>
         [Map("deposit")]
         Deposit,
         /// <summary>
-        /// Withdraw
+        /// ["<c>withdraw</c>"] Withdraw
         /// </summary>
         [Map("withdraw")]
         Withdraw,
         /// <summary>
-        /// Buy
+        /// ["<c>buy</c>"] Buy
         /// </summary>
         [Map("buy")]
         Buy,
         /// <summary>
-        /// Sell
+        /// ["<c>sell</c>"] Sell
         /// </summary>
         [Map("sell")]
         Sell,
         /// <summary>
-        /// Deduction of spot trading transaction fee
+        /// ["<c>deduction of handling fee</c>"] Deduction of spot trading transaction fee
         /// </summary>
         [Map("deduction of handling fee", "DEDUCTION_HANDLING_FEE")]
         FeeDeduction,
         /// <summary>
-        /// Transfer-in
+        /// ["<c>transfer-in</c>"] Transfer-in
         /// </summary>
         [Map("transfer-in", "TRANSFER_IN")]
         TransferIn,
         /// <summary>
-        /// Transfer-out
+        /// ["<c>transfer-out</c>"] Transfer-out
         /// </summary>
         [Map("transfer-out", "TRANSFER_OUT")]
         TransferOut,
         /// <summary>
-        /// Rebate
+        /// ["<c>rebate rewards</c>"] Rebate
         /// </summary>
         [Map("rebate rewards")]
         RebateRewards,
         /// <summary>
-        /// Airdrop rewards
+        /// ["<c>airdrop rewards</c>"] Airdrop rewards
         /// </summary>
         [Map("airdrop rewards")]
         AirdropRewards,
         /// <summary>
-        /// USDT futures promotion rewards
+        /// ["<c>USDT contract rewards</c>"] USDT futures promotion rewards
         /// </summary>
         [Map("USDT contract rewards")]
         UsdtContractRewards,
         /// <summary>
-        /// Mix contract promotion rewards
+        /// ["<c>mix contract rewards</c>"] Mix contract promotion rewards
         /// </summary>
         [Map("mix contract rewards")]
         MixContractRewards,
         /// <summary>
-        /// System lock-up
+        /// ["<c>system lock</c>"] System lock-up
         /// </summary>
         [Map("system lock")]
         SystemLock,
         /// <summary>
-        /// User lock-up
+        /// ["<c>user lock</c>"] User lock-up
         /// </summary>
         [Map("user lock")]
         UserLock,
         /// <summary>
-        /// Inner address withdraw in
+        /// ["<c>INNER_ADDRESS_WITHDRAW_IN</c>"] Inner address withdraw in
         /// </summary>
         [Map("INNER_ADDRESS_WITHDRAW_IN")]
         InnerAddressWithdrawIn,
         /// <summary>
-        /// Order exchange in
+        /// ["<c>ORDER_EXCHANGE_IN</c>"] Order exchange in
         /// </summary>
         [Map("ORDER_EXCHANGE_IN")]
         OrderExchangeIn,
         /// <summary>
-        /// Order exchange out
+        /// ["<c>ORDER_EXCHANGE_OUT</c>"] Order exchange out
         /// </summary>
         [Map("ORDER_EXCHANGE_OUT")]
         OrderExchangeOut,
         /// <summary>
-        /// Activity asset reward user in
+        /// ["<c>ACTIVITY_ASSET_REWARD_USER_IN</c>"] Activity asset reward user in
         /// </summary>
         [Map("ACTIVITY_ASSET_REWARD_USER_IN")]
         ActivityAssetRewardUserIn,
         /// <summary>
-        /// Small exchange user in
+        /// ["<c>SMALL_EXCHANGE_USER_IN</c>"] Small exchange user in
         /// </summary>
         [Map("SMALL_EXCHANGE_USER_IN")]
         SmallExchangeUserIn,
         /// <summary>
-        /// Small exchange user out
+        /// ["<c>SMALL_EXCHANGE_USER_OUT</c>"] Small exchange user out
         /// </summary>
         [Map("SMALL_EXCHANGE_USER_OUT")]
         SmallExchangeUserOut

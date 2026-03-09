@@ -11,17 +11,17 @@ namespace Bitget.Net.Enums.V2
     public enum DeliveryStatus
     {
         /// <summary>
-        /// Trading normally
+        /// ["<c>delivery_normal</c>"] Trading normally
         /// </summary>
         [Map("delivery_normal")]
         Normal,
         /// <summary>
-        /// 10 minutes before delivery, opening positions are prohibited
+        /// ["<c>delivery_before</c>"] 10 minutes before delivery, opening positions are prohibited
         /// </summary>
         [Map("delivery_before")]
         DeliveryBefore,
         /// <summary>
-        /// Delivery, opening, closing, and canceling orders are prohibited
+        /// ["<c>delivery_period</c>"] Delivery, opening, closing, and canceling orders are prohibited
         /// </summary>
         [Map("delivery_period")]
         DeliveryPeriod

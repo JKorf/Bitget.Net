@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum Role
     {
         /// <summary>
-        /// Taker
+        /// ["<c>taker</c>"] Taker
         /// </summary>
         [Map("taker", "T")]
         Taker,
         /// <summary>
-        /// Maker
+        /// ["<c>maker</c>"] Maker
         /// </summary>
         [Map("maker", "M")]
         Maker

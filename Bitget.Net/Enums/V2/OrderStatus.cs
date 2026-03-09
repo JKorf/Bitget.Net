@@ -11,37 +11,37 @@ namespace Bitget.Net.Enums.V2
     public enum OrderStatus
     {
         /// <summary>
-        /// Initial
+        /// ["<c>init</c>"] Initial
         /// </summary>
         [Map("init")]
         Initial,
         /// <summary>
-        /// Pending match
+        /// ["<c>live</c>"] Pending match
         /// </summary>
         [Map("live")]
         Live,
         /// <summary>
-        /// Unfilled, waiting for match
+        /// ["<c>new</c>"] Unfilled, waiting for match
         /// </summary>
         [Map("new")]
         New,
         /// <summary>
-        /// Partially filled
+        /// ["<c>partially_filled</c>"] Partially filled
         /// </summary>
         [Map("partially_filled")]
         PartiallyFilled,
         /// <summary>
-        /// Filled
+        /// ["<c>filled</c>"] Filled
         /// </summary>
         [Map("filled")]
         Filled,
         /// <summary>
-        /// Canceled
+        /// ["<c>cancelled</c>"] Canceled
         /// </summary>
         [Map("cancelled")]
         Canceled,
         /// <summary>
-        /// Reject
+        /// ["<c>reject</c>"] Reject
         /// </summary>
         [Map("reject")]
         Rejected

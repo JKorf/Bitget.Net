@@ -11,32 +11,32 @@ namespace Bitget.Net.Enums
     public enum BitgetProductTypeV2
     {
         /// <summary>
-        /// USDT futures
+        /// ["<c>USDT-FUTURES</c>"] USDT futures
         /// </summary>
         [Map("USDT-FUTURES")]
         UsdtFutures,
         /// <summary>
-        /// Mixed futures
+        /// ["<c>COIN-FUTURES</c>"] Mixed futures
         /// </summary>
         [Map("COIN-FUTURES")]
         CoinFutures,
         /// <summary>
-        /// USDC Futures
+        /// ["<c>USDC-FUTURES</c>"] USDC Futures
         /// </summary>
         [Map("USDC-FUTURES")]
         UsdcFutures,
         /// <summary>
-        /// DEMO USDT futures
+        /// ["<c>SUSDT-FUTURES</c>"] DEMO USDT futures
         /// </summary>
         [Map("SUSDT-FUTURES")]
         SimUsdtFutures,
         /// <summary>
-        /// DEMO Mixed futures
+        /// ["<c>SCOIN-FUTURES</c>"] DEMO Mixed futures
         /// </summary>
         [Map("SCOIN-FUTURES")]
         SimCoinFutures,
         /// <summary>
-        /// DEMO USDC futures
+        /// ["<c>SUSDC-FUTURES</c>"] DEMO USDC futures
         /// </summary>
         [Map("SUSDC-FUTURES")]
         SimUsdcFutures

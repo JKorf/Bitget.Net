@@ -11,17 +11,17 @@ namespace Bitget.Net.Enums.V2
     public enum TriggerPlanTypeFilter
     {
         /// <summary>
-        /// Trigger order
+        /// ["<c>normal_plan</c>"] Trigger order
         /// </summary>
         [Map("normal_plan")]
         Trigger,
         /// <summary>
-        /// Trailing stop order
+        /// ["<c>track_plan</c>"] Trailing stop order
         /// </summary>
         [Map("track_plan")]
         TrailingStop,
         /// <summary>
-        /// Take profit and stop loss orders
+        /// ["<c>profit_loss</c>"] Take profit and stop loss orders
         /// </summary>
         [Map("profit_loss")]
         ProfitLoss

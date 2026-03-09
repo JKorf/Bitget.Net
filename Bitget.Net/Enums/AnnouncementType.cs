@@ -11,37 +11,37 @@ namespace Bitget.Net.Enums
     public enum AnnouncementType
     {
         /// <summary>
-        /// Latest news
+        /// ["<c>latest_news</c>"] Latest news
         /// </summary>
         [Map("latest_news")]
         LatestNews,
         /// <summary>
-        /// Coin listing
+        /// ["<c>coin_listings</c>"] Coin listing
         /// </summary>
         [Map("coin_listings")]
         CoinListing,
         /// <summary>
-        /// Product updates
+        /// ["<c>product_updates</c>"] Product updates
         /// </summary>
         [Map("product_updates")]
         ProductUpdates,
         /// <summary>
-        /// Security update
+        /// ["<c>security</c>"] Security update
         /// </summary>
         [Map("security")]
         Security,
         /// <summary>
-        /// Api trading update
+        /// ["<c>api_trading</c>"] Api trading update
         /// </summary>
         [Map("api_trading")]
         ApiTrading,
         /// <summary>
-        /// Maintenance update
+        /// ["<c>maintenance_system_updates</c>"] Maintenance update
         /// </summary>
         [Map("maintenance_system_updates")]
         MaintenanceSystemUpdates,
         /// <summary>
-        /// Delisting update
+        /// ["<c>symbol_delisting</c>"] Delisting update
         /// </summary>
         [Map("symbol_delisting")]
         SymbolDelisting

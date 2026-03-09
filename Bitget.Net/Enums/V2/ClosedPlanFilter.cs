@@ -11,17 +11,17 @@ namespace Bitget.Net.Enums.V2
     public enum ClosedPlanFilter
     {
         /// <summary>
-        /// Executed
+        /// ["<c>executed</c>"] Executed
         /// </summary>
         [Map("executed")]
         Executed,
         /// <summary>
-        /// Trigger failed
+        /// ["<c>fail_trigger</c>"] Trigger failed
         /// </summary>
         [Map("fail_trigger")]
         Failed,
         /// <summary>
-        /// Canceled
+        /// ["<c>cancelled</c>"] Canceled
         /// </summary>
         [Map("cancelled")]
         Canceled

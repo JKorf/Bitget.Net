@@ -11,42 +11,42 @@ namespace Bitget.Net.Enums.V2
     public enum AccountType
     {
         /// <summary>
-        /// Spot account
+        /// ["<c>spot</c>"] Spot account
         /// </summary>
         [Map("spot")]
         Spot,
         /// <summary>
-        /// Funding account
+        /// ["<c>funding</c>"] Funding account
         /// </summary>
         [Map("funding")]
         Funding,
         /// <summary>
-        /// Coin futures
+        /// ["<c>coin-futures</c>"] Coin futures
         /// </summary>
         [Map("coin-futures")]
         CoinFutures,
         /// <summary>
-        /// USDT futures
+        /// ["<c>usdt-futures</c>"] USDT futures
         /// </summary>
         [Map("usdt-futures")]
         UsdtFutures,
         /// <summary>
-        /// USDC futures
+        /// ["<c>usdc-futures</c>"] USDC futures
         /// </summary>
         [Map("usdc-futures")]
         UsdcFutures,
         /// <summary>
-        /// P2P account
+        /// ["<c>p2p</c>"] P2P account
         /// </summary>
         [Map("p2p")]
         P2P,
         /// <summary>
-        /// Cross margin account
+        /// ["<c>crossed_margin</c>"] Cross margin account
         /// </summary>
         [Map("crossed_margin")]
         CrossMargin,
         /// <summary>
-        /// Isolated margin account
+        /// ["<c>isolated_margin</c>"] Isolated margin account
         /// </summary>
         [Map("isolated_margin")]
         IsolatedMargin

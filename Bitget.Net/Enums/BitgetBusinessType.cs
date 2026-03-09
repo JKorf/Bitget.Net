@@ -11,17 +11,17 @@ namespace Bitget.Net.Enums
     public enum BitgetBusinessType
     {
         /// <summary>
-        /// Mix
+        /// ["<c>mix</c>"] Mix
         /// </summary>
         [Map("mix")]
         Mix,
         /// <summary>
-        /// Spot
+        /// ["<c>spot</c>"] Spot
         /// </summary>
         [Map("spot")]
         Spot,
         /// <summary>
-        /// Spot margin
+        /// ["<c>margin</c>"] Spot margin
         /// </summary>
         [Map("margin")]
         SpotMargin
