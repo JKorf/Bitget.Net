@@ -1,4 +1,5 @@
 ﻿using Bitget.Net.Clients;
+using Bitget.Net.Clients.SpotApiV2;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Clients;
@@ -178,8 +179,8 @@ namespace Bitget.Net.UnitTests
 
             Assert.That(((BaseApiClient)restClient.SpotApiV2).OutputOriginalData, Is.True);
             Assert.That(((BaseApiClient)socketClient.SpotApiV2).OutputOriginalData, Is.False);
-            Assert.That(((BaseApiClient)restClient.SpotApiV2).AuthenticationProvider.ApiKey, Is.EqualTo("123"));
-            Assert.That(((BaseApiClient)socketClient.SpotApiV2).AuthenticationProvider.ApiKey, Is.EqualTo("456"));
+            Assert.That(((BitgetRestClientSpotApi)restClient.SpotApiV2).AuthenticationProvider.PublicKey, Is.EqualTo("123"));
+            Assert.That(((BitgetSocketClientSpotApi)socketClient.SpotApiV2).AuthenticationProvider.PublicKey, Is.EqualTo("456"));
             Assert.That(((BaseApiClient)restClient.SpotApiV2).ClientOptions.Proxy.Host, Is.EqualTo("host"));
             Assert.That(((BaseApiClient)restClient.SpotApiV2).ClientOptions.Proxy.Port, Is.EqualTo(80));
             Assert.That(((BaseApiClient)socketClient.SpotApiV2).ClientOptions.Proxy.Host, Is.EqualTo("host2"));

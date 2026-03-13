@@ -18,7 +18,7 @@ using System.Net.Http.Headers;
 namespace Bitget.Net.Clients.FuturesApiV2
 {
     /// <inheritdoc />
-    internal partial class BitgetRestClientFuturesApi : RestApiClient, IBitgetRestClientFuturesApi
+    internal partial class BitgetRestClientFuturesApi : RestApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetRestClientFuturesApi
     {
         protected override ErrorMapping ErrorMapping => BitgetErrors.RestErrors;
 
@@ -57,7 +57,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         public IBitgetRestClientFuturesApiShared SharedClient => this;
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override BitgetAuthenticationProviderV2 CreateAuthenticationProvider(BitgetCredentials credentials)
             => new BitgetAuthenticationProviderV2(credentials);
 
         /// <inheritdoc />

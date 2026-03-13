@@ -61,7 +61,7 @@ namespace Bitget.Net.UnitTests
 
             var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
+                ApiCredentials = new BitgetCredentials("123", "456", "789"),
                 OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Spot", "https://api.bitget.com", "data");
@@ -83,7 +83,7 @@ namespace Bitget.Net.UnitTests
 
             var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
-                ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "456", "789"),
+                ApiCredentials = new BitgetCredentials("123", "456", "789"),
                 OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Futures", "https://api.bitget.com", "data");

@@ -25,7 +25,7 @@ namespace Bitget.Net.UnitTests
             return new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec, pass) : null
+                ApiCredentials = Authenticated ? new BitgetCredentials(key, sec, pass) : null
             }), loggerFactory);
         }
 

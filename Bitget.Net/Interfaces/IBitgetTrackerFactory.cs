@@ -19,7 +19,7 @@ namespace Bitget.Net.Interfaces
         /// <param name="config">Configuration</param>
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
-        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null);
+        IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, BitgetCredentials credentials, SpotUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null);
         /// <summary>
         /// Create a new spot user data tracker
         /// </summary>
@@ -34,7 +34,7 @@ namespace Bitget.Net.Interfaces
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
         /// <param name="productType">Product type</param>
-        IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, ApiCredentials credentials, BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null);
+        IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, BitgetCredentials credentials, BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null);
         /// <summary>
         /// Create a new futures user data tracker
         /// </summary>

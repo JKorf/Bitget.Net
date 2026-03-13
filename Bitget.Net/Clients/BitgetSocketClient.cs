@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 namespace Bitget.Net.Clients
 {
     /// <inheritdoc />
-    public class BitgetSocketClient : BaseSocketClient, IBitgetSocketClient
+    public class BitgetSocketClient : BaseSocketClient<BitgetEnvironment, BitgetCredentials>, IBitgetSocketClient
     {
         /// <inheritdoc />
         public Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi SpotApiV2 { get; set; }
@@ -42,13 +42,6 @@ namespace Bitget.Net.Clients
 
         #endregion
 
-        /// <inheritdoc />
-        public void SetOptions(UpdateOptions options)
-        {
-            SpotApiV2.SetOptions(options);
-            FuturesApiV2.SetOptions(options);
-        }
-
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>
@@ -56,13 +49,6 @@ namespace Bitget.Net.Clients
         public static void SetDefaultOptions(Action<BitgetSocketOptions> optionsDelegate)
         {
             BitgetSocketOptions.Default = ApplyOptionsDelegate(optionsDelegate);
-        }
-
-        /// <inheritdoc />
-        public void SetApiCredentials(ApiCredentials credentials)
-        {
-            SpotApiV2.SetApiCredentials(credentials);
-            FuturesApiV2.SetApiCredentials(credentials);
         }
     }
 }

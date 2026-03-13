@@ -5,7 +5,7 @@ namespace Bitget.Net.Objects.Options
     /// <summary>
     /// Bitget rest client options
     /// </summary>
-    public class BitgetRestOptions : RestExchangeOptions<BitgetEnvironment>
+    public class BitgetRestOptions : RestExchangeOptions<BitgetEnvironment, BitgetCredentials>
     {
         /// <summary>
         /// Default options for new clients
@@ -36,17 +36,17 @@ namespace Bitget.Net.Objects.Options
         /// <summary>
         /// Spot API options
         /// </summary>
-        public RestApiOptions SpotOptions { get; private set; } = new RestApiOptions();
+        public RestApiOptions<BitgetCredentials> SpotOptions { get; private set; } = new RestApiOptions<BitgetCredentials>();
 
         /// <summary>
         /// Futures API options
         /// </summary>
-        public RestApiOptions FuturesOptions { get; private set; } = new RestApiOptions();
+        public RestApiOptions<BitgetCredentials> FuturesOptions { get; private set; } = new RestApiOptions<BitgetCredentials>();
 
         /// <summary>
         /// Copy Trading API options
         /// </summary>
-        public RestApiOptions CopyTradingOptions { get; private set; } = new RestApiOptions();
+        public RestApiOptions<BitgetCredentials> CopyTradingOptions { get; private set; } = new RestApiOptions<BitgetCredentials>();
 
         internal BitgetRestOptions Set(BitgetRestOptions targetOptions)
         {

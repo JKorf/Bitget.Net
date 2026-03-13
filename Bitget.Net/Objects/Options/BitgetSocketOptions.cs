@@ -5,7 +5,7 @@ namespace Bitget.Net.Objects.Options
     /// <summary>
     /// Bitget socket client options
     /// </summary>
-    public class BitgetSocketOptions : SocketExchangeOptions<BitgetEnvironment>
+    public class BitgetSocketOptions : SocketExchangeOptions<BitgetEnvironment, BitgetCredentials>
     {
         /// <summary>
         /// Default options for new clients
@@ -28,12 +28,12 @@ namespace Bitget.Net.Objects.Options
         /// <summary>
         /// Spot API options
         /// </summary>
-        public SocketApiOptions SpotOptions { get; private set; } = new SocketApiOptions();
+        public SocketApiOptions<BitgetCredentials> SpotOptions { get; private set; } = new SocketApiOptions<BitgetCredentials>();
 
         /// <summary>
         /// Futures API options
         /// </summary>
-        public SocketApiOptions FuturesOptions { get; private set; } = new SocketApiOptions();
+        public SocketApiOptions<BitgetCredentials> FuturesOptions { get; private set; } = new SocketApiOptions<BitgetCredentials>();
 
         internal BitgetSocketOptions Set(BitgetSocketOptions targetOptions)
         {

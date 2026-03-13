@@ -11,17 +11,18 @@ using System.Text;
 
 namespace Bitget.Net
 {
-    internal class BitgetAuthenticationProviderV2 : AuthenticationProvider
+    internal class BitgetAuthenticationProviderV2 : AuthenticationProvider<BitgetCredentials>
     {
         private static IStringMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
-        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.RsaXml, ApiCredentialsType.RsaPem];
-        public string Passphrase => _credentials.Pass!;
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.Rsa];
 
-        public BitgetAuthenticationProviderV2(ApiCredentials credentials) : base(credentials)
+        public override string PublicKey => ApiCredentials.PublicKey;
+
+        public BitgetAuthenticationProviderV2(BitgetCredentials credentials) : base(credentials)
         {
-            if (string.IsNullOrEmpty(credentials.Pass))
-                throw new ArgumentNullException(nameof(ApiCredentials.Pass), "Passphrase is required for Bitget authentication");
+            if (string.IsNullOrEmpty(credentials.Passphrase))
+                throw new ArgumentNullException(nameof(ApiCredentials.Passphrase), "Passphrase is required for Bitget authentication");
         }
 
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
@@ -36,15 +37,15 @@ namespace Bitget.Net
 
             var timestamp = GetMillisecondTimestamp(apiClient);
             var signString = timestamp + request.Method.ToString().ToUpperInvariant() + request.Path + query + body;
-            var signature = _credentials.CredentialType == ApiCredentialsType.Hmac 
-                ? SignHMACSHA256(signString, SignOutputType.Base64) 
-                : SignRSASHA256(Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
+            var signature = ApiCredentials.CredentialType == ApiCredentialsType.Hmac 
+                ? SignHMACSHA256(ApiCredentials.Hmac!, signString, SignOutputType.Base64) 
+                : SignRSASHA256(ApiCredentials.Rsa!, Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
             
             request.Headers ??= new Dictionary<string, string>();
             request.Headers["ACCESS-SIGN"] = signature;
-            request.Headers["ACCESS-KEY"] = _credentials.Key!;
+            request.Headers["ACCESS-KEY"] = ApiCredentials.PublicKey!;
             request.Headers["ACCESS-TIMESTAMP"] = timestamp;
-            request.Headers["ACCESS-PASSPHRASE"] = _credentials.Pass!;
+            request.Headers["ACCESS-PASSPHRASE"] = ApiCredentials.Passphrase!;
 
             request.SetQueryString(query);
             request.SetBodyContent(body);
@@ -52,12 +53,12 @@ namespace Bitget.Net
 
         public override Query? GetAuthenticationQuery(SocketApiClient apiClient, SocketConnection connection, Dictionary<string, object?>? context = null)
         {
-            if (_credentials.CredentialType != ApiCredentialsType.Hmac)
+            if (ApiCredentials.CredentialType != ApiCredentialsType.Hmac)
                 throw new NotSupportedException("Only Hmac credentials are supported for websocket");
 
 
             var time = DateTimeConverter.ConvertToSeconds(GetTimestamp(apiClient));
-            var signature = SignHMACSHA256(time + "GET" + "/user/verify", SignOutputType.Base64);
+            var signature = SignHMACSHA256(ApiCredentials.Hmac!, time + "GET" + "/user/verify", SignOutputType.Base64);
 
             var socketRequest = new BitgetSocketRequest
             {
@@ -66,8 +67,8 @@ namespace Bitget.Net
                 {
                     new Dictionary<string, string>
                     {
-                        { "apiKey", ApiKey },
-                        { "passphrase", Passphrase },
+                        { "apiKey", ApiCredentials.PublicKey },
+                        { "passphrase", ApiCredentials.Passphrase! },
                         { "timestamp", time.ToString()! },
                         { "sign", signature },
                     }
