@@ -17,7 +17,7 @@ namespace Bitget.Net
 
         public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.Rsa];
 
-        public override string PublicKey => ApiCredentials.PublicKey;
+        public override string Key => ApiCredentials.Key;
 
         public BitgetAuthenticationProviderV2(BitgetCredentials credentials) : base(credentials)
         {
@@ -43,7 +43,7 @@ namespace Bitget.Net
             
             request.Headers ??= new Dictionary<string, string>();
             request.Headers["ACCESS-SIGN"] = signature;
-            request.Headers["ACCESS-KEY"] = ApiCredentials.PublicKey!;
+            request.Headers["ACCESS-KEY"] = ApiCredentials.Key!;
             request.Headers["ACCESS-TIMESTAMP"] = timestamp;
             request.Headers["ACCESS-PASSPHRASE"] = ApiCredentials.Passphrase!;
 
@@ -67,7 +67,7 @@ namespace Bitget.Net
                 {
                     new Dictionary<string, string>
                     {
-                        { "apiKey", ApiCredentials.PublicKey },
+                        { "apiKey", ApiCredentials.Key },
                         { "passphrase", ApiCredentials.Passphrase! },
                         { "timestamp", time.ToString()! },
                         { "sign", signature },
