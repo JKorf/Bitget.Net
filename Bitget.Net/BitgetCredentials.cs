@@ -13,8 +13,8 @@ namespace Bitget.Net
         public ApiCredentialsType CredentialType => CredentialPairs.First().CredentialType;
 
         internal string? Passphrase =>
-            CredentialType == ApiCredentialsType.Hmac ? GetCredential<HMACCredential>()?.Pass
-            : CredentialType == ApiCredentialsType.Rsa ? GetCredential<RSACredential>()?.Pass
+            CredentialType == ApiCredentialsType.HMAC ? GetCredential<HMACCredential>()?.Pass
+            : CredentialType == ApiCredentialsType.RSA ? GetCredential<RSACredential>()?.Pass
             : null;
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace Bitget.Net
     {
         private static IStringMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
-        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac, ApiCredentialsType.Rsa];
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.HMAC, ApiCredentialsType.RSA];
 
         public override string Key => ApiCredentials.Key;
 
@@ -37,9 +37,9 @@ namespace Bitget.Net
 
             var timestamp = GetMillisecondTimestamp(apiClient);
             var signString = timestamp + request.Method.ToString().ToUpperInvariant() + request.Path + query + body;
-            var signature = ApiCredentials.CredentialType == ApiCredentialsType.Hmac 
-                ? SignHMACSHA256(ApiCredentials.Hmac!, signString, SignOutputType.Base64) 
-                : SignRSASHA256(ApiCredentials.Rsa!, Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
+            var signature = ApiCredentials.CredentialType == ApiCredentialsType.HMAC 
+                ? SignHMACSHA256(ApiCredentials.HMAC!, signString, SignOutputType.Base64) 
+                : SignRSASHA256(ApiCredentials.RSA!, Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
             
             request.Headers ??= new Dictionary<string, string>();
             request.Headers["ACCESS-SIGN"] = signature;
@@ -53,12 +53,12 @@ namespace Bitget.Net
 
         public override Query? GetAuthenticationQuery(SocketApiClient apiClient, SocketConnection connection, Dictionary<string, object?>? context = null)
         {
-            if (ApiCredentials.CredentialType != ApiCredentialsType.Hmac)
-                throw new NotSupportedException("Only Hmac credentials are supported for websocket");
+            if (ApiCredentials.CredentialType != ApiCredentialsType.HMAC)
+                throw new NotSupportedException("Only HMAC credentials are supported for websocket");
 
 
             var time = DateTimeConverter.ConvertToSeconds(GetTimestamp(apiClient));
-            var signature = SignHMACSHA256(ApiCredentials.Hmac!, time + "GET" + "/user/verify", SignOutputType.Base64);
+            var signature = SignHMACSHA256(ApiCredentials.HMAC!, time + "GET" + "/user/verify", SignOutputType.Base64);
 
             var socketRequest = new BitgetSocketRequest
             {
