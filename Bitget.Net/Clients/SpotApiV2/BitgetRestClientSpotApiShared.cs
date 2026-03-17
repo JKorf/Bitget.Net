@@ -546,7 +546,6 @@ namespace Bitget.Net.Clients.SpotApiV2
             return order.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedId(order.Data.OrderId.ToString()));
         }
 
-
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
             if (status == OrderStatus.Canceled || status == OrderStatus.Rejected)
