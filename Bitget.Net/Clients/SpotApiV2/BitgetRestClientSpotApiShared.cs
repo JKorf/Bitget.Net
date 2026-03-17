@@ -546,11 +546,17 @@ namespace Bitget.Net.Clients.SpotApiV2
             return order.AsExchangeResult(Exchange, request.Symbol!.TradingMode, new SharedId(order.Data.OrderId.ToString()));
         }
 
+
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
-            if (status == OrderStatus.Live || status == OrderStatus.PartiallyFilled || status == OrderStatus.Initial || status == OrderStatus.New) return SharedOrderStatus.Open;
-            if (status == OrderStatus.Canceled) return SharedOrderStatus.Canceled;
-            return SharedOrderStatus.Filled;
+            if (status == OrderStatus.Canceled || status == OrderStatus.Rejected)
+                return SharedOrderStatus.Canceled;
+            if (status == OrderStatus.Initial || status == OrderStatus.Live || status == OrderStatus.New || status == OrderStatus.PartiallyFilled)
+                return SharedOrderStatus.Open;
+            if (status == OrderStatus.Filled)
+                return SharedOrderStatus.Filled;
+
+            return SharedOrderStatus.Unknown;
         }
 
         private SharedOrderType ParseOrderType(OrderType type, TimeInForce? tif)
@@ -749,14 +755,25 @@ namespace Bitget.Net.Clients.SpotApiV2
                                 x.Quantity,
                                 x.Status == TransferStatus.Success,
                                 x.CreateTime,
-                                x.Status == TransferStatus.Success ? SharedTransferStatus.Completed :
-                                x.Status == TransferStatus.Failed ? SharedTransferStatus.Failed: SharedTransferStatus.InProgress)
+                                ParseTransferStatus(x.Status))
                             {
                                 Id = x.OrderId,
                                 Network = x.Network,
                                 TransactionId = x.TransactionId,
                             })
                        .ToArray(), nextPageRequest);
+        }
+
+        private SharedTransferStatus ParseTransferStatus(TransferStatus status)
+        {
+            if (status == TransferStatus.Success)
+                return SharedTransferStatus.Completed;
+            if (status == TransferStatus.Failed)
+                return SharedTransferStatus.Failed;
+            if (status == TransferStatus.Processing)
+                return SharedTransferStatus.InProgress;
+
+            return SharedTransferStatus.Unknown;
         }
 
         #endregion
@@ -1003,7 +1020,10 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (status == OrderStatus.Canceled || status == OrderStatus.Rejected)
                 return SharedTriggerOrderStatus.CanceledOrRejected;
 
-            return SharedTriggerOrderStatus.Active;
+            if (status == OrderStatus.Live || status == OrderStatus.PartiallyFilled || status == OrderStatus.Initial || status == OrderStatus.New)
+                return SharedTriggerOrderStatus.Active;
+
+            return SharedTriggerOrderStatus.Unknown;
         }
 
         EndpointOptions<CancelOrderRequest> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
