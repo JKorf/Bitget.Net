@@ -28,12 +28,12 @@ namespace Bitget.Net.Objects.Options
         /// <summary>
         /// Spot API options
         /// </summary>
-        public SocketApiOptions<BitgetCredentials> SpotOptions { get; private set; } = new SocketApiOptions<BitgetCredentials>();
+        public SocketApiOptions SpotOptions { get; private set; } = new SocketApiOptions();
 
         /// <summary>
         /// Futures API options
         /// </summary>
-        public SocketApiOptions<BitgetCredentials> FuturesOptions { get; private set; } = new SocketApiOptions<BitgetCredentials>();
+        public SocketApiOptions FuturesOptions { get; private set; } = new SocketApiOptions();
 
         internal BitgetSocketOptions Set(BitgetSocketOptions targetOptions)
         {

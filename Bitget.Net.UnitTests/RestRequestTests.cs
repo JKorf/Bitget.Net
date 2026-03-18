@@ -22,7 +22,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new BitgetCredentials("123", "456", "789");
+                opts.ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/Account", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.Account.GetAssetsValuationAsync(), "GetAssetsValuation");
@@ -51,7 +51,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new BitgetCredentials("123", "456", "789");
+                opts.ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/Margin", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.Margin.GetMarginSymbolsAsync(), "GetMarginSymbols", nestedJsonProperty: "data", ignoreProperties: new List<string> { "isBorrowable" });
@@ -85,7 +85,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new BitgetCredentials("123", "456", "789");
+                opts.ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetServerTimeAsync(), "GetServerTime", "data.serverTime");
@@ -108,7 +108,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new BitgetCredentials("123", "456", "789");
+                opts.ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Spot/Trading", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.SpotApiV2.Trading.PlaceOrderAsync("ETHUSDT", Enums.V2.OrderSide.Buy, Enums.V2.OrderType.Market, 1, Enums.V2.TimeInForce.FillOrKill), "PlaceOrder");
@@ -138,7 +138,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new BitgetCredentials("123", "456", "789");
+                opts.ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Futures/Account", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.FuturesApiV2.Account.GetBalancesAsync(Enums.BitgetProductTypeV2.UsdtFutures), "GetBalances");
@@ -157,7 +157,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new BitgetCredentials("123", "456", "789");
+                opts.ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Futures/ExchangeData", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.FuturesApiV2.ExchangeData.GetContractsAsync(Enums.BitgetProductTypeV2.UsdtFutures), "GetContracts");
@@ -185,7 +185,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new BitgetCredentials("123", "456", "789");
+                opts.ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Futures/Trading", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetPositionAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", "USDT"), "GetPosition");

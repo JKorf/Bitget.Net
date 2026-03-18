@@ -25,7 +25,7 @@ namespace Bitget.Net.UnitTests
             return new BitgetSocketClient(Options.Create(new BitgetSocketOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new BitgetCredentials(key, sec, pass) : null
+                ApiCredentials = Authenticated ? new BitgetCredentials().WithHMAC(key, sec, pass) : null
             }), loggerFactory);
         }
 

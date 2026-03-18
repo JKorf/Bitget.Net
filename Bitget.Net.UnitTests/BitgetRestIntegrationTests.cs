@@ -30,7 +30,7 @@ namespace Bitget.Net.UnitTests
             return new BitgetRestClient(null, loggerFactory, Options.Create(new Objects.Options.BitgetRestOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new BitgetCredentials(key, sec, pass) : null
+                ApiCredentials = Authenticated ? new BitgetCredentials().WithHMAC(key, sec, pass) : null
             }));
         }
 

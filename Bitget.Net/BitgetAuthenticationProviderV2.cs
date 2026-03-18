@@ -15,11 +15,9 @@ namespace Bitget.Net
     {
         private static IStringMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
-        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.HMAC, ApiCredentialsType.RSA];
+        public override string Key => ApiCredentials.Credential.Key;
 
-        public override string Key => ApiCredentials.Key;
-
-        public BitgetAuthenticationProviderV2(BitgetCredentials credentials) : base(credentials)
+        public BitgetAuthenticationProviderV2(BitgetCredentials credentials) : base(credentials, credentials.Credential)
         {
             if (string.IsNullOrEmpty(credentials.Passphrase))
                 throw new ArgumentNullException(nameof(ApiCredentials.Passphrase), "Passphrase is required for Bitget authentication");
@@ -37,13 +35,17 @@ namespace Bitget.Net
 
             var timestamp = GetMillisecondTimestamp(apiClient);
             var signString = timestamp + request.Method.ToString().ToUpperInvariant() + request.Path + query + body;
-            var signature = ApiCredentials.CredentialType == ApiCredentialsType.HMAC 
-                ? SignHMACSHA256(ApiCredentials.HMAC!, signString, SignOutputType.Base64) 
-                : SignRSASHA256(ApiCredentials.RSA!, Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
-            
+            string signature;
+            if (ApiCredentials.Credential is HMACCredential hmacCred)
+                signature = SignHMACSHA256(hmacCred, signString, SignOutputType.Base64);
+            else if (ApiCredentials.Credential is RSACredential rsaCred)
+                signature = SignRSASHA256(rsaCred, Encoding.UTF8.GetBytes(signString), SignOutputType.Base64);
+            else
+                throw new NotImplementedException();
+
             request.Headers ??= new Dictionary<string, string>();
             request.Headers["ACCESS-SIGN"] = signature;
-            request.Headers["ACCESS-KEY"] = ApiCredentials.Key!;
+            request.Headers["ACCESS-KEY"] = ApiCredentials.Credential.Key!;
             request.Headers["ACCESS-TIMESTAMP"] = timestamp;
             request.Headers["ACCESS-PASSPHRASE"] = ApiCredentials.Passphrase!;
 
@@ -53,7 +55,7 @@ namespace Bitget.Net
 
         public override Query? GetAuthenticationQuery(SocketApiClient apiClient, SocketConnection connection, Dictionary<string, object?>? context = null)
         {
-            if (ApiCredentials.CredentialType != ApiCredentialsType.HMAC)
+            if (ApiCredentials.HMAC == null)
                 throw new NotSupportedException("Only HMAC credentials are supported for websocket");
 
 
@@ -67,7 +69,7 @@ namespace Bitget.Net
                 {
                     new Dictionary<string, string>
                     {
-                        { "apiKey", ApiCredentials.Key },
+                        { "apiKey", ApiCredentials.Credential.Key },
                         { "passphrase", ApiCredentials.Passphrase! },
                         { "timestamp", time.ToString()! },
                         { "sign", signature },
