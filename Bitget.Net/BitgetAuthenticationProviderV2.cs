@@ -17,7 +17,7 @@ namespace Bitget.Net
 
         public override string Key => ApiCredentials.Credential.Key;
 
-        public BitgetAuthenticationProviderV2(BitgetCredentials credentials) : base(credentials, credentials.Credential)
+        public BitgetAuthenticationProviderV2(BitgetCredentials credentials) : base(credentials)
         {
             if (string.IsNullOrEmpty(credentials.Passphrase))
                 throw new ArgumentNullException(nameof(ApiCredentials.Passphrase), "Passphrase is required for Bitget authentication");

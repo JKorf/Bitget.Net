@@ -16,48 +16,122 @@ namespace Bitget.Net
 #endif
             ;
 
-        public HMACCredential? HMAC
+        /// <summary>
+        /// HMAC credentials
+        /// </summary>
+        public HMACPassCredential? HMAC
         {
-            get => Credential as HMACCredential;
+            get => Credential as HMACPassCredential;
             set { if (value != null) Credential = value; }
         }
 
-        public RSAXmlCredential? RSAXml
+        /// <summary>
+        /// RSA credentials in XML format
+        /// </summary>
+        public RSAXmlPassCredential? RSAXml
         {
-            get => Credential as RSAXmlCredential;
+            get => Credential as RSAXmlPassCredential;
             set { if (value != null) Credential = value; }
         }
 
 #if NETSTANDARD2_1_OR_GREATER || NET7_0_OR_GREATER
-        public RSAPemCredential? RSAPem
+        /// <summary>
+        /// RSA credentials in PEM/Base64 format
+        /// </summary>
+        public RSAPemPassCredential? RSAPem
         {
-            get => Credential as RSAPemCredential;
+            get => Credential as RSAPemPassCredential;
             set { if (value != null) Credential = value; }
         }
 #endif
 
-        public BitgetCredentials WithHMAC(string key, string secret, string passphrase)
+        /// <summary>
+        /// Create new credentials
+        /// </summary>
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+        public BitgetCredentials() { }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+
+        /// <summary>
+        /// Create new credentials providing HMAC credentials
+        /// </summary>
+        /// <param name="key">API key</param>
+        /// <param name="secret">API secret</param>
+        /// <param name="pass">Passphrase</param>
+        public BitgetCredentials(string key, string secret, string pass)
+        {
+            Credential = new HMACPassCredential(key, secret, pass);
+        }
+
+        /// <summary>
+        /// Create new credentials providing HMAC credentials
+        /// </summary>
+        /// <param name="credential">HMAC Credentials</param>
+        public BitgetCredentials(HMACPassCredential credential)
+        {
+            Credential = credential;
+        }
+
+        /// <summary>
+        /// Create new credentials providing RSA credentials in XML format
+        /// </summary>
+        /// <param name="credential">RSA Credentials in XML format</param>
+        public BitgetCredentials(RSAXmlPassCredential credential)
+        {
+            Credential = credential;
+        }
+
+#if NETSTANDARD2_1_OR_GREATER || NET7_0_OR_GREATER
+        /// <summary>
+        /// Create new credentials providing RSA credentials in PEM/Base64 format
+        /// </summary>
+        /// <param name="credential">RSA Credentials in PEM/Base64 format</param>
+        public BitgetCredentials(RSAPemPassCredential credential)
+        {
+            Credential = credential;
+        }
+#endif
+
+        /// <summary>
+        /// Specify the HMAC credentials
+        /// </summary>
+        /// <param name="key">API key</param>
+        /// <param name="secret">API secret</param>
+        /// <param name="pass">Passphrase</param>
+        public BitgetCredentials WithHMAC(string key, string secret, string pass)
         {
             if (Credential != null) throw new InvalidOperationException("Credentials already set");
 
-            Credential = new HMACCredential(key, secret, passphrase);
+            Credential = new HMACPassCredential(key, secret, pass);
             return this;
         }
 
-        public BitgetCredentials WithRSAXml(string key, string privateKey)
+        /// <summary>
+        /// Specify the RSA credentials in XML format
+        /// </summary>
+        /// <param name="key">API key</param>
+        /// <param name="privateKey">Private key</param>
+        /// <param name="pass">Passphrase</param>
+        public BitgetCredentials WithRSAXml(string key, string privateKey, string pass)
         {
             if (Credential != null) throw new InvalidOperationException("Credentials already set");
 
-            Credential = new RSAXmlCredential(key, privateKey);
+            Credential = new RSAXmlPassCredential(key, privateKey, pass);
             return this;
         }
 
 #if NETSTANDARD2_1_OR_GREATER || NET7_0_OR_GREATER
-        public BitgetCredentials WithRSAPem(string key, string privateKey)
+        /// <summary>
+        /// Specify the RSA credentials in PEM/Base64 format
+        /// </summary>
+        /// <param name="key">API key</param>
+        /// <param name="privateKey">Private key</param>
+        /// <param name="pass">Passphrase</param>
+        public BitgetCredentials WithRSAPem(string key, string privateKey, string pass)
         {
             if (Credential != null) throw new InvalidOperationException("Credentials already set");
 
-            Credential = new RSAPemCredential(key, privateKey);
+            Credential = new RSAPemPassCredential(key, privateKey, pass);
             return this;
         }
 #endif
@@ -65,43 +139,13 @@ namespace Bitget.Net
         /// <inheritdoc />
         public override ApiCredentials Copy() => new BitgetCredentials { Credential = Credential };
 
+        /// <inheritdoc />
+        public override void Validate()
+        {
+            if (Credential == null)
+                throw new ArgumentException("Credential not set");
 
-//        /// <summary>
-//        /// Create API credentials using an API key and secret generated by the server. This assumes HMAC authentication. If you want to use RSA authentication, use the appropriate constructor or static method instead.
-//        /// </summary>
-//        /// <param name="apiKey">The API key</param>
-//        /// <param name="secret">The API secret</param>
-//        /// <param name="passphrase">The API passphrase</param>
-//        public BitgetCredentials(string apiKey, string secret, string passphrase) : this(new HMACCredential(apiKey, secret, passphrase)) { }
-
-//        /// <summary>
-//        /// Create Bitget credentials using HMAC credentials
-//        /// </summary>
-//        /// <param name="credential">The HMAC credentials</param>
-//        public BitgetCredentials(HMACCredential credential) : base(credential) { }
-
-//#if NETSTANDARD2_1_OR_GREATER || NET7_0_OR_GREATER
-//        /// <summary>
-//        /// Create Bitget credentials using RSA credentials in PEM format
-//        /// </summary>
-//        /// <param name="rsaCredential">RSA credentials</param>
-//        public BitgetCredentials(RSAPemCredential rsaCredential)
-//            : base(rsaCredential)
-//        {
-//        }
-//#endif
-//        /// <summary>
-//        /// Create Bitget credentials using RSA credentials in XML format
-//        /// </summary>
-//        /// <param name="rsaCredential">RSA credentials</param>
-//        public BitgetCredentials(RSAXmlCredential rsaCredential)
-//            : base(rsaCredential)
-//        {
-//        }
-
-//        /// <inheritdoc />
-//#pragma warning disable CS0618 // Type or member is obsolete
-//        public override ApiCredentials Copy() => new BitgetCredentials { CredentialPairs = CredentialPairs };
-//#pragma warning restore CS0618 // Type or member is obsolete
+            Credential.Validate();
+        }
     }
 }

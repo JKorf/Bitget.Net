@@ -45,11 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             if (options.Rest == null || options.Socket == null)
-                throw new ArgumentException("Options null");
-
-            LibraryHelpers.ValidateCredentials(options.ApiCredentials);
-            LibraryHelpers.ValidateCredentials(options.Rest.ApiCredentials);
-            LibraryHelpers.ValidateCredentials(options.Socket.ApiCredentials);
+                throw new ArgumentException("Options null");;
 
             var restEnvName = options.Rest.Environment?.Name ?? options.Environment?.Name ?? BitgetEnvironment.Live.Name;
             var socketEnvName = options.Socket.Environment?.Name ?? options.Environment?.Name ?? BitgetEnvironment.Live.Name;
