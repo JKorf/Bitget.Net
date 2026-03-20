@@ -83,7 +83,7 @@ namespace Bitget.Net.Clients.BrokerApiV2
             return result.AsDataless();
         }
 
-        public async Task<WebCallResult<BitgetBrokerAgentDirectCommissions>> GetAgentDirectCommissionsAsync(DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int limit = 100, long? uid = null, string? coin = null, string? symbol = null, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetBrokerAgentDirectCommissions>> GetAgentDirectCommissionsAsync(DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int limit = 100, long? uid = null, string? coin = null, string? symbol = null, bool? showSub = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             if (startTime is not null)
@@ -99,13 +99,14 @@ namespace Bitget.Net.Clients.BrokerApiV2
                 parameters.Add("coin", coin);
             if (symbol is not null)
                 parameters.Add("symbol", symbol);
+            parameters.AddOptional("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/broker/customer-commissions", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await SendAsync<BitgetBrokerAgentDirectCommissions>(request, parameters, ct).ConfigureAwait(false);
         }
 
-        public async Task<WebCallResult<BitgetBrokerAgentCustomer[]>> GetAgentCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, int pageNo = 1, int pageSize = 100, long? uid = null, string? referralCode = null, bool showSub = true, CancellationToken ct = default)
+        public async Task<WebCallResult<BitgetBrokerAgentCustomer[]>> GetAgentCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, int pageNo = 1, int pageSize = 100, long? uid = null, string? referralCode = null, bool? showSub = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             if (startTime is not null)
@@ -118,7 +119,7 @@ namespace Bitget.Net.Clients.BrokerApiV2
                 parameters.AddString("uid", lUid);
             if (referralCode is not null)
                 parameters.Add("referralCode", referralCode);
-            parameters.Add("showSub", showSub);
+            parameters.AddOptional("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/broker/customer-list", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));

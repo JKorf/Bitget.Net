@@ -5021,7 +5021,7 @@
             Broker API endpoints
             </summary>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.BrokerApiV2.IBitgetRestClientBrokerApi.GetAgentDirectCommissionsAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Int32,System.Nullable{System.Int64},System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.BrokerApiV2.IBitgetRestClientBrokerApi.GetAgentDirectCommissionsAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Int32,System.Nullable{System.Int64},System.String,System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Get Agent Direct commissions
             <para><a href="https://www.bitget.com/api-doc/classic/affiliate/customerInfo/GetDirectCommissions" /></para>
@@ -5034,9 +5034,10 @@
             <param name="uid">User Id</param>
             <param name="coin">Coin, e.g: BTC</param>
             <param name="symbol">Coin, e.g: BGBUSDT_SPBL spot</param>
+            <param name="showSub">Whether to Display Subordinate User Information of Direct Clients</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Bitget.Net.Interfaces.Clients.BrokerApiV2.IBitgetRestClientBrokerApi.GetAgentCustomerListAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32,System.Nullable{System.Int64},System.String,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Bitget.Net.Interfaces.Clients.BrokerApiV2.IBitgetRestClientBrokerApi.GetAgentCustomerListAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32,System.Nullable{System.Int64},System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
             <summary>
             Get agent customers
             <para><a href="https://www.bitget.com/api-doc/classic/affiliate/customerInfo/GetCustomerList" /></para>
