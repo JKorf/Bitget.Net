@@ -11,37 +11,37 @@ namespace Bitget.Net.Enums.V2
     public enum UpdatePlanType
     {
         /// <summary>
-        /// Trigger order
+        /// ["<c>pl</c>"] Trigger order
         /// </summary>
         [Map("pl")]
         TriggerOrder,
         /// <summary>
-        /// Partial take profit
+        /// ["<c>tp</c>"] Partial take profit
         /// </summary>
         [Map("tp")]
         PartialTakeProfit,
         /// <summary>
-        /// Partial stop loss
+        /// ["<c>sl</c>"] Partial stop loss
         /// </summary>
         [Map("sl")]
         PartialStopLoss,
         /// <summary>
-        /// Position take profit
+        /// ["<c>ptp</c>"] Position take profit
         /// </summary>
         [Map("ptp")]
         PositionTakeProfit,
         /// <summary>
-        /// Position stop loss 
+        /// ["<c>psl</c>"] Position stop loss 
         /// </summary>
         [Map("psl")]
         PositionStopLoss,
         /// <summary>
-        /// Trailing stop
+        /// ["<c>track</c>"] Trailing stop
         /// </summary>
         [Map("track")]
         TrailingStop,
         /// <summary>
-        /// Trailing TP/SL
+        /// ["<c>mtpsl</c>"] Trailing TP/SL
         /// </summary>
         [Map("mtpsl")]
         TrailingTpSl

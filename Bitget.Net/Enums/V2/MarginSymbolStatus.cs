@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum MarginSymbolStatus
     {
         /// <summary>
-        /// Tradable
+        /// ["<c>1</c>"] Tradable
         /// </summary>
         [Map("1")]
         Tradable,
         /// <summary>
-        /// Under maintenance
+        /// ["<c>2</c>"] Under maintenance
         /// </summary>
         [Map("2")]
         Maintenance

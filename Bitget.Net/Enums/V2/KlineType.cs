@@ -11,17 +11,17 @@ namespace Bitget.Net.Enums.V2
     public enum KlineType
     {
         /// <summary>
-        /// Market price
+        /// ["<c>MARKET</c>"] Market price
         /// </summary>
         [Map("MARKET")]
         Market,
         /// <summary>
-        /// Mark price
+        /// ["<c>MARK</c>"] Mark price
         /// </summary>
         [Map("MARK")]
         Mark,
         /// <summary>
-        /// Index price
+        /// ["<c>INDEX</c>"] Index price
         /// </summary>
         [Map("INDEX")]
         Index

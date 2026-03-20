@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
 {
@@ -8,7 +8,7 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetMaxOpenQuantity
     {
         /// <summary>
-        /// Max quantity that can be opened
+        /// ["<c>maxOpen</c>"] Max quantity that can be opened
         /// </summary>
         [JsonPropertyName("maxOpen")]
         public decimal MaxOpenableQuantity { get; set; }

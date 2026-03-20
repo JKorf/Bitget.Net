@@ -19,9 +19,9 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/position/single-position
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetPosition[]>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
@@ -35,8 +35,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/position/all-position
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetPosition[]>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default);
@@ -50,12 +50,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/position/history-position
         /// </para>
         /// </summary>
-        /// <param name="productType">Filter by product type</param>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Filter by product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
@@ -69,22 +69,22 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/place-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
-        /// <param name="side">Order side</param>
-        /// <param name="type">Order type</param>
-        /// <param name="marginMode">Margin mode</param>
-        /// <param name="quantity">Quantity</param>
-        /// <param name="price">Limit price</param>
-        /// <param name="timeInForce">Time in force</param>
-        /// <param name="tradeSide">Trade side</param>
-        /// <param name="clientOrderId">Client order id</param>
-        /// <param name="reduceOnly">Reduce only order</param>
-        /// <param name="takeProfitPrice">Take profit price</param>
-        /// <param name="stopLossPrice">Stop loss price</param>
-        /// <param name="takeProfitLimitPrice">Take profit limit order price</param>
-        /// <param name="stopLossLimitPrice">Stop loss limit order price</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
+        /// <param name="side">["<c>side</c>"] Order side</param>
+        /// <param name="type">["<c>orderType</c>"] Order type</param>
+        /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
+        /// <param name="quantity">["<c>size</c>"] Quantity</param>
+        /// <param name="price">["<c>price</c>"] Limit price</param>
+        /// <param name="timeInForce">["<c>force</c>"] Time in force</param>
+        /// <param name="tradeSide">["<c>tradeSide</c>"] Trade side</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id</param>
+        /// <param name="reduceOnly">["<c>reduceOnly</c>"] Reduce only order</param>
+        /// <param name="takeProfitPrice">["<c>presetStopSurplusPrice</c>"] Take profit price</param>
+        /// <param name="stopLossPrice">["<c>presetStopLossPrice</c>"] Stop loss price</param>
+        /// <param name="takeProfitLimitPrice">["<c>presetStopSurplusExecutePrice</c>"] Take profit limit order price</param>
+        /// <param name="stopLossLimitPrice">["<c>presetStopLossExecutePrice</c>"] Stop loss limit order price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> PlaceOrderAsync(
@@ -115,11 +115,11 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/batch-place-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
-        /// <param name="marginMode">Margin mode</param>
-        /// <param name="orders">Orders</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
+        /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
+        /// <param name="orders">["<c>orderList</c>"] Orders</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
@@ -139,15 +139,15 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/modify-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
-        /// <param name="newClientOrderId">New client order id</param>
-        /// <param name="newPrice">New price</param>
-        /// <param name="newQuantity">New quantity</param>
-        /// <param name="newTakeProfit">New take profit price</param>
-        /// <param name="newStopLossPrice">New stop loss price</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id. Either this or orderId should be provided</param>
+        /// <param name="newClientOrderId">["<c>newClientOid</c>"] New client order id</param>
+        /// <param name="newPrice">["<c>newPrice</c>"] New price</param>
+        /// <param name="newQuantity">["<c>newSize</c>"] New quantity</param>
+        /// <param name="newTakeProfit">["<c>newPresetStopSurplusPrice</c>"] New take profit price</param>
+        /// <param name="newStopLossPrice">["<c>newPresetStopLossPrice</c>"] New stop loss price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> EditOrderAsync(
@@ -171,11 +171,11 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/cancel-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id. Either this or orderId should be provided</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> CancelOrderAsync(
@@ -195,10 +195,10 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/batch-cancel-orders
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="orders">Orders to cancel</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="orders">["<c>orderIdList</c>"] Orders to cancel</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> CancelMultipleOrdersAsync(
@@ -217,10 +217,10 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/order/detail
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Order id. Either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id. Either this or orderId should be provided</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id. Either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id. Either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesOrder>> GetOrderAsync(
@@ -239,15 +239,15 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/order/orders-pending
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="clientOrderId">Filter by client order id</param>
-        /// <param name="status">Filter by status</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Filter by client order id</param>
+        /// <param name="status">["<c>status</c>"] Filter by status</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesOrders>> GetOpenOrdersAsync(
@@ -271,14 +271,14 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/order/orders-history
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="clientOrderId">Filter by client order id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Filter by client order id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesOrders>> GetClosedOrdersAsync(
@@ -301,9 +301,9 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/cancel-all-orders
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> CancelAllOrdersAsync(
@@ -321,13 +321,13 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/order/fills
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesUserTrades>> GetUserTradesAsync(
@@ -349,13 +349,13 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/order/fill-history
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesUserTrades>> GetHistoricalUserTradesAsync(
@@ -377,9 +377,9 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/close-positions
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="side">Position side; only respected if in hedge mode</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="side">["<c>holdSide</c>"] Position side; only respected if in hedge mode</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> ClosePositionsAsync(
@@ -397,18 +397,18 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/place-tpsl-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
-        /// <param name="planType">Plan type, TakeProfit, StopLoss, TailingStop, PositionTakeProfit or PositionStopLoss</param>
-        /// <param name="quantity">Quantity</param>
-        /// <param name="triggerPrice">Trigger price</param>
-        /// <param name="orderPrice">Order limit price</param>
-        /// <param name="triggerPriceType">Trigger price type</param>
-        /// <param name="hedgeModePositionSide">Position side for when in hedge mode, either this or oneWaySide should be provided</param>
-        /// <param name="oneWaySide">Order side for when in one way mode, either this or hedgeModePositionSide should be provided</param>
-        /// <param name="trailingStopRate">Tailing stop rate</param>
-        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
+        /// <param name="planType">["<c>planType</c>"] Plan type, TakeProfit, StopLoss, TailingStop, PositionTakeProfit or PositionStopLoss</param>
+        /// <param name="quantity">["<c>size</c>"] Quantity</param>
+        /// <param name="triggerPrice">["<c>triggerPrice</c>"] Trigger price</param>
+        /// <param name="orderPrice">["<c>executePrice</c>"] Order limit price</param>
+        /// <param name="triggerPriceType">["<c>triggerType</c>"] Trigger price type</param>
+        /// <param name="hedgeModePositionSide">["<c>holdSide</c>"] Position side for when in hedge mode, either this or oneWaySide should be provided</param>
+        /// <param name="oneWaySide">["<c>holdSide</c>"] Order side for when in one way mode, either this or hedgeModePositionSide should be provided</param>
+        /// <param name="trailingStopRate">["<c>rangeRate</c>"] Tailing stop rate</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> PlaceTpSlOrderAsync(
@@ -435,27 +435,27 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/place-plan-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
-        /// <param name="planType">Plan type</param>
-        /// <param name="marginMode">Margin mode</param>
-        /// <param name="side">Order side</param>
-        /// <param name="orderType">Order type</param>
-        /// <param name="quantity">Order quantity</param>
-        /// <param name="triggerPrice">Trigger price</param>
-        /// <param name="orderPrice">Order limit price</param>
-        /// <param name="triggerPriceType">Trigger price type</param>
-        /// <param name="tradeSide">Trade side</param>
-        /// <param name="trailingStopRate">Trailing stop rate</param>
-        /// <param name="clientOrderId">Client order id</param>
-        /// <param name="reduceOnly">Reduce only</param>
-        /// <param name="takeProfitTriggerPrice">Take profit trigger price</param>
-        /// <param name="takeProfitOrderPrice">Take profit order price</param>
-        /// <param name="takeProfitPriceType">Take profit price type</param>
-        /// <param name="stopLossTriggerPrice">Stop loss trigger price</param>
-        /// <param name="stopLossOrderPrice">Stop loss order price</param>
-        /// <param name="stopLossPriceType">Stop loss price type</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
+        /// <param name="planType">["<c>planType</c>"] Plan type</param>
+        /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
+        /// <param name="side">["<c>side</c>"] Order side</param>
+        /// <param name="orderType">["<c>orderType</c>"] Order type</param>
+        /// <param name="quantity">["<c>size</c>"] Order quantity</param>
+        /// <param name="triggerPrice">["<c>triggerPrice</c>"] Trigger price</param>
+        /// <param name="orderPrice">["<c>price</c>"] Order limit price</param>
+        /// <param name="triggerPriceType">["<c>triggerType</c>"] Trigger price type</param>
+        /// <param name="tradeSide">["<c>tradeSide</c>"] Trade side</param>
+        /// <param name="trailingStopRate">["<c>callbackRatio</c>"] Trailing stop rate</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id</param>
+        /// <param name="reduceOnly">["<c>reduceOnly</c>"] Reduce only</param>
+        /// <param name="takeProfitTriggerPrice">["<c>stopSurplusTriggerPrice</c>"] Take profit trigger price</param>
+        /// <param name="takeProfitOrderPrice">["<c>stopSurplusExecutePrice</c>"] Take profit order price</param>
+        /// <param name="takeProfitPriceType">["<c>stopSurplusTriggerType</c>"] Take profit price type</param>
+        /// <param name="stopLossTriggerPrice">["<c>stopLossTriggerPrice</c>"] Stop loss trigger price</param>
+        /// <param name="stopLossOrderPrice">["<c>stopLossExecutePrice</c>"] Stop loss order price</param>
+        /// <param name="stopLossPriceType">["<c>stopLossTriggerType</c>"] Stop loss price type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> PlaceTriggerOrderAsync(
@@ -491,9 +491,9 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/order/plan-sub-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="triggerOrderId">Trigger order id</param>
-        /// <param name="planType">Plan type</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="triggerOrderId">["<c>planOrderId</c>"] Trigger order id</param>
+        /// <param name="planType">["<c>planType</c>"] Plan type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
@@ -511,20 +511,20 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/modify-plan-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id, either this or orderId should be provided</param>
-        /// <param name="newQuantity">New quantity</param>
-        /// <param name="newPrice">New price</param>
-        /// <param name="newTrailingStopRate">New trailing stop rate</param>
-        /// <param name="newTriggerPrice">New trigger price</param>
-        /// <param name="newTriggerType">New trigger price type</param>
-        /// <param name="newTakeProfitTriggerPrice">New take profit trigger price</param>
-        /// <param name="newTakeProfitOrderPrice">New take profit order price</param>
-        /// <param name="newTakeProfitPriceType">New take profit price type</param>
-        /// <param name="newStopLossTriggerPrice">New stop loss trigger price</param>
-        /// <param name="newStopLossOrderPrice">New stop loss order price</param>
-        /// <param name="newStopLossPriceType">New stop loss trigger price</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id, either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id, either this or orderId should be provided</param>
+        /// <param name="newQuantity">["<c>size</c>"] New quantity</param>
+        /// <param name="newPrice">["<c>price</c>"] New price</param>
+        /// <param name="newTrailingStopRate">["<c>callbackRatio</c>"] New trailing stop rate</param>
+        /// <param name="newTriggerPrice">["<c>triggerPrice</c>"] New trigger price</param>
+        /// <param name="newTriggerType">["<c>triggerType</c>"] New trigger price type</param>
+        /// <param name="newTakeProfitTriggerPrice">["<c>stopSurplusTriggerPrice</c>"] New take profit trigger price</param>
+        /// <param name="newTakeProfitOrderPrice">["<c>stopSurplusExecutePrice</c>"] New take profit order price</param>
+        /// <param name="newTakeProfitPriceType">["<c>stopSurplusTriggerType</c>"] New take profit price type</param>
+        /// <param name="newStopLossTriggerPrice">["<c>stopLossTriggerPrice</c>"] New stop loss trigger price</param>
+        /// <param name="newStopLossOrderPrice">["<c>stopLossExecutePrice</c>"] New stop loss order price</param>
+        /// <param name="newStopLossPriceType">["<c>stopLossTriggerType</c>"] New stop loss trigger price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> EditTriggerOrderAsync(
@@ -553,16 +553,16 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/modify-tpsl-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="marginAsset">Margin asset, for example `USDT`</param>
-        /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
-        /// <param name="clientOrderId">Client order id, either this or orderId should be provided</param>
-        /// <param name="newTriggerPrice">New trigger price</param>
-        /// <param name="newTriggerType">New trigger type</param>
-        /// <param name="newOrderPrice">New order price</param>
-        /// <param name="newQuantity">New quantity</param>
-        /// <param name="newTrailingStopRate">New trailing stop rate</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Order id, either this or clientOrderId should be provided</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id, either this or orderId should be provided</param>
+        /// <param name="newTriggerPrice">["<c>triggerPrice</c>"] New trigger price</param>
+        /// <param name="newTriggerType">["<c>triggerType</c>"] New trigger type</param>
+        /// <param name="newOrderPrice">["<c>executePrice</c>"] New order price</param>
+        /// <param name="newQuantity">["<c>size</c>"] New quantity</param>
+        /// <param name="newTrailingStopRate">["<c>rangeRate</c>"] New trailing stop rate</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderId>> EditTpSlOrderAsync(
@@ -587,15 +587,15 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/order/orders-plan-pending
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="planType">Plan type</param>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="clientOrderId">Filter by client order id</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="planType">["<c>planType</c>"] Plan type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Filter by client order id</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesTriggerOrders>> GetOpenTriggerOrdersAsync(
@@ -619,16 +619,16 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/order/orders-plan-history
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="planType">Plan type</param>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="clientOrderId">Filter by client order id</param>
-        /// <param name="status">Filter by status</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="planType">["<c>planType</c>"] Plan type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Filter by client order id</param>
+        /// <param name="status">["<c>planStatus</c>"] Filter by status</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesTriggerOrders>> GetClosedTriggerOrdersAsync(
@@ -653,11 +653,11 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/cancel-plan-order
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="planType">Plan type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="marginCoin">Margin coin</param>
-        /// <param name="orderIds">Order ids</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="planType">["<c>planType</c>"] Plan type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="marginCoin">["<c>marginCoin</c>"] Margin coin</param>
+        /// <param name="orderIds">["<c>orderIdList</c>"] Order ids</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderMultipleResult>> CancelTriggerOrdersAsync(
@@ -677,21 +677,21 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// POST /api/v2/mix/order/place-pos-tpsl
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
-        /// <param name="marginAsset">Margin asset</param>
-        /// <param name="holdSide"></param>
-        /// <param name="tpTriggerPrice">Take profit trigger price</param>
-        /// <param name="tpTriggerQuantity">Take profit quantity</param>
-        /// <param name="tpTriggerType">Take profit trigger type</param>
-        /// <param name="tpLimitPrice">Take profit limit price</param>
-        /// <param name="slTriggerPrice">Stop loss trigger price</param>
-        /// <param name="slTriggerQuantity">Stop loss trigger quantity</param>
-        /// <param name="slTriggerType">Stop loss trigger type</param>
-        /// <param name="slLimitPrice">Stop loss limit price</param>
-        /// <param name="stpMode">Self trade prevention mode</param>
-        /// <param name="tpClientOrderId">Take profit client order id</param>
-        /// <param name="slClientOrderId">Stop loss client order id</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset</param>
+        /// <param name="holdSide">["<c>holdSide</c>"]</param>
+        /// <param name="tpTriggerPrice">["<c>stopSurplusTriggerPrice</c>"] Take profit trigger price</param>
+        /// <param name="tpTriggerQuantity">["<c>stopSurplusSize</c>"] Take profit quantity</param>
+        /// <param name="tpTriggerType">["<c>stopSurplusTriggerType</c>"] Take profit trigger type</param>
+        /// <param name="tpLimitPrice">["<c>stopSurplusExecutePrice</c>"] Take profit limit price</param>
+        /// <param name="slTriggerPrice">["<c>stopLossTriggerPrice</c>"] Stop loss trigger price</param>
+        /// <param name="slTriggerQuantity">["<c>stopLossSize</c>"] Stop loss trigger quantity</param>
+        /// <param name="slTriggerType">["<c>stopLossTriggerType</c>"] Stop loss trigger type</param>
+        /// <param name="slLimitPrice">["<c>stopLossExecutePrice</c>"] Stop loss limit price</param>
+        /// <param name="stpMode">["<c>stpMode</c>"] Self trade prevention mode</param>
+        /// <param name="tpClientOrderId">["<c>stopSurplusClientOid</c>"] Take profit client order id</param>
+        /// <param name="slClientOrderId">["<c>stopLossClientOid</c>"] Stop loss client order id</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetPositionTpSl[]>> SetPositionTpSlAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, PositionSide holdSide, decimal? tpTriggerPrice = null, decimal? tpTriggerQuantity = null, TriggerPriceType? tpTriggerType = null, decimal? tpLimitPrice = null, decimal? slTriggerPrice = null, decimal? slTriggerQuantity = null, TriggerPriceType? slTriggerType = null, decimal? slLimitPrice = null, SelfTradePreventionMode? stpMode = null, string? tpClientOrderId = null, string? slClientOrderId = null, CancellationToken ct = default);
 

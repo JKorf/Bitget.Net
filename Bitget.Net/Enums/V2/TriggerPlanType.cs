@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum TriggerPlanType
     {
         /// <summary>
-        /// Normal trigger order
+        /// ["<c>normal_plan</c>"] Normal trigger order
         /// </summary>
         [Map("normal_plan")]
         Normal,
         /// <summary>
-        /// Trailing stop
+        /// ["<c>track_plan</c>"] Trailing stop
         /// </summary>
         [Map("track_plan")]
         TrailingStop

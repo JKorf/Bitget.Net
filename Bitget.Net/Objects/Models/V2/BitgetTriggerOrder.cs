@@ -11,72 +11,72 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetTriggerOrder
     {
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Client order id
+        /// ["<c>clientOid</c>"] Client order id
         /// </summary>
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Trigger price
+        /// ["<c>triggerPrice</c>"] Trigger price
         /// </summary>
         [JsonPropertyName("triggerPrice")]
         public decimal? TriggerPrice { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>size</c>"] Quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Order type
+        /// ["<c>orderType</c>"] Order type
         /// </summary>
         [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
-        /// Order side
+        /// ["<c>side</c>"] Order side
         /// </summary>
         [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
-        /// Order price
+        /// ["<c>executePrice</c>"] Order price
         /// </summary>
         [JsonPropertyName("executePrice")]
         public decimal? OrderPrice { get; set; }
         /// <summary>
-        /// Quantity type
+        /// ["<c>planType</c>"] Quantity type
         /// </summary>
         [JsonPropertyName("planType")]
         public QuantityType? QuantityType { get; set; }
         /// <summary>
-        /// Trigger price type
+        /// ["<c>triggerType</c>"] Trigger price type
         /// </summary>
         [JsonPropertyName("triggerType")]
         public TriggerPriceType? TriggerPriceType { get; set; }
         /// <summary>
-        /// Trigger order status
+        /// ["<c>status</c>"] Trigger order status
         /// </summary>
         [JsonPropertyName("status")]
         public TriggerOrderStatus Status { get; set; }
         /// <summary>
-        /// Entry point
+        /// ["<c>enterPointSource</c>"] Entry point
         /// </summary>
         [JsonPropertyName("enterPointSource")]
         public string EnterPointSource { get; set; } = string.Empty;
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Last update time
+        /// ["<c>uTime</c>"] Last update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }

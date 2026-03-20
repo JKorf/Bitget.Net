@@ -11,27 +11,27 @@ namespace Bitget.Net.Enums.V2
     public enum PlanType
     {
         /// <summary>
-        /// Take profit
+        /// ["<c>profit_plan</c>"] Take profit
         /// </summary>
         [Map("profit_plan")]
         TakeProfit,
         /// <summary>
-        /// Stop loss
+        /// ["<c>loss_plan</c>"] Stop loss
         /// </summary>
         [Map("loss_plan")]
         StopLoss,
         /// <summary>
-        /// Trailing stop
+        /// ["<c>moving_plan</c>"] Trailing stop
         /// </summary>
         [Map("moving_plan")]
         TailingStop,
         /// <summary>
-        /// Position take profit
+        /// ["<c>pos_profit</c>"] Position take profit
         /// </summary>
         [Map("pos_profit")]
         PositionTakeProfit,
         /// <summary>
-        /// Position stop loss
+        /// ["<c>pos_loss</c>"] Position stop loss
         /// </summary>
         [Map("pos_loss")]
         PositionStopLoss

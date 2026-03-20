@@ -10,12 +10,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetUserFee
     {
         /// <summary>
-        /// Maker fee rate
+        /// ["<c>makerFeeRate</c>"] Maker fee rate
         /// </summary>
         [JsonPropertyName("makerFeeRate")]
         public decimal MakerRate { get; set; }
         /// <summary>
-        /// Taker fee rate
+        /// ["<c>takerFeeRate</c>"] Taker fee rate
         /// </summary>
         [JsonPropertyName("takerFeeRate")]
         public decimal TakerRate { get; set; }

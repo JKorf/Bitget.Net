@@ -11,32 +11,32 @@ namespace Bitget.Net.Enums.V2
     public enum MarginOrderSide
     {
         /// <summary>
-        /// Buy order
+        /// ["<c>buy</c>"] Buy order
         /// </summary>
         [Map("buy")]
         Buy,
         /// <summary>
-        /// Sell order
+        /// ["<c>sell</c>"] Sell order
         /// </summary>
         [Map("sell")]
         Sell,
         /// <summary>
-        /// Liquidation buy
+        /// ["<c>liquidation-buy</c>"] Liquidation buy
         /// </summary>
         [Map("liquidation-buy")]
         LiquidationBuy,
         /// <summary>
-        /// Liquidation sell
+        /// ["<c>liquidation-sell</c>"] Liquidation sell
         /// </summary>
         [Map("liquidation-sell")]
         LiquidationSell,
         /// <summary>
-        /// System buy
+        /// ["<c>systemRepay-buy</c>"] System buy
         /// </summary>
         [Map("systemRepay-buy")]
         SytemBuy,
         /// <summary>
-        /// System sell
+        /// ["<c>systemRepay-sell</c>"] System sell
         /// </summary>
         [Map("systemRepay-sell")]
         SytemSell

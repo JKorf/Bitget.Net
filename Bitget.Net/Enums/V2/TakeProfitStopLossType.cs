@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum TakeProfitStopLossType
     {
         /// <summary>
-        /// Normal order
+        /// ["<c>normal</c>"] Normal order
         /// </summary>
         [Map("normal")]
         Normal,
         /// <summary>
-        /// Take profit/Stop loss order
+        /// ["<c>tpsl</c>"] Take profit/Stop loss order
         /// </summary>
         [Map("tpsl")]
         Tpsl

@@ -26,12 +26,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <summary>
         /// Get announcements
         /// </summary>
-        /// <param name="type">Filter by type</param>
-        /// <param name="language">Language</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="cursor">Page cursor</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="type">["<c>annType</c>"] Filter by type</param>
+        /// <param name="language">["<c>language</c>"] Language</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetAnnouncement[]>> GetAnnouncementsAsync(
             AnnouncementType? type = null,
@@ -51,7 +51,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/public/coins
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetAsset[]>> GetAssetsAsync(string? asset = null, CancellationToken ct = default);
@@ -65,7 +65,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/public/symbols
         /// </para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetSymbol[]>> GetSymbolsAsync(string? symbol = null, CancellationToken ct = default);
@@ -92,7 +92,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/market/tickers
         /// </para>
         /// </summary>
-        /// <param name="symbol">Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTicker[]>> GetTickersAsync(string? symbol = null, CancellationToken ct = default);
@@ -106,9 +106,9 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/market/orderbook
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="mergeStep">Merge step</param>
-        /// <param name="limit">Max number of rows</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="mergeStep">["<c>step</c>"] Merge step</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of rows</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOrderBook>> GetOrderBookAsync(string symbol, int? mergeStep = null, int? limit = null, CancellationToken ct = default);
@@ -122,11 +122,11 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/market/candles
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="interval">Kline interval</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>granularity</c>"] Kline interval</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -140,10 +140,10 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/market/history-candles
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="interval">Kline interval</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>granularity</c>"] Kline interval</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetKline[]>> GetHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime endTime, int? limit = null, CancellationToken ct = default);
@@ -157,8 +157,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/market/fills
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
@@ -172,11 +172,11 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/market/fills-history
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTrade[]>> GetTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);

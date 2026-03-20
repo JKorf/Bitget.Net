@@ -10,37 +10,37 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetVipFeeRate
     {
         /// <summary>
-        /// VIP level
+        /// ["<c>level</c>"] VIP level
         /// </summary>
         [JsonPropertyName("level")]
         public int Level { get; set; }
         /// <summary>
-        /// Trading volume for reaching this level
+        /// ["<c>dealAmount</c>"] Trading volume for reaching this level
         /// </summary>
         [JsonPropertyName("dealAmount")]
         public decimal TradingVolume { get; set; }
         /// <summary>
-        /// Asset value for reaching this level
+        /// ["<c>assetAmount</c>"] Asset value for reaching this level
         /// </summary>
         [JsonPropertyName("assetAmount")]
         public decimal AssetValue { get; set; }
         /// <summary>
-        /// Taker fee rate
+        /// ["<c>takerFeeRate</c>"] Taker fee rate
         /// </summary>
         [JsonPropertyName("takerFeeRate")]
         public decimal TakerFeeRate { get; set; }
         /// <summary>
-        /// Maker fee rate
+        /// ["<c>makerFeeRate</c>"] Maker fee rate
         /// </summary>
         [JsonPropertyName("makerFeeRate")]
         public decimal MakerFeeRate { get; set; }
         /// <summary>
-        /// BTC max withdrawal quantity per 24 hours
+        /// ["<c>btcWithdrawAmount</c>"] BTC max withdrawal quantity per 24 hours
         /// </summary>
         [JsonPropertyName("btcWithdrawAmount")]
         public decimal BtcWithdrawQuantity { get; set; }
         /// <summary>
-        /// USDT max withdrawal quantity per 24 hours
+        /// ["<c>usdtWithdrawAmount</c>"] USDT max withdrawal quantity per 24 hours
         /// </summary>
         [JsonPropertyName("usdtWithdrawAmount")]
         public decimal UsdtWithdrawQuantity { get; set; }

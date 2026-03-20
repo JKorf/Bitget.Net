@@ -11,52 +11,52 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetSubAccountTransfer
     {
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public TransferStatus Status { get; set; }
         /// <summary>
-        /// To account type
+        /// ["<c>toType</c>"] To account type
         /// </summary>
         [JsonPropertyName("toType")]
         public AccountType ToType { get; set; }
         /// <summary>
-        /// From account type
+        /// ["<c>fromType</c>"] From account type
         /// </summary>
         [JsonPropertyName("fromType")]
         public AccountType FromType { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>size</c>"] Quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Timestamp
+        /// ["<c>ts</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("ts")]
         public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Client oid
+        /// ["<c>clientOid</c>"] Client oid
         /// </summary>
         [JsonPropertyName("clientOid")]
         public string? ClientOid { get; set; }
         /// <summary>
-        /// Transfer id
+        /// ["<c>transferId</c>"] Transfer id
         /// </summary>
         [JsonPropertyName("transferId")]
         public string TransferId { get; set; } = string.Empty;
         /// <summary>
-        /// From user id
+        /// ["<c>fromUserId</c>"] From user id
         /// </summary>
         [JsonPropertyName("fromUserId")]
         public long FromUserId { get; set; }
         /// <summary>
-        /// To user id
+        /// ["<c>toUserId</c>"] To user id
         /// </summary>
         [JsonPropertyName("toUserId")]
         public long ToUserId { get; set; }

@@ -11,27 +11,27 @@ namespace Bitget.Net.Enums.V2
     public enum GroupType
     {
         /// <summary>
-        /// Deposit
+        /// ["<c>deposit</c>"] Deposit
         /// </summary>
         [Map("deposit")]
         Deposit,
         /// <summary>
-        /// Withdraw
+        /// ["<c>withdraw</c>"] Withdraw
         /// </summary>
         [Map("withdraw")]
         Withdraw,
         /// <summary>
-        /// Transaction
+        /// ["<c>transaction</c>"] Transaction
         /// </summary>
         [Map("transaction")]
         Transaction,
         /// <summary>
-        /// Transfer
+        /// ["<c>transfer</c>"] Transfer
         /// </summary>
         [Map("transfer")]
         Transfer,
         /// <summary>
-        /// Other
+        /// ["<c>other</c>"] Other
         /// </summary>
         [Map("other")]
         Other

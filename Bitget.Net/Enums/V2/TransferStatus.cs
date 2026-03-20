@@ -11,17 +11,17 @@ namespace Bitget.Net.Enums.V2
     public enum TransferStatus
     {
         /// <summary>
-        /// Success
+        /// ["<c>Successful</c>"] Success
         /// </summary>
         [Map("Successful", "success")]
         Success,
         /// <summary>
-        /// Failed
+        /// ["<c>Failed</c>"] Failed
         /// </summary>
         [Map("Failed", "fail")]
         Failed,
         /// <summary>
-        /// Processing
+        /// ["<c>Processing</c>"] Processing
         /// </summary>
         [Map("Processing", "pending")]
         Processing

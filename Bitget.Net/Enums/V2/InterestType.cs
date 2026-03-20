@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum InterestType
     {
         /// <summary>
-        /// Interest on initial borrowing
+        /// ["<c>first</c>"] Interest on initial borrowing
         /// </summary>
         [Map("first")]
         First,
         /// <summary>
-        /// Scheduled
+        /// ["<c>scheduled</c>"] Scheduled
         /// </summary>
         [Map("scheduled")]
         Scheduled

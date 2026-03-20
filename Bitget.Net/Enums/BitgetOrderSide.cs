@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums
     public enum BitgetOrderSide
     {
         /// <summary>
-        /// Buy
+        /// ["<c>buy</c>"] Buy
         /// </summary>
         [Map("buy")]
         Buy,
         /// <summary>
-        /// Sell
+        /// ["<c>sell</c>"] Sell
         /// </summary>
         [Map("sell")]
         Sell

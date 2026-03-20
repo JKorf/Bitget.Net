@@ -10,17 +10,17 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetOrderList
     {
         /// <summary>
-        /// Next flag
+        /// ["<c>nextFlag</c>"] Next flag
         /// </summary>
         [JsonPropertyName("nextFlag")]
         public bool NextFlag { get; set; }
         /// <summary>
-        /// Id for pagination
+        /// ["<c>idLessThan</c>"] Id for pagination
         /// </summary>
         [JsonPropertyName("idLessThan")]
         public string IdLessThan { get; set; } = string.Empty;
         /// <summary>
-        /// Orders
+        /// ["<c>orderList</c>"] Orders
         /// </summary>
         [JsonPropertyName("orderList")]
         public BitgetTriggerOrder[] Orders { get; set; } = Array.Empty<BitgetTriggerOrder>();

@@ -10,82 +10,82 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetIsolatedInterestLimit
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Leverage
+        /// ["<c>leverage</c>"] Leverage
         /// </summary>
         [JsonPropertyName("leverage")]
         public decimal Leverage { get; set; }
         /// <summary>
-        /// Base asset
+        /// ["<c>baseCoin</c>"] Base asset
         /// </summary>
         [JsonPropertyName("baseCoin")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Base asset transferable
+        /// ["<c>baseTransferable</c>"] Base asset transferable
         /// </summary>
         [JsonPropertyName("baseTransferable")]
         public bool BaseTransferable { get; set; }
         /// <summary>
-        /// Base asset borrowable
+        /// ["<c>baseBorrowable</c>"] Base asset borrowable
         /// </summary>
         [JsonPropertyName("baseBorrowable")]
         public bool BaseBorrowable { get; set; }
         /// <summary>
-        /// Base asset daily interest rate
+        /// ["<c>baseDailyInterestRate</c>"] Base asset daily interest rate
         /// </summary>
         [JsonPropertyName("baseDailyInterestRate")]
         public decimal BaseDailyInterestRate { get; set; }
         /// <summary>
-        /// Base asset annually interest rate
+        /// ["<c>baseAnnuallyInterestRate</c>"] Base asset annually interest rate
         /// </summary>
         [JsonPropertyName("baseAnnuallyInterestRate")]
         public decimal BaseAnnuallyInterestRate { get; set; }
         /// <summary>
-        /// Base asset max borrowable quantity
+        /// ["<c>baseMaxBorrowableAmount</c>"] Base asset max borrowable quantity
         /// </summary>
         [JsonPropertyName("baseMaxBorrowableAmount")]
         public decimal BaseMaxBorrowableQuantity { get; set; }
         /// <summary>
-        /// Base vip list
+        /// ["<c>baseVipList</c>"] Base vip list
         /// </summary>
         [JsonPropertyName("baseVipList")]
         public BitgetIsolatedInterestLimitVip[] BaseVipList { get; set; } = Array.Empty<BitgetIsolatedInterestLimitVip>();
         /// <summary>
-        /// Quote asset
+        /// ["<c>quoteCoin</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quoteCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset transferable
+        /// ["<c>quoteTransferable</c>"] Quote asset transferable
         /// </summary>
         [JsonPropertyName("quoteTransferable")]
         public bool QuoteTransferable { get; set; }
         /// <summary>
-        /// Quote asset borrowable
+        /// ["<c>quoteBorrowable</c>"] Quote asset borrowable
         /// </summary>
         [JsonPropertyName("quoteBorrowable")]
         public bool QuoteBorrowable { get; set; }
         /// <summary>
-        /// Quote asset daily interest rate
+        /// ["<c>quoteDailyInterestRate</c>"] Quote asset daily interest rate
         /// </summary>
         [JsonPropertyName("quoteDailyInterestRate")]
         public decimal QuoteDailyInterestRate { get; set; }
         /// <summary>
-        /// Quote asset annually interest rate
+        /// ["<c>quoteAnnuallyInterestRate</c>"] Quote asset annually interest rate
         /// </summary>
         [JsonPropertyName("quoteAnnuallyInterestRate")]
         public decimal QuoteAnnuallyInterestRate { get; set; }
         /// <summary>
-        /// Quote asset max borrowable quantity
+        /// ["<c>quoteMaxBorrowableAmount</c>"] Quote asset max borrowable quantity
         /// </summary>
         [JsonPropertyName("quoteMaxBorrowableAmount")]
         public decimal QuoteMaxBorrowableQuantity { get; set; }
         /// <summary>
-        /// Quote list
+        /// ["<c>quoteList</c>"] Quote list
         /// </summary>
         [JsonPropertyName("quoteList")]
         public BitgetIsolatedInterestLimitQuote[] QuoteList { get; set; } = Array.Empty<BitgetIsolatedInterestLimitQuote>();
@@ -98,27 +98,27 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetIsolatedInterestLimitVip
     {
         /// <summary>
-        /// Level
+        /// ["<c>level</c>"] Level
         /// </summary>
         [JsonPropertyName("level")]
         public int Level { get; set; }
         /// <summary>
-        /// Daily interest rate
+        /// ["<c>dailyInterestRate</c>"] Daily interest rate
         /// </summary>
         [JsonPropertyName("dailyInterestRate")]
         public decimal DailyInterestRate { get; set; }
         /// <summary>
-        /// Limit
+        /// ["<c>limit</c>"] Limit
         /// </summary>
         [JsonPropertyName("limit")]
         public decimal Limit { get; set; }
         /// <summary>
-        /// Annually interest rate
+        /// ["<c>annuallyInterestRate</c>"] Annually interest rate
         /// </summary>
         [JsonPropertyName("annuallyInterestRate")]
         public decimal AnnuallyInterestRate { get; set; }
         /// <summary>
-        /// Discount rate
+        /// ["<c>discountRate</c>"] Discount rate
         /// </summary>
         [JsonPropertyName("discountRate")]
         public decimal DiscountRate { get; set; }
@@ -131,27 +131,27 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetIsolatedInterestLimitQuote
     {
         /// <summary>
-        /// Level
+        /// ["<c>level</c>"] Level
         /// </summary>
         [JsonPropertyName("level")]
         public int Level { get; set; }
         /// <summary>
-        /// Daily interest rate
+        /// ["<c>dailyInterestRate</c>"] Daily interest rate
         /// </summary>
         [JsonPropertyName("dailyInterestRate")]
         public decimal DailyInterestRate { get; set; }
         /// <summary>
-        /// Limit
+        /// ["<c>limit</c>"] Limit
         /// </summary>
         [JsonPropertyName("limit")]
         public decimal Limit { get; set; }
         /// <summary>
-        /// Annually interest rate
+        /// ["<c>annuallyInterestRate</c>"] Annually interest rate
         /// </summary>
         [JsonPropertyName("annuallyInterestRate")]
         public decimal AnnuallyInterestRate { get; set; }
         /// <summary>
-        /// Discount rate
+        /// ["<c>discountRate</c>"] Discount rate
         /// </summary>
         [JsonPropertyName("discountRate")]
         public decimal DiscountRate { get; set; }

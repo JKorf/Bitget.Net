@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum LiquidationType
     {
         /// <summary>
-        /// Place order
+        /// ["<c>place_order</c>"] Place order
         /// </summary>
         [Map("place_order")]
         PlaceOrder,
         /// <summary>
-        /// Swap
+        /// ["<c>swap</c>"] Swap
         /// </summary>
         [Map("swap")]
         Swap

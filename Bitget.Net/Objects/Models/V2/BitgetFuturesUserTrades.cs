@@ -11,12 +11,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetFuturesUserTrades
     {
         /// <summary>
-        /// End id
+        /// ["<c>endId</c>"] End id
         /// </summary>
         [JsonPropertyName("endId")]
         public string EndId { get; set; } = string.Empty;
         /// <summary>
-        /// Trades
+        /// ["<c>fillList</c>"] Trades
         /// </summary>
         [JsonPropertyName("fillList")]
         public BitgetFuturesUserTrade[] Trades { get; set; } = Array.Empty<BitgetFuturesUserTrade>();
@@ -29,72 +29,72 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetFuturesUserTrade
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Trade id
+        /// ["<c>tradeId</c>"] Trade id
         /// </summary>
         [JsonPropertyName("tradeId")]
         public string TradeId { get; set; } = string.Empty;
         /// <summary>
-        /// Order side
+        /// ["<c>side</c>"] Order side
         /// </summary>
         [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
-        /// Price
+        /// ["<c>price</c>"] Price
         /// </summary>
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>baseVolume</c>"] Quantity
         /// </summary>
         [JsonPropertyName("baseVolume")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Quote quantity
+        /// ["<c>quoteVolume</c>"] Quote quantity
         /// </summary>
         [JsonPropertyName("quoteVolume")]
         public decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// Profit
+        /// ["<c>profit</c>"] Profit
         /// </summary>
         [JsonPropertyName("profit")]
         public decimal Profit { get; set; }
         /// <summary>
-        /// Entry point source
+        /// ["<c>enterPointSource</c>"] Entry point source
         /// </summary>
         [JsonPropertyName("enterPointSource")]
         public string EntryPointSource { get; set; } = string.Empty;
         /// <summary>
-        /// Trade side
+        /// ["<c>tradeSide</c>"] Trade side
         /// </summary>
         [JsonPropertyName("tradeSide")]
         public TradeSide TradeSide { get; set; }
         /// <summary>
-        /// Position mode
+        /// ["<c>posMode</c>"] Position mode
         /// </summary>
         [JsonPropertyName("posMode")]
         public PositionMode PositionMode { get; set; }
         /// <summary>
-        /// Role
+        /// ["<c>tradeScope</c>"] Role
         /// </summary>
         [JsonPropertyName("tradeScope")]
         public Role Role { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Fees
+        /// ["<c>feeDetail</c>"] Fees
         /// </summary>
         [JsonPropertyName("feeDetail")]
         public BitgetTradeFee[] Fees { get; set; } = Array.Empty<BitgetTradeFee>();

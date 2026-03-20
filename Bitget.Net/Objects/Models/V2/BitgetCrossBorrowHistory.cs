@@ -11,32 +11,32 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossBorrowHistory
     {
         /// <summary>
-        /// Loan id
+        /// ["<c>loanId</c>"] Loan id
         /// </summary>
         [JsonPropertyName("loanId")]
         public string LoanId { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Borrow quantity
+        /// ["<c>borrowAmount</c>"] Borrow quantity
         /// </summary>
         [JsonPropertyName("borrowAmount")]
         public decimal BorrowQuantity { get; set; }
         /// <summary>
-        /// Borrow type
+        /// ["<c>borrowType</c>"] Borrow type
         /// </summary>
         [JsonPropertyName("borrowType")]
         public BorrowType BorrowType { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }

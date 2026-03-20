@@ -11,92 +11,92 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetSymbol
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Base asset
+        /// ["<c>baseCoin</c>"] Base asset
         /// </summary>
         [JsonPropertyName("baseCoin")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset
+        /// ["<c>quoteCoin</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quoteCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Minimal order quantity
+        /// ["<c>minTradeAmount</c>"] Minimal order quantity
         /// </summary>
         [JsonPropertyName("minTradeAmount")]
         public decimal MinOrderQuantity { get; set; }
         /// <summary>
-        /// Maximal order quantity
+        /// ["<c>maxTradeAmount</c>"] Maximal order quantity
         /// </summary>
         [JsonPropertyName("maxTradeAmount")]
         public decimal MaxOrderQuantity { get; set; }
         /// <summary>
-        /// Taker fee rate
+        /// ["<c>takerFeeRate</c>"] Taker fee rate
         /// </summary>
         [JsonPropertyName("takerFeeRate")]
         public decimal TakerFeeRate { get; set; }
         /// <summary>
-        /// Maker fee rate
+        /// ["<c>makerFeeRate</c>"] Maker fee rate
         /// </summary>
         [JsonPropertyName("makerFeeRate")]
         public decimal MakerFeeRate { get; set; }
         /// <summary>
-        /// The number of decimals used for price
+        /// ["<c>pricePrecision</c>"] The number of decimals used for price
         /// </summary>
         [JsonPropertyName("pricePrecision"), JsonConverter(typeof(IntConverter))]
         public int? PricePrecision { get; set; }
         /// <summary>
-        /// The number of decimals used for quantity
+        /// ["<c>quantityPrecision</c>"] The number of decimals used for quantity
         /// </summary>
         [JsonPropertyName("quantityPrecision"), JsonConverter(typeof(IntConverter))]
         public int? QuantityPrecision { get; set; }
         /// <summary>
-        /// The number of decimals used for quote quantity
+        /// ["<c>quotePrecision</c>"] The number of decimals used for quote quantity
         /// </summary>
         [JsonPropertyName("quotePrecision"), JsonConverter(typeof(IntConverter))]
         public int? QuoteQuantityPrecision { get; set; }
         /// <summary>
-        /// Minimal order value in USDT
+        /// ["<c>minTradeUSDT</c>"] Minimal order value in USDT
         /// </summary>
         [JsonPropertyName("minTradeUSDT")]
         public decimal MinOrderValue { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public SymbolStatus Status { get; set; }
         /// <summary>
-        /// Max percentage spread between buy limit price and current price
+        /// ["<c>buyLimitPriceRatio</c>"] Max percentage spread between buy limit price and current price
         /// </summary>
         [JsonPropertyName("buyLimitPriceRatio")]
         public decimal? BuyLimitPriceRatio { get; set; }
         /// <summary>
-        /// Max percentage spread between sell limit price and current price
+        /// ["<c>sellLimitPriceRatio</c>"] Max percentage spread between sell limit price and current price
         /// </summary>
         [JsonPropertyName("sellLimitPriceRatio")]
         public decimal? SellLimitPriceRatio { get; set; }
         /// <summary>
-        /// Max number of orders allowed
+        /// ["<c>orderQuantity</c>"] Max number of orders allowed
         /// </summary>
         [JsonPropertyName("orderQuantity")]
         public int? MaxOrders { get; set; }
         /// <summary>
-        /// Area symbol
+        /// ["<c>areaSymbol</c>"] Area symbol
         /// </summary>
         [JsonPropertyName("areaSymbol")]
         public bool? AreaSymbol { get; set; }
         /// <summary>
-        /// Open time
+        /// ["<c>openTime</c>"] Open time
         /// </summary>
         [JsonPropertyName("openTime")]
         public DateTime? OpenTime { get; set; }
         /// <summary>
-        /// Offline time
+        /// ["<c>offTime</c>"] Offline time
         /// </summary>
         [JsonPropertyName("offTime")]
         public DateTime? OfflineTime { get; set; }

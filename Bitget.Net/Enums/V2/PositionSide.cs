@@ -11,17 +11,17 @@ namespace Bitget.Net.Enums.V2
     public enum PositionSide
     {
         /// <summary>
-        /// Long position
+        /// ["<c>long</c>"] Long position
         /// </summary>
         [Map("long")]
         Long,
         /// <summary>
-        /// Short position
+        /// ["<c>short</c>"] Short position
         /// </summary>
         [Map("short")]
         Short,
         /// <summary>
-        /// One way position
+        /// ["<c>net</c>"] One way position
         /// </summary>
         [Map("net")]
         Oneway

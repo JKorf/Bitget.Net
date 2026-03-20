@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum ContractType
     {
         /// <summary>
-        /// Perpetual futures
+        /// ["<c>perpetual</c>"] Perpetual futures
         /// </summary>
         [Map("perpetual", "1")]
         Perpetual,
         /// <summary>
-        /// Delivery futures
+        /// ["<c>delivery</c>"] Delivery futures
         /// </summary>
         [Map("delivery", "2")]
         Delivery

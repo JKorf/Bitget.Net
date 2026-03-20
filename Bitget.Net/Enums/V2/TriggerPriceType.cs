@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum TriggerPriceType
     {
         /// <summary>
-        /// Last fill price
+        /// ["<c>fill_price</c>"] Last fill price
         /// </summary>
         [Map("fill_price")]
         LastPrice,
         /// <summary>
-        /// Mark price
+        /// ["<c>mark_price</c>"] Mark price
         /// </summary>
         [Map("mark_price")]
         MarkPrice

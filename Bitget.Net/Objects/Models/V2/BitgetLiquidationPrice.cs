@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
 {
@@ -8,7 +8,7 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetLiquidationPrice
     {
         /// <summary>
-        /// Liquidation price
+        /// ["<c>liqPrice</c>"] Liquidation price
         /// </summary>
         [JsonPropertyName("liqPrice")]
         public decimal LiquidationPrice { get; set; }

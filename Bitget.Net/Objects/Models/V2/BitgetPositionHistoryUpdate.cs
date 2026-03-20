@@ -11,82 +11,82 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetPositionHistoryUpdate
     {
         /// <summary>
-        /// Position id
+        /// ["<c>posId</c>"] Position id
         /// </summary>
         [JsonPropertyName("posId")]
         public string PositionId { get; set; } = string.Empty;
         /// <summary>
-        /// Margin asset
+        /// ["<c>marginCoin</c>"] Margin asset
         /// </summary>
         [JsonPropertyName("marginCoin")]
         public string MarginAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Symbol
+        /// ["<c>instId</c>"] Symbol
         /// </summary>
         [JsonPropertyName("instId")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Position side
+        /// ["<c>holdSide</c>"] Position side
         /// </summary>
         [JsonPropertyName("holdSide")]
         public PositionSide Side { get; set; }
         /// <summary>
-        /// Position mode
+        /// ["<c>posMode</c>"] Position mode
         /// </summary>
         [JsonPropertyName("posMode")]
         public PositionMode PositionMode { get; set; }
         /// <summary>
-        /// Average open price
+        /// ["<c>openPriceAvg</c>"] Average open price
         /// </summary>
         [JsonPropertyName("openPriceAvg")]
         public decimal AverageOpenPrice { get; set; }
         /// <summary>
-        /// Average close price
+        /// ["<c>closePriceAvg</c>"] Average close price
         /// </summary>
         [JsonPropertyName("closePriceAvg")]
         public decimal AverageClosePrice { get; set; }
         /// <summary>
-        /// Margin mode
+        /// ["<c>marginMode</c>"] Margin mode
         /// </summary>
         [JsonPropertyName("marginMode")]
         public MarginMode MarginMode { get; set; }
         /// <summary>
-        /// Open quantity
+        /// ["<c>openSize</c>"] Open quantity
         /// </summary>
         [JsonPropertyName("openSize")]
         public decimal OpenQuantity { get; set; }
         /// <summary>
-        /// Close quantity
+        /// ["<c>closeSize</c>"] Close quantity
         /// </summary>
         [JsonPropertyName("closeSize")]
         public decimal CloseQuantity { get; set; }
         /// <summary>
-        /// Profit and loss
+        /// ["<c>achievedProfits</c>"] Profit and loss
         /// </summary>
         [JsonPropertyName("achievedProfits")]
         public decimal ProfitAndLoss { get; set; }
         /// <summary>
-        /// Settle fee
+        /// ["<c>settleFee</c>"] Settle fee
         /// </summary>
         [JsonPropertyName("settleFee")]
         public decimal SettleFee { get; set; }
         /// <summary>
-        /// Open fee
+        /// ["<c>openFee</c>"] Open fee
         /// </summary>
         [JsonPropertyName("openFee")]
         public decimal OpenFee { get; set; }
         /// <summary>
-        /// Close fee
+        /// ["<c>closeFee</c>"] Close fee
         /// </summary>
         [JsonPropertyName("closeFee")]
         public decimal CloseFee { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime UpdateTime { get; set; }

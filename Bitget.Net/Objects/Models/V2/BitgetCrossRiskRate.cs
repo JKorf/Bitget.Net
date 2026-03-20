@@ -10,7 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossRiskRate
     {
         /// <summary>
-        /// Risk rate ratio
+        /// ["<c>riskRateRatio</c>"] Risk rate ratio
         /// </summary>
         [JsonPropertyName("riskRateRatio")]
         public decimal RiskRateRatio { get; set; }

@@ -11,22 +11,22 @@ namespace Bitget.Net.Enums.V2
     public enum TimeInForce
     {
         /// <summary>
-        /// Good till canceled
+        /// ["<c>gtc</c>"] Good till canceled
         /// </summary>
         [Map("gtc")]
         GoodTillCanceled,
         /// <summary>
-        /// Post only
+        /// ["<c>post_only</c>"] Post only
         /// </summary>
         [Map("post_only")]
         PostOnly,
         /// <summary>
-        /// Fill or kill
+        /// ["<c>fok</c>"] Fill or kill
         /// </summary>
         [Map("fok")]
         FillOrKill,
         /// <summary>
-        /// Immediate or cancel
+        /// ["<c>ioc</c>"] Immediate or cancel
         /// </summary>
         [Map("ioc")]
         ImmediateOrCancel

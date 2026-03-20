@@ -1,4 +1,4 @@
-﻿using Bitget.Net.Enums.V2;
+using Bitget.Net.Enums.V2;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
@@ -9,22 +9,22 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetFuturesAdlRank
     {
         /// <summary>
-        /// Margin asset
+        /// ["<c>marginCoin</c>"] Margin asset
         /// </summary>
         [JsonPropertyName("marginCoin")]
         public string MarginAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Symbol name
+        /// ["<c>symbol</c>"] Symbol name
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Auto deleverage rank
+        /// ["<c>adlRank</c>"] Auto deleverage rank
         /// </summary>
         [JsonPropertyName("adlRank")]
         public decimal AdlRank { get; set; }
         /// <summary>
-        /// Position side
+        /// ["<c>holdSide</c>"] Position side
         /// </summary>
         [JsonPropertyName("holdSide")]
         public PositionSide PositionSide { get; set; }

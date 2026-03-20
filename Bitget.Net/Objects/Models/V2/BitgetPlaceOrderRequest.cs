@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Bitget.Net.Enums.V2;
 
 namespace Bitget.Net.Objects.Models.V2
@@ -9,57 +9,57 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetPlaceOrderRequest
     {
         /// <summary>
-        /// Order side
+        /// ["<c>side</c>"] Order side
         /// </summary>
         [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
-        /// Order type
+        /// ["<c>orderType</c>"] Order type
         /// </summary>
         [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
-        /// Time in force
+        /// ["<c>force</c>"] Time in force
         /// </summary>
         [JsonPropertyName("force")]
         public TimeInForce TimeInForce { get; set; }
         /// <summary>
-        /// Price
+        /// ["<c>price</c>"] Price
         /// </summary>
         [JsonPropertyName("price"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter)), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? Price { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>size</c>"] Quantity
         /// </summary>
         [JsonPropertyName("size"), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter))]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Client order id
+        /// ["<c>clientOid</c>"] Client order id
         /// </summary>
         [JsonPropertyName("clientOid"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string? ClientOrderId { get; set; }
         /// <summary>
-        /// Self Trade Prevention mode
+        /// ["<c>stpMode</c>"] Self Trade Prevention mode
         /// </summary>
         [JsonPropertyName("stpMode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SelfTradePreventionMode? StpMode { get; set; }
         /// <summary>
-        /// Take profit price
+        /// ["<c>presetTakeProfitPrice</c>"] Take profit price
         /// </summary>
         [JsonPropertyName("presetTakeProfitPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter))]
         public decimal? PresetTakeProfitPrice { get; set; }
         /// <summary>
-        /// Execute take profit price
+        /// ["<c>executeTakeProfitPrice</c>"] Execute take profit price
         /// </summary>
         [JsonPropertyName("executeTakeProfitPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter))]
         public decimal? ExecuteTakeProfitPrice { get; set; }
         /// <summary>
-        /// Stop loss price
+        /// ["<c>presetStopLossPrice</c>"] Stop loss price
         /// </summary>
         [JsonPropertyName("presetStopLossPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter))]
         public decimal? PresetStopLossPrice { get; set; }
         /// <summary>
-        /// Execute stop loss price
+        /// ["<c>executeStopLossPrice</c>"] Execute stop loss price
         /// </summary>
         [JsonPropertyName("executeStopLossPrice"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonConverter(typeof(CryptoExchange.Net.Converters.SystemTextJson.DecimalStringWriterConverter))]
         public decimal? ExecuteStopLossPrice { get; set; }
