@@ -10,27 +10,27 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetDepositAddress
     {
         /// <summary>
-        /// Address
+        /// ["<c>address</c>"] Address
         /// </summary>
         [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
         /// <summary>
-        /// Network
+        /// ["<c>chain</c>"] Network
         /// </summary>
         [JsonPropertyName("chain")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Tag
+        /// ["<c>tag</c>"] Tag
         /// </summary>
         [JsonPropertyName("tag")]
         public string? Tag { get; set; }
         /// <summary>
-        /// Deposit address url
+        /// ["<c>url</c>"] Deposit address url
         /// </summary>
         [JsonPropertyName("url")]
         public string? Url { get; set; }

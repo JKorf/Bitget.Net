@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum PositionMode
     {
         /// <summary>
-        /// One way mode
+        /// ["<c>one_way_mode</c>"] One way mode
         /// </summary>
         [Map("one_way_mode")]
         OneWay,
         /// <summary>
-        /// Hedge mode
+        /// ["<c>hedge_mode</c>"] Hedge mode
         /// </summary>
         [Map("hedge_mode")]
         Hedge

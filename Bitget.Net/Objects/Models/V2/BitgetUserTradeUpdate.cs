@@ -11,62 +11,62 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetUserTradeUpdate
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Order id
+        /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Trade id
+        /// ["<c>tradeId</c>"] Trade id
         /// </summary>
         [JsonPropertyName("tradeId")]
         public string TradeId { get; set; } = string.Empty;
         /// <summary>
-        /// Order type
+        /// ["<c>orderType</c>"] Order type
         /// </summary>
         [JsonPropertyName("orderType")]
         public OrderType OrderType { get; set; }
         /// <summary>
-        /// Order side
+        /// ["<c>side</c>"] Order side
         /// </summary>
         [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
-        /// Price
+        /// ["<c>priceAvg</c>"] Price
         /// </summary>
         [JsonPropertyName("priceAvg")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>size</c>"] Quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Quote quantity
+        /// ["<c>amount</c>"] Quote quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public decimal QuoteQuantity { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Last update time
+        /// ["<c>uTime</c>"] Last update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
-        /// Role
+        /// ["<c>tradeScope</c>"] Role
         /// </summary>
         [JsonPropertyName("tradeScope")]
         public Role Role { get; set; }
         /// <summary>
-        /// Fees
+        /// ["<c>feeDetail</c>"] Fees
         /// </summary>
         [JsonPropertyName("feeDetail")]
         public BitgetUserTradeFee[] Fees { get; set; } = null!;
@@ -79,22 +79,22 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetUserTradeFee
     {
         /// <summary>
-        /// Deduction
+        /// ["<c>deduction</c>"] Deduction
         /// </summary>
         [JsonPropertyName("deduction")]
         public bool Deduction { get; set; }
         /// <summary>
-        /// Fee asset
+        /// ["<c>feeCoin</c>"] Fee asset
         /// </summary>
         [JsonPropertyName("feeCoin")]
         public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Total deduction fee
+        /// ["<c>totalDeductionFee</c>"] Total deduction fee
         /// </summary>
         [JsonPropertyName("totalDeductionFee")]
         public decimal? TotalDeductionFee { get; set; }
         /// <summary>
-        /// Total fee
+        /// ["<c>totalFee</c>"] Total fee
         /// </summary>
         [JsonPropertyName("totalFee")]
         public decimal TotalFee { get; set; }

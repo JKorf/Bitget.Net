@@ -10,12 +10,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetAssetValue
     {
         /// <summary>
-        /// Account type
+        /// ["<c>accountType</c>"] Account type
         /// </summary>
         [JsonPropertyName("accountType")]
         public string AccountType { get; set; } = string.Empty;
         /// <summary>
-        /// Usdt value
+        /// ["<c>usdtBalance</c>"] Usdt value
         /// </summary>
         [JsonPropertyName("usdtBalance")]
         public decimal UsdtBalance { get; set; }

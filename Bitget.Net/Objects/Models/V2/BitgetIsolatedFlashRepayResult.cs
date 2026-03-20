@@ -10,17 +10,17 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetIsolatedFlashRepayResult
     {
         /// <summary>
-        /// Repay id
+        /// ["<c>repayId</c>"] Repay id
         /// </summary>
         [JsonPropertyName("repayId")]
         public string RepayId { get; set; } = string.Empty;
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Result
+        /// ["<c>result</c>"] Result
         /// </summary>
         [JsonPropertyName("result")]
         public string Result { get; set; } = string.Empty;

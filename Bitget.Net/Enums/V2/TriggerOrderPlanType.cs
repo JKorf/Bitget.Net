@@ -11,32 +11,32 @@ namespace Bitget.Net.Enums.V2
     public enum TriggerOrderPlanType
     {
         /// <summary>
-        /// Normal trigger order
+        /// ["<c>normal_plan</c>"] Normal trigger order
         /// </summary>
         [Map("normal_plan")]
         Normal,
         /// <summary>
-        /// Trailing stop
+        /// ["<c>track_plan</c>"] Trailing stop
         /// </summary>
         [Map("track_plan", "moving_plan")]
         TrailingStop,
         /// <summary>
-        /// Position profit
+        /// ["<c>pos_profit</c>"] Position profit
         /// </summary>
         [Map("pos_profit")]
         PosProfit,
         /// <summary>
-        /// Position loss
+        /// ["<c>pos_loss</c>"] Position loss
         /// </summary>
         [Map("pos_loss")]
         PosLoss,
         /// <summary>
-        /// Partial profit
+        /// ["<c>profit_plan</c>"] Partial profit
         /// </summary>
         [Map("profit_plan")]
         PartialProfit,
         /// <summary>
-        /// Partial loss
+        /// ["<c>loss_plan</c>"] Partial loss
         /// </summary>
         [Map("loss_plan")]
         PartialLoss

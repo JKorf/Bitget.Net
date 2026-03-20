@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models.V2
 {
@@ -8,22 +8,22 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetInterestRate
     {
         /// <summary>
-        /// Asset name
+        /// ["<c>coin</c>"] Asset name
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Daily interest rate
+        /// ["<c>dailyInterestRate</c>"] Daily interest rate
         /// </summary>
         [JsonPropertyName("dailyInterestRate")]
         public decimal DailyInterestRate { get; set; }
         /// <summary>
-        /// Annual interest rate
+        /// ["<c>annualInterestRate</c>"] Annual interest rate
         /// </summary>
         [JsonPropertyName("annualInterestRate")]
         public decimal AnnualInterestRate { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>updatedTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("updatedTime")]
         public DateTime UpdateTime { get; set; }

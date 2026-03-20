@@ -17,12 +17,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetOpenInterest
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Open interest quantity
+        /// ["<c>size</c>"] Open interest quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }

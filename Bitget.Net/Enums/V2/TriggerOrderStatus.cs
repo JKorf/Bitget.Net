@@ -11,27 +11,27 @@ namespace Bitget.Net.Enums.V2
     public enum TriggerOrderStatus
     {
         /// <summary>
-        /// Not triggered yet
+        /// ["<c>live</c>"] Not triggered yet
         /// </summary>
         [Map("live", "not_trigger")]
         Live,
         /// <summary>
-        /// Order executing
+        /// ["<c>executing</c>"] Order executing
         /// </summary>
         [Map("executing")]
         Executing,
         /// <summary>
-        /// Order executed
+        /// ["<c>executed</c>"] Order executed
         /// </summary>
         [Map("executed")]
         Executed,
         /// <summary>
-        /// Canceled
+        /// ["<c>cancelled</c>"] Canceled
         /// </summary>
         [Map("cancelled")]
         Canceled,
         /// <summary>
-        /// Failed to execute
+        /// ["<c>fail_execute</c>"] Failed to execute
         /// </summary>
         [Map("fail_execute")]
         FailedExecute

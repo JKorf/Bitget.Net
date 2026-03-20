@@ -30,8 +30,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/common/trade-rate
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="businessType">Business type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="businessType">["<c>businessType</c>"] Business type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetUserFee>> GetTradeFeeAsync(string symbol, BitgetBusinessType businessType, CancellationToken ct = default);
@@ -84,8 +84,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/wallet/modify-deposit-account
         /// </para>
         /// </summary>
-        /// <param name="asset">Asset, for example `ETH`</param>
-        /// <param name="accountType">The account type</param>
+        /// <param name="asset">["<c>coin</c>"] Asset, for example `ETH`</param>
+        /// <param name="accountType">["<c>accountType</c>"] The account type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> SetDepositAccountAsync(string asset, Enums.V2.AccountType accountType, CancellationToken ct = default);
@@ -99,13 +99,13 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/account/bills
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="groupType">Filter by group type</param>
-        /// <param name="businessType">Filter by business type</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="groupType">["<c>groupType</c>"] Filter by group type</param>
+        /// <param name="businessType">["<c>businessType</c>"] Filter by business type</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetSpotLedgerEntry[]>> GetLedgerAsync(string? asset = null, Enums.V2.GroupType? groupType = null, Enums.V2.BusinessType? businessType = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
@@ -119,12 +119,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/wallet/transfer
         /// </para>
         /// </summary>
-        /// <param name="asset">Asset, for example `ETH`</param>
-        /// <param name="fromAccount">From account</param>
-        /// <param name="toAccount">To account</param>
-        /// <param name="quantity">Quantity to transfer</param>
-        /// <param name="symbol">Symbol, required when transferring to or from an account type that is a leveraged position-by-position account.</param>
-        /// <param name="clientId">Client order id</param>
+        /// <param name="asset">["<c>coin</c>"] Asset, for example `ETH`</param>
+        /// <param name="fromAccount">["<c>fromType</c>"] From account</param>
+        /// <param name="toAccount">["<c>toType</c>"] To account</param>
+        /// <param name="quantity">["<c>amount</c>"] Quantity to transfer</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, required when transferring to or from an account type that is a leveraged position-by-position account.</param>
+        /// <param name="clientId">["<c>clientOid</c>"] Client order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTransferResult>> TransferAsync(string asset, Enums.V2.TransferAccountType fromAccount, Enums.V2.TransferAccountType toAccount, decimal quantity, string? symbol = null, string? clientId = null, CancellationToken ct = default);
@@ -138,8 +138,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/wallet/transfer-coin-info
         /// </para>
         /// </summary>
-        /// <param name="fromAccount">From account</param>
-        /// <param name="toAccount">To account</param>
+        /// <param name="fromAccount">["<c>fromType</c>"] From account</param>
+        /// <param name="toAccount">["<c>toType</c>"] To account</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<string[]>> GetTransferableAssetsAsync(Enums.V2.TransferAccountType fromAccount, Enums.V2.TransferAccountType toAccount, CancellationToken ct = default);
@@ -153,16 +153,16 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/wallet/withdrawal
         /// </para>
         /// </summary>
-        /// <param name="asset">Asset, for example `ETH`</param>
-        /// <param name="transferType">Transfer type</param>
-        /// <param name="address">Target address</param>
-        /// <param name="quantity">Quantity</param>
-        /// <param name="network">Network to use</param>
-        /// <param name="innerTargetType">Inner transfer target type</param>
-        /// <param name="areaCode">Area code for inner transfer</param>
-        /// <param name="tag">Tag</param>
-        /// <param name="remark">Remark</param>
-        /// <param name="clientOrderId">Client order id</param>
+        /// <param name="asset">["<c>coin</c>"] Asset, for example `ETH`</param>
+        /// <param name="transferType">["<c>transferType</c>"] Transfer type</param>
+        /// <param name="address">["<c>address</c>"] Target address</param>
+        /// <param name="quantity">["<c>size</c>"] Quantity</param>
+        /// <param name="network">["<c>chain</c>"] Network to use</param>
+        /// <param name="innerTargetType">["<c>innerToType</c>"] Inner transfer target type</param>
+        /// <param name="areaCode">["<c>areaCode</c>"] Area code for inner transfer</param>
+        /// <param name="tag">["<c>tag</c>"] Tag</param>
+        /// <param name="remark">["<c>remark</c>"] Remark</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetWithdrawResult>> WithdrawAsync(string asset, Enums.V2.TransferType transferType, string address, decimal quantity, string? network = null, string? innerTargetType = null, string? areaCode = null, string? tag = null, string? remark = null, string? clientOrderId = null, CancellationToken ct = default);
@@ -176,14 +176,14 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/account/transferRecords
         /// </para>
         /// </summary>
-        /// <param name="asset">Asset, for example `ETH`</param>
-        /// <param name="fromAccount">From account</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="clientOrderId">Filter by client order id</param>
-        /// <param name="page">Page number</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="idLessThan">[Deprecated] Use page instead</param>
+        /// <param name="asset">["<c>coin</c>"] Asset, for example `ETH`</param>
+        /// <param name="fromAccount">["<c>fromType</c>"] From account</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Filter by client order id</param>
+        /// <param name="page">["<c>pageNum</c>"] Page number</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] [Deprecated] Use page instead</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTransferRecord[]>> GetTransferHistoryAsync(string asset, Enums.V2.TransferAccountType? fromAccount = null, DateTime? startTime = null, DateTime? endTime = null, string? clientOrderId = null, int? page = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
@@ -197,7 +197,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/account/switch-deduct
         /// </para>
         /// </summary>
-        /// <param name="enable">Enabled</param>
+        /// <param name="enable">["<c>deduct</c>"] Enabled</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> SetBgbDeductEnabledAsync(bool enable, CancellationToken ct = default);
@@ -224,8 +224,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/wallet/deposit-address
         /// </para>
         /// </summary>
-        /// <param name="asset">Asset, for example `ETH`</param>
-        /// <param name="network">Network</param>
+        /// <param name="asset">["<c>coin</c>"] Asset, for example `ETH`</param>
+        /// <param name="network">["<c>chain</c>"] Network</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, CancellationToken ct = default);
@@ -239,7 +239,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/wallet/cancel-withdrawal
         /// </para>
         /// </summary>
-        /// <param name="withdrawalOrderId">Withdrawal order id</param>
+        /// <param name="withdrawalOrderId">["<c>orderId</c>"] Withdrawal order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> CancelWithdrawalAsync(string withdrawalOrderId, CancellationToken ct = default);
@@ -253,13 +253,13 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/wallet/withdrawal-records
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="clientOrderId">Filter by client order id</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="idLessThan">Return results before this id</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Filter by client order id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetWithdrawalRecord[]>> GetWithdrawalHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, string? clientOrderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
@@ -273,12 +273,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/wallet/deposit-records
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="orderId">Filter by order id</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="idLessThan">Return results before this id</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="orderId">["<c>orderId</c>"] Filter by order id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetDepositRecord[]>> GetDepositHistoryAsync(DateTime startTime, DateTime endTime, string? asset = null, string? orderId = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
@@ -292,14 +292,14 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/spot/wallet/subaccount-transfer
         /// </para>
         /// </summary>
-        /// <param name="asset">Asset, for example `ETH`</param>
-        /// <param name="fromAccount">From account</param>
-        /// <param name="toAccount">To account</param>
-        /// <param name="quantity">Quantity to transfer</param>
-        /// <param name="symbol">Symbol, required when transferring to or from an account type that is a leveraged position-by-position account.</param>
-        /// <param name="clientId">Client order id</param>
-        /// <param name="fromUserId">From user id</param>
-        /// <param name="toUserId">To user id</param>
+        /// <param name="asset">["<c>coin</c>"] Asset, for example `ETH`</param>
+        /// <param name="fromAccount">["<c>fromType</c>"] From account</param>
+        /// <param name="toAccount">["<c>toType</c>"] To account</param>
+        /// <param name="quantity">["<c>amount</c>"] Quantity to transfer</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, required when transferring to or from an account type that is a leveraged position-by-position account.</param>
+        /// <param name="clientId">["<c>clientOid</c>"] Client order id</param>
+        /// <param name="fromUserId">["<c>fromUserId</c>"] From user id</param>
+        /// <param name="toUserId">["<c>toUserId</c>"] To user id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTransferResult>> TransferSubAccountAsync(string asset, Enums.V2.TransferAccountType fromAccount, Enums.V2.TransferAccountType toAccount, decimal quantity, long fromUserId, long toUserId, string? symbol = null, string? clientId = null, CancellationToken ct = default);
@@ -313,8 +313,8 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/account/subaccount-assets
         /// </para>
         /// </summary>
-        /// <param name="idLessThan">Return results with id less than this</param>
-        /// <param name="limit">Max number of results, max 50</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results with id less than this</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results, max 50</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetSubAccountBalances[]>> GetSubAccountBalancesAsync(
             string? idLessThan = null,
@@ -330,14 +330,14 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/account/sub-main-trans-record
         /// </para>
         /// </summary>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="role">Filter by role</param>
-        /// <param name="subAccountId">Filter by sub account id</param>
-        /// <param name="clientOrderID">Filter by client id</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
-        /// <param name="idLessThan">Id less than this</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="role">["<c>role</c>"] Filter by role</param>
+        /// <param name="subAccountId">["<c>subUid</c>"] Filter by sub account id</param>
+        /// <param name="clientOrderID">["<c>clientOid</c>"] Filter by client id</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Id less than this</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetSubAccountTransfer[]>> GetSubAccountTransferHistoryAsync(string? asset = null, string? role = null, long? subAccountId = null, string? clientOrderID = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, long? idLessThan = null, CancellationToken ct = default);
 
@@ -350,10 +350,10 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/wallet/subaccount-deposit-address
         /// </para>
         /// </summary>
-        /// <param name="subAccountId">Sub account id</param>
-        /// <param name="asset">The asset, for example `ETH`</param>
-        /// <param name="network">Filter by network</param>
-        /// <param name="lightningNetworkQuantity">Bitcoin Lightning Network withdrawal amount</param>
+        /// <param name="subAccountId">["<c>subUid</c>"] Sub account id</param>
+        /// <param name="asset">["<c>coin</c>"] The asset, for example `ETH`</param>
+        /// <param name="network">["<c>chain</c>"] Filter by network</param>
+        /// <param name="lightningNetworkQuantity">["<c>size</c>"] Bitcoin Lightning Network withdrawal amount</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetDepositAddress>> GetSubAccountDepositAddressAsync(long subAccountId, string asset, string? network = null, decimal? lightningNetworkQuantity = null, CancellationToken ct = default);
 
@@ -366,12 +366,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET /api/v2/spot/wallet/subaccount-deposit-records
         /// </para>
         /// </summary>
-        /// <param name="subAccountId">Sub account id</param>
-        /// <param name="asset">Filter by asset, for example `ETH`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return ids less than this</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="subAccountId">["<c>subUid</c>"] Sub account id</param>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return ids less than this</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetDepositRecord[]>> GetSubAccountDepositHistoryAsync(long subAccountId, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int? limit = null, CancellationToken ct = default);
 

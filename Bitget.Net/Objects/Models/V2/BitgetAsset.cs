@@ -10,25 +10,25 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetAsset
     {
         /// <summary>
-        /// Asset id
+        /// ["<c>coinId</c>"] Asset id
         /// </summary>
         [JsonPropertyName("coinId")]
         public string AssetId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Asset name
+        /// ["<c>coin</c>"] Asset name
         /// </summary>
         [JsonPropertyName("coin")]
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Is the asset transferable
+        /// ["<c>transfer</c>"] Is the asset transferable
         /// </summary>
         [JsonPropertyName("transfer")]
         public bool Transferable { get; set; }
 
         /// <summary>
-        /// Supported networks
+        /// ["<c>chains</c>"] Supported networks
         /// </summary>
         [JsonPropertyName("chains")]
         public BitgetAssetNetwork[] Networks { get; set; } = Array.Empty<BitgetAssetNetwork>();
@@ -41,72 +41,72 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetAssetNetwork
     {
         /// <summary>
-        /// Network name
+        /// ["<c>chain</c>"] Network name
         /// </summary>
         [JsonPropertyName("chain")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
-        /// Whether a tag is needed for withdrawals
+        /// ["<c>needTag</c>"] Whether a tag is needed for withdrawals
         /// </summary>
         [JsonPropertyName("needTag")]
         public bool NeedsTag { get; set; }
         /// <summary>
-        /// Whether the asset is withdrawable
+        /// ["<c>withdrawable</c>"] Whether the asset is withdrawable
         /// </summary>
         [JsonPropertyName("withdrawable")]
         public bool Withdrawable { get; set; }
         /// <summary>
-        /// Whether the asset is depositable
+        /// ["<c>rechargeable</c>"] Whether the asset is depositable
         /// </summary>
         [JsonPropertyName("rechargeable")]
         public bool Depositable { get; set; }
         /// <summary>
-        /// Withdrawal fee
+        /// ["<c>withdrawFee</c>"] Withdrawal fee
         /// </summary>
         [JsonPropertyName("withdrawFee")]
         public decimal WithdrawFee { get; set; }
         /// <summary>
-        /// Extra withdrawal fee
+        /// ["<c>extraWithdrawFee</c>"] Extra withdrawal fee
         /// </summary>
         [JsonPropertyName("extraWithdrawFee")]
         public decimal ExtraWithdrawFee { get; set; }
         /// <summary>
-        /// Deposit confirmations needed
+        /// ["<c>depositConfirm</c>"] Deposit confirmations needed
         /// </summary>
         [JsonPropertyName("depositConfirm"), JsonConverter(typeof(IntConverter))]
         public int? DepositConfirm { get; set; }
         /// <summary>
-        /// Withdrawal confirmations
+        /// ["<c>withdrawConfirm</c>"] Withdrawal confirmations
         /// </summary>
         [JsonPropertyName("withdrawConfirm"), JsonConverter(typeof(IntConverter))]
         public int? WithdrawConfirm { get; set; }
         /// <summary>
-        /// Minimal deposit quantity
+        /// ["<c>minDepositAmount</c>"] Minimal deposit quantity
         /// </summary>
         [JsonPropertyName("minDepositAmount")]
         public decimal MinDepositQuantity { get; set; }
         /// <summary>
-        /// Minimal withdrawal quantity
+        /// ["<c>minWithdrawAmount</c>"] Minimal withdrawal quantity
         /// </summary>
         [JsonPropertyName("minWithdrawAmount")]
         public decimal MinWithdrawQuantity { get; set; }
         /// <summary>
-        /// Browser url
+        /// ["<c>browserUrl</c>"] Browser url
         /// </summary>
         [JsonPropertyName("browserUrl")]
         public string? BrowserUrl { get; set; }
         /// <summary>
-        /// Contract address
+        /// ["<c>contractAddress</c>"] Contract address
         /// </summary>
         [JsonPropertyName("contractAddress")]
         public string? ContractAddress { get; set; }
         /// <summary>
-        /// If not null, withdrawal quantities should be a multiple of this
+        /// ["<c>withdrawStep</c>"] If not null, withdrawal quantities should be a multiple of this
         /// </summary>
         [JsonPropertyName("withdrawStep")]
         public decimal WithdrawQuantityStep { get; set; }
         /// <summary>
-        /// Decimal places of withdrawal quantity
+        /// ["<c>withdrawMinScale</c>"] Decimal places of withdrawal quantity
         /// </summary>
         [JsonPropertyName("withdrawMinScale"), JsonConverter(typeof(IntConverter))]
         public int? WithdrawQuantityPrecision { get; set; }

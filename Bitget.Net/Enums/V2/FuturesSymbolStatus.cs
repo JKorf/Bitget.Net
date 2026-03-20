@@ -11,22 +11,22 @@ namespace Bitget.Net.Enums.V2
     public enum FuturesSymbolStatus
     {
         /// <summary>
-        /// Normal
+        /// ["<c>normal</c>"] Normal
         /// </summary>
         [Map("normal")]
         Normal,
         /// <summary>
-        /// In maintenance
+        /// ["<c>maintain</c>"] In maintenance
         /// </summary>
         [Map("maintain")]
         Maintenance,
         /// <summary>
-        /// Order placement restricted
+        /// ["<c>limit_open</c>"] Order placement restricted
         /// </summary>
         [Map("limit_open")]
         Limited,
         /// <summary>
-        /// API order placement restricted
+        /// ["<c>restrictedAPI</c>"] API order placement restricted
         /// </summary>
         [Map("restrictedAPI")]
         RestrictedApi

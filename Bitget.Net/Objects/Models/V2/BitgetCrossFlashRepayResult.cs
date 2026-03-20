@@ -10,12 +10,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossFlashRepayResult
     {
         /// <summary>
-        /// Repay id
+        /// ["<c>repayId</c>"] Repay id
         /// </summary>
         [JsonPropertyName("repayId")]
         public string RepayId { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;

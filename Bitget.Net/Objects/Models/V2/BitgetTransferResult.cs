@@ -10,12 +10,12 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetTransferResult
     {
         /// <summary>
-        /// Transfer id
+        /// ["<c>transferId</c>"] Transfer id
         /// </summary>
         [JsonPropertyName("transferId")]
         public string TransferId { get; set; } = string.Empty;
         /// <summary>
-        /// Client order id
+        /// ["<c>clientOid</c>"] Client order id
         /// </summary>
         [JsonPropertyName("clientOid")]
         public string? ClientOrderId { get; set; }

@@ -10,7 +10,7 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetIsolatedLiquidation: BitgetCrossLiquidation
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;

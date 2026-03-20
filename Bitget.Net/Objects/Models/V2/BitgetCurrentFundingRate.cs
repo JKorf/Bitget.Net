@@ -10,27 +10,27 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCurrentFundingRate
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Current funding rate
+        /// ["<c>fundingRate</c>"] Current funding rate
         /// </summary>
         [JsonPropertyName("fundingRate")]
         public decimal FundingRate { get; set; }
         /// <summary>
-        /// Funding interval in hours
+        /// ["<c>fundingRateInterval</c>"] Funding interval in hours
         /// </summary>
         [JsonPropertyName("fundingRateInterval")]
         public int FundingInterval { get; set; }
         /// <summary>
-        /// Lower limit of funding rate, 0.025 represents 2.5%
+        /// ["<c>minFundingRate</c>"] Lower limit of funding rate, 0.025 represents 2.5%
         /// </summary>
         [JsonPropertyName("minFundingRate")]
         public decimal? FundingRateLowerLimit { get; set; }
         /// <summary>
-        /// Upper limit of funding rate, 0.025 represents 2.5%
+        /// ["<c>maxFundingRate</c>"] Upper limit of funding rate, 0.025 represents 2.5%
         /// </summary>
         [JsonPropertyName("maxFundingRate")]
         public decimal? FundingRateUpperLimit { get; set; }

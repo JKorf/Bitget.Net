@@ -10,52 +10,52 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossBalance
     {
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Total quantity
+        /// ["<c>totalAmount</c>"] Total quantity
         /// </summary>
         [JsonPropertyName("totalAmount")]
         public decimal TotalQuantity { get; set; }
         /// <summary>
-        /// Available
+        /// ["<c>available</c>"] Available
         /// </summary>
         [JsonPropertyName("available")]
         public decimal Available { get; set; }
         /// <summary>
-        /// Frozen
+        /// ["<c>frozen</c>"] Frozen
         /// </summary>
         [JsonPropertyName("frozen")]
         public decimal Frozen { get; set; }
         /// <summary>
-        /// Borrow
+        /// ["<c>borrow</c>"] Borrow
         /// </summary>
         [JsonPropertyName("borrow")]
         public decimal Borrow { get; set; }
         /// <summary>
-        /// Interest
+        /// ["<c>interest</c>"] Interest
         /// </summary>
         [JsonPropertyName("interest")]
         public decimal Interest { get; set; }
         /// <summary>
-        /// Net
+        /// ["<c>net</c>"] Net
         /// </summary>
         [JsonPropertyName("net")]
         public decimal Net { get; set; }
         /// <summary>
-        /// Create time
+        /// ["<c>cTime</c>"] Create time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>uTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("uTime")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
-        /// Coupon
+        /// ["<c>coupon</c>"] Coupon
         /// </summary>
         [JsonPropertyName("coupon")]
         public decimal Coupon { get; set; }

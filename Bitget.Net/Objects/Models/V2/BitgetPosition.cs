@@ -11,112 +11,112 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetPosition
     {
         /// <summary>
-        /// Margin asset
+        /// ["<c>marginCoin</c>"] Margin asset
         /// </summary>
         [JsonPropertyName("marginCoin")]
         public string MarginAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Position side
+        /// ["<c>holdSide</c>"] Position side
         /// </summary>
         [JsonPropertyName("holdSide")]
         public PositionSide PositionSide { get; set; }
         /// <summary>
-        /// Quantity open for order
+        /// ["<c>openDelegateSize</c>"] Quantity open for order
         /// </summary>
         [JsonPropertyName("openDelegateSize")]
         public decimal QuantityOpen { get; set; }
         /// <summary>
-        /// Margin quantity
+        /// ["<c>marginSize</c>"] Margin quantity
         /// </summary>
         [JsonPropertyName("marginSize")]
         public decimal MarginQuantity { get; set; }
         /// <summary>
-        /// Available quantity for positions
+        /// ["<c>available</c>"] Available quantity for positions
         /// </summary>
         [JsonPropertyName("available")]
         public decimal Available { get; set; }
         /// <summary>
-        /// Frozen quantity in the position
+        /// ["<c>locked</c>"] Frozen quantity in the position
         /// </summary>
         [JsonPropertyName("locked")]
         public decimal Locked { get; set; }
         /// <summary>
-        /// Total quantity of all positions
+        /// ["<c>total</c>"] Total quantity of all positions
         /// </summary>
         [JsonPropertyName("total")]
         public decimal Total { get; set; }
         /// <summary>
-        /// Leverage
+        /// ["<c>leverage</c>"] Leverage
         /// </summary>
         [JsonPropertyName("leverage")]
         public decimal Leverage { get; set; }
         /// <summary>
-        /// Realized pnl
+        /// ["<c>achievedProfits</c>"] Realized pnl
         /// </summary>
         [JsonPropertyName("achievedProfits")]
         public decimal RealizedProfitAndLoss { get; set; }
         /// <summary>
-        /// Average open price
+        /// ["<c>openPriceAvg</c>"] Average open price
         /// </summary>
         [JsonPropertyName("openPriceAvg")]
         public decimal AverageOpenPrice { get; set; }
         /// <summary>
-        /// Margin mode
+        /// ["<c>marginMode</c>"] Margin mode
         /// </summary>
         [JsonPropertyName("marginMode")]
         public MarginMode MarginMode { get; set; }
         /// <summary>
-        /// Position mode
+        /// ["<c>posMode</c>"] Position mode
         /// </summary>
         [JsonPropertyName("posMode")]
         public PositionMode PositionMode { get; set; }
         /// <summary>
-        /// Unrealized pnl
+        /// ["<c>unrealizedPL</c>"] Unrealized pnl
         /// </summary>
         [JsonPropertyName("unrealizedPL")]
         public decimal UnrealizedProfitAndLoss { get; set; }
         /// <summary>
-        /// Liquidation price
+        /// ["<c>liquidationPrice</c>"] Liquidation price
         /// </summary>
         [JsonPropertyName("liquidationPrice")]
         public decimal LiquidationPrice { get; set; }
         /// <summary>
-        /// Maintenance margin rate
+        /// ["<c>keepMarginRate</c>"] Maintenance margin rate
         /// </summary>
         [JsonPropertyName("keepMarginRate")]
         public decimal MaintenanceMarginRate { get; set; }
         /// <summary>
-        /// Mark price
+        /// ["<c>markPrice</c>"] Mark price
         /// </summary>
         [JsonPropertyName("markPrice")]
         public decimal MarkPrice { get; set; }
         /// <summary>
-        /// Break even price
+        /// ["<c>breakEvenPrice</c>"] Break even price
         /// </summary>
         [JsonPropertyName("breakEvenPrice")]
         public decimal BreakEvenPrice { get; set; }
         /// <summary>
-        /// Funding fee, the accumulated value of funding fee during the position
+        /// ["<c>totalFee</c>"] Funding fee, the accumulated value of funding fee during the position
         /// </summary>
         [JsonPropertyName("totalFee")]
         public decimal? TotalFee { get; set; }
         /// <summary>
-        /// Deducted transaction fees: transaction fees deducted during the position
+        /// ["<c>deductedFee</c>"] Deducted transaction fees: transaction fees deducted during the position
         /// </summary>
         [JsonPropertyName("deductedFee")]
         public decimal DeductedFee { get; set; }
         /// <summary>
-        /// Margin ratio
+        /// ["<c>marginRatio</c>"] Margin ratio
         /// </summary>
         [JsonPropertyName("marginRatio")]
         public decimal MarginRatio { get; set; }
         /// <summary>
-        /// Update time
+        /// ["<c>cTime</c>"] Update time
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime UpdateTime { get; set; }

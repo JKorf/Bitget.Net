@@ -11,22 +11,22 @@ namespace Bitget.Net.Enums.V2
     public enum LoanType
     {
         /// <summary>
-        /// Normal order
+        /// ["<c>normal</c>"] Normal order
         /// </summary>
         [Map("normal")]
         Normal,
         /// <summary>
-        /// Auto borrow
+        /// ["<c>autoLoan</c>"] Auto borrow
         /// </summary>
         [Map("autoLoan")]
         AutoLoan,
         /// <summary>
-        /// Auto repay
+        /// ["<c>autoRepay</c>"] Auto repay
         /// </summary>
         [Map("autoRepay")]
         AutoRepay,
         /// <summary>
-        /// Auto borrow and repay
+        /// ["<c>autoLoanAndRepay</c>"] Auto borrow and repay
         /// </summary>
         [Map("autoLoanAndRepay")]
         AutoLoanAndRepay

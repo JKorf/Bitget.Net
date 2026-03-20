@@ -10,42 +10,42 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossInterestLimit
     {
         /// <summary>
-        /// Transferable
+        /// ["<c>transferable</c>"] Transferable
         /// </summary>
         [JsonPropertyName("transferable")]
         public bool Transferable { get; set; }
         /// <summary>
-        /// Leverage
+        /// ["<c>leverage</c>"] Leverage
         /// </summary>
         [JsonPropertyName("leverage")]
         public decimal Leverage { get; set; }
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Borrowable
+        /// ["<c>borrowable</c>"] Borrowable
         /// </summary>
         [JsonPropertyName("borrowable")]
         public bool Borrowable { get; set; }
         /// <summary>
-        /// Daily interest rate
+        /// ["<c>dailyInterestRate</c>"] Daily interest rate
         /// </summary>
         [JsonPropertyName("dailyInterestRate")]
         public decimal DailyInterestRate { get; set; }
         /// <summary>
-        /// Annual interest rate
+        /// ["<c>annualInterestRate</c>"] Annual interest rate
         /// </summary>
         [JsonPropertyName("annualInterestRate")]
         public decimal AnnualInterestRate { get; set; }
         /// <summary>
-        /// Max borrowable quantity
+        /// ["<c>maxBorrowableAmount</c>"] Max borrowable quantity
         /// </summary>
         [JsonPropertyName("maxBorrowableAmount")]
         public decimal MaxBorrowableQuantity { get; set; }
         /// <summary>
-        /// Vip list
+        /// ["<c>vipList</c>"] Vip list
         /// </summary>
         [JsonPropertyName("vipList")]
         public BitgetCrossInterestLimitVip[] VipList { get; set; } = Array.Empty<BitgetCrossInterestLimitVip>();
@@ -58,27 +58,27 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCrossInterestLimitVip
     {
         /// <summary>
-        /// Level
+        /// ["<c>level</c>"] Level
         /// </summary>
         [JsonPropertyName("level")]
         public string Level { get; set; } = string.Empty;
         /// <summary>
-        /// Limit
+        /// ["<c>limit</c>"] Limit
         /// </summary>
         [JsonPropertyName("limit")]
         public decimal Limit { get; set; }
         /// <summary>
-        /// Daily interest rate
+        /// ["<c>dailyInterestRate</c>"] Daily interest rate
         /// </summary>
         [JsonPropertyName("dailyInterestRate")]
         public decimal DailyInterestRate { get; set; }
         /// <summary>
-        /// Annual interest rate
+        /// ["<c>annualInterestRate</c>"] Annual interest rate
         /// </summary>
         [JsonPropertyName("annualInterestRate")]
         public decimal AnnualInterestRate { get; set; }
         /// <summary>
-        /// Discount rate
+        /// ["<c>discountRate</c>"] Discount rate
         /// </summary>
         [JsonPropertyName("discountRate")]
         public decimal DiscountRate { get; set; }

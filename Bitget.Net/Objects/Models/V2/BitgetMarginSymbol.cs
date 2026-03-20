@@ -11,97 +11,97 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetMarginSymbol
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>symbol</c>"] Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Base asset
+        /// ["<c>baseCoin</c>"] Base asset
         /// </summary>
         [JsonPropertyName("baseCoin")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset
+        /// ["<c>quoteCoin</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quoteCoin")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Max crossed leverage
+        /// ["<c>maxCrossedLeverage</c>"] Max crossed leverage
         /// </summary>
         [JsonPropertyName("maxCrossedLeverage")]
         public decimal MaxCrossedLeverage { get; set; }
         /// <summary>
-        /// Max isolated leverage
+        /// ["<c>maxIsolatedLeverage</c>"] Max isolated leverage
         /// </summary>
         [JsonPropertyName("maxIsolatedLeverage")]
         public decimal MaxIsolatedLeverage { get; set; }
         /// <summary>
-        /// Warning risk ratio
+        /// ["<c>warningRiskRatio</c>"] Warning risk ratio
         /// </summary>
         [JsonPropertyName("warningRiskRatio")]
         public decimal WarningRiskRatio { get; set; }
         /// <summary>
-        /// Liquidation risk ratio
+        /// ["<c>liquidationRiskRatio</c>"] Liquidation risk ratio
         /// </summary>
         [JsonPropertyName("liquidationRiskRatio")]
         public decimal LiquidationRiskRatio { get; set; }
         /// <summary>
-        /// Min trade quantity
+        /// ["<c>minTradeAmount</c>"] Min trade quantity
         /// </summary>
         [JsonPropertyName("minTradeAmount")]
         public decimal MinTradeQuantity { get; set; }
         /// <summary>
-        /// Max trade quantity
+        /// ["<c>maxTradeAmount</c>"] Max trade quantity
         /// </summary>
         [JsonPropertyName("maxTradeAmount")]
         public decimal MaxTradeQuantity { get; set; }
         /// <summary>
-        /// Taker fee rate
+        /// ["<c>takerFeeRate</c>"] Taker fee rate
         /// </summary>
         [JsonPropertyName("takerFeeRate")]
         public decimal TakerFeeRate { get; set; }
         /// <summary>
-        /// Maker fee rate
+        /// ["<c>makerFeeRate</c>"] Maker fee rate
         /// </summary>
         [JsonPropertyName("makerFeeRate")]
         public decimal MakerFeeRate { get; set; }
         /// <summary>
-        /// Price precision
+        /// ["<c>pricePrecision</c>"] Price precision
         /// </summary>
         [JsonPropertyName("pricePrecision")]
         public decimal PricePrecision { get; set; }
         /// <summary>
-        /// Quantity precision
+        /// ["<c>quantityPrecision</c>"] Quantity precision
         /// </summary>
         [JsonPropertyName("quantityPrecision")]
         public decimal QuantityPrecision { get; set; }
         /// <summary>
-        /// Min trade USDT
+        /// ["<c>minTradeUSDT</c>"] Min trade USDT
         /// </summary>
         [JsonPropertyName("minTradeUSDT")]
         public decimal MinTradeUSDT { get; set; }
         /// <summary>
-        /// User min borrow
+        /// ["<c>userMinBorrow</c>"] User min borrow
         /// </summary>
         [JsonPropertyName("userMinBorrow")]
         public decimal UserMinBorrow { get; set; }
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public MarginSymbolStatus? Status { get; set; }
         /// <summary>
-        /// Is isolated base borrowable
+        /// ["<c>isIsolatedBaseBorrowable</c>"] Is isolated base borrowable
         /// </summary>
         [JsonPropertyName("isIsolatedBaseBorrowable")]
         public bool IsIsolatedBaseBorrowable { get; set; }
         /// <summary>
-        /// Is isolated quote borrowable
+        /// ["<c>isIsolatedQuoteBorrowable</c>"] Is isolated quote borrowable
         /// </summary>
         [JsonPropertyName("isIsolatedQuoteBorrowable")]
         public bool IsIsolatedQuoteBorrowable { get; set; }
         /// <summary>
-        /// Is cross borrowable
+        /// ["<c>isCrossBorrowable</c>"] Is cross borrowable
         /// </summary>
         [JsonPropertyName("isCrossBorrowable")]
         public bool IsCrossBorrowable { get; set; }

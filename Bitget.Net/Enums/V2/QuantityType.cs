@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum QuantityType
     {
         /// <summary>
-        /// Base asset quantity
+        /// ["<c>amount</c>"] Base asset quantity
         /// </summary>
         [Map("amount")]
         BaseAsset,
         /// <summary>
-        /// Quote asset quantity
+        /// ["<c>total</c>"] Quote asset quantity
         /// </summary>
         [Map("total")]
         QuoteAsset

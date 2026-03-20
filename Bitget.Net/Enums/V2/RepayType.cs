@@ -11,22 +11,22 @@ namespace Bitget.Net.Enums.V2
     public enum RepayType
     {
         /// <summary>
-        /// Auto repayment
+        /// ["<c>auto_repay</c>"] Auto repayment
         /// </summary>
         [Map("auto_repay")]
         AutoRepay,
         /// <summary>
-        /// Manual repayment
+        /// ["<c>manual_repay</c>"] Manual repayment
         /// </summary>
         [Map("manual_repay")]
         ManualRepay,
         /// <summary>
-        /// Liquidation repayment
+        /// ["<c>liq_repay</c>"] Liquidation repayment
         /// </summary>
         [Map("liq_repay")]
         LiquidationRepay,
         /// <summary>
-        /// Forced repayment
+        /// ["<c>force_repay</c>"] Forced repayment
         /// </summary>
         [Map("force_repay")]
         ForcedRepay,

@@ -11,43 +11,43 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetSpotLedgerEntry
     {
         /// <summary>
-        /// Timestamp
+        /// ["<c>cTime</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("cTime")]
         public DateTime Timestamp { get; set; }
 
         /// <summary>
-        /// Asset
+        /// ["<c>coin</c>"] Asset
         /// </summary>
         [JsonPropertyName("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Group type
+        /// ["<c>groupType</c>"] Group type
         /// </summary>
         [JsonPropertyName("groupType")]
         public GroupType GroupType { get; set; }
         /// <summary>
-        /// Business type
+        /// ["<c>businessType</c>"] Business type
         /// </summary>
         [JsonPropertyName("businessType")]
         public BusinessType BusinessType { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>size</c>"] Quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// Balance
+        /// ["<c>balance</c>"] Balance
         /// </summary>
         [JsonPropertyName("balance")]
         public decimal Balance { get; set; }
         /// <summary>
-        /// Fees
+        /// ["<c>fees</c>"] Fees
         /// </summary>
         [JsonPropertyName("fees")]
         public decimal Fees { get; set; }
         /// <summary>
-        /// Id
+        /// ["<c>billId</c>"] Id
         /// </summary>
         [JsonPropertyName("billId")]
         public string Id { get; set; } = string.Empty;

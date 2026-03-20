@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum TransferType
     {
         /// <summary>
-        /// Withdraw on chain
+        /// ["<c>on_chain</c>"] Withdraw on chain
         /// </summary>
         [Map("on_chain")]
         OnChain,
         /// <summary>
-        /// Withdraw to another Bitget user
+        /// ["<c>internal_transfer</c>"] Withdraw to another Bitget user
         /// </summary>
         [Map("internal_transfer")]
         InternalTransfer

@@ -11,22 +11,22 @@ namespace Bitget.Net.Enums
     public enum SymbolStatus
     {
         /// <summary>
-        /// Maintenance/offline
+        /// ["<c>offline</c>"] Maintenance/offline
         /// </summary>
         [Map("offline")]
         Maintenance,
         /// <summary>
-        /// Gray scale
+        /// ["<c>gray</c>"] Gray scale
         /// </summary>
         [Map("gray")]
         Gray,
         /// <summary>
-        /// Halted
+        /// ["<c>halt</c>"] Halted
         /// </summary>
         [Map("halt")]
         Halt,
         /// <summary>
-        /// Online
+        /// ["<c>online</c>"] Online
         /// </summary>
         [Map("online")]
         Online

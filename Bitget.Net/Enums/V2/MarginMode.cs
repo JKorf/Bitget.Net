@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum MarginMode
     {
         /// <summary>
-        /// Cross margin
+        /// ["<c>crossed</c>"] Cross margin
         /// </summary>
         [Map("crossed", "cross")]
         CrossMargin,
         /// <summary>
-        /// Isolated margin
+        /// ["<c>isolated</c>"] Isolated margin
         /// </summary>
         [Map("isolated", "fixed")]
         IsolatedMargin

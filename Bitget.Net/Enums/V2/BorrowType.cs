@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum BorrowType
     {
         /// <summary>
-        /// Auto loan
+        /// ["<c>auto_loan</c>"] Auto loan
         /// </summary>
         [Map("auto_loan")]
         AutoLoan,
         /// <summary>
-        /// Manual loan
+        /// ["<c>manual_loan</c>"] Manual loan
         /// </summary>
         [Map("manual_loan")]
         ManualLoan

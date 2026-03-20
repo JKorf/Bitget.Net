@@ -11,62 +11,62 @@ namespace Bitget.Net.Enums.V2
     public enum TradeSide
     {
         /// <summary>
-        /// Open
+        /// ["<c>open</c>"] Open
         /// </summary>
         [Map("open")]
         Open,
         /// <summary>
-        /// Close
+        /// ["<c>close</c>"] Close
         /// </summary>
         [Map("close")]
         Close,
         /// <summary>
-        /// Reduce close long
+        /// ["<c>reduce_close_long</c>"] Reduce close long
         /// </summary>
         [Map("reduce_close_long")]
         ReduceCloseLong,
         /// <summary>
-        /// Reduce close short
+        /// ["<c>reduce_close_short</c>"] Reduce close short
         /// </summary>
         [Map("reduce_close_short")]
         ReduceCloseShort,
         /// <summary>
-        /// Offset close long
+        /// ["<c>offset_close_long</c>"] Offset close long
         /// </summary>
         [Map("offset_close_long")]
         OffsetCloseLong,
         /// <summary>
-        /// Offset close short
+        /// ["<c>offset_close_short</c>"] Offset close short
         /// </summary>
         [Map("offset_close_short")]
         OffsetCloseShort,
         /// <summary>
-        /// Burst close long
+        /// ["<c>burst_close_long</c>"] Burst close long
         /// </summary>
         [Map("burst_close_long")]
         BurstCloseLong,
         /// <summary>
-        /// Burst close short
+        /// ["<c>burst_close_short</c>"] Burst close short
         /// </summary>
         [Map("burst_close_short")]
         BurstCloseShort,
         /// <summary>
-        /// Delivery close long
+        /// ["<c>delivery_close_long</c>"] Delivery close long
         /// </summary>
         [Map("delivery_close_long")]
         DeliveryCloseLong,
         /// <summary>
-        /// Delivery close short
+        /// ["<c>delivery_close_short</c>"] Delivery close short
         /// </summary>
         [Map("delivery_close_short")]
         DeliveryCloseShort,
         /// <summary>
-        /// Buy single
+        /// ["<c>buy_single</c>"] Buy single
         /// </summary>
         [Map("buy_single")]
         BuySingle,
         /// <summary>
-        /// Sell single
+        /// ["<c>sell_single</c>"] Sell single
         /// </summary>
         [Map("sell_single")]
         SellSingle

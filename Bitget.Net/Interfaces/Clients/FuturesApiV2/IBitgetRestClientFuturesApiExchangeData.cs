@@ -32,8 +32,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/contracts
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="productType">Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetContract[]>> GetContractsAsync(BitgetProductTypeV2 productType, string? symbol = null, CancellationToken ct = default);
@@ -60,10 +60,10 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/merge-depth
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="productType">Product type</param>
-        /// <param name="mergeStep">Merge step</param>
-        /// <param name="limit">The book depth, 1, 5, 15, 50, 100 or -1. -1 will request the max gear of the symbol</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="mergeStep">["<c>precision</c>"] Merge step</param>
+        /// <param name="limit">["<c>limit</c>"] The book depth, 1, 5, 15, 50, 100 or -1. -1 will request the max gear of the symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesOrderBook>> GetOrderBookAsync(BitgetProductTypeV2 productType, string symbol, int? mergeStep = null, int? limit = null, CancellationToken ct = default);
@@ -77,8 +77,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/ticker
         /// </para>
         /// </summary>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="productType">Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesTicker>> GetTickerAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
@@ -92,7 +92,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/tickers
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesTicker[]>> GetTickersAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
@@ -106,9 +106,9 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/fills
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTrade[]>> GetRecentTradesAsync(BitgetProductTypeV2 productType, string symbol, int? limit = null, CancellationToken ct = default);
@@ -122,12 +122,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/fills-history
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="idLessThan">Return results before this id</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="idLessThan">["<c>idLessThan</c>"] Return results before this id</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetTrade[]>> GetTradesAsync(BitgetProductTypeV2 productType, string symbol, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
@@ -141,13 +141,13 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/candles
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="interval">Kline interval</param>
-        /// <param name="klineType">Price type</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>granularity</c>"] Kline interval</param>
+        /// <param name="klineType">["<c>kLineType</c>"] Price type</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesKline[]>> GetKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, KlineType? klineType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -161,12 +161,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/history-candles
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="interval">Kline interval</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>granularity</c>"] Kline interval</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesKline[]>> GetHistoricalKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -180,12 +180,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/history-index-candles
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="interval">Kline interval</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>granularity</c>"] Kline interval</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesKline[]>> GetHistoricalIndexPriceKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -199,12 +199,12 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/history-mark-candles
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="interval">Kline interval</param>
-        /// <param name="startTime">Filter by start time</param>
-        /// <param name="endTime">Filter by end time</param>
-        /// <param name="limit">Max number of results</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="interval">["<c>granularity</c>"] Kline interval</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesKline[]>> GetHistoricalMarkPriceKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
@@ -218,8 +218,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/open-interest
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOpenInterest>> GetOpenInterestAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
@@ -233,8 +233,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/funding-time
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFundingTime>> GetNextFundingTimeAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
@@ -248,8 +248,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/symbol-price
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFuturesPrices>> GetPricesAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
@@ -263,10 +263,10 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/history-fund-rate
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
-        /// <param name="pageSize">Page size</param>
-        /// <param name="page">Page number</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
+        /// <param name="pageSize">["<c>pageSize</c>"] Page size</param>
+        /// <param name="page">["<c>pageNo</c>"] Page number</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetFundingRate[]>> GetHistoricalFundingRateAsync(BitgetProductTypeV2 productType, string symbol, int? pageSize = null, int? page = null, CancellationToken ct = default);
@@ -280,8 +280,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/current-fund-rate
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetCurrentFundingRate>> GetFundingRateAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
@@ -295,7 +295,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/current-fund-rate
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetCurrentFundingRate[]>> GetFundingRatesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
@@ -309,8 +309,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/query-position-lever
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetPositionTier[]>> GetPositionTiersAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
@@ -324,8 +324,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// GET /api/v2/mix/market/oi-limit
         /// </para>
         /// </summary>
-        /// <param name="productType">Product type</param>
-        /// <param name="symbol">Symbol, for example `ETHUSDT`</param>
+        /// <param name="productType">["<c>productType</c>"] Product type</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<BitgetOiLimit[]>> GetOiLimitsAsync(BitgetProductTypeV2 productType, string? symbol = null, CancellationToken ct = default);

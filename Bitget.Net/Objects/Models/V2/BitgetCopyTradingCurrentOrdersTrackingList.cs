@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Bitget.Net.Enums.V2;
 
 namespace Bitget.Net.Objects.Models.V2
@@ -9,97 +9,97 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetCopyTradingCurrentOrdersTrackingItem
     {
         /// <summary>
-        /// Track order number
+        /// ["<c>trackingNo</c>"] Track order number
         /// </summary>
         [JsonPropertyName("trackingNo")]
         public string TrackingNo { get; set; } = string.Empty;
 
         /// <summary>
-        /// Trader user ID
+        /// ["<c>traderId</c>"] Trader user ID
         /// </summary>
         [JsonPropertyName("traderId")]
         public string TraderId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Opening order ID
+        /// ["<c>openOrderId</c>"] Opening order ID
         /// </summary>
         [JsonPropertyName("openOrderId")]
         public string OpenOrderId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Closing order ID
+        /// ["<c>closeOrderId</c>"] Closing order ID
         /// </summary>
         [JsonPropertyName("closeOrderId")]
         public string CloseOrderId { get; set; } = string.Empty;
 
         /// <summary>
-        /// Trading pair
+        /// ["<c>symbol</c>"] Trading pair
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
-        /// Position direction
+        /// ["<c>posSide</c>"] Position direction
         /// </summary>
         [JsonPropertyName("posSide")]
         public PositionSide PositionSide { get; set; }
 
         /// <summary>
-        /// Leverage for opening position
+        /// ["<c>openLeverage</c>"] Leverage for opening position
         /// </summary>
         [JsonPropertyName("openLeverage")]
         public int OpenLeverage { get; set; }
 
         /// <summary>
-        /// Average entry price
+        /// ["<c>openPriceAvg</c>"] Average entry price
         /// </summary>
         [JsonPropertyName("openPriceAvg")]
         public decimal OpenAveragePrice { get; set; }
 
         /// <summary>
-        /// Position opening time (millisecond timestamp)
+        /// ["<c>openTime</c>"] Position opening time (millisecond timestamp)
         /// </summary>
         [JsonPropertyName("openTime")]
         public DateTime OpenTime { get; set; }
 
         /// <summary>
-        /// Opening volume
+        /// ["<c>openSize</c>"] Opening volume
         /// </summary>
         [JsonPropertyName("openSize")]
         public decimal OpenSize { get; set; }
 
         /// <summary>
-        /// Opening fee (excluding discounts)
+        /// ["<c>openFee</c>"] Opening fee (excluding discounts)
         /// </summary>
         [JsonPropertyName("openFee")]
         public decimal OpenFee { get; set; }
 
         /// <summary>
-        /// Margin amount
+        /// ["<c>openMarginSz</c>"] Margin amount
         /// </summary>
         [JsonPropertyName("openMarginSz")]
         public decimal OpenMarginSize { get; set; }
 
         /// <summary>
-        /// Margin amount
+        /// ["<c>closeAvgPrice</c>"] Margin amount
         /// </summary>
         [JsonPropertyName("closeAvgPrice")]
         public decimal? CloseAveragePrice { get; set; }
 
         /// <summary>
-        /// Closing volume
+        /// ["<c>closeSize</c>"] Closing volume
         /// </summary>
         [JsonPropertyName("closeSize")]
         public decimal? CloseSize { get; set; }
 
         /// <summary>
-        /// Position closing time (millisecond timestamp)
+        /// ["<c>closeTime</c>"] Position closing time (millisecond timestamp)
         /// </summary>
         [JsonPropertyName("closeTime")]
         public DateTime? CloseTime { get; set; }
 
         /// <summary>
-        /// Trader alias
+        /// ["<c>traderName</c>"] Trader alias
         /// </summary>
         [JsonPropertyName("traderName")]
         public string TraderName { get; set; } = string.Empty;

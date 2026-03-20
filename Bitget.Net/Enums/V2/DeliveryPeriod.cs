@@ -11,12 +11,12 @@ namespace Bitget.Net.Enums.V2
     public enum DeliveryPeriod
     {
         /// <summary>
-        /// This quarter
+        /// ["<c>this_quarter</c>"] This quarter
         /// </summary>
         [Map("this_quarter")]
         ThisQuarter,
         /// <summary>
-        /// Next quarter
+        /// ["<c>next_quarter</c>"] Next quarter
         /// </summary>
         [Map("next_quarter")]
         NextQuarter

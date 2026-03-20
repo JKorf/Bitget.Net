@@ -10,32 +10,32 @@ namespace Bitget.Net.Objects.Models.V2
     public record BitgetPositionTier
     {
         /// <summary>
-        /// Symbol 
+        /// ["<c>symbol</c>"] Symbol 
         /// </summary>
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Level 
+        /// ["<c>level</c>"] Level 
         /// </summary>
         [JsonPropertyName("level")]
         public string Level { get; set; } = string.Empty;
         /// <summary>
-        /// Start  unit
+        /// ["<c>startUnit</c>"] Start  unit
         /// </summary>
         [JsonPropertyName("startUnit")]
         public decimal StartUnit { get; set; }
         /// <summary>
-        /// End unit 
+        /// ["<c>endUnit</c>"] End unit 
         /// </summary>
         [JsonPropertyName("endUnit")]
         public decimal EndUnit { get; set; }
         /// <summary>
-        /// Leverage
+        /// ["<c>leverage</c>"] Leverage
         /// </summary>
         [JsonPropertyName("leverage")]
         public decimal Leverage { get; set; }
         /// <summary>
-        /// Maintenance margin rate
+        /// ["<c>keepMarginRate</c>"] Maintenance margin rate
         /// </summary>
         [JsonPropertyName("keepMarginRate")]
         public decimal MaintenanceMarginRate { get; set; }
