@@ -57,7 +57,8 @@ namespace Bitget.Net
                 socketClient.FuturesApiV2.SharedClient,
                 socketClient.FuturesApiV2.SharedClient,
                 userIdentifier,
-                config ?? new FuturesUserDataTrackerConfig())
+                config ?? new FuturesUserDataTrackerConfig(),
+                exchangeParameters: exchangeParameters)
         {
         }
     }
