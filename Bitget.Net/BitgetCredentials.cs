@@ -7,7 +7,7 @@ namespace Bitget.Net
     /// </summary>
     public class BitgetCredentials : ApiCredentials
     {
-        internal CredentialPair Credential { get; set; }
+        internal CredentialSet Credential { get; set; }
         internal string? Passphrase =>
             HMAC?.Pass 
             ?? RSAXml?.Pass
