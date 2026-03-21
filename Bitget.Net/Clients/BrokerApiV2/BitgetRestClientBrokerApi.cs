@@ -86,19 +86,13 @@ namespace Bitget.Net.Clients.BrokerApiV2
         public async Task<WebCallResult<BitgetBrokerAgentDirectCommissions>> GetAgentDirectCommissionsAsync(DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int limit = 100, long? uid = null, string? coin = null, string? symbol = null, bool? showSub = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            if (startTime is not null)
-                parameters.AddMillisecondsString("startTime", startTime.Value);
-            if (endTime is not null)
-                parameters.AddMillisecondsString("endTime", endTime.Value);
-            if (idLessThan is not null)
-                parameters.AddString("idLessThan", idLessThan.Value);
+            parameters.AddOptionalMilliseconds("startTime", startTime);
+            parameters.AddOptionalMilliseconds("endTime", endTime);
+            parameters.AddOptionalString("idLessThan", idLessThan);
             parameters.AddString("limit", limit);
-            if (uid is long lUid)
-                parameters.AddString("uid", lUid);
-            if (coin is not null)
-                parameters.Add("coin", coin);
-            if (symbol is not null)
-                parameters.Add("symbol", symbol);
+            parameters.AddOptionalString("uid", uid);
+            parameters.AddOptional("coin", coin);
+            parameters.AddOptional("symbol", symbol);
             parameters.AddOptional("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
 
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/broker/customer-commissions", BitgetExchange.RateLimiter.Overall, 1, true,
@@ -109,10 +103,8 @@ namespace Bitget.Net.Clients.BrokerApiV2
         public async Task<WebCallResult<BitgetBrokerAgentCustomer[]>> GetAgentCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, int pageNo = 1, int pageSize = 100, long? uid = null, string? referralCode = null, bool? showSub = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            if (startTime is not null)
-                parameters.AddMillisecondsString("startTime", startTime.Value);
-            if (endTime is not null)
-                parameters.AddMillisecondsString("endTime", endTime.Value);
+            parameters.AddOptionalMilliseconds("startTime", startTime);
+            parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddString("pageNo", pageNo);
             parameters.AddString("pageSize", pageSize);
             if (uid is long lUid)
