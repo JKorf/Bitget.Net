@@ -107,10 +107,8 @@ namespace Bitget.Net.Clients.BrokerApiV2
             parameters.AddOptionalMilliseconds("endTime", endTime);
             parameters.AddString("pageNo", pageNo);
             parameters.AddString("pageSize", pageSize);
-            if (uid is long lUid)
-                parameters.AddString("uid", lUid);
-            if (referralCode is not null)
-                parameters.Add("referralCode", referralCode);
+            parameters.AddOptionalString("uid", uid);
+            parameters.AddOptional("referralCode", referralCode);
             parameters.AddOptional("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/broker/customer-list", BitgetExchange.RateLimiter.Overall, 1, true,
