@@ -1,0 +1,18 @@
+POST
+/api/v2/broker/customer-list
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695785738672,
+  "data": [
+    {
+      "uid": 1235665663,
+      "registerTime": "1679991960110"
+    },
+    {
+      "uid": 1235665663,
+      "registerTime": "1679991960110"
+    }
+  ]
+}

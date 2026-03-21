@@ -1,0 +1,33 @@
+GET
+/api/v2/broker/customer-commissions
+true
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1694593273026,
+  "data": {
+    "endId": "6624",
+    "commissionList": [
+      {
+        "uid": "3125195374",
+        "date": "1694275200000",
+        "coin": "BTC",
+        "symbol": "BTCUSDT_SPBL",
+        "productType": "SPOT",
+        "dealAmount": "222",
+        "fee": "0.0000111",
+        "feeDeduction": "0.00000333",
+        "activityBonusDeduct": "0.00001",
+        "spotCouponDeduct": "0.00001",
+        "futuresCouponDeduct": "0.00001",
+        "spotFeeDiscountDeduct": "0.00001",
+        "negativeMakerFeeDeduct": "0.00001",
+        "feePaid": "0.00000777",
+        "rebateAmount": "0.00000388",
+        "userTotalRebateAmount": "0",
+        "dayTotalRebateAmount": "0.00000388",
+        "totalRebateAmount": "0.00000388"
+      }
+    ]
+  }
+}
