@@ -19,8 +19,6 @@ namespace Bitget.Net
 
         public BitgetAuthenticationProviderV2(BitgetCredentials credentials) : base(credentials)
         {
-            if (string.IsNullOrEmpty(credentials.Passphrase))
-                throw new ArgumentNullException(nameof(ApiCredentials.Passphrase), "Passphrase is required for Bitget authentication");
         }
 
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)

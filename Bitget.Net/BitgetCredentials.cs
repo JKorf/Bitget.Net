@@ -8,13 +8,13 @@ namespace Bitget.Net
     public class BitgetCredentials : ApiCredentials
     {
         internal CredentialSet Credential { get; set; }
-        internal string? Passphrase =>
-            HMAC?.Pass 
+        internal string Passphrase =>
+            (HMAC?.Pass 
             ?? RSAXml?.Pass
 #if NETSTANDARD2_1_OR_GREATER || NET7_0_OR_GREATER
             ?? RSAPem?.Pass
 #endif
-            ;
+            )!;
 
         /// <summary>
         /// HMAC credentials
@@ -143,7 +143,7 @@ namespace Bitget.Net
         public override void Validate()
         {
             if (Credential == null)
-                throw new ArgumentException("Credential not set");
+                throw new ArgumentException($"No credentials provided on {GetType().Name}");
 
             Credential.Validate();
         }
