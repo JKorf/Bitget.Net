@@ -18,7 +18,7 @@ using System.Net.Http.Headers;
 namespace Bitget.Net.Clients.CopyTradingApiV2
 {
     /// <inheritdoc />
-    internal partial class BitgetRestClientCopyTradingApi : RestApiClient, IBitgetRestClientCopyTradingApi
+    internal partial class BitgetRestClientCopyTradingApi : RestApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetRestClientCopyTradingApi
     {
         /// <inheritdoc />
         public IBitgetRestClientCopyTradingApiTrader Trader { get; }
@@ -52,7 +52,7 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
 
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override BitgetAuthenticationProviderV2 CreateAuthenticationProvider(BitgetCredentials credentials)
             => new BitgetAuthenticationProviderV2(credentials);
 
         /// <inheritdoc />

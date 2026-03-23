@@ -25,7 +25,7 @@ using System.Net.WebSockets;
 namespace Bitget.Net.Clients.FuturesApiV2
 {
     /// <inheritdoc />
-    internal partial class BitgetSocketClientFuturesApi : SocketApiClient, IBitgetSocketClientFuturesApi
+    internal partial class BitgetSocketClientFuturesApi : SocketApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetSocketClientFuturesApi
     {
         protected override ErrorMapping ErrorMapping => BitgetErrors.SocketErrors;
 
@@ -236,7 +236,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials) => new BitgetAuthenticationProviderV2(credentials);
+        protected override BitgetAuthenticationProviderV2 CreateAuthenticationProvider(BitgetCredentials credentials) 
+            => new BitgetAuthenticationProviderV2(credentials);
 
     }
 }

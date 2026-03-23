@@ -18,7 +18,7 @@ using System.Net.Http.Headers;
 namespace Bitget.Net.Clients.SpotApiV2
 {
     /// <inheritdoc />
-    internal partial class BitgetRestClientSpotApi : RestApiClient, IBitgetRestClientSpotApi
+    internal partial class BitgetRestClientSpotApi : RestApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetRestClientSpotApi
     {
         protected override ErrorMapping ErrorMapping => BitgetErrors.RestErrors;
         /// <inheritdoc />
@@ -63,7 +63,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override BitgetAuthenticationProviderV2 CreateAuthenticationProvider(BitgetCredentials credentials)
             => new BitgetAuthenticationProviderV2(credentials);
 
         /// <inheritdoc />

@@ -146,7 +146,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                         x.OrderId.ToString(),
                         x.OrderType == OrderType.Limit ? SharedOrderType.Limit : x.OrderType == OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
                         x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                        x.Status == OrderStatus.Canceled ? SharedOrderStatus.Canceled : (x.Status == OrderStatus.Live || x.Status == OrderStatus.New || x.Status == OrderStatus.PartiallyFilled) ? SharedOrderStatus.Open : SharedOrderStatus.Filled,
+                        ParseOrderStatus(x.Status),
                         x.CreateTime)
                     {
                         ClientOrderId = x.ClientOrderId?.ToString(),
@@ -171,6 +171,19 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
+
+        private SharedOrderStatus ParseOrderStatus(OrderStatus status)
+        {
+            if (status == OrderStatus.Canceled || status == OrderStatus.Rejected)
+                return SharedOrderStatus.Canceled;
+            if (status == OrderStatus.Initial || status == OrderStatus.Live || status == OrderStatus.New || status == OrderStatus.PartiallyFilled)
+                return SharedOrderStatus.Open;
+            if (status == OrderStatus.Filled)
+                return SharedOrderStatus.Filled;
+
+            return SharedOrderStatus.Unknown;
+        }
+
         #endregion
 
         #region User Trade client
