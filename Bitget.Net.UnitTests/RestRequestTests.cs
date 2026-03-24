@@ -223,7 +223,7 @@ namespace Bitget.Net.UnitTests
             var client = new BitgetRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new ApiCredentials("123", "456", "789");
+                opts.ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789");
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Broker", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.BrokerV2.GetAgentCustomerListAsync(), "GetAgentCustomerList");
