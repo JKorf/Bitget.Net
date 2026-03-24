@@ -4,7 +4,6 @@ using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
@@ -17,7 +16,7 @@ using Microsoft.Extensions.Logging;
 namespace Bitget.Net.Clients.BrokerApiV2
 {
     /// <inheritdoc />
-    internal partial class BitgetRestClientBrokerApi : RestApiClient, IBitgetRestClientBrokerApi
+    internal partial class BitgetRestClientBrokerApi : RestApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetRestClientBrokerApi
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 
@@ -44,9 +43,8 @@ namespace Bitget.Net.Clients.BrokerApiV2
 
         public BitgetRestClientBrokerApi SharedClient => this;
 
-
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override BitgetAuthenticationProviderV2 CreateAuthenticationProvider(BitgetCredentials credentials)
             => new BitgetAuthenticationProviderV2(credentials);
 
         /// <inheritdoc />
