@@ -185,5 +185,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("isRwa")]
         public bool IsRwa { get; set; }
+        /// <summary>
+        /// ["<c>openTime</c>"] Open time
+        /// </summary>
+        [JsonPropertyName("openTime")]
+        public DateTime? OpenTime { get; set; }
     }
 }

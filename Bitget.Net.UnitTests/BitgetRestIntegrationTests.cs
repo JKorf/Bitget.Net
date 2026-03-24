@@ -67,16 +67,16 @@ namespace Bitget.Net.UnitTests
         public async Task TestSpotExchangeData()
         {
             await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetServerTimeAsync(default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAnnouncementsAsync(default, default, default, default, default, default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAssetsAsync(default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetSymbolsAsync(default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetVipFeeRatesAsync(default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetTickersAsync(default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetOrderBookAsync("ETHUSDT", default, default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay, default, default, default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetHistoricalKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay, DateTime.UtcNow, default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetRecentTradesAsync("ETHUSDT", default, default), false);
-            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetTradesAsync("ETHUSDT", default, default, default, default, default), false);
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAnnouncementsAsync(default, default, default, default, default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetAssetsAsync(default, default), false, true, "data", ignoreProperties: ["areaCoin"]);
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetSymbolsAsync(default, default), false, true, "data", ignoreProperties: ["areaSymbol"]);
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetVipFeeRatesAsync(default), false, true, "data");
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetTickersAsync(default, default), false, true, "data");
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetOrderBookAsync("ETHUSDT", default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay, default, default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetHistoricalKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay, DateTime.UtcNow, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetRecentTradesAsync("ETHUSDT", default, default), false, true, "data");
+            await RunAndCheckResult(client => client.SpotApiV2.ExchangeData.GetTradesAsync("ETHUSDT", default, default, default, default, default), false, true, "data");
         }
 
         [Test]
@@ -101,23 +101,23 @@ namespace Bitget.Net.UnitTests
         public async Task TestFuturesExchangeData()
         {
             await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetServerTimeAsync(default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetContractsAsync(Enums.BitgetProductTypeV2.UsdcFutures, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetVipFeeRatesAsync(default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetOrderBookAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetTickerAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetTickersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetRecentTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalIndexPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalMarkPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetOpenInterestAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetNextFundingTimeAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetPricesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
-            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetPositionTiersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false);
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetContractsAsync(Enums.BitgetProductTypeV2.UsdcFutures, default, default), false, true, "data", ignoreProperties: ["isRwa"]);
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetVipFeeRatesAsync(default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetOrderBookAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default), false, true, "data", ignoreProperties: ["isMaxPrecision"]);
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetTickerAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetTickersAsync(Enums.BitgetProductTypeV2.UsdtFutures, default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetRecentTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetTradesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalIndexPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalMarkPriceKlinesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", Enums.BitgetFuturesKlineInterval.OneDay, default, default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetOpenInterestAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false, true, "data.openInterestList");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetNextFundingTimeAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetPricesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetHistoricalFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetFundingRateAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false, true, "data");
+            await RunAndCheckResult(client => client.FuturesApiV2.ExchangeData.GetPositionTiersAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", default), false, true, "data");
         }
 
         [Test]

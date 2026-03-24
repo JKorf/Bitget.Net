@@ -28,6 +28,12 @@ namespace Bitget.Net.Objects.Models.V2
         public bool Transferable { get; set; }
 
         /// <summary>
+        /// ["<c>areaCoin</c>"] Is the asset area restricted
+        /// </summary>
+        [JsonPropertyName("areaCoin")]
+        public bool AreaAsset { get; set; }
+
+        /// <summary>
         /// ["<c>chains</c>"] Supported networks
         /// </summary>
         [JsonPropertyName("chains")]
@@ -110,5 +116,11 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("withdrawMinScale"), JsonConverter(typeof(IntConverter))]
         public int? WithdrawQuantityPrecision { get; set; }
+
+        /// <summary>
+        /// ["<c>congestion</c>"] Congestion levels
+        /// </summary>
+        [JsonPropertyName("congestion")]
+        public string Congestion { get; set; }
     }
 }
