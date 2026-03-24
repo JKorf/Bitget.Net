@@ -196,6 +196,18 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 3.9.0 - 24 Mar 2026
+    * Updated CryptoExchange.Net to version 11.0.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Updated class for supplying API credentials from ApiCredentials to BitgetCredentials
+    * Updated Shared order status parsing to default to Unknown value if not parsable
+    * Added BrokerApiV2 endpoints
+    * Added support for specifying non-HMAC credentials via Configuration
+    * Fixed exchangeParameters not being forwarded in BitgetUserDataTracker
+
+    * Notes for updating:
+        * Update ApiCredentials to BitgetCredentials for authentication, i.e. `ApiCredentials = new ApiCredentials(..)` => `ApiCredentials = new BitgetCredentials(..)`
+        * When using AddBitget with the Configuration overload (loading config from appsettings), the API credentials path has been changed from ApiCredentials:Key to ApiCredentials:HMAC:Key (and secret/pass)
+
 * Version 3.8.0 - 06 Mar 2026
     * Updated CryptoExchange.Net to version 10.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Improved method XML comments
