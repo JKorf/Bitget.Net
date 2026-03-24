@@ -216,6 +216,20 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.SetPositionTpSlAsync(Enums.BitgetProductTypeV2.CoinFutures, "123", "123", PositionSide.Oneway), "SetPositionTpSl", nestedJsonProperty: "data");
         }
 
+
+        [Test]
+        public async Task ValidateBrokerCalls()
+        {
+            var client = new BitgetRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789");
+            });
+            var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Broker", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
+            await tester.ValidateAsync(client => client.BrokerV2.GetAgentCustomerListAsync(), "GetAgentCustomerList");
+            await tester.ValidateAsync(client => client.BrokerV2.GetAgentDirectCommissionsAsync(), "GetAgentDirectCommissions");
+        }
+
         private bool IsAuthenticated(WebCallResult result)
         {
             return result.RequestHeaders.Any(x => x.Key == "ACCESS-SIGN");
