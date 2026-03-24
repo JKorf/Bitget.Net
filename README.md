@@ -45,16 +45,34 @@ Bitget.Net is available on [GitHub packages](https://github.com/JKorf/Bitget.Net
 The NuGet package files are added along side the source with the latest GitHub release which can found [here](https://github.com/JKorf/Bitget.Net/releases).
 
 ## How to use
-*REST Endpoints*  
-
+*Basic request:*
 ```csharp
 // Get the ETH/USDT ticker via rest request
 var restClient = new BitgetRestClient();
 var tickerResult = await restClient.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT_SPBL");
 var lastPrice = tickerResult.Data.ClosePrice;
 ```
-*Websocket streams*  
 
+*Place order:*
+```csharp
+var restClient = new BitgetRestClient(opts => {
+	opts.ApiCredentials = new BitgetCredentials("APIKEY", "APISECRET", "PASS");
+});
+
+// Place Limit order to go long for 0.1 ETH at 2000
+var orderResult = await restClient.FuturesApiV2.Trading.PlaceOrderAsync(
+    BitgetProductTypeV2.UsdtFutures,
+    "ETHUSDT",
+    "USDT",
+    OrderSide.Buy,
+    OrderType.Limit,
+    MarginMode.CrossMargin,
+    0.1m,
+    2000,
+    timeInForce: TimeInForce.GoodTillCanceled);
+```
+
+*WebSocket subscription:*
 ```csharp
 // Subscribe to ETH/USDT ticker updates via the websocket API
 var socketClient = new BitgetSocketClient();
