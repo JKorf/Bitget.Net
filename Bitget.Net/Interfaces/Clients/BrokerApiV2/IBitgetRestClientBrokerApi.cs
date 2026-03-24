@@ -39,10 +39,11 @@ namespace Bitget.Net.Interfaces.Clients.BrokerApiV2
         /// Endpoint:<br />
         /// GET /api/v2/broker/customer-list
         /// </para>
+        /// </summary>
         /// <param name="startTime">Start time (The maximum time span supported is three months. The default end time is three months if no value is set for the end time. )</param>
         /// <param name="endTime">End time (The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. )</param>
         /// <param name="pageNo">Current page number</param>
-        /// <param name="limit">Max number of results, 100 default, Max 1000</param>
+        /// <param name="pageSize">Max number of results, 100 default, Max 1000</param>
         /// <param name="uid">User Id</param>
         /// <param name="referralCode">Referral code</param>
         /// <param name="showSub">Whether to Display Subordinate User Information of Direct Clients</param>
