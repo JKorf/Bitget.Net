@@ -5,7 +5,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
     /// <summary>
     /// Futures API endpoints
     /// </summary>
-    public interface IBitgetRestClientFuturesApi : IRestApiClient, IDisposable
+    public interface IBitgetRestClientFuturesApi : IRestApiClient<BitgetCredentials>, IDisposable
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions

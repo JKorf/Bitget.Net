@@ -47,7 +47,7 @@ namespace Bitget.Net.Clients
         }
 
         /// <inheritdoc />
-        public void InitializeUserClient(string userIdentifier, ApiCredentials credentials, BitgetEnvironment? environment = null)
+        public void InitializeUserClient(string userIdentifier, BitgetCredentials credentials, BitgetEnvironment? environment = null)
         {
             CreateRestClient(userIdentifier, credentials, environment);
             CreateSocketClient(userIdentifier, credentials, environment);
@@ -61,7 +61,7 @@ namespace Bitget.Net.Clients
         }
 
         /// <inheritdoc />
-        public IBitgetRestClient GetRestClient(string userIdentifier, ApiCredentials? credentials = null, BitgetEnvironment? environment = null)
+        public IBitgetRestClient GetRestClient(string userIdentifier, BitgetCredentials? credentials = null, BitgetEnvironment? environment = null)
         {
             if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateRestClient(userIdentifier, credentials, environment);
@@ -70,7 +70,7 @@ namespace Bitget.Net.Clients
         }
 
         /// <inheritdoc />
-        public IBitgetSocketClient GetSocketClient(string userIdentifier, ApiCredentials? credentials = null, BitgetEnvironment? environment = null)
+        public IBitgetSocketClient GetSocketClient(string userIdentifier, BitgetCredentials? credentials = null, BitgetEnvironment? environment = null)
         {
             if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateSocketClient(userIdentifier, credentials, environment);
@@ -78,7 +78,7 @@ namespace Bitget.Net.Clients
             return client;
         }
 
-        private IBitgetRestClient CreateRestClient(string userIdentifier, ApiCredentials? credentials, BitgetEnvironment? environment)
+        private IBitgetRestClient CreateRestClient(string userIdentifier, BitgetCredentials? credentials, BitgetEnvironment? environment)
         {
             var clientRestOptions = SetRestEnvironment(environment);
             var client = new BitgetRestClient(_httpClient, _loggerFactory, clientRestOptions);
@@ -90,7 +90,7 @@ namespace Bitget.Net.Clients
             return client;
         }
 
-        private IBitgetSocketClient CreateSocketClient(string userIdentifier, ApiCredentials? credentials, BitgetEnvironment? environment)
+        private IBitgetSocketClient CreateSocketClient(string userIdentifier, BitgetCredentials? credentials, BitgetEnvironment? environment)
         {
             var clientSocketOptions = SetSocketEnvironment(environment);
             var client = new BitgetSocketClient(clientSocketOptions!, _loggerFactory);

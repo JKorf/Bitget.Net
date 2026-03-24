@@ -5,7 +5,7 @@ namespace Bitget.Net.Objects.Options
     /// <summary>
     /// Bitget socket client options
     /// </summary>
-    public class BitgetSocketOptions : SocketExchangeOptions<BitgetEnvironment>
+    public class BitgetSocketOptions : SocketExchangeOptions<BitgetEnvironment, BitgetCredentials>
     {
         /// <summary>
         /// Default options for new clients

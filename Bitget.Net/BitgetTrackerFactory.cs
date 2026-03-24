@@ -122,7 +122,7 @@ namespace Bitget.Net
         }
 
         /// <inheritdoc />
-        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null)
+        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, BitgetCredentials credentials, SpotUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<IBitgetUserClientProvider>() ?? new BitgetUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
@@ -154,7 +154,7 @@ namespace Bitget.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, ApiCredentials credentials, BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null)
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, BitgetCredentials credentials, BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null)
         {
             var exchangeParams = new ExchangeParameters(new ExchangeParameter("Bitget", "ProductType", productType.ToString()));
 

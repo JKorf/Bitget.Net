@@ -1,4 +1,5 @@
 ﻿using Bitget.Net.Clients;
+using Bitget.Net.Clients.SpotApiV2;
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Clients;
@@ -155,12 +156,12 @@ namespace Bitget.Net.UnitTests
             var configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>
                 {
-                    { "ApiCredentials:Key", "123" },
-                    { "ApiCredentials:Secret", "456" },
-                    { "ApiCredentials:Pass", "000" },
-                    { "Socket:ApiCredentials:Key", "456" },
-                    { "Socket:ApiCredentials:Secret", "789" },
-                    { "Socket:ApiCredentials:Pass", "xxx" },
+                    { "ApiCredentials:HMAC:Key", "123" },
+                    { "ApiCredentials:HMAC:Secret", "456" },
+                    { "ApiCredentials:HMAC:Pass", "000" },
+                    { "Socket:ApiCredentials:HMAC:Key", "456" },
+                    { "Socket:ApiCredentials:HMAC:Secret", "789" },
+                    { "Socket:ApiCredentials:HMAC:Pass", "xxx" },
                     { "Rest:OutputOriginalData", "true" },
                     { "Socket:OutputOriginalData", "false" },
                     { "Rest:Proxy:Host", "host" },
@@ -178,8 +179,8 @@ namespace Bitget.Net.UnitTests
 
             Assert.That(((BaseApiClient)restClient.SpotApiV2).OutputOriginalData, Is.True);
             Assert.That(((BaseApiClient)socketClient.SpotApiV2).OutputOriginalData, Is.False);
-            Assert.That(((BaseApiClient)restClient.SpotApiV2).AuthenticationProvider.ApiKey, Is.EqualTo("123"));
-            Assert.That(((BaseApiClient)socketClient.SpotApiV2).AuthenticationProvider.ApiKey, Is.EqualTo("456"));
+            Assert.That(((BitgetRestClientSpotApi)restClient.SpotApiV2).AuthenticationProvider.Key, Is.EqualTo("123"));
+            Assert.That(((BitgetSocketClientSpotApi)socketClient.SpotApiV2).AuthenticationProvider.Key, Is.EqualTo("456"));
             Assert.That(((BaseApiClient)restClient.SpotApiV2).ClientOptions.Proxy.Host, Is.EqualTo("host"));
             Assert.That(((BaseApiClient)restClient.SpotApiV2).ClientOptions.Proxy.Port, Is.EqualTo(80));
             Assert.That(((BaseApiClient)socketClient.SpotApiV2).ClientOptions.Proxy.Host, Is.EqualTo("host2"));
