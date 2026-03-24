@@ -9,7 +9,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
     /// <summary>
     /// Bitget futures streams
     /// </summary>
-    public interface IBitgetSocketClientFuturesApi : ISocketApiClient, IDisposable
+    public interface IBitgetSocketClientFuturesApi : ISocketApiClient<BitgetCredentials>, IDisposable
     {
         /// <summary>
         /// Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.

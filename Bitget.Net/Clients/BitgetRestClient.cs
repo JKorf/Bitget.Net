@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 namespace Bitget.Net.Clients
 {
     /// <inheritdoc />
-    public class BitgetRestClient : BaseRestClient, IBitgetRestClient
+    public class BitgetRestClient : BaseRestClient<BitgetEnvironment, BitgetCredentials>, IBitgetRestClient
     {
         /// <inheritdoc />
         public Interfaces.Clients.SpotApiV2.IBitgetRestClientSpotApi SpotApiV2 { get; }
@@ -43,24 +43,6 @@ namespace Bitget.Net.Clients
             FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
             CopyTradingFuturesV2 = AddApiClient(new CopyTradingApiV2.BitgetRestClientCopyTradingApi(_logger, httpClient, this, options.Value));
             BrokerV2 = AddApiClient(new BrokerApiV2.BitgetRestClientBrokerApi(_logger, httpClient, this, options.Value));
-        }
-
-        /// <inheritdoc />
-        public void SetOptions(UpdateOptions options)
-        {
-            SpotApiV2.SetOptions(options);
-            FuturesApiV2.SetOptions(options);
-            CopyTradingFuturesV2.SetOptions(options);
-            BrokerV2.SetOptions(options);
-        }
-
-        /// <inheritdoc />
-        public void SetApiCredentials(ApiCredentials credentials)
-        {
-            SpotApiV2.SetApiCredentials(credentials);
-            FuturesApiV2.SetApiCredentials(credentials);
-            CopyTradingFuturesV2.SetApiCredentials(credentials);
-            BrokerV2.SetApiCredentials(credentials);
         }
 
         /// <summary>

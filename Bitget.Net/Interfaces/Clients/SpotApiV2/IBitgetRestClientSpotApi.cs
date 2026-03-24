@@ -5,7 +5,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
     /// <summary>
     /// Spot API endpoints
     /// </summary>
-    public interface IBitgetRestClientSpotApi : IRestApiClient, IDisposable
+    public interface IBitgetRestClientSpotApi : IRestApiClient<BitgetCredentials>, IDisposable
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions

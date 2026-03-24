@@ -5,7 +5,7 @@ namespace Bitget.Net.Interfaces.Clients.CopyTradingApiV2
     /// <summary>
     /// CopyTrading API endpoints
     /// </summary>
-    public interface IBitgetRestClientCopyTradingApi : IRestApiClient, IDisposable
+    public interface IBitgetRestClientCopyTradingApi : IRestApiClient<BitgetCredentials>, IDisposable
     {
         /// <summary>
         /// Endpoints related to copy trading lead settings, info or actions
