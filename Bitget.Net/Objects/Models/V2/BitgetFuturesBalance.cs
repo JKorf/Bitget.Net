@@ -105,5 +105,45 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("posMode")]
         public PositionMode? PositionMode { get; set; }
+        /// <summary>
+        /// Asset mode
+        /// </summary>
+        [JsonPropertyName("assetMode")]
+        public AssetMode AssetMode { get; set; }
+        /// <summary>
+        /// ["<c>grant</c>"] Futures airdrop voucher amount
+        /// </summary>
+        [JsonPropertyName("grant")]
+        public decimal? AirdropVoucher { get; set; }
+        /// <summary>
+        /// ["<c>isolatedMargin</c>"] Isolated margin used
+        /// </summary>
+        [JsonPropertyName("isolatedMargin")]
+        public decimal? IsolatedMarginUsed { get; set; }
+        /// <summary>
+        /// ["<c>crossedMargin</c>"] Cross margin used
+        /// </summary>
+        [JsonPropertyName("crossedMargin")]
+        public decimal? CrossMarginUsed { get; set; }
+        /// <summary>
+        /// ["<c>unionTotalMargin</c>"] Multi asset mode total margin used
+        /// </summary>
+        [JsonPropertyName("unionTotalMargin")]
+        public decimal? MarginMultiAsset { get; set; }
+        /// <summary>
+        /// ["<c>unionAvailable</c>"] Available under multi-assets mode
+        /// </summary>
+        [JsonPropertyName("unionAvailable")]
+        public decimal? AvailableMultiAsset { get; set; }
+        /// <summary>
+        /// ["<c>unionMm</c>"] Maintenance margin under multi-assets mode
+        /// </summary>
+        [JsonPropertyName("unionMm")]
+        public decimal? MaintenanceMarginMultiAsset { get; set; }
+        /// <summary>
+        /// ["<c>assetList</c>"] Assets under multi-assets mode
+        /// </summary>
+        [JsonPropertyName("assetList")]
+        public string[]? AssetListMultiMargin { get; set; }
     }
 }

@@ -51,5 +51,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("billId")]
         public string Id { get; set; } = string.Empty;
+        /// <summary>
+        /// ["<c>bizOrderId</c>"] Business order id
+        /// </summary>
+        [JsonPropertyName("bizOrderId")]
+        public string BusinessOrderId { get; set; } = string.Empty;
     }
 }

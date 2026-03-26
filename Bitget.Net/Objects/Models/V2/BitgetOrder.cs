@@ -22,6 +22,21 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
+        /// ["<c>baseCoin</c>"] Base asset
+        /// </summary>
+        [JsonPropertyName("baseCoin")]
+        public string? BaseAsset { get; set; }
+        /// <summary>
+        /// ["<c>quoteCoin</c>"] Quote asset
+        /// </summary>
+        [JsonPropertyName("quoteCoin")]
+        public string? QuoteAsset { get; set; }
+        /// <summary>
+        /// ["<c>cancelReason</c>"] Cancel reason
+        /// </summary>
+        [JsonPropertyName("cancelReason")]
+        public string? CancelReason { get; set; }
+        /// <summary>
         /// ["<c>orderId</c>"] Order id
         /// </summary>
         [JsonPropertyName("orderId")]

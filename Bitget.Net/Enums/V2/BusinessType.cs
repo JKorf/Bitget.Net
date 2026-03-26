@@ -48,7 +48,7 @@ namespace Bitget.Net.Enums.V2
         /// <summary>
         /// ["<c>rebate rewards</c>"] Rebate
         /// </summary>
-        [Map("rebate rewards")]
+        [Map("rebate rewards", "REBATE_REWARDS")]
         RebateRewards,
         /// <summary>
         /// ["<c>airdrop rewards</c>"] Airdrop rewards
