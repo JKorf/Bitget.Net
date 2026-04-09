@@ -121,6 +121,6 @@ namespace Bitget.Net.Objects.Models.V2
         /// ["<c>congestion</c>"] Congestion levels
         /// </summary>
         [JsonPropertyName("congestion")]
-        public string Congestion { get; set; }
+        public string Congestion { get; set; } = string.Empty;
     }
 }
