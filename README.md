@@ -84,6 +84,13 @@ var tickerSubscriptionResult = socketClient.SpotApi.SubscribeToTickerUpdatesAsyn
 
 For information on the clients, dependency injection, response processing and more see the [Bitget.Net documentation](https://cryptoexchange.jkorf.dev?library=Bitget.Net) or have a look at the examples [here](https://github.com/JKorf/Bitget.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
+## AI documentation
+For AI coding assistants and quick onboarding:
+* [`llms.txt`](llms.txt) provides concise AI context
+* [`llms-full.txt`](llms-full.txt) provides detailed patterns, pitfalls and endpoint routing
+* [`docs/ai-api-map.md`](docs/ai-api-map.md) maps common intents to client members
+* [`Examples/ai-friendly`](Examples/ai-friendly) contains compact examples that are compiled by the test suite
+
 ## CryptoExchange.Net
 Biget.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
 

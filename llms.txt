@@ -1,0 +1,54 @@
+# Bitget.Net
+
+Bitget.Net is a .NET client library for Bitget REST and WebSocket APIs, built on CryptoExchange.Net.
+
+## Install
+
+```bash
+dotnet add package JK.Bitget.Net
+```
+
+## Clients
+
+```csharp
+using Bitget.Net;
+using Bitget.Net.Clients;
+
+var restClient = new BitgetRestClient(options =>
+{
+    options.ApiCredentials = new BitgetCredentials("API_KEY", "API_SECRET", "PASSPHRASE");
+});
+
+var socketClient = new BitgetSocketClient();
+```
+
+## API roots
+
+- Spot REST: `restClient.SpotApiV2`
+- Futures REST: `restClient.FuturesApiV2`
+- Copy trading REST: `restClient.CopyTradingFuturesV2`
+- Broker REST on concrete client: `restClient.BrokerV2`
+- Spot socket: `socketClient.SpotApiV2`
+- Futures socket: `socketClient.FuturesApiV2`
+
+## Common calls
+
+```csharp
+var spotTicker = await restClient.SpotApiV2.ExchangeData.GetTickersAsync("BTCUSDT");
+var spotBalances = await restClient.SpotApiV2.Account.GetSpotBalancesAsync();
+var openSpotOrders = await restClient.SpotApiV2.Trading.GetOpenOrdersAsync("BTCUSDT");
+
+var futuresTicker = await restClient.FuturesApiV2.ExchangeData.GetTickerAsync(BitgetProductTypeV2.UsdtFutures, "BTCUSDT");
+var positions = await restClient.FuturesApiV2.Trading.GetPositionsAsync(BitgetProductTypeV2.UsdtFutures, "USDT");
+```
+
+## Rules
+
+- Use V2 API roots: `SpotApiV2`, `FuturesApiV2`, `CopyTradingFuturesV2`.
+- Use compact symbols like `BTCUSDT`.
+- Futures calls use `BitgetProductTypeV2`, for example `BitgetProductTypeV2.UsdtFutures`.
+- Futures account/trading calls often require margin asset `"USDT"`.
+- Spot margin is `SpotApiV2.Margin`.
+- V2 order enums live in `Bitget.Net.Enums.V2`; product type and stream kline enums live in `Bitget.Net.Enums`.
+- Always check `.Success` before reading `.Data`.
+- Use `docs/ai-api-map.md` for endpoint routing and `llms-full.txt` for full examples, pitfalls, DI, shared APIs, and source-of-truth files.
