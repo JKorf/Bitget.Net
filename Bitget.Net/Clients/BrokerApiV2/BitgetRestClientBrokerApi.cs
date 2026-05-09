@@ -113,5 +113,20 @@ namespace Bitget.Net.Clients.BrokerApiV2
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await SendAsync<BitgetBrokerAgentCustomer[]>(request, parameters, ct).ConfigureAwait(false);
         }
+
+        public async Task<WebCallResult<BitgetBrokerAgentCustomerList>> GetAgentSubCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int limit = 100, long? uid = null, bool? showSub = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalMilliseconds("startTime", startTime);
+            parameters.AddOptionalMilliseconds("endTime", endTime);
+            parameters.AddOptionalString("idLessThan", idLessThan);
+            parameters.AddString("limit", limit);
+            parameters.AddOptionalString("uid", uid);
+            parameters.AddOptional("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
+
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/broker/sub-customer-list", BitgetExchange.RateLimiter.Overall, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            return await SendAsync<BitgetBrokerAgentCustomerList>(request, parameters, ct).ConfigureAwait(false);
+        }
     }
 }

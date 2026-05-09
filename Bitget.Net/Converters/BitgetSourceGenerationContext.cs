@@ -60,6 +60,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetResponse<BitgetCopyTradingCurrentOrdersTrackingItem[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetBrokerAgentDirectCommissions>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetBrokerAgentCustomer[]>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetBrokerAgentCustomerList>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetFuturesBalance[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetContract[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetVipFeeRate[]>))]
