@@ -224,7 +224,7 @@ Inject `IBitgetRestClient` and `IBitgetSocketClient`.
 
 ## Source of truth
 
-For detailed patterns and pitfalls see `CLAUDE.md`, `llms.txt`, `llms-full.txt`, `docs/ai-api-map.md`, and `Examples/ai-friendly/`.
+For detailed patterns and pitfalls see `AGENTS.md`, `llms.txt`, `llms-full.txt`, `docs/ai-api-map.md`, and `Examples/ai-friendly/`.
 
 When method signatures are unclear, inspect:
 
