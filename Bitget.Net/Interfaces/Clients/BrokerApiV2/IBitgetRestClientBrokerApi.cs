@@ -49,5 +49,24 @@ namespace Bitget.Net.Interfaces.Clients.BrokerApiV2
         /// <param name="showSub">Whether to Display Subordinate User Information of Direct Clients</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<BitgetBrokerAgentCustomer[]>> GetAgentCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, int pageNo = 1, int pageSize = 100, long? uid = null, string? referralCode = null, bool? showSub = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get Agent SubCustomer List
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/classic/affiliate/customerInfo/GetSubCustomerList" /><br />
+        /// <a href="https://www.bitget.com/zh-CN/api-doc/classic/affiliate/customerInfo/GetSubCustomerList" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/broker/sub-customer-list
+        /// </para>
+        /// </summary>
+        /// <param name="startTime">Start time (The maximum time span supported is three months. The default end time is three months if no value is set for the end time. )</param>
+        /// <param name="endTime">End time (The maximum time span supported is three months. The default start time is three months ago if no value is set for the start time. )</param>
+        /// <param name="idLessThan">Cursor ID</param>
+        /// <param name="limit">Items per page</param>
+        /// <param name="uid">UID</param>
+        /// <param name="showSub">Whether to Display Subordinate User Information of Direct Clients</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<BitgetBrokerAgentCustomerList>> GetAgentSubCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int limit = 100, long? uid = null, bool? showSub = null, CancellationToken ct = default);
     }
 }
