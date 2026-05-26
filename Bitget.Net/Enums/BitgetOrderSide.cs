@@ -13,12 +13,12 @@ namespace Bitget.Net.Enums
         /// <summary>
         /// ["<c>buy</c>"] Buy
         /// </summary>
-        [Map("buy")]
+        [Map("buy", "Buy")]
         Buy,
         /// <summary>
         /// ["<c>sell</c>"] Sell
         /// </summary>
-        [Map("sell")]
+        [Map("sell", "Sell")]
         Sell
     }
 }
