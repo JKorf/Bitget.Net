@@ -36,6 +36,16 @@ namespace Bitget.Net.Objects.Models.V2
         [JsonPropertyName("maxTradeAmount")]
         public decimal MaxOrderQuantity { get; set; }
         /// <summary>
+        /// ["<c>maxLimitOrderValue</c>"] Maximal limit order value
+        /// </summary>
+        [JsonPropertyName("maxLimitOrderValue")]
+        public decimal? MaxLimitOrderValue { get; set; }
+        /// <summary>
+        /// ["<c>maxMarketOrderValue</c>"] Maximal market order value
+        /// </summary>
+        [JsonPropertyName("maxMarketOrderValue")]
+        public decimal? MaxMarketOrderValue { get; set; }
+        /// <summary>
         /// ["<c>takerFeeRate</c>"] Taker fee rate
         /// </summary>
         [JsonPropertyName("takerFeeRate")]
