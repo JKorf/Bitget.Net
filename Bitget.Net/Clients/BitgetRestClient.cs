@@ -1,4 +1,5 @@
 ﻿using Bitget.Net.Interfaces.Clients;
+using Bitget.Net.Interfaces.Clients.UnifiedApi;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
@@ -19,6 +20,8 @@ namespace Bitget.Net.Clients
         public Interfaces.Clients.CopyTradingApiV2.IBitgetRestClientCopyTradingApi CopyTradingFuturesV2 { get; }
         /// <inheritdoc />
         public Interfaces.Clients.BrokerApiV2.IBitgetRestClientBrokerApi BrokerV2 { get; }
+        /// <inheritdoc />
+        public IBitgetRestClientUnifiedApi UnifiedApi { get; }
 
         /// <summary> 
         /// Create a new instance of BitgetRestClient
@@ -43,6 +46,7 @@ namespace Bitget.Net.Clients
             FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
             CopyTradingFuturesV2 = AddApiClient(new CopyTradingApiV2.BitgetRestClientCopyTradingApi(_logger, httpClient, this, options.Value));
             BrokerV2 = AddApiClient(new BrokerApiV2.BitgetRestClientBrokerApi(_logger, httpClient, this, options.Value));
+            UnifiedApi = AddApiClient(new UnifiedApi.BitgetRestClientUnifiedApi(_logger, httpClient, this, options.Value));
         }
 
         /// <summary>

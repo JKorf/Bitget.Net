@@ -1,0 +1,42 @@
+GET
+/api/v3/account/assets
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1746687063471,
+  "data": {
+    "accountEquity": "11.13919278",
+    "usdtEquity": "11.13921165",
+    "btcEquity": "0.00011256",
+    "unrealisedPnl": "0",
+    "usdtUnrealisedPnl": "0",
+    "btcUnrealizedPnl": "0",
+    "effEquity": "6.19299777",
+    "mmr": "0",
+    "imr": "0",
+    "mgnRatio": "0",
+    "positionMgnRatio": "0",
+    "assets": [
+      {
+        "coin": "USDT",
+        "equity": "6.19300826",
+        "usdValue": "6.19299777",
+        "balance": "6.19300826",
+        "available": "6.19300826",
+        "debt": "0",
+        "locked": "0"
+      },
+      {
+        "coin": "BGB",
+        "equity": "1.15582129",
+        "usdValue": "4.94618029",
+        "balance": "1.15582129",
+        "available": "1.15582129",
+        "debt": "0",
+        "locked": "0"
+      }
+    ]
+  }
+}

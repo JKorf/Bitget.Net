@@ -1,0 +1,19 @@
+GET
+/api/v3/market/oi-limit
+false
+UriParams: {"category": "USDT-FUTURES"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1741665165571,
+  "data": [{
+    "symbol": "BTCUSDT",
+    "notionalValue": "1000000",
+    "totalNotionalValue": "5000000"
+  },
+    {
+      "symbol": "ETHUSDT",
+      "notionalValue": "1000000",
+      "totalNotionalValue": "5000000"
+    }]
+}

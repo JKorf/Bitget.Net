@@ -1,0 +1,25 @@
+GET
+/api/v3/account/financial-records
+true
+UriParams: {"category": "MARGIN"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1750135478641,
+  "data": {
+    "list": [
+      {
+        "category": "Margin",
+        "id": "13111111111111111",
+        "symbol": "BTCUSDT",
+        "coin": "BTC",
+        "type": "ORDER_DEALT_IN",
+        "amount": "0.00531168",
+        "fee": "-0.00000531",
+        "balance": "55.10017801",
+        "ts": "1745853486185"
+      }
+    ],
+    "cursor": "122222222222222222"
+  }
+}

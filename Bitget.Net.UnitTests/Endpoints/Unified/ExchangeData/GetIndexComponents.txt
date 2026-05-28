@@ -1,0 +1,50 @@
+GET
+/api/v3/market/index-components
+false
+UriParams: {"symbol": "ETHUSDT"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1767159256214,
+  "data": {
+    "symbol": "BTCUSDT",
+    "componentList": [
+      {
+        "exchange": "BITGET_FUTURE",
+        "spotPair": "BTC/USDT",
+        "equivalentPrice": "88432.1",
+        "weight": "0.4696"
+      },
+      {
+        "exchange": "GATEIO",
+        "spotPair": "BTC/USDT",
+        "equivalentPrice": "88467",
+        "weight": "0.164"
+      },
+      {
+        "exchange": "BINANCE",
+        "spotPair": "BTC/USDT",
+        "equivalentPrice": "88456.65",
+        "weight": "0.1434"
+      },
+      {
+        "exchange": "MEXC",
+        "spotPair": "BTC/USDT",
+        "equivalentPrice": "88457.1",
+        "weight": "0.0992"
+      },
+      {
+        "exchange": "BITGET",
+        "spotPair": "BTC/USDT",
+        "equivalentPrice": "88469.77",
+        "weight": "0.0768"
+      },
+      {
+        "exchange": "OKX",
+        "spotPair": "BTC/USDT",
+        "equivalentPrice": "88463",
+        "weight": "0.0468"
+      }
+    ]
+  }
+}

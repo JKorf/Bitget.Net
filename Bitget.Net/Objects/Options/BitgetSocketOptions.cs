@@ -35,11 +35,17 @@ namespace Bitget.Net.Objects.Options
         /// </summary>
         public SocketApiOptions FuturesOptions { get; private set; } = new SocketApiOptions();
 
+        /// <summary>
+        /// UTA API options
+        /// </summary>
+        public SocketApiOptions UnifiedOptions { get; private set; } = new SocketApiOptions();
+
         internal BitgetSocketOptions Set(BitgetSocketOptions targetOptions)
         {
             targetOptions = base.Set(targetOptions);
             targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
             targetOptions.FuturesOptions = FuturesOptions.Set(targetOptions.FuturesOptions);
+            targetOptions.UnifiedOptions = UnifiedOptions.Set(targetOptions.UnifiedOptions);
             return targetOptions;
         }
     }

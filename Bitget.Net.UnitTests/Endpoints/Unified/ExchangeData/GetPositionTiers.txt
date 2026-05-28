@@ -1,0 +1,18 @@
+GET
+/api/v3/market/position-tier
+false
+UriParams: {"category": "SPOT"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1731146663643,
+  "data": [
+    {
+      "tier": "1",
+      "minTierValue": "0",
+      "maxTierValue": "100000",
+      "leverage": "125",
+      "mmr": "0.004"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+GET
+/api/v3/market/discount-rate
+false
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730911874605,
+  "data": [
+      {
+        "coin": "ETH",
+        "list": [
+          {
+            "tierStartValue": "0",
+            "discountRate": "0.99"
+          },
+          {
+            "tierStartValue": "40000",
+            "discountRate": "0.98"
+          }
+        ]
+      }
+    ]
+}

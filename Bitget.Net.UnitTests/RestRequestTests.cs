@@ -1,4 +1,6 @@
 ﻿using Bitget.Net.Clients;
+using Bitget.Net.Enums;
+using Bitget.Net.Enums.Uta;
 using Bitget.Net.Enums.V2;
 using Bitget.Net.Objects;
 using Bitget.Net.Objects.Models.V2;
@@ -95,8 +97,8 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetVipFeeRatesAsync(), "GetVipFeeRates");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetTickersAsync(), "GetTickers");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetOrderBookAsync("ETHUSDT"), "GetOrderBook");
-            await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetKlinesAsync("ETHUSDT", KlineInterval.OneDay), "GetKlines");
-            await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetHistoricalKlinesAsync("ETHUSDT", KlineInterval.OneDay, DateTime.UtcNow), "GetHistoricalKlines");
+            await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay), "GetKlines");
+            await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetHistoricalKlinesAsync("ETHUSDT", Enums.V2.KlineInterval.OneDay, DateTime.UtcNow), "GetHistoricalKlines");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetRecentTradesAsync("ETHUSDT"), "GetRecentTrades");
             await tester.ValidateAsync(client => client.SpotApiV2.ExchangeData.GetTradesAsync("ETHUSDT"), "GetTrades");
 
@@ -213,9 +215,50 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetOpenTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, TriggerPlanTypeFilter.Trigger), "GetOpenTriggerOrders2");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.GetClosedTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, TriggerPlanTypeFilter.Trigger), "GetClosedTriggerOrders");
             await tester.ValidateAsync(client => client.FuturesApiV2.Trading.CancelTriggerOrdersAsync(Enums.BitgetProductTypeV2.UsdtFutures, CancelTriggerPlanTypeFilter.Trigger), "CancelTriggerOrders");
-            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.SetPositionTpSlAsync(Enums.BitgetProductTypeV2.CoinFutures, "123", "123", PositionSide.Oneway), "SetPositionTpSl", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.FuturesApiV2.Trading.SetPositionTpSlAsync(Enums.BitgetProductTypeV2.CoinFutures, "123", "123", Enums.V2.PositionSide.Oneway), "SetPositionTpSl", nestedJsonProperty: "data");
         }
 
+        [Test]
+        public async Task ValidateUnifiedAccountCalls()
+        {
+            var client = new BitgetRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+                opts.ApiCredentials = new BitgetCredentials("123", "456", "789");
+            });
+            var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Unified/Account", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data"); 
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.GetBalancesAsync(), "GetBalances", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.GetFundingBalancesAsync(), "GetFundingBalances", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.GetAccountInfoAsync(), "GetAccountInfo", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.SetLeverageAsync(ProductCategory.UsdtFutures, "ETHUSDT", 0.1m), "SetLeverage");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.SetHoldModeAsync(HoldingMode.OneWayMode), "SetHoldMode");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.GetFinancialRecordsAsync(ProductCategory.Margin), "GetFinancialRecords", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.GetRepayableAssetsAsync(), "GetRepayableAssets", nestedJsonProperty: "data");
+        }
+
+            [Test]
+        public async Task ValidateUnifiedExchangeDataCalls()
+        {
+            var client = new BitgetRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+            });
+            var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Unified/ExchangeData", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetFuturesSymbolsAsync(ProductCategory.UsdtFutures), "GetFuturesSymbols", nestedJsonProperty: "data", ignoreProperties: ["isRwa"]);
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetFuturesTickersAsync(ProductCategory.UsdtFutures), "GetFuturesTickers", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetOrderBookAsync(ProductCategory.Spot, "ETHUSDT"), "GetOrderBook", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetRecentTradesAsync(ProductCategory.Spot, "ETHUSDT"), "GetRecentTrades", nestedJsonProperty: "data", ignoreProperties: ["isRPI"]);
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetOpenInterestAsync(ProductCategory.UsdtFutures), "GetOpenInterest", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetKlinesAsync(ProductCategory.Spot, "ETHUSDT", Enums.Uta.KlineInterval.OneMinute), "GetKlines", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetKlineHistoryAsync(ProductCategory.Spot, "ETHUSDT", Enums.Uta.KlineInterval.OneMinute), "GetKlineHistory", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetFundingRateAsync("ETHUSDT"), "GetFundingRate", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetFundingRateHistoryAsync(ProductCategory.Spot, "ETHUSDT"), "GetFundingRateHistory", nestedJsonProperty: "data.resultList");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetDiscountRateAsync(), "GetDiscountRate", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetMarginLoanInterestRatesAsync("123"), "GetMarginLoanInterestRates", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetPositionTiersAsync(ProductCategory.Spot), "GetPositionTiers", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetOpenInterestLimitAsync(ProductCategory.UsdtFutures), "GetOpenInterestLimit", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetIndexComponentsAsync("ETHUSDT"), "GetIndexComponents", nestedJsonProperty: "data");
+        }
 
         [Test]
         public async Task ValidateBrokerCalls()

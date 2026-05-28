@@ -1,0 +1,10 @@
+POST
+/api/v3/account/set-leverage
+true
+BodyParams: {"category": "USDT-FUTURES","symbol": "ETHUSDT","leverage": 0.1}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1728625799912,
+  "data": "success"
+}

@@ -1,0 +1,29 @@
+GET
+/api/v3/market/fills
+false
+UriParams: {"category": "SPOT","symbol": "ETHUSDT"}
+{
+  "code": "00000",
+  "data": [
+    {
+      "execId": "1",
+      "execLinkId": "12345877111",
+      "price": "29990.5",
+      "size": "0.0166",
+      "side": "sell",
+      "ts": "1627116776464",
+      "isRPI": "no"
+    },
+    {
+      "execId": "2",
+      "execLinkId": "12345877112",
+      "price": "30007.0",
+      "size": "0.0166",
+      "side": "buy",
+      "ts": "1627116600875",
+      "isRPI": "yes"
+    }
+  ],
+  "msg": "success",
+  "requestTime": 1690313813709
+}

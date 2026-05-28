@@ -1,0 +1,19 @@
+GET
+/api/v3/account/repayable-coins
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730189435812,
+  "data": {
+    "repayableCoinList": [
+      {
+        "coin": "USDT",
+        "size": "147214.04781004",
+        "amount": "147102.60677584"
+      }
+    ],
+    "maxSelection": "1"
+  }
+}

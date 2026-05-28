@@ -1,0 +1,34 @@
+GET
+/api/v3/market/tickers
+false
+UriParams: {"category": "USDT-FUTURES"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1765444282767,
+  "data": [
+    {
+      "category": "USDT-FUTURES",
+      "symbol": "BTCUSDT",
+      "ts": "1765444282230",
+      "lastPrice": "90216.3",
+      "openPrice24h": "92629",
+      "highPrice24h": "94477.8",
+      "lowPrice24h": "89350.1",
+      "ask1Price": "90216.4",
+      "bid1Price": "90216.3",
+      "bid1Size": "11.0845",
+      "ask1Size": "4.2309",
+      "price24hPcnt": "-0.02605",
+      "volume24h": "50772.839",
+      "turnover24h": "4667820987.88478",
+      "indexPrice": "90247.5410266912815894",
+      "markPrice": "90216.4",
+      "fundingRate": "0.000047",
+      "openInterest": "27606.0718",
+      "deliveryStartTime": "",
+      "deliveryTime": "",
+      "deliveryStatus": ""
+    }
+  ]
+}

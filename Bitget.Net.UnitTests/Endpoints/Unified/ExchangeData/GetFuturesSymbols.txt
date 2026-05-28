@@ -1,0 +1,49 @@
+GET
+/api/v3/market/instruments
+false
+UriParams: {"category": "USDT-FUTURES"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1770531054230,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "category": "USDT-FUTURES",
+      "baseCoin": "BTC",
+      "quoteCoin": "USDT",
+      "isRwa": "NO",
+      "buyLimitPriceRatio": "0.05",
+      "sellLimitPriceRatio": "0.05",
+      "feeRateUpRatio": "0.005",
+      "makerFeeRate": "0.0002",
+      "takerFeeRate": "0.0006",
+      "openCostUpRatio": "0.01",
+      "minOrderQty": "0.0001",
+      "maxOrderQty": "1200",
+      "pricePrecision": "1",
+      "quantityPrecision": "4",
+      "quotePrecision": "",
+      "priceMultiplier": "0.1",
+      "quantityMultiplier": "0.0001",
+      "type": "perpetual",
+      "minOrderAmount": "5",
+      "maxSymbolOrderNum": "",
+      "maxProductOrderNum": "400",
+      "maxPositionNum": "200",
+      "status": "online",
+      "offTime": "-1",
+      "limitOpenTime": "-1",
+      "deliveryTime": "",
+      "deliveryStartTime": "",
+      "deliveryPeriod": "",
+      "launchTime": "0",
+      "fundInterval": "8",
+      "minLeverage": "1",
+      "maxLeverage": "150",
+      "maintainTime": "",
+      "symbolType": "crypto",
+      "maxMarketOrderQty": "220"
+    }
+  ]
+}

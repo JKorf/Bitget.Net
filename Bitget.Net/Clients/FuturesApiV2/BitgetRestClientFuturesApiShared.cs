@@ -6,6 +6,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
+using ContractType = Bitget.Net.Enums.V2.ContractType;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {

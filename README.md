@@ -1,6 +1,6 @@
 # ![.Bitget.Net](https://github.com/JKorf/Bitget.Net/blob/main/Bitget.Net/Icon/icon.png?raw=true) Bitget.Net
 
-[![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bitget.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge)
+[![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bitget.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge) ![Since](https://img.shields.io/badge/since-2023-brightgreen?style=for-the-badge)
 
 Bitget.Net is a strongly typed client library for accessing the [Bitget REST and Websocket API](https://bitgetlimited.github.io/apidoc/en/spot).
 ## Features
