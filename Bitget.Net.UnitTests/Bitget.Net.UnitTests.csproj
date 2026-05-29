@@ -16,9 +16,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Bitget.Net\Bitget.Net.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Endpoints\Unified\Trading\" />
-	</ItemGroup>
 	
 </Project>

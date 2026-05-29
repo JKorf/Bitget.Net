@@ -1,0 +1,34 @@
+GET
+/api/v3/position/history-position
+true
+UriParams: {"category": "USDT-FUTURES"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730186957802,
+  "data": {
+    "list": [
+      {
+        "positionId": "1111111111111111111",
+        "category": "USDT-FUTURES",
+        "symbol": "EOSUSDT",
+        "marginCoin": "USDT",
+        "holdMode": "one_way_mode",
+        "posSide": "long",
+        "marginMode": "crossed",
+        "openPriceAvg": "1960.001",
+        "closePriceAvg": "1959.999",
+        "openTotalPos": "58",
+        "closeTotalPos": "58",
+        "cumRealisedPnl": "-0.116",
+        "netProfit": "-45.588",
+        "totalFunding": "0",
+        "openFeeTotal": "-22.7360116",
+        "closeFeeTotal": "-22.7359884",
+        "createdTime": "1729928018076",
+        "updatedTime": "1729929656321"
+      }
+    ],
+    "cursor": "1111111111111111111"
+  }
+}

@@ -1,0 +1,25 @@
+GET
+/api/v3/account/deposit-records
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1740481864545,
+  "data": [
+      {
+        "orderId": "1278112570963742720",
+        "recordId": "1278112570963742720",
+        "coin": "usdt",
+        "type": "deposit",
+        "dest": "internal_transfer",
+        "size": "1",
+        "status": "success",
+        "fromAddress": "0x51xxx",
+        "toAddress": "0x51xxx",
+        "chain": "erc20",
+        "createdTime": "1740451703778",
+        "updatedTime": "1740451703778"
+      }
+  ]
+}

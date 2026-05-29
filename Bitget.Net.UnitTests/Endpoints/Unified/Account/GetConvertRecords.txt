@@ -1,0 +1,30 @@
+GET
+/api/v3/account/convert-records
+true
+UriParams: {"fromAsset": "123","toAsset": "123"}
+{
+    "code": "00000",
+    "msg": "success",
+    "requestTime": 1730369634178,
+    "data": {
+        "list": [
+            {
+                "fromCoin": "USDT",
+                "fromCoinSize": "281.72276656",
+                "toCoin": "ETH",
+                "toCoinSize": "0.0986029682",
+                "price": "0.0003499",
+                "ts": "1730359119358"
+            },
+            {
+                "fromCoin": "USDT",
+                "fromCoinSize": "3305.13434913",
+                "toCoin": "ETH",
+                "toCoinSize": "1.1567970221",
+                "price": "0.00035",
+                "ts": "1730359063138"
+            }
+        ],
+        "cursor": "1235780967957364737"
+    }
+}

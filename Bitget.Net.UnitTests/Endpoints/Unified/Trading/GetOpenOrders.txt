@@ -1,0 +1,52 @@
+GET
+/api/v3/trade/unfilled-orders
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730186730084,
+  "data": {
+    "list": [
+      {
+        "orderId": "111111111111111111",
+        "clientOid": "111111111111111111",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "orderType": "limit",
+        "side": "buy",
+        "price": "45000",
+        "qty": "0.01",
+        "amount": "0",
+        "cumExecQty": "0",
+        "cumExecValue": "0",
+        "avgPrice": "0",
+        "timeInForce": "gtc",
+        "orderStatus": "live",
+        "posSide": "long",
+        "holdMode": "hedge_mode",
+        "delegateType": "normal",
+        "reduceOnly": "NO",
+        "marginMode": "crossed",
+        "stpMode": "none",
+        "takeProfit": "",
+        "stopLoss": "",
+        "tpTriggerBy": "",
+        "slTriggerBy": "",
+        "tpOrderType": "",
+        "slOrderType": "",
+        "tpLimitPrice": "",
+        "slLimitPrice": "",
+        "feeDetail": [
+          {
+            "feeCoin": null,
+            "fee": null
+          }
+        ],
+        "createdTime": "1730186725663",
+        "updatedTime": "1730186725691"
+      }
+    ],
+    "cursor": "1235058132196622336"
+  }
+}

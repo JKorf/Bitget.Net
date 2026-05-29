@@ -1,0 +1,25 @@
+GET
+/api/v3/account/withdraw-address
+true
+UriParams: { }
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1740000000000,
+  "data": {
+    "addressList": [
+      {
+        "coin": "BTC",
+        "chain": "BTC",
+        "address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7Divf",
+        "countryCode": "",
+        "label": "My BTC Wallet",
+        "memo": "",
+        "type": "regular",
+        "internalType": "",
+        "createdTime": "1740000000000"
+      }
+    ],
+    "cursor": "1740000000000"
+  }
+}

@@ -1,0 +1,13 @@
+GET
+/api/v3/account/switch-status
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1746687063471,
+  "data": {
+    "status": "fail",
+    "reason": "upgrade_disabled"
+  }
+}

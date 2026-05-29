@@ -8,8 +8,20 @@ namespace Bitget.Net.Objects.Socket
         public string IntstrumentType { get; set; } = null!;
         [JsonPropertyName("channel")]
         public string Channel { get; set; } = null!;
+        [JsonPropertyName("topic")]
+        public string Topic
+        {
+            get => Channel;
+            set => Channel = value;
+        }
         [JsonPropertyName("instId")]
         public string InstrumentId { get; set; } = null!;
+        [JsonPropertyName("symbol")]
+        public string Symbol
+        {
+            get => InstrumentId;
+            set => InstrumentId = value;
+        }
     }
 
     internal class BitgetSocketUpdate

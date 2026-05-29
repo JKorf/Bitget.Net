@@ -1,0 +1,12 @@
+GET
+/api/v3/account/transferable-coins
+true
+UriParams: {"fromType": "spot","toType": "uta"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730189276579,
+  "data": [
+        "ETH"
+    ]
+}

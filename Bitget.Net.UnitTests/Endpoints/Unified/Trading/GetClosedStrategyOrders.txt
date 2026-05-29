@@ -1,0 +1,37 @@
+GET
+/api/v3/trade/history-strategy-orders
+true
+UriParams: {"category": "SPOT","type": "tpsl"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730186730084,
+  "data": {
+    "list": [
+      {
+        "orderId": "111111111111111111",
+        "clientOid": "111111111111111111",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "qty": "0.01",
+        "posSide": "long",
+        "status": "success",
+        "tpTriggerBy": "market",
+        "slTriggerBy": "market",
+        "takeProfit": "110000",
+        "stopLoss": "90000",
+        "tpOrderType": "market",
+        "slOrderType": "market",
+        "tpLimitPrice": "91000",
+        "slLimitPrice": "111000",
+        "triggerBy": "market",
+        "triggerPrice": "100000",
+        "triggerOrderType": "limit",
+        "triggerOrderPrice": "100500",
+        "createdTime": "1730186725663",
+        "updatedTime": "1730186725691"
+      }
+    ],
+    "cursor": "1233319323918499840"
+  }
+}

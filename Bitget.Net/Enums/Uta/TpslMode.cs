@@ -5,19 +5,19 @@ using System.Text.Json.Serialization;
 namespace Bitget.Net.Enums.Uta;
 
 /// <summary>
-/// Contract type
+/// TP/SL mode
 /// </summary>
-[JsonConverter(typeof(EnumConverter<ContractType>))]
-public enum ContractType
+[JsonConverter(typeof(EnumConverter<TpslMode>))]
+public enum TpslMode
 {
     /// <summary>
-    /// ["<c>perpetual</c>"] Perpetual contract
+    /// ["<c>full</c>"] Full
     /// </summary>
-    [Map("perpetual")]
-    Perpetual,
+    [Map("full")]
+    Full,
     /// <summary>
-    /// ["<c>delivery</c>"] Delivery contract
+    /// ["<c>partial</c>"] Partial take profit / stop loss order
     /// </summary>
-    [Map("delivery")]
-    Delivery,
+    [Map("partial")]
+    Partial
 }

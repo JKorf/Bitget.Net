@@ -24,6 +24,11 @@ namespace Bitget.Net.Enums.V2
         /// ["<c>delivery_period</c>"] Delivery, opening, closing, and canceling orders are prohibited
         /// </summary>
         [Map("delivery_period")]
-        DeliveryPeriod
+        DeliveryPeriod,
+        /// <summary>
+        /// ["<c>delivery_config_period</c>"] New pair configuration
+        /// </summary>
+        [Map("delivery_config_period")]
+        New,
     }
 }

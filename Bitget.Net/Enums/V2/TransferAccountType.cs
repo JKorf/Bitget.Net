@@ -44,6 +44,11 @@ namespace Bitget.Net.Enums.V2
         /// ["<c>isolated_margin</c>"] Isolated margin account
         /// </summary>
         [Map("isolated_margin")]
-        IsolatedMargin
+        IsolatedMargin,
+        /// <summary>
+        /// ["<c>uta</c>"] Unified trading account
+        /// </summary>
+        [Map("uta")]
+        Uta
     }
 }

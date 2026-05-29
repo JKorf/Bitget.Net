@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 using Bitget.Net.Enums.Uta;
+using Bitget.Net.Enums.V2;
 
 namespace Bitget.Net.Objects.Models;
 

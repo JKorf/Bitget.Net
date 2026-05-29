@@ -1,0 +1,13 @@
+POST
+/api/v3/trade/modify-order
+true
+BodyParams: {}
+{
+  "code": "00000",
+  "data": {
+    "orderId": "121212121212",
+    "clientOid": "BITGET#1627293504612"
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}

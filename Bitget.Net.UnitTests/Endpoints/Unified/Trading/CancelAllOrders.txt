@@ -1,0 +1,19 @@
+POST
+/api/v3/trade/cancel-symbol-order
+true
+BodyParams: {"category": "SPOT"}
+{
+  "code": "00000",
+  "data": {
+    "list": [
+      {
+        "orderId": "111111111111111111",
+        "clientOid": "111111111111111111",
+        "code": "24056",
+        "msg": "notExisted"
+      }
+    ]
+  },
+  "msg": "success",
+  "requestTime": 1627293504612
+}

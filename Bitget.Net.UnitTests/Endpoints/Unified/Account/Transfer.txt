@@ -1,0 +1,12 @@
+POST
+/api/v3/account/transfer
+true
+BodyParams: {"fromType": "spot","toType": "uta","coin": "123","amount": 0.1}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730189276579,
+  "data": {
+    "transferId":"111111111111"
+  }
+}

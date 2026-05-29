@@ -189,7 +189,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         Task<WebCallResult<BitgetUaKline[]>> GetKlinesAsync(
             ProductCategory category,
             string symbol,
-            KlineInterval interval,
+            KlineUaInterval interval,
             KlineType? type = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
@@ -216,7 +216,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         Task<WebCallResult<BitgetUaKline[]>> GetKlineHistoryAsync(
             ProductCategory category,
             string symbol,
-            KlineInterval interval,
+            KlineUaInterval interval,
             KlineType? type = null,
             DateTime? startTime = null,
             DateTime? endTime = null,

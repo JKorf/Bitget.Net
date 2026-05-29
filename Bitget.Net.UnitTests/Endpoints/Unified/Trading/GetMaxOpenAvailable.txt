@@ -1,0 +1,19 @@
+GET
+/api/v3/account/max-open-available
+true
+UriParams: {"category": "USDT-FUTURES","symbol": "ETHUSDT","orderType": "limit","side": "buy","size": 0.1}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1741851607871,
+  "data": {
+    "available": "52.008255",
+    "maxOpen": "",
+    "buyOpenCost": "",
+    "sellOpenCost": "",
+    "maxBuyOpen": "",
+    "maxSellOpen": "",
+    "maxBuyAvailable": "",
+    "maxSellAvailable": ""
+  }
+}

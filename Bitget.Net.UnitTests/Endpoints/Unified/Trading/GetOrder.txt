@@ -1,0 +1,49 @@
+GET
+/api/v3/trade/order-info
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730369201783,
+  "data": {
+    "orderId": "111111111111111111",
+    "clientOid": "111111111111111111",
+    "category": "SPOT",
+    "symbol": "ETHUSDT",
+    "orderType": "market",
+    "side": "buy",
+    "price": "0",
+    "qty": "0",
+    "amount": "100",
+    "cumExecQty": "0.0372",
+    "cumExecValue": "99.853356",
+    "avgPrice": "2684.23",
+    "timeInForce": "gtc",
+    "orderStatus": "filled",
+    "posSide": "",
+    "holdMode": "",
+    "tradeSide": "open",
+    "reduceOnly": "NO",
+    "marginMode": "crossed",
+    "stpMode": "none",
+    "takeProfit": "",
+    "stopLoss": "",
+    "tpTriggerBy": "",
+    "slTriggerBy": "",
+    "tpOrderType": "",
+    "slOrderType": "",
+    "tpLimitPrice": "",
+    "slLimitPrice": "",
+    "feeDetail": [
+      {
+        "feeCoin": "ETH",
+        "fee": "0.00000744"
+      }
+    ],
+    "cancelReason": "",
+    "execType": "",
+    "createdTime": "1730295766596",
+    "updatedTime": "1730295766691"
+  }
+}

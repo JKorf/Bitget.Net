@@ -28,7 +28,7 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
 
         private string GetRouteParams(Dictionary<string, string> arg)
         {
-            return $"{arg["instType"]}{arg["channel"]}";
+            return $"{arg["instType"]}{arg["topic"]}";
         }
 
         protected override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(_client, new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false) { RequiredResponses = _args.Count() };

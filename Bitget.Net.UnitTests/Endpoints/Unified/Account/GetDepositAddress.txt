@@ -1,0 +1,16 @@
+GET
+/api/v3/account/deposit-address
+true
+UriParams: {"coin": "123"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730189276579,
+  "data": {
+    "address": "0x51xxx",
+    "chain": "erc20",
+    "coin": "USDT",
+    "tag": null,
+    "url": ""
+  }
+}

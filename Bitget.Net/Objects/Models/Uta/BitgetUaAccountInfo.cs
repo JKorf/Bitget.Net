@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 using Bitget.Net.Enums;
-using Bitget.Net.Enums.Uta;
-using Bitget.Net.Enums.V2;
 
 namespace Bitget.Net.Objects.Models;
 
@@ -12,88 +10,49 @@ namespace Bitget.Net.Objects.Models;
 public record BitgetUaAccountInfo
 {
     /// <summary>
-    /// ["<c>uid</c>"] Unique id
+    /// ["<c>userId</c>"] User id
     /// </summary>
-    [JsonPropertyName("uid")]
-    public decimal Uid { get; set; }
+    [JsonPropertyName("userId")]
+    public string UserId { get; set; } = string.Empty;
     /// <summary>
-    /// ["<c>accountMode</c>"] Account mode
+    /// ["<c>inviterId</c>"] Inviter id
     /// </summary>
-    [JsonPropertyName("accountMode")]
-    public AccountMode AccountMode { get; set; }
+    [JsonPropertyName("inviterId")]
+    public string InviterId { get; set; } = string.Empty;
     /// <summary>
-    /// ["<c>assetMode</c>"] Asset mode
+    /// ["<c>parentId</c>"] Parent id
     /// </summary>
-    [JsonPropertyName("assetMode")]
-    public string AssetMode { get; set; } = string.Empty;
+    [JsonPropertyName("parentId")]
+    public string ParentId { get; set; } = string.Empty;
     /// <summary>
-    /// ["<c>accountLevel</c>"] Account level
+    /// ["<c>channelCode</c>"] Channel code
     /// </summary>
-    [JsonPropertyName("accountLevel")]
-    public AccountLevel AccountLevel { get; set; }
+    [JsonPropertyName("channelCode")]
+    public string ChannelCode { get; set; } = string.Empty;
     /// <summary>
-    /// ["<c>holdMode</c>"] Hold mode
+    /// ["<c>channel</c>"] Channel
     /// </summary>
-    [JsonPropertyName("holdMode")]
-    public HoldingMode HoldMode { get; set; }
+    [JsonPropertyName("channel")]
+    public string Channel { get; set; } = string.Empty;
     /// <summary>
-    /// ["<c>stpMode</c>"] Self trade prevention mode
+    /// ["<c>ips</c>"] Ips
     /// </summary>
-    [JsonPropertyName("stpMode")]
-    public StpMode StpMode { get; set; }
+    [JsonPropertyName("ips")]
+    public string Ips { get; set; } = string.Empty;
     /// <summary>
-    /// ["<c>symbolConfigList</c>"] Symbol configurations
+    /// ["<c>permType</c>"] Permission type
     /// </summary>
-    [JsonPropertyName("symbolConfigList")]
-    public BitgetUaAccountInfoSymbol[] SymbolConfigs { get; set; } = [];
+    [JsonPropertyName("permType")]
+    public PermissionType PermissionType { get; set; }
     /// <summary>
-    /// ["<c>coinConfigList</c>"] Asset configurations
+    /// ["<c>permissions</c>"] Permissions
     /// </summary>
-    [JsonPropertyName("coinConfigList")]
-    public BitgetUaAccountInfoAsset[] AssetConfigs { get; set; } = [];
-}
-
-/// <summary>
-/// 
-/// </summary>
-public record BitgetUaAccountInfoSymbol
-{
+    [JsonPropertyName("permissions")]
+    public string[] Permissions { get; set; } = [];
     /// <summary>
-    /// ["<c>category</c>"] Category
+    /// ["<c>regisTime</c>"] Registration time
     /// </summary>
-    [JsonPropertyName("category")]
-    public ProductCategory Category { get; set; }
-    /// <summary>
-    /// ["<c>symbol</c>"] Symbol
-    /// </summary>
-    [JsonPropertyName("symbol")]
-    public string Symbol { get; set; } = string.Empty;
-    /// <summary>
-    /// ["<c>marginMode</c>"] Margin mode
-    /// </summary>
-    [JsonPropertyName("marginMode")]
-    public MarginMode MarginMode { get; set; }
-    /// <summary>
-    /// ["<c>leverage</c>"] Leverage
-    /// </summary>
-    [JsonPropertyName("leverage")]
-    public decimal Leverage { get; set; }
-}
-
-/// <summary>
-/// Asset info
-/// </summary>
-public record BitgetUaAccountInfoAsset
-{
-    /// <summary>
-    /// ["<c>coin</c>"] Asset
-    /// </summary>
-    [JsonPropertyName("coin")]
-    public string Asset { get; set; } = string.Empty;
-    /// <summary>
-    /// ["<c>leverage</c>"] Leverage
-    /// </summary>
-    [JsonPropertyName("leverage")]
-    public decimal Leverage { get; set; }
+    [JsonPropertyName("regisTime")]
+    public DateTime RegistrationTime { get; set; }
 }
 

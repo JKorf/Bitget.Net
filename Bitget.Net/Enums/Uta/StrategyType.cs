@@ -5,19 +5,19 @@ using System.Text.Json.Serialization;
 namespace Bitget.Net.Enums.Uta;
 
 /// <summary>
-/// Position side
+/// Strategy type
 /// </summary>
-[JsonConverter(typeof(EnumConverter<PositionSide>))]
-public enum PositionSide
+[JsonConverter(typeof(EnumConverter<StrategyType>))]
+public enum StrategyType
 {
     /// <summary>
-    /// ["<c>long</c>"] Long
+    /// ["<c>tpsl</c>"] Take profit / Stop loss order
     /// </summary>
-    [Map("long")]
-    Long,
+    [Map("tpsl")]
+    TpSl,
     /// <summary>
-    /// ["<c>short</c>"] Short
+    /// ["<c>trigger</c>"] Trigger order
     /// </summary>
-    [Map("short")]
-    Short,
+    [Map("trigger")]
+    Trigger
 }

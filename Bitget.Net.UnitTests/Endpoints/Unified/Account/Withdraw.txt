@@ -1,0 +1,14 @@
+POST
+/api/v3/account/withdrawal
+true
+BodyParams: {"coin": "123","transferType": "on_chain","address": "123","size": 0.1}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730189276579,
+  "data": {
+    "orderId": "111111111111",
+    "clientOid": "111111111111"
+
+  }
+}

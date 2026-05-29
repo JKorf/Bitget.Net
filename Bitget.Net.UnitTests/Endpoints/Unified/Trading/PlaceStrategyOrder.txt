@@ -1,0 +1,13 @@
+POST
+/api/v3/trade/place-strategy-order
+true
+BodyParams: {"category": "USDT-FUTURES","symbol": "ETHUSDT"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695806875837,
+  "data": {
+    "clientOid": "121211212122",
+    "orderId": "121211212122"
+  }
+}

@@ -1,0 +1,20 @@
+GET
+/api/v3/account/delta-info
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1740000000000,
+  "data": {
+    "deltaEquityRatio": "0.15",
+    "deltaThreshold": "0.2",
+    "positionThreshold": "0.05",
+    "list": [
+      {
+        "coin": "BTC",
+        "positionRatio": "0.03"
+      }
+    ]
+  }
+}

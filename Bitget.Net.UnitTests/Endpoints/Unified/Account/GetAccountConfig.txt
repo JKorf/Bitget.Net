@@ -1,0 +1,81 @@
+GET
+/api/v3/account/settings
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1753787749280,
+  "data": {
+    "uid": "1111111111",
+    "accountMode": "hybrid",
+    "assetMode": "multi_assets",
+    "accountLevel": "advanced",
+    "holdMode": "one_way_mode",
+    "stpMode": "none",
+    "symbolConfigList": [
+      {
+        "category": "USDT-FUTURES",
+        "symbol": "BGBUSDT",
+        "marginMode": "crossed",
+        "leverage": "20"
+      },
+      {
+        "category": "USDT-FUTURES",
+        "symbol": "BMTUSDT",
+        "marginMode": "crossed",
+        "leverage": "20"
+      },
+      {
+        "category": "USDT-FUTURES",
+        "symbol": "1000SATSUSDT",
+        "marginMode": "crossed",
+        "leverage": "20"
+      },
+      {
+        "category": "USDT-FUTURES",
+        "symbol": "FUNUSDT",
+        "marginMode": "crossed",
+        "leverage": "20"
+      },
+      {
+        "category": "USDT-FUTURES",
+        "symbol": "1000BONKUSDT",
+        "marginMode": "crossed",
+        "leverage": "20"
+      },
+      {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "marginMode": "crossed",
+        "leverage": "1"
+      },
+      {
+        "category": "USDT-FUTURES",
+        "symbol": "IOTAUSDT",
+        "marginMode": "crossed",
+        "leverage": "20"
+      },
+      {
+        "category": "USDT-FUTURES",
+        "symbol": "C98USDT",
+        "marginMode": "crossed",
+        "leverage": "20"
+      }
+    ],
+    "coinConfigList": [
+      {
+        "coin": "USDT",
+        "leverage": "6"
+      },
+      {
+        "coin": "SHIB",
+        "leverage": "2"
+      },
+      {
+        "coin": "BTC",
+        "leverage": "3"
+      }
+    ]
+  }
+}

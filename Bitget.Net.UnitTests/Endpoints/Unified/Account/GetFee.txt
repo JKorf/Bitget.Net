@@ -1,0 +1,13 @@
+GET
+/api/v3/account/fee-rate
+true
+UriParams: {"category": "SPOT","symbol": "ETHUSDT"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1751972326323,
+  "data": {
+    "makerFeeRate": "0.0008",
+    "takerFeeRate": "0.0008"
+  }
+}

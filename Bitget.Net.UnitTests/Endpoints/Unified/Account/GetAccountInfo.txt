@@ -1,81 +1,26 @@
 GET
-/api/v3/account/settings
+/api/v3/account/info
 true
 UriParams: {}
 {
   "code": "00000",
   "msg": "success",
-  "requestTime": 1753787749280,
+  "requestTime": 1744617600000,
   "data": {
-    "uid": "1111111111",
-    "accountMode": "hybrid",
-    "assetMode": "multi_assets",
-    "accountLevel": "advanced",
-    "holdMode": "one_way_mode",
-    "stpMode": "none",
-    "symbolConfigList": [
-      {
-        "category": "USDT-FUTURES",
-        "symbol": "BGBUSDT",
-        "marginMode": "crossed",
-        "leverage": "20"
-      },
-      {
-        "category": "USDT-FUTURES",
-        "symbol": "BMTUSDT",
-        "marginMode": "crossed",
-        "leverage": "20"
-      },
-      {
-        "category": "USDT-FUTURES",
-        "symbol": "1000SATSUSDT",
-        "marginMode": "crossed",
-        "leverage": "20"
-      },
-      {
-        "category": "USDT-FUTURES",
-        "symbol": "FUNUSDT",
-        "marginMode": "crossed",
-        "leverage": "20"
-      },
-      {
-        "category": "USDT-FUTURES",
-        "symbol": "1000BONKUSDT",
-        "marginMode": "crossed",
-        "leverage": "20"
-      },
-      {
-        "category": "USDT-FUTURES",
-        "symbol": "BTCUSDT",
-        "marginMode": "crossed",
-        "leverage": "1"
-      },
-      {
-        "category": "USDT-FUTURES",
-        "symbol": "IOTAUSDT",
-        "marginMode": "crossed",
-        "leverage": "20"
-      },
-      {
-        "category": "USDT-FUTURES",
-        "symbol": "C98USDT",
-        "marginMode": "crossed",
-        "leverage": "20"
-      }
+    "userId": "123456789",
+    "inviterId": "987654321",
+    "parentId": "",
+    "channelCode": "6258",
+    "channel": "official",
+    "ips": "192.168.1.1,192.168.1.2",
+    "permType": "read-and-write",
+    "permissions": [
+      "uta_mgt",
+      "uta_trade",
+      "withdraw",
+      "copy_futures_position",
+      "copy_futures_order"
     ],
-    "coinConfigList": [
-      {
-        "coin": "USDT",
-        "leverage": "6"
-      },
-      {
-        "coin": "SHIB",
-        "leverage": "2"
-      },
-      {
-        "coin": "BTC",
-        "leverage": "3"
-      }
-    ]
+    "regisTime": "1704067200000"
   }
 }

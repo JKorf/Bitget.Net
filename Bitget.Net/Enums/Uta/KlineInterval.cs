@@ -5,10 +5,10 @@ using System.Text.Json.Serialization;
 namespace Bitget.Net.Enums.Uta;
 
 /// <summary>
-/// 
+/// Kline interval
 /// </summary>
-[JsonConverter(typeof(EnumConverter<KlineInterval>))]
-public enum KlineInterval
+[JsonConverter(typeof(EnumConverter<KlineUaInterval>))]
+public enum KlineUaInterval
 {
     /// <summary>
     /// ["<c>1m</c>"] 1 minute
