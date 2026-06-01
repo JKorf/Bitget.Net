@@ -61,7 +61,7 @@ public record BitgetUaOrder
     /// ["<c>price</c>"] Price
     /// </summary>
     [JsonPropertyName("price")]
-    public decimal Price { get; set; }
+    public decimal? Price { get; set; }
     /// <summary>
     /// ["<c>qty</c>"] Quantity
     /// </summary>
@@ -102,6 +102,12 @@ public record BitgetUaOrder
     /// </summary>
     [JsonPropertyName("posSide")]
     public PositionSide? PositionSide { get; set; }
+    [JsonInclude, JsonPropertyName("holdSide")]
+    internal PositionSide? HoldSide
+    {
+        set => PositionSide = value;
+    }
+
     /// <summary>
     /// ["<c>holdMode</c>"] Hold mode
     /// </summary>
@@ -122,6 +128,21 @@ public record BitgetUaOrder
     /// </summary>
     [JsonPropertyName("marginMode")]
     public MarginMode MarginMode { get; set; }
+    /// <summary>
+    /// ["<c>marginCoin</c>"] Margin asset
+    /// </summary>
+    [JsonPropertyName("marginCoin")]
+    public string? MarginAsset { get; set; }
+    /// <summary>
+    /// ["<c>totalProfit</c>"] Total profit
+    /// </summary>
+    [JsonPropertyName("totalProfit")]
+    public decimal? TotalProfit { get; set; }
+    /// <summary>
+    /// ["<c>leverage</c>"] Leverage
+    /// </summary>
+    [JsonPropertyName("leverage")]
+    public decimal? Leverage { get; set; }
     /// <summary>
     /// ["<c>stpMode</c>"] Stp mode
     /// </summary>

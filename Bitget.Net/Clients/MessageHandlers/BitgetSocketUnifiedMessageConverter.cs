@@ -21,9 +21,18 @@ namespace Bitget.Net.Clients.MessageHandlers
         {
             AddTopicMapping<BitgetSocketEvent>(x => x.Args?.InstrumentId);
             AddTopicMapping<BitgetSocketUpdate>(x => x.Args.InstrumentId);
+            AddTopicMapping<BitgetSocketResponse>(x => x.Id);
         }
 
         protected override MessageTypeDefinition[] TypeEvaluators { get; } = [
+
+            new MessageTypeDefinition {
+                ForceIfFound = true,
+                Fields = [
+                    new PropertyFieldReference("id"),
+                ],
+                TypeIdentifierCallback = x => x.FieldValue("id")!
+            },
 
             new MessageTypeDefinition {
                 Fields = [

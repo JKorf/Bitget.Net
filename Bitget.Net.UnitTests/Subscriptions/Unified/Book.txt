@@ -1,0 +1,32 @@
+> { "op": "subscribe", "args": [{ "instType": "usdt-futures", "topic": "books1", "instId": "BTCUSDT" }]}
+< { "event": "subscribe", "arg": { "instType": "usdt-futures", "topic": "books1", "instId": "BTCUSDT" }}
+= 
+{
+  "data": [
+    {
+      "a": [
+        [
+          "99756.7",
+          "23.9774"
+        ]
+      ],
+      "b": [
+        [
+          "99756.6",
+          "0.0128"
+        ]
+      ],
+      "pseq": 0,
+      "seq": 1304314508780744705,
+      "maxDepth": "50",
+      "ts": "1746698732562"
+    }
+  ],
+  "arg": {
+    "instType": "usdt-futures",
+    "symbol": "BTCUSDT",
+    "topic": "books1"
+  },
+  "action": "snapshot",
+  "ts": 1746698732563
+}

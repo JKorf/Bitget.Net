@@ -148,5 +148,51 @@ namespace Bitget.Net
 
                 new ErrorInfo(ErrorType.RateLimitRequest, false, "Request rate limit reached", "30006", "30007"),
             ]);
+
+        public static ErrorMapping UnifiedErrors { get; } = new ErrorMapping(
+            [
+                new ErrorInfo(ErrorType.Unauthorized, false, "Region not allowed", "40000"),
+                new ErrorInfo(ErrorType.Unauthorized, false, "Unauthorized", "25620"),
+                new ErrorInfo(ErrorType.Unauthorized, false, "Invalid credentials", "40006", "40009", "30005", "30011", "30012", "30015"),
+
+                new ErrorInfo(ErrorType.InvalidTimestamp, false, "Timestamp expired", "40008"),
+                new ErrorInfo(ErrorType.InvalidTimestamp, true, "Invalid timestamp", "30013", "30014"),
+
+                new ErrorInfo(ErrorType.SystemError, true, "System error", "25000", "40015"),
+                new ErrorInfo(ErrorType.SystemError, true, "Operation timeout", "25001"),
+                new ErrorInfo(ErrorType.SystemError, true, "Concurrency error, try again", "25003"),
+
+                new ErrorInfo(ErrorType.RateLimitRequest, false, "Request rate limit", "429", "25004"),
+                new ErrorInfo(ErrorType.RateLimitOrder, false, "Max number of tp/sl orders reached", "25599"),
+                new ErrorInfo(ErrorType.RateLimitOrder, false, "Max number of open orders reached", "40761"),
+
+                new ErrorInfo(ErrorType.UnavailableSymbol, false, "Symbol doesn't support API trading", "25013", "22004"),
+                new ErrorInfo(ErrorType.UnavailableSymbol, false, "Symbol not available", "25101", "25102", "25104", "25105", "25108", "22056", "40844", "40845"),
+
+                new ErrorInfo(ErrorType.UnknownSymbol, false, "Symbol does not exist", "25100"),
+                new ErrorInfo(ErrorType.UnknownAsset, false, "Asset does not exist", "25201"),
+                new ErrorInfo(ErrorType.UnknownOrder, false, "Unknown order", "25204"),
+
+                new ErrorInfo(ErrorType.NoPosition, false, "Position not found", "25601"),
+
+                new ErrorInfo(ErrorType.MissingParameter, false, "Parameter not set", "40811", "40813"),
+                new ErrorInfo(ErrorType.InvalidParameter, false, "Parameter validation failed", "25200", "40017", "95011", "40808"),
+                new ErrorInfo(ErrorType.InvalidPrice, false, "Price value not in range", "25205", "25206", "22046", "22047", "40815", "40816", "40820", "40821"),
+                new ErrorInfo(ErrorType.InvalidPrice, false, "Price tick invalid", "25244"),
+                new ErrorInfo(ErrorType.InvalidQuantity, false, "Quantity not in range", "25207", "25208"),
+                new ErrorInfo(ErrorType.InvalidQuantity, false, "Quantity step not valid", "25610", "22038"),
+                new ErrorInfo(ErrorType.InvalidQuantity, false, "Quantity less than min order quantity", "25611", "13008", "22034"),
+
+                new ErrorInfo(ErrorType.InvalidStopParameters, false, "Tp/sl not valid", "25579", "25580", "25581", "25582", "25583", "25584", "25585", "25586",
+                    "25587", "25588", "25589", "25590", "25591", "25592", "25602", "25603", "25604", "25605", "25606", "25607", "25608", "25609", "25650",
+                    "25651", "25652", "25653", "40829", "40830", "40831", "40832", "40833", "40834", "40835", "40836"),
+
+                new ErrorInfo(ErrorType.InsufficientBalance, false, "Insufficient balance", "25202", "25203", "25228", "25231", "40798", "40800"),
+
+                new ErrorInfo(ErrorType.MaxPosition, false, "Order quantity exceeds the maximum open quantity", "25230"),
+
+                new ErrorInfo(ErrorType.DuplicateClientOrderId, false, "Duplicate client order id", "25212"),
+            ]
+        );
     }
 }

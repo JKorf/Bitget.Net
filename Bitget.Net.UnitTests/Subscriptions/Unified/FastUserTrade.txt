@@ -1,0 +1,29 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "UTA", "topic": "fast-fill" }]}
+< { "event": "subscribe", "arg": { "instType": "UTA", "topic": "fast-fill" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "UTA",
+        "topic": "fast-fill"
+    },
+    "data":  [
+    {
+      "symbol": "BTCUSDT",
+      "updatedTime": "1736378720623",
+      "side": "buy",
+      "orderId": "1288888888888888888",
+      "execTime": "1736378720623",
+      "tradeScope": "taker",
+      "execId": "1288888888888888888",
+      "execPrice": "94993",
+      "holdSide": "long",
+      "category": "usdt-futures",
+      "execQty": "0.01",
+      "clientOid": "1288888888888888889"
+    }
+  ],
+    "ts": 1695717225146
+}

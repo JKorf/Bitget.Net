@@ -94,6 +94,11 @@ public record BitgetUaUserTrade
     [JsonPropertyName("tradeSide")]
     public TradeSide TradeSide { get; set; }
     /// <summary>
+    /// ["<c>holdSize</c>"] Position side
+    /// </summary>
+    [JsonPropertyName("holdSide")]
+    public PositionSide? PositionSide { get; set; }
+    /// <summary>
     /// ["<c>feeDetail</c>"] Fee detail
     /// </summary>
     [JsonPropertyName("feeDetail")]
@@ -108,6 +113,11 @@ public record BitgetUaUserTrade
     /// </summary>
     [JsonPropertyName("updatedTime")]
     public DateTime? UpdatedTime { get; set; }
+    /// <summary>
+    /// ["<c>execTime</c>"] Trade timestamp
+    /// </summary>
+    [JsonPropertyName("execTime")]
+    public DateTime? TradeTime { get; set; }
     /// <summary>
     /// ["<c>execPnl</c>"] Profit and loss
     /// </summary>

@@ -12,7 +12,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
     public interface IBitgetRestClientUnifiedApiTrading
     {
         /// <summary>
-        /// 
+        /// Place a new order
         /// <para>
         /// Docs:<br />
         /// <a href="https://www.bitget.com/api-doc/uta/trade/Place-Order" /><br />

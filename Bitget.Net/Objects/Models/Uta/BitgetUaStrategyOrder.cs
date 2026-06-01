@@ -59,10 +59,25 @@ public record BitgetUaStrategyOrder
     [JsonPropertyName("posSide")]
     public PositionSide? PositionSide { get; set; }
     /// <summary>
+    /// ["<c>side</c>"] Order side
+    /// </summary>
+    [JsonPropertyName("side")]
+    public OrderSide? Side { get; set; }
+    /// <summary>
+    /// Reduce only
+    /// </summary>
+    [JsonPropertyName("reduceOnly")]
+    public bool ReduceOnly { get; set; }
+    /// <summary>
     /// ["<c>status</c>"] Status
     /// </summary>
     [JsonPropertyName("status")]
     public StrategyStatus Status { get; set; }
+    /// <summary>
+    /// ["<c>type</c>"] Strategy type
+    /// </summary>
+    [JsonPropertyName("type")]
+    public StrategyType? Type { get; set; }
     /// <summary>
     /// ["<c>tpTriggerBy</c>"] Take profit trigger by
     /// </summary>
@@ -103,6 +118,11 @@ public record BitgetUaStrategyOrder
     /// </summary>
     [JsonPropertyName("slLimitPrice")]
     public decimal? SlLimitPrice { get; set; }
+    /// <summary>
+    /// ["<c>triggerType</c>"] Trigger type
+    /// </summary>
+    [JsonPropertyName("triggerType")]
+    public TriggerType? TriggerType { get; set; }
     /// <summary>
     /// ["<c>triggerBy</c>"] Trigger by
     /// </summary>

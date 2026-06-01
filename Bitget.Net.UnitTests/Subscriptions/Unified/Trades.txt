@@ -1,0 +1,23 @@
+> { "op": "subscribe", "args": [{ "instType": "usdt-futures", "topic": "publicTrade", "instId": "BTCUSDT" }]}
+< { "event": "subscribe", "arg": { "instType": "usdt-futures", "topic": "publicTrade", "instId": "BTCUSDT" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "usdt-futures",
+        "topic": "publicTrade",
+        "instId": "BTCUSDT"
+    },
+    "data": [
+    {
+      "p": "100000",
+      "S": "buy",
+      "T": "1736348770627",
+      "v": "0.00118",
+      "i": "1260903622036942849",
+      "L": "1234568787787878787",
+      "isRPI": "no"
+    }
+  ],
+    "ts": 1695715383039
+}

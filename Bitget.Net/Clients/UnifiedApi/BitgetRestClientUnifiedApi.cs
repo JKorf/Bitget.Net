@@ -21,7 +21,7 @@ namespace Bitget.Net.Clients.UnifiedApi
     /// <inheritdoc />
     internal partial class BitgetRestClientUnifiedApi : RestApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetRestClientUnifiedApi
     {
-        protected override ErrorMapping ErrorMapping => BitgetErrors.RestErrors;
+        protected override ErrorMapping ErrorMapping => BitgetErrors.UnifiedErrors;
         /// <inheritdoc />
         public IBitgetRestClientUnifiedApiAccount Account { get; }
         /// <inheritdoc />

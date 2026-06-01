@@ -135,6 +135,29 @@ namespace Bitget.Net.UnitTests
         }
 
         [Test]
+        public async Task TestUnifiedExchangeData()
+        {
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetFuturesSymbolsAsync(Enums.Uta.ProductCategory.UsdtFutures, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetSpotSymbolsAsync(default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetMarginSymbolsAsync(default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetSpotTickersAsync(default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetFuturesTickersAsync(Enums.Uta.ProductCategory.UsdtFutures, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetOrderBookAsync(Enums.Uta.ProductCategory.UsdtFutures, "ETHUSDT", default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetRecentTradesAsync(Enums.Uta.ProductCategory.UsdtFutures, "ETHUSDT", default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetProofOfReservesAsync(default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetOpenInterestAsync(Enums.Uta.ProductCategory.UsdtFutures, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetKlinesAsync(Enums.Uta.ProductCategory.UsdtFutures, "ETHUSDT", Enums.Uta.KlineUaInterval.OneDay, default, default, default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetKlineHistoryAsync(Enums.Uta.ProductCategory.UsdtFutures, "ETHUSDT", Enums.Uta.KlineUaInterval.OneDay, default, default, default, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetFundingRateAsync("ETHUSDT", default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetFundingRateHistoryAsync(Enums.Uta.ProductCategory.UsdtFutures, "ETHUSDT", default, default, default), false, true, "data.resultList");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetDiscountRateAsync(default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetMarginLoanInterestRatesAsync("ETH", default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetPositionTiersAsync(Enums.Uta.ProductCategory.UsdtFutures, "ETHUSDT", default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetOpenInterestLimitAsync(Enums.Uta.ProductCategory.UsdtFutures, default, default), false, true, "data");
+            await RunAndCheckResult(client => client.UnifiedApi.ExchangeData.GetIndexComponentsAsync("ETHUSDT", default), false, true, "data");
+        }
+
+        [Test]
         public async Task TestOrderBooks()
         {
             await TestOrderBook(new BitgetSpotSymbolOrderBook("ETHUSDT"));

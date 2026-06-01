@@ -5,6 +5,9 @@ using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Converters
 {
+    [JsonSerializable(typeof(BitgetIdSocketRequest))]
+    [JsonSerializable(typeof(BitgetSocketResponse<BitgetUaOrderResult[]>))]
+
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaTickerUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaKlineUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaBookUpdate[]>))]
@@ -14,6 +17,9 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaPositionUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaOrder[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaUserTrade[]>))]
+    [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaFastUserTrade[]>))]
+    [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaStrategyOrder[]>))]
+    [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaAdlUpdate[]>))]
 
     [JsonSerializable(typeof(BitgetResponse<BitgetUaStrategyOrders>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaStrategyOrder[]>))]

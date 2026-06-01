@@ -1,0 +1,43 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "UTA", "topic": "strategy-order" }]}
+< { "event": "subscribe", "arg": { "instType": "UTA", "topic": "strategy-order" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "UTA",
+        "topic": "strategy-order",
+        "symbol": "default"
+    },
+    "data": [
+    {
+      "category": "usdt-futures",
+      "symbol": "BTCUSDT",
+      "orderId": "111111111111111111",
+      "clientOid": "myorder001",
+      "qty": "0.01",
+      "side": "buy",
+      "posSide": "long",
+      "reduceOnly": "no",
+      "type": "tpsl",
+      "status": "pending",
+      "triggerType": "takeProfit",
+      "tpTriggerBy": "market",
+      "slTriggerBy": "market",
+      "takeProfit": "110000",
+      "stopLoss": "90000",
+      "tpOrderType": "market",
+      "slOrderType": "market",
+      "tpLimitPrice": "",
+      "slLimitPrice": "",
+      "triggerBy": "market",
+      "triggerPrice": "100000",
+      "triggerOrderType": "limit",
+      "triggerOrderPrice": "100500",
+      "createdTime": "1730186725663",
+      "updatedTime": "1730186725691"
+    }
+  ],
+    "ts": 1695717225146
+}

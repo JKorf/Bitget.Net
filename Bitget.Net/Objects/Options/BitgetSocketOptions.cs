@@ -26,6 +26,11 @@ namespace Bitget.Net.Objects.Options
         }
 
         /// <summary>
+        /// Channel code
+        /// </summary>
+        public string? ChannelCode { get; set; }
+
+        /// <summary>
         /// Spot API options
         /// </summary>
         public SocketApiOptions SpotOptions { get; private set; } = new SocketApiOptions();
@@ -43,6 +48,7 @@ namespace Bitget.Net.Objects.Options
         internal BitgetSocketOptions Set(BitgetSocketOptions targetOptions)
         {
             targetOptions = base.Set(targetOptions);
+            targetOptions.ChannelCode = ChannelCode;
             targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
             targetOptions.FuturesOptions = FuturesOptions.Set(targetOptions.FuturesOptions);
             targetOptions.UnifiedOptions = UnifiedOptions.Set(targetOptions.UnifiedOptions);

@@ -1,0 +1,50 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "UTA", "topic": "order" }]}
+< { "event": "subscribe", "arg": { "instType": "UTA", "topic": "order" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "UTA",
+        "topic": "order"
+    },
+    "data": [
+    {
+      "category": "usdt-futures",
+      "symbol": "BTCUSDT",
+      "orderId": "xxx",
+      "clientOid": "xxx",
+      "price": "",
+      "qty": "0.001",
+      "amount": "1000",
+      "holdMode": "hedge_mode",
+      "holdSide": "long",
+      "delegateType": "normal",
+      "tradeSide": "open",
+      "orderType": "market",
+      "timeInForce": "gtc",
+      "side": "buy",
+      "marginMode": "crossed",
+      "marginCoin": "USDT",
+      "reduceOnly": "no",
+      "cumExecQty": "0.001",
+      "cumExecValue": "83.1315",
+      "avgPrice": "83131.5",
+      "totalProfit": "0",
+      "orderStatus": "filled",
+      "cancelReason": "",
+      "leverage": "20",
+      "feeDetail": [
+        {
+          "feeCoin": "USDT",
+          "fee": "0.0332526"
+        }
+      ],
+      "createdTime": "1742367838101",
+      "updatedTime": "1742367838115",
+      "stpMode": "none"
+    }
+  ],
+    "ts": 1695717225146
+}

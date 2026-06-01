@@ -13,26 +13,26 @@ public enum ProductCategory
     /// <summary>
     /// ["<c>SPOT</c>"] Spot
     /// </summary>
-    [Map("SPOT")]
+    [Map("SPOT", "spot")]
     Spot,
     /// <summary>
     /// ["<c>MARGIN</c>"] Margin
     /// </summary>
-    [Map("MARGIN")]
+    [Map("MARGIN", "margin")]
     Margin,
     /// <summary>
     /// ["<c>USDT-FUTURES</c>"] USDT futures
     /// </summary>
-    [Map("USDT-FUTURES")]
+    [Map("USDT-FUTURES", "usdt-futures")]
     UsdtFutures,
     /// <summary>
     /// ["<c>COIN-FUTURES</c>"] Coin futures
     /// </summary>
-    [Map("COIN-FUTURES")]
+    [Map("COIN-FUTURES", "coin-futures")]
     CoinFutures,
     /// <summary>
     /// ["<c>USDC-FUTURES</c>"] USDC futures
     /// </summary>
-    [Map("USDC-FUTURES")]
+    [Map("USDC-FUTURES", "usdc-futures")]
     UsdcFutures,
 }

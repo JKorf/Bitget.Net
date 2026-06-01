@@ -104,5 +104,10 @@ public record BitgetUaSpotSymbol
     /// </summary>
     [JsonPropertyName("launchTime")]
     public DateTime? LaunchTime { get; set; }
+    /// <summary>
+    /// ["<c>areaSymbol</c>"] Is area restricted
+    /// </summary>
+    [JsonPropertyName("areaSymbol")]
+    public bool? AreaSymbol { get; set; }
 }
 

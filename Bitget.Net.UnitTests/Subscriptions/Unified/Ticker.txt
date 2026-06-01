@@ -1,0 +1,27 @@
+> { "op": "subscribe", "args": [{ "instType": "usdt-futures", "topic": "ticker", "instId": "BTCUSDT" }]}
+< { "event": "subscribe", "arg": { "instType": "usdt-futures", "topic": "ticker", "instId": "BTCUSDT" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "usdt-futures",
+        "topic": "ticker",
+        "instId": "BTCUSDT"
+    },
+    "data": [
+    {
+      "bid1Price": "99999",
+      "lowPrice24h": "98200",
+      "ask1Size": "188.312553",
+      "volume24h": "37.722858",
+      "price24hPcnt": "0.01833",
+      "highPrice24h": "100000",
+      "turnover24h": "3750302.979626",
+      "bid1Size": "186.183209",
+      "ask1Price": "100000",
+      "openPrice24h": "0",
+      "lastPrice": "100000"
+    }
+  ],
+    "ts": 1695715383039
+}

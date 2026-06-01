@@ -1,0 +1,50 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "UTA", "topic": "account" }]}
+< { "event": "subscribe", "arg": { "instType": "UTA", "topic": "account" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "UTA",
+        "topic": "account"
+    },
+    "data": [{
+    "unrealisedPnL": "-10116.55",
+    "totalEquity": "4976919.05",
+    "positionMgnRatio": "0",
+    "mmr": "408.08",
+    "effEquity": "4847952.35",
+    "imr": "17795.97",
+    "mgnRatio": "0",
+    "coin": [{
+      "debts": "0",
+      "balance": "0.9992",
+      "available": "0.9992",
+      "borrow": "0",
+      "locked": "0",
+      "equity": "0.9992",
+      "coin": "ETH",
+      "usdValue": "2488.667472"
+    }, {
+      "debts": "0",
+      "balance": "52.00819",
+      "available": "52.00819",
+      "borrow": "0",
+      "locked": "0",
+      "equity": "52.00819",
+      "coin": "BTC",
+      "usdValue": "4630564.31304974"
+    }, {
+      "debts": "0",
+      "balance": "354411.45536458",
+      "available": "344282.65536458",
+      "borrow": "0",
+      "locked": "0",
+      "equity": "344282.65536458",
+      "coin": "USDT",
+      "usdValue": "343866.07335159"
+    }]
+  }],
+    "ts": 1695717225146
+}

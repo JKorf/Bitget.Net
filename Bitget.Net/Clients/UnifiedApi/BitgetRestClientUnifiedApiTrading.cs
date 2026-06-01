@@ -91,7 +91,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.AddOptional("clientOid", clientOrderId);
             parameters.AddOptionalString("qty", quantity);
             parameters.AddOptionalString("price", price);
-            parameters.AddOptionalBoolString("autoCancel", autoCancel);
+            parameters.AddOptional("autoCancel", autoCancel == null ? null : autoCancel.Value ? "yes" : "no");
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v3/trade/modify-order", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaOrderResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
