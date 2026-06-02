@@ -1,0 +1,17 @@
+GET
+/api/v3/position/adlRank
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1754035547922,
+  "data": [
+    {
+      "symbol": "MOVEUSDT",
+      "marginCoin": "USDT",
+      "adlRank": "0.4872",
+      "holdSide": "long"
+    }
+  ]
+}

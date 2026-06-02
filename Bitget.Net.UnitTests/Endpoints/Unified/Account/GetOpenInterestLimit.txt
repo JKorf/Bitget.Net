@@ -1,0 +1,15 @@
+GET
+/api/v3/account/open-interest-limit
+true
+UriParams: {"category": "USDT-FUTURES","symbol": "ETHUSDT"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1764170997805,
+  "data": {
+    "symbol": "BTCUSDT",
+    "singleUserLimit": "2766.30748",
+    "masterSubLimit": "9173.8782",
+    "marketMakerLimit": "0"
+  }
+}

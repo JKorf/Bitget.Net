@@ -1,4 +1,5 @@
 ﻿using Bitget.Net.Clients;
+using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Testing;
@@ -37,6 +38,9 @@ namespace Bitget.Net.UnitTests
 
             await RunAndCheckUpdate<BitgetTickerUpdate>((client, updateHandler) => client.FuturesApiV2.SubscribeToBalanceUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, default, default), false, true);
             await RunAndCheckUpdate<BitgetFuturesTickerUpdate[]>((client, updateHandler) => client.FuturesApiV2.SubscribeToTickerUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, "ETHUSDT", updateHandler, default), true, false);
-        } 
+
+            await RunAndCheckUpdate<BitgetUaAccountUpdate[]>((client, updateHandler) => client.UnifiedApi.SubscribeToAccountUpdatesAsync(default, default), false, true);
+            await RunAndCheckUpdate<BitgetUaTickerUpdate[]>((client, updateHandler) => client.UnifiedApi.SubscribeToTickerUpdatesAsync(Enums.Uta.ProductCategory.Spot, "ETHUSDT", updateHandler, default), true, false);
+        }
     }
 }

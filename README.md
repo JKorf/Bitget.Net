@@ -1,6 +1,6 @@
 # ![.Bitget.Net](https://github.com/JKorf/Bitget.Net/blob/main/Bitget.Net/Icon/icon.png?raw=true) Bitget.Net
 
-[![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bitget.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge)
+[![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bitget.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge) ![Since](https://img.shields.io/badge/since-2023-brightgreen?style=for-the-badge)
 
 Bitget.Net is a strongly typed client library for accessing the [Bitget REST and Websocket API](https://bitgetlimited.github.io/apidoc/en/spot).
 ## Features
@@ -134,7 +134,7 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 
 ## Supported functionality
 
-*Both V1 API and V2 are currently supported*
+*Both V2 API and V3/UTA are currently supported*
 
 ### V2  
 #### Spot
@@ -166,30 +166,22 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 |Rest Isolated|✓|`restClient.SpotApiV2.Margin`|
 |Websocket|✓|`socketClient.SpotApiV2`|
 
-### V1  
+### UTA  
 #### Spot
 |API|Supported|Location|
 |--|--:|--|
-|Rest Public|✓|`restClient.SpotApi.ExchangeData`|
-|Rest Market|✓|`restClient.SpotApi.ExchangeData`|
-|Rest Wallet|✓|`restClient.SpotApi.Account`|
-|Rest Account|✓|`restClient.SpotApi.Account`|
-|Rest Trade|✓|`restClient.SpotApi.Trading`|
+|Rest Market|✓|`restClient.UnifiedApi.ExchangeData`|
+|Rest Account|✓|`restClient.UnifiedApi.Account`|
+|Rest Trade|✓|`restClient.UnifiedApi.Trading`|
+|Rest Strategy|✓|`restClient.UnifiedApi.Trading`|
+|Rest Copy Trading|X||
+|Rest Earn|X||
+|Rest Tax|X||
+|Rest Crypto Loans|X||
+|Rest Inst Loan|X||
 |Rest P2P|X||
-|Rest Sub-Account|X||
-|Rest Convert|X||
-|Websocket Public|✓|`socketClient.SpotApi`|
-|Websocket Private|✓|`socketClient.SpotApi`|
-
-#### Futures USDT/Coin
-|API|Supported|Location|
-|--|--:|--|
-|Rest Market|✓|`restClient.FuturesApi.ExchangeData`|
-|Rest Account|✓|`restClient.FuturesApi.Account`|
-|Rest Trade|✓|`restClient.FuturesApi.Trading`|
-|Websocket Public|✓|`socketClient.FuturesApi`|
-|Websocket Private|✓|`socketClient.FuturesApi`|
-
+|Websocket Public|✓|`socketClient.UnifiedApi`|
+|Websocket Private|✓|`socketClient.UnifiedApi`|
 
 ## Support the project
 Any support is greatly appreciated.

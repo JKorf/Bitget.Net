@@ -19,12 +19,14 @@ namespace Bitget.Net.Objects.Socket.Queries
             var routes = new List<MessageRoute>();
             foreach (var arg in _args)
             {
+                var topic = arg.TryGetValue("channel", out var channel) ? channel : arg["topic"];
+
                 routes.Add(MessageRoute<BitgetSocketEvent>.CreateWithOptionalTopicFilter(
-                    $"{request.Op}{arg["instType"]}{arg["channel"]}",
+                    $"{request.Op}{arg["instType"]}{topic}",
                     GetRouteIdentifier(arg),
                     HandleMessage));
                 routes.Add(MessageRoute<BitgetSocketEvent>.CreateWithOptionalTopicFilter(
-                    $"error{arg["instType"]}{arg["channel"]}",
+                    $"error{arg["instType"]}{topic}",
                     GetRouteIdentifier(arg),
                     HandleMessage));
             }

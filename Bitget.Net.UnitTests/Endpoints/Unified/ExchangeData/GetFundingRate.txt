@@ -1,0 +1,19 @@
+GET
+/api/v3/market/current-fund-rate
+false
+UriParams: {"symbol": "ETHUSDT"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1743059269376,
+  "data": [
+    {
+      "symbol": "BTCUSDT",
+      "fundingRate": "0.000071",
+      "fundingRateInterval": "8",
+      "nextUpdate": "1743062400000",
+      "minFundingRate": "-0.003",
+      "maxFundingRate": "0.003"
+    }
+  ]
+}

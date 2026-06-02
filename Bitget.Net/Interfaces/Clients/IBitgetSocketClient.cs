@@ -1,5 +1,6 @@
 ﻿using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Interfaces.Clients.UnifiedApi;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects.Options;
@@ -20,6 +21,11 @@ namespace Bitget.Net.Interfaces.Clients
         /// Futures streams
         /// </summary>
         /// <see cref="IBitgetSocketClientFuturesApi"/>
-        IBitgetSocketClientFuturesApi FuturesApiV2 { get; set; }    
+        IBitgetSocketClientFuturesApi FuturesApiV2 { get; set; }
+        /// <summary>
+        /// UTA API endpoints
+        /// </summary>
+        /// <see cref="IBitgetSocketClientUnifiedApi"/>
+        IBitgetSocketClientUnifiedApi UnifiedApi { get; }
     }
 }

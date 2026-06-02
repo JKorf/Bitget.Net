@@ -1,0 +1,14 @@
+GET
+/api/v3/market/margin-loans
+false
+UriParams: {"coin": "123"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730912814587,
+  "data": {
+    "dailyInterest": "0.1",
+    "annualInterest": "0.00416667",
+    "limit": "3000"
+  }
+}

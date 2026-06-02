@@ -1,0 +1,39 @@
+GET
+/api/v3/market/proof-of-reserves
+false
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1753845058586,
+  "data": {
+    "merkleRootHash": "e0dff99bbe2c2dcb",
+    "totalReserveRatio": "175%",
+    "list": [
+      {
+        "coin": "BTC",
+        "userAssets": "9530.89",
+        "platformAssets": "29679.59",
+        "reserveRatio": "311%"
+      },
+      {
+        "coin": "USDT",
+        "userAssets": "1948633388.98",
+        "platformAssets": "1985576297.93",
+        "reserveRatio": "102%"
+      },
+      {
+        "coin": "ETH",
+        "userAssets": "195465.81",
+        "platformAssets": "294561.45",
+        "reserveRatio": "151%"
+      },
+      {
+        "coin": "USDC",
+        "userAssets": "58830275.64",
+        "platformAssets": "157216065.76",
+        "reserveRatio": "267%"
+      }
+    ]
+  }
+}

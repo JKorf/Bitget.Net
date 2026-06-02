@@ -59,7 +59,7 @@ namespace Bitget.Net
         /// <summary>
         /// Demo trading environment
         /// </summary>
-        public static BitgetEnvironment DemoTrading { get; } = new BitgetEnvironment("demo", BitgetApiAddresses.Default.RestBaseAddress, BitgetApiAddresses.Default.SocketBaseAddress);
+        public static BitgetEnvironment DemoTrading { get; } = new BitgetEnvironment("demo", BitgetApiAddresses.Demo.RestBaseAddress, BitgetApiAddresses.Demo.SocketBaseAddress);
 
         /// <summary>
         /// Create a custom environment

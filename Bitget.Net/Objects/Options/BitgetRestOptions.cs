@@ -53,6 +53,11 @@ namespace Bitget.Net.Objects.Options
         /// </summary>
         public RestApiOptions BrokerOptions { get; private set; } = new RestApiOptions();
 
+        /// <summary>
+        /// UTA API options
+        /// </summary>
+        public RestApiOptions UnifiedOptions { get; private set; } = new RestApiOptions();
+
         internal BitgetRestOptions Set(BitgetRestOptions targetOptions)
         {
             targetOptions = base.Set(targetOptions);
@@ -61,6 +66,7 @@ namespace Bitget.Net.Objects.Options
             targetOptions.SpotOptions = SpotOptions.Set(targetOptions.SpotOptions);
             targetOptions.CopyTradingOptions = CopyTradingOptions.Set(targetOptions.CopyTradingOptions);
             targetOptions.BrokerOptions = BrokerOptions.Set(targetOptions.BrokerOptions);
+            targetOptions.UnifiedOptions = UnifiedOptions.Set(targetOptions.UnifiedOptions);
             return targetOptions;
         }
     }

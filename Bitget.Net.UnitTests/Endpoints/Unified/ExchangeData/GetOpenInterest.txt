@@ -1,0 +1,18 @@
+GET
+/api/v3/market/open-interest
+false
+UriParams: {"category": "USDT-FUTURES"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730969652387,
+  "data": {
+    "list": [
+      {
+        "symbol": "BTCUSDT",
+        "openInterest": "2243.019"
+      }
+    ],
+    "ts": "1730969652411"
+  }
+}

@@ -1,0 +1,23 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "UTA", "topic": "adl-notification" }]}
+< { "event": "subscribe", "arg": { "instType": "UTA", "topic": "adl-notification" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "UTA",
+        "topic": "adl-notification"
+    },
+    "data": [
+    {
+      "symbol": "BTCUSDT",
+      "side": "buy",
+      "status": "triggered",
+      "price": "88291.2",
+      "amount": "2.35",
+      "ts": "1740546523244"
+    }
+  ],
+    "ts": 1695717225146
+}

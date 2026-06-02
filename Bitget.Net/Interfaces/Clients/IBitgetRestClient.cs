@@ -1,6 +1,7 @@
 ﻿using Bitget.Net.Interfaces.Clients.CopyTradingApiV2;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Interfaces.Clients.UnifiedApi;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects.Options;
@@ -27,5 +28,10 @@ namespace Bitget.Net.Interfaces.Clients
         /// </summary>
         /// <see cref="IBitgetRestClientCopyTradingApi"/>
         IBitgetRestClientCopyTradingApi CopyTradingFuturesV2 { get; }
+        /// <summary>
+        /// UTA API endpoints
+        /// </summary>
+        /// <see cref="IBitgetRestClientUnifiedApi"/>
+        IBitgetRestClientUnifiedApi UnifiedApi{ get; }
     }
 }

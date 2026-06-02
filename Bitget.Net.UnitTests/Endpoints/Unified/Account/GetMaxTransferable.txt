@@ -1,0 +1,14 @@
+GET
+/api/v3/account/max-transferable
+true
+UriParams: {"coin": "123"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730189435812,
+  "data": {
+    "coin": "USDT",
+    "maxTransfer": "1",
+    "borrowMaxTransfer": "1"
+  }
+}

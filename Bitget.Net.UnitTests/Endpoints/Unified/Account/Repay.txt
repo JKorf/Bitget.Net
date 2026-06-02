@@ -1,0 +1,13 @@
+POST
+/api/v3/account/repay
+true
+BodyParams: {"repayableCoinList": ["123"],"paymentCoinList": ["123"]}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1728625799912,
+  "data": {
+    "result": "YES",
+    "repayAmount":"4345"
+  }
+}

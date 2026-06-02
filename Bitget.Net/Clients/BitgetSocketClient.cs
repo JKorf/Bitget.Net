@@ -1,4 +1,6 @@
-﻿using Bitget.Net.Interfaces.Clients;
+﻿using Bitget.Net.Clients.UnifiedApi;
+using Bitget.Net.Interfaces.Clients;
+using Bitget.Net.Interfaces.Clients.UnifiedApi;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
@@ -15,6 +17,8 @@ namespace Bitget.Net.Clients
         public Interfaces.Clients.SpotApiV2.IBitgetSocketClientSpotApi SpotApiV2 { get; set; }
         /// <inheritdoc />
         public Interfaces.Clients.FuturesApiV2.IBitgetSocketClientFuturesApi FuturesApiV2 { get; set; }
+        /// <inheritdoc />
+        public IBitgetSocketClientUnifiedApi UnifiedApi { get; set; }
 
         #region ctor
 
@@ -38,6 +42,7 @@ namespace Bitget.Net.Clients
 
             SpotApiV2 = AddApiClient(new SpotApiV2.BitgetSocketClientSpotApi(_logger, options.Value));
             FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetSocketClientFuturesApi(_logger, options.Value));
+            UnifiedApi = AddApiClient(new BitgetSocketClientUnifiedApi(_logger, options.Value));
         }
 
         #endregion

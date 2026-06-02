@@ -1,0 +1,23 @@
+GET
+/api/v3/account/funding-assets
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1750396239013,
+  "data": [
+    {
+      "coin": "BGB",
+      "available": "0.01",
+      "frozen": "0",
+      "balance": "0.01"
+    },
+    {
+      "coin": "USDT",
+      "available": "0.04",
+      "frozen": "0",
+      "balance": "0.04"
+    }
+  ]
+}

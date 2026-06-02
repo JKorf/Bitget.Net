@@ -1,0 +1,12 @@
+GET
+/api/v3/account/deduct-info
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1746687063471,
+  "data": {
+    "deduct": "on"
+  }
+}

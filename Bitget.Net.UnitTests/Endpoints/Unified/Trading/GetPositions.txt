@@ -1,0 +1,40 @@
+GET
+/api/v3/position/current-position
+true
+UriParams: {"category": "USDT-FUTURES"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1753103840140,
+  "data": {
+    "list": [
+      {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "marginCoin": "USDT",
+        "holdMode": "hedge_mode",
+        "posSide": "long",
+        "marginMode": "crossed",
+        "positionBalance": "4701531.84941582",
+        "available": "119.2068",
+        "frozen": "0",
+        "total": "119.2068",
+        "leverage": "3",
+        "curRealisedPnl": "0",
+        "avgPrice": "108674",
+        "positionStatus": "normal",
+        "unrealisedPnl": "1124573.04243999",
+        "liquidationPrice": "43099.9",
+        "mmr": "0.015",
+        "profitRate": "0.2391929010498401",
+        "markPrice": "118097",
+        "breakEvenPrice": "109208.6",
+        "totalFunding": "-53076.32433032",
+        "openFeeTotal": "-2842.86603479",
+        "closeFeeTotal": "0",
+        "createdTime": "1736378720620",
+        "updatedTime": "1753102803148"
+      }
+    ]
+  }
+}

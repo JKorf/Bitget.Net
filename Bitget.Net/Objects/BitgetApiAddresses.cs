@@ -22,5 +22,14 @@
             RestBaseAddress = "https://api.bitget.com",
             SocketBaseAddress = "wss://ws.bitget.com",
         };
+
+        /// <summary>
+        /// The addresses to connect to the bitget.com demo trading API
+        /// </summary>
+        public static BitgetApiAddresses Demo = new BitgetApiAddresses
+        {
+            RestBaseAddress = "https://api.bitget.com",
+            SocketBaseAddress = "wss://wspap.bitget.com",
+        };
     }
 }

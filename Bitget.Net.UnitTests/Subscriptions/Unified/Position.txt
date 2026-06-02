@@ -1,0 +1,41 @@
+> { "op":"login", "args":[{ "apiKey":"1213", "passphrase":"789", "timestamp":"|1|", "sign":"|2|" }]}
+< { "event":"login", "code":"0", "msg":"" }
+> { "op": "subscribe", "args": [{ "instType": "UTA", "topic": "position" }]}
+< { "event": "subscribe", "arg": { "instType": "UTA", "topic": "position" }}
+= 
+{
+    "action": "snapshot",
+    "arg": {
+        "instType": "UTA",
+        "topic": "position"
+    },
+    "data": [
+    {
+      "symbol": "BTCUSDT",
+      "leverage": "20",
+      "openFeeTotal": "",
+      "mmr": "",
+      "breakEvenPrice": "",
+      "available": "0",
+      "liqPrice": "",
+      "marginMode": "crossed",
+      "unrealisedPnl": "0",
+      "markPrice": "94987.1",
+      "createdTime": "1736378720620",
+      "avgPrice": "0",
+      "totalFundingFee": "0",
+      "updatedTime": "1736378720620",
+      "marginCoin": "USDT",
+      "frozen": "0",
+      "profitRate": "",
+      "closeFeeTotal": "",
+      "marginSize": "0",
+      "curRealisedPnl": "0",
+      "size": "0",
+      "positionStatus": "ended",
+      "posSide": "long",
+      "holdMode": "hedge_mode"
+    }
+  ],
+    "ts": 1695717225146
+}

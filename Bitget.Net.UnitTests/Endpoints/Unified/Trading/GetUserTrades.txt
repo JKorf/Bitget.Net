@@ -1,0 +1,39 @@
+GET
+/api/v3/trade/fills
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1750142995229,
+  "data": {
+    "list": [
+      {
+        "execId": "131111111111111111",
+        "execLinkId": "131111111111111111",
+        "orderId": "131111111111111111",
+        "clientOid": "131111111111111111",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "orderType": "market",
+        "side": "sell",
+        "execPrice": "106950.1",
+        "execQty": "0.01",
+        "execValue": "1069.501",
+        "tradeScope": "taker",
+        "tradeSide": "open",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "0.6417006"
+          }
+        ],
+        "createdTime": "1750141421721",
+        "updatedTime": "1750141421728",
+        "execPnl": "-0.002",
+        "isRPI": "no"
+      }
+    ],
+    "cursor": "131111111111111111"
+  }
+}

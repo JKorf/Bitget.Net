@@ -1,0 +1,19 @@
+GET
+/api/v3/account/payment-coins
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730189435812,
+  "data": {
+    "paymentCoinList": [
+      {
+        "coin": "ETH",
+        "size": "0.12",
+        "amount": "293.5"
+      }
+    ],
+    "maxSelection": "1"
+  }
+}

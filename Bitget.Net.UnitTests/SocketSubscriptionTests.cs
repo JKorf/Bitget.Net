@@ -1,6 +1,8 @@
 ﻿using Bitget.Net.Clients;
 using Bitget.Net.Enums;
+using Bitget.Net.Enums.Uta;
 using Bitget.Net.Objects;
+using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
@@ -98,6 +100,31 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync<BitgetFuturesTriggerOrderUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToTriggerOrderUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "TriggerOrder", ignoreProperties: new List<string> { "deduction", "reduceOnly" });
             await tester.ValidateAsync<BitgetPositionHistoryUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToPositionHistoryUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "PositionClose", ignoreProperties: new List<string> { "deduction", "reduceOnly" });
             await tester.ValidateAsync<BitgetEquityUpdate[]>((client, handler) => client.FuturesApiV2.SubscribeToEquityUpdatesAsync(Enums.BitgetProductTypeV2.UsdtFutures, handler), "Equity");
+        }
+
+        [Test]
+        public async Task ValidateUnifiedSubscriptions()
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new BitgetSocketClient(Options.Create(new BitgetSocketOptions
+            {
+                ApiCredentials = new BitgetCredentials().WithHMAC("123", "456", "789"),
+                OutputOriginalData = true
+            }), logger);
+            var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Unified", "https://api.bitget.com", "data");
+            await tester.ValidateAsync<BitgetUaTickerUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToTickerUpdatesAsync(ProductCategory.UsdtFutures, "BTCUSDT", handler), "Ticker");
+            await tester.ValidateAsync<BitgetUaKlineUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToKlineUpdatesAsync(ProductCategory.UsdtFutures, "BTCUSDT", KlineUaInterval.OneDay, handler), "Kline");
+            await tester.ValidateAsync<BitgetUaBookUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToOrderBookUpdatesAsync(ProductCategory.UsdtFutures, "BTCUSDT", 1, handler), "Book", ignoreProperties: ["maxDepth"]);
+            await tester.ValidateAsync<BitgetUaTradeUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToTradeUpdatesAsync(ProductCategory.UsdtFutures, "BTCUSDT", handler), "Trades");
+            await tester.ValidateAsync<BitgetUaAccountUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToAccountUpdatesAsync(handler), "Account");
+            await tester.ValidateAsync<BitgetUaPositionUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToPositionUpdatesAsync(handler), "Position");
+            await tester.ValidateAsync<BitgetUaOrder[]>((client, handler) => client.UnifiedApi.SubscribeToOrderUpdatesAsync(handler), "Order");
+            await tester.ValidateAsync<BitgetUaUserTrade[]>((client, handler) => client.UnifiedApi.SubscribeToUserTradeUpdatesAsync(handler), "UserTrade");
+            await tester.ValidateAsync<BitgetUaFastUserTrade>((client, handler) => client.UnifiedApi.SubscribeToFastUserTradeUpdatesAsync(handler), "FastUserTrade");
+            await tester.ValidateAsync<BitgetUaStrategyOrder[]>((client, handler) => client.UnifiedApi.SubscribeToStrategyOrderUpdatesAsync(handler), "StrategyOrder");
+            await tester.ValidateAsync<BitgetUaAdlUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToAdlUpdatesAsync(handler), "Adl");
         }
     }
 }
