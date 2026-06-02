@@ -229,7 +229,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToFastUserTradeUpdatesAsync(Action<DataEvent<BitgetUaFastUserTrade[]>> handler, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToFastUserTradeUpdatesAsync(Action<DataEvent<BitgetUaFastUserTrade>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user strategy order updates

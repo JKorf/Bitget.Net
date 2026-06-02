@@ -188,7 +188,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToFastUserTradeUpdatesAsync(Action<DataEvent<BitgetUaFastUserTrade[]>> handler, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToFastUserTradeUpdatesAsync(Action<DataEvent<BitgetUaFastUserTrade>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/private"), [new Dictionary<string, string>
                     {

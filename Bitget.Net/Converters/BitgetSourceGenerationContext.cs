@@ -17,7 +17,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaPositionUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaOrder[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaUserTrade[]>))]
-    [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaFastUserTrade[]>))]
+    [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaFastUserTrade>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaStrategyOrder[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaAdlUpdate[]>))]
 

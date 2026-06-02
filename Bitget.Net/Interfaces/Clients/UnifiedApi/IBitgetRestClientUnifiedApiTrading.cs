@@ -24,7 +24,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="side">["<c>side</c>"] Order side</param>
         /// <param name="orderType">["<c>orderType</c>"] Order type</param>
-        /// <param name="quantity">["<c>qty</c>"] Quantity</param>
+        /// <param name="quantity">["<c>qty</c>"] Quantity. In quote asset for market buy orders</param>
         /// <param name="price">["<c>price</c>"] Order limit price</param>
         /// <param name="timeInForce">["<c>timeInForce</c>"] Time in force</param>
         /// <param name="positionSide">["<c>posSide</c>"] Position side</param>

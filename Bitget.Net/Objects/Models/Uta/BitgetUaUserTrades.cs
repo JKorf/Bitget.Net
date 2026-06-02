@@ -108,16 +108,16 @@ public record BitgetUaUserTrade
     /// </summary>
     [JsonPropertyName("createdTime")]
     public DateTime CreateTime { get; set; }
+    [JsonInclude, JsonPropertyName("execTime")]
+    internal DateTime TradeTime
+    {
+        set => CreateTime = value;
+    }
     /// <summary>
-    /// ["<c>updatedTime</c>"] Updated time
+    /// ["<c>updatedTime</c>"] Update time
     /// </summary>
     [JsonPropertyName("updatedTime")]
-    public DateTime? UpdatedTime { get; set; }
-    /// <summary>
-    /// ["<c>execTime</c>"] Trade timestamp
-    /// </summary>
-    [JsonPropertyName("execTime")]
-    public DateTime? TradeTime { get; set; }
+    public DateTime? UpdateTime { get; set; }
     /// <summary>
     /// ["<c>execPnl</c>"] Profit and loss
     /// </summary>

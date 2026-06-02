@@ -86,7 +86,7 @@ public record BitgetUaOrder
     /// ["<c>avgPrice</c>"] Average price
     /// </summary>
     [JsonPropertyName("avgPrice")]
-    public decimal AveragePrice { get; set; }
+    public decimal? AveragePrice { get; set; }
     /// <summary>
     /// ["<c>timeInForce</c>"] Time in force
     /// </summary>
