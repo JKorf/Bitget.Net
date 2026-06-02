@@ -26,7 +26,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/public/time", BitgetExchange.RateLimiter.Overall, 1, false, preventCaching: true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetServerTime>(request, null, ct).ConfigureAwait(false);
-            return result.As(result.Data.ServerTime);
+            return result.As(result.Data?.ServerTime ?? default);
         }
 
         #region Get Tickers

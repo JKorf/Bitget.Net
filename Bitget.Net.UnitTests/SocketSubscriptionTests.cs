@@ -122,7 +122,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync<BitgetUaPositionUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToPositionUpdatesAsync(handler), "Position");
             await tester.ValidateAsync<BitgetUaOrder[]>((client, handler) => client.UnifiedApi.SubscribeToOrderUpdatesAsync(handler), "Order");
             await tester.ValidateAsync<BitgetUaUserTrade[]>((client, handler) => client.UnifiedApi.SubscribeToUserTradeUpdatesAsync(handler), "UserTrade");
-            await tester.ValidateAsync<BitgetUaFastUserTrade[]>((client, handler) => client.UnifiedApi.SubscribeToFastUserTradeUpdatesAsync(handler), "FastUserTrade");
+            await tester.ValidateAsync<BitgetUaFastUserTrade>((client, handler) => client.UnifiedApi.SubscribeToFastUserTradeUpdatesAsync(handler), "FastUserTrade");
             await tester.ValidateAsync<BitgetUaStrategyOrder[]>((client, handler) => client.UnifiedApi.SubscribeToStrategyOrderUpdatesAsync(handler), "StrategyOrder");
             await tester.ValidateAsync<BitgetUaAdlUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToAdlUpdatesAsync(handler), "Adl");
         }

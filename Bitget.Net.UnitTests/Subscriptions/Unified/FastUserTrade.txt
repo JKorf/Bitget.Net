@@ -9,7 +9,7 @@
         "instType": "UTA",
         "topic": "fast-fill"
     },
-    "data":  [
+    "data":  
     {
       "symbol": "BTCUSDT",
       "updatedTime": "1736378720623",
@@ -24,6 +24,6 @@
       "execQty": "0.01",
       "clientOid": "1288888888888888889"
     }
-  ],
+  ,
     "ts": 1695717225146
 }

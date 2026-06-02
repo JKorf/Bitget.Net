@@ -38,7 +38,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         protected override IRestMessageHandler MessageHandler { get; } = new BitgetRestMessageHandler(BitgetErrors.RestErrors);
 
         internal BitgetRestClientUnifiedApi(ILogger logger, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
-            : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.SpotOptions)
+            : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.UnifiedOptions)
         {
             Account = new BitgetRestClientUnifiedApiAccount(this);
             ExchangeData = new BitgetRestClientUnifiedApiExchangeData(this);

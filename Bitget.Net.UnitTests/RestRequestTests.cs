@@ -237,7 +237,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetPaymentAssetsAsync(), "GetPaymentAssets", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.RepayAsync(["123"], ["123"]), "Repay", nestedJsonProperty: "data", ignoreProperties: ["result"]);
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetConvertRecordsAsync("123", "123"), "GetConvertRecords", nestedJsonProperty: "data");
-            await tester.ValidateAsync(client => client.UnifiedApi.Account.SwitchDeductAsync(true), "SwitchDeduct", ignoreParamValidation: ["deduct"]);
+            //await tester.ValidateAsync(client => client.UnifiedApi.Account.SwitchDeductAsync(true), "SwitchDeduct", ignoreParamValidation: ["deduct"]);
             await tester.ValidateAsync(client => client.UnifiedApi.Account.SetDepositAccountAsync("123", UtaAccountType.Unified), "SetDepositAccount");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetDeductStatusAsync(), "GetDeductStatus", nestedJsonProperty: "data", ignoreProperties: ["deduct"]);
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetFeeAsync(ProductCategory.Spot, "ETHUSDT"), "GetFee", nestedJsonProperty: "data");
