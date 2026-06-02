@@ -1,4 +1,5 @@
 ﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums.Uta;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.SharedApis;
@@ -10,6 +11,10 @@ namespace Bitget.Net.Interfaces
     /// </summary>
     public interface IBitgetOrderBookFactory : IExchangeService
     {
+        /// <summary>
+        /// Unified API order book factory methods
+        /// </summary>
+        public IOrderBookFactory<BitgetOrderBookOptions> Unified { get; }
         /// <summary>
         /// Spot order book factory methods
         /// </summary>
@@ -54,5 +59,14 @@ namespace Bitget.Net.Interfaces
         /// <param name="options">Book options</param>
         /// <returns></returns>
         ISymbolOrderBook CreateFutures(BitgetProductTypeV2 productType, string symbol, Action<BitgetOrderBookOptions>? options = null);
+
+        /// <summary>
+        /// Create a SymbolOrderBook for a symbol using the unified API
+        /// </summary>
+        /// <param name="category">The symbol category</param>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="options">Book options</param>
+        /// <returns></returns>
+        ISymbolOrderBook CreateUnified(ProductCategory category, string symbol, Action<BitgetOrderBookOptions>? options = null);
     }
 }
