@@ -12,10 +12,6 @@ namespace Bitget.Net.Interfaces
     public interface IBitgetOrderBookFactory : IExchangeService
     {
         /// <summary>
-        /// Unified API order book factory methods
-        /// </summary>
-        public IOrderBookFactory<BitgetOrderBookOptions> Unified { get; }
-        /// <summary>
         /// Spot order book factory methods
         /// </summary>
         public IOrderBookFactory<BitgetOrderBookOptions> Spot { get; }

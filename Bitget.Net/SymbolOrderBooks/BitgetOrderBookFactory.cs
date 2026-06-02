@@ -21,9 +21,6 @@ namespace Bitget.Net.SymbolOrderBooks
 
         /// <inheritdoc />
         public string ExchangeName => BitgetExchange.ExchangeName;
-
-        /// <inheritdoc />
-        public IOrderBookFactory<BitgetOrderBookOptions> Unified { get; }
         /// <inheritdoc />
         public IOrderBookFactory<BitgetOrderBookOptions> Spot { get; }
         /// <inheritdoc />
