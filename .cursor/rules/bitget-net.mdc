@@ -44,9 +44,11 @@ var price = ticker.Data.Single().LastPrice;
 - `restClient.FuturesApiV2.Account` for balances, leverage, margin mode, position mode, ADL and ledger
 - `restClient.FuturesApiV2.Trading` for futures positions, orders, fills, close-position actions, triggers and TP/SL
 - `restClient.CopyTradingFuturesV2.Trader` and `.Follower` for copy trading futures
+- `restClient.UnifiedApi.ExchangeData`, `.Account` and `.Trading` for Unified/UTA market, account and trading endpoints
 - `restClient.BrokerV2` for broker reporting on the concrete `BitgetRestClient`
 - `socketClient.SpotApiV2` for spot public/private WebSocket streams and margin streams
 - `socketClient.FuturesApiV2` for futures public/private WebSocket streams
+- `socketClient.UnifiedApi` for Unified/UTA public/private WebSocket streams and socket order actions
 
 ## Symbols and product types
 
@@ -86,6 +88,17 @@ MarginMode.CrossMargin
 TradeSide.Open
 TransferAccountType.Spot
 TransferType.OnChain
+```
+
+Use `Bitget.Net.Enums.Uta` for Unified/UTA category and account enums:
+
+```csharp
+ProductCategory.Spot
+ProductCategory.UsdtFutures
+KlineUaInterval.OneMinute
+AccountLevel.Advanced
+HoldingMode.OneWayMode
+StpMode.CancelMaker
 ```
 
 ## Spot order placement
@@ -129,6 +142,23 @@ var crossBalances = await restClient.SpotApiV2.Margin.GetCrossBalancesAsync("USD
 var isolatedBalances = await restClient.SpotApiV2.Margin.GetIsolatedBalancesAsync();
 ```
 
+## Unified/UTA
+
+Unified/UTA endpoints are under `UnifiedApi`. Use `ProductCategory` from `Bitget.Net.Enums.Uta` for category parameters:
+
+```csharp
+var symbols = await restClient.UnifiedApi.ExchangeData.GetSpotSymbolsAsync("BTCUSDT");
+var balances = await restClient.UnifiedApi.Account.GetBalancesAsync();
+
+var order = await restClient.UnifiedApi.Trading.PlaceOrderAsync(
+    ProductCategory.Spot,
+    "BTCUSDT",
+    OrderSide.Buy,
+    OrderType.Limit,
+    quantity: 0.001m,
+    price: 1m);
+```
+
 ## WebSocket pattern
 
 ```csharp
@@ -147,6 +177,15 @@ For futures sockets:
 ```csharp
 var futuresSub = await socketClient.FuturesApiV2.SubscribeToTickerUpdatesAsync(
     BitgetProductTypeV2.UsdtFutures,
+    "BTCUSDT",
+    update => { /* update.Data.First().LastPrice */ });
+```
+
+For Unified/UTA sockets:
+
+```csharp
+var unifiedSub = await socketClient.UnifiedApi.SubscribeToTickerUpdatesAsync(
+    ProductCategory.Spot,
     "BTCUSDT",
     update => { /* update.Data.First().LastPrice */ });
 ```
@@ -182,6 +221,7 @@ Prefer project helpers instead of hand-rolling stream merge logic:
 
 - `BitgetSpotSymbolOrderBook`
 - `BitgetFuturesSymbolOrderBook`
+- `BitgetUnifiedSymbolOrderBook`
 - `BitgetOrderBookFactory`
 - `BitgetUserDataTracker`
 - `BitgetTrackerFactory`
@@ -195,12 +235,13 @@ Prefer project helpers instead of hand-rolling stream merge logic:
 - Prefer `BitgetRestClient` and `BitgetSocketClient`.
 - Always use `BitgetCredentials("key", "secret", "passPhrase")`, not generic credentials without passphrase.
 - Always store WebSocket subscriptions and unsubscribe on shutdown.
-- Use V2 roots: `SpotApiV2`, `FuturesApiV2`, `CopyTradingFuturesV2`.
+- Use V2 roots: `SpotApiV2`, `FuturesApiV2`, `CopyTradingFuturesV2`; use `UnifiedApi` for Unified/UTA.
 - Use `SpotApiV2.Margin` for spot margin.
 - Use compact Bitget symbols such as `BTCUSDT`.
 - Include `BitgetProductTypeV2` on futures calls.
 - Include margin asset where futures methods require it.
 - Use the correct enum namespace.
+- Do not invent `UtaApi`; the Unified/UTA root is `UnifiedApi`.
 
 ## Reference
 

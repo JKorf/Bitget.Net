@@ -4,9 +4,9 @@
 
 Bitget.Net is a strongly typed .NET client library for the Bitget REST and WebSocket APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, local order book, and socket patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 3.10.0.
+Current package version in this repository: 3.12.0.
 NuGet package id: `JK.Bitget.Net`.
-CryptoExchange.Net dependency: 11.1.0.
+CryptoExchange.Net dependency: 11.2.1.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
 
@@ -21,11 +21,12 @@ Primary documentation:
 ## Golden Rules For AI Code Generation
 
 - Use `BitgetRestClient` for REST and `BitgetSocketClient` for WebSocket. Do not generate raw `HttpClient` calls to Bitget endpoints.
-- Use V2 roots: `SpotApiV2`, `FuturesApiV2`, `CopyTradingFuturesV2`, and concrete-client `BrokerV2`.
+- Use V2 roots: `SpotApiV2`, `FuturesApiV2`, `CopyTradingFuturesV2`, `UnifiedApi`, and concrete-client `BrokerV2`.
 - Use `BitgetCredentials("key", "secret", "passPhrase")`, not generic `ApiCredentials`, for API key setup.
 - Include `using Bitget.Net;` when using `BitgetCredentials` or `BitgetEnvironment`.
 - Include `using Bitget.Net.Enums;` for `BitgetProductTypeV2`, `BitgetStreamKlineIntervalV2`, and `BitgetFuturesKlineInterval`.
 - Include `using Bitget.Net.Enums.V2;` for V2 order/account enums such as `OrderSide`, `OrderType`, `TimeInForce`, `MarginMode`, `TradeSide`, `PositionSide`, `PositionMode`, and V2 spot `KlineInterval`.
+- Include `using Bitget.Net.Enums.Uta;` for Unified/UTA enums such as `ProductCategory`, `KlineUaInterval`, `AccountLevel`, `HoldingMode`, `StpMode`, `StrategyType`, and `TpslMode`.
 - Always check `.Success` before reading `.Data`.
 - REST methods return `WebCallResult<T>` or `WebCallResult`.
 - WebSocket subscriptions return `CallResult<UpdateSubscription>`.
@@ -37,6 +38,7 @@ Primary documentation:
 - Use compact Bitget symbols such as `BTCUSDT`, not `BTC-USDT`, `BTC/USDT`, or Bitfinex-style `tBTCUSD`.
 - Futures calls usually require `BitgetProductTypeV2`, a symbol, and a margin asset such as `"USDT"`.
 - Spot margin is `SpotApiV2.Margin`; there is no top-level `MarginApi`.
+- Unified/UTA endpoints are under `UnifiedApi`; there is no `UtaApi`.
 - For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient`.
 
 ## Installation
@@ -53,6 +55,7 @@ General REST and sockets:
 using Bitget.Net;
 using Bitget.Net.Clients;
 using Bitget.Net.Enums;
+using Bitget.Net.Enums.Uta;
 using Bitget.Net.Enums.V2;
 ```
 
@@ -158,6 +161,10 @@ BitgetRestClient
   .CopyTradingFuturesV2
     .Trader
     .Follower
+  .UnifiedApi
+    .ExchangeData
+    .Account
+    .Trading
   .BrokerV2
 ```
 
@@ -193,6 +200,22 @@ BitgetSocketClient
     SubscribeToPositionHistoryUpdatesAsync(...)
     SubscribeToEquityUpdatesAsync(...)
     SubscribeToAdlUpdatesAsync(...)
+  .UnifiedApi
+    SubscribeToTickerUpdatesAsync(...)
+    SubscribeToTradeUpdatesAsync(...)
+    SubscribeToKlineUpdatesAsync(...)
+    SubscribeToOrderBookUpdatesAsync(...)
+    SubscribeToLiquidationUpdatesAsync(...)
+    SubscribeToAccountUpdatesAsync(...)
+    SubscribeToPositionUpdatesAsync(...)
+    SubscribeToOrderUpdatesAsync(...)
+    SubscribeToUserTradeUpdatesAsync(...)
+    SubscribeToFastUserTradeUpdatesAsync(...)
+    SubscribeToStrategyOrderUpdatesAsync(...)
+    SubscribeToAdlUpdatesAsync(...)
+    PlaceOrderAsync(...)
+    EditOrderAsync(...)
+    CancelOrderAsync(...)
 ```
 
 ## Symbol And Product Type Rules
@@ -223,6 +246,19 @@ BitgetProductTypeV2.UsdcFutures
 BitgetProductTypeV2.SimUsdtFutures
 BitgetProductTypeV2.SimCoinFutures
 BitgetProductTypeV2.SimUsdcFutures
+```
+
+Unified/UTA category and account enums are in `Bitget.Net.Enums.Uta`:
+
+```csharp
+ProductCategory.Spot
+ProductCategory.UsdtFutures
+KlineUaInterval.OneMinute
+AccountLevel.Advanced
+HoldingMode.OneWayMode
+StpMode.CancelMaker
+StrategyType.Trigger
+TpslMode.Partial
 ```
 
 Most futures account and trading methods require a margin asset:
@@ -471,6 +507,63 @@ var setTpSl = await client.FuturesApiV2.Trading.SetPositionTpSlAsync(
 
 Inspect `IBitgetRestClientFuturesApiTrading.cs` for the full trigger, TP/SL, edit, and batch-order parameter sets.
 
+## Unified/UTA REST
+
+Unified/UTA endpoints live under `client.UnifiedApi`. Use `ProductCategory` from `Bitget.Net.Enums.Uta` for category parameters and compact symbols such as `BTCUSDT`.
+
+Exchange data:
+
+```csharp
+var serverTime = await client.UnifiedApi.ExchangeData.GetServerTimeAsync();
+var spotSymbols = await client.UnifiedApi.ExchangeData.GetSpotSymbolsAsync("BTCUSDT");
+var futuresSymbols = await client.UnifiedApi.ExchangeData.GetFuturesSymbolsAsync(ProductCategory.UsdtFutures, "BTCUSDT");
+var marginSymbols = await client.UnifiedApi.ExchangeData.GetMarginSymbolsAsync("BTCUSDT");
+var spotTickers = await client.UnifiedApi.ExchangeData.GetSpotTickersAsync("BTCUSDT");
+var futuresTickers = await client.UnifiedApi.ExchangeData.GetFuturesTickersAsync(ProductCategory.UsdtFutures);
+var book = await client.UnifiedApi.ExchangeData.GetOrderBookAsync(ProductCategory.Spot, "BTCUSDT", limit: 20);
+var trades = await client.UnifiedApi.ExchangeData.GetRecentTradesAsync(ProductCategory.Spot, "BTCUSDT");
+var klines = await client.UnifiedApi.ExchangeData.GetKlinesAsync(ProductCategory.Spot, "BTCUSDT", KlineUaInterval.OneMinute);
+var funding = await client.UnifiedApi.ExchangeData.GetFundingRateAsync("BTCUSDT");
+var tiers = await client.UnifiedApi.ExchangeData.GetPositionTiersAsync(ProductCategory.UsdtFutures, symbol: "BTCUSDT");
+```
+
+Account:
+
+```csharp
+var balances = await client.UnifiedApi.Account.GetBalancesAsync();
+var fundingBalances = await client.UnifiedApi.Account.GetFundingBalancesAsync("USDT");
+var config = await client.UnifiedApi.Account.GetAccountConfigAsync();
+var info = await client.UnifiedApi.Account.GetAccountInfoAsync();
+var fee = await client.UnifiedApi.Account.GetFeeAsync(ProductCategory.Spot, "BTCUSDT");
+var leverage = await client.UnifiedApi.Account.SetLeverageAsync(ProductCategory.UsdtFutures, "BTCUSDT", leverage: 5);
+var holdMode = await client.UnifiedApi.Account.SetHoldModeAsync(HoldingMode.OneWayMode);
+var transferable = await client.UnifiedApi.Account.GetTransferableAssetsAsync(TransferAccountType.Spot, TransferAccountType.Uta);
+var transfer = await client.UnifiedApi.Account.TransferAsync(TransferAccountType.Spot, TransferAccountType.Uta, "USDT", 10m);
+var depositAddress = await client.UnifiedApi.Account.GetDepositAddressAsync("USDT", network: "TRX");
+var withdrawals = await client.UnifiedApi.Account.GetWithdrawalRecordsAsync(asset: "USDT");
+```
+
+Trading:
+
+```csharp
+var order = await client.UnifiedApi.Trading.PlaceOrderAsync(
+    ProductCategory.Spot,
+    "BTCUSDT",
+    OrderSide.Buy,
+    OrderType.Limit,
+    quantity: 0.001m,
+    price: 1m);
+
+var edit = await client.UnifiedApi.Trading.EditOrderAsync(orderId: order.Data.OrderId, price: 2m);
+var cancel = await client.UnifiedApi.Trading.CancelOrderAsync(orderId: order.Data.OrderId);
+var openOrders = await client.UnifiedApi.Trading.GetOpenOrdersAsync(ProductCategory.Spot, symbol: "BTCUSDT");
+var userTrades = await client.UnifiedApi.Trading.GetUserTradesAsync(ProductCategory.Spot);
+var positions = await client.UnifiedApi.Trading.GetPositionsAsync(ProductCategory.UsdtFutures, symbol: "BTCUSDT");
+var strategyOrder = await client.UnifiedApi.Trading.PlaceStrategyOrderAsync(ProductCategory.UsdtFutures, "BTCUSDT", type: StrategyType.Trigger);
+```
+
+Inspect `Bitget.Net/Interfaces/Clients/UnifiedApi/*.cs` for the full Unified/UTA parameter sets.
+
 ## Copy Trading Futures
 
 ```csharp
@@ -490,7 +583,7 @@ var directCommissions = await client.BrokerV2.GetAgentDirectCommissionsAsync();
 var customers = await client.BrokerV2.GetAgentCustomerListAsync();
 ```
 
-The `IBitgetRestClient` interface currently exposes spot, futures, and copy-trading roots. If code needs broker endpoints through abstraction, depend on the concrete client or the broker interface as appropriate for the project.
+The `IBitgetRestClient` interface exposes spot, futures, copy-trading, and Unified/UTA roots. If code needs broker endpoints through abstraction, depend on the concrete client or the broker interface as appropriate for the project.
 
 ## WebSocket Subscriptions
 
@@ -536,6 +629,34 @@ var futuresTriggerSub = await socketClient.FuturesApiV2.SubscribeToTriggerOrderU
 var futuresEquitySub = await socketClient.FuturesApiV2.SubscribeToEquityUpdatesAsync(BitgetProductTypeV2.UsdtFutures, update => { });
 ```
 
+Unified/UTA public:
+
+```csharp
+var unifiedTickerSub = await socketClient.UnifiedApi.SubscribeToTickerUpdatesAsync(ProductCategory.Spot, "BTCUSDT", update => { });
+var unifiedTradeSub = await socketClient.UnifiedApi.SubscribeToTradeUpdatesAsync(ProductCategory.Spot, "BTCUSDT", update => { });
+var unifiedKlineSub = await socketClient.UnifiedApi.SubscribeToKlineUpdatesAsync(ProductCategory.Spot, "BTCUSDT", KlineUaInterval.OneMinute, update => { });
+var unifiedBookSub = await socketClient.UnifiedApi.SubscribeToOrderBookUpdatesAsync(ProductCategory.Spot, "BTCUSDT", depth: 5, update => { });
+var liquidationSub = await socketClient.UnifiedApi.SubscribeToLiquidationUpdatesAsync(ProductCategory.UsdtFutures, update => { });
+```
+
+Unified/UTA private and socket order actions:
+
+```csharp
+var accountSub = await socketClient.UnifiedApi.SubscribeToAccountUpdatesAsync(update => { });
+var positionSub = await socketClient.UnifiedApi.SubscribeToPositionUpdatesAsync(update => { });
+var orderSub = await socketClient.UnifiedApi.SubscribeToOrderUpdatesAsync(update => { });
+var userTradeSub = await socketClient.UnifiedApi.SubscribeToUserTradeUpdatesAsync(update => { });
+var strategyOrderSub = await socketClient.UnifiedApi.SubscribeToStrategyOrderUpdatesAsync(update => { });
+
+var socketOrder = await socketClient.UnifiedApi.PlaceOrderAsync(
+    ProductCategory.Spot,
+    "BTCUSDT",
+    OrderSide.Buy,
+    OrderType.Limit,
+    quantity: 0.001m,
+    price: 1m);
+```
+
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with:
 
 ```csharp
@@ -573,6 +694,7 @@ Bitget.Net includes local order book and user data tracker support in the projec
 ```text
 Bitget.Net/SymbolOrderBooks/BitgetSpotSymbolOrderBook.cs
 Bitget.Net/SymbolOrderBooks/BitgetFuturesSymbolOrderBook.cs
+Bitget.Net/SymbolOrderBooks/BitgetUnifiedSymbolOrderBook.cs
 Bitget.Net/SymbolOrderBooks/BitgetOrderBookFactory.cs
 Bitget.Net/BitgetUserDataTracker.cs
 Bitget.Net/BitgetTrackerFactory.cs
@@ -632,7 +754,7 @@ async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call)
 ## Anti-Hallucination Checklist
 
 - Does it compile with the current package?
-- Does it use `SpotApiV2`, `FuturesApiV2`, `CopyTradingFuturesV2`, or concrete `BrokerV2` correctly?
+- Does it use `SpotApiV2`, `FuturesApiV2`, `CopyTradingFuturesV2`, `UnifiedApi`, or concrete `BrokerV2` correctly?
 - Does it use `BitgetCredentials("key", "secret", "passPhrase")` for private endpoints?
 - Does every REST/socket result check `.Success` before `.Data`?
 - Does it avoid raw Bitget URLs and manual signing?
@@ -642,7 +764,7 @@ async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call)
 - Are Bitget symbols compact, for example `BTCUSDT`?
 - Do futures calls include `BitgetProductTypeV2` and the margin asset where required?
 - Does spot margin use `SpotApiV2.Margin`?
-- Does code use the correct enum namespace (`Bitget.Net.Enums` vs `Bitget.Net.Enums.V2`)?
+- Does code use the correct enum namespace (`Bitget.Net.Enums`, `Bitget.Net.Enums.V2`, or `Bitget.Net.Enums.Uta`)?
 - Does multi-exchange code use `SharedSymbol` instead of exchange-native symbols?
 
 ## Source Of Truth For Method Names
@@ -657,10 +779,13 @@ Bitget.Net/Interfaces/Clients/SpotApiV2/IBitgetRestClientSpotApi*.cs
 Bitget.Net/Interfaces/Clients/SpotApiV2/IBitgetSocketClientSpotApi*.cs
 Bitget.Net/Interfaces/Clients/FuturesApiV2/IBitgetRestClientFuturesApi*.cs
 Bitget.Net/Interfaces/Clients/FuturesApiV2/IBitgetSocketClientFuturesApi*.cs
+Bitget.Net/Interfaces/Clients/UnifiedApi/IBitgetRestClientUnifiedApi*.cs
+Bitget.Net/Interfaces/Clients/UnifiedApi/IBitgetSocketClientUnifiedApi.cs
 Bitget.Net/Interfaces/Clients/CopyTradingApiV2/IBitgetRestClientCopyTradingApi*.cs
 Bitget.Net/Interfaces/Clients/BrokerApiV2/IBitgetRestClientBrokerApi.cs
 Bitget.Net/Enums/**/*.cs
 Bitget.Net/Objects/Models/V2/**/*.cs
+Bitget.Net/Objects/Models/Uta/**/*.cs
 ```
 
 Prefer the interface files over memory when generating endpoint names, parameters, callback names, enum names, and return types.

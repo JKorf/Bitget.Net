@@ -1,6 +1,6 @@
 ---
 name: bitget-net
-description: Use Bitget.Net when generating C#/.NET code that interacts with Bitget, including Spot V2, Futures V2, copy trading futures, broker reporting, margin, REST endpoints, WebSocket subscriptions, account management, market data, or order placement. Triggers on Bitget integration requests in C#, .NET, dotnet, F#, or VB.NET context.
+description: Use Bitget.Net when generating C#/.NET code that interacts with Bitget, including Spot V2, Futures V2, Unified/UTA, copy trading futures, broker reporting, margin, REST endpoints, WebSocket subscriptions, account management, market data, or order placement. Triggers on Bitget integration requests in C#, .NET, dotnet, F#, or VB.NET context.
 ---
 
 # Bitget.Net Skill
@@ -69,13 +69,17 @@ restClient.FuturesApiV2.SharedClient
 
 restClient.CopyTradingFuturesV2.Trader
 restClient.CopyTradingFuturesV2.Follower
+restClient.UnifiedApi.Account
+restClient.UnifiedApi.ExchangeData
+restClient.UnifiedApi.Trading
 restClient.BrokerV2 // concrete BitgetRestClient surface
 
 socketClient.SpotApiV2
 socketClient.FuturesApiV2
+socketClient.UnifiedApi
 ```
 
-Bitget.Net uses V2 API roots. Do not generate older-looking `SpotApi`, `FuturesApi`, top-level `MarginApi`, Binance-style `UsdFuturesApi`, or BingX-style `PerpetualFuturesApi`.
+Bitget.Net uses V2 API roots plus the Unified/UTA root. Do not generate older-looking `SpotApi`, `FuturesApi`, top-level `MarginApi`, Binance-style `UsdFuturesApi`, or BingX-style `PerpetualFuturesApi`.
 
 ## Symbols, Product Types, and Enums
 
@@ -108,6 +112,17 @@ MarginMode.CrossMargin
 TradeSide.Open
 PositionSide.Long
 PositionMode.OneWay
+```
+
+Unified/UTA category and account enums live in `Bitget.Net.Enums.Uta`:
+
+```csharp
+ProductCategory.Spot
+ProductCategory.UsdtFutures
+KlineUaInterval.OneMinute
+AccountLevel.Advanced
+HoldingMode.OneWayMode
+StpMode.CancelMaker
 ```
 
 ## Core Pattern: Spot Market Data
@@ -304,6 +319,33 @@ var commissions = await restClient.BrokerV2.GetAgentDirectCommissionsAsync();
 var customers = await restClient.BrokerV2.GetAgentCustomerListAsync();
 ```
 
+## Core Pattern: Unified/UTA
+
+Unified/UTA endpoints live under `UnifiedApi`. Use `Bitget.Net.Enums.Uta.ProductCategory` for category parameters and keep compact symbols such as `BTCUSDT`.
+
+```csharp
+using Bitget.Net.Enums.Uta;
+using Bitget.Net.Enums.V2;
+
+var symbols = await restClient.UnifiedApi.ExchangeData.GetSpotSymbolsAsync("BTCUSDT");
+var futuresTickers = await restClient.UnifiedApi.ExchangeData.GetFuturesTickersAsync(ProductCategory.UsdtFutures);
+var balances = await restClient.UnifiedApi.Account.GetBalancesAsync();
+
+var order = await restClient.UnifiedApi.Trading.PlaceOrderAsync(
+    ProductCategory.Spot,
+    "BTCUSDT",
+    OrderSide.Buy,
+    OrderType.Limit,
+    quantity: 0.001m,
+    price: 1m);
+```
+
+Unified REST groups:
+
+- `UnifiedApi.ExchangeData`: server time, instruments, tickers, order book, trades, proof of reserves, open interest, klines, funding, margin loan rates, tiers, index components
+- `UnifiedApi.Account`: balances, funding assets, account config/info, leverage, holding/account mode, financial records, repayment, BGB deduct, transfers, deposits, withdrawals
+- `UnifiedApi.Trading`: orders, batch cancel, close positions, fills, positions, ADL, max open available, strategy orders
+
 ## Core Pattern: WebSocket Subscriptions
 
 Use `BitgetSocketClient`. Always store the `UpdateSubscription` and unsubscribe when done.
@@ -339,6 +381,23 @@ var sub = await socketClient.FuturesApiV2.SubscribeToTickerUpdatesAsync(
     "BTCUSDT",
     update => Console.WriteLine(update.Data.First().LastPrice));
 ```
+
+Unified socket calls use `ProductCategory`:
+
+```csharp
+using Bitget.Net.Enums.Uta;
+
+var unifiedSub = await socketClient.UnifiedApi.SubscribeToTickerUpdatesAsync(
+    ProductCategory.Spot,
+    "BTCUSDT",
+    update => Console.WriteLine(update.Data.First().LastPrice));
+```
+
+Unified WebSocket groups:
+
+- public ticker, trade, kline, order book, liquidation
+- private account, position, order, fill, fast fill, strategy order, ADL
+- private WebSocket order placement, edit, and cancel
 
 ## Multi-Exchange via CryptoExchange.Net.SharedApis
 
@@ -400,6 +459,7 @@ Bitget.Net includes local order book and user data tracker helpers. Prefer them 
 
 - `Bitget.Net/SymbolOrderBooks/BitgetSpotSymbolOrderBook.cs`
 - `Bitget.Net/SymbolOrderBooks/BitgetFuturesSymbolOrderBook.cs`
+- `Bitget.Net/SymbolOrderBooks/BitgetUnifiedSymbolOrderBook.cs`
 - `Bitget.Net/SymbolOrderBooks/BitgetOrderBookFactory.cs`
 - `Bitget.Net/BitgetUserDataTracker.cs`
 - `Bitget.Net/BitgetTrackerFactory.cs`
@@ -412,10 +472,11 @@ Bitget.Net includes local order book and user data tracker helpers. Prefer them 
 - Do not use `FuturesApi`; use `FuturesApiV2`.
 - Do not use top-level `MarginApi`; use `SpotApiV2.Margin`.
 - Do not use `CopyTradingApi`; use `CopyTradingFuturesV2`.
+- Do use `UnifiedApi` for Unified/UTA endpoints; do not invent `UtaApi`.
 - Do not use `BTC-USDT`, `BTC/USDT`, `BTC_USDT`, or `tBTCUSD`; use `BTCUSDT`.
 - Do not omit `BitgetProductTypeV2` for futures.
 - Do not omit the margin asset where futures account/trading methods require it.
-- Do not mix up enum namespaces: product type is in `Bitget.Net.Enums`; V2 order/account enums are in `Bitget.Net.Enums.V2`.
+- Do not mix up enum namespaces: product type is in `Bitget.Net.Enums`; V2 order/account enums are in `Bitget.Net.Enums.V2`; Unified/UTA enums are in `Bitget.Net.Enums.Uta`.
 - Do not mix sync and async. Always `await` async methods.
 - Do not instantiate clients per request.
 - Do not forget to unsubscribe from WebSocket streams.
@@ -436,10 +497,12 @@ When uncertain, inspect interfaces and enums instead of guessing:
 - `Bitget.Net/Interfaces/Clients/IBitgetSocketClient.cs`
 - `Bitget.Net/Interfaces/Clients/SpotApiV2/*.cs`
 - `Bitget.Net/Interfaces/Clients/FuturesApiV2/*.cs`
+- `Bitget.Net/Interfaces/Clients/UnifiedApi/*.cs`
 - `Bitget.Net/Interfaces/Clients/CopyTradingApiV2/*.cs`
 - `Bitget.Net/Interfaces/Clients/BrokerApiV2/*.cs`
 - `Bitget.Net/Enums/**/*.cs`
 - `Bitget.Net/Objects/Models/V2/**/*.cs`
+- `Bitget.Net/Objects/Models/Uta/**/*.cs`
 
 ## Reference
 

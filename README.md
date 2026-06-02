@@ -197,6 +197,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 3.12.0 - 02 Jun 2026
+    * Updated CryptoExchange.Net to v11.2.1
+    * Added UTA/Unified API access
+    * Fixed user client provider not caching new client when previous client was disposed
+
 * Version 3.11.0 - 26 May 2026
     * Updated CryptoExchange.Net to version 11.2.0
     * Added GetAgentSubCustomerListAsync endpoint

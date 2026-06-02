@@ -27,9 +27,11 @@ var socketClient = new BitgetSocketClient();
 - Spot REST: `restClient.SpotApiV2`
 - Futures REST: `restClient.FuturesApiV2`
 - Copy trading REST: `restClient.CopyTradingFuturesV2`
+- Unified/UTA REST: `restClient.UnifiedApi`
 - Broker REST on concrete client: `restClient.BrokerV2`
 - Spot socket: `socketClient.SpotApiV2`
 - Futures socket: `socketClient.FuturesApiV2`
+- Unified/UTA socket: `socketClient.UnifiedApi`
 
 ## Common calls
 
@@ -40,15 +42,20 @@ var openSpotOrders = await restClient.SpotApiV2.Trading.GetOpenOrdersAsync("BTCU
 
 var futuresTicker = await restClient.FuturesApiV2.ExchangeData.GetTickerAsync(BitgetProductTypeV2.UsdtFutures, "BTCUSDT");
 var positions = await restClient.FuturesApiV2.Trading.GetPositionsAsync(BitgetProductTypeV2.UsdtFutures, "USDT");
+
+var unifiedSymbols = await restClient.UnifiedApi.ExchangeData.GetSpotSymbolsAsync("BTCUSDT");
+var unifiedBalances = await restClient.UnifiedApi.Account.GetBalancesAsync();
+var unifiedOrder = await restClient.UnifiedApi.Trading.PlaceOrderAsync(ProductCategory.Spot, "BTCUSDT", OrderSide.Buy, OrderType.Limit, 0.001m, price: 1m);
 ```
 
 ## Rules
 
-- Use V2 API roots: `SpotApiV2`, `FuturesApiV2`, `CopyTradingFuturesV2`.
+- Use V2 API roots: `SpotApiV2`, `FuturesApiV2`, `CopyTradingFuturesV2`; use `UnifiedApi` for Unified/UTA endpoints.
 - Use compact symbols like `BTCUSDT`.
 - Futures calls use `BitgetProductTypeV2`, for example `BitgetProductTypeV2.UsdtFutures`.
 - Futures account/trading calls often require margin asset `"USDT"`.
 - Spot margin is `SpotApiV2.Margin`.
 - V2 order enums live in `Bitget.Net.Enums.V2`; product type and stream kline enums live in `Bitget.Net.Enums`.
+- Unified/UTA category and account enums live in `Bitget.Net.Enums.Uta`.
 - Always check `.Success` before reading `.Data`.
 - Use `docs/ai-api-map.md` for endpoint routing and `llms-full.txt` for full examples, pitfalls, DI, shared APIs, and source-of-truth files.
