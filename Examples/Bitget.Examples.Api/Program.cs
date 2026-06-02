@@ -1,6 +1,5 @@
-using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects;
-using CryptoExchange.Net.Authentication;
+using Bitget.Net.Interfaces.Clients;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,14 +28,18 @@ app.UseHttpsRedirection();
 app.MapGet("/{Symbol}", async ([FromServices] IBitgetRestClient client, string symbol) =>
 {
     var result = await client.SpotApiV2.ExchangeData.GetTickersAsync(symbol);
-    return (object)(result.Success ? result.Data.Single() : result.Error!);
+    return result.Success
+        ? Results.Ok(result.Data.Single())
+        : Results.Problem(result.Error?.Message, statusCode: 502);
 })
 .WithOpenApi();
 
 app.MapGet("/Balances", async ([FromServices] IBitgetRestClient client) =>
 {
     var result = await client.SpotApiV2.Account.GetSpotBalancesAsync();
-    return (object)(result.Success ? result.Data : result.Error!);
+    return result.Success
+        ? Results.Ok(result.Data)
+        : Results.Problem(result.Error?.Message, statusCode: 502);
 })
 .WithOpenApi();
 
