@@ -450,7 +450,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var direction = DataDirection.Descending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
-            var limit = request.Limit ?? 1000;
+            var limit = request.Limit ?? 200;
             var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
 
             var result = await ExchangeData.GetHistoricalMarkPriceKlinesAsync(
@@ -513,7 +513,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             var direction = DataDirection.Descending;
             var symbol = request.Symbol!.GetSymbol(FormatSymbol);
-            var limit = request.Limit ?? 1000;
+            var limit = request.Limit ?? 200;
             var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
 
             var result = await ExchangeData.GetHistoricalIndexPriceKlinesAsync(
