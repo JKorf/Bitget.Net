@@ -197,6 +197,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 3.12.1 - 02 Jun 2026
+    * Fixed Shared GetKlines implementations using incorrect limit default
+
 * Version 3.12.0 - 02 Jun 2026
     * Updated CryptoExchange.Net to v11.2.1
     * Added UTA/Unified API access
