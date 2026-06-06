@@ -34,5 +34,10 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("seq")]
         public long? Sequence { get; set; }
+        /// <summary>
+        /// ["<c>pseq</c>"] Previous sequence number
+        /// </summary>
+        [JsonPropertyName("pseq")]
+        public long? PreviousSequence { get; set; }
     }
 }
