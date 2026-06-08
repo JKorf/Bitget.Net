@@ -197,6 +197,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 3.13.0 - 08 Jun 2026
+    * Updated CryptoExchange.Net to version 11.2.2
+    * Added PreviousSequence to BitgetOrderBookUpdate model
+
 * Version 3.12.1 - 02 Jun 2026
     * Fixed Shared GetKlines implementations using incorrect limit default
 
