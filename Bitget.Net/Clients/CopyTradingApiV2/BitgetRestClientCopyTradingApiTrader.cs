@@ -18,11 +18,11 @@ namespace Bitget.Net.Clients.CopyTradingApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetCopyTradingSymbolSettings[]>> GetCopyTradeSymbolSettings(BitgetProductTypeV2 productType, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetCopyTradingSymbolSettings[]>> GetCopyTradeSymbolSettings(BitgetProductTypeV2 productType, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/copy/mix-trader/config-query-symbols", BitgetExchange.RateLimiter.Overall, 1, true,
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/copy/mix-trader/config-query-symbols", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetCopyTradingSymbolSettings[]>(request, parameters, ct).ConfigureAwait(false);
         }

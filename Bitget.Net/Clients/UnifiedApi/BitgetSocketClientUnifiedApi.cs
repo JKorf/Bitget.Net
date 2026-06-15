@@ -25,6 +25,7 @@ using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net.Sockets.Default;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Linq;
 using System.Net.WebSockets;
 
 namespace Bitget.Net.Clients.UnifiedApi
@@ -37,8 +38,8 @@ namespace Bitget.Net.Clients.UnifiedApi
         protected override ErrorMapping ErrorMapping => BitgetErrors.UnifiedErrors;
 
         #region ctor
-        internal BitgetSocketClientUnifiedApi(ILogger logger, BitgetSocketOptions options) :
-            base(logger, options.Environment.SocketBaseAddress, options, options.UnifiedOptions)
+        internal BitgetSocketClientUnifiedApi(ILoggerFactory? loggerFactory, BitgetSocketOptions options) :
+            base(loggerFactory, BitgetExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.UnifiedOptions)
         {
             RateLimiter = BitgetExchange.RateLimiter.Websocket;
 
@@ -68,11 +69,11 @@ namespace Bitget.Net.Clients.UnifiedApi
                 => BitgetExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToTickerUpdatesAsync(type, new[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
@@ -84,11 +85,11 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(ProductCategory type, string symbol, KlineUaInterval interval, Action<DataEvent<BitgetUaKlineUpdate[]>> handler, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(ProductCategory type, string symbol, KlineUaInterval interval, Action<DataEvent<BitgetUaKlineUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToKlineUpdatesAsync(type, new[] { symbol }, interval, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, KlineUaInterval interval, Action<DataEvent<BitgetUaKlineUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, KlineUaInterval interval, Action<DataEvent<BitgetUaKlineUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
@@ -101,11 +102,11 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(ProductCategory type, string symbol, int? limit, Action<DataEvent<BitgetUaBookUpdate[]>> handler, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(ProductCategory type, string symbol, int? limit, Action<DataEvent<BitgetUaBookUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToOrderBookUpdatesAsync(type, new[] { symbol }, limit, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, int? limit, Action<DataEvent<BitgetUaBookUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, int? limit, Action<DataEvent<BitgetUaBookUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
@@ -117,11 +118,11 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTradeUpdate[]>> handler, CancellationToken ct = default)
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTradeUpdate[]>> handler, CancellationToken ct = default)
             => SubscribeToTradeUpdatesAsync(type, new[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTradeUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTradeUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
@@ -133,7 +134,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(ProductCategory type, Action<DataEvent<BitgetUaLiquidationUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(ProductCategory type, Action<DataEvent<BitgetUaLiquidationUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), [new Dictionary<string, string>
                     {
@@ -144,7 +145,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BitgetUaAccountUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BitgetUaAccountUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/private"), [new Dictionary<string, string>
                     {
@@ -155,7 +156,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BitgetUaPositionUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BitgetUaPositionUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/private"), [new Dictionary<string, string>
                     {
@@ -166,7 +167,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BitgetUaOrder[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BitgetUaOrder[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/private"), [new Dictionary<string, string>
                     {
@@ -177,7 +178,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BitgetUaUserTrade[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BitgetUaUserTrade[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/private"), [new Dictionary<string, string>
                     {
@@ -188,7 +189,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToFastUserTradeUpdatesAsync(Action<DataEvent<BitgetUaFastUserTrade>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToFastUserTradeUpdatesAsync(Action<DataEvent<BitgetUaFastUserTrade>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/private"), [new Dictionary<string, string>
                     {
@@ -200,7 +201,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToStrategyOrderUpdatesAsync(Action<DataEvent<BitgetUaStrategyOrder[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToStrategyOrderUpdatesAsync(Action<DataEvent<BitgetUaStrategyOrder[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/private"), [new Dictionary<string, string>
                     {
@@ -212,7 +213,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToAdlUpdatesAsync(Action<DataEvent<BitgetUaAdlUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToAdlUpdatesAsync(Action<DataEvent<BitgetUaAdlUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/private"), [new Dictionary<string, string>
                     {
@@ -225,7 +226,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Place Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BitgetUaOrderResult>> PlaceOrderAsync(
+        public async Task<QueryResult<BitgetUaOrderResult>> PlaceOrderAsync(
             ProductCategory category,
             string symbol,
             OrderSide side,
@@ -248,26 +249,26 @@ namespace Bitget.Net.Clients.UnifiedApi
             MarginMode? marginMode = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
-            parameters.AddEnum("side", side);
-            parameters.AddEnum("orderType", orderType);
-            parameters.AddString("qty", quantity);
-            parameters.AddOptional("price", price);
-            parameters.AddOptionalEnum("timeInForce", timeInForce);
-            parameters.AddOptionalEnum("posSide", positionSide);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptional("reduceOnly", reduceOnly == null ? null : reduceOnly.Value ? "yes" : "no");
-            parameters.AddOptionalEnum("stpMode", stpMode);
-            parameters.AddOptionalEnum("tpTriggerBy", tpTriggerBy);
-            parameters.AddOptionalEnum("slTriggerBy", slTriggerBy);
-            parameters.AddOptional("takeProfit", tpTriggerPrice);
-            parameters.AddOptional("stopLoss", slTriggerPrice);
-            parameters.AddOptionalEnum("tpOrderType", tpOrderType);
-            parameters.AddOptionalEnum("slOrderType", slOrderType);
-            parameters.AddOptional("tpLimitPrice", tpLimitPrice);
-            parameters.AddOptional("slLimitPrice", slLimitPrice);
-            parameters.AddOptionalEnum("marginMode", marginMode);
+            parameters.Add("side", side);
+            parameters.Add("orderType", orderType);
+            parameters.Add("qty", quantity);
+            parameters.Add("price", price);
+            parameters.Add("timeInForce", timeInForce);
+            parameters.Add("posSide", positionSide);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("reduceOnly", reduceOnly == null ? null : reduceOnly.Value ? "yes" : "no");
+            parameters.Add("stpMode", stpMode);
+            parameters.Add("tpTriggerBy", tpTriggerBy);
+            parameters.Add("slTriggerBy", slTriggerBy);
+            parameters.Add("takeProfit", tpTriggerPrice);
+            parameters.Add("stopLoss", slTriggerPrice);
+            parameters.Add("tpOrderType", tpOrderType);
+            parameters.Add("slOrderType", slOrderType);
+            parameters.Add("tpLimitPrice", tpLimitPrice);
+            parameters.Add("slLimitPrice", slLimitPrice);
+            parameters.Add("marginMode", marginMode);
 
             var query = new BitgetIdQuery<BitgetUaOrderResult[]>(this, new BitgetIdSocketRequest
             {
@@ -280,7 +281,10 @@ namespace Bitget.Net.Clients.UnifiedApi
             }, true);
 
             var result = await QueryAsync(BaseAddress.AppendPath("v3/ws/private"), query, ct).ConfigureAwait(false);
-            return result.As<BitgetUaOrderResult>(result.Data?.SingleOrDefault());
+            if (!result.Success)
+                return QueryResult.Fail<BitgetUaOrderResult>(result);
+
+            return QueryResult.Ok(result, result.Data.Single());
         }
 
         #endregion
@@ -288,7 +292,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Edit Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BitgetUaOrderResult>> EditOrderAsync(
+        public async Task<QueryResult<BitgetUaOrderResult>> EditOrderAsync(
             ProductCategory category,
             string? orderId = null,
             string? clientOrderId = null,
@@ -297,12 +301,12 @@ namespace Bitget.Net.Clients.UnifiedApi
             bool? autoCancel = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptionalString("qty", quantity);
-            parameters.AddOptional("price", price);
-            parameters.AddOptional("autoCancel", autoCancel == null ? null : autoCancel.Value ? "yes" : "no");
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("orderId", orderId);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("qty", quantity);
+            parameters.Add("price", price);
+            parameters.Add("autoCancel", autoCancel == null ? null : autoCancel.Value ? "yes" : "no");
 
             var query = new BitgetIdQuery<BitgetUaOrderResult[]>(this, new BitgetIdSocketRequest
             {
@@ -314,7 +318,10 @@ namespace Bitget.Net.Clients.UnifiedApi
             }, true);
 
             var result = await QueryAsync(BaseAddress.AppendPath("v3/ws/private"), query, ct).ConfigureAwait(false);
-            return result.As<BitgetUaOrderResult>(result.Data?.SingleOrDefault());
+            if (!result.Success)
+                return QueryResult.Fail<BitgetUaOrderResult>(result);
+
+            return QueryResult.Ok(result, result.Data.Single());
         }
 
         #endregion
@@ -322,15 +329,15 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Cancel Order
 
         /// <inheritdoc />
-        public async Task<CallResult<BitgetUaOrderResult>> CancelOrderAsync(
+        public async Task<QueryResult<BitgetUaOrderResult>> CancelOrderAsync(
             ProductCategory category,
             string? orderId = null,
             string? clientOrderId = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptional("clientOid", clientOrderId);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("orderId", orderId);
+            parameters.Add("clientOid", clientOrderId);
 
             var query = new BitgetIdQuery<BitgetUaOrderResult[]>(this, new BitgetIdSocketRequest
             {
@@ -342,12 +349,15 @@ namespace Bitget.Net.Clients.UnifiedApi
             }, true);
 
             var result = await QueryAsync(BaseAddress.AppendPath("v3/ws/private"), query, ct).ConfigureAwait(false);
-            return result.As<BitgetUaOrderResult>(result.Data?.SingleOrDefault());
+            if (!result.Success)
+                return QueryResult.Fail<BitgetUaOrderResult>(result);
+
+            return QueryResult.Ok(result, result.Data.Single());
         }
 
         #endregion
 
-        private async Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(
+        private async Task<WebSocketResult<UpdateSubscription>> SubscribeInternalAsync<T>(
             string url,
             Dictionary<string, string>[] request,
             IEnumerable<string>? symbols,

@@ -24,7 +24,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPosition[]>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
+        Task<HttpResult<BitgetPosition[]>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
 
         /// <summary>
         /// Get all positions
@@ -39,7 +39,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPosition[]>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default);
+        Task<HttpResult<BitgetPosition[]>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default);
 
         /// <summary>
         /// Get position history
@@ -58,7 +58,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new order
@@ -87,7 +87,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="stopLossLimitPrice">["<c>presetStopLossExecutePrice</c>"] Stop loss limit order price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderId>> PlaceOrderAsync(
+        Task<HttpResult<BitgetOrderId>> PlaceOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -122,7 +122,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="orders">["<c>orderList</c>"] Orders</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
+        Task<HttpResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -150,7 +150,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="newStopLossPrice">["<c>newPresetStopLossPrice</c>"] New stop loss price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderId>> EditOrderAsync(
+        Task<HttpResult<BitgetOrderId>> EditOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string? orderId = null,
@@ -178,7 +178,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderId>> CancelOrderAsync(
+        Task<HttpResult<BitgetOrderId>> CancelOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string? orderId = null,
@@ -201,7 +201,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderMultipleResult>> CancelMultipleOrdersAsync(
+        Task<HttpResult<BitgetOrderMultipleResult>> CancelMultipleOrdersAsync(
             BitgetProductTypeV2 productType,
             IEnumerable<BitgetCancelOrderRequest> orders,
             string? symbol = null,
@@ -223,7 +223,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id. Either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesOrder>> GetOrderAsync(
+        Task<HttpResult<BitgetFuturesOrder>> GetOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string? orderId = null,
@@ -250,7 +250,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesOrders>> GetOpenOrdersAsync(
+        Task<HttpResult<BitgetFuturesOrders>> GetOpenOrdersAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? orderId = null,
@@ -281,7 +281,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesOrders>> GetClosedOrdersAsync(
+        Task<HttpResult<BitgetFuturesOrders>> GetClosedOrdersAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? orderId = null,
@@ -306,7 +306,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderMultipleResult>> CancelAllOrdersAsync(
+        Task<HttpResult<BitgetOrderMultipleResult>> CancelAllOrdersAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? marginAsset = null,
@@ -330,7 +330,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesUserTrades>> GetUserTradesAsync(
+        Task<HttpResult<BitgetFuturesUserTrades>> GetUserTradesAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? orderId = null,
@@ -358,7 +358,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesUserTrades>> GetHistoricalUserTradesAsync(
+        Task<HttpResult<BitgetFuturesUserTrades>> GetHistoricalUserTradesAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? orderId = null,
@@ -382,7 +382,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="side">["<c>holdSide</c>"] Position side; only respected if in hedge mode</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderMultipleResult>> ClosePositionsAsync(
+        Task<HttpResult<BitgetOrderMultipleResult>> ClosePositionsAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             PositionSide? side = null,
@@ -411,7 +411,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderId>> PlaceTpSlOrderAsync(
+        Task<HttpResult<BitgetOrderId>> PlaceTpSlOrderAsync(
            BitgetProductTypeV2 productType,
            string symbol,
            string marginAsset,
@@ -458,7 +458,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="stopLossPriceType">["<c>stopLossTriggerType</c>"] Stop loss price type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderId>> PlaceTriggerOrderAsync(
+        Task<HttpResult<BitgetOrderId>> PlaceTriggerOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -496,7 +496,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="planType">["<c>planType</c>"] Plan type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
+        Task<HttpResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
             BitgetProductTypeV2 productType,
             string triggerOrderId,
             TriggerPlanType planType,
@@ -527,7 +527,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="newStopLossPriceType">["<c>stopLossTriggerType</c>"] New stop loss trigger price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderId>> EditTriggerOrderAsync(
+        Task<HttpResult<BitgetOrderId>> EditTriggerOrderAsync(
             BitgetProductTypeV2 productType,
             string? orderId = null,
             string? clientOrderId = null,
@@ -565,7 +565,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="newTrailingStopRate">["<c>rangeRate</c>"] New trailing stop rate</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderId>> EditTpSlOrderAsync(
+        Task<HttpResult<BitgetOrderId>> EditTpSlOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -598,7 +598,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesTriggerOrders>> GetOpenTriggerOrdersAsync(
+        Task<HttpResult<BitgetFuturesTriggerOrders>> GetOpenTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
             TriggerPlanTypeFilter planType,
             string? symbol = null,
@@ -631,7 +631,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesTriggerOrders>> GetClosedTriggerOrdersAsync(
+        Task<HttpResult<BitgetFuturesTriggerOrders>> GetClosedTriggerOrdersAsync(
            BitgetProductTypeV2 productType,
            TriggerPlanTypeFilter planType,
            string? symbol = null,
@@ -660,7 +660,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="orderIds">["<c>orderIdList</c>"] Order ids</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderMultipleResult>> CancelTriggerOrdersAsync(
+        Task<HttpResult<BitgetOrderMultipleResult>> CancelTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
             CancelTriggerPlanTypeFilter? planType = null,
             string? symbol = null,
@@ -693,7 +693,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="tpClientOrderId">["<c>stopSurplusClientOid</c>"] Take profit client order id</param>
         /// <param name="slClientOrderId">["<c>stopLossClientOid</c>"] Stop loss client order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetPositionTpSl[]>> SetPositionTpSlAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, PositionSide holdSide, decimal? tpTriggerPrice = null, decimal? tpTriggerQuantity = null, TriggerPriceType? tpTriggerType = null, decimal? tpLimitPrice = null, decimal? slTriggerPrice = null, decimal? slTriggerQuantity = null, TriggerPriceType? slTriggerType = null, decimal? slLimitPrice = null, SelfTradePreventionMode? stpMode = null, string? tpClientOrderId = null, string? slClientOrderId = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetPositionTpSl[]>> SetPositionTpSlAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, PositionSide holdSide, decimal? tpTriggerPrice = null, decimal? tpTriggerQuantity = null, TriggerPriceType? tpTriggerType = null, decimal? tpLimitPrice = null, decimal? slTriggerPrice = null, decimal? slTriggerQuantity = null, TriggerPriceType? slTriggerType = null, decimal? slLimitPrice = null, SelfTradePreventionMode? stpMode = null, string? tpClientOrderId = null, string? slClientOrderId = null, CancellationToken ct = default);
 
     }
 }

@@ -21,7 +21,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
+        Task<HttpResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get list of contracts
@@ -36,7 +36,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetContract[]>> GetContractsAsync(BitgetProductTypeV2 productType, string? symbol = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetContract[]>> GetContractsAsync(BitgetProductTypeV2 productType, string? symbol = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of VIP levels and fee rates
@@ -49,7 +49,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetVipFeeRate[]>> GetVipFeeRatesAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetVipFeeRate[]>> GetVipFeeRatesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get futures order book
@@ -66,7 +66,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] The book depth, 1, 5, 15, 50, 100 or -1. -1 will request the max gear of the symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesOrderBook>> GetOrderBookAsync(BitgetProductTypeV2 productType, string symbol, int? mergeStep = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesOrderBook>> GetOrderBookAsync(BitgetProductTypeV2 productType, string symbol, int? mergeStep = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get futures ticker
@@ -81,7 +81,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesTicker>> GetTickerAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesTicker>> GetTickerAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get all futures tickers
@@ -95,7 +95,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesTicker[]>> GetTickersAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesTicker[]>> GetTickersAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
 
         /// <summary>
         /// Get recent trades
@@ -111,7 +111,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetTrade[]>> GetRecentTradesAsync(BitgetProductTypeV2 productType, string symbol, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetTrade[]>> GetRecentTradesAsync(BitgetProductTypeV2 productType, string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get trades
@@ -130,7 +130,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetTrade[]>> GetTradesAsync(BitgetProductTypeV2 productType, string symbol, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetTrade[]>> GetTradesAsync(BitgetProductTypeV2 productType, string symbol, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get kline/candlestick data
@@ -150,7 +150,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesKline[]>> GetKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, Enums.V2.KlineType? klineType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesKline[]>> GetKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, Enums.V2.KlineType? klineType = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get historical market price kline/candlestick data
@@ -169,7 +169,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesKline[]>> GetHistoricalKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesKline[]>> GetHistoricalKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get historical index price kline/candlestick data
@@ -188,7 +188,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesKline[]>> GetHistoricalIndexPriceKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesKline[]>> GetHistoricalIndexPriceKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get historical mark price kline/candlestick data
@@ -207,7 +207,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesKline[]>> GetHistoricalMarkPriceKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesKline[]>> GetHistoricalMarkPriceKlinesAsync(BitgetProductTypeV2 productType, string symbol, BitgetFuturesKlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get open interest
@@ -222,7 +222,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOpenInterest>> GetOpenInterestAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetOpenInterest>> GetOpenInterestAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get next funding time
@@ -237,7 +237,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFundingTime>> GetNextFundingTimeAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetFundingTime>> GetNextFundingTimeAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get prices
@@ -252,7 +252,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesPrices>> GetPricesAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesPrices>> GetPricesAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get historical funding rate
@@ -269,7 +269,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="page">["<c>pageNo</c>"] Page number</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFundingRate[]>> GetHistoricalFundingRateAsync(BitgetProductTypeV2 productType, string symbol, int? pageSize = null, int? page = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetFundingRate[]>> GetHistoricalFundingRateAsync(BitgetProductTypeV2 productType, string symbol, int? pageSize = null, int? page = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get current funding rate for a symbol
@@ -284,7 +284,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetCurrentFundingRate>> GetFundingRateAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetCurrentFundingRate>> GetFundingRateAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get current funding rate for all symbols
@@ -298,7 +298,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetCurrentFundingRate[]>> GetFundingRatesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
+        Task<HttpResult<BitgetCurrentFundingRate[]>> GetFundingRatesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
 
         /// <summary>
         /// Get position tiers
@@ -313,7 +313,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPositionTier[]>> GetPositionTiersAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetPositionTier[]>> GetPositionTiersAsync(BitgetProductTypeV2 productType, string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get contracts notional position value limits
@@ -328,6 +328,6 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="symbol">["<c>symbol</c>"] Symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOiLimit[]>> GetOiLimitsAsync(BitgetProductTypeV2 productType, string? symbol = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetOiLimit[]>> GetOiLimitsAsync(BitgetProductTypeV2 productType, string? symbol = null, CancellationToken ct = default);
     }
 }

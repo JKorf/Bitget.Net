@@ -40,9 +40,9 @@ namespace Bitget.Net.Clients
         {
             Initialize(options.Value);
 
-            SpotApiV2 = AddApiClient(new SpotApiV2.BitgetSocketClientSpotApi(_logger, options.Value));
-            FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetSocketClientFuturesApi(_logger, options.Value));
-            UnifiedApi = AddApiClient(new BitgetSocketClientUnifiedApi(_logger, options.Value));
+            SpotApiV2 = AddApiClient(new SpotApiV2.BitgetSocketClientSpotApi(loggerFactory, options.Value));
+            FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetSocketClientFuturesApi(loggerFactory, options.Value));
+            UnifiedApi = AddApiClient(new BitgetSocketClientUnifiedApi(loggerFactory, options.Value));
         }
 
         #endregion

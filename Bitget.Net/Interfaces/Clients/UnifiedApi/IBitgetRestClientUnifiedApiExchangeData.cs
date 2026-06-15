@@ -21,7 +21,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
+        Task<HttpResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get supported futures symbols
@@ -35,7 +35,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="category">["<c>category</c>"] Category</param>
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaFuturesSymbol[]>> GetFuturesSymbolsAsync(
+        Task<HttpResult<BitgetUaFuturesSymbol[]>> GetFuturesSymbolsAsync(
             ProductCategory category,
             string? symbol = null,
             CancellationToken ct = default);
@@ -51,7 +51,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaSpotSymbol[]>> GetSpotSymbolsAsync(
+        Task<HttpResult<BitgetUaSpotSymbol[]>> GetSpotSymbolsAsync(
             string? symbol = null,
             CancellationToken ct = default);
 
@@ -66,7 +66,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaMarginSymbol[]>> GetMarginSymbolsAsync(
+        Task<HttpResult<BitgetUaMarginSymbol[]>> GetMarginSymbolsAsync(
             string? symbol = null,
             CancellationToken ct = default);
 
@@ -81,7 +81,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaSpotTicker[]>> GetSpotTickersAsync(
+        Task<HttpResult<BitgetUaSpotTicker[]>> GetSpotTickersAsync(
             string? symbol = null,
             CancellationToken ct = default);
 
@@ -97,7 +97,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="category">["<c>category</c>"] Futures category</param>
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaFuturesTicker[]>> GetFuturesTickersAsync(
+        Task<HttpResult<BitgetUaFuturesTicker[]>> GetFuturesTickersAsync(
             ProductCategory category,
             string? symbol = null,
             CancellationToken ct = default);
@@ -115,7 +115,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 200</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOrderBook>> GetOrderBookAsync(
+        Task<HttpResult<BitgetUaOrderBook>> GetOrderBookAsync(
             ProductCategory category,
             string symbol,
             int? limit = null,
@@ -134,7 +134,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 100</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaTrade[]>> GetRecentTradesAsync(
+        Task<HttpResult<BitgetUaTrade[]>> GetRecentTradesAsync(
             ProductCategory category,
             string symbol,
             int? limit = null,
@@ -150,7 +150,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaProofOfReserves>> GetProofOfReservesAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaProofOfReserves>> GetProofOfReservesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get open interest for symbol(s)
@@ -164,7 +164,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="category">["<c>category</c>"] Category</param>
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOpenInterest>> GetOpenInterestAsync(
+        Task<HttpResult<BitgetUaOpenInterest>> GetOpenInterestAsync(
             ProductCategory category,
             string? symbol = null,
             CancellationToken ct = default);
@@ -186,7 +186,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 1000</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaKline[]>> GetKlinesAsync(
+        Task<HttpResult<BitgetUaKline[]>> GetKlinesAsync(
             ProductCategory category,
             string symbol,
             KlineUaInterval interval,
@@ -213,7 +213,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 100</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaKline[]>> GetKlineHistoryAsync(
+        Task<HttpResult<BitgetUaKline[]>> GetKlineHistoryAsync(
             ProductCategory category,
             string symbol,
             KlineUaInterval interval,
@@ -234,7 +234,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaFundingRate[]>> GetFundingRateAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetUaFundingRate[]>> GetFundingRateAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get funding rate history
@@ -250,7 +250,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="page">["<c>cursor</c>"] Page</param>
         /// <param name="pageSize">["<c>limit</c>"] Page size, max 100</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaFundingRateHistory[]>> GetFundingRateHistoryAsync(
+        Task<HttpResult<BitgetUaFundingRateHistory[]>> GetFundingRateHistoryAsync(
             ProductCategory category,
             string symbol,
             int? page = null,
@@ -267,7 +267,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaDiscountRates[]>> GetDiscountRateAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaDiscountRates[]>> GetDiscountRateAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get margin loan interest rates
@@ -280,7 +280,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="asset">["<c>coin</c>"] The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaLoanInterestRate>> GetMarginLoanInterestRatesAsync(string asset, CancellationToken ct = default);
+        Task<HttpResult<BitgetUaLoanInterestRate>> GetMarginLoanInterestRatesAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -295,7 +295,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="asset">["<c>coin</c>"] The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaPositionTier[]>> GetPositionTiersAsync(
+        Task<HttpResult<BitgetUaPositionTier[]>> GetPositionTiersAsync(
             ProductCategory category,
             string? symbol = null,
             string? asset = null,
@@ -313,7 +313,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="category">["<c>category</c>"] Category</param>
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOpenInterestLimit[]>> GetOpenInterestLimitAsync(
+        Task<HttpResult<BitgetUaOpenInterestLimit[]>> GetOpenInterestLimitAsync(
             ProductCategory category,
             string? symbol = null,
             CancellationToken ct = default);
@@ -329,7 +329,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaIndexComponents>> GetIndexComponentsAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetUaIndexComponents>> GetIndexComponentsAsync(string symbol, CancellationToken ct = default);
 
     }
 }

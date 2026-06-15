@@ -323,7 +323,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.BrokerV2.GetAgentDirectCommissionsAsync(), "GetAgentDirectCommissions");
         }
 
-        private bool IsAuthenticated(WebCallResult result)
+        private bool IsAuthenticated(IHttpResult result)
         {
             return result.RequestHeaders.Any(x => x.Key == "ACCESS-SIGN");
         }

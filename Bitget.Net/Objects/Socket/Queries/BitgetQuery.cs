@@ -21,11 +21,11 @@ namespace Bitget.Net.Objects.Socket.Queries
             {
                 var topic = arg.TryGetValue("channel", out var channel) ? channel : arg["topic"];
 
-                routes.Add(MessageRoute<BitgetSocketEvent>.CreateWithOptionalTopicFilter(
+                routes.Add(MessageRoute.CreateForQuery<BitgetSocketEvent>(
                     $"{request.Op}{arg["instType"]}{topic}",
                     GetRouteIdentifier(arg),
                     HandleMessage));
-                routes.Add(MessageRoute<BitgetSocketEvent>.CreateWithOptionalTopicFilter(
+                routes.Add(MessageRoute.CreateForQuery<BitgetSocketEvent>(
                     $"error{arg["instType"]}{topic}",
                     GetRouteIdentifier(arg),
                     HandleMessage));
@@ -42,9 +42,9 @@ namespace Bitget.Net.Objects.Socket.Queries
         public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketEvent message)
         {
             if (message.Code != null)
-                return new CallResult<BitgetSocketEvent>(new ServerError(message.Code.Value.ToString(), _client.GetErrorInfo(message.Code.Value, message.Message!)), originalData);
+                return CallResult<BitgetSocketEvent>.Fail(new ServerError(message.Code.Value.ToString(), _client.GetErrorInfo(message.Code.Value, message.Message!)), originalData);
 
-            return new CallResult<BitgetSocketEvent>(message, originalData, null);
+            return CallResult<BitgetSocketEvent>.Ok(message, originalData);
         }
     }
 }
