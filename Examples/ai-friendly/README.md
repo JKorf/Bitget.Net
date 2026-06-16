@@ -40,7 +40,7 @@ const string marginAsset = "USDT";
 
 ## Result pattern
 
-Most REST calls return `WebCallResult<T>`. Always check `.Success` before using `.Data`; use `.Error` for exchange, validation, network and rate-limit failures.
+Most REST calls return `HttpResult<T>`. Always check `.Success` before using `.Data`; use `.Error` for exchange, validation, network and rate-limit failures.
 
 ```csharp
 var result = await client.SpotApiV2.ExchangeData.GetTickersAsync("BTCUSDT");
@@ -53,7 +53,7 @@ if (!result.Success)
 Console.WriteLine(result.Data.Single().LastPrice);
 ```
 
-Socket subscription calls return `CallResult<UpdateSubscription>`. Keep the concrete socket client so you can unsubscribe:
+Socket subscription calls return `WebSocketResult<UpdateSubscription>`. Keep the concrete socket client so you can unsubscribe:
 
 ```csharp
 var sub = await socketClient.SpotApiV2.SubscribeToTickerUpdatesAsync("BTCUSDT", update => { });
@@ -82,7 +82,7 @@ Use `Bitget.Net.Enums.V2` for V2 order/account enums:
 - `02-futures-v2.cs` - futures product type, ticker, funding rate, balances, positions and order flow.
 - `03-websocket.cs` - spot and futures public WebSocket subscriptions and unsubscribe pattern.
 - `04-multi-exchange.cs` - CryptoExchange.Net shared API usage for exchange-agnostic code.
-- `05-error-handling.cs` - `WebCallResult<T>` handling, transient retry shape and order error categorization.
+- `05-error-handling.cs` - `HttpResult<T>` handling, transient retry shape and order error categorization.
 
 ## Common routing
 

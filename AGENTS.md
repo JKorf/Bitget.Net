@@ -40,7 +40,7 @@ var publicClient = new BitgetRestClient();
 
 ## Core Pattern: Result Handling
 
-Every REST method returns `WebCallResult<T>` or `WebCallResult`. WebSocket subscriptions return `CallResult<UpdateSubscription>`. Always check `.Success` before accessing `.Data`.
+Every REST method returns `HttpResult<T>` or `HttpResult`. WebSocket subscriptions return `WebSocketResult<UpdateSubscription>`. Always check `.Success` before accessing `.Data`.
 
 ```csharp
 var ticker = await restClient.SpotApiV2.ExchangeData.GetTickersAsync("BTCUSDT");
@@ -480,7 +480,7 @@ Bitget.Net includes local order book and user data tracker helpers. Prefer them 
 - Do not mix sync and async. Always `await` async methods.
 - Do not instantiate clients per request.
 - Do not forget to unsubscribe from WebSocket streams.
-- Do not assume `WebCallResult.Data` is non-null without checking `.Success`.
+- Do not assume `HttpResult.Data` is non-null without checking `.Success`.
 - Do not hand-roll local order book merge logic when project helpers fit.
 
 ## Environments

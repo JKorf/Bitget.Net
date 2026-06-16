@@ -28,8 +28,8 @@ Primary documentation:
 - Include `using Bitget.Net.Enums.V2;` for V2 order/account enums such as `OrderSide`, `OrderType`, `TimeInForce`, `MarginMode`, `TradeSide`, `PositionSide`, `PositionMode`, and V2 spot `KlineInterval`.
 - Include `using Bitget.Net.Enums.Uta;` for Unified/UTA enums such as `ProductCategory`, `KlineUaInterval`, `AccountLevel`, `HoldingMode`, `StpMode`, `StrategyType`, and `TpslMode`.
 - Always check `.Success` before reading `.Data`.
-- REST methods return `WebCallResult<T>` or `WebCallResult`.
-- WebSocket subscriptions return `CallResult<UpdateSubscription>`.
+- REST methods return `HttpResult<T>` or `HttpResult`.
+- WebSocket subscriptions return `WebSocketResult<UpdateSubscription>`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
 - Store WebSocket subscriptions and unsubscribe during shutdown.
@@ -735,9 +735,9 @@ Console.WriteLine(result.Data.Single().LastPrice);
 Retry only transient failures:
 
 ```csharp
-async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call)
+async Task<HttpResult<T>> WithRetry<T>(Func<Task<HttpResult<T>>> call)
 {
-    WebCallResult<T> last = default!;
+    HttpResult<T> last = default!;
     for (var attempt = 1; attempt <= 3; attempt++)
     {
         last = await call();

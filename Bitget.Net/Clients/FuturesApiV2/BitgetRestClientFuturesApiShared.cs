@@ -369,7 +369,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
+                new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")
             }
         };
         async Task<HttpResult<SharedLeverage>> ILeverageRestClient.GetLeverageAsync(GetLeverageRequest request, CancellationToken ct)
@@ -381,7 +381,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Trading.GetPositionAsync(
                 GetProductType(request.TradingMode, request.ExchangeParameters),
                 symbol: request.Symbol!.GetSymbol(FormatSymbol),
-                marginAsset: ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
+                marginAsset: request.GetParamValue<string>(Exchange, "MarginAsset", "marginCoin")!,
                 ct: ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<SharedLeverage>(result);
@@ -396,7 +396,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
+                new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")
             }
         };
         async Task<HttpResult<SharedLeverage>> ILeverageRestClient.SetLeverageAsync(SetLeverageRequest request, CancellationToken ct)
@@ -408,7 +408,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Account.SetLeverageAsync(
                 GetProductType(request.TradingMode, request.ExchangeParameters),
                 symbol: request.Symbol!.GetSymbol(FormatSymbol),
-                marginAsset: ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
+                marginAsset: request.GetParamValue<string>(Exchange, "MarginAsset", "marginCoin")!,
                 (int)request.Leverage,
                 side: request.Side == null ? null : request.Side == SharedPositionSide.Short ? PositionSide.Short : PositionSide.Long,
                 ct: ct).ConfigureAwait(false);
@@ -653,7 +653,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC"),
+                new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC"),
             }
         };
         async Task<HttpResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
@@ -666,7 +666,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Trading.PlaceOrderAsync(
                 GetProductType(request.Symbol!.TradingMode, request.ExchangeParameters),
                 request.Symbol.GetSymbol(FormatSymbol),
-                ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
+                request.GetParamValue<string>(Exchange, "MarginAsset", "marginCoin")!,
                 side,
                 request.OrderType == SharedOrderType.Limit ? OrderType.Limit : OrderType.Market,
                 request.MarginMode == SharedMarginMode.Isolated ? MarginMode.IsolatedMargin : MarginMode.CrossMargin,
@@ -950,7 +950,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
+                new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")
             }
         };
         async Task<HttpResult<SharedPosition[]>> IFuturesOrderRestClient.GetPositionsAsync(GetPositionsRequest request, CancellationToken ct)
@@ -965,7 +965,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 result = await Trading.GetPositionAsync(
                     GetProductType(request.Symbol.TradingMode, request.ExchangeParameters),
                     symbol: request.Symbol.GetSymbol(FormatSymbol),
-                    marginAsset: ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
+                    marginAsset: request.GetParamValue<string>(Exchange, "MarginAsset", "marginCoin")!,
                     ct: ct).ConfigureAwait(false);
                 if (!result.Success)
                     return HttpResult.Fail<SharedPosition[]>(result);
@@ -973,7 +973,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             else
             {
                 var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
-                result = await Trading.GetPositionsAsync(productType, ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!, ct: ct).ConfigureAwait(false);
+                result = await Trading.GetPositionsAsync(productType, request.GetParamValue<string>(Exchange, "MarginAsset", "marginCoin")!, ct: ct).ConfigureAwait(false);
                 if (!result.Success)
                     return HttpResult.Fail<SharedPosition[]>(result);
             }
@@ -1135,7 +1135,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")                
+                new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")                
             }
         };
         async Task<HttpResult<SharedPositionModeResult>> IPositionModeRestClient.GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
@@ -1148,7 +1148,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Account.GetBalanceAsync(
                 productType,
                 request.Symbol!.GetSymbol(FormatSymbol),
-                ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
+                request.GetParamValue<string>(Exchange, "MarginAsset", "marginCoin")!,
                 ct: ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<SharedPositionModeResult>(result);
@@ -1262,7 +1262,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
+                new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")
             }
         };
         async Task<HttpResult<SharedId>> IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
@@ -1275,7 +1275,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Trading.PlaceTriggerOrderAsync(
                 GetProductType(request.TradingMode, request.ExchangeParameters),
                 request.Symbol!.GetSymbol(FormatSymbol),
-                ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
+                request.GetParamValue<string>(Exchange, "MarginAsset", "marginCoin")!,
                 TriggerPlanType.Normal,
                 request.MarginMode == SharedMarginMode.Isolated ? MarginMode.IsolatedMargin : MarginMode.CrossMargin,
                 side,
@@ -1413,7 +1413,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             RequiredExchangeParameters = new List<ParameterDescription>
             {
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-                new ParameterDescription("MarginAsset", typeof(string), "The margin asset to be used", "USDC")
+                new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")
             }
         };
 
@@ -1426,7 +1426,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await Trading.PlaceTpSlOrderAsync(
                 GetProductType(request.TradingMode, request.ExchangeParameters),
                 request.Symbol!.GetSymbol(FormatSymbol),
-                ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "MarginAsset")!,
+                request.GetParamValue<string>(Exchange, "MarginAsset", "marginCoin")!,
                 request.TpSlSide == SharedTpSlSide.TakeProfit ? PlanType.PositionTakeProfit : PlanType.PositionStopLoss,
                 null,
                 request.TriggerPrice,
