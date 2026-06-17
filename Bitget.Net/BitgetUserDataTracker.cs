@@ -20,7 +20,6 @@ namespace Bitget.Net
             SpotUserDataTrackerConfig? config) : base(
                 logger,
                 restClient.SpotApiV2.SharedClient,
-                null,
                 restClient.SpotApiV2.SharedClient,
                 socketClient.SpotApiV2.SharedClient,
                 restClient.SpotApiV2.SharedClient,
@@ -49,7 +48,6 @@ namespace Bitget.Net
             FuturesUserDataTrackerConfig? config,
             ExchangeParameters exchangeParameters) : base(logger,
                 restClient.FuturesApiV2.SharedClient,
-                null,
                 restClient.FuturesApiV2.SharedClient,
                 socketClient.FuturesApiV2.SharedClient,
                 restClient.FuturesApiV2.SharedClient,
