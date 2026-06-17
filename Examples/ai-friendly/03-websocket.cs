@@ -9,6 +9,7 @@ using Bitget.Net.Enums;
 
 var socketClient = new BitgetSocketClient();
 
+// Subscription methods return WebSocketResult<UpdateSubscription>.
 var spotTickerSubscription = await socketClient.SpotApiV2.SubscribeToTickerUpdatesAsync(
     "BTCUSDT",
     update =>

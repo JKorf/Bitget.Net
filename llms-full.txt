@@ -30,6 +30,7 @@ Primary documentation:
 - Always check `.Success` before reading `.Data`.
 - REST methods return `HttpResult<T>` or `HttpResult`.
 - WebSocket subscriptions return `WebSocketResult<UpdateSubscription>`.
+- Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
 - Store WebSocket subscriptions and unsubscribe during shutdown.
@@ -39,7 +40,7 @@ Primary documentation:
 - Futures calls usually require `BitgetProductTypeV2`, a symbol, and a margin asset such as `"USDT"`.
 - Spot margin is `SpotApiV2.Margin`; there is no top-level `MarginApi`.
 - Unified/UTA endpoints are under `UnifiedApi`; there is no `UtaApi`.
-- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient`.
+- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient` and call `.Discover()` to inspect supported shared features.
 
 ## Installation
 
@@ -669,6 +670,10 @@ Spot:
 
 ```csharp
 ISpotTickerRestClient tickerClient = new BitgetRestClient().SpotApiV2.SharedClient;
+var info = tickerClient.Discover();
+var supported = info.Features.Where(x => x.Supported).Select(x => x.EndpointName);
+Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supported)}");
+
 var symbol = new SharedSymbol(TradingMode.Spot, "BTC", "USDT");
 
 var ticker = await tickerClient.GetSpotTickerAsync(new GetTickerRequest(symbol));
@@ -678,6 +683,10 @@ Futures:
 
 ```csharp
 IFuturesTickerRestClient futuresTickerClient = new BitgetRestClient().FuturesApiV2.SharedClient;
+var futuresInfo = futuresTickerClient.Discover();
+var futuresSupported = futuresInfo.Features.Where(x => x.Supported).Select(x => x.EndpointName);
+Console.WriteLine($"{futuresInfo.Exchange} {futuresInfo.TypeName}: {string.Join(", ", futuresSupported)}");
+
 var futuresSymbol = new SharedSymbol(TradingMode.PerpetualLinear, "BTC", "USDT");
 
 var ticker = await futuresTickerClient.GetFuturesTickerAsync(new GetTickerRequest(futuresSymbol));
