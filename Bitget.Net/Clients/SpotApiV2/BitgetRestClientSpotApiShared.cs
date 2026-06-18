@@ -1,6 +1,7 @@
 using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
@@ -865,7 +866,13 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             return HttpResult.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.CreateTime, request.StartTime, request.EndTime, direction)
                        .Select(x =>
-                           new SharedWithdrawal(x.Asset, x.ToAddress, x.Quantity, x.Status == TransferStatus.Success, x.CreateTime)
+                           new SharedWithdrawal(
+                               x.Asset,
+                               x.ToAddress,
+                               x.Quantity, 
+                               x.Status == TransferStatus.Success,
+                               x.CreateTime,
+                               GetWithdrawalStatus(x))
                            {
                                Id = x.OrderId,
                                Confirmations = x.Confirmations,
@@ -875,6 +882,20 @@ namespace Bitget.Net.Clients.SpotApiV2
                                Fee = x.Fee
                            })
                        .ToArray(), nextPageRequest);
+        }
+
+        private SharedTransferStatus GetWithdrawalStatus(BitgetWithdrawalRecord x)
+        {
+            if (x.Status == TransferStatus.Failed)
+                return SharedTransferStatus.Failed;
+
+            if (x.Status == TransferStatus.Success)
+                return SharedTransferStatus.Completed;
+
+            if (x.Status == TransferStatus.Processing)
+                return SharedTransferStatus.InProgress;
+
+            return SharedTransferStatus.Unknown;
         }
 
         #endregion
