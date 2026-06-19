@@ -27,7 +27,8 @@ namespace Bitget.Net
                 ["https://bitgetlimited.github.io/apidoc/en/mix/#welcome",
                  "https://www.bitget.com/api-doc"],
                 PlatformType.CryptoCurrencyExchange,
-                CentralizationType.Centralized
+                CentralizationType.Centralized,
+                BitgetEnvironment.All
                 );
 
         /// <summary>
