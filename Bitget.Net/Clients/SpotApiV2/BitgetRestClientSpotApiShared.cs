@@ -372,7 +372,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 OrderPrice = x.Price,
                 OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? x.Quantity : null),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),                
-                Fee = x.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(x.Fees.NewFees.TotalFee),
+                // Positive fees means rebate which we're not currently supported
+                Fee = x.Fees?.NewFees?.TotalFee == null ? null : x.Fees.NewFees.TotalFee > 0 ? 0 : Math.Abs(x.Fees.NewFees.TotalFee),
                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 UpdateTime = x.UpdateTime,
                 TriggerPrice = x.TriggerPrice,
@@ -428,7 +429,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                                 OrderPrice = x.Price,
                                 OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? x.Quantity : null),
                                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
-                                Fee = x.Fees?.NewFees?.TotalFee == null ? null : Math.Abs(x.Fees.NewFees.TotalFee),
+                                // Positive fees means rebate which we're not currently supported
+                                Fee = x.Fees?.NewFees?.TotalFee == null ? null : x.Fees.NewFees.TotalFee > 0 ? 0 : Math.Abs(x.Fees.NewFees.TotalFee),
                                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                                 UpdateTime = x.UpdateTime,
                                 TriggerPrice = x.TriggerPrice,
@@ -458,7 +460,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 x.Price,
                 x.CreateTime)
             {
-                Fee = Math.Abs(x.Fees.TotalFee),
+                // Positive fees means rebate which we're not currently supported
+                Fee = x.Fees.TotalFee > 0 ? 0 : Math.Abs(x.Fees.TotalFee),
                 FeeAsset = x.Fees.FeeAsset,
                 Role = x.Role == Role.Taker ? SharedRole.Taker: SharedRole.Maker
             }).ToArray());
@@ -509,7 +512,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                                x.Price,
                                x.CreateTime)
                             {
-                                Fee = Math.Abs(x.Fees.TotalFee),
+                                // Positive fees means rebate which we're not currently supported
+                                Fee = x.Fees.TotalFee > 0 ? 0 : Math.Abs(x.Fees.TotalFee),
                                 FeeAsset = x.Fees.FeeAsset,
                                 Role = x.Role == Role.Taker ? SharedRole.Taker : SharedRole.Maker
                             })
