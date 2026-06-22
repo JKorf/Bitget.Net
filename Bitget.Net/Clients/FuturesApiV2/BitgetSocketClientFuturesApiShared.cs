@@ -144,7 +144,12 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await SubscribeToBalanceUpdatesAsync(
                 productType,
                 update => {
-                    handler(update.ToType(update.Data.Select(x => new SharedBalance(x.MarginAsset, x.Available, x.Equity)).ToArray()));
+                    handler(update.ToType(update.Data.Select(x => 
+                        new SharedBalance(
+                            SupportedTradingModes, 
+                            x.MarginAsset, 
+                            x.Available,
+                            x.Equity)).ToArray()));
                 },
                 ct: ct).ConfigureAwait(false);
 

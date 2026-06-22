@@ -260,7 +260,12 @@ namespace Bitget.Net.Clients.SpotApiV2
                 if (!result.Success)
                     return HttpResult.Fail<SharedBalance[]>(result);
 
-                return HttpResult.Ok(result, result.Data.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + (x.Frozen ?? 0))).ToArray());
+                return HttpResult.Ok(result, result.Data.Select(x => 
+                    new SharedBalance(
+                        SupportedTradingModes, 
+                        x.Asset,
+                        x.Available,
+                        x.Available + (x.Frozen ?? 0))).ToArray());
             }
             else
             {
@@ -268,7 +273,12 @@ namespace Bitget.Net.Clients.SpotApiV2
                 if (!result.Success)
                     return HttpResult.Fail<SharedBalance[]>(result);
 
-                return HttpResult.Ok(result, result.Data.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + x.Frozen)).ToArray());
+                return HttpResult.Ok(result, result.Data.Select(x => 
+                    new SharedBalance(
+                        SupportedTradingModes, 
+                        x.Asset,
+                        x.Available,
+                        x.Available + x.Frozen)).ToArray());
             }
         }
 

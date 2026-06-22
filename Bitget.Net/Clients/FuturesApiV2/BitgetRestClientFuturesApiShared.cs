@@ -38,8 +38,16 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return HttpResult.Fail<SharedBalance[]>(resultUsdc.Result);
 
             var result = new List<SharedBalance>();
-            result.AddRange(resultUsdt.Result.Data.Select(x => new SharedBalance("USDT", x.MaxTransferable, x.Available)));
-            result.AddRange(resultUsdc.Result.Data.Select(x => new SharedBalance("USDC", x.MaxTransferable, x.Available)));
+            result.AddRange(resultUsdt.Result.Data.Select(x => new SharedBalance(
+                        SupportedTradingModes, 
+                        "USDT",
+                        x.MaxTransferable, 
+                        x.Available)));
+            result.AddRange(resultUsdc.Result.Data.Select(x => new SharedBalance(
+                        SupportedTradingModes, 
+                        "USDC", 
+                        x.MaxTransferable,
+                        x.Available)));
             return HttpResult.Ok(resultUsdt.Result, result.ToArray());
         }
 

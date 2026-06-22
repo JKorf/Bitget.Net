@@ -122,7 +122,12 @@ namespace Bitget.Net.Clients.SpotApiV2
                     if (update.UpdateType == SocketUpdateType.Snapshot)
                         return;
 
-                    handler(update.ToType<SharedBalance[]>(update.Data.Select(x => new SharedBalance(x.Asset, x.Available, x.Available + (x.Locked ?? 0) + (x.Frozen ?? 0))).ToArray()));
+                    handler(update.ToType<SharedBalance[]>(update.Data.Select(x =>
+                        new SharedBalance(
+                            SupportedTradingModes, 
+                            x.Asset,
+                            x.Available,
+                            x.Available + (x.Locked ?? 0) + (x.Frozen ?? 0))).ToArray()));
                 },
                 ct: ct).ConfigureAwait(false);
 
