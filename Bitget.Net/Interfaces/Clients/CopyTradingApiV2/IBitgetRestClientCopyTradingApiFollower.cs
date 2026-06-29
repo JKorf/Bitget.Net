@@ -19,7 +19,7 @@ namespace Bitget.Net.Interfaces.Clients.CopyTradingApiV2
         /// <param name="pageSize">Number of quiries</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetCopyTradingMyTrader[]>> GetMyTradersAsync(DateTime? startTime = null, DateTime? endTime = null, int pageNo = 1, int pageSize = 20, CancellationToken ct = default);
+        Task<HttpResult<BitgetCopyTradingMyTrader[]>> GetMyTradersAsync(DateTime? startTime = null, DateTime? endTime = null, int pageNo = 1, int pageSize = 20, CancellationToken ct = default);
 
         /// <summary>
         /// Get Current Tracking Orders
@@ -35,6 +35,6 @@ namespace Bitget.Net.Interfaces.Clients.CopyTradingApiV2
         /// <param name="traderId">Trader ID</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetCopyTradingCurrentOrders>> GetCurrentOrdersAsync(BitgetProductTypeV2 productType, string? idLessThan = null, string? idGreaterThan = null, DateTime? startTime = null, DateTime? endTime = null, int limit = 20, string? symbol = null, string? traderId = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetCopyTradingCurrentOrders>> GetCurrentOrdersAsync(BitgetProductTypeV2 productType, string? idLessThan = null, string? idGreaterThan = null, DateTime? startTime = null, DateTime? endTime = null, int limit = 20, string? symbol = null, string? traderId = null, CancellationToken ct = default);
     }
 }

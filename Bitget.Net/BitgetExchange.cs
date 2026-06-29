@@ -27,7 +27,8 @@ namespace Bitget.Net
                 ["https://bitgetlimited.github.io/apidoc/en/mix/#welcome",
                  "https://www.bitget.com/api-doc"],
                 PlatformType.CryptoCurrencyExchange,
-                CentralizationType.Centralized
+                CentralizationType.Centralized,
+                BitgetEnvironment.All
                 );
 
         /// <summary>
@@ -64,6 +65,11 @@ namespace Bitget.Net
         public static ExchangeType Type { get; } = ExchangeType.CEX;
 
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<BitgetSourceGenerationContext>();
+        internal static ParameterSerializationSettings _parameterSerializationSettings = new ParameterSerializationSettings
+        {
+            Decimal = DecimalSerialization.String,
+            DateTimes = DateTimeSerialization.MillisecondsNumber
+        };
 
         /// <summary>
         /// Aliases for Bitget assets
@@ -94,7 +100,7 @@ namespace Bitget.Net
         /// <summary>
         /// Rate limiter configuration for the Bitget API
         /// </summary>
-        public static BitgetRateLimiters RateLimiter { get; } = new BitgetRateLimiters();
+        public static BitgetRateLimiters RateLimiter { get; set; } = new BitgetRateLimiters();
     }
 
     /// <summary>
@@ -113,13 +119,19 @@ namespace Bitget.Net
         public event Action<RateLimitUpdateEvent> RateLimitUpdated;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        internal BitgetRateLimiters()
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public BitgetRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Initialize();
         }
 
-        private void Initialize()
+        /// <summary>
+        /// Initialize the rate limits
+        /// </summary>
+        protected virtual void Initialize()
         {
             Overall = new RateLimitGate("Overall")
                                     .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, Array.Empty<IGuardFilter>(), 6000, TimeSpan.FromSeconds(60), RateLimitWindowType.FixedAfterFirst)); // Overall limit of 6000 per ip per minute

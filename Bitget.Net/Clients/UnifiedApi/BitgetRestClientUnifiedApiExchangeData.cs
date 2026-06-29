@@ -21,25 +21,28 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
+        public async Task<HttpResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/public/time", BitgetExchange.RateLimiter.Overall, 1, false, preventCaching: true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/public/time", BitgetExchange.RateLimiter.Overall, 1, false, preventCaching: true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetServerTime>(request, null, ct).ConfigureAwait(false);
-            return result.As(result.Data?.ServerTime ?? default);
+            if (!result.Success)
+                return HttpResult.Fail<DateTime>(result);
+
+            return HttpResult.Ok(result, result.Data.ServerTime);
         }
 
         #region Get Tickers
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaSpotTicker[]>> GetSpotTickersAsync(
+        public async Task<HttpResult<BitgetUaSpotTicker[]>> GetSpotTickersAsync(
             string? symbol = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", ProductCategory.Spot);
-            parameters.AddOptional("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/tickers", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", ProductCategory.Spot);
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/tickers", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaSpotTicker[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -49,15 +52,15 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Tickers
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaFuturesTicker[]>> GetFuturesTickersAsync(
+        public async Task<HttpResult<BitgetUaFuturesTicker[]>> GetFuturesTickersAsync(
             ProductCategory category,
             string? symbol = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
-            parameters.AddOptional("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/tickers", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/tickers", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaFuturesTicker[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -67,14 +70,14 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Spot Symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaSpotSymbol[]>> GetSpotSymbolsAsync(
+        public async Task<HttpResult<BitgetUaSpotSymbol[]>> GetSpotSymbolsAsync(
             string? symbol = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", ProductCategory.Spot);
-            parameters.AddOptional("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/instruments", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", ProductCategory.Spot);
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/instruments", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaSpotSymbol[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -84,14 +87,14 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Margin Symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaMarginSymbol[]>> GetMarginSymbolsAsync(
+        public async Task<HttpResult<BitgetUaMarginSymbol[]>> GetMarginSymbolsAsync(
             string? symbol = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", ProductCategory.Margin);
-            parameters.AddOptional("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/instruments", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", ProductCategory.Margin);
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/instruments", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaMarginSymbol[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -101,15 +104,15 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Futures Symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaFuturesSymbol[]>> GetFuturesSymbolsAsync(
+        public async Task<HttpResult<BitgetUaFuturesSymbol[]>> GetFuturesSymbolsAsync(
             ProductCategory category,
             string? symbol = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
-            parameters.AddOptional("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/instruments", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/instruments", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaFuturesSymbol[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -119,17 +122,17 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Order Book
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaOrderBook>> GetOrderBookAsync(
+        public async Task<HttpResult<BitgetUaOrderBook>> GetOrderBookAsync(
             ProductCategory category,
             string symbol,
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
             parameters.Add("symbol", symbol);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/orderbook", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/orderbook", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaOrderBook>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -139,17 +142,17 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Recent Trades
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaTrade[]>> GetRecentTradesAsync(
+        public async Task<HttpResult<BitgetUaTrade[]>> GetRecentTradesAsync(
             ProductCategory category,
             string symbol,
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
             parameters.Add("symbol", symbol);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/fills", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/fills", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaTrade[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -159,9 +162,9 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Proof Of Reserves
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaProofOfReserves>> GetProofOfReservesAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BitgetUaProofOfReserves>> GetProofOfReservesAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/proof-of-reserves", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/proof-of-reserves", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaProofOfReserves>(request, null, ct).ConfigureAwait(false);
             return result;
         }
@@ -171,15 +174,15 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Open Interest
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaOpenInterest>> GetOpenInterestAsync(
+        public async Task<HttpResult<BitgetUaOpenInterest>> GetOpenInterestAsync(
             ProductCategory category,
             string? symbol = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
-            parameters.AddOptional("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/open-interest", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/open-interest", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaOpenInterest>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -189,7 +192,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Klines
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaKline[]>> GetKlinesAsync(
+        public async Task<HttpResult<BitgetUaKline[]>> GetKlinesAsync(
             ProductCategory category,
             string symbol,
             KlineUaInterval interval,
@@ -199,15 +202,15 @@ namespace Bitget.Net.Clients.UnifiedApi
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
             parameters.Add("symbol", symbol);
-            parameters.AddEnum("interval", interval);
-            parameters.AddOptionalEnum("type", type);
-            parameters.AddOptionalMillisecondsString("startTime", startTime);
-            parameters.AddOptionalMillisecondsString("endTime", endTime);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/candles", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            parameters.Add("interval", interval);
+            parameters.Add("type", type);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/candles", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaKline[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -217,7 +220,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Kline History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaKline[]>> GetKlineHistoryAsync(
+        public async Task<HttpResult<BitgetUaKline[]>> GetKlineHistoryAsync(
             ProductCategory category,
             string symbol,
             KlineUaInterval interval,
@@ -227,15 +230,15 @@ namespace Bitget.Net.Clients.UnifiedApi
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
             parameters.Add("symbol", symbol);
-            parameters.AddEnum("interval", interval);
-            parameters.AddOptionalEnum("type", type);
-            parameters.AddOptionalMillisecondsString("startTime", startTime);
-            parameters.AddOptionalMillisecondsString("endTime", endTime);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/history-candles", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            parameters.Add("interval", interval);
+            parameters.Add("type", type);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/history-candles", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaKline[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -245,11 +248,11 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Funding Rate
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaFundingRate[]>> GetFundingRateAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetUaFundingRate[]>> GetFundingRateAsync(string symbol, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/current-fund-rate", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/current-fund-rate", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaFundingRate[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -259,21 +262,24 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Funding Rate History
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaFundingRateHistory[]>> GetFundingRateHistoryAsync(
+        public async Task<HttpResult<BitgetUaFundingRateHistory[]>> GetFundingRateHistoryAsync(
             ProductCategory category,
             string symbol,
             int? page = null,
             int? pageSize = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
             parameters.Add("symbol", symbol);
-            parameters.AddOptional("cursor", page);
-            parameters.AddOptional("limit", pageSize);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/history-fund-rate", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            parameters.Add("cursor", page);
+            parameters.Add("limit", pageSize);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/history-fund-rate", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaFundingRateHistoryWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<BitgetUaFundingRateHistory[]>(result.Data?.ResultList);
+            if (!result.Success)
+                return HttpResult.Fail<BitgetUaFundingRateHistory[]>(result);
+
+            return HttpResult.Ok(result, result.Data.ResultList);
         }
 
         #endregion
@@ -281,9 +287,9 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Discount Rate
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaDiscountRates[]>> GetDiscountRateAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BitgetUaDiscountRates[]>> GetDiscountRateAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/discount-rate", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/discount-rate", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaDiscountRates[]>(request, null, ct).ConfigureAwait(false);
             return result;
         }
@@ -293,11 +299,11 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Margin Loan Interest Rates
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaLoanInterestRate>> GetMarginLoanInterestRatesAsync(string asset, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetUaLoanInterestRate>> GetMarginLoanInterestRatesAsync(string asset, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/margin-loans", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/margin-loans", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaLoanInterestRate>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -307,17 +313,17 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Position Tiers
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaPositionTier[]>> GetPositionTiersAsync(
+        public async Task<HttpResult<BitgetUaPositionTier[]>> GetPositionTiersAsync(
             ProductCategory category,
             string? symbol = null,
             string? asset = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/position-tier", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
+            parameters.Add("symbol", symbol);
+            parameters.Add("coin", asset);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/position-tier", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaPositionTier[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -327,15 +333,15 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Open Interest Limit
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaOpenInterestLimit[]>> GetOpenInterestLimitAsync(
+        public async Task<HttpResult<BitgetUaOpenInterestLimit[]>> GetOpenInterestLimitAsync(
             ProductCategory category,
             string? symbol = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("category", category);
-            parameters.AddOptional("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/oi-limit", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
+            parameters.Add("symbol", symbol);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/oi-limit", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaOpenInterestLimit[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -345,11 +351,11 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Index Components
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetUaIndexComponents>> GetIndexComponentsAsync(string symbol, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetUaIndexComponents>> GetIndexComponentsAsync(string symbol, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/market/index-components", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/index-components", BitgetExchange.RateLimiter.Overall, 1, false, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaIndexComponents>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }

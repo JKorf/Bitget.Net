@@ -20,45 +20,45 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetPosition[]>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetPosition[]>> GetPositionAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/position/single-position", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/position/single-position", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetPosition[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetPosition[]>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetPosition[]>> GetPositionsAsync(BitgetProductTypeV2 productType, string marginAsset, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
             parameters.Add("marginCoin", marginAsset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/position/all-position", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/position/all-position", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetPosition[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetPositionHistory>> GetPositionHistoryAsync(BitgetProductTypeV2? productType = null, string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("productType", productType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("idLessThan", idLessThan);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/position/history-position", BitgetExchange.RateLimiter.Overall, 1, true,
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("idLessThan", idLessThan);
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/position/history-position", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetPositionHistory>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderId>> PlaceOrderAsync(
+        public async Task<HttpResult<BitgetOrderId>> PlaceOrderAsync(
             BitgetProductTypeV2 productType, 
             string symbol, 
             string marginAsset,
@@ -80,31 +80,31 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (tradeSide.HasValue && (tradeSide != TradeSide.Open && tradeSide != TradeSide.Close))
                 throw new ArgumentException("Trade side should be either Open or Close if provided", nameof(tradeSide));
 
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            parameters.AddEnum("side", side);
-            parameters.AddEnum("orderType", type);
-            parameters.AddEnum("marginMode", marginMode);
-            parameters.AddString("size", quantity);
-            parameters.AddOptionalString("price", price);
-            parameters.AddOptionalEnum("force", timeInForce);
-            parameters.AddOptionalEnum("tradeSide", tradeSide);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptional("reduceOnly", reduceOnly == null ? null : reduceOnly == true ? "YES" : "NO");
-            parameters.AddOptionalString("presetStopSurplusPrice", takeProfitPrice);
-            parameters.AddOptionalString("presetStopLossPrice", stopLossPrice);
-            parameters.AddOptionalString("presetStopSurplusExecutePrice", takeProfitLimitPrice);
-            parameters.AddOptionalString("presetStopLossExecutePrice", stopLossLimitPrice);
+            parameters.Add("side", side);
+            parameters.Add("orderType", type);
+            parameters.Add("marginMode", marginMode);
+            parameters.Add("size", quantity);
+            parameters.Add("price", price);
+            parameters.Add("force", timeInForce);
+            parameters.Add("tradeSide", tradeSide);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("reduceOnly", reduceOnly == null ? null : reduceOnly == true ? "YES" : "NO");
+            parameters.Add("presetStopSurplusPrice", takeProfitPrice);
+            parameters.Add("presetStopLossPrice", stopLossPrice);
+            parameters.Add("presetStopSurplusExecutePrice", takeProfitLimitPrice);
+            parameters.Add("presetStopLossExecutePrice", stopLossLimitPrice);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/place-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/place-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
+        public async Task<HttpResult<CallResult<BitgetOrderId>[]>> PlaceMultipleOrdersAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -112,34 +112,34 @@ namespace Bitget.Net.Clients.FuturesApiV2
             IEnumerable<BitgetFuturesPlaceOrderRequest> orders,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            parameters.AddEnum("marginMode", marginMode);
+            parameters.Add("marginMode", marginMode);
             parameters.Add("orderList", orders.ToArray());
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/batch-place-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/batch-place-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var resultData = await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
-            if (!resultData)
-                return resultData.As<CallResult<BitgetOrderId>[]>(default);
+            if (!resultData.Success)
+                return HttpResult.Fail<CallResult<BitgetOrderId>[]>(resultData);
 
             var result = new List<CallResult<BitgetOrderId>>();
             foreach (var item in resultData.Data.Success)
-                result.Add(new CallResult<BitgetOrderId>(item!));
+                result.Add(CallResult<BitgetOrderId>.Ok(item!));
 
             foreach (var item in resultData.Data.Failed)
-                result.Add(new CallResult<BitgetOrderId>(new ServerError(item.ErrorCode!.Value.ToString(), _baseClient.GetErrorInfo(item.ErrorCode!.Value, item.ErrorMessage!))));
+                result.Add(CallResult<BitgetOrderId>.Fail(new ServerError(item.ErrorCode!.Value.ToString(), _baseClient.GetErrorInfo(item.ErrorCode!.Value, item.ErrorMessage!))));
 
             if (result.All(x => !x.Success))
-                return resultData.AsErrorWithData(new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All orders failed")), result.ToArray());
+                return HttpResult.Fail(resultData, new ServerError(new ErrorInfo(ErrorType.AllOrdersFailed, "All orders failed")), result.ToArray());
 
-            return resultData.As(result.ToArray());
+            return HttpResult.Ok(resultData, result.ToArray());
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderId>> EditOrderAsync(
+        public async Task<HttpResult<BitgetOrderId>> EditOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string? orderId = null,
@@ -151,24 +151,24 @@ namespace Bitget.Net.Clients.FuturesApiV2
             decimal? newStopLossPrice = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
             parameters.Add("symbol", symbol);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptional("newClientOid", newClientOrderId);
-            parameters.AddOptionalString("newPrice", newPrice);
-            parameters.AddOptionalString("newSize", newQuantity);
-            parameters.AddOptionalString("newPresetStopSurplusPrice", newTakeProfit);
-            parameters.AddOptionalString("newPresetStopLossPrice", newStopLossPrice);
+            parameters.Add("orderId", orderId);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("newClientOid", newClientOrderId);
+            parameters.Add("newPrice", newPrice);
+            parameters.Add("newSize", newQuantity);
+            parameters.Add("newPresetStopSurplusPrice", newTakeProfit);
+            parameters.Add("newPresetStopLossPrice", newStopLossPrice);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/modify-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/modify-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderId>> CancelOrderAsync(
+        public async Task<HttpResult<BitgetOrderId>> CancelOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string? orderId = null,
@@ -176,75 +176,75 @@ namespace Bitget.Net.Clients.FuturesApiV2
             string? marginAsset = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
             parameters.Add("symbol", symbol);
-            parameters.AddOptional("marginCoin", marginAsset);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.Add("marginCoin", marginAsset);
+            parameters.Add("orderId", orderId);
+            parameters.Add("clientOid", clientOrderId);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/cancel-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/cancel-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderMultipleResult>> CancelMultipleOrdersAsync(
+        public async Task<HttpResult<BitgetOrderMultipleResult>> CancelMultipleOrdersAsync(
             BitgetProductTypeV2 productType,
             IEnumerable<BitgetCancelOrderRequest> orders,
             string? symbol = null,
             string? marginAsset = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("marginCoin", marginAsset);
-            parameters.AddOptional("orderIdList", orders.ToArray());
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("marginCoin", marginAsset);
+            parameters.Add("orderIdList", orders.ToArray());
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/batch-cancel-orders", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/batch-cancel-orders", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderMultipleResult>> CancelAllOrdersAsync(
+        public async Task<HttpResult<BitgetOrderMultipleResult>> CancelAllOrdersAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? marginAsset = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("marginCoin", marginAsset?.ToUpperInvariant());
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("marginCoin", marginAsset?.ToUpperInvariant());
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/cancel-all-orders", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/cancel-all-orders", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFuturesOrder>> GetOrderAsync(
+        public async Task<HttpResult<BitgetFuturesOrder>> GetOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string? orderId = null,
             string? clientOrderId = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
             parameters.Add("symbol", symbol);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptional("clientOid", clientOrderId);
+            parameters.Add("orderId", orderId);
+            parameters.Add("clientOid", clientOrderId);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/detail", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/order/detail", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetFuturesOrder>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFuturesOrders>> GetOpenOrdersAsync(
+        public async Task<HttpResult<BitgetFuturesOrders>> GetOpenOrdersAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? orderId = null,
@@ -256,31 +256,31 @@ namespace Bitget.Net.Clients.FuturesApiV2
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptionalEnum("status", status);
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("idLessThan", idLessThan);
-            parameters.AddOptional("limit", limit);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderId", orderId);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("status", status);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("idLessThan", idLessThan);
+            parameters.Add("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/orders-pending", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/order/orders-pending", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetFuturesOrders>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
+            if (!result.Success)
                 return result;
 
             if (result.Data.Orders == null)
                 result.Data.Orders = Array.Empty<BitgetFuturesOrder>();
 
-            return result.As(result.Data);
+            return result;
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFuturesOrders>> GetClosedOrdersAsync(
+        public async Task<HttpResult<BitgetFuturesOrders>> GetClosedOrdersAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? orderId = null,
@@ -291,21 +291,21 @@ namespace Bitget.Net.Clients.FuturesApiV2
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("idLessThan", idLessThan);
-            parameters.AddOptional("limit", limit);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderId", orderId);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("idLessThan", idLessThan);
+            parameters.Add("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/orders-history", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/order/orders-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             var result = await _baseClient.SendAsync<BitgetFuturesOrders>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
-                return result.As<BitgetFuturesOrders>(default);
+            if (!result.Success)
+                return result;
             
             if (result.Data.Orders == null)
                 result.Data.Orders = Array.Empty<BitgetFuturesOrder>();
@@ -314,7 +314,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFuturesUserTrades>> GetUserTradesAsync(
+        public async Task<HttpResult<BitgetFuturesUserTrades>> GetUserTradesAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? orderId = null,
@@ -324,22 +324,22 @@ namespace Bitget.Net.Clients.FuturesApiV2
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("idLessThan", idLessThan);
-            parameters.AddOptional("limit", limit);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderId", orderId);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("idLessThan", idLessThan);
+            parameters.Add("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/fills", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/order/fills", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetFuturesUserTrades>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFuturesUserTrades>> GetHistoricalUserTradesAsync(
+        public async Task<HttpResult<BitgetFuturesUserTrades>> GetHistoricalUserTradesAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             string? orderId = null,
@@ -349,39 +349,39 @@ namespace Bitget.Net.Clients.FuturesApiV2
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("idLessThan", idLessThan);
-            parameters.AddOptional("limit", limit);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderId", orderId);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("idLessThan", idLessThan);
+            parameters.Add("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/fill-history", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/order/fill-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetFuturesUserTrades>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderMultipleResult>> ClosePositionsAsync(
+        public async Task<HttpResult<BitgetOrderMultipleResult>> ClosePositionsAsync(
             BitgetProductTypeV2 productType,
             string? symbol = null,
             PositionSide? side = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptionalEnum("holdSide", side);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("holdSide", side);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/close-positions", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/close-positions", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderId>> PlaceTpSlOrderAsync(
+        public async Task<HttpResult<BitgetOrderId>> PlaceTpSlOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -402,27 +402,27 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 throw new ArgumentException("Either hedgeModePositionSide (for two way position mode) or oneWaySide (for one way position mode) should be provided");
             }
 
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType); 
-            parameters.AddEnum("planType", planType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType); 
+            parameters.Add("planType", planType);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            parameters.AddOptionalString("size", quantity);
-            parameters.AddString("triggerPrice", triggerPrice);
-            parameters.AddOptionalEnum("holdSide", hedgeModePositionSide);
-            parameters.AddOptionalEnum("holdSide", oneWaySide);
-            parameters.AddOptionalEnum("triggerType", triggerPriceType);
-            parameters.AddOptionalString("rangeRate", trailingStopRate);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptionalString("executePrice", orderPrice);
+            parameters.Add("size", quantity);
+            parameters.Add("triggerPrice", triggerPrice);
+            parameters.Add("holdSide", hedgeModePositionSide);
+            parameters.Add("holdSide", oneWaySide);
+            parameters.Add("triggerType", triggerPriceType);
+            parameters.Add("rangeRate", trailingStopRate);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("executePrice", orderPrice);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/place-tpsl-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/place-tpsl-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderId>> PlaceTriggerOrderAsync(
+        public async Task<HttpResult<BitgetOrderId>> PlaceTriggerOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -446,52 +446,52 @@ namespace Bitget.Net.Clients.FuturesApiV2
             TriggerPriceType? stopLossPriceType = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddEnum("planType", planType);
-            parameters.AddEnum("marginMode", marginMode);
-            parameters.AddEnum("side", side);
-            parameters.AddEnum("orderType", orderType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("planType", planType);
+            parameters.Add("marginMode", marginMode);
+            parameters.Add("side", side);
+            parameters.Add("orderType", orderType);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            parameters.AddString("size", quantity);
-            parameters.AddOptionalString("price", orderPrice);
-            parameters.AddString("triggerPrice", triggerPrice);
-            parameters.AddEnum("triggerType", triggerPriceType ?? TriggerPriceType.LastPrice);
-            parameters.AddOptionalString("callbackRatio", trailingStopRate);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptional("reduceOnly", reduceOnly == null ? null : reduceOnly == true ? "YES" : "NO");
-            parameters.AddOptionalEnum("tradeSide", tradeSide);
-            parameters.AddOptionalString("stopSurplusTriggerPrice", takeProfitTriggerPrice);
-            parameters.AddOptionalString("stopSurplusExecutePrice", takeProfitOrderPrice);
-            parameters.AddOptionalEnum("stopSurplusTriggerType", takeProfitPriceType);
-            parameters.AddOptionalString("stopLossTriggerPrice", stopLossTriggerPrice);
-            parameters.AddOptionalString("stopLossExecutePrice", stopLossOrderPrice);
-            parameters.AddOptionalEnum("stopLossTriggerType", stopLossPriceType);
+            parameters.Add("size", quantity);
+            parameters.Add("price", orderPrice);
+            parameters.Add("triggerPrice", triggerPrice);
+            parameters.Add("triggerType", triggerPriceType ?? TriggerPriceType.LastPrice);
+            parameters.Add("callbackRatio", trailingStopRate);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("reduceOnly", reduceOnly == null ? null : reduceOnly == true ? "YES" : "NO");
+            parameters.Add("tradeSide", tradeSide);
+            parameters.Add("stopSurplusTriggerPrice", takeProfitTriggerPrice);
+            parameters.Add("stopSurplusExecutePrice", takeProfitOrderPrice);
+            parameters.Add("stopSurplusTriggerType", takeProfitPriceType);
+            parameters.Add("stopLossTriggerPrice", stopLossTriggerPrice);
+            parameters.Add("stopLossExecutePrice", stopLossOrderPrice);
+            parameters.Add("stopLossTriggerType", stopLossPriceType);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/place-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/place-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
+        public async Task<HttpResult<BitgetTriggerSubOrder[]>> GetTriggerSubOrdersAsync(
             BitgetProductTypeV2 productType,
             string triggerOrderId,
             TriggerPlanType planType,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("planOrderId", triggerOrderId);
-            parameters.AddEnum("productType", productType);
-            parameters.AddEnum("planType", planType);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/plan-sub-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            parameters.Add("productType", productType);
+            parameters.Add("planType", planType);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/order/plan-sub-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetTriggerSubOrder[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderId>> EditTriggerOrderAsync(
+        public async Task<HttpResult<BitgetOrderId>> EditTriggerOrderAsync(
             BitgetProductTypeV2 productType,
             string? orderId = null,
             string? clientOrderId = null,
@@ -508,29 +508,29 @@ namespace Bitget.Net.Clients.FuturesApiV2
             TriggerPriceType? newStopLossPriceType = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptionalString("size", newQuantity);
-            parameters.AddOptionalString("price", newPrice);
-            parameters.AddOptionalString("triggerPrice", newTriggerPrice);
-            parameters.AddOptionalEnum("triggerType", newTriggerType);
-            parameters.AddOptionalString("callbackRatio", newTrailingStopRate);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptionalString("stopSurplusTriggerPrice", newTakeProfitTriggerPrice);
-            parameters.AddOptionalString("stopSurplusExecutePrice", newTakeProfitOrderPrice);
-            parameters.AddOptionalEnum("stopSurplusTriggerType", newTakeProfitPriceType);
-            parameters.AddOptionalString("stopLossTriggerPrice", newStopLossTriggerPrice);
-            parameters.AddOptionalString("stopLossExecutePrice", newStopLossOrderPrice);
-            parameters.AddOptionalEnum("stopLossTriggerType", newStopLossPriceType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("size", newQuantity);
+            parameters.Add("price", newPrice);
+            parameters.Add("triggerPrice", newTriggerPrice);
+            parameters.Add("triggerType", newTriggerType);
+            parameters.Add("callbackRatio", newTrailingStopRate);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("orderId", orderId);
+            parameters.Add("stopSurplusTriggerPrice", newTakeProfitTriggerPrice);
+            parameters.Add("stopSurplusExecutePrice", newTakeProfitOrderPrice);
+            parameters.Add("stopSurplusTriggerType", newTakeProfitPriceType);
+            parameters.Add("stopLossTriggerPrice", newStopLossTriggerPrice);
+            parameters.Add("stopLossExecutePrice", newStopLossOrderPrice);
+            parameters.Add("stopLossTriggerType", newStopLossPriceType);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/modify-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/modify-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderId>> EditTpSlOrderAsync(
+        public async Task<HttpResult<BitgetOrderId>> EditTpSlOrderAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -543,25 +543,25 @@ namespace Bitget.Net.Clients.FuturesApiV2
             decimal? newTrailingStopRate = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptionalString("size", newQuantity);
-            parameters.AddOptionalString("executePrice", newOrderPrice);
-            parameters.AddOptionalString("triggerPrice", newTriggerPrice);
-            parameters.AddOptionalEnum("triggerType", newTriggerType);
-            parameters.AddOptionalString("rangeRate", newTrailingStopRate);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptional("orderId", orderId);
+            parameters.Add("productType", productType);
+            parameters.Add("size", newQuantity);
+            parameters.Add("executePrice", newOrderPrice);
+            parameters.Add("triggerPrice", newTriggerPrice);
+            parameters.Add("triggerType", newTriggerType);
+            parameters.Add("rangeRate", newTrailingStopRate);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("orderId", orderId);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/modify-tpsl-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/modify-tpsl-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderId>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFuturesTriggerOrders>> GetOpenTriggerOrdersAsync(
+        public async Task<HttpResult<BitgetFuturesTriggerOrders>> GetOpenTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
             TriggerPlanTypeFilter planType,
             string? symbol = null,
@@ -573,23 +573,23 @@ namespace Bitget.Net.Clients.FuturesApiV2
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddEnum("planType", planType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptional("idLessThan", idLessThan);
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/orders-plan-pending", BitgetExchange.RateLimiter.Overall, 1, true,
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("planType", planType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderId", orderId);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("idLessThan", idLessThan);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/order/orders-plan-pending", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetFuturesTriggerOrders>(request, parameters, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetFuturesTriggerOrders>> GetClosedTriggerOrdersAsync(
+        public async Task<HttpResult<BitgetFuturesTriggerOrders>> GetClosedTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
             TriggerPlanTypeFilter planType,
             string? symbol = null,
@@ -602,24 +602,22 @@ namespace Bitget.Net.Clients.FuturesApiV2
             int? limit = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddEnum("planType", planType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("orderId", orderId);
-            parameters.AddOptional("clientOid", clientOrderId);
-            parameters.AddOptional("idLessThan", idLessThan);
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptional("limit", limit);
-            parameters.AddOptionalEnum("planStatus", status);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/mix/order/orders-plan-history", BitgetExchange.RateLimiter.Overall, 1, true,
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("planType", planType);
+            parameters.Add("symbol", symbol);
+            parameters.Add("orderId", orderId);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("idLessThan", idLessThan);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            parameters.Add("planStatus", status);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/mix/order/orders-plan-history", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
-
             var result = await _baseClient.SendAsync<BitgetFuturesTriggerOrders>(request, parameters, ct).ConfigureAwait(false);
-
-            if (!result)
-                return result.As<BitgetFuturesTriggerOrders>(default);
+            if (!result.Success)
+                return result;
 
             if (result.Data.Orders == null)
                 result.Data.Orders = Array.Empty<BitgetFuturesTriggerOrder>();
@@ -628,7 +626,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetOrderMultipleResult>> CancelTriggerOrdersAsync(
+        public async Task<HttpResult<BitgetOrderMultipleResult>> CancelTriggerOrdersAsync(
             BitgetProductTypeV2 productType,
             CancelTriggerPlanTypeFilter? planType = null,
             string? symbol = null,
@@ -636,13 +634,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
             IEnumerable<BitgetCancelOrderRequest>? orderIds = null,
             CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
-            parameters.AddOptionalEnum("planType", planType);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("orderIdList", orderIds == null ? null : orderIds.ToArray()!);
-            parameters.AddOptional("marginCoin", marginCoin);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/cancel-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
+            parameters.Add("planType", planType);
+            parameters.Add("symbol", symbol);
+            parameters.AddArray("orderIdList", orderIds == null ? null : orderIds.ToArray()!);
+            parameters.Add("marginCoin", marginCoin);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/cancel-plan-order", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await _baseClient.SendAsync<BitgetOrderMultipleResult>(request, parameters, ct).ConfigureAwait(false);
         }
@@ -650,25 +648,25 @@ namespace Bitget.Net.Clients.FuturesApiV2
         #region Set Position Tp Sl
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetPositionTpSl[]>> SetPositionTpSlAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, PositionSide holdSide, decimal? tpTriggerPrice = null, decimal? tpTriggerQuantity = null, TriggerPriceType? tpTriggerType = null, decimal? tpLimitPrice = null, decimal? slTriggerPrice = null, decimal? slTriggerQuantity = null, TriggerPriceType? slTriggerType = null, decimal? slLimitPrice = null, SelfTradePreventionMode? stpMode = null, string? tpClientOrderId = null, string? slClientOrderId = null, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetPositionTpSl[]>> SetPositionTpSlAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, PositionSide holdSide, decimal? tpTriggerPrice = null, decimal? tpTriggerQuantity = null, TriggerPriceType? tpTriggerType = null, decimal? tpLimitPrice = null, decimal? slTriggerPrice = null, decimal? slTriggerQuantity = null, TriggerPriceType? slTriggerType = null, decimal? slLimitPrice = null, SelfTradePreventionMode? stpMode = null, string? tpClientOrderId = null, string? slClientOrderId = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("productType", productType);
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("productType", productType);
             parameters.Add("symbol", symbol);
             parameters.Add("marginCoin", marginAsset);
-            parameters.AddEnum("holdSide", holdSide);
-            parameters.AddOptionalString("stopSurplusTriggerPrice", tpTriggerPrice);
-            parameters.AddOptionalString("stopSurplusSize", tpTriggerQuantity);
-            parameters.AddOptionalEnum("stopSurplusTriggerType", tpTriggerType);
-            parameters.AddOptionalString("stopSurplusExecutePrice", tpLimitPrice);
-            parameters.AddOptionalString("stopLossTriggerPrice", slTriggerPrice);
-            parameters.AddOptionalString("stopLossSize", slTriggerQuantity);
-            parameters.AddOptionalEnum("stopLossTriggerType", slTriggerType);
-            parameters.AddOptionalString("stopLossExecutePrice", slLimitPrice);
-            parameters.AddOptionalEnum("stpMode", stpMode);
-            parameters.AddOptional("stopSurplusClientOid", tpClientOrderId);
-            parameters.AddOptional("stopLossClientOid", slClientOrderId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/mix/order/place-pos-tpsl", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            parameters.Add("holdSide", holdSide);
+            parameters.Add("stopSurplusTriggerPrice", tpTriggerPrice);
+            parameters.Add("stopSurplusSize", tpTriggerQuantity);
+            parameters.Add("stopSurplusTriggerType", tpTriggerType);
+            parameters.Add("stopSurplusExecutePrice", tpLimitPrice);
+            parameters.Add("stopLossTriggerPrice", slTriggerPrice);
+            parameters.Add("stopLossSize", slTriggerQuantity);
+            parameters.Add("stopLossTriggerType", slTriggerType);
+            parameters.Add("stopLossExecutePrice", slLimitPrice);
+            parameters.Add("stpMode", stpMode);
+            parameters.Add("stopSurplusClientOid", tpClientOrderId);
+            parameters.Add("stopLossClientOid", slClientOrderId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/mix/order/place-pos-tpsl", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetPositionTpSl[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }

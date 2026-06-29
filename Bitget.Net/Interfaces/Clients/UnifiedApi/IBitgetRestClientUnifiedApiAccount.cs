@@ -22,7 +22,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaBalances>> GetBalancesAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaBalances>> GetBalancesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get funding assets
@@ -35,7 +35,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaFundingAsset[]>> GetFundingBalancesAsync(string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetUaFundingAsset[]>> GetFundingBalancesAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get account config
@@ -47,7 +47,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaAccountConfig>> GetAccountConfigAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaAccountConfig>> GetAccountConfigAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Set leverage
@@ -64,7 +64,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="asset">["<c>coin</c>"] The asset, for example `ETH`</param>
         /// <param name="positionSide">["<c>posSide</c>"] Position side</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult> SetLeverageAsync(
+        Task<HttpResult> SetLeverageAsync(
             ProductCategory category,
             string symbol,
             decimal leverage,
@@ -83,7 +83,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="holdMode">["<c>holdMode</c>"] Holding mode</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult> SetHoldModeAsync(HoldingMode holdMode, CancellationToken ct = default);
+        Task<HttpResult> SetHoldModeAsync(HoldingMode holdMode, CancellationToken ct = default);
 
         /// <summary>
         /// 
@@ -102,7 +102,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaFinancialRecordPage>> GetFinancialRecordsAsync(
+        Task<HttpResult<BitgetUaFinancialRecordPage>> GetFinancialRecordsAsync(
             ProductCategory category,
             string? asset = null,
             string? type = null,
@@ -122,7 +122,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaRepayableAssets>> GetRepayableAssetsAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaRepayableAssets>> GetRepayableAssetsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get payment assets
@@ -134,7 +134,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaPaymentAssets>> GetPaymentAssetsAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaPaymentAssets>> GetPaymentAssetsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Manual repayment
@@ -148,7 +148,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="repayableAssets">["<c>repayableCoinList</c>"] Repayable asset list</param>
         /// <param name="paymentAssets">["<c>paymentCoinList</c>"] Payment asset list</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaRepayResult>> RepayAsync(
+        Task<HttpResult<BitgetUaRepayResult>> RepayAsync(
             IEnumerable<string> repayableAssets,
             IEnumerable<string> paymentAssets,
             CancellationToken ct = default);
@@ -169,7 +169,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaConvertRecords>> GetConvertRecordsAsync(
+        Task<HttpResult<BitgetUaConvertRecords>> GetConvertRecordsAsync(
             string fromAsset,
             string toAsset,
             DateTime? startTime = null,
@@ -189,7 +189,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="deduct">["<c>deduct</c>"] Deduct enabled</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult> SwitchDeductAsync(bool deduct, CancellationToken ct = default);
+        Task<HttpResult> SwitchDeductAsync(bool deduct, CancellationToken ct = default);
 
         /// <summary>
         /// Set deposit account for an asset
@@ -203,7 +203,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="asset">["<c>coin</c>"] The asset, for example `ETH`</param>
         /// <param name="accountType">["<c>accountType</c>"] Account type</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult> SetDepositAccountAsync(
+        Task<HttpResult> SetDepositAccountAsync(
             string asset,
             UtaAccountType accountType,
             CancellationToken ct = default);
@@ -218,7 +218,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaDeductStatus>> GetDeductStatusAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaDeductStatus>> GetDeductStatusAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get fee rates
@@ -232,7 +232,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="category">["<c>category</c>"] Category</param>
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaFeeRate>> GetFeeAsync(
+        Task<HttpResult<BitgetUaFeeRate>> GetFeeAsync(
             ProductCategory category,
             string symbol,
             CancellationToken ct = default);
@@ -247,7 +247,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult> SwitchToClassicModeAsync(CancellationToken ct = default);
+        Task<HttpResult> SwitchToClassicModeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get switch to classic account mode status
@@ -259,7 +259,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaSwitchStatus>> GetSwitchToClassicStatusAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaSwitchStatus>> GetSwitchToClassicStatusAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get max transferable quantity for an asset
@@ -272,7 +272,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="asset">["<c>coin</c>"] The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaMaxTransferable>> GetMaxTransferableAsync(string asset, CancellationToken ct = default);
+        Task<HttpResult<BitgetUaMaxTransferable>> GetMaxTransferableAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
         /// Get max open interest
@@ -286,7 +286,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="category">["<c>category</c>"] Category</param>
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaUserOpenInterestLimit>> GetOpenInterestLimitAsync(
+        Task<HttpResult<BitgetUaUserOpenInterestLimit>> GetOpenInterestLimitAsync(
             ProductCategory category,
             string symbol,
             CancellationToken ct = default);
@@ -301,7 +301,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaAccountInfo>> GetAccountInfoAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaAccountInfo>> GetAccountInfoAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get delta info
@@ -313,7 +313,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaDeltaInfo>> GetDeltaInfoAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaDeltaInfo>> GetDeltaInfoAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Set account mode
@@ -327,7 +327,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="mode">["<c>mode</c>"] New mode</param>
         /// <param name="subAccountId">["<c>targetUid</c>"] Sub account id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult> SetAccountModeAsync(
+        Task<HttpResult> SetAccountModeAsync(
             AccountLevel mode,
             string? subAccountId = null,
             CancellationToken ct = default);
@@ -344,7 +344,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="fromType">["<c>fromType</c>"] From type</param>
         /// <param name="toType">["<c>toType</c>"] To type</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<string[]>> GetTransferableAssetsAsync(
+        Task<HttpResult<string[]>> GetTransferableAssetsAsync(
             Enums.V2.TransferAccountType fromType,
             Enums.V2.TransferAccountType toType,
             CancellationToken ct = default);
@@ -365,7 +365,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="symbol">["<c>symbol</c>"] Isolated margin symbol</param>
         /// <param name="allowBorrow">["<c>allowBorrow</c>"] Allow borrowing for transfer</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaTransferId>> TransferAsync(
+        Task<HttpResult<BitgetUaTransferId>> TransferAsync(
             Enums.V2.TransferAccountType fromType,
             Enums.V2.TransferAccountType toType,
             string asset,
@@ -387,7 +387,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="network">["<c>chain</c>"] Network</param>
         /// <param name="quantity">["<c>size</c>"] Quantity for BTC lightning deposit</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaDepositAddress>> GetDepositAddressAsync(
+        Task<HttpResult<BitgetUaDepositAddress>> GetDepositAddressAsync(
             string asset,
             string? network = null,
             decimal? quantity = null,
@@ -409,7 +409,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 100</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaDeposit[]>> GetDepositRecordsAsync(
+        Task<HttpResult<BitgetUaDeposit[]>> GetDepositRecordsAsync(
             string? asset = null,
             string? orderId = null,
             DateTime? startTime = null,
@@ -443,7 +443,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="firstName">["<c>firstName</c>"] First name</param>
         /// <param name="lastName">["<c>lastName</c>"] Last name</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaWithdrawResult>> WithdrawAsync(
+        Task<HttpResult<BitgetUaWithdrawResult>> WithdrawAsync(
             string asset,
             Enums.V2.TransferType transferType,
             string address,
@@ -478,7 +478,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 100</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaWithdrawRecord[]>> GetWithdrawalRecordsAsync(
+        Task<HttpResult<BitgetUaWithdrawRecord[]>> GetWithdrawalRecordsAsync(
             string? asset = null,
             string? orderId = null,
             string? clientOrderId = null,
@@ -502,7 +502,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 10</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaAddressBook>> GetWithdrawAddressBookAsync(
+        Task<HttpResult<BitgetUaAddressBook>> GetWithdrawAddressBookAsync(
             string? asset = null,
             AddressBookType? type = null,
             int? limit = null,
@@ -521,7 +521,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="orderId">["<c>orderId</c>"] Cancel by order id</param>
         /// <param name="clientOrderId">["<c>clientOid</c>"] Cancel by client order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult> CancelWithdrawalAsync(
+        Task<HttpResult> CancelWithdrawalAsync(
             string? orderId = null,
             string? clientOrderId = null,
             CancellationToken ct = default);

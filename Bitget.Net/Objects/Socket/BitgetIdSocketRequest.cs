@@ -17,6 +17,6 @@ namespace Bitget.Net.Objects.Socket
         [JsonPropertyName("category"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public ProductCategory? Category { get; set; }
         [JsonPropertyName("args")]
-        public ParameterCollection[] Args { get; set; } = [];
+        public Parameters[] Args { get; set; } = [];
     }
 }

@@ -40,7 +40,7 @@ const string marginAsset = "USDT";
 
 ## Result pattern
 
-Most REST calls return `WebCallResult<T>`. Always check `.Success` before using `.Data`; use `.Error` for exchange, validation, network and rate-limit failures.
+Most REST calls return `HttpResult<T>` or `HttpResult`. Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`. Always check `.Success` before using `.Data`; use `.Error` for exchange, validation, network and rate-limit failures.
 
 ```csharp
 var result = await client.SpotApiV2.ExchangeData.GetTickersAsync("BTCUSDT");
@@ -53,7 +53,7 @@ if (!result.Success)
 Console.WriteLine(result.Data.Single().LastPrice);
 ```
 
-Socket subscription calls return `CallResult<UpdateSubscription>`. Keep the concrete socket client so you can unsubscribe:
+Socket subscription calls return `WebSocketResult<UpdateSubscription>`. Keep the concrete socket client so you can unsubscribe:
 
 ```csharp
 var sub = await socketClient.SpotApiV2.SubscribeToTickerUpdatesAsync("BTCUSDT", update => { });
@@ -81,8 +81,8 @@ Use `Bitget.Net.Enums.V2` for V2 order/account enums:
 - `01-spot-quickstart.cs` - public market data, balances, open orders and spot order placement.
 - `02-futures-v2.cs` - futures product type, ticker, funding rate, balances, positions and order flow.
 - `03-websocket.cs` - spot and futures public WebSocket subscriptions and unsubscribe pattern.
-- `04-multi-exchange.cs` - CryptoExchange.Net shared API usage for exchange-agnostic code.
-- `05-error-handling.cs` - `WebCallResult<T>` handling, transient retry shape and order error categorization.
+- `04-multi-exchange.cs` - CryptoExchange.Net shared API usage, capability discovery and shared subscriptions.
+- `05-error-handling.cs` - `HttpResult`, `WebSocketResult` and `ExchangeCallResult` handling, transient retry shape and order error categorization.
 
 ## Common routing
 
@@ -95,6 +95,6 @@ Use `Bitget.Net.Enums.V2` for V2 order/account enums:
 - Futures positions and orders: `client.FuturesApiV2.Trading`
 - Copy trading: `client.CopyTradingFuturesV2.Trader` and `.Follower`
 - Broker: `client.BrokerV2`
-- Shared APIs: `client.SpotApiV2.SharedClient`, `client.FuturesApiV2.SharedClient`
+- Shared APIs: `client.SpotApiV2.SharedClient`, `client.FuturesApiV2.SharedClient`; call `.Discover()` before routing optional shared features
 
 For detailed endpoint routing, see `docs/ai-api-map.md`. For fuller assistant context, see `llms-full.txt`.

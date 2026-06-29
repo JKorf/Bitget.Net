@@ -21,7 +21,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
+        Task<HttpResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get announcements
@@ -33,7 +33,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetAnnouncement[]>> GetAnnouncementsAsync(
+        Task<HttpResult<BitgetAnnouncement[]>> GetAnnouncementsAsync(
             AnnouncementType? type = null,
             string? language = null,
             DateTime? startTime = null,
@@ -54,7 +54,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetAsset[]>> GetAssetsAsync(string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetAsset[]>> GetAssetsAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of supported symbols and their trading rules
@@ -68,7 +68,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetSymbol[]>> GetSymbolsAsync(string? symbol = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetSymbol[]>> GetSymbolsAsync(string? symbol = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of VIP levels and fee rates
@@ -81,7 +81,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetVipFeeRate[]>> GetVipFeeRatesAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetVipFeeRate[]>> GetVipFeeRatesAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get tickers
@@ -95,7 +95,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetTicker[]>> GetTickersAsync(string? symbol = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetTicker[]>> GetTickersAsync(string? symbol = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get order book
@@ -111,7 +111,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of rows</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetOrderBook>> GetOrderBookAsync(string symbol, int? mergeStep = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetOrderBook>> GetOrderBookAsync(string symbol, int? mergeStep = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get kline/candlestick data
@@ -129,7 +129,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetKline[]>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get historical kline data
@@ -146,7 +146,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetKline[]>> GetHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime endTime, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetKline[]>> GetHistoricalKlinesAsync(string symbol, KlineInterval interval, DateTime endTime, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get the most recent trades on the symbol
@@ -161,7 +161,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetTrade[]>> GetRecentTradesAsync(string symbol, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get trades
@@ -179,6 +179,6 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetTrade[]>> GetTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetTrade[]>> GetTradesAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, string? idLessThan = null, int? limit = null, CancellationToken ct = default);
     }
 }

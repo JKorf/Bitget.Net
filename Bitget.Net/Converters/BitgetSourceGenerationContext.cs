@@ -1,6 +1,7 @@
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Socket;
+using CryptoExchange.Net.Objects;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Converters
@@ -277,6 +278,8 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(decimal))]
     [JsonSerializable(typeof(DateTime))]
     [JsonSerializable(typeof(DateTime?))]
+    [JsonSerializable(typeof(Parameters))]
+    [JsonSerializable(typeof(Parameters[]))]
 
     [JsonSerializable(typeof(BitgetResponse<BitgetInterestRate>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetAnnouncement[]>))]

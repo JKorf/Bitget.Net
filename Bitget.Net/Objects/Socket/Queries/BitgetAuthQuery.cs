@@ -14,15 +14,15 @@ namespace Bitget.Net.Objects.Socket.Queries
         {
             _client = client;
 
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BitgetSocketEvent>(["login", "error"], HandleMessage);
+            MessageRouter = MessageRouter.CreateForQuery<BitgetSocketEvent>(["login", "error"], HandleMessage);
         }
 
         public CallResult<BitgetSocketEvent> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketEvent message)
         {
             if (message.Code == 0)
-                return new CallResult<BitgetSocketEvent>(message, originalData, null);
+                return CallResult<BitgetSocketEvent>.Ok(message, originalData);
 
-            return new CallResult<BitgetSocketEvent>(new ServerError(message.Code!.Value.ToString(), _client.GetErrorInfo(message.Code!.Value, message.Message!)), originalData);
+            return CallResult<BitgetSocketEvent>.Fail(new ServerError(message.Code!.Value.ToString(), _client.GetErrorInfo(message.Code!.Value, message.Message!)), originalData);
         }
     }
 }

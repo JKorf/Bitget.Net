@@ -42,11 +42,11 @@ namespace Bitget.Net.Clients
         {
             Initialize(options.Value);
 
-            SpotApiV2 = AddApiClient(new SpotApiV2.BitgetRestClientSpotApi(_logger, httpClient, this, options.Value));
-            FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(_logger, httpClient, this, options.Value));
-            CopyTradingFuturesV2 = AddApiClient(new CopyTradingApiV2.BitgetRestClientCopyTradingApi(_logger, httpClient, this, options.Value));
-            BrokerV2 = AddApiClient(new BrokerApiV2.BitgetRestClientBrokerApi(_logger, httpClient, this, options.Value));
-            UnifiedApi = AddApiClient(new UnifiedApi.BitgetRestClientUnifiedApi(_logger, httpClient, this, options.Value));
+            SpotApiV2 = AddApiClient(new SpotApiV2.BitgetRestClientSpotApi(loggerFactory, httpClient, this, options.Value));
+            FuturesApiV2 = AddApiClient(new FuturesApiV2.BitgetRestClientFuturesApi(loggerFactory, httpClient, this, options.Value));
+            CopyTradingFuturesV2 = AddApiClient(new CopyTradingApiV2.BitgetRestClientCopyTradingApi(loggerFactory, httpClient, this, options.Value));
+            BrokerV2 = AddApiClient(new BrokerApiV2.BitgetRestClientBrokerApi(loggerFactory, httpClient, this, options.Value));
+            UnifiedApi = AddApiClient(new UnifiedApi.BitgetRestClientUnifiedApi(loggerFactory, httpClient, this, options.Value));
         }
 
         /// <summary>

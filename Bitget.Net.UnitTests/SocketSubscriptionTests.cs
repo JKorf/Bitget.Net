@@ -30,7 +30,7 @@ namespace Bitget.Net.UnitTests
                 OutputOriginalData = true
             }), logger);
 
-            var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Spot", "https://api.bitget.com", "data");
+            var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Spot", "wss://ws.bitget.com/v2/ws/public", "data");
             await tester.ValidateConcurrentAsync<BitgetKlineUpdate[]>(
                 (client, handler) => client.SpotApiV2.SubscribeToKlineUpdatesAsync("ETHUSDT", BitgetStreamKlineIntervalV2.OneDay, handler),
                 (client, handler) => client.SpotApiV2.SubscribeToKlineUpdatesAsync("ETHUSDT", BitgetStreamKlineIntervalV2.OneHour, handler),
@@ -48,7 +48,7 @@ namespace Bitget.Net.UnitTests
                 OutputOriginalData = true
             }), logger);
 
-            var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Futures", "https://api.bitget.com", "data");
+            var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Futures", "wss://ws.bitget.com/v2/ws/public", "data");
             await tester.ValidateConcurrentAsync<BitgetFuturesKlineUpdate[]>(
                 (client, handler) => client.FuturesApiV2.SubscribeToKlineUpdatesAsync(BitgetProductTypeV2.UsdtFutures, "ETHUSDT", BitgetStreamKlineIntervalV2.OneDay, handler),
                 (client, handler) => client.FuturesApiV2.SubscribeToKlineUpdatesAsync(BitgetProductTypeV2.UsdtFutures, "ETHUSDT", BitgetStreamKlineIntervalV2.OneHour, handler),

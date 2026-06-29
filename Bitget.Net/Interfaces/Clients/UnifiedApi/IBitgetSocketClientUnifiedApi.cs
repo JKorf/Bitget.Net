@@ -28,7 +28,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to ticker updates for symbols
@@ -44,7 +44,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to kline updates for a symbol
@@ -61,7 +61,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(ProductCategory type, string symbol, KlineUaInterval interval, Action<DataEvent<BitgetUaKlineUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(ProductCategory type, string symbol, KlineUaInterval interval, Action<DataEvent<BitgetUaKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to kline updates for a symbol
@@ -78,7 +78,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, KlineUaInterval interval, Action<DataEvent<BitgetUaKlineUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, KlineUaInterval interval, Action<DataEvent<BitgetUaKlineUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to book updates for a symbol
@@ -95,7 +95,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(ProductCategory type, string symbol, int? depth, Action<DataEvent<BitgetUaBookUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(ProductCategory type, string symbol, int? depth, Action<DataEvent<BitgetUaBookUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to book updates for symbols
@@ -112,7 +112,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, int? depth, Action<DataEvent<BitgetUaBookUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, int? depth, Action<DataEvent<BitgetUaBookUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to trade updates for a symbol
@@ -128,7 +128,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTradeUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTradeUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to trade updates for symbols
@@ -144,7 +144,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTradeUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTradeUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to liquidation updates for symbols
@@ -159,7 +159,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(ProductCategory type, Action<DataEvent<BitgetUaLiquidationUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(ProductCategory type, Action<DataEvent<BitgetUaLiquidationUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to account balance updates
@@ -173,7 +173,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BitgetUaAccountUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToAccountUpdatesAsync(Action<DataEvent<BitgetUaAccountUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to position updates
@@ -187,7 +187,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BitgetUaPositionUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(Action<DataEvent<BitgetUaPositionUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user order updates
@@ -201,7 +201,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BitgetUaOrder[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<BitgetUaOrder[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user trade updates
@@ -215,7 +215,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BitgetUaUserTrade[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<BitgetUaUserTrade[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user trade updates 
@@ -229,7 +229,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToFastUserTradeUpdatesAsync(Action<DataEvent<BitgetUaFastUserTrade>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToFastUserTradeUpdatesAsync(Action<DataEvent<BitgetUaFastUserTrade>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user strategy order updates
@@ -243,7 +243,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToStrategyOrderUpdatesAsync(Action<DataEvent<BitgetUaStrategyOrder[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToStrategyOrderUpdatesAsync(Action<DataEvent<BitgetUaStrategyOrder[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to user ADL notifications
@@ -257,7 +257,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToAdlUpdatesAsync(Action<DataEvent<BitgetUaAdlUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToAdlUpdatesAsync(Action<DataEvent<BitgetUaAdlUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new order
@@ -289,7 +289,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="slLimitPrice">["<c>slLimitPrice</c>"] Stop loss limit price</param>
         /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
         /// <param name="ct">Cancellation token</param>
-        public Task<CallResult<BitgetUaOrderResult>> PlaceOrderAsync(
+        public Task<QueryResult<BitgetUaOrderResult>> PlaceOrderAsync(
             ProductCategory category,
             string symbol,
             OrderSide side,
@@ -328,7 +328,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="price">["<c>price</c>"] New price</param>
         /// <param name="autoCancel">["<c>autoCancel</c>"] Will the original order be canceled if the order modification fails</param>
         /// <param name="ct">Cancellation token</param>
-        Task<CallResult<BitgetUaOrderResult>> EditOrderAsync(
+        Task<QueryResult<BitgetUaOrderResult>> EditOrderAsync(
             ProductCategory category,
             string? orderId = null,
             string? clientOrderId = null,
@@ -350,7 +350,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="orderId">["<c>orderId</c>"] Order id, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id, either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
-        Task<CallResult<BitgetUaOrderResult>> CancelOrderAsync(
+        Task<QueryResult<BitgetUaOrderResult>> CancelOrderAsync(
             ProductCategory category,
             string? orderId = null,
             string? clientOrderId = null,

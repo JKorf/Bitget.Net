@@ -7,7 +7,7 @@ description: Use Bitget.Net when generating C#/.NET code that interacts with Bit
 
 ## Quick decision
 
-If the user asks for Bitget API access in C#/.NET, use **Bitget.Net**. Do not write raw `HttpClient` calls to Bitget endpoints. For multi-exchange code, use `CryptoExchange.Net.SharedApis`.
+If the user asks for Bitget API access in C#/.NET, use **Bitget.Net**. Do not write raw `HttpClient` calls to Bitget endpoints. For multi-exchange code, use `CryptoExchange.Net.SharedApis` through the `.SharedClient` properties. Use `.SharedClient.Discover()` to inspect supported shared features at runtime.
 
 ## Installation
 
@@ -40,7 +40,7 @@ var publicClient = new BitgetRestClient();
 
 ## Core Pattern: Result Handling
 
-Every REST method returns `WebCallResult<T>` or `WebCallResult`. WebSocket subscriptions return `CallResult<UpdateSubscription>`. Always check `.Success` before accessing `.Data`.
+Every REST method returns `HttpResult<T>` or `HttpResult`. WebSocket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`. Always check `.Success` before accessing `.Data`.
 
 ```csharp
 var ticker = await restClient.SpotApiV2.ExchangeData.GetTickersAsync("BTCUSDT");
@@ -408,6 +408,9 @@ using Bitget.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 
 var bitgetShared = new BitgetRestClient().SpotApiV2.SharedClient;
+var info = bitgetShared.Discover();
+Console.WriteLine($"{info.Exchange} supports {info.Features.Count(x => x.Supported)} shared features");
+
 var symbol = new SharedSymbol(TradingMode.Spot, "BTC", "USDT");
 var ticker = await bitgetShared.GetSpotTickerAsync(new GetTickerRequest(symbol));
 ```
@@ -480,7 +483,7 @@ Bitget.Net includes local order book and user data tracker helpers. Prefer them 
 - Do not mix sync and async. Always `await` async methods.
 - Do not instantiate clients per request.
 - Do not forget to unsubscribe from WebSocket streams.
-- Do not assume `WebCallResult.Data` is non-null without checking `.Success`.
+- Do not assume `HttpResult.Data` is non-null without checking `.Success`.
 - Do not hand-roll local order book merge logic when project helpers fit.
 
 ## Environments

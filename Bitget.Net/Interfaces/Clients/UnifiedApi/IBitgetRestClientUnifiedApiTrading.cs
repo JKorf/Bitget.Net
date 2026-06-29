@@ -41,7 +41,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="slLimitPrice">["<c>slLimitPrice</c>"] Stop loss limit price</param>
         /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOrderResult>> PlaceOrderAsync(
+        Task<HttpResult<BitgetUaOrderResult>> PlaceOrderAsync(
             ProductCategory category,
             string symbol,
             OrderSide side,
@@ -79,7 +79,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="price">["<c>price</c>"] New price</param>
         /// <param name="autoCancel">["<c>autoCancel</c>"] Will the original order be canceled if the order modification fails</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOrderResult>> EditOrderAsync(
+        Task<HttpResult<BitgetUaOrderResult>> EditOrderAsync(
             string? orderId = null,
             string? clientOrderId = null,
             decimal? quantity = null,
@@ -99,7 +99,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="orderId">["<c>orderId</c>"] Order id, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id, either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOrderResult>> CancelOrderAsync(
+        Task<HttpResult<BitgetUaOrderResult>> CancelOrderAsync(
             string? orderId = null,
             string? clientOrderId = null,
             CancellationToken ct = default);
@@ -116,7 +116,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="category">["<c>category</c>"] Category</param>
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaBatchResult[]>> CancelAllOrdersAsync(
+        Task<HttpResult<BitgetUaBatchResult[]>> CancelAllOrdersAsync(
             ProductCategory category,
             string? symbol = null,
             CancellationToken ct = default);
@@ -134,7 +134,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
         /// <param name="positionSide">["<c>posSide</c>"] Position side</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaBatchResult[]>> ClosePositionsAsync(
+        Task<HttpResult<BitgetUaBatchResult[]>> ClosePositionsAsync(
             ProductCategory category,
             string? symbol = null,
             PositionSide? positionSide = null,
@@ -152,7 +152,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="orderId">["<c>orderId</c>"] Order id, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id, either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOrder>> GetOrderAsync(
+        Task<HttpResult<BitgetUaOrder>> GetOrderAsync(
             string? orderId = null,
             string? clientOrderId = null,
             CancellationToken ct = default);
@@ -173,7 +173,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 100</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOrders>> GetOpenOrdersAsync(
+        Task<HttpResult<BitgetUaOrders>> GetOpenOrdersAsync(
             ProductCategory? category = null,
             string? symbol = null,
             DateTime? startTime = null,
@@ -198,7 +198,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaUserTrades>> GetUserTradesAsync(
+        Task<HttpResult<BitgetUaUserTrades>> GetUserTradesAsync(
             ProductCategory? category = null,
             string? orderId = null,
             DateTime? startTime = null,
@@ -220,7 +220,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
         /// <param name="positionSide">["<c>posSide</c>"] Filter by position side</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaPosition[]>> GetPositionsAsync(
+        Task<HttpResult<BitgetUaPosition[]>> GetPositionsAsync(
             ProductCategory category,
             string? symbol = null,
             PositionSide? positionSide = null,
@@ -242,7 +242,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 100</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaPositionHistory>> GetPositionHistoryAsync(
+        Task<HttpResult<BitgetUaPositionHistory>> GetPositionHistoryAsync(
             ProductCategory category,
             string? symbol = null,
             DateTime? startTime = null,
@@ -261,7 +261,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaAdlRank[]>> GetPositionAdlRankAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetUaAdlRank[]>> GetPositionAdlRankAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get max open available
@@ -279,7 +279,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="quantity">["<c>size</c>"] Order quantity</param>
         /// <param name="price">["<c>price</c>"] Order price</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaMaxOpenAvailable>> GetMaxOpenAvailableAsync(
+        Task<HttpResult<BitgetUaMaxOpenAvailable>> GetMaxOpenAvailableAsync(
             ProductCategory category,
             string symbol,
             OrderType orderType,
@@ -319,7 +319,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="triggerOrderType">["<c>triggerOrderType</c>"] Trigger order type</param>
         /// <param name="triggerOrderPrice">["<c>triggerOrderPrice</c>"] Trigger order price</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOrderResult>> PlaceStrategyOrderAsync(
+        Task<HttpResult<BitgetUaOrderResult>> PlaceStrategyOrderAsync(
             ProductCategory category,
             string symbol,
             StrategyType? type = null,
@@ -368,7 +368,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="triggerOrderType">["<c>triggerOrderType</c>"] Trigger order type</param>
         /// <param name="triggerOrderPrice">["<c>triggerOrderPrice</c>"] Trigger order price</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaOrderResult>> EditStrategyOrderAsync(
+        Task<HttpResult<BitgetUaOrderResult>> EditStrategyOrderAsync(
             string? orderId = null,
             string? clientOrderId = null,
             decimal? quantity = null,
@@ -398,7 +398,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="orderId">["<c>orderId</c>"] Order id, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id, either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult> CancelStrategyOrderAsync(
+        Task<HttpResult> CancelStrategyOrderAsync(
             string? orderId = null,
             string? clientOrderId = null,
             CancellationToken ct = default);
@@ -415,7 +415,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="category">["<c>category</c>"] Category</param>
         /// <param name="type">["<c>type</c>"] Filter by type</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaStrategyOrder[]>> GetOpenStrategyOrdersAsync(
+        Task<HttpResult<BitgetUaStrategyOrder[]>> GetOpenStrategyOrdersAsync(
             ProductCategory category,
             StrategyType? type = null,
             CancellationToken ct = default);
@@ -436,7 +436,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="limit">["<c>limit</c>"] Max number of results, max 100</param>
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetUaStrategyOrders>> GetClosedStrategyOrdersAsync(
+        Task<HttpResult<BitgetUaStrategyOrders>> GetClosedStrategyOrdersAsync(
             ProductCategory category,
             StrategyType? type = null,
             DateTime? startTime = null,

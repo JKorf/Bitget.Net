@@ -23,7 +23,10 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
 
             IndividualSubscriptionCount = args.Length;
 
-            MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), symbols, DoHandleMessage);
+            if (symbols == null)
+                MessageRouter = MessageRouter.CreateForEvent<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), DoHandleMessage);
+            else
+                MessageRouter = MessageRouter.CreateForEvent<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), symbols, DoHandleMessage);
         }
 
         private string GetRouteParams(Dictionary<string, string> arg)
@@ -46,7 +49,7 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
                     .WithStreamId(message.Args.Channel)
                     .WithDataTimestamp(message.Timestamp, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
     }

@@ -13,7 +13,7 @@ namespace Bitget.Net.Objects.Socket.Queries
 {
     internal class BitgetIdQuery<TResponse> : Query<TResponse>
     {
-        private readonly ParameterCollection[] _args;
+        private readonly Parameters[] _args;
         private readonly SocketApiClient _client;
 
         public BitgetIdQuery(SocketApiClient client, BitgetIdSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
@@ -21,15 +21,15 @@ namespace Bitget.Net.Objects.Socket.Queries
             _args = request.Args;
             _client = client;
 
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<BitgetSocketResponse<TResponse>>(request.Id, HandleMessage);
+            MessageRouter = MessageRouter.CreateForQuery<BitgetSocketResponse<TResponse>, TResponse>(request.Id, HandleMessage);
         }
 
         public CallResult<TResponse> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketResponse<TResponse> message)
         {
             if (message.Code != null)
-                return new CallResult<TResponse>(new ServerError(message.Code.Value.ToString(), _client.GetErrorInfo(message.Code.Value, message.Message!)), originalData);
+                return CallResult<TResponse>.Fail(new ServerError(message.Code.Value.ToString(), _client.GetErrorInfo(message.Code.Value, message.Message!)), originalData);
 
-            return new CallResult<TResponse>(message.Data, originalData, null);
+            return CallResult<TResponse>.Ok(message.Data, originalData);
         }
     }
 }

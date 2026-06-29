@@ -1,6 +1,6 @@
 # Bitget.Net
 
-Bitget.Net is a .NET client library for Bitget REST and WebSocket APIs, built on CryptoExchange.Net.
+Bitget.Net is a .NET client library for Bitget REST and WebSocket APIs, built on CryptoExchange.Net. REST methods return `HttpResult<T>` / `HttpResult`, WebSocket subscriptions return `WebSocketResult<UpdateSubscription>`, and shared symbol/cache helpers return `ExchangeCallResult<T>`.
 
 ## Install
 
@@ -32,6 +32,7 @@ var socketClient = new BitgetSocketClient();
 - Spot socket: `socketClient.SpotApiV2`
 - Futures socket: `socketClient.FuturesApiV2`
 - Unified/UTA socket: `socketClient.UnifiedApi`
+- Shared capability discovery: `client.SpotApiV2.SharedClient.Discover()` / `client.FuturesApiV2.SharedClient.Discover()`
 
 ## Common calls
 
