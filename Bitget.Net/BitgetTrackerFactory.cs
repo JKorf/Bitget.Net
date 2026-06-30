@@ -137,9 +137,11 @@ namespace Bitget.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserFuturesDataTracker(BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null)
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(BitgetProductTypeV2 productType, string marginAsset, FuturesUserDataTrackerConfig? config = null)
         {
-            var exchangeParams = new ExchangeParameters(new ExchangeParameter("Bitget", "ProductType", productType.ToString()));
+            var exchangeParams = new ExchangeParameters(
+                new ExchangeParameter("Bitget", "ProductType", productType.ToString()),
+                new ExchangeParameter("Bitget", "MarginAsset", marginAsset));
 
             var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
@@ -154,9 +156,11 @@ namespace Bitget.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, BitgetCredentials credentials, BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null)
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, BitgetCredentials credentials, BitgetProductTypeV2 productType, string marginAsset, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null)
         {
-            var exchangeParams = new ExchangeParameters(new ExchangeParameter("Bitget", "ProductType", productType.ToString()));
+            var exchangeParams = new ExchangeParameters(
+                new ExchangeParameter("Bitget", "ProductType", productType.ToString()),
+                new ExchangeParameter("Bitget", "MarginAsset", marginAsset));
 
             var clientProvider = _serviceProvider?.GetRequiredService<IBitgetUserClientProvider>() ?? new BitgetUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);

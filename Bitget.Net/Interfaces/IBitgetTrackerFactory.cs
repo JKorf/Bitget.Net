@@ -34,12 +34,14 @@ namespace Bitget.Net.Interfaces
         /// <param name="credentials">Credentials</param>
         /// <param name="environment">Environment</param>
         /// <param name="productType">Product type</param>
-        IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, BitgetCredentials credentials, BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null);
+        /// <param name="marginAsset">Margin asset to track, for example USDT</param>
+        IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, BitgetCredentials credentials, BitgetProductTypeV2 productType, string marginAsset, FuturesUserDataTrackerConfig? config = null, BitgetEnvironment? environment = null);
         /// <summary>
         /// Create a new futures user data tracker
         /// </summary>
         /// <param name="config">Configuration</param>
         /// <param name="productType">Product type</param>
-        IUserFuturesDataTracker CreateUserFuturesDataTracker(BitgetProductTypeV2 productType, FuturesUserDataTrackerConfig? config = null);
+        /// <param name="marginAsset">Margin asset to track, for example USDT</param>
+        IUserFuturesDataTracker CreateUserFuturesDataTracker(BitgetProductTypeV2 productType, string marginAsset, FuturesUserDataTrackerConfig? config = null);
     }
 }
