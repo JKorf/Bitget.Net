@@ -24,9 +24,15 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
             IndividualSubscriptionCount = args.Length;
 
             if (symbols == null)
+            {
+                // If no symbols are provided use the instType + channel/topic without filter
                 MessageRouter = MessageRouter.CreateForEvent<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), DoHandleMessage);
+            }
             else
-                MessageRouter = MessageRouter.CreateForEvent<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), symbols, DoHandleMessage);
+            {
+                // If symbols are provided, use the instType + channel/topic with filter for each symbol
+                MessageRouter = MessageRouter.CreateForEvent<BitgetSocketUpdate<T>>(args.Select(GetRouteParams).Distinct(), symbols, DoHandleMessage);
+            }
         }
 
         private string GetRouteParams(Dictionary<string, string> arg)
