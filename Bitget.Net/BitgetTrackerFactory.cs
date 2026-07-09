@@ -48,7 +48,7 @@ namespace Bitget.Net
         public bool CanCreateTradeTracker(SharedSymbol symbol) => true;
 
         /// <inheritdoc />
-        public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null)
+        public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
         {
             var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
@@ -73,12 +73,49 @@ namespace Bitget.Net
                 symbol,
                 interval,
                 limit,
-                period
+                period,
+                exchangeParameters
+                );
+        }
+
+
+        /// <inheritdoc />
+        public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, BitgetProductTypeV2 productType, string marginAsset, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
+        {
+            var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
+
+            exchangeParameters ??= new ExchangeParameters(
+                new ExchangeParameter("Bitget", "ProductType", productType.ToString()),
+                new ExchangeParameter("Bitget", "MarginAsset", marginAsset));
+
+            IKlineRestClient sharedRestClient;
+            IKlineSocketClient sharedSocketClient;
+            if (symbol.TradingMode == TradingMode.Spot)
+            {
+                sharedRestClient = restClient.SpotApiV2.SharedClient;
+                sharedSocketClient = socketClient.SpotApiV2.SharedClient;
+            }
+            else
+            {
+                sharedRestClient = restClient.FuturesApiV2.SharedClient;
+                sharedSocketClient = socketClient.FuturesApiV2.SharedClient;
+            }
+
+            return new KlineTracker(
+                _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
+                sharedRestClient,
+                sharedSocketClient,
+                symbol,
+                interval,
+                limit,
+                period,
+                exchangeParameters
                 );
         }
 
         /// <inheritdoc />
-        public ITradeTracker CreateTradeTracker(SharedSymbol symbol, int? limit = null, TimeSpan? period = null)
+        public ITradeTracker CreateTradeTracker(SharedSymbol symbol, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
         {
             var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
@@ -103,7 +140,43 @@ namespace Bitget.Net
                 sharedSocketClient,
                 symbol,
                 limit,
-                period
+                period,
+                exchangeParameters
+                );
+        }
+
+        /// <inheritdoc />
+        public ITradeTracker CreateTradeTracker(SharedSymbol symbol, BitgetProductTypeV2 productType, string marginAsset, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
+        {
+            exchangeParameters ??= new ExchangeParameters(
+                new ExchangeParameter("Bitget", "ProductType", productType.ToString()),
+                new ExchangeParameter("Bitget", "MarginAsset", marginAsset));
+
+            var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
+            var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
+
+            IRecentTradeRestClient sharedRestClient;
+            ITradeSocketClient sharedSocketClient;
+            if (symbol.TradingMode == TradingMode.Spot)
+            {
+                sharedRestClient = restClient.SpotApiV2.SharedClient;
+                sharedSocketClient = socketClient.SpotApiV2.SharedClient;
+            }
+            else
+            {
+                sharedRestClient = restClient.FuturesApiV2.SharedClient;
+                sharedSocketClient = socketClient.FuturesApiV2.SharedClient;
+            }
+
+            return new TradeTracker(
+                _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
+                sharedRestClient,
+                null,
+                sharedSocketClient,
+                symbol,
+                limit,
+                period,
+                exchangeParameters
                 );
         }
 

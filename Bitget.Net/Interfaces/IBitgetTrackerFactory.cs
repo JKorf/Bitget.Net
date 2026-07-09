@@ -1,6 +1,9 @@
 ﻿using Bitget.Net.Enums;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.SharedApis;
+using CryptoExchange.Net.Trackers.Klines;
+using CryptoExchange.Net.Trackers.Trades;
 using CryptoExchange.Net.Trackers.UserData;
 using CryptoExchange.Net.Trackers.UserData.Interfaces;
 using CryptoExchange.Net.Trackers.UserData.Objects;
@@ -12,6 +15,31 @@ namespace Bitget.Net.Interfaces
     /// </summary>
     public interface IBitgetTrackerFactory : ITrackerFactory
     {
+        /// <summary>
+        /// Create a new kline tracker
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="interval">Kline interval</param>
+        /// <param name="limit">The max amount of klines to retain</param>
+        /// <param name="period">The max period the data should be retained</param>
+        /// <param name="productType">Product type</param>
+        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="exchangeParameters">Exchange parameters</param>
+        /// <returns></returns>
+        IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, BitgetProductTypeV2 productType, string marginAsset, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null);
+
+        /// <summary>
+        /// Create a new trade tracker for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="limit">The max amount of trades to retain</param>
+        /// <param name="period">The max period the data should be retained</param>
+        /// <param name="productType">Product type</param>
+        /// <param name="marginAsset">Margin asset</param>
+        /// <param name="exchangeParameters">Exchange parameters</param>
+        /// <returns></returns>
+        ITradeTracker CreateTradeTracker(SharedSymbol symbol, BitgetProductTypeV2 productType, string marginAsset, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null);
+
         /// <summary>
         /// Create a new Spot user data tracker
         /// </summary>
