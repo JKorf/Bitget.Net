@@ -3,6 +3,7 @@ using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
@@ -199,16 +200,30 @@ namespace Bitget.Net.Clients.FuturesApiV2
                              || ((request.TradingMode == TradingMode.DeliveryLinear || request.TradingMode == TradingMode.DeliveryInverse) && x.ContractType == ContractType.Delivery));
             }
 
-            var response = HttpResult.Ok(result, data.Select(s => 
-            new SharedFuturesSymbol(
-                productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Delivery ? TradingMode.DeliveryInverse :
-                productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Perpetual ? TradingMode.PerpetualInverse :
-                s.DeliveryPeriod.HasValue ? TradingMode.DeliveryLinear :
-                TradingMode.PerpetualLinear,
-                s.BaseAsset,
-                s.QuoteAsset,
-                s.Symbol, 
-                s.Status == Enums.V2.FuturesSymbolStatus.Normal)
+            var resultData = data.Select(s => ParseSymbol(s, productType)).ToArray();
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, resultData);
+
+            if (request.SymbolType != null)
+                resultData = resultData.Where(s => s.SymbolType == request.SymbolType).ToArray();
+            if (request.SymbolSubType != null)
+                resultData = resultData.Where(s => s.SymbolSubType == request.SymbolSubType).ToArray();
+
+            var response = HttpResult.Ok(result, resultData);
+            return response;
+        }
+
+        private SharedFuturesSymbol ParseSymbol(BitgetContract s, BitgetProductTypeV2 productType)
+        {
+            var (symbolType, subType) = ParseSymbolType(s);
+            return new SharedFuturesSymbol(
+                    productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Delivery ? TradingMode.DeliveryInverse :
+                    productType == BitgetProductTypeV2.CoinFutures && s.ContractType == ContractType.Perpetual ? TradingMode.PerpetualInverse :
+                    s.DeliveryPeriod.HasValue ? TradingMode.DeliveryLinear :
+                    TradingMode.PerpetualLinear,
+                    s.BaseAsset,
+                    s.QuoteAsset,
+                    s.Symbol,
+                    s.Status == Enums.V2.FuturesSymbolStatus.Normal)
             {
                 MinTradeQuantity = s.MinOrderQuantity,
                 PriceDecimals = s.PriceDecimals,
@@ -219,11 +234,19 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ContractSize = 1,
                 MaxShortLeverage = s.MaxLeverage,
                 MaxLongLeverage = s.MaxLeverage,
-                MaxTradeQuantity = s.MaxLimitOrderQuantity == null && s.MaxLimitOrderQuantity == null ? null : Math.Min(s.MaxLimitOrderQuantity ?? decimal.MaxValue, s.MaxMarketOrderQuantity ?? decimal.MaxValue)
-            }).ToArray());
+                MaxTradeQuantity = s.MaxLimitOrderQuantity == null && s.MaxLimitOrderQuantity == null ? null : Math.Min(s.MaxLimitOrderQuantity ?? decimal.MaxValue, s.MaxMarketOrderQuantity ?? decimal.MaxValue),
+                DisplayName = s.Symbol,
+                SymbolType = symbolType,
+                SymbolSubType = subType
+            };
+        }
 
-            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, response.Data!);
-            return response;
+        private (SymbolAssetType, SymbolAssetSubType?) ParseSymbolType(BitgetContract s)
+        {
+            if (s.IsRwa)
+                return (SymbolAssetType.Rwa, null);
+
+            return (SymbolAssetType.CryptoOrFiat, null);
         }
 
         async Task<ExchangeCallResult<SharedSymbol[]>> IFuturesSymbolRestClient.GetFuturesSymbolsForBaseAssetAsync(string baseAsset)
