@@ -32,11 +32,15 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         public string ExchangeName => "Bitget";
 
+        internal BitgetRestClient _baseClient;
+
         protected override IRestMessageHandler MessageHandler { get; } = new BitgetRestMessageHandler(BitgetErrors.RestErrors);
 
         internal BitgetRestClientFuturesApi(ILoggerFactory? loggerFactory, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
             : base(loggerFactory, BitgetExchange.Metadata.Id, httpClient, options.Environment.RestBaseAddress, options, options.FuturesOptions)
         {
+            _baseClient = baseClient;
+
             Account = new BitgetRestClientFuturesApiAccount(this);
             ExchangeData = new BitgetRestClientFuturesApiExchangeData(this);
             Trading = new BitgetRestClientFuturesApiTrading(this);

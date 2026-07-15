@@ -38,9 +38,13 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         protected override IRestMessageHandler MessageHandler { get; } = new BitgetRestMessageHandler(BitgetErrors.RestErrors);
 
+        internal BitgetRestClient _baseClient;
+
         internal BitgetRestClientSpotApi(ILoggerFactory? loggerFactory, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
             : base(loggerFactory, BitgetExchange.Metadata.Id, httpClient, options.Environment.RestBaseAddress, options, options.SpotOptions)
         {
+            _baseClient = baseClient;
+
             Account = new BitgetRestClientSpotApiAccount(this);
             Margin = new BitgetRestClientSpotApiMargin(this);
             ExchangeData = new BitgetRestClientSpotApiExchangeData(this);
