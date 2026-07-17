@@ -250,7 +250,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return SharedAssetSubType.Commodity;
 
             if (s.SymbolType == SymbolType.Stock)
-                return SharedAssetSubType.Stock;
+                return SharedAssetSubType.Equity;
 
             return null;
         }

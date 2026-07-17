@@ -127,7 +127,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             else if (s.SymbolType == Enums.Uta.SymbolType.Stock)
             {
                 result.BaseAssetType = SharedAssetType.TradFi;
-                result.BaseAssetSubType = SharedAssetSubType.Stock;
+                result.BaseAssetSubType = SharedAssetSubType.Equity;
             } 
             else if (LibraryHelpers.IsStableCoin(s.BaseAsset))
             {
