@@ -152,6 +152,10 @@ namespace Bitget.Net.Clients.SpotApiV2
             {
                 result.QuoteAssetType = SharedAssetType.Fiat;
             }
+            else
+            {
+                result.QuoteAssetType = SharedAssetType.Crypto;
+            }
 
             return result;
         }
