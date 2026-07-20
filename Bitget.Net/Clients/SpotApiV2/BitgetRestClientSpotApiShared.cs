@@ -1,6 +1,7 @@
 using Bitget.Net.Enums;
 using Bitget.Net.Enums.V2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
@@ -18,6 +19,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
         public SharedClientInfo Discover() => SharedUtils.GetClientInfo(BitgetExchange.Metadata, this);
+        private static HashSet<string> _exchangeSupportedFiatCurrencies = ["EUR", "USD", "BRL"];
 
         #region Kline client
 
@@ -83,6 +85,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         #endregion
 
         #region Spot Symbol client
+        SharedSymbolCatalog? ISpotSymbolRestClient.SpotSymbolCatalog => ExchangeSymbolCache.GetSymbolCatalog(_exchangeName, _topicId, EnvironmentName, null);
         GetSpotSymbolsOptions ISpotSymbolRestClient.GetSpotSymbolsOptions { get; } = new GetSpotSymbolsOptions(_exchangeName, false);
 
         async Task<HttpResult<SharedSpotSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
@@ -91,21 +94,70 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (validationError != null)
                 return HttpResult.Fail<SharedSpotSymbol[]>(Exchange, validationError);
 
-            var result = await ExchangeData.GetSymbolsAsync(ct: ct).ConfigureAwait(false);
+            var result = await _baseClient.UnifiedApi.ExchangeData.GetSpotSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<SharedSpotSymbol[]>(result);
 
-            var response = HttpResult.Ok(result, result.Data.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol, s.Status == Enums.SymbolStatus.Online)
+            var data = result.Data
+                .Select(x => ParseSymbol(x)!)
+                .Where(x => x != null)
+                .ToArray();
+
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, data);
+            return HttpResult.Ok(result, SharedUtils.ApplySymbolFilter(data, request));
+        }
+
+        private SharedSpotSymbol ParseSymbol(BitgetUaSpotSymbol s)
+        {
+            var result = new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol, s.Status == Enums.Uta.InstrumentStatus.Online)
             {
                 MinTradeQuantity = s.MinOrderQuantity,
                 MinNotionalValue = s.MinOrderValue,
                 MaxTradeQuantity = s.MaxOrderQuantity,
                 QuantityDecimals = s.QuantityPrecision,
-                PriceDecimals = s.PricePrecision
-            }).ToArray());
+                PriceDecimals = s.PricePrecision,
+                DisplayName = s.Symbol
+            };
 
-            ExchangeSymbolCache.UpdateSymbolInfo(_topicId, EnvironmentName, null, response.Data!);
-            return response;
+            if (s.SymbolType == Enums.Uta.SymbolType.Commodity || s.SymbolType == Enums.Uta.SymbolType.Metal)
+            {
+                result.BaseAssetType = SharedAssetType.TradFi;
+                result.BaseAssetSubType = SharedAssetSubType.Commodity;
+            }
+            else if (s.SymbolType == Enums.Uta.SymbolType.Stock)
+            {
+                result.BaseAssetType = SharedAssetType.TradFi;
+                result.BaseAssetSubType = SharedAssetSubType.Equity;
+            } 
+            else if (LibraryHelpers.IsStableCoin(s.BaseAsset))
+            {
+                result.BaseAssetType = SharedAssetType.Crypto;
+                result.BaseAssetSubType = SharedAssetSubType.StableCoin;
+            }
+            else if (_exchangeSupportedFiatCurrencies.Contains(s.BaseAsset))
+            {
+                result.BaseAssetType = SharedAssetType.Fiat;
+            }
+            else
+            {
+                result.BaseAssetType = SharedAssetType.Crypto;
+            }
+
+            if (LibraryHelpers.IsStableCoin(s.QuoteAsset))
+            {
+                result.QuoteAssetType = SharedAssetType.Crypto;
+                result.QuoteAssetSubType = SharedAssetSubType.StableCoin;
+            }
+            else if (_exchangeSupportedFiatCurrencies.Contains(s.QuoteAsset))
+            {
+                result.QuoteAssetType = SharedAssetType.Fiat;
+            }
+            else
+            {
+                result.QuoteAssetType = SharedAssetType.Crypto;
+            }
+
+            return result;
         }
 
         async Task<ExchangeCallResult<SharedSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsForBaseAssetAsync(string baseAsset)
