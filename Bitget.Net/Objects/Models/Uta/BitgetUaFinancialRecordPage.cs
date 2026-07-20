@@ -18,7 +18,7 @@ public record BitgetUaFinancialRecordPage
     /// ["<c>cursor</c>"] Cursor
     /// </summary>
     [JsonPropertyName("cursor")]
-    public decimal Cursor { get; set; }
+    public string? Cursor { get; set; }
 }
 
 /// <summary>
