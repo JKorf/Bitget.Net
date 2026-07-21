@@ -33,6 +33,7 @@ var socketClient = new BitgetSocketClient();
 - Futures socket: `socketClient.FuturesApiV2`
 - Unified/UTA socket: `socketClient.UnifiedApi`
 - Shared capability discovery: `client.SpotApiV2.SharedClient.Discover()` / `client.FuturesApiV2.SharedClient.Discover()`
+- Shared symbol discovery returns asset type/subtype metadata and populates `SpotSymbolCatalog` / `FuturesSymbolCatalog` after a successful symbol request.
 
 ## Common calls
 

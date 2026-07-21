@@ -417,6 +417,8 @@ var ticker = await bitgetShared.GetSpotTickerAsync(new GetTickerRequest(symbol))
 
 For shared symbols, use `SharedSymbol`; do not pass the exchange-native `BTCUSDT` string into shared requests.
 
+Shared spot and futures symbol responses include `BaseAssetType`, `BaseAssetSubType`, `QuoteAssetType`, and `QuoteAssetSubType` metadata, including crypto, fiat, stablecoin, commodity, and equity classifications where available. A successful `GetSpotSymbolsAsync` or `GetFuturesSymbolsAsync` call also populates the corresponding `SpotSymbolCatalog` or `FuturesSymbolCatalog` on the shared symbol REST interface.
+
 For shared socket subscriptions, keep the concrete socket client for unsubscribe:
 
 ```csharp

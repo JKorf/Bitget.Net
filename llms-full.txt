@@ -4,9 +4,9 @@
 
 Bitget.Net is a strongly typed .NET client library for the Bitget REST and WebSocket APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, local order book, and socket patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 3.12.1.
+Current package version in this repository: 4.2.0.
 NuGet package id: `JK.Bitget.Net`.
-CryptoExchange.Net dependency: 11.2.1.
+CryptoExchange.Net dependency: 12.2.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
 
@@ -693,6 +693,8 @@ var ticker = await futuresTickerClient.GetFuturesTickerAsync(new GetTickerReques
 ```
 
 Shared REST interfaces exposed by Bitget.Net include spot ticker, symbol, order, balance, deposit, withdraw, fee, order book, trade, kline and transfer clients; futures ticker, symbol, order, balance, position, funding, leverage, TP/SL and kline clients.
+
+Shared spot and futures symbol discovery uses Unified instrument data. Returned `SharedSpotSymbol` and `SharedFuturesSymbol` values include base/quote `SharedAssetType` and `SharedAssetSubType` metadata for crypto, fiat, stablecoin, commodity, and equity assets where available. After a successful `GetSpotSymbolsAsync` or `GetFuturesSymbolsAsync` request, the shared symbol interface exposes the cached catalog through `SpotSymbolCatalog` or `FuturesSymbolCatalog`.
 
 Shared socket interfaces expose spot and futures ticker, trade, order book, balance, order, user trade, and kline subscriptions, plus futures positions.
 
