@@ -35,9 +35,16 @@ namespace Bitget.Net.Clients.SpotApiV2
             {
                 foreach (var item in update.Data)
                 {
-                    handler(update.ToType(new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, item.Symbol), item.Symbol, item.LastPrice, item.HighPrice24h, item.LowPrice24h, item.BaseVolume, item.ChangePercentage * 100)
+                    handler(update.ToType(
+                        new SharedSpotTicker(
+                            ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, item.Symbol),
+                            item.Symbol,
+                            item.LastPrice,
+                            item.HighPrice24h,
+                            item.LowPrice24h,
+                            new SharedOrderQuantity(item.BaseVolume, item.QuoteVolume),
+                            item.ChangePercentage * 100)
                     {
-                        QuoteVolume = item.QuoteVolume
                     }));
                 }
             }, ct).ConfigureAwait(false);
@@ -67,7 +74,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                     return;
 
                 handler(update.ToType<SharedTrade[]>(update.Data.Select(x => 
-                new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol), update.Symbol!, x.Quantity, x.Price, x.Timestamp)
+                new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol), update.Symbol!, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
                 {
                     Side = x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
                 }).ToArray()));
@@ -257,7 +264,18 @@ namespace Bitget.Net.Clients.SpotApiV2
                     return;
 
                 foreach (var item in update.Data)
-                    handler(update.ToType(new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol), update.Symbol!, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
+                {
+                    handler(update.ToType(
+                        new SharedKline(
+                            ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol),
+                            update.Symbol!,
+                            item.OpenTime,
+                            item.ClosePrice,
+                            item.HighPrice,
+                            item.LowPrice,
+                            item.OpenPrice,
+                            new SharedOrderQuantity(item.Volume, item.QuoteVolume))));
+                }
             }, ct).ConfigureAwait(false);            
 
             return result;

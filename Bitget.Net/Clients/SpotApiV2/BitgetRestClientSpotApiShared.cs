@@ -7,6 +7,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.SharedApis;
+using System.Timers;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {
@@ -78,7 +79,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                             x.HighPrice,
                             x.LowPrice,
                             x.OpenPrice,
-                            x.Volume))
+                            new SharedOrderQuantity(x.Volume, x.QuoteVolume)))
                    .ToArray(), nextPageRequest);
         }
 
@@ -214,9 +215,16 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return HttpResult.Fail<SharedSpotTicker>(result);
 
             var ticker = result.Data.Single();
-            return HttpResult.Ok(result, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, ticker.Symbol), ticker.Symbol, ticker.LastPrice, ticker.HighPrice, ticker.LowPrice, ticker.Volume, ticker.ChangePercentage24H * 100)
+            return HttpResult.Ok(result, 
+                new SharedSpotTicker(
+                    ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, ticker.Symbol),
+                    ticker.Symbol, 
+                    ticker.LastPrice, 
+                    ticker.HighPrice,
+                    ticker.LowPrice, 
+                    new SharedOrderQuantity(ticker.Volume, ticker.QuoteVolume),
+                    ticker.ChangePercentage24H * 100)
             {
-                QuoteVolume = ticker.QuoteVolume
             });
         }
 
@@ -231,10 +239,17 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (!result.Success)
                 return HttpResult.Fail<SharedSpotTicker[]>(result);
 
-            return HttpResult.Ok(result, result.Data.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.ChangePercentage24H * 100)
-            {
-                QuoteVolume = x.QuoteVolume
-            }).ToArray());
+            return HttpResult.Ok(result, result.Data.Select(x => 
+                new SharedSpotTicker(
+                    ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol),
+                    x.Symbol,
+                    x.LastPrice,
+                    x.HighPrice,
+                    x.LowPrice,
+                    new SharedOrderQuantity(x.Volume, x.QuoteVolume),
+                    x.ChangePercentage24H * 100)
+                {
+                }).ToArray());
         }
 
         #endregion
@@ -289,7 +304,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             // Return
             return HttpResult.Ok(result, result.Data.Select(x => 
-            new SharedTrade(request.Symbol, symbol, x.Quantity, x.Price, x.Timestamp)
+            new SharedTrade(request.Symbol, symbol, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
             {
                 Side = x.Side == BitgetOrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray());
@@ -888,7 +903,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             // Return
             return HttpResult.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.Timestamp, request.StartTime, request.EndTime, direction)
                        .Select(x => 
-                            new SharedTrade(request.Symbol, symbol, x.Quantity, x.Price, x.Timestamp)
+                            new SharedTrade(request.Symbol, symbol, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
                             {
                                 Side = x.Side == BitgetOrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
                             })

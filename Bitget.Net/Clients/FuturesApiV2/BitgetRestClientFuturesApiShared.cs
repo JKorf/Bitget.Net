@@ -93,7 +93,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     resultTicker.Result.Data.LastPrice,
                     resultTicker.Result.Data.HighPrice,
                     resultTicker.Result.Data.LowPrice,
-                    resultTicker.Result.Data.Volume,
+                    new SharedOrderQuantity(resultTicker.Result.Data.Volume, resultTicker.Result.Data.QuoteVolume),
                     resultTicker.Result.Data.ChangePercentage24H * 100)
                 {
                     MarkPrice = resultPrices.Result.Data.MarkPrice,
@@ -126,7 +126,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 data = data.Where(x => (request.TradingMode == TradingMode.DeliveryLinear || request.TradingMode == TradingMode.DeliveryInverse) ? x.DeliveryTime != null : x.DeliveryTime == null);
 
             return HttpResult.Ok(resultTickers, data.Select(x =>
-             new SharedFuturesTicker(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), x.Symbol, x.LastPrice, x.HighPrice, x.LowPrice, x.Volume, x.ChangePercentage24H * 100)
+             new SharedFuturesTicker(
+                 ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), 
+                 x.Symbol,
+                 x.LastPrice,
+                 x.HighPrice,
+                 x.LowPrice,
+                new SharedOrderQuantity(x.Volume, x.QuoteVolume),
+                 x.ChangePercentage24H * 100)
                 {
                     FundingRate = x.FundingRate,
                     IndexPrice = x.IndexPrice
@@ -359,7 +366,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                             x.HighPrice,
                             x.LowPrice,
                             x.OpenPrice,
-                            x.Volume))
+                            new SharedOrderQuantity(x.Volume, x.QuoteVolume)))
                    .ToArray(), nextPageRequest);
         }
 
@@ -390,7 +397,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return HttpResult.Fail<SharedTrade[]>(result);
 
             return HttpResult.Ok(result, result.Data.Select(x => new SharedTrade(
-                request.Symbol, symbol, x.Quantity, x.Price, x.Timestamp)
+                request.Symbol, symbol, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
             {
                 Side = x.Side == BitgetOrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray());

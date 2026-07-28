@@ -47,7 +47,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                             item.LastPrice, 
                             item.HighPrice, 
                             item.LowPrice,
-                            item.Volume, 
+                            new SharedOrderQuantity(item.Volume, item.QuoteVolume),
                             item.ChangePercentage24H * 100)
                         ));
                 }
@@ -79,7 +79,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)).ToArray() : [request.Symbol!.GetSymbol(FormatSymbol)];
             var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
             var result = await SubscribeToTradeUpdatesAsync(productType, symbols, update => handler(update.ToType(update.Data.Select(x => 
-            new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol), update.Symbol!, x.Quantity, x.Price, x.Timestamp)
+            new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol), update.Symbol!, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
             {
                 Side = x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray())), ct).ConfigureAwait(false);
@@ -196,7 +196,18 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     return;
 
                 foreach (var item in update.Data)
-                    handler(update.ToType(new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol), update.Symbol!, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
+                {
+                    handler(update.ToType(
+                        new SharedKline(
+                            ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, update.Symbol),
+                            update.Symbol!,
+                            item.OpenTime,
+                            item.ClosePrice,
+                            item.HighPrice,
+                            item.LowPrice,
+                            item.OpenPrice,
+                            new SharedOrderQuantity(item.Volume, item.QuoteVolume))));
+                }
             }, ct).ConfigureAwait(false);
             
             return result;
