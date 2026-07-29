@@ -79,5 +79,10 @@ public record BitgetUaSpotTicker
     /// </summary>
     [JsonPropertyName("turnover24h")]
     public decimal Turnover { get; set; }
+    /// <summary>
+    /// ["<c>platformTurnover24h</c>"] Platform turnover 24h
+    /// </summary>
+    [JsonPropertyName("platformTurnover24h")]
+    public decimal? PlatformTurnover { get; set; }
 }
 
