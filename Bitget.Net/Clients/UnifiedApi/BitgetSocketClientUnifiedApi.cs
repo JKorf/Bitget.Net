@@ -273,7 +273,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             var query = new BitgetIdQuery<BitgetUaOrderResult[]>(this, new BitgetIdSocketRequest
             {
                 Id = ExchangeHelpers.NextId().ToString(),
-                Category = category,
+                Category = EnumConverter.GetString(category).ToLowerInvariant(),
                 Op = "trade",
                 Topic = "place-order",
                 ApiCode = LibraryHelpers.GetClientReference(() => ClientOptions.ChannelCode, BitgetExchange.ExchangeName),
@@ -311,7 +311,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             var query = new BitgetIdQuery<BitgetUaOrderResult[]>(this, new BitgetIdSocketRequest
             {
                 Id = ExchangeHelpers.NextId().ToString(),
-                Category = category,
+                Category = EnumConverter.GetString(category).ToLowerInvariant(),
                 Op = "trade",
                 Topic = "modify-order",
                 Args = [parameters]
@@ -342,7 +342,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             var query = new BitgetIdQuery<BitgetUaOrderResult[]>(this, new BitgetIdSocketRequest
             {
                 Id = ExchangeHelpers.NextId().ToString(),
-                Category = category,
+                Category = EnumConverter.GetString(category).ToLowerInvariant(),
                 Op = "trade",
                 Topic = "cancel-order",
                 Args = [parameters]

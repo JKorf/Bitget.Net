@@ -26,7 +26,7 @@ namespace Bitget.Net.Objects.Socket.Queries
 
         public CallResult<TResponse> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, BitgetSocketResponse<TResponse> message)
         {
-            if (message.Code != null)
+            if (message.Code > 0)
                 return CallResult<TResponse>.Fail(new ServerError(message.Code.Value.ToString(), _client.GetErrorInfo(message.Code.Value, message.Message!)), originalData);
 
             return CallResult<TResponse>.Ok(message.Data, originalData);
