@@ -183,6 +183,31 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
             CancellationToken ct = default);
 
         /// <summary>
+        /// Get order history
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/uta/trade/Get-Order-History" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/trade/history-orders<br />
+        /// </para>
+        /// </summary>
+        /// <param name="category">["<c>category</c>"] Category</param>
+        /// <param name="symbol">["<c>symbol</c>"] Filter by symbol, for example `ETHUSDT`</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results, max 100</param>
+        /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<BitgetUaOrders>> GetClosedOrdersAsync(
+            ProductCategory category,
+            string? symbol = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Get user trades
         /// <para>
         /// Docs:<br />

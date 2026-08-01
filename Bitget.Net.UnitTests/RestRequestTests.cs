@@ -298,6 +298,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.ClosePositionsAsync(ProductCategory.UsdtFutures), "ClosePositions", nestedJsonProperty: "data.list");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetOrderAsync(), "GetOrder", nestedJsonProperty: "data", ignoreProperties: ["reduceOnly"]);
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetOpenOrdersAsync(), "GetOpenOrders", nestedJsonProperty: "data", ignoreProperties: ["reduceOnly"]);
+            await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetClosedOrdersAsync(ProductCategory.Spot), "GetClosedOrders", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetUserTradesAsync(), "GetUserTrades", nestedJsonProperty: "data", ignoreProperties: ["isRPI"]);
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetPositionsAsync(ProductCategory.UsdtFutures), "GetPositions", nestedJsonProperty: "data.list");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetPositionHistoryAsync(ProductCategory.UsdtFutures), "GetPositionHistory", nestedJsonProperty: "data");
