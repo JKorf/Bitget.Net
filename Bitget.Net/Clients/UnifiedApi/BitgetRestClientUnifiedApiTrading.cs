@@ -205,6 +205,32 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         #endregion
 
+        #region Get Closed Orders (history)
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BitgetUaOrders>> GetClosedOrdersAsync(
+            ProductCategory category,
+            string? orderId = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
+            parameters.Add("orderId", orderId);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            parameters.Add("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/trade/history-orders", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<BitgetUaOrders>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
         #region Get User Trades
 
         /// <inheritdoc />
