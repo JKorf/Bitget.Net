@@ -144,6 +144,6 @@ namespace Bitget.Net.Objects.Models.V2
         /// ["<c>assetList</c>"] Assets under multi-assets mode
         /// </summary>
         [JsonPropertyName("assetList")]
-        public string[]? AssetListMultiMargin { get; set; }
+        public BitgetFuturesAsset[]? AssetListMultiMargin { get; set; }
     }
 }

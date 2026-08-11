@@ -270,6 +270,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetResponse))]
     [JsonSerializable(typeof(BitgetSocketEvent))]
     [JsonSerializable(typeof(BitgetSocketRequest))]
+    [JsonSerializable(typeof(BitgetFuturesAsset))]
     [JsonSerializable(typeof(int?))]
     [JsonSerializable(typeof(int))]
     [JsonSerializable(typeof(long?))]
