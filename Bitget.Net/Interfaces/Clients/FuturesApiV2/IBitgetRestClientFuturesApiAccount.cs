@@ -30,7 +30,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// Get balances
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/contract/account/Get-Account-List" /><br />
+        /// <a href="https://www.bitget.com/api-doc/classic/contract/account/Get-Account-List" /><br />
         /// Endpoint:<br />
         /// GET /api/v2/mix/account/accounts
         /// </para>
