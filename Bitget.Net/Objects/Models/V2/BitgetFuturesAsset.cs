@@ -18,11 +18,11 @@ namespace Bitget.Net.Objects.Models.V2
         /// Available
         /// </summary>
         [JsonPropertyName("available")]
-        public string Available { get; set; }
+        public decimal Available { get; set; }
         /// <summary>
         /// Balance
         /// </summary>
         [JsonPropertyName("balance")]
-        public string Balance { get; set; }
+        public decimal Balance { get; set; }
     }
 }
