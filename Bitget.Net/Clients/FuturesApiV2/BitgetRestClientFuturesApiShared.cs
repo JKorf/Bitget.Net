@@ -611,7 +611,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #region Open Interest client
 
-        GetOpenInterestOptions IOpenInterestRestClient.GetOpenInterestOptions { get; } = new GetOpenInterestOptions(_exchangeName, true)
+        GetOpenInterestOptions IOpenInterestRestClient.GetOpenInterestOptions { get; } = new GetOpenInterestOptions(_exchangeName, false)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
             {
