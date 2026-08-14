@@ -261,6 +261,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 4.4.0 - 14 Aug 2026
+    * Added UTA copy trading futures endpoints under UnifiedApi.CopyFutures
+    * Fixed Shared GetOpenInterestAsync being marked as Authenticated
+    * Fixed AssetListMultiMargin deserialization in BitgetFuturesBalance model
+
 * Version 4.3.2 - 06 Aug 2026
     * Added restClient.UnifiedApi.Trading.GetClosedOrdersAsync endpoint
 
