@@ -13,7 +13,7 @@ namespace Bitget.Net.Objects.Models.V2
         /// Asset Name
         /// </summary>
         [JsonPropertyName("coin")]
-        public string Coin { get; set; }
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Available
         /// </summary>
