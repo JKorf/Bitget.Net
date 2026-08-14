@@ -5,7 +5,7 @@ using Bitget.Net.Enums.Uta;
 namespace Bitget.Net.Objects.Models;
 
 /// <summary>
-/// 
+/// Spot symbol
 /// </summary>
 public record BitgetUaSpotSymbol
 {
@@ -109,5 +109,10 @@ public record BitgetUaSpotSymbol
     /// </summary>
     [JsonPropertyName("areaSymbol")]
     public bool? AreaSymbol { get; set; }
+    /// <summary>
+    /// ["<c>isReality</c>"] Is realty
+    /// </summary>
+    [JsonPropertyName("isReality")]
+    public bool? IsRealty { get; set; }
 }
 

@@ -2,6 +2,8 @@
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Bitget.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Bitget.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Bitget.Net?style=for-the-badge) ![Since](https://img.shields.io/badge/since-2023-brightgreen?style=for-the-badge)
 
+[![Docs](https://img.shields.io/badge/Docs-Bitget.Net-1b7f50?style=for-the-badge)](https://cryptoexchange.jkorf.dev/docs/exchange-clients?library=Bitget.Net)
+
 Bitget.Net is a strongly typed client library for accessing the [Bitget REST and Websocket API](https://bitgetlimited.github.io/apidoc/en/spot).
 ## Features
 * Response data is mapped to descriptive models
@@ -15,6 +17,17 @@ Bitget.Net is a strongly typed client library for accessing the [Bitget REST and
 * Support for different environments
 * Easy integration with other exchange client based on the CryptoExchange.Net base library
 * Native AOT support
+
+## Documentation
+
+The [Bitget.Net documentation](https://cryptoexchange.jkorf.dev/docs/exchange-clients?library=Bitget.Net) is the main resource for installing, configuring, and using the library.
+
+| Resource | Description |
+|--|--|
+| [Client guide](https://cryptoexchange.jkorf.dev/docs/exchange-clients?library=Bitget.Net) | Installation, REST and WebSocket clients, authentication, dependency injection, error handling, and advanced features |
+| [Examples](https://cryptoexchange.jkorf.dev/docs/exchange-clients/examples?library=Bitget.Net) | Common REST and WebSocket operations |
+| [API reference](https://cryptoexchange.jkorf.dev/docs/exchange-clients/reference?library=Bitget.Net) | Client interfaces, methods, and properties |
+| [Shared API guide](https://cryptoexchange.jkorf.dev/docs/shared-api) | Common interfaces and models for working with multiple exchanges |
 
 ## Supported Frameworks
 The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility, as well as the latest dotnet versions to use the latest framework features.
@@ -82,7 +95,55 @@ var tickerSubscriptionResult = socketClient.SpotApi.SubscribeToTickerUpdatesAsyn
 });
 ```
 
-For information on the clients, dependency injection, response processing and more see the [Bitget.Net documentation](https://cryptoexchange.jkorf.dev?library=Bitget.Net) or have a look at the examples [here](https://github.com/JKorf/Bitget.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
+For more examples and explanations, continue with the [Bitget.Net documentation](https://cryptoexchange.jkorf.dev/docs/exchange-clients?library=Bitget.Net) or browse the [compilable repository examples](https://github.com/JKorf/Bitget.Net/tree/main/Examples).
+
+## Shared / unified API
+
+The CryptoExchange.Net [Shared APIs](https://cryptoexchange.jkorf.dev/docs/shared-api) provide exchange-agnostic, unified interfaces for common operations such as retrieving tickers, order books and balances, placing orders, and subscribing to market updates.
+
+This allows the same application code to work with different exchange libraries. The supported Bitget API surfaces expose their shared functionality through a `SharedClient` property. Because support differs between exchanges and API surfaces, call `Discover()` to inspect the available trading modes, environments, endpoints, and subscriptions at runtime.
+
+### Supported shared interfaces
+
+| API | Type | Supported interfaces |
+|--|--|--|
+| `SpotApiV2` | REST | `IAssetsRestClient`, `IBalanceRestClient`, `IBookTickerRestClient`, `IDepositRestClient`, `IFeeRestClient`, `IKlineRestClient`, `IOrderBookRestClient`, `IRecentTradeRestClient`, `ISpotOrderClientIdRestClient`, `ISpotOrderRestClient`, `ISpotSymbolRestClient`, `ISpotTickerRestClient`, `ISpotTriggerOrderRestClient`, `ITradeHistoryRestClient`, `ITransferRestClient`, `IWithdrawalRestClient`, `IWithdrawRestClient` |
+| `SpotApiV2` | WebSocket | `IBalanceSocketClient`, `IBookTickerSocketClient`, `IKlineSocketClient`, `IOrderBookSocketClient`, `ISpotOrderSocketClient`, `ITickerSocketClient`, `ITradeSocketClient`, `IUserTradeSocketClient` |
+| `FuturesApiV2` | REST | `IBalanceRestClient`, `IBookTickerRestClient`, `IFeeRestClient`, `IFundingRateRestClient`, `IFuturesOrderClientIdRestClient`, `IFuturesOrderRestClient`, `IFuturesSymbolRestClient`, `IFuturesTickerRestClient`, `IFuturesTpSlRestClient`, `IFuturesTriggerOrderRestClient`, `IIndexPriceKlineRestClient`, `IKlineRestClient`, `ILeverageRestClient`, `IMarkPriceKlineRestClient`, `IOpenInterestRestClient`, `IOrderBookRestClient`, `IPositionHistoryRestClient`, `IPositionModeRestClient`, `IRecentTradeRestClient` |
+| `FuturesApiV2` | WebSocket | `IBalanceSocketClient`, `IBookTickerSocketClient`, `IFuturesOrderSocketClient`, `IKlineSocketClient`, `IOrderBookSocketClient`, `IPositionSocketClient`, `ITickerSocketClient`, `ITradeSocketClient`, `IUserTradeSocketClient` |
+
+### Discover supported functionality
+
+```csharp
+var sharedClient = new BitgetRestClient().SpotApiV2.SharedClient;
+var clientInfo = sharedClient.Discover();
+
+Console.WriteLine(clientInfo);
+```
+
+### Example
+
+```csharp
+using Bitget.Net.Clients;
+using CryptoExchange.Net.SharedApis;
+
+var sharedClient = new BitgetRestClient().SpotApiV2.SharedClient;
+ISpotTickerRestClient tickerClient = sharedClient;
+
+var symbol = new SharedSymbol(TradingMode.Spot, "ETH", "USDT");
+var result = await tickerClient.GetSpotTickerAsync(
+    new GetTickerRequest(symbol));
+
+if (!result.Success)
+{
+    Console.WriteLine(result.Error);
+    return;
+}
+
+Console.WriteLine(result.Data.LastPrice);
+```
+
+The request and response models belong to `CryptoExchange.Net.SharedApis`, so the same pattern can be used with another exchange's `SharedClient`.
 
 ## AI documentation
 For AI coding assistants and quick onboarding:
@@ -92,10 +153,12 @@ For AI coding assistants and quick onboarding:
 * [`docs/ai-api-map.md`](docs/ai-api-map.md) maps common intents to client members
 * [`Examples/ai-friendly`](Examples/ai-friendly) contains compact examples that are compiled by the test suite
 
+See [cryptoexchange-skills-hub](https://github.com/JKorf/cryptoexchange-skills-hub) for installable skills.
+
 ## CryptoExchange.Net
 Biget.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
 
-CryptoExchange.Net also allows for [easy access to different exchange API's](https://cryptoexchange.jkorf.dev/client-libs/shared).
+CryptoExchange.Net also provides [shared access to different exchange APIs](https://cryptoexchange.jkorf.dev/docs/shared-api).
 
 |Exchange|Repository|Nuget|
 |--|--|--|
@@ -119,8 +182,11 @@ CryptoExchange.Net also allows for [easy access to different exchange API's](htt
 |HyperLiquid|[JKorf/HyperLiquid.Net](https://github.com/JKorf/HyperLiquid.Net)|[![Nuget version](https://img.shields.io/nuget/v/HyperLiquid.Net.svg?style=flat-square)](https://www.nuget.org/packages/HyperLiquid.Net)|
 |Kraken|[JKorf/Kraken.Net](https://github.com/JKorf/Kraken.Net)|[![Nuget version](https://img.shields.io/nuget/v/KrakenExchange.net.svg?style=flat-square)](https://www.nuget.org/packages/KrakenExchange.Net)|
 |Kucoin|[JKorf/Kucoin.Net](https://github.com/JKorf/Kucoin.Net)|[![Nuget version](https://img.shields.io/nuget/v/Kucoin.net.svg?style=flat-square)](https://www.nuget.org/packages/Kucoin.Net)|
+|LBank|[JKorf/LBank.Net](https://github.com/JKorf/LBank.Net)|[![Nuget version](https://img.shields.io/nuget/v/LBank.net.svg?style=flat-square)](https://www.nuget.org/packages/LBank.Net)|
+|Lighter|[JKorf/Lighter.Net](https://github.com/JKorf/Lighter.Net)|[![Nuget version](https://img.shields.io/nuget/v/JKorf.Lighter.net.svg?style=flat-square)](https://www.nuget.org/packages/JKorf.Lighter.Net)|
 |Mexc|[JKorf/Mexc.Net](https://github.com/JKorf/Mexc.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.Mexc.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.Mexc.Net)|
 |OKX|[JKorf/OKX.Net](https://github.com/JKorf/OKX.Net)|[![Nuget version](https://img.shields.io/nuget/v/JK.OKX.net.svg?style=flat-square)](https://www.nuget.org/packages/JK.OKX.Net)|
+|Pionex|[JKorf/Pionex.Net](https://github.com/JKorf/Pionex.Net)|[![Nuget version](https://img.shields.io/nuget/v/Pionex.net.svg?style=flat-square)](https://www.nuget.org/packages/Pionex.Net)|
 |Polymarket|[JKorf/Polymarket.Net](https://github.com/JKorf/Polymarket.Net)|[![Nuget version](https://img.shields.io/nuget/v/Polymarket.net.svg?style=flat-square)](https://www.nuget.org/packages/Polymarket.Net)|
 |Toobit|[JKorf/Toobit.Net](https://github.com/JKorf/Toobit.Net)|[![Nuget version](https://img.shields.io/nuget/v/Toobit.net.svg?style=flat-square)](https://www.nuget.org/packages/Toobit.Net)|
 |Upbit|[JKorf/Upbit.Net](https://github.com/JKorf/Upbit.Net)|[![Nuget version](https://img.shields.io/nuget/v/JKorf.Upbit.net.svg?style=flat-square)](https://www.nuget.org/packages/JKorf.Upbit.Net)|
@@ -187,534 +253,75 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free t
 Any support is greatly appreciated.
 
 ### Donate
-Make a one time donation in a crypto currency of your choice. If you prefer to donate a currency not listed here please contact me.
-
-**Btc**:  bc1q277a5n54s2l2mzlu778ef7lpkwhjhyvghuv8qf  
-**Eth**:  0xcb1b63aCF9fef2755eBf4a0506250074496Ad5b7   
+Make a one time donation in a crypto currency of your choice. If you prefer to donate in a different currency or network send me a message.
+   
 **USDT (TRX)**  TKigKeJPXZYyMVDgMyXxMf17MWYia92Rjd
 
 ### Sponsor
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
-* Version 3.13.0 - 08 Jun 2026
-    * Updated CryptoExchange.Net to version 11.2.2
-    * Added PreviousSequence to BitgetOrderBookUpdate model
-
-* Version 3.12.1 - 02 Jun 2026
-    * Fixed Shared GetKlines implementations using incorrect limit default
-
-* Version 3.12.0 - 02 Jun 2026
-    * Updated CryptoExchange.Net to v11.2.1
-    * Added UTA/Unified API access
-    * Fixed user client provider not caching new client when previous client was disposed
-
-* Version 3.11.0 - 26 May 2026
-    * Updated CryptoExchange.Net to version 11.2.0
-    * Added GetAgentSubCustomerListAsync endpoint
-    * Added MaxLimitOrderValue, MaxMarketOrderValue to BitgetSymbol model
-
-* Version 3.10.0 - 09 Apr 2026
-    * Updated CryptoExchange.Net to version 11.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Added AreaAsset, Congestion properties to BitgetAsset model
-    * Added OpenTime to BitgetContract model
-    * Added BaseAsset, QuoteAsset, CancelReason properties to BitgetOrder model
-    * Added BusinessOrderId property to BitgetSpotLedgerEntry model
-    * Updated BitgetFuturesBalance model
-
-* Version 3.9.0 - 24 Mar 2026
-    * Updated CryptoExchange.Net to version 11.0.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Updated class for supplying API credentials from ApiCredentials to BitgetCredentials
-    * Updated Shared order status parsing to default to Unknown value if not parsable
-    * Added BrokerApiV2 endpoints
-    * Added support for specifying non-HMAC credentials via Configuration
-    * Fixed exchangeParameters not being forwarded in BitgetUserDataTracker
-
-    * Notes for updating:
-        * Update ApiCredentials to BitgetCredentials for authentication, i.e. `ApiCredentials = new ApiCredentials(..)` => `ApiCredentials = new BitgetCredentials(..)`
-        * When using AddBitget with the Configuration overload (loading config from appsettings), the API credentials path has been changed from ApiCredentials:Key to ApiCredentials:HMAC:Key (and secret/pass)
-
-* Version 3.8.0 - 06 Mar 2026
-    * Updated CryptoExchange.Net to version 10.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Improved method XML comments
-
-* Version 3.7.0 - 24 Feb 2026
-    * Updated CryptoExchange.Net to version 10.7.0
-    * Added additional Http settings to client options
-    * Updated Shared REST interfaces pagination logic
-    * Updated HttpClient registration, fixing issue of DNS changes not getting processed
-    * Fixed UserClientProvider using unconfigured HttpClient
-
-* Version 3.6.0 - 16 Feb 2026
-    * Updated CryptoExchange.Net to version 10.6.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Fixed SymbolOrderBook websocket subscription not getting closed if when waiting for initial data times out
-
-* Version 3.5.0 - 10 Feb 2026
-    * Updated CryptoExchange.Net to version 10.5.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Updated UserClientProvider internal client cache to non-static to prevent cleanup issues
-
-* Version 3.4.0 - 06 Feb 2026
-    * Updated CryptoExchange.Net to version 10.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Added BitgetUserSpotDataTracker and BitgetUserFuturesDataTracker
-    * Added additional methods for requesting supported symbols to Shared ISpotSymbolRestClient/IFuturesSymbolRestClient interfaces
-    * Added PositionMode mapping on SharedPosition models
-    * Added Status mapping for SharedDeposit models
-    * Fixed disposed clients getting returned from UserClientProvider
-    * Fixed Shared futures SubscribeToBalanceUpdatesAsync missing balance updates
-
-* Version 3.3.1 - 26 Jan 2026
-    * Added SharedOrderType.LimitMaker to Shared REST SpotSupportedOrderTypes
-    * Fixed price mapping for spot GetOpenOrdersAsync response
-
-* Version 3.3.0 - 22 Jan 2026
-    * Updated CryptoExchange.Net to version 10.3.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Removed legacy websocket message handling and the corresponding UseUpdatedDeserialization client option
-    * Added Metadata to BitgetExchange
-
-* Version 3.2.1 - 14 Jan 2026
-    * Updated CryptoExchange.Net to version 10.2.3, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-
-* Version 3.2.0 - 13 Jan 2026
-    * Updated CryptoExchange.Net to version 10.2.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Added SequenceNumber to order book websocket updates
-    * Added timestamping to Futures SymbolOrderBook implementation
-
-* Version 3.1.0 - 07 Jan 2026
-    * Updated CryptoExchange.Net version to 10.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Added DataTimeLocal and DataAge properties to DataEvent object
-    * Added UpdateServerTime, UpdateLocalTime and DataAge properties to (I)SymbolOrderBook
-    * Updated SymbolOrderBook implementations to work with sequence numbers instead of timestamps
-    * Added limit of 50 subscriptions for Shared websocket subscriptions to prevent ping timeouts
-
-* Version 3.0.0 - 16 Dec 2025
-    * Added Net10.0 target framework
-    * Updated CryptoExchange.Net version to 10.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
-    * Improved performance across the board, biggest gains in websocket message processing
-    * Updated REST message response handling
-    * Updated WebSocket message handling
-    * Added UseUpdatedDeserialization socket client options to toggle by new and old message handling
-    * Added SocketIndividualSubscriptionCombineTarget socket client option
-    * Added IsRwa to restClient.FuturesApiV2.ExchangeData.GetContractsAsync response
-    * Added socketClient.FuturesApiV2.SubscribeToAdlUpdatesAsync subscription
-    * Added LiquidationPrice to BitgetFuturesOrder model
-    * Updated Shared API's subscription update types from ExchangeEvent to DataEvent
-    * Updated SubscribeToTickerUpdatesAsync, SubscribeToOrderBookUpdatesAsync to produce array updates
-    * Renamed incorrectly named BitMartPositionTpSl to BitgetPositionTpSl
-
-* Version 2.12.0 - 11 Nov 2025
-    * Updated CryptoExchange.Net version to 9.13.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added restClient.FuturesApiV2.Account.GetLiquidationPriceAsync endpoint
-    * Added restClient.FuturesApiV2.Account.GetOpenableQuantityAsync endpoint
-    * Added socketClient.FuturesApiV2.SubscribeToEquityUpdatesAsync subscription
-    * Added BusinessType enum values
-
-* Version 2.11.0 - 03 Nov 2025
-    * Updated CryptoExchange.Net to version 9.12.0
-    * Added support for using SharedSymbol.UsdOrStable in Shared APIs
-    * Fixed exception when initial trade snapshot has no items in TradeTracker
-    * Removed some unhelpful verbose logs
-
-* Version 2.10.0 - 27 Oct 2025
-    * Added CopyTrading follower endpoints
-    * Fixed fee from Shared SpotApi websocket updates being negative
-
-* Version 2.9.0 - 16 Oct 2025
-    * Updated CryptoExchange.Net version to 9.10.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added ClientOrderId mapping on SharedUserTrade models
-    * Added ITransferRestClient.TransferAsync implementation
-    * Updated SpotApi IBalanceRestClient.GetBalancesAsync to support funding wallet balance retrieval
-
-* Version 2.8.0 - 30 Sep 2025
-    * Updated CryptoExchange.Net version to 9.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added ITrackerFactory to TrackerFactory implementation
-    * Added ContractAddress mapping in Shared IAssetClient implementation
-
-* Version 2.7.1 - 10 Sep 2025
-    * Updated fromAccount parameter in restClient.SpotApiV2.Account.GetTransferHistoryAsync to be optional
-
-* Version 2.7.0 - 01 Sep 2025
-    * Updated CryptoExchange.Net version to 9.7.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * HTTP REST requests will now use HTTP version 2.0 by default
-
-* Version 2.6.1 - 30 Aug 2025
-    * Fixed incorrect base order quantity in Shared Spot order update
-    * Fixed restClient.FuturesApiV2.Trading.EditOrderAsync quantity parameter serialization
-
-* Version 2.6.0 - 25 Aug 2025
-    * Updated CryptoExchange.Net version to 9.6.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added ClearUserClients method to user client provider
-
-* Version 2.5.1 - 21 Aug 2025
-    * Fixed websocket login error check
-
-* Version 2.5.0 - 20 Aug 2025
-    * Updated CryptoExchange.Net to version 9.5.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added improved error parsing
-    * Updated rest request sending too prevent duplicate parameter serialization
-
-* Version 2.4.0 - 04 Aug 2025
-    * Updated CryptoExchange.Net to version 9.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added support for multi-symbol Shared socket subscriptions
-
-* Version 2.3.0 - 23 Jul 2025
-    * Updated CryptoExchange.Net to version 9.3.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Updated websocket message matching
-    * Fixed culture issue in websocket subscriptions
-
-* Version 2.2.1 - 16 Jul 2025
-    * Updated CryptoExchange.Net to version 9.2.1, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Fixed issue with websocket ping response parsing
-
-* Version 2.2.0 - 15 Jul 2025
-    * Updated CryptoExchange.Net to version 9.2.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added MarkPrice property to socketClient.FuturesApiV2.SubscribeToPositionUpdatesAsync update model
-    * Added PositionMode property to estClient.FuturesApiV2.Trading.GetPositionHistoryAsync response model
-    * Added restClient.FuturesApiV2.Trading.SetPositionTpSlAsync endpoint
-    * Added longLeverage, shortLeverage parameters to restClient.FuturesApiV2.Account.SetLeverageAsync endpoint
-
-* Version 2.1.1 - 20 Jun 2025
-    * Added MaxMarketOrderQuantity and MaxLimitOrderQuantity properties to BitgetContract model
-    * Added PositionSide to BitgetFuturesAdlRank model
-
-* Version 2.1.0 - 02 Jun 2025
-    * Updated CryptoExchange.Net to version 9.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added (I)BitgetUserClientProvider allowing for easy client management when handling multiple users
-    * Fixed demo trading check
-
-* Version 2.0.0 - 13 May 2025
-    * Updated CryptoExchange.Net to version 9.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added support for Native AOT compilation
-    * Added RateLimitUpdated event
-    * Added SharedSymbol response property to all Shared interfaces response models returning a symbol name
-    * Added GenerateClientOrderId method to Futures and Spot Shared clients
-    * Added OptionalExchangeParameters and Supported properties to EndpointOptions
-    * Added IBookTickerRestClient implementation to Futures and Spot Shared clients
-    * Added IFuturesOrderClientIdClient implementation to Futures Shared client
-    * Added IFuturesTriggerOrderRestClient implementation to Futures Shared client
-    * Added IFuturesTpSlRestClient implementation to Futures Shared client
-    * Added ISpotOrderClientIdClient implementation to Spot Shared client
-    * Added ISpotTriggerOrderRestClient implementation to Futures Shared client
-    * Added MaxShortLeverage and MaxLongLeverage to SharedFuturesSymbol response model
-    * Added support for takeProfitPrice and StopLossPrice to Futures Shared PlaceOrderAsync endpoint
-    * Added TakeProfitPrice and StopLossPrice properties to SharedFuturesOrder response model
-    * Added TriggerPrice and IsTriggerOrder properties to SharedFuturesOrder response model
-    * Added QuoteVolume property mapping to SharedSpotTicker response model
-    * Added restClient.FuturesApiV2.Account.GetAdlRankAsync endpoint
-    * Added restClient.FuturesApiV2.ExchangeData.GetFundingRatesAsync endpoint
-    * Added restClient.SpotApiV2.Margin.GetInterestRatesAsync endpoint
-    * Added restClient.SpotApiV2.ExchangeData.GetAnnouncementsAsync endpoint
-    * Added All property to retrieve all available environment on BitgetEnvironment
-    * Added takeProfitLimitPrice, stopLossLimitPrice parameters to restClient.FuturesApiV2.Trading.PlaceOrderAsync endpoint
-    * Added UpdateTime to BitgetMarginOrderUpdate model
-    * Added idLessThan, limit parameters to restClient.SpotApiV2.Account.GetSubAccountBalancesAsync
-    * Refactored Shared clients quantity parameters and responses to use SharedQuantity
-    * Updated all IEnumerable response and model types to array response types
-    * Updated PlaceMultipleOrdersAsync methods to return a list of CallResult models and an error if all orders fail to place
-    * Updated restClient.FuturesApiV2.ExchangeData.GetFundingRateAsync response model
-    * Updated restClient.SpotApiV2.Trading.GetUserTradesAsync symbol parameter to nullable
-    * Updated Shared Spot GetTradeHistoryAsync max age from 30 to 90 days
-    * Replaced BitgetApiCredentials with ApiCredentials
-    * Fixed incorrect DataTradeMode on certain Shared interface responses
-    * Fixed Shared interfaces AveragePrice property being 0 instead of null
-    * Removed V1 API support
-    * Removed Newtonsoft.Json dependency
-    * Removed legacy AddBitget(restOptions, socketOptions) DI overload
-    * Fixed some typos
-
-* Version 2.0.0-beta3 - 01 May 2025
-    * Updated CryptoExchange.Net version to 9.0.0-beta5
-    * Added property to retrieve all available API environments
-
-* Version 2.0.0-beta2 - 23 Apr 2025
-    * Updated CryptoExchange.Net to version 9.0.0-beta2
-    * Added Shared spot ticker QuoteVolume mapping
-    * Fixed incorrect DataTradeMode on responses
-
-* Version 2.0.0-beta1 - 22 Apr 2025
-    * Updated CryptoExchange.Net to version 9.0.0-beta1, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added support for Native AOT compilation
-    * Added RateLimitUpdated event
-    * Added SharedSymbol response property to all Shared interfaces response models returning a symbol name
-    * Added GenerateClientOrderId method to Futures and Spot Shared clients
-    * Added OptionalExchangeParameters and Supported properties to EndpointOptions
-    * Added IBookTickerRestClient implementation to Futures and Spot Shared clients
-    * Added IFuturesOrderClientIdClient implementation to Futures Shared client
-    * Added IFuturesTriggerOrderRestClient implementation to Futures Shared client
-    * Added IFuturesTpSlRestClient implementation to Futures Shared client
-    * Added ISpotOrderClientIdClient implementation to Spot Shared client
-    * Added ISpotTriggerOrderRestClient implementation to Futures Shared client
-    * Added MaxShortLeverage and MaxLongLeverage to SharedFuturesSymbol response model
-    * Added support for takeProfitPrice and StopLossPrice to Futures Shared PlaceOrderAsync endpoint
-    * Added TakeProfitPrice and StopLossPrice properties to SharedFuturesOrder response model
-    * Added TriggerPrice and IsTriggerOrder properties to SharedFuturesOrder response model
-    * Added restClient.FuturesApiV2.Account.GetAdlRankAsync endpoint
-    * Refactored Shared clients quantity parameters and responses to use SharedQuantity
-    * Updated all IEnumerable response and model types to array response types
-    * Updated PlaceMultipleOrdersAsync methods to return a list of CallResult models and an error if all orders fail to place
-    * Updated restClient.FuturesApiV2.ExchangeData.GetFundingRateAsync response model
-    * Updated restClient.SpotApiV2.Trading.GetUserTradesAsync symbol parameter to nullable
-    * Replaced BitgetApiCredentials with ApiCredentials
-    * Removed V1 API support
-    * Removed Newtonsoft.Json dependency
-    * Removed legacy AddBitget(restOptions, socketOptions) DI overload
-    * Fixed some typos
-
-* Version 1.22.1 - 28 Mar 2025
-    * Fixed ProductType parsing for shared socket subscriptions
-
-* Version 1.22.0 - 24 Mar 2025
-    * Added demo trading environment
-    * Added restClient.FuturesApiV2.ExchangeData.GetOiLimitsAsync endpoint
-    * Added CrossRiskRate and UnrealizedPnl properties to futures balance websocket update model
-    * Added missing Trigger Order Plan Type Enum values
-
-* Version 1.21.0 - 11 Feb 2025
-    * Updated CryptoExchange.Net to version 8.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added support for more SharedKlineInterval values
-    * Added setting of DataTime value on websocket DataEvent updates
-    * Added initial futures CopyTrader endpoints
-    * Updated BitgetFuturesTriggerOrder response model
-    * Fix Mono runtime exception on rest client construction using DI
-
-* Version 1.20.0 - 28 Jan 2025
-    * Added restClient.SpotApiV2.Trading.CancelReplaceOrderAsync endpoint
-    * Added restClient.SpotApiV2.Trading.CancelReplaceMultipleOrdersAsync endpoint
-    * Added TakeProfit/StopLoss parameters to SpotApiV2 place order endpoints
-    * Fixed restClient.SpotApiV2.Margin.GetIsolatedRiskRateAsync response parsing
-
-* Version 1.19.2 - 25 Jan 2025
-    * Fixed an issue with data not being parsed correctly for certain models
-
-* Version 1.19.1 - 07 Jan 2025
-    * Updated CryptoExchange.Net version
-    * Added Type property to BitgetExchange class
-
-* Version 1.19.0 - 23 Dec 2024
-    * Updated CryptoExchange.Net to version 8.5.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Added SetOptions methods on Rest and Socket clients
-    * Added setting of DefaultProxyCredentials to CredentialCache.DefaultCredentials on the DI http client
-    * Added page parameter to restClient.SpotApi.Account.GetTransferHistoryAsync, marked idLessThan as deprecated
-    * Improved websocket disconnect detection
-
-* Version 1.18.1 - 03 Dec 2024
-    * Updated CryptoExchange.Net to version 8.4.3, see https://github.com/JKorf/CryptoExchange.Net/releases/
-    * Fixed orderbook creation via BitgetOrderBookFactory
-
-* Version 1.18.0 - 28 Nov 2024
-    * Updated CryptoExchange.Net to version 8.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.4.0
-    * Added GetFeesAsync Shared REST client implementations
-    * Updated BitgetOptions to LibraryOptions implementation
-    * Updated test and analyzer package versions
-
-* Version 1.17.0 - 25 Nov 2024
-    * Added restClient.SpotApiV2.Account.TransferSubAccountAsync endpoint
-    * Added restClient.SpotApiV2.Account.GetSubAccountBalancesAsync endpoint
-    * Added restClient.SpotApiV2.Account.GetSubAccountTransferHistoryAsync endpoint
-    * Added restClient.SpotApiV2.Account.GetSubAccountDepositAddressAsync endpoint
-    * Added restClient.SpotApiV2.Account.GetSubAccountDepositHistoryAsync endpoint
-    * Added websocket rate limiting rules
-    * Fixed restClient.SetApiCredentials having incorrect ApiCredentials type
-
-* Version 1.16.0 - 19 Nov 2024
-    * Updated CryptoExchange.Net to version 8.3.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.3.0
-    * Added support for loading client settings from IConfiguration
-    * Added DI registration method for configuring Rest and Socket options at the same time
-    * Added DisplayName and ImageUrl properties to BitgetExchange class
-    * Updated client constructors to accept IOptions from DI
-    * Changed restClient.FuturesApiV2.Account.GetLedgerAsync idLessThan parameter to long type to match response model id type
-    * Removed redundant BitgetSocketClient constructor
-
-* Version 1.15.1 - 15 Nov 2024
-    * Added missing futures trigger order statuses
-
-* Version 1.15.0 - 14 Nov 2024
-    * Added status filter to restClient.FuturesApiV2.Trading.GetClosedTriggerOrdersAsync
-    * Updated restClient.FuturesApiV2.Account.GetLedgerAsync response model
-
-* Version 1.14.0 - 11 Nov 2024
-    * Split and corrected futures trigger plan type parameters
-
-* Version 1.13.0 - 06 Nov 2024
-    * Updated CryptoExchange.Net to version 8.2.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.2.0
-
-* Version 1.12.0 - 04 Nov 2024
-    * Added Cross and Isolated Margin API implementation
-    * Fixed V1 API GET request authentication for requests without parameters
-    * Fixed warning log when subscribing multiple symbols at the same time
-
-* Version 1.11.0 - 28 Oct 2024
-    * Updated CryptoExchange.Net to version 8.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.1.0
-    * Moved FormatSymbol to BitgetExchange class
-    * Added support Side setting on SharedTrade model
-    * Added BitgetTrackerFactory for creating trackers
-    * Added overload to Create method on BitgetOrderBookFactory support SharedSymbol parameter
-
-* Version 1.10.4 - 15 Oct 2024
-    * Fixed V1 GET request signing without parameters
-    * Fixed request signing V2 with special characters
-    * Fixed restClient.SpotApi.Trading.GetOrderAsync exception when order not found
-
-* Version 1.10.3 - 14 Oct 2024
-    * Updated CryptoExchange.Net to version 8.0.3, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.3
-    * Fixed TypeLoadException during initialization
-
-* Version 1.10.2 - 14 Oct 2024
-    * Fixed V1 request signing where query parameters contain special characters
-
-* Version 1.10.1 - 08 Oct 2024
-    * Added BitgetSymbolStatus.Halt Enum value
-    * Added converting to uppercase for CancelAllOrdersAsync marginAsset parameter
-    * Fixed FutureApiV2.Trading.CancelTriggerOrdersAsync endpoint
-
-* Version 1.10.0 - 27 Sep 2024
-    * Updated CryptoExchange.Net to version 8.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.0.0
-    * Added Shared client interfaces implementation for Spot Rest and Socket clients
-    * Added oneWaySide parameter to FuturesV2.Trading.PlaceTpSlOrderAsync and renamed positionSide parameter to hedgeModePositionSide
-    * Updated QuoteQuantityFilled property name to QuoteQuantity on BitgetFuturesOrderUpdate
-    * Updated LastTradeId property type from decimal to string? on BitgetFuturesOrderUpdate
-    * Updated LastTradeQuantity, AveragePrice, LastTradeFillPrice and LastTradeFillTime property types from decimal to decimal? on BitgetFuturesOrderUpdate
-    * Updated BitgetStreamKlineIntervalV2 Enum values to match number of seconds
-    * Updated QuantityDecimals and PriceDecimals property types from decimal to int on BitgetContract model
-    * Updated Sourcelink package version
-    * Fixed FuturesV2.ExchangeData.GetNextFundingTimeAsync potentially throwing InvalidOperationException
-    * Fixed various endpoints on FuturesV2.Trading returning null data instead of empty collection
-    * Fixed typo in IsolatedMarginProfitAndLoss property on BitgetFuturesBalance model
-    * Fixed websocket message identification on subscriptions without symbol parameter
-    * Marked ISpotClient references as deprecated
-
-* Version 1.9.5 - 19 Sep 2024
-    * Fixed ClientOrderId websocket order update deserialization
-
-* Version 1.9.4 - 11 Sep 2024
-    * Fixed UsdcPerpetualSimulated Enum value serialization
-
-* Version 1.9.3 - 28 Aug 2024
-    * Updated CryptoExchange.Net to version 7.11.2, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.11.2
-    * Added missing Price property on SpotApi websocket order update model
-
-* Version 1.9.2 - 23 Aug 2024
-    * Fixed deserialization issue in FuturesApiV2.Account.SetLeverageAsync and SetMarginModeAsync response
-
-* Version 1.9.1 - 18 Aug 2024
-    * Added PositionId to FuturesApiV2.Trading.GetPositionHistoryAsync response model
-    * Updated some endpoint ratelimits
-
-* Version 1.9.0 - 07 Aug 2024
-    * Updated CryptoExchange.Net to version 7.11.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.11.0
-    * Updated XML code comments
-    * Fixed order status and order type deserialization futures models
-
-* Version 1.8.0 - 27 Jul 2024
-    * Updated CryptoExchange.Net to version 7.10.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.10.0
-    * Fixed body serialization FuturesV2, fixing PlaceMultipleOrders and CancelMultipleOrdersAsync endpoints
-    * Fixed futures plan type parameters
-    * Fixed spot GetHistoricalKlinesAsync endTime parameter being required
-    * Fixed BitgetFuturesOrder response mapping
-
-* Version 1.7.0 - 16 Jul 2024
-    * Updated CryptoExchange.Net to version 7.9.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.9.0
-    * Updated internal classes to internal access modifier
-    * Fixed deserialization error on BitgetPosition model
-    * Fixed positionSide parameter on FuturesApiV2.Trading.PlaceOrderAsync endpoint
-    * Fixed websocket error response identification
-    * Fixed CreateTime and UpdateTime deserialization on FuturesApiV2.Trading.GetPositionHistoryAsync
-
-* Version 1.6.1 - 02 Jul 2024
-    * Updated CryptoExchange.Net to V7.8.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.8.0
-    * Updated ratelimiting for per-endpoint limits
-
-* Version 1.6.0 - 28 Jun 2024
-    * Fixed V1 socket subscriptions
-    * Fixed FuturesApiV2.Trading.GetOpenOrdersAsync deserialization
-    * Updated V2 websocket kline interval Enum values
-
-* Version 1.5.1 - 25 Jun 2024
-    * Updated CryptoExchange.Net to 7.7.2, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.7.2
-    * Fixed deserialization of nullable int values
-    * Fixed SpotApiV2.ExchangeData.GetSymbolsAsync deserialization
-
-* Version 1.5.0 - 23 Jun 2024
-    * Updated CryptoExchange.Net to version 7.7.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/7.7.0
-    * Added V2 SpotApi and V2 Futures API implementation
-
-* Version 1.4.0 - 11 Jun 2024
-    * Updated CryptoExchange.Net to v7.6.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-
-* Version 1.3.8 - 02 Jun 2024
-    * Added simulated product types to BitgetInstrumentType enum
-
-* Version 1.3.7 - 07 May 2024
-    * Fixed SpotApi.Account.GetDepositHistoryAsync deserialization
-    * Updated CryptoExchange.Net to v7.5.2, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-
-* Version 1.3.6 - 01 May 2024
-    * Updated CryptoExchange.Net to v7.5.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-
-* Version 1.3.5 - 28 Apr 2024
-    * Added BitgetExchange static info class
-    * Added BitgetOrderBookFactory book creation method
-    * Fixed BitgetOrderBookFactory injection issue
-    * Updated CryptoExchange.Net to v7.4.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-
-* Version 1.3.4 - 23 Apr 2024
-    * Updated CryptoExchange.Net to 7.3.3, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-
-* Version 1.3.3 - 18 Apr 2024
-    * Updated CryptoExchange.Net to 7.3.1, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-    * Fixed SpotApi.Account.GetWithdrawalHistoryAsync timestamp filters
-
-* Version 1.3.2 - 04 Apr 2024
-    * Fixed websocket kline deserialization
-    * Fixed WithdrawAsync parameter serialization
-
-* Version 1.3.1 - 24 Mar 2024
-	* Updated CryptoExchange.Net to 7.2.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-
-* Version 1.3.0 - 16 Mar 2024
-    * Updated CryptoExchange.Net to 7.1.0, see https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes for release notes
-	
-* Version 1.2.0 - 10 Mar 2024
-    * Updated GetBillsAsync endpoints to V2 API to fix some issues occurring with the V1 endpoints. Full update to the V2 API will follow later
-
-* Version 1.1.2 - 08 Mar 2024
-    * Fixed deserialization error for nullable UpdateTime properties
-
-* Version 1.1.1 - 08 Mar 2024
-    * Fixed Socket Futures subscription data handling
-
-* Version 1.1.0 - 25 Feb 2024
-    * Updated CryptoExchange.Net and implemented reworked websocket message handling. For release notes for the CryptoExchange.Net base library see here: https://github.com/JKorf/CryptoExchange.Net?tab=readme-ov-file#release-notes
-    * Fixed issue in DI registration causing http client to not be correctly injected
-    * Updated some namespaces
-
-* Version 1.0.7 - 05 Feb 2024
-    * Added FuturesApi.Trading.GetPlanOrdersAsync endpoint
-    * Fixed futures order update deserialization when filled
-
-* Version 1.0.6 - 19 Jan 2024
-    * Fixed V5.Trading.GetPlanOrderHistoryAsync
-    * Added missing PlanType enum value
-
-* Version 1.0.5 - 16 Jan 2024
-    * Updated PlanType enum
-    * Added UpdateTime to BitgetPosition model
-
-* Version 1.0.4 - 23 Dec 2023
-    * Fixed deserialization issues Symbol models
-
-* Version 1.0.3 - 03 Dec 2023
-    * Updated CryptoExchange.Net
-    * Fixed nullability on BitgetSymbol model
-
-* Version 1.0.2 - 23 Nov 2023
-    * Fixed FuturesApi.Trading.PlacePlanOrderAsync quantity serialization
-
-* Version 1.0.1 - 22 Nov 2023
-    * Fixed FuturesApi.Trading.GetOpenOrders deserialization error
-
-* Version 1.0.0 - 24 Oct 2023
-    * Updated CryptoExchange.Net
-
-* Version 0.0.1 - 09 Oct 2023
-    * Initial release
-
+* Version 4.3.2 - 06 Aug 2026
+    * Added restClient.UnifiedApi.Trading.GetClosedOrdersAsync endpoint
+
+* Version 4.3.1 - 30 Jul 2026
+    * Fixed socket client UnifiedApi order requests
+
+* Version 4.3.0 - 29 Jul 2026
+    * Updated CryptoExchange.Net to version 12.4.0
+    * Added calculation of AveragePrice on Shared order models if data is available and AveragePrice is not set
+    * Added DebuggerDisplay attributes to Result models
+    * Added AveragePrice property to SharedQuantity model
+    * Added MasterSubLimit, PlatformRemainingQuota to BitgetUaLoanInterestRate model
+    * Added PlatformTurnover to BitgetUaSpotTicker model
+    * Updated SharedFuturesTicker, SharedSpotTicker, SharedTrade and SharedKline to use SharedOrderQuantity for volumes/quantities
+
+* Version 4.2.0 - 21 Jul 2026
+    * Updated CryptoExchange.Net to v12.2.0 
+    * Added SpotSymbolCatalog to Shared ISpotSymbolRestClient interface
+    * Added FuturesSymbolCatalog to Shared IFuturesSymbolRestClient interface
+    * Added BaseAssetType, BaseAssetSubType, QuoteAssetType and QuoteAssetSubType to GetSymbolsRequest model
+    * Added DisplayName to SharedSpotSymbol and SharedFuturesSymbol models
+    * Added BaseAssetType, BaseAssetSubType, QuoteAssetType and QuoteAssetSubType to SharedSpotSymbol and SharedFuturesSymbol models
+    * Added DebuggerDisplay attributes to Shared models
+    * Fixed incorrect type for Cursor property in BitgetUaFinancialRecordPage and BitgetUaUserTrades models
+
+* Version 4.1.0 - 09 Jul 2026
+    * Updated CryptoExchange.Net to v12.1.0
+    * Added IsRealty to BitgetUaSpotSymbol model
+    * Added marginAsset parameter to UserDataTracker factory methods
+    * Added productType, marginAsset parameters to BitgetTrackerFactory methods
+    * Fixed duplicate message handling registration for websocket subscriptions specifying multiple symbols
+
+* Version 4.0.0 - 29 Jun 2026
+    * Result types:
+      * (Web)CallResult types are replaced by HttpResult, WebSocketResult and QueryResult with the same logic
+      * WebSocketResult and QueryResult now return additional info for websocket operations
+      * Updated result types to record type
+      * Removed implicit result type conversion to bool, `if (result)` no longer works, instead use `if (result.Success)`
+      * Fixed result object nullability hinting, for example Data might be null if Success isn't checked for true
+    * Clients:
+      * Added ToString overrides on base API types
+      * Added Exchange property on BaseApiClient
+      * Added ApiCredentials property on Api clients
+      * Updated ILogger source from client name to topic specific client name
+      * Removed logging from client creation
+      * Fixed issue in SocketApiClient.GetSocketConnection causing requests to always wait the full max 10 seconds when there was a reconnecting socket
+    * Shared APIs:
+      * Added missing dedicated option types
+      * Added Discover method on ISharedClient interface, returning info on supported capabilities and operations
+      * Added ResetStaticExchangeParameters method on ExchangeParameters
+      * Added Status property to SharedWithdrawal model
+      * Added TradingModes property to SharedBalance model
+      * Updated Shared ExchangeParameters parameter names to be case insensitive
+      * Updated code comments
+      * Replaced ExchangeResult with ExchangeCallResult type
+      * Removed TradingMode from the response model, only maintained on models where it makes sense
+      * Fixed Shared APIs returning rebates as fees
+    * Added async streaming on UserDataTracker items with StreamUpdatesAsync
+    * Added cancellation token support to UserDataTracker starting
+    * Added SupportedEnvironments property to PlatformInfo
+    * Added Clear() method on UserClientProvider to clear all cached clients
+    * Added setter to BitgetExchange.RateLimiter to allow custom rate limit settings
+    * Various small performance improvements
+    * Fixed websocket connection attempts counting towards rate limit even when server could not be reached

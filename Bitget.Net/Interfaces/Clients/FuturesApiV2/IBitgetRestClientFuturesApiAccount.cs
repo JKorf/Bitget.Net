@@ -24,7 +24,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="marginAsset">["<c>marginCoin</c>"] Margin asset, for example `USDT`</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesBalance>> GetBalanceAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesBalance>> GetBalanceAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, CancellationToken ct = default);
 
         /// <summary>
         /// Get balances
@@ -38,7 +38,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesBalance[]>> GetBalancesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesBalance[]>> GetBalancesAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
 
         /// <summary>
         /// Set leverage
@@ -58,7 +58,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="side">["<c>holdSide</c>"] Position side</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPositionLeverage>> SetLeverageAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, decimal? leverage = null, PositionSide? side = null, decimal? longLeverage = null, decimal? shortLeverage = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetPositionLeverage>> SetLeverageAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, decimal? leverage = null, PositionSide? side = null, decimal? longLeverage = null, decimal? shortLeverage = null, CancellationToken ct = default);
 
         /// <summary>
         /// Adjust margin
@@ -76,7 +76,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="side">["<c>holdSide</c>"] Position side</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> AdjustMarginAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, decimal quantity, PositionSide? side = null, CancellationToken ct = default);
+        Task<HttpResult> AdjustMarginAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, decimal quantity, PositionSide? side = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set margin mode
@@ -93,7 +93,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="mode">["<c>marginMode</c>"] Margin mode</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPositionLeverage>> SetMarginModeAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, MarginMode? mode = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetPositionLeverage>> SetMarginModeAsync(BitgetProductTypeV2 productType, string symbol, string marginAsset, MarginMode? mode = null, CancellationToken ct = default);
 
         /// <summary>
         /// Set position mode
@@ -108,7 +108,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="mode">["<c>posMode</c>"] Position mode</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetPositionMode>> SetPositionModeAsync(BitgetProductTypeV2 productType, PositionMode mode, CancellationToken ct = default);
+        Task<HttpResult<BitgetPositionMode>> SetPositionModeAsync(BitgetProductTypeV2 productType, PositionMode mode, CancellationToken ct = default);
 
         /// <summary>
         /// Get account ledger
@@ -128,7 +128,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="limit">["<c>limit</c>"] Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesLedger>> GetLedgerAsync(BitgetProductTypeV2 productType, string? asset = null, string? businessType = null, DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int? limit = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesLedger>> GetLedgerAsync(BitgetProductTypeV2 productType, string? asset = null, string? businessType = null, DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get Auto deleverage rank
@@ -142,7 +142,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="productType">["<c>productType</c>"] Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetFuturesAdlRank[]>> GetAdlRankAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
+        Task<HttpResult<BitgetFuturesAdlRank[]>> GetAdlRankAsync(BitgetProductTypeV2 productType, CancellationToken ct = default);
 
         /// <summary>
         /// Get liquidation price
@@ -161,7 +161,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="openQuantity">["<c>openAmount</c>"] Open quantity</param>
         /// <param name="openPrice">["<c>openPrice</c>"] Open price for limit order</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetLiquidationPrice>> GetLiquidationPriceAsync(
+        Task<HttpResult<BitgetLiquidationPrice>> GetLiquidationPriceAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,
@@ -181,7 +181,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         /// <param name="orderType">["<c>orderType</c>"] Order type</param>
         /// <param name="openPrice">["<c>openPrice</c>"] Open price for limit order</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMaxOpenQuantity>> GetOpenableQuantityAsync(
+        Task<HttpResult<BitgetMaxOpenQuantity>> GetOpenableQuantityAsync(
             BitgetProductTypeV2 productType,
             string symbol,
             string marginAsset,

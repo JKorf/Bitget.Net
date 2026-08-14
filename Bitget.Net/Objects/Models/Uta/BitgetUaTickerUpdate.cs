@@ -13,7 +13,7 @@ public record BitgetUaTickerUpdate
     /// ["<c>bid1Price</c>"] Best bid price
     /// </summary>
     [JsonPropertyName("bid1Price")]
-    public decimal BestBidPrice { get; set; }
+    public decimal? BestBidPrice { get; set; }
     /// <summary>
     /// ["<c>lowPrice24h</c>"] Low price 24h
     /// </summary>
@@ -23,7 +23,7 @@ public record BitgetUaTickerUpdate
     /// ["<c>ask1Size</c>"] Best ask quantity
     /// </summary>
     [JsonPropertyName("ask1Size")]
-    public decimal BestAskQuantity { get; set; }
+    public decimal? BestAskQuantity { get; set; }
     /// <summary>
     /// ["<c>volume24h</c>"] Volume 24h
     /// </summary>
@@ -48,12 +48,12 @@ public record BitgetUaTickerUpdate
     /// ["<c>bid1Size</c>"] Best bid quantity
     /// </summary>
     [JsonPropertyName("bid1Size")]
-    public decimal BestBidQuantity { get; set; }
+    public decimal? BestBidQuantity { get; set; }
     /// <summary>
     /// ["<c>ask1Price</c>"] Best ask price
     /// </summary>
     [JsonPropertyName("ask1Price")]
-    public decimal BestAskPrice { get; set; }
+    public decimal? BestAskPrice { get; set; }
     /// <summary>
     /// ["<c>openPrice24h</c>"] Open price 24h
     /// </summary>

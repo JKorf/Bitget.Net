@@ -1,6 +1,7 @@
 ﻿using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Collections.Concurrent;
@@ -8,18 +9,18 @@ using System.Collections.Concurrent;
 namespace Bitget.Net.Clients
 {
     /// <inheritdoc />
-    public class BitgetUserClientProvider : IBitgetUserClientProvider
+    public class BitgetUserClientProvider : UserClientProvider<
+        IBitgetRestClient,
+        IBitgetSocketClient,
+        BitgetRestOptions,
+        BitgetSocketOptions,
+        BitgetCredentials,
+        BitgetEnvironment
+        >, IBitgetUserClientProvider
     {
-        private ConcurrentDictionary<string, IBitgetRestClient> _restClients = new ConcurrentDictionary<string, IBitgetRestClient>();
-        private ConcurrentDictionary<string, IBitgetSocketClient> _socketClients = new ConcurrentDictionary<string, IBitgetSocketClient>();
-
-        private readonly IOptions<BitgetRestOptions> _restOptions;
-        private readonly IOptions<BitgetSocketOptions> _socketOptions;
-        private readonly HttpClient _httpClient;
-        private readonly ILoggerFactory? _loggerFactory;
-
+       
         /// <inheritdoc />
-        public string ExchangeName => BitgetExchange.ExchangeName;
+        public override string ExchangeName => BitgetExchange.ExchangeName;
 
         /// <summary>
         /// ctor
@@ -37,98 +38,16 @@ namespace Bitget.Net.Clients
             HttpClient? httpClient,
             ILoggerFactory? loggerFactory,
             IOptions<BitgetRestOptions> restOptions,
-            IOptions<BitgetSocketOptions> socketOptions)
+            IOptions<BitgetSocketOptions> socketOptions):
+            base (httpClient, loggerFactory, restOptions, socketOptions)
         {
-            _httpClient = httpClient ?? new HttpClient();
-            _httpClient.Timeout = restOptions.Value.RequestTimeout;
-            _loggerFactory = loggerFactory;
-            _restOptions = restOptions;
-            _socketOptions = socketOptions;
         }
 
         /// <inheritdoc />
-        public void InitializeUserClient(string userIdentifier, BitgetCredentials credentials, BitgetEnvironment? environment = null)
-        {
-            CreateRestClient(userIdentifier, credentials, environment);
-            CreateSocketClient(userIdentifier, credentials, environment);
-        }
-
+        protected override IBitgetRestClient ConstructRestClient(HttpClient client, ILoggerFactory? loggerFactory, IOptions<BitgetRestOptions> options)
+            => new BitgetRestClient(client, loggerFactory, options);
         /// <inheritdoc />
-        public void ClearUserClients(string userIdentifier)
-        {
-            _restClients.TryRemove(userIdentifier, out _);
-            _socketClients.TryRemove(userIdentifier, out _);
-        }
-
-        /// <inheritdoc />
-        public IBitgetRestClient GetRestClient(string userIdentifier, BitgetCredentials? credentials = null, BitgetEnvironment? environment = null)
-        {
-            if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
-                client = CreateRestClient(userIdentifier, credentials, environment);
-
-            return client;
-        }
-
-        /// <inheritdoc />
-        public IBitgetSocketClient GetSocketClient(string userIdentifier, BitgetCredentials? credentials = null, BitgetEnvironment? environment = null)
-        {
-            if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
-                client = CreateSocketClient(userIdentifier, credentials, environment);
-
-            return client;
-        }
-
-        private IBitgetRestClient CreateRestClient(string userIdentifier, BitgetCredentials? credentials, BitgetEnvironment? environment)
-        {
-            var clientRestOptions = SetRestEnvironment(environment);
-            var client = new BitgetRestClient(_httpClient, _loggerFactory, clientRestOptions);
-            if (credentials != null)
-            {
-                client.SetApiCredentials(credentials);
-                _restClients[userIdentifier] = client;
-            }
-            return client;
-        }
-
-        private IBitgetSocketClient CreateSocketClient(string userIdentifier, BitgetCredentials? credentials, BitgetEnvironment? environment)
-        {
-            var clientSocketOptions = SetSocketEnvironment(environment);
-            var client = new BitgetSocketClient(clientSocketOptions!, _loggerFactory);
-            if (credentials != null)
-            {
-                client.SetApiCredentials(credentials);
-                _socketClients[userIdentifier] = client;
-            }
-            return client;
-        }
-
-        private IOptions<BitgetRestOptions> SetRestEnvironment(BitgetEnvironment? environment)
-        {
-            if (environment == null)
-                return _restOptions;
-
-            var newRestClientOptions = new BitgetRestOptions();
-            var restOptions = _restOptions.Value.Set(newRestClientOptions);
-            newRestClientOptions.Environment = environment;
-            return Options.Create(newRestClientOptions);
-        }
-
-        private IOptions<BitgetSocketOptions> SetSocketEnvironment(BitgetEnvironment? environment)
-        {
-            if (environment == null)
-                return _socketOptions;
-
-            var newSocketClientOptions = new BitgetSocketOptions();
-            var restOptions = _socketOptions.Value.Set(newSocketClientOptions);
-            newSocketClientOptions.Environment = environment;
-            return Options.Create(newSocketClientOptions);
-        }
-
-        private static T ApplyOptionsDelegate<T>(Action<T>? del) where T : new()
-        {
-            var opts = new T();
-            del?.Invoke(opts);
-            return opts;
-        }
+        protected override IBitgetSocketClient ConstructSocketClient(ILoggerFactory? loggerFactory, IOptions<BitgetSocketOptions> options)
+            => new BitgetSocketClient(options, loggerFactory);
     }
 }

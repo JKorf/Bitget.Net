@@ -20,17 +20,15 @@ namespace Bitget.Net.Clients.BrokerApiV2
     {
         private static readonly RequestDefinitionCache _definitions = new RequestDefinitionCache();
 
-        /// <inheritdoc />
-        public string ExchangeName => "Bitget";
         protected override IRestMessageHandler MessageHandler { get; } = new BitgetRestMessageHandler(BitgetErrors.RestErrors);
 
 
-        internal BitgetRestClientBrokerApi(ILogger logger, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
-            : base(logger, httpClient, options.Environment.RestBaseAddress, options, options.BrokerOptions)
+        internal BitgetRestClientBrokerApi(ILoggerFactory? loggerFactory, HttpClient? httpClient, BitgetRestClient baseClient, BitgetRestOptions options)
+            : base(loggerFactory, BitgetExchange.Metadata.Id, httpClient, options.Environment.RestBaseAddress, options, options.BrokerOptions)
         {
             StandardRequestHeaders = new Dictionary<string, string>
             {
-                { "X-CHANNEL-API-CODE", LibraryHelpers.GetClientReference(() => options.ChannelCode, ExchangeName) },
+                { "X-CHANNEL-API-CODE", LibraryHelpers.GetClientReference(() => options.ChannelCode, Exchange) },
                 { "locale", options.Locale }
             };
 
@@ -51,80 +49,62 @@ namespace Bitget.Net.Clients.BrokerApiV2
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
                 => BitgetExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
-        internal Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, Dictionary<string, string>? requestHeaders = null) where T : class
-            => SendToAddressAsync<T>(BaseAddress, definition, parameters, cancellationToken, weight, requestHeaders);
-
-        internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, Dictionary<string, string>? requestHeaders = null) where T : class
+        internal async Task<HttpResult<T>> SendAsync<T>(RequestDefinition definition, Parameters? parameters, CancellationToken cancellationToken, int? weight = null, Dictionary<string, string>? requestHeaders = null) where T : class
         {
-            var result = await base.SendAsync<BitgetResponse<T>>(baseAddress, definition, parameters, cancellationToken, requestHeaders, weight).ConfigureAwait(false);
+            var result = await base.SendAsync<BitgetResponse<T>>(definition, parameters, cancellationToken, requestHeaders, weight).ConfigureAwait(false);
             if (!result.Success)
-                return result.As<T>(default);
+                return HttpResult.Fail<T>(result);
 
             if (result.Data.Code != 0)
-                return result.AsError<T>(new ServerError(result.Data.Code.ToString(), GetErrorInfo(result.Data.Code, result.Data.Message!)));
+                return HttpResult.Fail<T>(result, new ServerError(result.Data.Code.ToString(), GetErrorInfo(result.Data.Code, result.Data.Message!)));
 
-            return result.As<T>(result.Data.Data);
+            return HttpResult.Ok<T>(result, result.Data.Data!);
         }
 
-        internal Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, Dictionary<string, string>? requestHeaders = null)
-            => SendToAddressAsync(BaseAddress, definition, parameters, cancellationToken, weight, requestHeaders);
-
-        internal async Task<WebCallResult> SendToAddressAsync(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null, Dictionary<string, string>? requestHeaders = null)
+        public async Task<HttpResult<BitgetBrokerAgentDirectCommissions>> GetAgentDirectCommissionsAsync(DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int limit = 100, long? uid = null, string? coin = null, string? symbol = null, bool? showSub = null, CancellationToken ct = default)
         {
-            var result = await base.SendAsync<BitgetResponse>(baseAddress, definition, parameters, cancellationToken, requestHeaders, weight).ConfigureAwait(false);
-            if (!result.Success)
-                return result.AsDataless();
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("idLessThan", idLessThan);
+            parameters.Add("limit", limit);
+            parameters.Add("uid", uid);
+            parameters.Add("coin", coin);
+            parameters.Add("symbol", symbol);
+            parameters.Add("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
 
-            if (result.Data.Code != 0)
-                return result.AsDatalessError(new ServerError(result.Data.Code.ToString(), GetErrorInfo(result.Data.Code, result.Data.Message!)));
-
-            return result.AsDataless();
-        }
-
-        public async Task<WebCallResult<BitgetBrokerAgentDirectCommissions>> GetAgentDirectCommissionsAsync(DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int limit = 100, long? uid = null, string? coin = null, string? symbol = null, bool? showSub = null, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptionalString("idLessThan", idLessThan);
-            parameters.AddString("limit", limit);
-            parameters.AddOptionalString("uid", uid);
-            parameters.AddOptional("coin", coin);
-            parameters.AddOptional("symbol", symbol);
-            parameters.AddOptional("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
-
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/broker/customer-commissions", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, BaseAddress, "/api/v2/broker/customer-commissions", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await SendAsync<BitgetBrokerAgentDirectCommissions>(request, parameters, ct).ConfigureAwait(false);
         }
 
-        public async Task<WebCallResult<BitgetBrokerAgentCustomer[]>> GetAgentCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, int pageNo = 1, int pageSize = 100, long? uid = null, string? referralCode = null, bool? showSub = null, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetBrokerAgentCustomer[]>> GetAgentCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, int pageNo = 1, int pageSize = 100, long? uid = null, string? referralCode = null, bool? showSub = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddString("pageNo", pageNo);
-            parameters.AddString("pageSize", pageSize);
-            parameters.AddOptionalString("uid", uid);
-            parameters.AddOptional("referralCode", referralCode);
-            parameters.AddOptional("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("pageNo", pageNo);
+            parameters.Add("pageSize", pageSize);
+            parameters.Add("uid", uid);
+            parameters.Add("referralCode", referralCode);
+            parameters.Add("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
 
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v2/broker/customer-list", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Post, BaseAddress, "/api/v2/broker/customer-list", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await SendAsync<BitgetBrokerAgentCustomer[]>(request, parameters, ct).ConfigureAwait(false);
         }
 
-        public async Task<WebCallResult<BitgetBrokerAgentCustomerList>> GetAgentSubCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int limit = 100, long? uid = null, bool? showSub = null, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetBrokerAgentCustomerList>> GetAgentSubCustomerListAsync(DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int limit = 100, long? uid = null, bool? showSub = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalMilliseconds("startTime", startTime);
-            parameters.AddOptionalMilliseconds("endTime", endTime);
-            parameters.AddOptionalString("idLessThan", idLessThan);
-            parameters.AddString("limit", limit);
-            parameters.AddOptionalString("uid", uid);
-            parameters.AddOptional("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("idLessThan", idLessThan);
+            parameters.Add("limit", limit);
+            parameters.Add("uid", uid);
+            parameters.Add("showSub", showSub == null ? null : showSub == true ? "yes" : "no");
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v2/broker/sub-customer-list", BitgetExchange.RateLimiter.Overall, 1, true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, BaseAddress, "/api/v2/broker/sub-customer-list", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
             return await SendAsync<BitgetBrokerAgentCustomerList>(request, parameters, ct).ConfigureAwait(false);
         }

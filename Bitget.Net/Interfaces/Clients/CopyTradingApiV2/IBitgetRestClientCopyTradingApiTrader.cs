@@ -16,6 +16,6 @@ namespace Bitget.Net.Interfaces.Clients.CopyTradingApiV2
         /// <param name="productType">Product type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<BitgetCopyTradingSymbolSettings[]>> GetCopyTradeSymbolSettings(BitgetProductTypeV2 productType, CancellationToken ct = default);
+        Task<HttpResult<BitgetCopyTradingSymbolSettings[]>> GetCopyTradeSymbolSettings(BitgetProductTypeV2 productType, CancellationToken ct = default);
     }
 }

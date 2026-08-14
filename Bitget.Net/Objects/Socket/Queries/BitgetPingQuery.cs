@@ -8,7 +8,7 @@ namespace Bitget.Net.Objects.Socket.Queries
         public BitgetPingQuery() : base("ping", false, 0)
         {
             RequestTimeout = TimeSpan.FromSeconds(5);
-            MessageRouter = MessageRouter.CreateWithoutHandler<string>("pong");
+            MessageRouter = MessageRouter.CreateVoid<string>("pong");
         }
     }
 }

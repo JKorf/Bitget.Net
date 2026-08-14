@@ -1,0 +1,54 @@
+GET
+/api/v3/trade/history-orders
+true
+UriParams: {"category": "SPOT"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1730186730084,
+  "data": {
+    "list": [
+      {
+        "orderId": "111111111111111111",
+        "clientOid": "111111111111111111",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "orderType": "limit",
+        "side": "sell",
+        "price": "49534.4",
+        "qty": "0.429",
+        "amount": "0",
+        "cumExecQty": "0.429",
+        "cumExecValue": "21250.2929",
+        "avgPrice": "49534.4",
+        "timeInForce": "gtc",
+        "orderStatus": "filled",
+        "posSide": "long",
+        "holdMode": "hedge_mode",
+        "delegateType": "normal",
+        "reduceOnly": "NO",
+        "marginMode": "crossed",
+        "stpMode": "none",
+        "takeProfit": "",
+        "stopLoss": "",
+        "tpTriggerBy": "",
+        "slTriggerBy": "",
+        "tpOrderType": "",
+        "slOrderType": "",
+        "tpLimitPrice": "",
+        "slLimitPrice": "",
+        "feeDetail": [
+          {
+            "feeCoin": "USDT",
+            "fee": "4.2500586"
+          }
+        ],
+        "cancelReason": "normal_cancel",
+        "execType": "liquidation",
+        "createdTime": "1730181468493",
+        "updatedTime": "1730181468493"
+      }
+    ],
+    "cursor": "1233319323918499840"
+  }
+}

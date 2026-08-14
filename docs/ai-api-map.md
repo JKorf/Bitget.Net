@@ -21,6 +21,7 @@ Use this file to route common user intents to the correct Bitget.Net client memb
 | Futures shared REST | `client.FuturesApiV2.SharedClient` |
 | Spot shared socket | `socketClient.SpotApiV2.SharedClient` |
 | Futures shared socket | `socketClient.FuturesApiV2.SharedClient` |
+| Discover shared capabilities | `client.SpotApiV2.SharedClient.Discover()` / `client.FuturesApiV2.SharedClient.Discover()` |
 
 ## Symbols, Product Types And Enums
 
@@ -265,6 +266,11 @@ Use this file to route common user intents to the correct Bitget.Net client memb
 | Shared futures REST client | `new BitgetRestClient().FuturesApiV2.SharedClient` |
 | Shared spot socket client | `new BitgetSocketClient().SpotApiV2.SharedClient` |
 | Shared futures socket client | `new BitgetSocketClient().FuturesApiV2.SharedClient` |
+| Discover shared capabilities | `client.SpotApiV2.SharedClient.Discover()` / `client.FuturesApiV2.SharedClient.Discover()` |
+| Get shared spot symbols and asset classifications | `ISpotSymbolRestClient.GetSpotSymbolsAsync(new GetSymbolsRequest())` |
+| Read the populated shared spot symbol catalog | `ISpotSymbolRestClient.SpotSymbolCatalog` after a successful symbol request |
+| Get shared futures symbols and asset classifications | `IFuturesSymbolRestClient.GetFuturesSymbolsAsync(new GetSymbolsRequest())` |
+| Read the populated shared futures symbol catalog | `IFuturesSymbolRestClient.FuturesSymbolCatalog` after a successful symbol request |
 | Shared spot ticker REST | `ISpotTickerRestClient.GetSpotTickerAsync(new GetTickerRequest(symbol))` |
 | Shared futures ticker REST | `IFuturesTickerRestClient.GetFuturesTickerAsync(new GetTickerRequest(symbol))` |
 | Shared spot order REST | `ISpotOrderRestClient.PlaceSpotOrderAsync(...)` |
@@ -272,7 +278,20 @@ Use this file to route common user intents to the correct Bitget.Net client memb
 | Shared ticker socket | `ITickerSocketClient.SubscribeToTickerUpdatesAsync(...)` |
 | Shared order book socket | `IOrderBookSocketClient.SubscribeToOrderBookUpdatesAsync(...)` |
 
+Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers such as symbol support checks return `ExchangeCallResult<T>`.
+
+Shared symbol results provide base/quote `SharedAssetType` and `SharedAssetSubType` metadata, including crypto, fiat, stablecoin, commodity, and equity classifications where available.
+
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
+
+## Result Handling
+
+| Situation | Pattern |
+|---|---|
+| REST success check | `if (!result.Success) { Console.WriteLine(result.Error); return; }` |
+| Socket subscription success check | `WebSocketResult<UpdateSubscription> sub = await ...; if (!sub.Success) { Console.WriteLine(sub.Error); return; }` |
+| Read REST data | Read `result.Data` only after `result.Success` |
+| Shared helper data | Read `ExchangeCallResult<T>.Data` only after `result.Success` |
 
 ## Common Routing Pitfalls
 

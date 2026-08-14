@@ -231,6 +231,8 @@ var ticker = await shared.GetSpotTickerAsync(new GetTickerRequest(symbol));
 
 Use `SharedSymbol` for shared APIs. Do not pass exchange-native `BTCUSDT` strings to shared requests.
 
+Shared spot and futures symbol discovery returns base/quote asset type and subtype metadata. Successful symbol requests also populate `SpotSymbolCatalog` or `FuturesSymbolCatalog` on the corresponding shared symbol REST interface.
+
 For shared socket subscriptions, keep the concrete socket client because shared socket interfaces do not expose unsubscribe.
 
 ## Dependency injection

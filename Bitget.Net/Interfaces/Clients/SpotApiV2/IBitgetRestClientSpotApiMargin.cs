@@ -20,7 +20,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMarginSymbol[]>> GetMarginSymbolsAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetMarginSymbol[]>> GetMarginSymbolsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get interest rate
@@ -33,7 +33,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="asset">Asset name</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetInterestRate>> GetInterestRatesAsync(string asset, CancellationToken ct = default);
+        Task<HttpResult<BitgetInterestRate>> GetInterestRatesAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross margin borrow history
@@ -51,7 +51,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossBorrowHistory>>> GetCrossBorrowHistoryAsync(string? loanId = null,
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossBorrowHistory>>> GetCrossBorrowHistoryAsync(string? loanId = null,
             string? asset = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
@@ -75,7 +75,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossRepayHistory>>> GetCrossRepayHistoryAsync(string? repayId = null,
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossRepayHistory>>> GetCrossRepayHistoryAsync(string? repayId = null,
             string? asset = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
@@ -98,7 +98,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossInterest>>> GetCrossInterestHistoryAsync(string? asset = null,
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossInterest>>> GetCrossInterestHistoryAsync(string? asset = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
             int? limit = null,
@@ -119,7 +119,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossLiquidation>>> GetCrossLiquidationHistoryAsync(
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossLiquidation>>> GetCrossLiquidationHistoryAsync(
             DateTime? startTime = null,
             DateTime? endTime = null,
             int? limit = null,
@@ -142,7 +142,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossFinancial>>> GetCrossFinancialHistoryAsync(
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossFinancial>>> GetCrossFinancialHistoryAsync(
             MarginType? marginType = null,
             string? asset = null,
             DateTime? startTime = null,
@@ -162,7 +162,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossBalance[]>> GetCrossBalancesAsync(string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossBalance[]>> GetCrossBalancesAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cross margin borrow
@@ -177,7 +177,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="quantity">Quantity to borrow</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossBorrowResult>> CrossBorrowAsync(string asset, decimal quantity, string clientOrderId, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossBorrowResult>> CrossBorrowAsync(string asset, decimal quantity, string clientOrderId, CancellationToken ct = default);
 
         /// <summary>
         /// Cross margin repay
@@ -191,7 +191,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="quantity">Quantity to repay</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossRepayResult>> CrossRepayAsync(string asset, decimal quantity, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossRepayResult>> CrossRepayAsync(string asset, decimal quantity, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross margin risk rate
@@ -203,7 +203,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossRiskRate>> GetCrossRiskRateAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossRiskRate>> GetCrossRiskRateAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get cross margin max borrowable amount
@@ -216,7 +216,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossMaxBorrowable>> GetCrossMaxBorrowableAsync(string asset, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossMaxBorrowable>> GetCrossMaxBorrowableAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross margin max transferable amount
@@ -229,7 +229,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossMaxTransferable>> GetCrossMaxTransferableAsync(string asset, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossMaxTransferable>> GetCrossMaxTransferableAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross margin interest rates and borrow limits
@@ -242,7 +242,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossInterestLimit[]>> GetCrossInterestAndLimitAsync(string asset, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossInterestLimit[]>> GetCrossInterestAndLimitAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross margin tier configuration
@@ -255,7 +255,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossTierConfig[]>> GetCrossTierConfigAsync(string asset, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossTierConfig[]>> GetCrossTierConfigAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
         /// Cross margin flash repay
@@ -268,7 +268,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="asset">The asset, for example `ETH`. If not provided cross margin account will be fully repaid.</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossFlashRepayResult>> CrossFlashRepayAsync(string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossFlashRepayResult>> CrossFlashRepayAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get flash repayment statuses
@@ -281,7 +281,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="ids">Ids to retrieve</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossFlashRepayStatus[]>> GetCrossFlashRepayStatusAsync(string ids, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossFlashRepayStatus[]>> GetCrossFlashRepayStatusAsync(string ids, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new cross margin order
@@ -303,7 +303,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetOrderId>> PlaceCrossOrderAsync(
+        Task<HttpResult<BitgetOrderId>> PlaceCrossOrderAsync(
             string symbol,
             LoanType loanType,
             OrderSide orderSide,
@@ -322,7 +322,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="symbol">Symbol name</param>
         /// <param name="requests">Order requests</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetOrderResult[]>> PlaceMultipleCrossOrdersAsync(
+        Task<HttpResult<BitgetOrderResult[]>> PlaceMultipleCrossOrdersAsync(
             string symbol,
             IEnumerable<BitgetCrossOrderRequest> requests,
             CancellationToken ct = default);
@@ -340,7 +340,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">Client order id, either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetOrderId>> CancelCrossOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetOrderId>> CancelCrossOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel multiple orders in a single call
@@ -354,7 +354,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orders">Orders to cancel</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetOrderMultipleResult>> CancelMultipleCrossOrdersAsync(
+        Task<HttpResult<BitgetOrderMultipleResult>> CancelMultipleCrossOrdersAsync(
             string symbol,
             IEnumerable<BitgetCancelOrderRequest> orders,
             CancellationToken ct = default);
@@ -376,7 +376,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">Return results with id less than this</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetCrossOpenOrdersAsync(string symbol, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetCrossOpenOrdersAsync(string symbol, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get closed cross margin orders
@@ -396,7 +396,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">Return results with id less than this</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetCrossClosedOrdersAsync(string symbol, string? orderId = null, string? enterPointSource = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetCrossClosedOrdersAsync(string symbol, string? orderId = null, string? enterPointSource = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross margin user trades
@@ -414,7 +414,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">Return results with id less than this</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossUserTrade>>> GetCrossUserTradesAsync(string symbol, string? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossUserTrade>>> GetCrossUserTradesAsync(string symbol, string? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get cross margin liquidation history
@@ -434,7 +434,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">Return results with id less than this</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>> GetCrossLiquidationOrdersAsync(string? symbol = null, LiquidationType? type = null, string? fromAsset = null, string? toAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>> GetCrossLiquidationOrdersAsync(string? symbol = null, LiquidationType? type = null, string? fromAsset = null, string? toAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
 
         /// <summary>
@@ -454,7 +454,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedBorrowHistory>>> GetIsolatedBorrowHistoryAsync(
+        Task<HttpResult<BitgetMinMaxResult<BitgetIsolatedBorrowHistory>>> GetIsolatedBorrowHistoryAsync(
             string symbol,
             string? loanId = null,
             string? asset = null,
@@ -481,7 +481,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedRepayHistory>>> GetIsolatedRepayHistoryAsync(
+        Task<HttpResult<BitgetMinMaxResult<BitgetIsolatedRepayHistory>>> GetIsolatedRepayHistoryAsync(
             string symbol,
             string? repayId = null,
             string? asset = null,
@@ -507,7 +507,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedInterest>>> GetIsolatedInterestHistoryAsync(
+        Task<HttpResult<BitgetMinMaxResult<BitgetIsolatedInterest>>> GetIsolatedInterestHistoryAsync(
             string symbol,
             string? asset = null,
             DateTime? startTime = null,
@@ -531,7 +531,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedLiquidation>>> GetIsolatedLiquidationHistoryAsync(
+        Task<HttpResult<BitgetMinMaxResult<BitgetIsolatedLiquidation>>> GetIsolatedLiquidationHistoryAsync(
             string symbol,
             DateTime? startTime = null,
             DateTime? endTime = null,
@@ -556,7 +556,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">return results less than this id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetIsolatedFinancial>>> GetIsolatedFinancialHistoryAsync(
+        Task<HttpResult<BitgetMinMaxResult<BitgetIsolatedFinancial>>> GetIsolatedFinancialHistoryAsync(
             string symbol,
             MarginType? marginType = null,
             string? asset = null,
@@ -577,7 +577,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="asset">Filter by asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedBalance[]>> GetIsolatedBalancesAsync(string? asset = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedBalance[]>> GetIsolatedBalancesAsync(string? asset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Isolated margin borrow
@@ -592,7 +592,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="quantity">Quantity to borrow</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedBorrowResult>> IsolatedBorrowAsync(string asset, decimal quantity, string clientOrderId, CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedBorrowResult>> IsolatedBorrowAsync(string asset, decimal quantity, string clientOrderId, CancellationToken ct = default);
 
         /// <summary>
         /// Isolated margin repay
@@ -606,7 +606,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="quantity">Quantity to repay</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedRepayResult>> IsolatedRepayAsync(string asset, decimal quantity, CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedRepayResult>> IsolatedRepayAsync(string asset, decimal quantity, CancellationToken ct = default);
 
         /// <summary>
         /// Get Isolated margin risk rate
@@ -618,7 +618,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedRiskRate[]>> GetIsolatedRiskRateAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedRiskRate[]>> GetIsolatedRiskRateAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get isolated margin interest rates and limits
@@ -631,7 +631,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedInterestLimit[]>> GetIsolatedInterestAndLimitAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedInterestLimit[]>> GetIsolatedInterestAndLimitAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get isolated margin tier configuration
@@ -644,7 +644,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="symbol">The asset, for example `ETH`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedTierConfig[]>> GetIsolatedTierConfigAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedTierConfig[]>> GetIsolatedTierConfigAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get isolated margin max borrowable
@@ -657,7 +657,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedMaxBorrowable>> GetIsolatedMaxBorrowableAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedMaxBorrowable>> GetIsolatedMaxBorrowableAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get isolated margin max transferable
@@ -670,7 +670,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedMaxTransferable>> GetIsolatedMaxTransferableAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedMaxTransferable>> GetIsolatedMaxTransferableAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Isolated margin flash repay
@@ -683,7 +683,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="symbols">The symbols to repay. If not provided all isolated symbols will be repayed.</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetIsolatedFlashRepayResult[]>> IsolatedFlashRepayAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedFlashRepayResult[]>> IsolatedFlashRepayAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get flash repayment statuses
@@ -696,7 +696,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// </summary>
         /// <param name="ids">Ids to retrieve</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCrossFlashRepayStatus[]>> GetIsolatedFlashRepayStatusAsync(string ids, CancellationToken ct = default);
+        Task<HttpResult<BitgetCrossFlashRepayStatus[]>> GetIsolatedFlashRepayStatusAsync(string ids, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new isolated margin order
@@ -718,7 +718,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="selfTradePreventionMode">Self trade prevention mode</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetOrderId>> PlaceIsolatedOrderAsync(
+        Task<HttpResult<BitgetOrderId>> PlaceIsolatedOrderAsync(
             string symbol,
             LoanType loanType,
             OrderSide orderSide,
@@ -737,7 +737,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="symbol">Symbol name</param>
         /// <param name="requests">Order requests</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetOrderResult[]>> PlaceMultipleIsolatedOrdersAsync(
+        Task<HttpResult<BitgetOrderResult[]>> PlaceMultipleIsolatedOrdersAsync(
             string symbol,
             IEnumerable<BitgetCrossOrderRequest> requests,
             CancellationToken ct = default);
@@ -755,7 +755,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="orderId">Order id, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">Client order id, either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetOrderId>> CancelIsolatedOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetOrderId>> CancelIsolatedOrderAsync(string symbol, string? orderId = null, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel multiple isolated orders in a single call
@@ -769,7 +769,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="orders">Orders to cancel</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetOrderMultipleResult>> CancelMultipleIsolatedOrdersAsync(
+        Task<HttpResult<BitgetOrderMultipleResult>> CancelMultipleIsolatedOrdersAsync(
             string symbol,
             IEnumerable<BitgetCancelOrderRequest> orders,
             CancellationToken ct = default);
@@ -791,7 +791,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">Return results with id less than this</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetIsolatedOpenOrdersAsync(string symbol, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetIsolatedOpenOrdersAsync(string symbol, string? orderId = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get closed isolated margin orders
@@ -811,7 +811,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">Return results with id less than this</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetIsolatedClosedOrdersAsync(string symbol, string? orderId = null, string? enterPointSource = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossOrder>>> GetIsolatedClosedOrdersAsync(string symbol, string? orderId = null, string? enterPointSource = null, string? clientOrderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get isolated margin user trades
@@ -829,7 +829,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">Return results with id less than this</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossUserTrade>>> GetIsolatedUserTradesAsync(string symbol, string? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossUserTrade>>> GetIsolatedUserTradesAsync(string symbol, string? orderId = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get isolated margin liquidation history
@@ -849,7 +849,7 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="limit">Max number of results</param>
         /// <param name="idLessThan">Return results with id less than this</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>> GetIsolatedLiquidationOrdersAsync(string? symbol = null, LiquidationType? type = null, string? fromAsset = null, string? toAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
+        Task<HttpResult<BitgetMinMaxResult<BitgetCrossLiquidationOrder>>> GetIsolatedLiquidationOrdersAsync(string? symbol = null, LiquidationType? type = null, string? fromAsset = null, string? toAsset = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? idLessThan = null, CancellationToken ct = default);
 
     }
 }

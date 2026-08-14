@@ -23,16 +23,16 @@ namespace Bitget.Net
 
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
-            if (!request.Authenticated)
+            if (!request.RequestDefinition.Authenticated)
                 return;
 
-            var body = request.ParameterPosition == HttpMethodParameterPosition.InBody ? GetSerializedBody(_serializer, request.BodyParameters ?? new Dictionary<string, object>()) : "";
+            var body = request.ParameterPosition == HttpMethodParameterPosition.InBody ? GetSerializedBody(_serializer, request.BodyParameters ?? new Parameters(BitgetExchange._parameterSerializationSettings)) : "";
             var query = request.GetQueryString(false);
             if (!string.IsNullOrEmpty(query))
                 query = $"?{query}";
 
             var timestamp = GetMillisecondTimestamp(apiClient);
-            var signString = timestamp + request.Method.ToString().ToUpperInvariant() + request.Path + query + body;
+            var signString = timestamp + request.RequestDefinition.Method.ToString().ToUpperInvariant() + request.RequestDefinition.Path + query + body;
             string signature;
             if (ApiCredentials.Credential is HMACCredential hmacCred)
                 signature = SignHMACSHA256(hmacCred, signString, SignOutputType.Base64);

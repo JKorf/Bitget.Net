@@ -24,5 +24,15 @@ public record BitgetUaLoanInterestRate
     /// </summary>
     [JsonPropertyName("limit")]
     public decimal Limit { get; set; }
+    /// <summary>
+    /// ["<c>masterSubLimit</c>"] Master sub limit
+    /// </summary>
+    [JsonPropertyName("masterSubLimit")]
+    public decimal? MasterSubLimit { get; set; }
+    /// <summary>
+    /// ["<c>platformRemaingQuota</c>"] Platform remaining quota
+    /// </summary>
+    [JsonPropertyName("platformRemaingQuota")]
+    public decimal? PlatformRemainingQuota { get; set; }
 }
 

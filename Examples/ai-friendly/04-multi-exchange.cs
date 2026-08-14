@@ -11,7 +11,14 @@ using Bitget.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 
 // Bitget exposes SharedClient on both SpotApiV2 and FuturesApiV2.
-ISpotTickerRestClient bitgetSpotShared = new BitgetRestClient().SpotApiV2.SharedClient;
+var bitgetRest = new BitgetRestClient();
+ISpotTickerRestClient bitgetSpotShared = bitgetRest.SpotApiV2.SharedClient;
+
+var sharedInfo = bitgetRest.SpotApiV2.SharedClient.Discover();
+var supportedFeatures = sharedInfo.Features
+    .Where(x => x.Supported)
+    .Select(x => x.EndpointName);
+Console.WriteLine($"{sharedInfo.Exchange} {sharedInfo.TypeName}: {string.Join(", ", supportedFeatures)}");
 
 var btcusdt = new SharedSymbol(TradingMode.Spot, "BTC", "USDT");
 
@@ -33,6 +40,7 @@ async Task PrintTicker(ISpotTickerRestClient client, SharedSymbol symbol)
 //   ISpotTickerRestClient, ISpotSymbolRestClient, ISpotOrderRestClient
 //   IFuturesTickerRestClient, IFuturesOrderRestClient, IFuturesSymbolRestClient
 //   IBalanceRestClient, IPositionRestClient, IFeeRestClient, IOrderBookRestClient
+// Call SharedClient.Discover() before routing optional shared features.
 
 // ---- WEBSOCKET EXAMPLE - SHARED SUBSCRIPTION ----
 var bitgetSocket = new BitgetSocketClient();
