@@ -24,5 +24,11 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <see cref="IBitgetRestClientUnifiedApiTrading"/>
         public IBitgetRestClientUnifiedApiTrading Trading { get; }
+
+        /// <summary>
+        /// Endpoints related to copy trading futures
+        /// </summary>
+        /// <see cref="IBitgetRestClientUnifiedApiCopyFutures"/>
+        public IBitgetRestClientUnifiedApiCopyFutures CopyFutures { get; }
     }
 }

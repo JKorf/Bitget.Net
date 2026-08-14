@@ -1,11 +1,9 @@
-using CryptoExchange.Net.Objects;
-using CryptoExchange.Net;
-using Bitget.Net.Objects.Models.V2;
-using Bitget.Net.Interfaces.Clients.SpotApiV2;
 using Bitget.Net.Enums.Uta;
-using CryptoExchange.Net.RateLimiting.Guards;
 using Bitget.Net.Interfaces.Clients.UnifiedApi;
 using Bitget.Net.Objects.Models;
+using Bitget.Net.Objects.Models.V2;
+using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.RateLimiting.Guards;
 
 namespace Bitget.Net.Clients.UnifiedApi
 {

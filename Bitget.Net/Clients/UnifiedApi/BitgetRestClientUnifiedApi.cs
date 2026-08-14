@@ -28,6 +28,8 @@ namespace Bitget.Net.Clients.UnifiedApi
         public IBitgetRestClientUnifiedApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IBitgetRestClientUnifiedApiTrading Trading { get; }
+        /// <inheritdoc />
+        public IBitgetRestClientUnifiedApiCopyFutures CopyFutures { get; }
 
         /// <inheritdoc />
         public new BitgetRestOptions ClientOptions => (BitgetRestOptions)base.ClientOptions;
@@ -40,6 +42,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             Account = new BitgetRestClientUnifiedApiAccount(this);
             ExchangeData = new BitgetRestClientUnifiedApiExchangeData(this);
             Trading = new BitgetRestClientUnifiedApiTrading(this);
+            CopyFutures = new BitgetRestClientUnifiedApiCopyFutures(this);
 
             StandardRequestHeaders = new Dictionary<string, string>
             {
