@@ -19,6 +19,6 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<BitgetCopyTradingSymbol[]>> GetTradingPairsAsync(CancellationToken ct = default);
+        Task<HttpResult<BitgetCopyTradingSymbol[]>> GetTradingPairsAsync(CancellationToken ct = default);
     }
 }

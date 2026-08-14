@@ -19,9 +19,9 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Get Trading Pairs
 
         /// <inheritdoc />
-        public async Task<WebCallResult<BitgetCopyTradingSymbol[]>> GetTradingPairsAsync(CancellationToken ct = default)
+        public async Task<HttpResult<BitgetCopyTradingSymbol[]>> GetTradingPairsAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/copy/futures/trading-pairs", BitgetExchange.RateLimiter.Overall, 1, true, 
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/copy/futures/trading-pairs", BitgetExchange.RateLimiter.Overall, 1, true,
                 limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetCopyTradingSymbol[]>(request, null, ct).ConfigureAwait(false);
             return result;
