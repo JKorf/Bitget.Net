@@ -116,9 +116,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                             ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, item.Symbol),
                             item.Symbol,
                             item.BestAskPrice ?? 0,
-                            item.BestAskQuantity ?? 0,
+                            new SharedOrderQuantity(item.BestAskQuantity ?? 0),
                             item.BestBidPrice ?? 0,
-                            item.BestBidQuantity ?? 0)
+                            new SharedOrderQuantity(item.BestBidQuantity ?? 0))
                         ));
                 }
             }, ct).ConfigureAwait(false);
@@ -235,7 +235,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await SubscribeToOrderBookUpdatesAsync(productType, symbols, request.Limit ?? 15, update =>
             {
                 foreach(var item in update.Data)
-                    handler(update.ToType(new SharedOrderBook(item.Asks, item.Bids)));
+                    handler(update.ToType(new SharedOrderBook(SharedQuantityType.BaseAsset, item.Asks, item.Bids)));
             }, ct).ConfigureAwait(false);
             
             return result;
@@ -283,13 +283,22 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         ReduceOnly = x.ReduceOnly,
                         StopLossPrice = x.StopLossPrice,
                         TakeProfitPrice = x.TakeProfitPrice,
-                        LastTrade = x.LastTradeId == null ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), x.Symbol, x.OrderId, x.LastTradeId, x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, x.LastTradeQuantity ?? 0, x.LastTradeFillPrice ?? 0, x.LastTradeFillTime!.Value)
-                        {
-                            Fee = Math.Abs(x.LastTradeFee),
-                            FeeAsset = x.LastTradeFeeAsset,
-                            Role = x.LastTradeRole == Role.Taker ? SharedRole.Taker : SharedRole.Maker,
-                            ClientOrderId = x.ClientOrderId
-                        }
+                        LastTrade = x.LastTradeId == null ? null : 
+                            new SharedUserTrade(
+                                ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), 
+                                x.Symbol, 
+                                x.OrderId, 
+                                x.LastTradeId, 
+                                x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
+                                new SharedOrderQuantity(x.LastTradeQuantity ?? 0), 
+                                x.LastTradeFillPrice ?? 0, 
+                                x.LastTradeFillTime!.Value)
+                            {
+                                Fee = Math.Abs(x.LastTradeFee),
+                                FeeAsset = x.LastTradeFeeAsset,
+                                Role = x.LastTradeRole == Role.Taker ? SharedRole.Taker : SharedRole.Maker,
+                                ClientOrderId = x.ClientOrderId
+                            }
                     }
                 ).ToArray())),
                 ct: ct).ConfigureAwait(false);
@@ -346,7 +355,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         x.OrderId.ToString(),
                         x.TradeId.ToString(),
                         x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                        x.Quantity,
+                        new SharedOrderQuantity(x.Quantity),
                         x.Price,
                         x.UpdateTime ?? x.CreateTime)
                     {
@@ -378,15 +387,20 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var productType = GetProductType(request.TradingMode, request.ExchangeParameters);
             var result = await SubscribeToPositionUpdatesAsync(productType!,
                 update => {
-                    handler(update.ToType<SharedPosition[]>(update.Data.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), x.Symbol, x.Total, x.UpdateTime)
-                    {
-                        AverageOpenPrice = x.AverageOpenPrice,
-                        PositionMode = x.PositionSide == PositionSide.Oneway ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
-                        PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
-                        UnrealizedPnl = x.UnrealizedProfitAndLoss,
-                        Leverage = x.Leverage,
-                        LiquidationPrice = x.LiquidationPrice
-                    }).ToArray()));
+                    handler(update.ToType<SharedPosition[]>(update.Data.Select(x => 
+                        new SharedPosition(
+                            ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol),
+                            x.Symbol,
+                            new SharedOrderQuantity(x.Total), 
+                            x.UpdateTime)
+                        {
+                            AverageOpenPrice = x.AverageOpenPrice,
+                            PositionMode = x.PositionSide == PositionSide.Oneway ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
+                            PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
+                            UnrealizedPnl = x.UnrealizedProfitAndLoss,
+                            Leverage = x.Leverage,
+                            LiquidationPrice = x.LiquidationPrice
+                        }).ToArray()));
                     },
                 ct: ct).ConfigureAwait(false);
 

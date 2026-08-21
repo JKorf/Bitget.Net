@@ -106,9 +106,9 @@ namespace Bitget.Net.Clients.SpotApiV2
                         new SharedBookTicker(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, item.Symbol), 
                         item.Symbol,
                         item.BestAskPrice,
-                        item.BestAskQuantity,
+                        new SharedOrderQuantity(item.BestAskQuantity),
                         item.BestBidPrice,
-                        item.BestBidQuantity)));
+                        new SharedOrderQuantity(item.BestBidQuantity))));
                 }
             }, ct).ConfigureAwait(false);
             
@@ -171,13 +171,22 @@ namespace Bitget.Net.Clients.SpotApiV2
                         Fee = x.Fees.Any() ? x.Fees.Sum(f => f.Fee) : 0,
                         FeeAsset = x.FeeAsset,
                         OrderPrice = x.Price,
-                        LastTrade = x.TradeId == null ? null : new SharedUserTrade(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), x.Symbol, x.OrderId, x.TradeId, x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, x.BaseVolume!.Value, x.LastTradePrice!.Value, x.LastTradeTime!.Value)
-                        {
-                            Fee = x.LastTradeFee == null ? null : Math.Abs(x.LastTradeFee.Value),
-                            FeeAsset = x.FeeAsset,
-                            Role = x.LastTradeRole == Role.Taker ? SharedRole.Taker : SharedRole.Maker,
-                            ClientOrderId = x.ClientOrderId
-                        }
+                        LastTrade = x.TradeId == null ? null : 
+                            new SharedUserTrade(
+                                ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol),
+                                x.Symbol,
+                                x.OrderId,
+                                x.TradeId,
+                                x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
+                                new SharedOrderQuantity(x.BaseVolume!.Value),
+                                x.LastTradePrice!.Value,
+                                x.LastTradeTime!.Value)
+                            {
+                                Fee = x.LastTradeFee == null ? null : Math.Abs(x.LastTradeFee.Value),
+                                FeeAsset = x.FeeAsset,
+                                Role = x.LastTradeRole == Role.Taker ? SharedRole.Taker : SharedRole.Maker,
+                                ClientOrderId = x.ClientOrderId
+                            }
                     }
                 ).ToArray())),
                 ct: ct).ConfigureAwait(false);
@@ -216,7 +225,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                         x.OrderId.ToString(),
                         x.TradeId.ToString(),
                         x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                        x.Quantity,
+                        new SharedOrderQuantity(x.Quantity),
                         x.Price,
                         x.UpdateTime ?? x.CreateTime)
                     {
@@ -298,7 +307,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             var result = await SubscribeToOrderBookUpdatesAsync(symbols, request.Limit ?? 15, update =>
             {
                 foreach(var item in update.Data)
-                    handler(update.ToType(new SharedOrderBook(item.Asks, item.Bids)));
+                    handler(update.ToType(new SharedOrderBook(SharedQuantityType.BaseAsset, item.Asks, item.Bids)));
             }, ct).ConfigureAwait(false);
             
             return result;

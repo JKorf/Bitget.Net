@@ -6,7 +6,7 @@ using Bitget.Net.Enums.V2;
 namespace Bitget.Net.Objects.Models;
 
 /// <summary>
-/// 
+/// Futures symbol
 /// </summary>
 public record BitgetUaFuturesSymbol
 {

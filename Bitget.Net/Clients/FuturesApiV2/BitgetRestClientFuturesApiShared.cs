@@ -172,9 +172,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, symbol),
                 symbol,
                 resultTicker.Data.Asks[0].Price,
-                resultTicker.Data.Asks[0].Quantity,
+                new SharedOrderQuantity(resultTicker.Data.Asks[0].Quantity),
                 resultTicker.Data.Bids[0].Price,
-                resultTicker.Data.Bids[0].Quantity));
+                new SharedOrderQuantity(resultTicker.Data.Bids[0].Quantity)));
         }
 
         #endregion
@@ -233,6 +233,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 MaxLongLeverage = s.MaxLeverage,
                 MaxTradeQuantity = Math.Min(s.MaxOrderQuantity, s.MaxMarketOrderQuantity),
                 DisplayName = s.Symbol,
+                TakerFeePercentage = s.TakerFeeRate * 100,
+                MakerFeePercentage = s.MakerFeeRate * 100,
+                UpperPriceLimitPercentage = s.SellLimitPriceRatio * 100,
+                LowerPriceLimitPercentage = -s.BuyLimitPriceRatio * 100
             };
 
             if (productCategory != ProductCategory.CoinFutures)
@@ -604,7 +608,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!result.Success)
                 return HttpResult.Fail<SharedOrderBook>(result);
 
-            return HttpResult.Ok(result, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
+            return HttpResult.Ok(result, new SharedOrderBook(SharedQuantityType.BaseAsset, result.Data.Asks, result.Data.Bids));
         }
 
         #endregion
@@ -628,7 +632,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             if (!result.Success)
                 return HttpResult.Fail<SharedOpenInterest>(result);
 
-            return HttpResult.Ok(result, new SharedOpenInterest(result.Data.Quantity));
+            return HttpResult.Ok(result, new SharedOpenInterest(new SharedOrderQuantity(result.Data.Quantity)));
         }
 
         #endregion
@@ -900,7 +904,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 x.OrderId.ToString(),
                 x.TradeId,
                 x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                x.Quantity,
+                new SharedOrderQuantity(x.Quantity),
                 x.Price,
                 x.CreateTime)
             {
@@ -956,12 +960,11 @@ namespace Bitget.Net.Clients.FuturesApiV2
                                 x.OrderId.ToString(),
                                 x.TradeId.ToString(),
                                 x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                                x.Quantity,
+                                new SharedOrderQuantity(x.Quantity),
                                 x.Price,
                                 x.CreateTime)
                             {
                                 Price = x.Price,
-                                Quantity = x.Quantity,
                                 Fee = Math.Abs(x.Fees.Sum(x => x.TotalFee)),
                                 FeeAsset = x.Fees.FirstOrDefault()?.FeeAsset,
                                 Role = x.Role == Role.Maker ? SharedRole.Maker : SharedRole.Taker
@@ -1022,15 +1025,20 @@ namespace Bitget.Net.Clients.FuturesApiV2
                     return HttpResult.Fail<SharedPosition[]>(result);
             }
 
-            return HttpResult.Ok(result, result.Data.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), x.Symbol, x.Total, x.UpdateTime)
-            {
-                UnrealizedPnl = x.UnrealizedProfitAndLoss,
-                LiquidationPrice = x.LiquidationPrice,
-                AverageOpenPrice = x.AverageOpenPrice,
-                Leverage = x.Leverage,
-                PositionMode = x.PositionSide == PositionSide.Oneway ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
-                PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
-            }).ToArray());
+            return HttpResult.Ok(result, result.Data.Select(x => 
+                new SharedPosition(
+                    ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, x.Symbol), 
+                    x.Symbol,
+                    new SharedOrderQuantity(x.Total),
+                    x.UpdateTime)
+                {
+                    UnrealizedPnl = x.UnrealizedProfitAndLoss,
+                    LiquidationPrice = x.LiquidationPrice,
+                    AverageOpenPrice = x.AverageOpenPrice,
+                    Leverage = x.Leverage,
+                    PositionMode = x.PositionSide == PositionSide.Oneway ? SharedPositionMode.OneWay : SharedPositionMode.HedgeMode,
+                    PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long
+                }).ToArray());
         }
 
         ClosePositionOptions IFuturesOrderRestClient.ClosePositionOptions { get; } = new ClosePositionOptions(_exchangeName, true);
@@ -1266,7 +1274,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                                 x.Side == PositionSide.Long ? SharedPositionSide.Long : SharedPositionSide.Short,
                                 x.AverageOpenPrice,
                                 x.AverageClosePrice,
-                                x.CloseTotalPosition,
+                                new SharedOrderQuantity(x.CloseTotalPosition),
                                 x.NetProfit,
                                 x.UpdateTime)
                             {

@@ -117,7 +117,9 @@ namespace Bitget.Net.Clients.SpotApiV2
                 MaxTradeQuantity = s.MaxOrderQuantity,
                 QuantityDecimals = s.QuantityPrecision,
                 PriceDecimals = s.PricePrecision,
-                DisplayName = s.Symbol
+                DisplayName = s.Symbol,
+                UpperPriceLimitPercentage = s.SellLimitPriceRatio * 100,
+                LowerPriceLimitPercentage = -s.BuyLimitPriceRatio * 100,
             };
 
             if (s.SymbolType == Enums.Uta.SymbolType.Commodity || s.SymbolType == Enums.Uta.SymbolType.Metal)
@@ -276,9 +278,9 @@ namespace Bitget.Net.Clients.SpotApiV2
                 ExchangeSymbolCache.ParseSymbol(_topicId, EnvironmentName, null, symbol),
                 symbol,
                 resultTicker.Data.Asks[0].Price,
-                resultTicker.Data.Asks[0].Quantity,
+                new SharedOrderQuantity(resultTicker.Data.Asks[0].Quantity),
                 resultTicker.Data.Bids[0].Price,
-                resultTicker.Data.Bids[0].Quantity));
+                new SharedOrderQuantity(resultTicker.Data.Bids[0].Quantity)));
         }
 
         #endregion
@@ -533,7 +535,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 x.OrderId,
                 x.TradeId,
                 x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                x.Quantity,
+                new SharedOrderQuantity(x.Quantity),
                 x.Price,
                 x.CreateTime)
             {
@@ -585,7 +587,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                                x.OrderId,
                                x.TradeId,
                                x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                               x.Quantity,
+                               new SharedOrderQuantity(x.Quantity),
                                x.Price,
                                x.CreateTime)
                             {
@@ -855,7 +857,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (!result.Success)
                 return HttpResult.Fail<SharedOrderBook>(result);
 
-            return HttpResult.Ok(result, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
+            return HttpResult.Ok(result, new SharedOrderBook(SharedQuantityType.BaseAsset, result.Data.Asks, result.Data.Bids));
         }
 
         #endregion

@@ -5,6 +5,7 @@ using Bitget.Net.Enums;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Enums.V2;
 using CryptoExchange.Net.RateLimiting.Guards;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {
@@ -189,6 +190,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
             var result = await _baseClient.SendAsync<BitgetOpenInterestResult>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<BitgetOpenInterest>(result);
+
+            if (result.Data.OpenInterest.Length == 0)
+                return HttpResult.Fail<BitgetOpenInterest>(result, new ServerError(ErrorType.UnknownSymbol, "No data for symbol"));
 
             return HttpResult.Ok(result, result.Data.OpenInterest.Single());
         }
