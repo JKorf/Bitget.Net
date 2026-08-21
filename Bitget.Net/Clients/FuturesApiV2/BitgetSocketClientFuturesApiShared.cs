@@ -359,6 +359,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                         x.Price,
                         x.UpdateTime ?? x.CreateTime)
                     {
+                        ClientOrderId = x.ClientOrderId,
                         Fee = Math.Abs(x.Fees.First().TotalFee),
                         FeeAsset = x.Fees.First().FeeAsset,
                         Role = x.Role == Role.Maker ? SharedRole.Maker : SharedRole.Taker
