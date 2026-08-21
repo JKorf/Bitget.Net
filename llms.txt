@@ -34,6 +34,7 @@ var socketClient = new BitgetSocketClient();
 - Unified/UTA socket: `socketClient.UnifiedApi`
 - Shared capability discovery: `client.SpotApiV2.SharedClient.Discover()` / `client.FuturesApiV2.SharedClient.Discover()`
 - Shared symbol discovery returns asset type/subtype metadata and populates `SpotSymbolCatalog` / `FuturesSymbolCatalog` after a successful symbol request.
+- Shared result quantities use `SharedOrderQuantity`; select its base, quote, or contract quantity as appropriate. Shared Bitget order books identify quantities as `SharedQuantityType.BaseAsset`.
 
 ## Common calls
 
