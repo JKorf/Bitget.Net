@@ -64,14 +64,18 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="asset">["<c>coin</c>"] The asset, for example `ETH`</param>
         /// <param name="positionSide">["<c>posSide</c>"] Position side</param>
         /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
+        /// <param name="longLeverage">["<c>longLeverage</c>"] Long leverage in isolated hedge mode</param>
+        /// <param name="shortLeverage">["<c>shortLeverage</c>"] Short leverage in isolated hedge mode</param>
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult> SetLeverageAsync(
             ProductCategory category,
             string symbol,
-            decimal leverage,
+            decimal? leverage = null,
             string? asset = null,
             PositionSide? positionSide = null,
             MarginMode? marginMode = null,
+            decimal? longLeverage = null,
+            decimal? shortLeverage = null,
             CancellationToken ct = default);
 
         /// <summary>

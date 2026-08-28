@@ -66,10 +66,12 @@ namespace Bitget.Net.Clients.UnifiedApi
         public async Task<HttpResult> SetLeverageAsync(
             ProductCategory category,
             string symbol,
-            decimal leverage,
+            decimal? leverage = null,
             string? asset = null,
             PositionSide? positionSide = null,
             MarginMode? marginMode = null,
+            decimal? longLeverage = null,
+            decimal? shortLeverage = null,
             CancellationToken ct = default)
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
@@ -79,6 +81,8 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("coin", asset);
             parameters.Add("posSide", positionSide);
             parameters.Add("marginMode", marginMode);
+            parameters.Add("longLeverage", longLeverage);
+            parameters.Add("shortLeverage", shortLeverage);
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v3/account/set-leverage", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
             return result;
