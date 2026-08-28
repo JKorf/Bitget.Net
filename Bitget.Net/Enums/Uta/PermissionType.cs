@@ -11,9 +11,9 @@ namespace Bitget.Net.Enums;
 public enum PermissionType
 {
     /// <summary>
-    /// ["<c>read-and-write</c>"] Read write
+    /// ["<c>read-and-write</c>", "<c>read_and_write</c>"] Read write
     /// </summary>
-    [Map("read-and-write")]
+    [Map("read-and-write", "read_and_write")]
     ReadWrite,
     /// <summary>
     /// ["<c>read-only</c>"] Read only

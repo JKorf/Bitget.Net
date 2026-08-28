@@ -63,6 +63,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="leverage">["<c>leverage</c>"] Leverage</param>
         /// <param name="asset">["<c>coin</c>"] The asset, for example `ETH`</param>
         /// <param name="positionSide">["<c>posSide</c>"] Position side</param>
+        /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult> SetLeverageAsync(
             ProductCategory category,
@@ -70,6 +71,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
             decimal leverage,
             string? asset = null,
             PositionSide? positionSide = null,
+            MarginMode? marginMode = null,
             CancellationToken ct = default);
 
         /// <summary>
