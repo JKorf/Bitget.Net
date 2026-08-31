@@ -8,12 +8,12 @@ UriParams: {}
   "requestTime": 1744617600000,
   "data": {
     "userId": "123456789",
-    "inviterId": "987654321",
-    "parentId": "",
+    "inviterId": null,
+    "parentId": 3883688412,
     "channelCode": "6258",
     "channel": "official",
     "ips": "192.168.1.1,192.168.1.2",
-    "permType": "read-and-write",
+    "permType": "read_and_write",
     "permissions": [
       "uta_mgt",
       "uta_trade",

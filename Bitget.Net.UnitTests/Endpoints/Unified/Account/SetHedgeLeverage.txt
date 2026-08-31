@@ -1,7 +1,7 @@
 POST
 /api/v3/account/set-leverage
 true
-BodyParams: {"category": "USDT-FUTURES","symbol": "ETHUSDT","leverage": 0.1,"marginMode": "isolated"}
+BodyParams: {"category": "USDT-FUTURES","symbol": "ETHUSDT","marginMode": "isolated","longLeverage": 0.1,"shortLeverage": 0.1}
 {
   "code": "00000",
   "msg": "success",

@@ -74,7 +74,7 @@ public record BitgetUaPositionUpdate
     /// ["<c>totalFundingFee</c>"] Total funding fee
     /// </summary>
     [JsonPropertyName("totalFundingFee")]
-    public decimal TotalFundingFee { get; set; }
+    public decimal? TotalFundingFee { get; set; }
     /// <summary>
     /// ["<c>updatedTime</c>"] Update time
     /// </summary>

@@ -275,7 +275,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             if (!result.Success)
                 return HttpResult.Fail<BitgetUaPosition[]>(result);
 
-            return HttpResult.Ok(result, result.Data.List);
+            return HttpResult.Ok(result, result.Data.List ?? []);
         }
 
         #endregion

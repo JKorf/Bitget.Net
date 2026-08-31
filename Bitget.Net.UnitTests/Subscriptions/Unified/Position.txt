@@ -23,7 +23,7 @@
       "markPrice": "94987.1",
       "createdTime": "1736378720620",
       "avgPrice": "0",
-      "totalFundingFee": "0",
+      "totalFundingFee": "",
       "updatedTime": "1736378720620",
       "marginCoin": "USDT",
       "frozen": "0",

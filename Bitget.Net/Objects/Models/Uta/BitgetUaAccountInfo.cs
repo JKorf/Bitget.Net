@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 using Bitget.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
 
 namespace Bitget.Net.Objects.Models;
 
@@ -18,12 +19,13 @@ public record BitgetUaAccountInfo
     /// ["<c>inviterId</c>"] Inviter id
     /// </summary>
     [JsonPropertyName("inviterId")]
-    public string InviterId { get; set; } = string.Empty;
+    public string? InviterId { get; set; }
     /// <summary>
     /// ["<c>parentId</c>"] Parent id
     /// </summary>
     [JsonPropertyName("parentId")]
-    public string ParentId { get; set; } = string.Empty;
+    [JsonConverter(typeof(NumberStringConverter))]
+    public string? ParentId { get; set; }
     /// <summary>
     /// ["<c>channelCode</c>"] Channel code
     /// </summary>
