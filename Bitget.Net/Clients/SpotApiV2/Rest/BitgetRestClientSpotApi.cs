@@ -20,6 +20,8 @@ namespace Bitget.Net.Clients.SpotApiV2
     /// <inheritdoc />
     internal partial class BitgetRestClientSpotApi : RestApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetRestClientSpotApi
     {
+        private readonly BitgetRestClientSpotSharedApi _sharedApi;
+
         protected override ErrorMapping ErrorMapping => BitgetErrors.RestErrors;
         /// <inheritdoc />
         public IBitgetRestClientSpotApiAccount Account { get; }
@@ -31,7 +33,9 @@ namespace Bitget.Net.Clients.SpotApiV2
         public IBitgetRestClientSpotApiTrading Trading { get; }
 
         /// <inheritdoc />
-        public IBitgetRestClientSpotApiShared SharedClient => this;
+        public IBitgetRestClientSpotApiShared SharedClient => _sharedApi;
+        /// <inheritdoc />
+        public IBitgetRestClientSpotSharedApi SharedApi => _sharedApi;
 
         /// <inheritdoc />
         public new BitgetRestOptions ClientOptions => (BitgetRestOptions)base.ClientOptions;
@@ -44,6 +48,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             : base(loggerFactory, BitgetExchange.Metadata.Id, httpClient, options.Environment.RestBaseAddress, options, options.SpotOptions)
         {
             _baseClient = baseClient;
+
+            _sharedApi = new BitgetRestClientSpotSharedApi(this);
 
             Account = new BitgetRestClientSpotApiAccount(this);
             Margin = new BitgetRestClientSpotApiMargin(this);

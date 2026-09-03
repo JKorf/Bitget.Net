@@ -32,9 +32,15 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         public IBitgetRestClientSpotApiTrading Trading { get; }
 
         /// <summary>
-        /// Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
+        /// [V1] Get the shared rest requests client. For new implementations prefer using <see cref="SharedApi"/>
         /// </summary>
         IBitgetRestClientSpotApiShared SharedClient { get; }
+        /// <summary>
+        /// [V2] Gets the aggregate Shared API interface. Shared APIs provide a common,
+        /// exchange-independent contract for accessing functionality across different
+        /// exchange client libraries.
+        /// </summary>
+        IBitgetRestClientSpotSharedApi SharedApi { get; }
 
     }
 }

@@ -20,6 +20,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
     /// <inheritdoc />
     internal partial class BitgetRestClientFuturesApi : RestApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetRestClientFuturesApi
     {
+        private readonly BitgetRestClientFuturesSharedApi _sharedApi;
+
         protected override ErrorMapping ErrorMapping => BitgetErrors.RestErrors;
 
         /// <inheritdoc />
@@ -40,6 +42,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             : base(loggerFactory, BitgetExchange.Metadata.Id, httpClient, options.Environment.RestBaseAddress, options, options.FuturesOptions)
         {
             _baseClient = baseClient;
+            _sharedApi = new BitgetRestClientFuturesSharedApi(this);
 
             Account = new BitgetRestClientFuturesApiAccount(this);
             ExchangeData = new BitgetRestClientFuturesApiExchangeData(this);
@@ -58,7 +61,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));
 
-        public IBitgetRestClientFuturesApiShared SharedClient => this;
+        public IBitgetRestClientFuturesApiShared SharedClient => _sharedApi;
+        public IBitgetRestClientFuturesSharedApi SharedApi => _sharedApi;
 
         /// <inheritdoc />
         protected override BitgetAuthenticationProviderV2 CreateAuthenticationProvider(BitgetCredentials credentials)
