@@ -15,7 +15,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetRestClientFuturesSharedApi
     {
-        #region Open Interest client
+        #region Get Open Interest
 
         public GetOpenInterestOptions GetOpenInterestOptions { get; } = new GetOpenInterestOptions(_exchangeName, false)
         {
@@ -24,6 +24,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
             }
         };
+        async Task<ICallResult<SharedOpenInterest>> IGetOpenInterest.GetOpenInterestAsync(GetOpenInterestRequest request, CancellationToken ct)
+            => await GetOpenInterestAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedOpenInterest>> GetOpenInterestAsync(GetOpenInterestRequest request, CancellationToken ct)
         {
             var validationError = GetOpenInterestOptions.ValidateRequest(request, this);
@@ -38,5 +41,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         #endregion
+
     }
 }

@@ -15,7 +15,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetRestClientFuturesSharedApi
     {
-        #region Leverage client
+        #region Get Leverage
+
         public SharedLeverageSettingMode LeverageSettingType => SharedLeverageSettingMode.PerSide;
 
         public GetLeverageOptions GetLeverageOptions { get; } = new GetLeverageOptions(_exchangeName, true)
@@ -26,6 +27,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")
             }
         };
+        async Task<ICallResult<SharedLeverage>> IGetLeverage.GetLeverageAsync(GetLeverageRequest request, CancellationToken ct)
+            => await GetLeverageAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedLeverage>> GetLeverageAsync(GetLeverageRequest request, CancellationToken ct)
         {
             var validationError = GetLeverageOptions.ValidateRequest(request, this);
@@ -45,6 +49,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return HttpResult.Ok(result, new SharedLeverage(position?.Leverage ?? 0));
         }
 
+        #endregion
+
+        #region Set Leverage
+
         public SetLeverageOptions SetLeverageOptions { get; } = new SetLeverageOptions(_exchangeName)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
@@ -53,6 +61,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")
             }
         };
+        async Task<ICallResult<SharedLeverage>> ISetLeverage.SetLeverageAsync(SetLeverageRequest request, CancellationToken ct)
+            => await SetLeverageAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedLeverage>> SetLeverageAsync(SetLeverageRequest request, CancellationToken ct)
         {
             var validationError = SetLeverageOptions.ValidateRequest(request, this);
@@ -74,6 +85,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 Side = request.Side
             });
         }
+
         #endregion
     }
 }

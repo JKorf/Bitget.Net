@@ -11,7 +11,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetSocketClientFuturesSharedApi
     {
-        #region Balance client
+        #region Subscribe To Balance Updates
+
         public SubscribeBalanceOptions SubscribeBalanceOptions { get; } = new SubscribeBalanceOptions(_exchangeName, false)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
@@ -39,6 +40,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             return result;
         }
+
         #endregion
     }
 }

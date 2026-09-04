@@ -15,7 +15,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetRestClientFuturesSharedApi
     {
-        #region Recent Trade client
+        #region Get Recent Trades
 
         public GetRecentTradesOptions GetRecentTradesOptions { get; } = new GetRecentTradesOptions(_exchangeName, 1000, false)
         {
@@ -24,6 +24,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
+        async Task<ICallResult<SharedTrade[]>> IGetRecentTrades.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
+            => await GetRecentTradesAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedTrade[]>> GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
             var validationError = GetRecentTradesOptions.ValidateRequest(request, this);
@@ -47,5 +50,6 @@ namespace Bitget.Net.Clients.FuturesApiV2
         }
 
         #endregion
+
     }
 }

@@ -11,7 +11,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetSocketClientFuturesSharedApi
     {
-        #region Order Book client
+        #region Subscribe To Order Book Updates
+
         public SubscribeOrderBookOptions SubscribeOrderBookOptions { get; } = new SubscribeOrderBookOptions(_exchangeName, false, new[] { 1, 5, 15 })
         {
             SupportsMultipleSymbols = true,
@@ -37,6 +38,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             
             return result;
         }
+
         #endregion
     }
 }

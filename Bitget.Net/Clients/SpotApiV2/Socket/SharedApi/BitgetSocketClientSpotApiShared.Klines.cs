@@ -9,7 +9,8 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetSocketClientSpotSharedApi
     {
-        #region Kline client
+        #region Subscribe To Kline Updates
+
         public SubscribeKlineOptions SubscribeKlineOptions { get; } = new SubscribeKlineOptions(_exchangeName, false,
             SharedKlineInterval.OneMinute,
             SharedKlineInterval.ThreeMinutes,
@@ -58,6 +59,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             return result;
         }
+
         #endregion
     }
 }

@@ -15,7 +15,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetRestClientFuturesSharedApi
     {
-        #region Trigger Order Client
+        #region Place Futures Trigger Order
+
         public PlaceFuturesTriggerOrderOptions PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(_exchangeName, false)
         {
             RequiredRequestParameters = new List<ParameterDescription>
@@ -29,6 +30,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")
             }
         };
+        async Task<ICallResult<SharedId>> IPlaceFuturesTriggerOrder.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
+            => await PlaceFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
         {
             var (side, tradeSide) = GetTradeSide(request);
@@ -58,7 +62,14 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return HttpResult.Ok(result, new SharedId(result.Data.OrderId.ToString()));
         }
 
+        #endregion
+
+        #region Get Futures Trigger Order
+
         public GetFuturesTriggerOrderOptions GetFuturesTriggerOrderOptions { get; } = new GetFuturesTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedFuturesTriggerOrder>> IGetFuturesTriggerOrder.GetFuturesTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedFuturesTriggerOrder>> GetFuturesTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = GetFuturesTriggerOrderOptions.ValidateRequest(request, this);
@@ -109,6 +120,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
             });
         }
 
+        #endregion
+
         private SharedTriggerOrderStatus ParseTriggerOrderStatus(TriggerOrderStatus? status)
         {
             if (status == TriggerOrderStatus.Executed)
@@ -123,7 +136,12 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return SharedTriggerOrderStatus.Unknown;
         }
 
+        #region Cancel Futures Trigger Order
+
         public CancelFuturesTriggerOrderOptions CancelFuturesTriggerOrderOptions { get; } = new CancelFuturesTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelFuturesTriggerOrder.CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelFuturesTriggerOrderOptions.ValidateRequest(request, this);
@@ -139,6 +157,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             return HttpResult.Ok(order, new SharedId(request.OrderId));
         }
+
+        #endregion
 
 
         private (OrderSide, TradeSide?) GetTradeSide(PlaceFuturesTriggerOrderRequest request)
@@ -165,6 +185,5 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 return (OrderSide.Sell, TradeSide.Open);
             return (OrderSide.Sell, TradeSide.Close);
         }
-        #endregion
     }
 }

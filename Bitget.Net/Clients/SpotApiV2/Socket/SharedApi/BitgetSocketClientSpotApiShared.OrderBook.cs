@@ -9,7 +9,8 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetSocketClientSpotSharedApi
     {
-        #region Order Book client
+        #region Subscribe To Order Book Updates
+
         public SubscribeOrderBookOptions SubscribeOrderBookOptions { get; } = new SubscribeOrderBookOptions(_exchangeName, false, new[] { 1, 5, 15 })
         {
             SupportsMultipleSymbols = true,
@@ -30,6 +31,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             
             return result;
         }
+
         #endregion
     }
 }

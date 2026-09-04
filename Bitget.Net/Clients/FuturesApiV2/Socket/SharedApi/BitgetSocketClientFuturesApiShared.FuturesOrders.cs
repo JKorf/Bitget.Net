@@ -11,7 +11,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetSocketClientFuturesSharedApi
     {
-        #region Futures Order client
+        #region Subscribe To Futures Order Updates
+
         async Task<WebSocketResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<DataEvent<SharedFuturesOrder[]>> handler, CancellationToken ct)
             => await SubscribeToFuturesOrderUpdatesAsync(request, x => handler(x.ToType<SharedFuturesOrder[]>(x.Data)), ct).ConfigureAwait(false);
 
@@ -80,6 +81,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return result;
         }
 
+        #endregion
+
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
             if (status == OrderStatus.Canceled || status == OrderStatus.Rejected)
@@ -102,6 +105,5 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             return x.Side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell;
         }
-        #endregion
     }
 }

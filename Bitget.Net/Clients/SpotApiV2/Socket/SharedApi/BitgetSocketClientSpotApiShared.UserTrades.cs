@@ -9,7 +9,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetSocketClientSpotSharedApi
     {
-        #region User Trade client
+        #region Subscribe To User Trade Updates
 
         public SubscribeUserTradeOptions SubscribeUserTradeOptions { get; } = new SubscribeUserTradeOptions(_exchangeName, false);
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(SubscribeUserTradeRequest request, Action<DataEvent<SharedUserTrade[]>> handler, CancellationToken ct)
@@ -39,6 +39,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             return result;
         }
+
         #endregion
     }
 }

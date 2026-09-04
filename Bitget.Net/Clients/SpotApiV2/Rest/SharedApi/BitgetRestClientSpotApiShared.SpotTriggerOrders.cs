@@ -14,8 +14,12 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetRestClientSpotSharedApi
     {
-        #region Trigger Order Client
+        #region Place Spot Trigger Order
+
         public PlaceSpotTriggerOrderOptions PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> IPlaceSpotTriggerOrder.PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
+            => await PlaceSpotTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
         {
             var validationError = PlaceSpotTriggerOrderOptions.ValidateRequest(request, this);
@@ -39,7 +43,14 @@ namespace Bitget.Net.Clients.SpotApiV2
             return HttpResult.Ok(result, new SharedId(result.Data.OrderId.ToString()));
         }
 
+        #endregion
+
+        #region Get Spot Trigger Order
+
         public GetSpotTriggerOrderOptions GetSpotTriggerOrderOptions { get; } = new GetSpotTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedSpotTriggerOrder>> IGetSpotTriggerOrder.GetSpotTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetSpotTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedSpotTriggerOrder>> GetSpotTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
         {
             var validationError = GetSpotTriggerOrderOptions.ValidateRequest(request, this);
@@ -74,6 +85,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             });
         }
 
+        #endregion
+
         private SharedTriggerOrderStatus ParseTriggerOrderStatus(OrderStatus status)
         {
             if (status == OrderStatus.Filled)
@@ -88,7 +101,12 @@ namespace Bitget.Net.Clients.SpotApiV2
             return SharedTriggerOrderStatus.Unknown;
         }
 
+        #region Cancel Spot Trigger Order
+
         public CancelSpotTriggerOrderOptions CancelSpotTriggerOrderOptions { get; } = new CancelSpotTriggerOrderOptions(_exchangeName, true);
+        async Task<ICallResult<SharedId>> ICancelSpotTriggerOrder.CancelSpotTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelSpotTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> CancelSpotTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
             var validationError = CancelSpotTriggerOrderOptions.ValidateRequest(request, this);
@@ -101,6 +119,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 
             return HttpResult.Ok(order, new SharedId(order.Data.OrderId.ToString()));
         }
+
         #endregion
     }
 }

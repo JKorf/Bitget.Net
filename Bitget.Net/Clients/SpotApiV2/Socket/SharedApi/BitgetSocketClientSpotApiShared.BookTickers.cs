@@ -9,7 +9,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetSocketClientSpotSharedApi
     {
-        #region Book Ticker client
+        #region Subscribe To Book Ticker Updates
 
         public SubscribeBookTickerOptions SubscribeBookTickerOptions { get; } = new SubscribeBookTickerOptions(_exchangeName, false)
         {
@@ -39,6 +39,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             
             return result;
         }
+
         #endregion
     }
 }

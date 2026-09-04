@@ -15,8 +15,12 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetRestClientFuturesSharedApi
     {
-        #region Fee Client
+        #region Get Fees
+
         public GetFeeOptions GetFeeOptions { get; } = new GetFeeOptions(_exchangeName, false);
+
+        async Task<ICallResult<SharedFee>> IGetFees.GetFeesAsync(GetFeeRequest request, CancellationToken ct)
+            => await GetFeesAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedFee>> GetFeesAsync(GetFeeRequest request, CancellationToken ct)
         {
@@ -32,6 +36,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             // Return
             return HttpResult.Ok(result, new SharedFee(result.Data.First().MakerFeeRate * 100, result.Data.First().TakerFeeRate * 100));
         }
+
         #endregion
     }
 }

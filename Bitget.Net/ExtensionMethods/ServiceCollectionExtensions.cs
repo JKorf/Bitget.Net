@@ -1,4 +1,4 @@
-﻿using Bitget.Net;
+using Bitget.Net;
 using Bitget.Net.Clients;
 using Bitget.Net.Interfaces;
 using Bitget.Net.Interfaces.Clients;
@@ -120,6 +120,13 @@ namespace Microsoft.Extensions.DependencyInjection
                 x.GetRequiredService<ILoggerFactory>(),
                 x.GetRequiredService<IOptions<BitgetRestOptions>>(),
                 x.GetRequiredService<IOptions<BitgetSocketOptions>>()));
+
+            services.AddTransient<IBitgetSharedApiClient, BitgetSharedApiClient>();
+
+            services.RegisterSharedApi(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBitgetRestClient>().FuturesApiV2.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<IBitgetSocketClient>().FuturesApiV2.SharedApi);
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedClient);

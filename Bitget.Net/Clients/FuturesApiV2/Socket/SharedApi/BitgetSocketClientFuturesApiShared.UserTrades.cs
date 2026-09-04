@@ -11,7 +11,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetSocketClientFuturesSharedApi
     {
-        #region User Trade client
+        #region Subscribe To User Trade Updates
 
         public SubscribeUserTradeOptions SubscribeUserTradeOptions { get; } = new SubscribeUserTradeOptions(_exchangeName, true)
         {
@@ -50,6 +50,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             return result;
         }
+
         #endregion
     }
 }

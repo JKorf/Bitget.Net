@@ -15,7 +15,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetRestClientFuturesSharedApi
     {
-        #region Position Mode client
+        #region Get Position Mode
+
         public SharedPositionModeSelection PositionModeSettingType => SharedPositionModeSelection.PerAccount;
 
         public GetPositionModeOptions GetPositionModeOptions { get; } = new GetPositionModeOptions(_exchangeName)
@@ -30,6 +31,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")                
             }
         };
+        async Task<ICallResult<SharedPositionModeResult>> IGetPositionMode.GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
+            => await GetPositionModeAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedPositionModeResult>> GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
         {
             var validationError = GetPositionModeOptions.ValidateRequest(request, this);
@@ -48,6 +52,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
             return HttpResult.Ok(result, new SharedPositionModeResult(result.Data.PositionMode == PositionMode.Hedge ? SharedPositionMode.HedgeMode : SharedPositionMode.OneWay));
         }
 
+        #endregion
+
+        #region Set Position Mode
+
         public SetPositionModeOptions SetPositionModeOptions { get; } = new SetPositionModeOptions(_exchangeName)
         {
             RequiredExchangeParameters = new List<ParameterDescription>
@@ -55,6 +63,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
+        async Task<ICallResult<SharedPositionModeResult>> ISetPositionMode.SetPositionModeAsync(SetPositionModeRequest request, CancellationToken ct)
+            => await SetPositionModeAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedPositionModeResult>> SetPositionModeAsync(SetPositionModeRequest request, CancellationToken ct)
         {
             var validationError = SetPositionModeOptions.ValidateRequest(request, this);
@@ -70,6 +81,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             return HttpResult.Ok(result, new SharedPositionModeResult(request.PositionMode));
         }
+
         #endregion
     }
 }

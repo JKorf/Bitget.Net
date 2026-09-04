@@ -11,7 +11,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetSocketClientFuturesSharedApi
     {
-        #region Book Ticker client
+        #region Subscribe To Book Ticker Updates
 
         public SubscribeBookTickerOptions SubscribeBookTickerOptions { get; } = new SubscribeBookTickerOptions(_exchangeName, false)
         {
@@ -48,6 +48,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
             
             return result;
         }
+
         #endregion
     }
 }

@@ -14,7 +14,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetRestClientSpotSharedApi
     {
-        #region Kline client
+        #region Get Klines
 
         public GetKlinesOptions GetKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, false, true, true, 1000, false,
             SharedKlineInterval.OneMinute,
@@ -28,6 +28,9 @@ namespace Bitget.Net.Clients.SpotApiV2
             SharedKlineInterval.OneDay,
             SharedKlineInterval.OneWeek,
             SharedKlineInterval.OneMonth);
+
+        async Task<ICallResult<SharedKline[]>> IGetKlines.GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetKlinesAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedKline[]>> GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
@@ -76,5 +79,6 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         #endregion
+
     }
 }

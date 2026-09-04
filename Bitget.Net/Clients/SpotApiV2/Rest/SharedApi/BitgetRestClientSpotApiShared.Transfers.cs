@@ -14,7 +14,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetRestClientSpotSharedApi
     {
-        #region Transfer client
+        #region Transfer
 
         public TransferOptions TransferOptions { get; } = new TransferOptions(_exchangeName, [
             SharedAccountType.Funding,
@@ -32,6 +32,9 @@ namespace Bitget.Net.Clients.SpotApiV2
                 new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             }
         };
+        async Task<ICallResult<SharedId>> ITransfer.TransferAsync(TransferRequest request, CancellationToken ct)
+            => await TransferAsync(request, ct).ConfigureAwait(false);
+
         public async Task<HttpResult<SharedId>> TransferAsync(TransferRequest request, CancellationToken ct)
         {
             var validationError = TransferOptions.ValidateRequest(request, this);
@@ -57,6 +60,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             return HttpResult.Ok(transfer, new SharedId(transfer.Data.TransferId));
         }
 
+        #endregion
+
         private TransferAccountType? GetTransferType(SharedAccountType type, string productType)
         {
             if (type == SharedAccountType.Funding) return TransferAccountType.Funding;
@@ -69,6 +74,5 @@ namespace Bitget.Net.Clients.SpotApiV2
             return null;
         }
 
-        #endregion
     }
 }

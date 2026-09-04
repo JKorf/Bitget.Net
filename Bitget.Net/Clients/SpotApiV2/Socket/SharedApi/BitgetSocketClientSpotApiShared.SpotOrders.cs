@@ -9,7 +9,7 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetSocketClientSpotSharedApi
     {
-        #region Spot Order client
+        #region Subscribe To Spot Order Updates
 
         async Task<WebSocketResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<DataEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
             => await SubscribeToSpotOrderUpdatesAsync(request, x => handler(x.ToType<SharedSpotOrder[]>(x.Data)), ct).ConfigureAwait(false);
@@ -66,6 +66,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             return result;
         }
 
+        #endregion
+
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
             if (status == OrderStatus.Canceled || status == OrderStatus.Rejected)
@@ -78,6 +80,5 @@ namespace Bitget.Net.Clients.SpotApiV2
             return SharedOrderStatus.Unknown;
         }
 
-        #endregion
     }
 }
