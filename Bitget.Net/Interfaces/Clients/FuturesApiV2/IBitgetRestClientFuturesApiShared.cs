@@ -35,8 +35,8 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
     /// </summary>
     public interface IBitgetRestClientFuturesSharedApi :
         IGetBalancesRest,
-        IGetFuturesTickerRest,
-        IGetAllFuturesTickersRest,
+        IGetTickerRest,
+        IGetAllTickersRest,
         IGetFuturesSymbolsRest,
         IGetKlinesRest,
         IGetRecentTradesRest,
@@ -54,7 +54,7 @@ namespace Bitget.Net.Interfaces.Clients.FuturesApiV2
         IGetFuturesOrderTradesRest,
         IGetFuturesUserTradeHistoryRest,
         IGetPositionsRest,
-        IClosePositionRest,
+        ICloseFullPositionRest,
         ICancelFuturesOrderRest,
         IGetPositionModeRest,
         ISetPositionModeRest,

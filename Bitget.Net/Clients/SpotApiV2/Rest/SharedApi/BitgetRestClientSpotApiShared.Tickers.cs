@@ -14,16 +14,27 @@ namespace Bitget.Net.Clients.SpotApiV2
 {
     internal partial class BitgetRestClientSpotSharedApi
     {
-        #region Get Spot Ticker
+        #region Get Ticker
 
-        public GetSpotTickerOptions GetSpotTickerOptions { get; } = new GetSpotTickerOptions(_exchangeName);
+        async Task<ICallResult<SharedTicker>> IGetTicker.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
+            => await ((IGetTickerRest)this).GetTickerAsync(request, ct).ConfigureAwait(false);
 
-        async Task<ICallResult<SharedSpotTicker>> IGetSpotTicker.GetSpotTickerAsync(GetTickerRequest request, CancellationToken ct)
-            => await GetSpotTickerAsync(request, ct).ConfigureAwait(false);
+        async Task<HttpResult<SharedTicker>> IGetTickerRest.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
+        {
+            var result = await GetSpotTickerAsync(request, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<SharedTicker>(result);
+
+            return HttpResult.Ok<SharedTicker>(result, result.Data);
+        }
+
+        GetTickerOptions ISpotTickerRestClient.GetSpotTickerOptions => GetTickerOptions;
+
+        public GetTickerOptions GetTickerOptions { get; } = new GetTickerOptions(_exchangeName);
 
         public async Task<HttpResult<SharedSpotTicker>> GetSpotTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
-            var validationError = GetSpotTickerOptions.ValidateRequest(request, this);
+            var validationError = GetTickerOptions.ValidateRequest(request, this);
             if (validationError != null)
                 return HttpResult.Fail<SharedSpotTicker>(Exchange, validationError);
 
@@ -32,13 +43,13 @@ namespace Bitget.Net.Clients.SpotApiV2
                 return HttpResult.Fail<SharedSpotTicker>(result);
 
             var ticker = result.Data.Single();
-            return HttpResult.Ok(result, 
+            return HttpResult.Ok(result,
                 new SharedSpotTicker(
                     ExchangeSymbolCache.ParseSymbol(_topicId, _api.EnvironmentName, null, ticker.Symbol),
-                    ticker.Symbol, 
-                    ticker.LastPrice, 
+                    ticker.Symbol,
+                    ticker.LastPrice,
                     ticker.HighPrice,
-                    ticker.LowPrice, 
+                    ticker.LowPrice,
                     new SharedOrderQuantity(ticker.Volume, ticker.QuoteVolume),
                     ticker.ChangePercentage24H * 100)
             {
@@ -47,19 +58,29 @@ namespace Bitget.Net.Clients.SpotApiV2
 
         #endregion
 
-        #region Get All Spot Tickers
+        #region Get All Tickers
+
+        async Task<ICallResult<SharedTicker[]>> IGetAllTickers.GetAllTickersAsync(GetTickersRequest request, CancellationToken ct)
+            => await ((IGetAllTickersRest)this).GetAllTickersAsync(request, ct).ConfigureAwait(false);
+
+        async Task<HttpResult<SharedTicker[]>> IGetAllTickersRest.GetAllTickersAsync(GetTickersRequest request, CancellationToken ct)
+        {
+            var result = await GetAllSpotTickersAsync(request, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<SharedTicker[]>(result);
+
+            return HttpResult.Ok<SharedTicker[]>(result, result.Data);
+        }
 
         Task<HttpResult<SharedSpotTicker[]>> ISpotTickerRestClient.GetSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
             => GetAllSpotTickersAsync(request, ct);
-        GetAllSpotTickersOptions ISpotTickerRestClient.GetSpotTickersOptions => GetAllSpotTickersOptions;
+        GetAllTickersOptions ISpotTickerRestClient.GetSpotTickersOptions => GetAllTickersOptions;
 
-        public GetAllSpotTickersOptions GetAllSpotTickersOptions { get; } = new GetAllSpotTickersOptions(_exchangeName);
-        async Task<ICallResult<SharedSpotTicker[]>> IGetAllSpotTickers.GetAllSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
-            => await GetAllSpotTickersAsync(request, ct).ConfigureAwait(false);
+        public GetAllTickersOptions GetAllTickersOptions { get; } = new GetAllTickersOptions(_exchangeName);
 
         public async Task<HttpResult<SharedSpotTicker[]>> GetAllSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
         {
-            var validationError = GetAllSpotTickersOptions.ValidateRequest(request, this);
+            var validationError = GetAllTickersOptions.ValidateRequest(request, this);
             if (validationError != null)
                 return HttpResult.Fail<SharedSpotTicker[]>(Exchange, validationError);
 
@@ -67,7 +88,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             if (!result.Success)
                 return HttpResult.Fail<SharedSpotTicker[]>(result);
 
-            return HttpResult.Ok(result, result.Data.Select(x => 
+            return HttpResult.Ok(result, result.Data.Select(x =>
                 new SharedSpotTicker(
                     ExchangeSymbolCache.ParseSymbol(_topicId, _api.EnvironmentName, null, x.Symbol),
                     x.Symbol,

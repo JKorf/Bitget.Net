@@ -13,7 +13,7 @@ using ContractType = Bitget.Net.Enums.V2.ContractType;
 
 namespace Bitget.Net.Clients.FuturesApiV2
 {
-    internal partial class BitgetRestClientFuturesSharedApi : 
+    internal partial class BitgetRestClientFuturesSharedApi :
         SharedApiBase,
         IBitgetRestClientFuturesApiShared,
         IBitgetRestClientFuturesSharedApi
@@ -36,8 +36,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             SetCapabilities(
                 GetBalancesOptions,
-                GetFuturesTickerOptions,
-                GetAllFuturesTickersOptions,
+                GetTickerOptions,
+                GetAllTickersOptions,
                 GetBookTickerOptions,
                 GetFuturesSymbolsOptions,
                 GetKlinesOptions,
@@ -57,7 +57,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 GetFuturesUserTradeHistoryOptions,
                 CancelFuturesOrderOptions,
                 GetPositionsOptions,
-                ClosePositionOptions,
+                CloseFullPositionOptions,
                 GetFuturesOrderByClientOrderIdOptions,
                 CancelFuturesOrderByClientOrderIdOptions,
                 GetPositionModeOptions,

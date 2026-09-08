@@ -15,21 +15,32 @@ namespace Bitget.Net.Clients.FuturesApiV2
 {
     internal partial class BitgetRestClientFuturesSharedApi
     {
-        #region Get Futures Ticker
+        #region Get Ticker
 
-        public GetFuturesTickerOptions GetFuturesTickerOptions { get; } = new GetFuturesTickerOptions(_exchangeName)
+        async Task<ICallResult<SharedTicker>> IGetTicker.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
+            => await ((IGetTickerRest)this).GetTickerAsync(request, ct).ConfigureAwait(false);
+
+        async Task<HttpResult<SharedTicker>> IGetTickerRest.GetTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
-            RequiredExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
-            }
+            var result = await GetFuturesTickerAsync(request, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<SharedTicker>(result);
+
+            return HttpResult.Ok<SharedTicker>(result, result.Data);
+        }
+
+        GetTickerOptions IFuturesTickerRestClient.GetFuturesTickerOptions => GetTickerOptions;
+
+        public GetTickerOptions GetTickerOptions { get; } = new GetTickerOptions(_exchangeName)
+        {
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Required("ProductType", "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
+            ]
         };
-        async Task<ICallResult<SharedFuturesTicker>> IGetFuturesTicker.GetFuturesTickerAsync(GetTickerRequest request, CancellationToken ct)
-            => await GetFuturesTickerAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedFuturesTicker>> GetFuturesTickerAsync(GetTickerRequest request, CancellationToken ct)
         {
-            var validationError = GetFuturesTickerOptions.ValidateRequest(request, this);
+            var validationError = GetTickerOptions.ValidateRequest(request, this);
             if (validationError != null)
                 return HttpResult.Fail<SharedFuturesTicker>(Exchange, validationError);
 
@@ -67,26 +78,34 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         #endregion
 
-        #region Get All Futures Tickers
+        #region Get All Tickers
+
+        async Task<ICallResult<SharedTicker[]>> IGetAllTickers.GetAllTickersAsync(GetTickersRequest request, CancellationToken ct)
+            => await ((IGetAllTickersRest)this).GetAllTickersAsync(request, ct).ConfigureAwait(false);
+
+        async Task<HttpResult<SharedTicker[]>> IGetAllTickersRest.GetAllTickersAsync(GetTickersRequest request, CancellationToken ct)
+        {
+            var result = await GetAllFuturesTickersAsync(request, ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<SharedTicker[]>(result);
+
+            return HttpResult.Ok<SharedTicker[]>(result, result.Data);
+        }
 
         Task<HttpResult<SharedFuturesTicker[]>> IFuturesTickerRestClient.GetFuturesTickersAsync(GetTickersRequest request, CancellationToken ct)
             => GetAllFuturesTickersAsync(request, ct);
-        GetAllFuturesTickersOptions IFuturesTickerRestClient.GetFuturesTickersOptions => GetAllFuturesTickersOptions;
+        GetAllTickersOptions IFuturesTickerRestClient.GetFuturesTickersOptions => GetAllTickersOptions;
 
-        public GetAllFuturesTickersOptions GetAllFuturesTickersOptions { get; } = new GetAllFuturesTickersOptions(_exchangeName)
+        public GetAllTickersOptions GetAllTickersOptions { get; } = new GetAllTickersOptions(_exchangeName)
         {
-            RequiredExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Required("ProductType", "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
+            ]
         };
-
-        async Task<ICallResult<SharedFuturesTicker[]>> IGetAllFuturesTickers.GetAllFuturesTickersAsync(GetTickersRequest request, CancellationToken ct)
-            => await GetAllFuturesTickersAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedFuturesTicker[]>> GetAllFuturesTickersAsync(GetTickersRequest request, CancellationToken ct)
         {
-            var validationError = GetAllFuturesTickersOptions.ValidateRequest(request, this);
+            var validationError = GetAllTickersOptions.ValidateRequest(request, this);
             if (validationError != null)
                 return HttpResult.Fail<SharedFuturesTicker[]>(Exchange, validationError);
 
@@ -100,7 +119,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
             return HttpResult.Ok(resultTickers, data.Select(x =>
              new SharedFuturesTicker(
-                 ExchangeSymbolCache.ParseSymbol(_topicId, _api.EnvironmentName, null, x.Symbol), 
+                 ExchangeSymbolCache.ParseSymbol(_topicId, _api.EnvironmentName, null, x.Symbol),
                  x.Symbol,
                  x.LastPrice,
                  x.HighPrice,

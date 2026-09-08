@@ -12,7 +12,7 @@ using System.Timers;
 
 namespace Bitget.Net.Clients.SpotApiV2
 {
-    internal partial class BitgetRestClientSpotSharedApi : 
+    internal partial class BitgetRestClientSpotSharedApi :
         SharedApiBase,
         IBitgetRestClientSpotApiShared,
         IBitgetRestClientSpotSharedApi
@@ -38,8 +38,8 @@ namespace Bitget.Net.Clients.SpotApiV2
             SetCapabilities(
                 GetKlinesOptions,
                 GetSpotSymbolsOptions,
-                GetSpotTickerOptions,
-                GetAllSpotTickersOptions,
+                GetTickerOptions,
+                GetAllTickersOptions,
                 GetBookTickerOptions,
                 GetRecentTradesOptions,
                 GetBalancesOptions,

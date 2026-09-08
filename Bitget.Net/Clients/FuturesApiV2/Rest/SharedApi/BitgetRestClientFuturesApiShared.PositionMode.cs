@@ -21,15 +21,13 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         public GetPositionModeOptions GetPositionModeOptions { get; } = new GetPositionModeOptions(_exchangeName)
         {
-            RequiredRequestParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("Symbol", typeof(SharedSymbol), "A symbol to request position mode for. Actual symbol doesn't matter as the setting is account wide", "ETH-USDT")
-            },
-            RequiredExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
-                new ParameterDescription(["MarginAsset", "marginCoin"], typeof(string), "The margin asset to be used", "USDC")                
-            }
+            ParameterRuleOverwrites = [
+                RequestParameterRuleOverride<GetPositionModeRequest>.Required(x => x.Symbol)
+            ],
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Required("ProductType", "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
+                ExchangeParameterRule.Required("MarginAsset", "The margin asset to be used", "USDC", ["marginCoin"])
+            ]
         };
         async Task<ICallResult<SharedPositionModeResult>> IGetPositionMode.GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
             => await GetPositionModeAsync(request, ct).ConfigureAwait(false);
@@ -58,10 +56,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         public SetPositionModeOptions SetPositionModeOptions { get; } = new SetPositionModeOptions(_exchangeName)
         {
-            RequiredExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("ProductType", typeof(string), "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Required("ProductType", "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
+            ]
         };
         async Task<ICallResult<SharedPositionModeResult>> ISetPositionMode.SetPositionModeAsync(SetPositionModeRequest request, CancellationToken ct)
             => await SetPositionModeAsync(request, ct).ConfigureAwait(false);
