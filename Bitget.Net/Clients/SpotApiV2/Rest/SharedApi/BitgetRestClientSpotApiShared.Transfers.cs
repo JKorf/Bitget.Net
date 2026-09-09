@@ -52,6 +52,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 fromAccount.Value,
                 toAccount.Value,
                 request.Quantity,
+                symbol: request.FromAccountType == SharedAccountType.IsolatedMargin ? request.FromSymbol : request.ToSymbol,
                 ct: ct).ConfigureAwait(false);
             if (!transfer.Success)
                 return HttpResult.Fail<SharedId>(transfer);

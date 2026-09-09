@@ -31,6 +31,10 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         public PlaceFuturesOrderOptions PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions(_exchangeName, true)
         {
+            ParameterRuleOverwrites = [
+                RequestParameterRuleOverride<PlaceFuturesOrderRequest>.NotSupported(x => x.Leverage),
+                RequestParameterRuleOverride<PlaceFuturesOrderRequest>.NotSupported(x => x.PositionSide),
+            ],
             ExchangeParameterRules = [
                 ExchangeParameterRule.Required("ProductType", "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures"),
                 ExchangeParameterRule.Required("MarginAsset", "The margin asset to be used", "USDC", ["marginCoin"]),
