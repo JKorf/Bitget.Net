@@ -21,7 +21,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         public GetPositionModeOptions GetPositionModeOptions { get; } = new GetPositionModeOptions(_exchangeName)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<GetPositionModeRequest>.Required(x => x.Symbol)
             ],
             ExchangeParameterRules = [
