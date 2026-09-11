@@ -1,11 +1,14 @@
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Objects.Options;
+using CryptoExchange.Net.SharedApis;
+using Microsoft.Extensions.Options;
 
 namespace Bitget.Net.Clients
 {
     /// <inheritdoc />
-    public class BitgetSharedApiClient : IBitgetSharedApiClient
+    public class BitgetSharedApiClient : SharedApiClientBase, IBitgetSharedApiClient
     {
         /// <inheritdoc />
         public IBitgetRestClientSpotSharedApi SpotRest { get; }
@@ -21,7 +24,14 @@ namespace Bitget.Net.Clients
         /// </summary>
         public BitgetSharedApiClient(
             IBitgetRestClient restClient,
-            IBitgetSocketClient socketClient)
+            IBitgetSocketClient socketClient,
+            IOptions<BitgetOptions> options)
+            : base(options.Value.SharedApi.PreferredTransport,
+                restClient.SpotApiV2.SharedApi,
+                socketClient.SpotApiV2.SharedApi,
+                restClient.FuturesApiV2.SharedApi,
+                socketClient.FuturesApiV2.SharedApi
+                )
         {
             SpotRest = restClient.SpotApiV2.SharedApi;
             FuturesRest = restClient.FuturesApiV2.SharedApi;
