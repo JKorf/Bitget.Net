@@ -234,6 +234,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.UnifiedApi.Account.SetLeverageAsync(ProductCategory.UsdtFutures, "ETHUSDT", marginMode: MarginMode.IsolatedMargin, longLeverage: 0.1m, shortLeverage: 0.1m), "SetHedgeLeverage");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.SetHoldModeAsync(HoldingMode.OneWayMode), "SetHoldMode");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetFinancialRecordsAsync(ProductCategory.Margin), "GetFinancialRecords", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.GetFundingFinancialRecordsAsync(), "GetFundingFinancialRecords", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetRepayableAssetsAsync(), "GetRepayableAssets", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetPaymentAssetsAsync(), "GetPaymentAssets", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.RepayAsync(["123"], ["123"]), "Repay", nestedJsonProperty: "data", ignoreProperties: ["result"]);

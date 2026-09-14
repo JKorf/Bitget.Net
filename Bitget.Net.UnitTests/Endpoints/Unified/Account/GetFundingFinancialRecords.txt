@@ -1,0 +1,23 @@
+GET
+/api/v3/account/funding-financial-records
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1750396239013,
+  "data": {
+    "list": [
+      {
+        "id": "123456789",
+        "coin": "USDT",
+        "groupType": "transfer",
+        "type": "transfer_in",
+        "amount": "10.5",
+        "balance": "100.5",
+        "ts": "1750396239013"
+      }
+    ],
+    "cursor": "123456789"
+  }
+}
