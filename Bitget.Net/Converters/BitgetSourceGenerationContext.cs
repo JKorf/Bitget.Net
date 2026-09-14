@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Converters
 {
+    [JsonSerializable(typeof(Bitget.Net.Enums.Uta.TransferAccountType), TypeInfoPropertyName = "UtaTransferAccountType")]
     [JsonSerializable(typeof(BitgetIdSocketRequest))]
     [JsonSerializable(typeof(BitgetSocketResponse<BitgetUaOrderResult[]>))]
 
@@ -48,6 +49,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetResponse<BitgetUaFeeRate>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaDeductStatus>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaConvertRecords>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetUaSubTransferRecords>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaRepayResult>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaPaymentAssets>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaAccountConfig>))]

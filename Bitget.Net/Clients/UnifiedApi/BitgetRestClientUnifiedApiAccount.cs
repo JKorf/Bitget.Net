@@ -218,6 +218,36 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         #endregion
 
+        #region Get Sub Transfer Records
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BitgetUaSubTransferRecords>> GetSubTransferRecordsAsync(
+            string? subUid = null,
+            string? role = null,
+            string? asset = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            string? clientOrderId = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("subUid", subUid);
+            parameters.Add("role", role);
+            parameters.Add("coin", asset);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("limit", limit);
+            parameters.Add("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/account/sub-transfer-record", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<BitgetUaSubTransferRecords>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
         #region Switch Deduct
 
         /// <inheritdoc />
