@@ -176,8 +176,8 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult<BitgetUaConvertRecords>> GetConvertRecordsAsync(
-            string fromAsset,
-            string toAsset,
+            string? fromAsset = null,
+            string? toAsset = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
             int? limit = null,
