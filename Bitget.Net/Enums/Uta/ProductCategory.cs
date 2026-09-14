@@ -35,4 +35,9 @@ public enum ProductCategory
     /// </summary>
     [Map("USDC-FUTURES", "usdc-futures")]
     UsdcFutures,
+    /// <summary>
+    /// ["<c>OTHER</c>"] Other
+    /// </summary>
+    [Map("OTHER", "other")]
+    Other,
 }
