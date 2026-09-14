@@ -119,6 +119,24 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
             CancellationToken ct = default);
 
         /// <summary>
+        /// Get funding account financial records. Requires Unified account management read permission.
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/uta/account/Get-Funding-Financial-Records" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/account/funding-financial-records<br />
+        /// </para>
+        /// </summary>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset</param>
+        /// <param name="type">["<c>type</c>"] Filter by financial record type</param>
+        /// <param name="startTime">["<c>startTime</c>"] Start time, within the last 90 days</param>
+        /// <param name="endTime">["<c>endTime</c>"] End time, at most 30 days after start time</param>
+        /// <param name="limit">["<c>limit</c>"] Maximum number of results, at most 100; defaults to 100</param>
+        /// <param name="cursor">["<c>cursor</c>"] Cursor returned by the previous page</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<BitgetUaFundingFinancialRecordPage>> GetFundingFinancialRecordsAsync(string? asset = null, string? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get repayable assets
         /// <para>
         /// Docs:<br />

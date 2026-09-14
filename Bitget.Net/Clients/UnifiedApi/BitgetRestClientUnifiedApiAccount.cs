@@ -132,6 +132,24 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         #endregion
 
+        #region Get Funding Financial Records
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BitgetUaFundingFinancialRecordPage>> GetFundingFinancialRecordsAsync(string? asset = null, string? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("coin", asset);
+            parameters.Add("type", type);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            parameters.Add("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/account/funding-financial-records", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            return await _baseClient.SendAsync<BitgetUaFundingFinancialRecordPage>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get Repayable Assets
 
         /// <inheritdoc />
