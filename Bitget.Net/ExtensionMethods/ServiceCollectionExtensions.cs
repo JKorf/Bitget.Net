@@ -8,6 +8,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -123,19 +124,19 @@ namespace Microsoft.Extensions.DependencyInjection
                 x.GetRequiredService<IOptions<BitgetRestOptions>>(),
                 x.GetRequiredService<IOptions<BitgetSocketOptions>>()));
 
-            services.AddTransient<IBitgetSharedApiClient, BitgetSharedApiClient>();
-
-            services.RegisterSharedApi(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedApi);
-            services.RegisterSharedApi(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedApi);
-            services.RegisterSharedApi(x => x.GetRequiredService<IBitgetRestClient>().FuturesApiV2.SharedApi);
-            services.RegisterSharedApi(x => x.GetRequiredService<IBitgetSocketClient>().FuturesApiV2.SharedApi);
-
-            services.RegisterSharedApiClientCapabilities<IBitgetSharedApiClient>();
-
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedClient);
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().FuturesApiV2.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().FuturesApiV2.SharedClient);
+
+            services.RegisterSharedApiClient<
+                IBitgetSharedApiClient,
+                BitgetSharedApiClient>(sharedApis => sharedApis
+                    .Add(client => client.SpotRest)
+                    .Add(client => client.SpotSocket)
+                    .Add(client => client.FuturesRest)
+                    .Add(client => client.FuturesSocket)
+                    );
 
             return services;
         }
