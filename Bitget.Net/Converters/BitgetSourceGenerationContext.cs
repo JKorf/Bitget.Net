@@ -54,6 +54,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetResponse<BitgetCopyTradingSymbol[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaRepayableAssets>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaFinancialRecordPage>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetUaFundingFinancialRecordPage>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaFundingAsset[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaBalances>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaIndexComponents>))]
