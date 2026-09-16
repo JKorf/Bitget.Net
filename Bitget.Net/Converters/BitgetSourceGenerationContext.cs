@@ -1,3 +1,4 @@
+using Bitget.Net.Enums.Uta;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Socket;
@@ -6,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Converters
 {
-    [JsonSerializable(typeof(Bitget.Net.Enums.Uta.TransferAccountType), TypeInfoPropertyName = "UtaTransferAccountType")]
+    [JsonSerializable(typeof(TransferAccountTypeUta))]
     [JsonSerializable(typeof(BitgetIdSocketRequest))]
     [JsonSerializable(typeof(BitgetSocketResponse<BitgetUaOrderResult[]>))]
 

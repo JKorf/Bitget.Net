@@ -35,12 +35,12 @@ public record BitgetUaSubTransferRecord
     /// ["<c>fromType</c>"] Transferring account type
     /// </summary>
     [JsonPropertyName("fromType")]
-    public TransferAccountType FromType { get; set; }
+    public TransferAccountTypeUta FromType { get; set; }
     /// <summary>
     /// ["<c>toType</c>"] Receiving account type
     /// </summary>
     [JsonPropertyName("toType")]
-    public TransferAccountType ToType { get; set; }
+    public TransferAccountTypeUta ToType { get; set; }
     /// <summary>
     /// ["<c>amount</c>"] Amount to transfer in
     /// </summary>

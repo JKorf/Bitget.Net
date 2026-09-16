@@ -251,8 +251,8 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetAccountInfoAsync(), "GetAccountInfo", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetDeltaInfoAsync(), "GetDeltaInfo", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.SetAccountModeAsync(AccountLevel.Advanced), "SetAccountMode");
-            await tester.ValidateAsync(client => client.UnifiedApi.Account.GetTransferableAssetsAsync(Bitget.Net.Enums.V2.TransferAccountType.Spot, Bitget.Net.Enums.V2.TransferAccountType.Uta), "GetTransferableAssets", nestedJsonProperty: "data");
-            await tester.ValidateAsync(client => client.UnifiedApi.Account.TransferAsync(Bitget.Net.Enums.V2.TransferAccountType.Spot, Bitget.Net.Enums.V2.TransferAccountType.Uta, "123", 0.1m), "Transfer", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.GetTransferableAssetsAsync(TransferAccountType.Spot, TransferAccountType.Uta), "GetTransferableAssets", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.TransferAsync(TransferAccountType.Spot, TransferAccountType.Uta, "123", 0.1m), "Transfer", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetDepositAddressAsync("123"), "GetDepositAddress", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetDepositRecordsAsync(), "GetDepositRecords", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.WithdrawAsync("123", TransferType.OnChain, "123", 0.1m), "Withdraw", nestedJsonProperty: "data");

@@ -7,8 +7,8 @@ namespace Bitget.Net.Enums.Uta;
 /// <summary>
 /// Transfer account type
 /// </summary>
-[JsonConverter(typeof(EnumConverter<TransferAccountType>))]
-public enum TransferAccountType
+[JsonConverter(typeof(EnumConverter<TransferAccountTypeUta>))]
+public enum TransferAccountTypeUta
 {
     /// <summary>
     /// ["<c>spot</c>"] Spot account/Funding account
