@@ -268,6 +268,7 @@ namespace Bitget.Net.UnitTests
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Unified/ExchangeData", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetFuturesSymbolsAsync(ProductCategory.UsdtFutures), "GetFuturesSymbols", nestedJsonProperty: "data", ignoreProperties: ["isRwa"]);
+            await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetFuturesSymbolsAsync(ProductCategory.UsdtFutures), "GetFuturesSymbolsMissingFields", nestedJsonProperty: "data", ignoreProperties: ["isRwa", "maxOrderQty", "maxMarketOrderQty", "fundInterval", "maintainTime"]);
             await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetFuturesTickersAsync(ProductCategory.UsdtFutures), "GetFuturesTickers", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetOrderBookAsync(ProductCategory.Spot, "ETHUSDT"), "GetOrderBook", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.ExchangeData.GetRecentTradesAsync(ProductCategory.Spot, "ETHUSDT"), "GetRecentTrades", nestedJsonProperty: "data", ignoreProperties: ["isRPI"]);

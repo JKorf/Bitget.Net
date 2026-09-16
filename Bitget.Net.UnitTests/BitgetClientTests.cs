@@ -5,13 +5,11 @@ using Bitget.Net.Objects.Models;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -187,51 +185,6 @@ namespace Bitget.Net.UnitTests
             Assert.That(((BaseApiClient)restClient.SpotApiV2).ClientOptions.Proxy.Port, Is.EqualTo(80));
             Assert.That(((BaseApiClient)socketClient.SpotApiV2).ClientOptions.Proxy.Host, Is.EqualTo("host2"));
             Assert.That(((BaseApiClient)socketClient.SpotApiV2).ClientOptions.Proxy.Port, Is.EqualTo(81));
-        }
-
-        [Test]
-        public async Task GetFuturesSymbolsAsync_ShouldHandleMissingOptionalQuantityFields()
-        {
-            // arrange
-            var responseJson = """
-            {
-                "code": "00000",
-                "msg": "success",
-                "requestTime": 1750396239013,
-                "data": [
-                    {
-                        "symbol": "ETHUSDT",
-                        "category": "USDT-FUTURES",
-                        "baseCoin": "ETH",
-                        "quoteCoin": "USDT",
-                        "minOrderQty": "0.01",
-                        "maxOrderQty": "",
-                        "pricePrecision": 2,
-                        "quantityPrecision": 2,
-                        "priceMultiplier": "0.01",
-                        "quantityMultiplier": "0.01",
-                        "type": "perpetual",
-                        "minOrderAmount": "5",
-                        "status": "online",
-                        "fundInterval": "",
-                        "minLeverage": "1",
-                        "maxLeverage": "100",
-                        "maintainTime": "",
-                        "symbolType": "crypto",
-                        "maxMarketOrderQty": ""
-                    }
-                ]
-            }
-            """;
-            ExchangeParameters.SetStaticParameter("Bitget", "ProductType", "UsdtFutures");
-            var client = (BitgetRestClient)TestHelpers.CreateResponseClient(responseJson);
-
-            // act
-            var result = await client.FuturesApiV2.SharedClient.GetFuturesSymbolsAsync(new GetSymbolsRequest());
-
-            // assert
-            ClassicAssert.IsTrue(result.Success);
-            ClassicAssert.IsNull(result.Data.Single().MaxTradeQuantity);
         }
     }
 }

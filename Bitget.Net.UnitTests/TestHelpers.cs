@@ -61,7 +61,6 @@ namespace Bitget.Net.UnitTests
             client = options != null ? new BitgetRestClient(options) : new BitgetRestClient();
             client.SpotApiV2.RequestFactory = Mock.Of<IRequestFactory>();
             client.FuturesApiV2.RequestFactory = Mock.Of<IRequestFactory>();
-            client.UnifiedApi.RequestFactory = Mock.Of<IRequestFactory>();
             return client;
         }
 
@@ -100,9 +99,6 @@ namespace Bitget.Net.UnitTests
             factory.Setup(c => c.Create(It.IsAny<Version>(), It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
             factory = Mock.Get(client.FuturesApiV2.RequestFactory);
-            factory.Setup(c => c.Create(It.IsAny<Version>(), It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
-                .Returns(request.Object);
-            factory = Mock.Get(client.UnifiedApi.RequestFactory);
             factory.Setup(c => c.Create(It.IsAny<Version>(), It.IsAny<HttpMethod>(), It.IsAny<Uri>(), It.IsAny<int>()))
                 .Returns(request.Object);
         }
