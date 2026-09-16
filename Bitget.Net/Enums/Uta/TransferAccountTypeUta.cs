@@ -41,8 +41,8 @@ public enum TransferAccountTypeUta
     [Map("crossed_margin")]
     CrossedMargin,
     /// <summary>
-    /// ["<c>uta</c>"] Unified account (the docs say "unified" but the live API returns "uta")
+    /// ["<c>uta</c>"] Unified account (the docs list "unified" as the value, but the live API always returns "uta")
     /// </summary>
-    [Map("uta", "unified")]
+    [Map("uta")]
     Unified,
 }
