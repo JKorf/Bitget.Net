@@ -1,0 +1,28 @@
+GET
+/api/v3/account/sub-transfer-record
+true
+UriParams: {}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1750396239013,
+  "data": {
+    "list": [
+      {
+        "transferId": "123456789",
+        "fromType": "spot",
+        "toType": "usdt_futures",
+        "amount": "10.5",
+        "coin": "USDT",
+        "fromUserId": "111",
+        "toUserId": "222",
+        "status": "Successful",
+        "clientOid": "abc123",
+        "oldTransferId": null,
+        "createdTime": "1750396239013",
+        "updatedTime": "1750396239013"
+      }
+    ],
+    "cursor": "123456789"
+  }
+}

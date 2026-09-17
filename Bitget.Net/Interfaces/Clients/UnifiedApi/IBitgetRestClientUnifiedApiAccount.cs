@@ -203,6 +203,35 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
             CancellationToken ct = default);
 
         /// <summary>
+        /// Get the transfer records of Main-Sub account
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/uta/account/transfer/SubAccount-Transfer-Get" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/account/sub-transfer-record<br />
+        /// </para>
+        /// </summary>
+        /// <param name="subUid">["<c>subUid</c>"] Sub-account UID. If not provided, transfer records of the main account will be retrieved.</param>
+        /// <param name="role">["<c>role</c>"] Transfer-out account type: `initiator` or `receiver`. Default `initiator`</param>
+        /// <param name="asset">["<c>coin</c>"] Coin name</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time. The interval between startTime and endTime cannot exceed 90 days</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time. The interval between startTime and endTime cannot exceed 90 days</param>
+        /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id, cannot exceed 64 characters</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results, default 100, max 100</param>
+        /// <param name="cursor">["<c>cursor</c>"] Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<BitgetUaSubTransferRecords>> GetSubTransferRecordsAsync(
+            string? subUid = null,
+            string? role = null,
+            string? asset = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            string? clientOrderId = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Switch deduct mode
         /// <para>
         /// Docs:<br />
