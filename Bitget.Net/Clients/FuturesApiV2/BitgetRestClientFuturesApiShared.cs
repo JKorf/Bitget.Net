@@ -231,7 +231,9 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ContractSize = 1,
                 MaxShortLeverage = s.MaxLeverage,
                 MaxLongLeverage = s.MaxLeverage,
-                MaxTradeQuantity = Math.Min(s.MaxOrderQuantity, s.MaxMarketOrderQuantity),
+                MaxTradeQuantity = s.MaxOrderQuantity.HasValue && s.MaxMarketOrderQuantity.HasValue
+                    ? Math.Min(s.MaxOrderQuantity.Value, s.MaxMarketOrderQuantity.Value)
+                    : null,
                 DisplayName = s.Symbol,
                 TakerFeePercentage = s.TakerFeeRate * 100,
                 MakerFeePercentage = s.MakerFeeRate * 100,
