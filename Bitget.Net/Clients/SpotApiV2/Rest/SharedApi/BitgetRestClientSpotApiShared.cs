@@ -28,7 +28,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         public BitgetRestClientSpotSharedApi(BitgetRestClientSpotApi api)
             : base(
                   SharedTransport.Rest,
-                  api.Exchange,
+                  api,
                   new[] { TradingMode.Spot },
                   () => api.Authenticated,
                   api.FormatSymbol)

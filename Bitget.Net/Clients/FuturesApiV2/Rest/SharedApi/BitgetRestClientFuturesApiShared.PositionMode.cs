@@ -29,7 +29,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ExchangeParameterRule.Required("MarginAsset", "The margin asset to be used", "USDC", ["marginCoin"])
             ]
         };
-        async Task<ICallResult<SharedPositionModeResult>> IGetPositionMode.GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
+        async Task<IExchangeCallResult<SharedPositionModeResult>> IGetPositionMode.GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
             => await GetPositionModeAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedPositionModeResult>> GetPositionModeAsync(GetPositionModeRequest request, CancellationToken ct)
@@ -60,7 +60,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
                 ExchangeParameterRule.Required("ProductType", "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             ]
         };
-        async Task<ICallResult<SharedPositionModeResult>> ISetPositionMode.SetPositionModeAsync(SetPositionModeRequest request, CancellationToken ct)
+        async Task<IExchangeCallResult<SharedPositionModeResult>> ISetPositionMode.SetPositionModeAsync(SetPositionModeRequest request, CancellationToken ct)
             => await SetPositionModeAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedPositionModeResult>> SetPositionModeAsync(SetPositionModeRequest request, CancellationToken ct)

@@ -31,7 +31,7 @@ namespace Bitget.Net.Clients.SpotApiV2
                 ExchangeParameterRule.Required("ProductType", "The product type that is target, either UsdcFutures, UsdtFutures or CoinFutures", "UsdtFutures")
             ]
         };
-        async Task<ICallResult<SharedId>> ITransfer.TransferAsync(TransferRequest request, CancellationToken ct)
+        async Task<IExchangeCallResult<SharedId>> ITransfer.TransferAsync(TransferRequest request, CancellationToken ct)
             => await TransferAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedId>> TransferAsync(TransferRequest request, CancellationToken ct)

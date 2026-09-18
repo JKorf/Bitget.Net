@@ -22,7 +22,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         public BitgetSocketClientSpotSharedApi(BitgetSocketClientSpotApi api)
             : base(
                   SharedTransport.Socket,
-                  api.Exchange,
+                  api,
                   new[] { TradingMode.Spot },
                   () => api.Authenticated,
                   api.FormatSymbol)

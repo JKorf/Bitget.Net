@@ -24,7 +24,7 @@ namespace Bitget.Net.Clients.FuturesApiV2
         public BitgetSocketClientFuturesSharedApi(BitgetSocketClientFuturesApi api)
             : base(
                   SharedTransport.Socket,
-                  api.Exchange,
+                  api,
                   new[] { TradingMode.PerpetualLinear, TradingMode.PerpetualInverse, TradingMode.DeliveryLinear, TradingMode.DeliveryInverse },
                   () => api.Authenticated,
                   api.FormatSymbol)
