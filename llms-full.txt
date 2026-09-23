@@ -40,7 +40,7 @@ Primary documentation:
 - Futures calls usually require `BitgetProductTypeV2`, a symbol, and a margin asset such as `"USDT"`.
 - Spot margin is `SpotApiV2.Margin`; there is no top-level `MarginApi`.
 - Unified/UTA endpoints are under `UnifiedApi`; there is no `UtaApi`.
-- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from each exchange's `.SharedClient` and call `.Discover()` to inspect supported shared features.
+- Use the exchange-level `IBitgetSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 ## Installation
 
@@ -153,12 +153,12 @@ BitgetRestClient
     .Account
     .Trading
     .Margin
-    .SharedClient
+    .SharedApi
   .FuturesApiV2
     .ExchangeData
     .Account
     .Trading
-    .SharedClient
+    .SharedApi
   .CopyTradingFuturesV2
     .Trader
     .Follower
@@ -174,7 +174,7 @@ WebSocket:
 ```text
 BitgetSocketClient
   .SpotApiV2
-    .SharedClient
+    .SharedApi
     SubscribeToTickerUpdatesAsync(...)
     SubscribeToTradeUpdatesAsync(...)
     SubscribeToKlineUpdatesAsync(...)
@@ -188,7 +188,7 @@ BitgetSocketClient
     SubscribeToIsolatedMarginAccountUpdatesAsync(...)
     SubscribeToIsolatedMarginOrderUpdatesAsync(...)
   .FuturesApiV2
-    .SharedClient
+    .SharedApi
     SubscribeToTickerUpdatesAsync(...)
     SubscribeToTradeUpdatesAsync(...)
     SubscribeToKlineUpdatesAsync(...)
@@ -519,8 +519,8 @@ var serverTime = await client.UnifiedApi.ExchangeData.GetServerTimeAsync();
 var spotSymbols = await client.UnifiedApi.ExchangeData.GetSpotSymbolsAsync("BTCUSDT");
 var futuresSymbols = await client.UnifiedApi.ExchangeData.GetFuturesSymbolsAsync(ProductCategory.UsdtFutures, "BTCUSDT");
 var marginSymbols = await client.UnifiedApi.ExchangeData.GetMarginSymbolsAsync("BTCUSDT");
-var spotTickers = await client.UnifiedApi.ExchangeData.GetSpotTickersAsync("BTCUSDT");
-var futuresTickers = await client.UnifiedApi.ExchangeData.GetFuturesTickersAsync(ProductCategory.UsdtFutures);
+var spotTickers = await client.UnifiedApi.ExchangeData.GetAllTickersAsync("BTCUSDT");
+var futuresTickers = await client.UnifiedApi.ExchangeData.GetAllTickersAsync(ProductCategory.UsdtFutures);
 var book = await client.UnifiedApi.ExchangeData.GetOrderBookAsync(ProductCategory.Spot, "BTCUSDT", limit: 20);
 var trades = await client.UnifiedApi.ExchangeData.GetRecentTradesAsync(ProductCategory.Spot, "BTCUSDT");
 var klines = await client.UnifiedApi.ExchangeData.GetKlinesAsync(ProductCategory.Spot, "BTCUSDT", KlineUaInterval.OneMinute);
@@ -669,27 +669,25 @@ await socketClient.UnsubscribeAsync(subscription.Data);
 Spot:
 
 ```csharp
-ISpotTickerRestClient tickerClient = new BitgetRestClient().SpotApiV2.SharedClient;
-var info = tickerClient.Discover();
-var supported = info.Features.Where(x => x.Supported).Select(x => x.EndpointName);
-Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supported)}");
+IGetTickerRest tickerClient = new BitgetRestClient().SpotApiV2.SharedApi;
+// Use the exchange-level `IBitgetSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 var symbol = new SharedSymbol(TradingMode.Spot, "BTC", "USDT");
 
-var ticker = await tickerClient.GetSpotTickerAsync(new GetTickerRequest(symbol));
+var ticker = await tickerClient.GetTickerAsync(new GetTickerRequest(symbol));
 ```
 
 Futures:
 
 ```csharp
-IFuturesTickerRestClient futuresTickerClient = new BitgetRestClient().FuturesApiV2.SharedClient;
-var futuresInfo = futuresTickerClient.Discover();
+IGetTickerRest futuresTickerClient = new BitgetRestClient().FuturesApiV2.SharedApi;
+// Use the exchange-level `IBitgetSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 var futuresSupported = futuresInfo.Features.Where(x => x.Supported).Select(x => x.EndpointName);
 Console.WriteLine($"{futuresInfo.Exchange} {futuresInfo.TypeName}: {string.Join(", ", futuresSupported)}");
 
 var futuresSymbol = new SharedSymbol(TradingMode.PerpetualLinear, "BTC", "USDT");
 
-var ticker = await futuresTickerClient.GetFuturesTickerAsync(new GetTickerRequest(futuresSymbol));
+var ticker = await futuresTickerClient.GetTickerAsync(new GetTickerRequest(futuresSymbol));
 ```
 
 Shared REST interfaces exposed by Bitget.Net include spot ticker, symbol, order, balance, deposit, withdraw, fee, order book, trade, kline and transfer clients; futures ticker, symbol, order, balance, position, funding, leverage, TP/SL and kline clients.
