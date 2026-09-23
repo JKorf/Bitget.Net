@@ -186,5 +186,72 @@ namespace Bitget.Net.UnitTests
             Assert.That(((BaseApiClient)socketClient.SpotApiV2).ClientOptions.Proxy.Host, Is.EqualTo("host2"));
             Assert.That(((BaseApiClient)socketClient.SpotApiV2).ClientOptions.Proxy.Port, Is.EqualTo(81));
         }
+
+        [Test]
+        public void TestRestSpotSharedApiDiscoveryMatchesAggregate()
+        {
+            var (missingOptions, missingInterfaces) = CryptoExchange.Net.Testing.TestHelpers.ValidateSharedApi(new BitgetRestClient().SpotApiV2.SharedApi);
+
+            Assert.That(missingOptions, Is.Empty);
+            Assert.That(missingInterfaces, Is.Empty);
+        }
+
+        [Test]
+        public void TestSocketSpotSharedApiDiscoveryMatchesAggregate()
+        {
+            var (missingOptions, missingInterfaces) = CryptoExchange.Net.Testing.TestHelpers.ValidateSharedApi(new BitgetSocketClient().SpotApiV2.SharedApi);
+
+            Assert.That(missingOptions, Is.Empty);
+            Assert.That(missingInterfaces, Is.Empty);
+        }
+
+        [Test]
+        public void TestRestFuturesSharedApiDiscoveryMatchesAggregate()
+        {
+            var (missingOptions, missingInterfaces) = CryptoExchange.Net.Testing.TestHelpers.ValidateSharedApi(new BitgetRestClient().FuturesApiV2.SharedApi);
+
+            Assert.That(missingOptions, Is.Empty);
+            Assert.That(missingInterfaces, Is.Empty);
+        }
+
+        [Test]
+        public void TestSocketFuturesSharedApiDiscoveryMatchesAggregate()
+        {
+            var (missingOptions, missingInterfaces) = CryptoExchange.Net.Testing.TestHelpers.ValidateSharedApi(new BitgetSocketClient().FuturesApiV2.SharedApi);
+
+            Assert.That(missingOptions, Is.Empty);
+            Assert.That(missingInterfaces, Is.Empty);
+        }
+        [Test]
+        public void TestSpotRestSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BitgetRestClient().SpotApiV2.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestSpotSocketSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BitgetSocketClient().SpotApiV2.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestFuturesRestSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BitgetRestClient().FuturesApiV2.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestFuturesSocketSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BitgetSocketClient().FuturesApiV2.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
     }
 }

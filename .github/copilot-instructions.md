@@ -172,7 +172,7 @@ using Bitget.Net.Enums.Uta;
 using Bitget.Net.Enums.V2;
 
 var symbols = await restClient.UnifiedApi.ExchangeData.GetSpotSymbolsAsync("BTCUSDT");
-var futuresTickers = await restClient.UnifiedApi.ExchangeData.GetFuturesTickersAsync(ProductCategory.UsdtFutures);
+var futuresTickers = await restClient.UnifiedApi.ExchangeData.GetAllTickersAsync(ProductCategory.UsdtFutures);
 var balances = await restClient.UnifiedApi.Account.GetBalancesAsync();
 
 var order = await restClient.UnifiedApi.Trading.PlaceOrderAsync(
@@ -218,15 +218,15 @@ var sub = await socketClient.UnifiedApi.SubscribeToTickerUpdatesAsync(
 
 ## Cross-exchange
 
-For code that needs to work across multiple exchanges, use `CryptoExchange.Net.SharedApis` interfaces accessed via `.SharedClient` properties.
+For code that needs to work across multiple exchanges, use `CryptoExchange.Net.SharedApis` interfaces accessed via `.SharedApi` properties.
 
 ```csharp
 using Bitget.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 
-var shared = new BitgetRestClient().SpotApiV2.SharedClient;
+var shared = new BitgetRestClient().SpotApiV2.SharedApi;
 var symbol = new SharedSymbol(TradingMode.Spot, "BTC", "USDT");
-var ticker = await shared.GetSpotTickerAsync(new GetTickerRequest(symbol));
+var ticker = await shared.GetTickerAsync(new GetTickerRequest(symbol));
 ```
 
 Use `SharedSymbol` for shared APIs. Do not pass exchange-native `BTCUSDT` strings to shared requests.

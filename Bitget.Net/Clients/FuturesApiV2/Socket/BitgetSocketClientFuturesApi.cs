@@ -27,6 +27,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
     /// <inheritdoc />
     internal partial class BitgetSocketClientFuturesApi : SocketApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetSocketClientFuturesApi
     {
+        private readonly BitgetSocketClientFuturesSharedApi _sharedApi;
+
         protected override ErrorMapping ErrorMapping => BitgetErrors.SocketErrors;
 
         #region ctor
@@ -34,6 +36,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
             base(loggerFactory, BitgetExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.FuturesOptions)
         {
             RateLimiter = BitgetExchange.RateLimiter.Websocket;
+
+            _sharedApi = new BitgetSocketClientFuturesSharedApi(this);
 
             RegisterPeriodicQuery(
                 "Ping",
@@ -56,7 +60,8 @@ namespace Bitget.Net.Clients.FuturesApiV2
 
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new BitgetSocketFuturesMessageConverter();
 
-        public IBitgetSocketClientFuturesApiShared SharedClient => this;
+        public IBitgetSocketClientFuturesApiShared SharedClient => _sharedApi;
+        public IBitgetSocketClientFuturesSharedApi SharedApi => _sharedApi;
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

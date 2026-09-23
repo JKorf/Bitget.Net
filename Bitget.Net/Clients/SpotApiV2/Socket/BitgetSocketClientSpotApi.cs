@@ -27,6 +27,8 @@ namespace Bitget.Net.Clients.SpotApiV2
     /// <inheritdoc />
     internal partial class BitgetSocketClientSpotApi : SocketApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetSocketClientSpotApi
     {
+        private readonly BitgetSocketClientSpotSharedApi _sharedApi;
+
         protected override ErrorMapping ErrorMapping => BitgetErrors.SocketErrors;
 
         #region ctor
@@ -34,6 +36,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             base(loggerFactory, BitgetExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.SpotOptions)
         {
             RateLimiter = BitgetExchange.RateLimiter.Websocket;
+            _sharedApi = new BitgetSocketClientSpotSharedApi(this);
 
             RegisterPeriodicQuery(
                 "Ping",
@@ -60,7 +63,8 @@ namespace Bitget.Net.Clients.SpotApiV2
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
                 => BitgetExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
-        public IBitgetSocketClientSpotApiShared SharedClient => this;
+        public IBitgetSocketClientSpotApiShared SharedClient => _sharedApi;
+        public IBitgetSocketClientSpotSharedApi SharedApi => _sharedApi;
 
         /// <inheritdoc />
         public Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<BitgetTickerUpdate[]>> handler, CancellationToken ct = default)

@@ -1,4 +1,4 @@
-﻿using Bitget.Net;
+using Bitget.Net;
 using Bitget.Net.Clients;
 using Bitget.Net.Interfaces;
 using Bitget.Net.Interfaces.Clients;
@@ -8,6 +8,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -30,33 +31,11 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var options = new BitgetOptions();
-            // Reset environment so we know if they're overridden
-            options.Rest.Environment = null!;
-            options.Socket.Environment = null!;
+            var options = BitgetOptions.CreateFromConfiguration(configuration);
 
-            try
-            {
-                configuration.Bind(options);
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new InvalidOperationException("Invalid configuration provided", ex);
-            }
-
-            if (options.Rest == null || options.Socket == null)
-                throw new ArgumentException("Options null");;
-
-            var restEnvName = options.Rest.Environment?.Name ?? options.Environment?.Name ?? BitgetEnvironment.Live.Name;
-            var socketEnvName = options.Socket.Environment?.Name ?? options.Environment?.Name ?? BitgetEnvironment.Live.Name;
-            options.Rest.Environment = BitgetEnvironment.GetEnvironmentByName(restEnvName) ?? options.Rest.Environment!;
-            options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
-            options.Socket.Environment = BitgetEnvironment.GetEnvironmentByName(socketEnvName) ?? options.Socket.Environment!;
-            options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
-
-
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddBitgetCore(services, options.SocketClientLifeTime);
         }
@@ -71,21 +50,11 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             Action<BitgetOptions>? optionsDelegate = null)
         {
-            var options = new BitgetOptions();
-            // Reset environment so we know if they're overridden
-            options.Rest.Environment = null!;
-            options.Socket.Environment = null!;
-            optionsDelegate?.Invoke(options);
-            if (options.Rest == null || options.Socket == null)
-                throw new ArgumentException("Options null");
+            var options = BitgetOptions.Create(optionsDelegate);
 
-            options.Rest.Environment = options.Rest.Environment ?? options.Environment ?? BitgetEnvironment.Live;
-            options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
-            options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? BitgetEnvironment.Live;
-            options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
-
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddBitgetCore(services, options.SocketClientLifeTime);
         }
@@ -125,6 +94,15 @@ namespace Microsoft.Extensions.DependencyInjection
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedClient);
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().FuturesApiV2.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().FuturesApiV2.SharedClient);
+
+            services.RegisterSharedApiClient<
+                IBitgetSharedApiClient,
+                BitgetSharedApiClient>(sharedApis => sharedApis
+                    .Add(client => client.SpotRest)
+                    .Add(client => client.SpotSocket)
+                    .Add(client => client.FuturesRest)
+                    .Add(client => client.FuturesSocket)
+                    );
 
             return services;
         }

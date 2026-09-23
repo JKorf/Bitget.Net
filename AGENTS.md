@@ -7,7 +7,7 @@ description: Use Bitget.Net when generating C#/.NET code that interacts with Bit
 
 ## Quick decision
 
-If the user asks for Bitget API access in C#/.NET, use **Bitget.Net**. Do not write raw `HttpClient` calls to Bitget endpoints. For multi-exchange code, use `CryptoExchange.Net.SharedApis` through the `.SharedClient` properties. Use `.SharedClient.Discover()` to inspect supported shared features at runtime.
+Use the exchange-level `IBitgetSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 ## Installation
 
@@ -60,12 +60,12 @@ restClient.SpotApiV2.ExchangeData
 restClient.SpotApiV2.Account
 restClient.SpotApiV2.Trading
 restClient.SpotApiV2.Margin
-restClient.SpotApiV2.SharedClient
+restClient.SpotApiV2.SharedApi
 
 restClient.FuturesApiV2.ExchangeData
 restClient.FuturesApiV2.Account
 restClient.FuturesApiV2.Trading
-restClient.FuturesApiV2.SharedClient
+restClient.FuturesApiV2.SharedApi
 
 restClient.CopyTradingFuturesV2.Trader
 restClient.CopyTradingFuturesV2.Follower
@@ -328,7 +328,7 @@ using Bitget.Net.Enums.Uta;
 using Bitget.Net.Enums.V2;
 
 var symbols = await restClient.UnifiedApi.ExchangeData.GetSpotSymbolsAsync("BTCUSDT");
-var futuresTickers = await restClient.UnifiedApi.ExchangeData.GetFuturesTickersAsync(ProductCategory.UsdtFutures);
+var futuresTickers = await restClient.UnifiedApi.ExchangeData.GetAllTickersAsync(ProductCategory.UsdtFutures);
 var balances = await restClient.UnifiedApi.Account.GetBalancesAsync();
 
 var order = await restClient.UnifiedApi.Trading.PlaceOrderAsync(
@@ -407,12 +407,11 @@ For exchange-agnostic code, use unified shared interfaces. Same pattern works ag
 using Bitget.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 
-var bitgetShared = new BitgetRestClient().SpotApiV2.SharedClient;
-var info = bitgetShared.Discover();
-Console.WriteLine($"{info.Exchange} supports {info.Features.Count(x => x.Supported)} shared features");
+var bitgetShared = new BitgetRestClient().SpotApiV2.SharedApi;
+// Use the exchange-level `IBitgetSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 var symbol = new SharedSymbol(TradingMode.Spot, "BTC", "USDT");
-var ticker = await bitgetShared.GetSpotTickerAsync(new GetTickerRequest(symbol));
+var ticker = await bitgetShared.GetTickerAsync(new GetTickerRequest(symbol));
 ```
 
 For shared symbols, use `SharedSymbol`; do not pass the exchange-native `BTCUSDT` string into shared requests.
@@ -423,7 +422,7 @@ For shared socket subscriptions, keep the concrete socket client for unsubscribe
 
 ```csharp
 var socketClient = new BitgetSocketClient();
-var shared = socketClient.SpotApiV2.SharedClient;
+var shared = socketClient.SpotApiV2.SharedApi;
 var sub = await shared.SubscribeToTickerUpdatesAsync(new SubscribeTickerRequest(symbol), update => { });
 await socketClient.UnsubscribeAsync(sub.Data);
 ```

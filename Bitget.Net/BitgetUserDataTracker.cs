@@ -19,12 +19,16 @@ namespace Bitget.Net
             string? userIdentifier,
             SpotUserDataTrackerConfig? config) : base(
                 logger,
-                restClient.SpotApiV2.SharedClient,
-                restClient.SpotApiV2.SharedClient,
-                socketClient.SpotApiV2.SharedClient,
-                restClient.SpotApiV2.SharedClient,
-                socketClient.SpotApiV2.SharedClient,
-                socketClient.SpotApiV2.SharedClient,
+                restClient.SpotApiV2.SharedApi,
+                restClient.SpotApiV2.SharedApi,
+                socketClient.SpotApiV2.SharedApi,
+
+                restClient.SpotApiV2.SharedApi,
+                restClient.SpotApiV2.SharedApi,
+                socketClient.SpotApiV2.SharedApi,
+
+                restClient.SpotApiV2.SharedApi,
+                socketClient.SpotApiV2.SharedApi,
                 userIdentifier,
                 config ?? new SpotUserDataTrackerConfig())
         {
@@ -47,13 +51,20 @@ namespace Bitget.Net
             string? userIdentifier,
             FuturesUserDataTrackerConfig? config,
             ExchangeParameters exchangeParameters) : base(logger,
-                restClient.FuturesApiV2.SharedClient,
-                restClient.FuturesApiV2.SharedClient,
-                socketClient.FuturesApiV2.SharedClient,
-                restClient.FuturesApiV2.SharedClient,
-                socketClient.FuturesApiV2.SharedClient,
-                socketClient.FuturesApiV2.SharedClient,
-                socketClient.FuturesApiV2.SharedClient,
+                restClient.FuturesApiV2.SharedApi,
+                restClient.FuturesApiV2.SharedApi,
+                socketClient.FuturesApiV2.SharedApi,
+
+                restClient.FuturesApiV2.SharedApi,
+                restClient.FuturesApiV2.SharedApi,
+                socketClient.FuturesApiV2.SharedApi,
+
+                restClient.FuturesApiV2.SharedApi,
+                socketClient.FuturesApiV2.SharedApi,
+
+                restClient.FuturesApiV2.SharedApi,
+                socketClient.FuturesApiV2.SharedApi,
+
                 userIdentifier,
                 config ?? new FuturesUserDataTrackerConfig(),
                 exchangeParameters: exchangeParameters)
