@@ -74,7 +74,7 @@ public record BitgetUaFuturesSymbol
     /// ["<c>maxOrderQty</c>"] Max order quantity
     /// </summary>
     [JsonPropertyName("maxOrderQty")]
-    public decimal MaxOrderQuantity { get; set; }
+    public decimal? MaxOrderQuantity { get; set; }
     /// <summary>
     /// ["<c>pricePrecision</c>"] Price precision
     /// </summary>
@@ -164,7 +164,7 @@ public record BitgetUaFuturesSymbol
     /// ["<c>fundInterval</c>"] Fund interval
     /// </summary>
     [JsonPropertyName("fundInterval")]
-    public int FundInterval { get; set; }
+    public int? FundInterval { get; set; }
     /// <summary>
     /// ["<c>minLeverage</c>"] Min leverage
     /// </summary>
@@ -179,7 +179,7 @@ public record BitgetUaFuturesSymbol
     /// ["<c>maintainTime</c>"] Maintenance time
     /// </summary>
     [JsonPropertyName("maintainTime")]
-    public DateTime MaintainTime { get; set; }
+    public DateTime? MaintainTime { get; set; }
     /// <summary>
     /// ["<c>symbolType</c>"] Symbol type
     /// </summary>
@@ -189,6 +189,6 @@ public record BitgetUaFuturesSymbol
     /// ["<c>maxMarketOrderQty</c>"] Max market order quantity
     /// </summary>
     [JsonPropertyName("maxMarketOrderQty")]
-    public decimal MaxMarketOrderQuantity { get; set; }
+    public decimal? MaxMarketOrderQuantity { get; set; }
 }
 

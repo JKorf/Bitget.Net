@@ -132,6 +132,24 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         #endregion
 
+        #region Get Funding Financial Records
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BitgetUaFundingFinancialRecordPage>> GetFundingFinancialRecordsAsync(string? asset = null, string? type = null, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, string? cursor = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("coin", asset);
+            parameters.Add("type", type);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("limit", limit);
+            parameters.Add("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/account/funding-financial-records", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            return await _baseClient.SendAsync<BitgetUaFundingFinancialRecordPage>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        #endregion
+
         #region Get Repayable Assets
 
         /// <inheritdoc />
@@ -178,8 +196,8 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         /// <inheritdoc />
         public async Task<HttpResult<BitgetUaConvertRecords>> GetConvertRecordsAsync(
-            string fromAsset,
-            string toAsset,
+            string? fromAsset = null,
+            string? toAsset = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
             int? limit = null,
@@ -195,6 +213,36 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("cursor", cursor);
             var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/account/convert-records", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaConvertRecords>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Sub Transfer Records
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BitgetUaSubTransferRecords>> GetSubTransferRecordsAsync(
+            string? subUid = null,
+            string? role = null,
+            string? asset = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            string? clientOrderId = null,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("subUid", subUid);
+            parameters.Add("role", role);
+            parameters.Add("coin", asset);
+            parameters.Add("startTime", startTime);
+            parameters.Add("endTime", endTime);
+            parameters.Add("clientOid", clientOrderId);
+            parameters.Add("limit", limit);
+            parameters.Add("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/account/sub-transfer-record", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(5, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+            var result = await _baseClient.SendAsync<BitgetUaSubTransferRecords>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
 

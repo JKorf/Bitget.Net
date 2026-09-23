@@ -1,3 +1,4 @@
+using Bitget.Net.Enums.Uta;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
 using Bitget.Net.Objects.Socket;
@@ -6,6 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Converters
 {
+    [JsonSerializable(typeof(TransferAccountTypeUta))]
     [JsonSerializable(typeof(BitgetIdSocketRequest))]
     [JsonSerializable(typeof(BitgetSocketResponse<BitgetUaOrderResult[]>))]
 
@@ -48,12 +50,14 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetResponse<BitgetUaFeeRate>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaDeductStatus>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaConvertRecords>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetUaSubTransferRecords>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaRepayResult>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaPaymentAssets>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaAccountConfig>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetCopyTradingSymbol[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaRepayableAssets>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaFinancialRecordPage>))]
+    [JsonSerializable(typeof(BitgetResponse<BitgetUaFundingFinancialRecordPage>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaFundingAsset[]>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaBalances>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaIndexComponents>))]
