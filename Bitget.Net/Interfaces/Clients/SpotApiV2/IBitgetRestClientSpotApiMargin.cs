@@ -588,11 +588,12 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// POST /api/v2/margin/isolated/account/borrow
         /// </para>
         /// </summary>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="quantity">Quantity to borrow</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<HttpResult<BitgetIsolatedBorrowResult>> IsolatedBorrowAsync(string asset, decimal quantity, string clientOrderId, CancellationToken ct = default);
+        Task<HttpResult<BitgetIsolatedBorrowResult>> IsolatedBorrowAsync(string symbol, string asset, decimal quantity, string clientOrderId, CancellationToken ct = default);
 
         /// <summary>
         /// Isolated margin repay

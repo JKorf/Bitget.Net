@@ -658,9 +658,10 @@ namespace Bitget.Net.Clients.SpotApiV2
         #region Isolated Borrow
 
         /// <inheritdoc />
-        public async Task<HttpResult<BitgetIsolatedBorrowResult>> IsolatedBorrowAsync(string asset, decimal quantity, string clientOrderId, CancellationToken ct = default)
+        public async Task<HttpResult<BitgetIsolatedBorrowResult>> IsolatedBorrowAsync(string symbol, string asset, decimal quantity, string clientOrderId, CancellationToken ct = default)
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("symbol", symbol);
             parameters.Add("coin", asset);
             parameters.Add("borrowAmount", quantity);
             parameters.Add("clientOid", clientOrderId);
