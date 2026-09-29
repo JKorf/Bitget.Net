@@ -40,5 +40,8 @@ namespace Bitget.Net.Clients.SpotApiV2
                 SubscribeOrderBookOptions
                 );
         }
+
+        /// <inheritdoc />
+        public Task UnsubscribeAllAsync() => _api.UnsubscribeAllAsync();
     }
 }
