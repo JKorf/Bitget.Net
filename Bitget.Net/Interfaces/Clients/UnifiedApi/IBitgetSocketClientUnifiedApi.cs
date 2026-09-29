@@ -289,7 +289,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="slLimitPrice">["<c>slLimitPrice</c>"] Stop loss limit price</param>
         /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
         /// <param name="ct">Cancellation token</param>
-        public Task<QueryResult<BitgetUaOrderResult>> PlaceOrderAsync(
+        public Task<QueryResult<BitgetUaSocketOrderResult>> PlaceOrderAsync(
             ProductCategory category,
             string symbol,
             OrderSide side,
@@ -328,7 +328,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="price">["<c>price</c>"] New price</param>
         /// <param name="autoCancel">["<c>autoCancel</c>"] Will the original order be canceled if the order modification fails</param>
         /// <param name="ct">Cancellation token</param>
-        Task<QueryResult<BitgetUaOrderResult>> EditOrderAsync(
+        Task<QueryResult<BitgetUaSocketOrderResult>> EditOrderAsync(
             ProductCategory category,
             string? orderId = null,
             string? clientOrderId = null,
@@ -350,7 +350,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="orderId">["<c>orderId</c>"] Order id, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id, either this or orderId should be provided</param>
         /// <param name="ct">Cancellation token</param>
-        Task<QueryResult<BitgetUaOrderResult>> CancelOrderAsync(
+        Task<QueryResult<BitgetUaSocketOrderResult>> CancelOrderAsync(
             ProductCategory category,
             string? orderId = null,
             string? clientOrderId = null,

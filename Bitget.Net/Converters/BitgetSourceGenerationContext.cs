@@ -10,6 +10,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(TransferAccountTypeUta))]
     [JsonSerializable(typeof(BitgetIdSocketRequest))]
     [JsonSerializable(typeof(BitgetSocketResponse<BitgetUaOrderResult[]>))]
+    [JsonSerializable(typeof(BitgetSocketResponse<BitgetUaSocketOrderResult[]>))]
 
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaTickerUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaKlineUpdate[]>))]

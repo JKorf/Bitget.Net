@@ -226,7 +226,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Place Order
 
         /// <inheritdoc />
-        public async Task<QueryResult<BitgetUaOrderResult>> PlaceOrderAsync(
+        public async Task<QueryResult<BitgetUaSocketOrderResult>> PlaceOrderAsync(
             ProductCategory category,
             string symbol,
             OrderSide side,
@@ -270,7 +270,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("slLimitPrice", slLimitPrice);
             parameters.Add("marginMode", marginMode);
 
-            var query = new BitgetIdQuery<BitgetUaOrderResult[]>(this, new BitgetIdSocketRequest
+            var query = new BitgetIdQuery<BitgetUaSocketOrderResult[]>(this, new BitgetIdSocketRequest
             {
                 Id = ExchangeHelpers.NextId().ToString(),
                 Category = EnumConverter.GetString(category).ToLowerInvariant(),
@@ -282,7 +282,7 @@ namespace Bitget.Net.Clients.UnifiedApi
 
             var result = await QueryAsync(BaseAddress.AppendPath("v3/ws/private"), query, ct).ConfigureAwait(false);
             if (!result.Success)
-                return QueryResult.Fail<BitgetUaOrderResult>(result);
+                return QueryResult.Fail<BitgetUaSocketOrderResult>(result);
 
             return QueryResult.Ok(result, result.Data.Single());
         }
@@ -292,7 +292,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Edit Order
 
         /// <inheritdoc />
-        public async Task<QueryResult<BitgetUaOrderResult>> EditOrderAsync(
+        public async Task<QueryResult<BitgetUaSocketOrderResult>> EditOrderAsync(
             ProductCategory category,
             string? orderId = null,
             string? clientOrderId = null,
@@ -308,7 +308,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("price", price);
             parameters.Add("autoCancel", autoCancel == null ? null : autoCancel.Value ? "yes" : "no");
 
-            var query = new BitgetIdQuery<BitgetUaOrderResult[]>(this, new BitgetIdSocketRequest
+            var query = new BitgetIdQuery<BitgetUaSocketOrderResult[]>(this, new BitgetIdSocketRequest
             {
                 Id = ExchangeHelpers.NextId().ToString(),
                 Category = EnumConverter.GetString(category).ToLowerInvariant(),
@@ -319,7 +319,7 @@ namespace Bitget.Net.Clients.UnifiedApi
 
             var result = await QueryAsync(BaseAddress.AppendPath("v3/ws/private"), query, ct).ConfigureAwait(false);
             if (!result.Success)
-                return QueryResult.Fail<BitgetUaOrderResult>(result);
+                return QueryResult.Fail<BitgetUaSocketOrderResult>(result);
 
             return QueryResult.Ok(result, result.Data.Single());
         }
@@ -329,7 +329,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Cancel Order
 
         /// <inheritdoc />
-        public async Task<QueryResult<BitgetUaOrderResult>> CancelOrderAsync(
+        public async Task<QueryResult<BitgetUaSocketOrderResult>> CancelOrderAsync(
             ProductCategory category,
             string? orderId = null,
             string? clientOrderId = null,
@@ -339,7 +339,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("orderId", orderId);
             parameters.Add("clientOid", clientOrderId);
 
-            var query = new BitgetIdQuery<BitgetUaOrderResult[]>(this, new BitgetIdSocketRequest
+            var query = new BitgetIdQuery<BitgetUaSocketOrderResult[]>(this, new BitgetIdSocketRequest
             {
                 Id = ExchangeHelpers.NextId().ToString(),
                 Category = EnumConverter.GetString(category).ToLowerInvariant(),
@@ -350,7 +350,7 @@ namespace Bitget.Net.Clients.UnifiedApi
 
             var result = await QueryAsync(BaseAddress.AppendPath("v3/ws/private"), query, ct).ConfigureAwait(false);
             if (!result.Success)
-                return QueryResult.Fail<BitgetUaOrderResult>(result);
+                return QueryResult.Fail<BitgetUaSocketOrderResult>(result);
 
             return QueryResult.Ok(result, result.Data.Single());
         }
