@@ -296,7 +296,7 @@ namespace Bitget.Net.UnitTests
             });
             var tester = new RestRequestValidator<BitgetRestClient>(client, "Endpoints/Unified/Trading", "https://api.bitget.com", IsAuthenticated, nestedPropertyForCompare: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.PlaceOrderAsync(ProductCategory.Spot, "ETHUSDT", OrderSide.Buy, OrderType.Limit, 0.1m), "PlaceOrder", nestedJsonProperty: "data");
-            await tester.ValidateAsync(client => client.UnifiedApi.Trading.EditOrderAsync(), "EditOrder", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Trading.EditOrderAsync(ProductCategory.Spot, "ETHUSDT"), "EditOrder", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.CancelOrderAsync(), "CancelOrder", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.CancelAllOrdersAsync(ProductCategory.Spot), "CancelAllOrders", nestedJsonProperty: "data.list");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.ClosePositionsAsync(ProductCategory.UsdtFutures), "ClosePositions", nestedJsonProperty: "data.list");

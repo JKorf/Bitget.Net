@@ -149,5 +149,10 @@ public record BitgetUaMarginSymbol
     /// </summary>
     [JsonPropertyName("launchTime")]
     public DateTime? LaunchTime { get; set; }
+    /// <summary>
+    /// ["<c>maxMarketOrderAmount</c>"] Max market order quantity
+    /// </summary>
+    [JsonPropertyName("maxMarketOrderAmount")]
+    public decimal? MaxMarketOrderQuantity { get; set; }
 }
 
