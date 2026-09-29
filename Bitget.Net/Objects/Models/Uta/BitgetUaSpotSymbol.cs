@@ -114,5 +114,10 @@ public record BitgetUaSpotSymbol
     /// </summary>
     [JsonPropertyName("isReality")]
     public bool? IsRealty { get; set; }
+    /// <summary>
+    /// ["<c>maxMarketOrderAmount</c>"] Max market order quantity
+    /// </summary>
+    [JsonPropertyName("maxMarketOrderAmount")]
+    public decimal MaxMarketOrderQuantity { get; set; }
 }
 
