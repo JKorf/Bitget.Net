@@ -22,6 +22,11 @@ public record BitgetUaAccountConfig
     [JsonPropertyName("accountMode")]
     public AccountMode AccountMode { get; set; }
     /// <summary>
+    /// ["<c>deltaSwitch</c>"] Delta-neutral mode switch
+    /// </summary>
+    [JsonPropertyName("deltaSwitch")]
+    public bool DeltaSwitch { get; set; }
+    /// <summary>
     /// ["<c>assetMode</c>"] Asset mode
     /// </summary>
     [JsonPropertyName("assetMode")]
