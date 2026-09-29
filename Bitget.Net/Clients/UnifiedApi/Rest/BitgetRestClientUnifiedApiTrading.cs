@@ -45,6 +45,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             decimal? tpLimitPrice = null,
             decimal? slLimitPrice = null,
             MarginMode? marginMode = null,
+            bool? autoBorrow = null,
             CancellationToken ct = default)
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
@@ -67,7 +68,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("slOrderType", slOrderType);
             parameters.Add("tpLimitPrice", tpLimitPrice);
             parameters.Add("slLimitPrice", slLimitPrice);
-            parameters.Add("marginMode", marginMode);
+            parameters.Add("autoBorrow", autoBorrow == null ? null : autoBorrow.Value ? "yes" : "no");
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v3/trade/place-order", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaOrderResult>(request, parameters, ct).ConfigureAwait(false);
             return result;

@@ -247,6 +247,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             decimal? tpLimitPrice = null,
             decimal? slLimitPrice = null,
             MarginMode? marginMode = null,
+            bool? autoBorrow = null,
             CancellationToken ct = default)
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
@@ -269,6 +270,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("tpLimitPrice", tpLimitPrice);
             parameters.Add("slLimitPrice", slLimitPrice);
             parameters.Add("marginMode", marginMode);
+            parameters.Add("autoBorrow", autoBorrow == null ? null : autoBorrow.Value ? "yes" : "no");
 
             var query = new BitgetIdQuery<BitgetUaSocketOrderResult[]>(this, new BitgetIdSocketRequest
             {

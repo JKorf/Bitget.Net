@@ -288,6 +288,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="tpLimitPrice">["<c>tpLimitPrice</c>"] Take profit limit price</param>
         /// <param name="slLimitPrice">["<c>slLimitPrice</c>"] Stop loss limit price</param>
         /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
+        /// <param name="autoBorrow">["<c>autoBorrow</c>"] Whether to automatically borrow funds for Spot orders</param>
         /// <param name="ct">Cancellation token</param>
         public Task<QueryResult<BitgetUaSocketOrderResult>> PlaceOrderAsync(
             ProductCategory category,
@@ -310,6 +311,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
             decimal? tpLimitPrice = null,
             decimal? slLimitPrice = null,
             MarginMode? marginMode = null,
+            bool? autoBorrow = null,
             CancellationToken ct = default);
 
         /// <summary>
