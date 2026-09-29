@@ -80,6 +80,8 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         /// <inheritdoc />
         public async Task<HttpResult<BitgetUaOrderResult>> EditOrderAsync(
+            ProductCategory category,
+            string symbol,
             string? orderId = null,
             string? clientOrderId = null,
             decimal? quantity = null,
@@ -88,6 +90,8 @@ namespace Bitget.Net.Clients.UnifiedApi
             CancellationToken ct = default)
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
+            parameters.Add("symbol", symbol);
             parameters.Add("orderId", orderId);
             parameters.Add("clientOid", clientOrderId);
             parameters.Add("qty", quantity);

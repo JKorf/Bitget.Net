@@ -75,6 +75,8 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// POST /api/v3/trade/modify-order<br />
         /// </para>
         /// </summary>
+        /// <param name="category">["<c>category</c>"] Category</param>
+        /// <param name="symbol">["<c>symbol</c>"] Symbol </param>
         /// <param name="orderId">["<c>orderId</c>"] Order id, either this or clientOrderId should be provided</param>
         /// <param name="clientOrderId">["<c>clientOid</c>"] Client order id, either this or orderId should be provided</param>
         /// <param name="quantity">["<c>qty</c>"] New quantity</param>
@@ -82,6 +84,8 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="autoCancel">["<c>autoCancel</c>"] Will the original order be canceled if the order modification fails</param>
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult<BitgetUaOrderResult>> EditOrderAsync(
+            ProductCategory category,
+            string symbol,
             string? orderId = null,
             string? clientOrderId = null,
             decimal? quantity = null,
