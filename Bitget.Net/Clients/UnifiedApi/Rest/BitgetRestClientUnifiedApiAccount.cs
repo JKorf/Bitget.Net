@@ -396,11 +396,13 @@ namespace Bitget.Net.Clients.UnifiedApi
         public async Task<HttpResult> SetAccountModeAsync(
             AccountLevel mode,
             string? subAccountId = null,
+            bool? deltaSwitch = null,
             CancellationToken ct = default)
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("mode", mode);
             parameters.Add("targetUid", subAccountId);
+            parameters.Add("deltaSwitch", deltaSwitch == null ? null : deltaSwitch == true ? "yes" : "no");
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v3/account/adjust-account-mode", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
             return result;

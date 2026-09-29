@@ -379,10 +379,12 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// </summary>
         /// <param name="mode">["<c>mode</c>"] New mode</param>
         /// <param name="subAccountId">["<c>targetUid</c>"] Sub account id</param>
+        /// <param name="deltaSwitch">["<c>deltaSwitch</c>"] Enable delta-neutral or not</param>
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult> SetAccountModeAsync(
             AccountLevel mode,
             string? subAccountId = null,
+            bool? deltaSwitch = null,
             CancellationToken ct = default);
 
         /// <summary>
