@@ -78,8 +78,12 @@ namespace Bitget.Net.Clients.MessageHandlers
                 TypeIdentifierCallback = x => {
                     // msg is in this format:
                     // "msg":"{\"instType\":\"spot\",\"symbol\":\"ETHU1SDT\",\"topic\":\"ticker\"} doesn't exist"
+
                     var msg = x.FieldValue("msg")!;
                     var jsonEnd = msg.LastIndexOf('}');
+                    if (jsonEnd == -1)
+                        return "error";
+
                     var msgJson = JsonDocument.Parse(msg.Substring(0, jsonEnd + 1));
                     var instType = msgJson.RootElement.TryGetProperty("instType", out var instTypeProp) ? instTypeProp.GetString() : null;
                     var topic = msgJson.RootElement.TryGetProperty("topic", out var topicProp) ? topicProp.GetString() : null;
