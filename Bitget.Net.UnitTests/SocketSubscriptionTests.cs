@@ -114,7 +114,7 @@ namespace Bitget.Net.UnitTests
                 OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<BitgetSocketClient>(client, "Subscriptions/Unified", "https://api.bitget.com", "data");
-            await tester.ValidateAsync<BitgetUaTickerUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToTickerUpdatesAsync(ProductCategory.UsdtFutures, "BTCUSDT", handler), "Ticker");
+            await tester.ValidateAsync<BitgetUaFuturesTickerUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToFuturesTickerUpdatesAsync(ProductCategory.UsdtFutures, "BTCUSDT", handler), "Ticker");
             await tester.ValidateAsync<BitgetUaKlineUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToKlineUpdatesAsync(ProductCategory.UsdtFutures, "BTCUSDT", KlineUaInterval.OneDay, handler), "Kline");
             await tester.ValidateAsync<BitgetUaBookUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToOrderBookUpdatesAsync(ProductCategory.UsdtFutures, "BTCUSDT", 1, handler), "Book", ignoreProperties: ["maxDepth"]);
             await tester.ValidateAsync<BitgetUaTradeUpdate[]>((client, handler) => client.UnifiedApi.SubscribeToTradeUpdatesAsync(ProductCategory.UsdtFutures, "BTCUSDT", handler), "Trades");
