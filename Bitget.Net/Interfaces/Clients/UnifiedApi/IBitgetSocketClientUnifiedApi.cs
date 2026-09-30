@@ -15,6 +15,36 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
     public interface IBitgetSocketClientUnifiedApi : ISocketApiClient<BitgetCredentials>, IDisposable
     {
         /// <summary>
+        /// Subscribe to ticker updates for a spot symbol
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/uta/websocket/public/Tickers-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v3/ws/public (channel: ticker)
+        /// </para>
+        /// </summary>
+        /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToSpotTickerUpdatesAsync(string symbol, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Subscribe to ticker updates for spot symbols
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/api-doc/uta/websocket/public/Tickers-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v3/ws/public (channel: ticker)
+        /// </para>
+        /// </summary>
+        /// <param name="symbols">The symbols, for example `ETHUSDT`</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToSpotTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribe to ticker updates for a symbol
         /// <para>
         /// Docs:<br />
@@ -28,7 +58,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToFuturesTickerUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaFuturesTickerUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to ticker updates for symbols
@@ -44,7 +74,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns></returns>
-        Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToFuturesTickerUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaFuturesTickerUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to kline updates for a symbol

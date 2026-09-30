@@ -5,7 +5,7 @@ using Bitget.Net.Enums;
 namespace Bitget.Net.Objects.Models;
 
 /// <summary>
-/// 
+/// Ticker update
 /// </summary>
 public record BitgetUaTickerUpdate
 {

@@ -13,6 +13,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetSocketResponse<BitgetUaSocketOrderResult[]>))]
 
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaTickerUpdate[]>))]
+    [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaFuturesTickerUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaKlineUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaBookUpdate[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaTradeUpdate[]>))]

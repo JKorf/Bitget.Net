@@ -69,12 +69,31 @@ namespace Bitget.Net.Clients.UnifiedApi
                 => BitgetExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         /// <inheritdoc />
-        public Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default)
-            => SubscribeToTickerUpdatesAsync(type, new[] { symbol }, handler, ct);
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToSpotTickerUpdatesAsync(string symbol, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default)
+            => SubscribeToSpotTickerUpdatesAsync(new[] { symbol }, handler, ct);
 
         /// <inheritdoc />
-        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToSpotTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<BitgetUaTickerUpdate[]>> handler, CancellationToken ct = default)
         {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), symbols.Select(s => new Dictionary<string, string>
+                    {
+                        { "instType", "spot" },
+                        { "topic", "ticker" },
+                        { "symbol", s },
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToFuturesTickerUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaFuturesTickerUpdate[]>> handler, CancellationToken ct = default)
+            => SubscribeToFuturesTickerUpdatesAsync(type, new[] { symbol }, handler, ct);
+
+        /// <inheritdoc />
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToFuturesTickerUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaFuturesTickerUpdate[]>> handler, CancellationToken ct = default)
+        {
+            if (type == ProductCategory.Spot)
+                throw new ArgumentException("Futures ticker updates can only be subscribed to for futures products", nameof(type));
+
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), symbols.Select(s => new Dictionary<string, string>
                     {
                         { "instType", EnumConverter.GetString(type).ToLowerInvariant() },
