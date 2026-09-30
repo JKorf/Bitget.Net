@@ -244,6 +244,19 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 4.7.0 - 30 Sep 2026
+    * Updated CryptoExchange.Net to V13.1.0
+    * Added missing symbol parameter to IsolatedBorrowAsync endpoint
+    * Added deltaSwitch parameter to UTA SetAccountModeAsync endpoint
+    * Added autoBorrow parameter to UTA PlaceOrderAsync endpoints
+    * Added category, symbol parameters to UTA EditOrderAsync endpoints
+    * Added MaxMarketOrderQuantity to BitgetUaSpotSymbol model
+    * Added DeltaSwitch to BitgetUaAccountConfig model
+    * Added MaxMarketOrderQuantity to BitgetUaMarginSymbol model
+    * Added additional error response handling Unified API websocket
+    * Split UnifiedApi socket SubscribeToTickerUpdatesAsync into SubscribeToSpotTickerUpdatesAsync and SubscribeToFuturesTickerUpdatesAsync
+    * Updated Unified API Socket order operations response model to BitgetUaSocketOrderResult model
+
 * Version 4.6.0 - 24 Sep 2026
     * Updated CryptoExchange.Net to v13.0.0
     * Shared APIs
