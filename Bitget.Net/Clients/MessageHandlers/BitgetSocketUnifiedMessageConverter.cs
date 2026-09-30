@@ -73,6 +73,23 @@ namespace Bitget.Net.Clients.MessageHandlers
             new MessageTypeDefinition {
                 Fields = [
                     new PropertyFieldReference("event").WithEqualConstraint("error"),
+                    new PropertyFieldReference("msg"),
+                ],
+                TypeIdentifierCallback = x => {
+                    // msg is in this format:
+                    // "msg":"{\"instType\":\"spot\",\"symbol\":\"ETHU1SDT\",\"topic\":\"ticker\"} doesn't exist"
+                    var msg = x.FieldValue("msg")!;
+                    var jsonEnd = msg.LastIndexOf('}');
+                    var msgJson = JsonDocument.Parse(msg.Substring(0, jsonEnd + 1));
+                    var instType = msgJson.RootElement.TryGetProperty("instType", out var instTypeProp) ? instTypeProp.GetString() : null;
+                    var topic = msgJson.RootElement.TryGetProperty("topic", out var topicProp) ? topicProp.GetString() : null;
+                    return $"error{instType}{topic}";
+                },
+            },
+
+            new MessageTypeDefinition {
+                Fields = [
+                    new PropertyFieldReference("event").WithEqualConstraint("error"),
                 ],
                 StaticIdentifier = "error",
             },
