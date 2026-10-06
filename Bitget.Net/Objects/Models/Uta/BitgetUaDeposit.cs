@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Bitget.Net.Enums;
+using Bitget.Net.Enums.V2;
+using System;
 using System.Text.Json.Serialization;
-using Bitget.Net.Enums;
 
 namespace Bitget.Net.Objects.Models;
 
@@ -33,7 +34,7 @@ public record BitgetUaDeposit
     /// ["<c>dest</c>"] Destination
     /// </summary>
     [JsonPropertyName("dest")]
-    public string Destination { get; set; } = string.Empty;
+    public TransferType Destination { get; set; }
     /// <summary>
     /// ["<c>size</c>"] Quantity
     /// </summary>
@@ -43,7 +44,7 @@ public record BitgetUaDeposit
     /// ["<c>status</c>"] Status
     /// </summary>
     [JsonPropertyName("status")]
-    public string Status { get; set; } = string.Empty;
+    public TransferStatus Status { get; set; }
     /// <summary>
     /// ["<c>fromAddress</c>"] From address
     /// </summary>

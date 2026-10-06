@@ -21,6 +21,8 @@ namespace Bitget.Net.Clients.UnifiedApi
     /// <inheritdoc />
     internal partial class BitgetRestClientUnifiedApi : RestApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetRestClientUnifiedApi
     {
+        private readonly BitgetRestClientUnifiedSharedApi _sharedApi;
+
         protected override ErrorMapping ErrorMapping => BitgetErrors.UnifiedErrors;
         /// <inheritdoc />
         public IBitgetRestClientUnifiedApiAccount Account { get; }
@@ -43,6 +45,8 @@ namespace Bitget.Net.Clients.UnifiedApi
             ExchangeData = new BitgetRestClientUnifiedApiExchangeData(this);
             Trading = new BitgetRestClientUnifiedApiTrading(this);
             CopyFutures = new BitgetRestClientUnifiedApiCopyFutures(this);
+
+            _sharedApi = new BitgetRestClientUnifiedSharedApi(this);
 
             StandardRequestHeaders = new Dictionary<string, string>
             {
@@ -93,5 +97,6 @@ namespace Bitget.Net.Clients.UnifiedApi
         protected override Task<HttpResult<DateTime>> GetServerTimestampAsync()
             => ExchangeData.GetServerTimeAsync();
 
+        public IBitgetRestClientUnifiedSharedApi SharedApi => _sharedApi;
     }
 }

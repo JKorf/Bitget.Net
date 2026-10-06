@@ -7,6 +7,8 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
     /// </summary>
     public interface IBitgetRestClientUnifiedApi : IRestApiClient<BitgetCredentials>, IDisposable
     {
+        public IBitgetRestClientUnifiedSharedApi SharedApi { get; }
+
         /// <summary>
         /// Endpoints related to account settings, info or actions
         /// </summary>

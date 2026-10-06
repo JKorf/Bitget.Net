@@ -1,0 +1,59 @@
+using Bitget.Net.Clients.FuturesApiV2;
+using Bitget.Net.Enums;
+using Bitget.Net.Enums.Uta;
+using Bitget.Net.Enums.V2;
+using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Interfaces.Clients.UnifiedApi;
+using Bitget.Net.Objects.Models;
+using Bitget.Net.Objects.Models.V2;
+using CryptoExchange.Net;
+using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.SharedApis;
+using System.Timers;
+
+namespace Bitget.Net.Clients.UnifiedApi
+{
+    internal partial class BitgetRestClientUnifiedSharedApi :
+        SharedApiBase,
+        IBitgetRestClientUnifiedSharedApi
+    {
+        private readonly BitgetRestClientUnifiedApi _api;
+
+        private const string _topicSpotId = "BitgetUnifiedSpot";
+        private const string _topicFuturesId = "BitgetUnifiedFutures";
+        private const string _exchangeName = "Bitget";
+
+        public override SharedClientInfo Discover() => SharedUtils.GetClientInfo(BitgetExchange.Metadata, this);
+        private static HashSet<string> _exchangeSupportedFiatCurrencies = ["EUR", "USD", "BRL"];
+
+        public BitgetRestClientUnifiedSharedApi(BitgetRestClientUnifiedApi api)
+            : base(
+                  SharedTransport.Rest,
+                  api,
+                  new[] { TradingMode.Spot, TradingMode.PerpetualLinear, TradingMode.PerpetualInverse, TradingMode.DeliveryLinear, TradingMode.DeliveryInverse },
+                  () => api.Authenticated,
+                  api.FormatSymbol)
+        {
+            _api = api;
+
+            SetCapabilities(
+                GetTickerOptions,
+                GetAllTickersOptions,
+                GetBalancesOptions,
+                GetDepositAddressesOptions,
+                GetDepositHistoryOptions,
+                GetFeeOptions
+                );
+        }
+
+        private ProductCategory GetCategory(SharedRequest request)
+        {
+            if (request.TradingMode == TradingMode.Spot)
+                return ProductCategory.Spot;
+
+            var category = request.GetParamValue<ProductCategory?>(Exchange, "ProductCategory");
+            return category ?? ProductCategory.UsdtFutures;
+        }
+    }
+}
