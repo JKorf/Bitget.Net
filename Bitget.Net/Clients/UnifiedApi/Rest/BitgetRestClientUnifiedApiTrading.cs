@@ -362,15 +362,15 @@ namespace Bitget.Net.Clients.UnifiedApi
             OrderSide? side = null,
             PositionSide? positionSide = null,
             bool? reduceOnly = null,
-            TriggerPriceType? tpTriggerBy = null,
-            TriggerPriceType? slTriggerBy = null,
+            PriceTriggerType? tpTriggerBy = null,
+            PriceTriggerType? slTriggerBy = null,
             decimal? takeProfit = null,
             decimal? stopLoss = null,
             OrderType? tpOrderType = null,
             OrderType? slOrderType = null,
             decimal? tpLimitPrice = null,
             decimal? slLimitPrice = null,
-            TriggerPriceType? triggerBy = null,
+            PriceTriggerType? triggerBy = null,
             decimal? triggerPrice = null,
             OrderType? triggerOrderType = null,
             decimal? triggerOrderPrice = null,
@@ -385,7 +385,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("qty", quantity);
             parameters.Add("side", side);
             parameters.Add("posSide", positionSide);
-            parameters.Add("reduceOnly", reduceOnly, BoolSerialization.String);
+            parameters.Add("reduceOnly", reduceOnly == null ? null : reduceOnly.Value ? "yes" : "no");
             parameters.Add("tpTriggerBy", tpTriggerBy);
             parameters.Add("slTriggerBy", slTriggerBy);
             parameters.Add("takeProfit", takeProfit);
@@ -412,15 +412,15 @@ namespace Bitget.Net.Clients.UnifiedApi
             string? orderId = null,
             string? clientOrderId = null,
             decimal? quantity = null,
-            TriggerPriceType? tpTriggerBy = null,
-            TriggerPriceType? slTriggerBy = null,
+            PriceTriggerType? tpTriggerBy = null,
+            PriceTriggerType? slTriggerBy = null,
             decimal? takeProfit = null,
             decimal? stopLoss = null,
             OrderType? tpOrderType = null,
             OrderType? slOrderType = null,
             decimal? tpLimitPrice = null,
             decimal? slLimitPrice = null,
-            TriggerPriceType? triggerBy = null,
+            PriceTriggerType? triggerBy = null,
             decimal? triggerPrice = null,
             OrderType? triggerOrderType = null,
             decimal? triggerOrderPrice = null,

@@ -1,0 +1,13 @@
+POST
+/api/v3/trade/modify-strategy-order
+true
+BodyParams: {"tpTriggerBy": "mark","slTriggerBy": "mark","triggerBy": "mark"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1695806875837,
+  "data": {
+    "clientOid": "121211212122",
+    "orderId": "121211212122"
+  }
+}
