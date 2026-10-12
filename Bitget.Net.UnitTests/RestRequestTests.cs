@@ -259,6 +259,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetWithdrawalRecordsAsync(), "GetWithdrawalRecords", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetWithdrawAddressBookAsync(), "GetWithdrawAddressBook", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.CancelWithdrawalAsync(), "CancelWithdrawal");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.SetMarginAsync(ProductCategory.UsdtFutures, "ETHUSDT", PositionSide.Long, Operation.Add, 1), "SetMargin");
         }
 
         [Test]
