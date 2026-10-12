@@ -1,3 +1,4 @@
+using CryptoExchange.Net.Converters.SystemTextJson;
 using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Models;
@@ -16,5 +17,6 @@ public record BitgetUaFundingFinancialRecordPage
     /// ["<c>cursor</c>"] Cursor for the next page
     /// </summary>
     [JsonPropertyName("cursor")]
+    [JsonConverter(typeof(NumberStringConverter))]
     public string? Cursor { get; set; }
 }
