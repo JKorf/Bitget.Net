@@ -452,7 +452,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
             CancellationToken ct = default);
 
         /// <summary>
-        /// 
+        /// Get closed strategy orders
         /// <para>
         /// Docs:<br />
         /// <a href="https://www.bitget.com/api-doc/uta/strategy/Get-History-Strategy-Orders" /><br />
@@ -476,5 +476,23 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
             string? cursor = null,
             CancellationToken ct = default);
 
+        /// <summary>
+        /// Get sub orders of a strategy order
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/catalog/trading/strategy-trading#get-strategy-sub-orders" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/trade/strategy-sub-orders<br />
+        /// </para>
+        /// </summary>
+        /// <param name="orderId">The strategy order id</param>
+        /// <param name="limit">Max number of results, max 100</param>
+        /// <param name="cursor">Pagination cursor</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<BitgetUaStrategySubOrders>> GetStrategySubOrdersAsync(
+            string orderId,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default);
     }
 }

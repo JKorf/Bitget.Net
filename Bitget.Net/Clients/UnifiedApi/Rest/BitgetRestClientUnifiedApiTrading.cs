@@ -511,5 +511,25 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         #endregion
 
+        #region Get Strategy Sub Orders
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BitgetUaStrategySubOrders>> GetStrategySubOrdersAsync(
+            string orderId,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("orderId", orderId);
+            parameters.Add("limit", limit);
+            parameters.Add("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/trade/strategy-sub-orders", BitgetExchange.RateLimiter.Overall, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            var result = await _baseClient.SendAsync<BitgetUaStrategySubOrders>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
     }
 }
