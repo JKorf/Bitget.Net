@@ -155,6 +155,26 @@ namespace Bitget.Net.Clients.SpotApiV2
         }
 
         /// <inheritdoc />
+        public async Task<HttpResult> UpgradeAccountAsync(string? subUserId = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("subUid", subUserId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v2/spot/account/upgrade", BitgetExchange.RateLimiter.Overall, 1, true,
+                limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BitgetUpgradeStatus>> GetUpgradeStatusAsync(string? subUserId = null, CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("subUid", subUserId);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/spot/account/upgrade-status", BitgetExchange.RateLimiter.Overall, 1, true,
+                limitGuard: new SingleLimitGuard(1, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            return await _baseClient.SendAsync<BitgetUpgradeStatus>(request, parameters, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
         public async Task<HttpResult> SetBgbDeductEnabledAsync(bool enable, CancellationToken ct = default)
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
