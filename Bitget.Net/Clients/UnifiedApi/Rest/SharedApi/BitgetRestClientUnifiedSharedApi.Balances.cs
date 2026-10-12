@@ -16,7 +16,12 @@ namespace Bitget.Net.Clients.UnifiedApi
     {
         #region Get Balances
 
-        public GetBalancesOptions GetBalancesOptions { get; } = new GetBalancesOptions(_exchangeName, AccountTypeFilter.Spot, AccountTypeFilter.Funding);
+        public GetBalancesOptions GetBalancesOptions { get; } = new GetBalancesOptions(_exchangeName, 
+            AccountTypeFilter.Funding,
+            AccountTypeFilter.Spot,
+            AccountTypeFilter.Futures,
+            AccountTypeFilter.Margin
+            );
 
         async Task<IExchangeCallResult<SharedBalance[]>> IGetBalances.GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
             => await GetBalancesAsync(request, ct).ConfigureAwait(false);

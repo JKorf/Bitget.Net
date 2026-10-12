@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Bitget.Net.Enums.Uta;
+using Bitget.Net.Enums.V2;
+using System;
 using System.Text.Json.Serialization;
-using Bitget.Net.Enums.Uta;
 
 namespace Bitget.Net.Objects.Models;
 
@@ -38,7 +39,7 @@ public record BitgetUaWithdrawRecord
     /// ["<c>dest</c>"] Destination
     /// </summary>
     [JsonPropertyName("dest")]
-    public string Destination { get; set; } = string.Empty;
+    public TransferType Destination { get; set; }
     /// <summary>
     /// ["<c>size</c>"] Quantity
     /// </summary>

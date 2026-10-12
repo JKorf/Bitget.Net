@@ -43,7 +43,28 @@ namespace Bitget.Net.Clients.UnifiedApi
                 GetBalancesOptions,
                 GetDepositAddressesOptions,
                 GetDepositHistoryOptions,
-                GetFeeOptions
+                GetFeeOptions,
+                GetFundingInfoOptions,
+                GetFundingRateHistoryOptions,
+                GetIndexPriceOptions,
+                GetAllIndexPricesOptions,
+                GetMarkPriceOptions,
+                GetAllMarkPricesOptions,
+                GetKlinesOptions,
+                GetMarkPriceKlinesOptions,
+                GetIndexPriceKlinesOptions,
+                GetLedgerOptions,
+                GetLeverageOptions,
+                SetLeverageOptions,
+                GetOpenInterestOptions,
+                GetBookTickerOptions,
+                GetOrderBookOptions,
+                GetPositionModeOptions,
+                SetPositionModeOptions,
+                GetFuturesSymbolsOptions,
+                GetSpotSymbolsOptions,
+                GetRecentTradesOptions,
+                WithdrawOptions
                 );
         }
 

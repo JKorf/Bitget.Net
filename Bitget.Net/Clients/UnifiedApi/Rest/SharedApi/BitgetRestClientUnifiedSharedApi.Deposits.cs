@@ -43,7 +43,13 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         #region Get Deposit History
 
-        public GetDepositHistoryOptions GetDepositHistoryOptions { get; } = new GetDepositHistoryOptions(_exchangeName, false, true, true, 100);
+        public GetDepositHistoryOptions GetDepositHistoryOptions { get; } = new GetDepositHistoryOptions(_exchangeName, false, true, true, 100)
+        {
+            ParameterRuleOverrides = [
+                RequestParameterRuleOverride<GetDepositsRequest>.Required(x => x.StartTime),
+                RequestParameterRuleOverride<GetDepositsRequest>.Required(x => x.EndTime)
+                ]
+        };
         async Task<IExchangeCallResult<SharedDeposit[]>> IGetDepositHistory.GetDepositHistoryAsync(GetDepositsRequest request, PageRequest? pageRequest, CancellationToken ct)
             => await GetDepositHistoryAsync(request, pageRequest, ct).ConfigureAwait(false);
 
@@ -55,7 +61,7 @@ namespace Bitget.Net.Clients.UnifiedApi
 
             var direction = DataDirection.Descending;
             var limit = request.Limit ?? 100;
-            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true, TimeSpan.FromDays(30));
+            var pageParams = Pagination.GetPaginationParameters(direction, limit, request.StartTime, request.EndTime ?? DateTime.UtcNow, pageRequest, true);
 
             // Get data
             var time = DateTime.UtcNow;
@@ -75,8 +81,7 @@ namespace Bitget.Net.Clients.UnifiedApi
                 result.Data.Select(x => x.CreateTime),
                 request.StartTime,
                 request.EndTime ?? DateTime.UtcNow,
-                pageParams,
-                TimeSpan.FromDays(30));
+                pageParams);
 
             return HttpResult.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.CreateTime, request.StartTime, request.EndTime, direction)
                         .Where(x => x.Destination == TransferType.OnChain)

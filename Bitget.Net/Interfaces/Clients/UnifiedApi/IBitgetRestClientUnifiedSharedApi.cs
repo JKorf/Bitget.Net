@@ -19,7 +19,29 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         IGetBalancesRest,
         IGetDepositAddressesRest,
         IGetDepositHistoryRest,
-        IGetFeesRest
+        IGetFeesRest,
+        IGetFundingInfoRest,
+        IGetFundingRateHistoryRest,
+        IGetIndexPriceRest,
+        IGetAllIndexPricesRest,
+        IGetMarkPriceRest,
+        IGetAllMarkPricesRest,
+        IGetKlinesRest,
+        IGetMarkPriceKlinesRest,
+        IGetIndexPriceKlinesRest,
+        IGetLedgerRest,
+        IGetLeverageRest,
+        ISetLeverageRest,
+        IGetOpenInterestRest,
+        IGetBookTickerRest,
+        IGetOrderBookRest,
+        IGetPositionModeRest,
+        ISetPositionModeRest,
+        IGetFuturesSymbolsRest,
+        IGetSpotSymbolsRest,
+        IGetRecentTradesRest,
+        IGetWithdrawalHistoryRest,
+        IWithdrawRest
     {        
     }
 }

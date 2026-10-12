@@ -52,7 +52,7 @@ public record BitgetUaFinancialRecord
     /// ["<c>type</c>"] Type
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; } = string.Empty;
+    public FinancialEntryType Type { get; set; }
     /// <summary>
     /// ["<c>amount</c>"] Quantity
     /// </summary>
