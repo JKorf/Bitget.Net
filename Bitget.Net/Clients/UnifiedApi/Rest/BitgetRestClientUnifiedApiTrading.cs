@@ -215,7 +215,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         /// <inheritdoc />
         public async Task<HttpResult<BitgetUaOrders>> GetClosedOrdersAsync(
             ProductCategory category,
-            string? orderId = null,
+            string? symbol = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
             int? limit = null,
@@ -224,7 +224,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("category", category);
-            parameters.Add("orderId", orderId);
+            parameters.Add("symbol", symbol);
             parameters.Add("startTime", startTime);
             parameters.Add("endTime", endTime);
             parameters.Add("limit", limit);
