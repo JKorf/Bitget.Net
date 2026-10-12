@@ -244,6 +244,15 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 4.8.0 - 12 Oct 2026
+    * Added restClient.UnifiedApi.Account.SetMarginAsync endpoint
+    * Added restClient.SpotApiV2.Account.GetUpgradeStatusAsync and UpgradeAccountAsync endpoints
+    * Added restClient.UnifiedApi.Trading.GetStrategySubOrdersAsync endpoint
+    * Added LongLeverage and ShortLeverage to BitgetUaAccountInfoSymbol model
+    * Fixed restClient.UnifiedApi.Trading.GetClosedOrdersAsync symbol parameter serialization
+    * Updated Unified API Cursor response properties to allow parsing from both string and numbers
+    * Updated Unified API strategy order endpoint parameter TriggerPriceType to PriceTriggerType, fixing parameters 
+
 * Version 4.7.0 - 30 Sep 2026
     * Updated CryptoExchange.Net to V13.1.0
     * Added missing symbol parameter to IsolatedBorrowAsync endpoint

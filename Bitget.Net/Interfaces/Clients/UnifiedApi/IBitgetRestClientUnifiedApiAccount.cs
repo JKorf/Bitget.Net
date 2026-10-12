@@ -357,6 +357,30 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         Task<HttpResult<BitgetUaAccountInfo>> GetAccountInfoAsync(CancellationToken ct = default);
 
         /// <summary>
+        /// Adjust margin
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/catalog/account/account-settings#set-margin" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/account/info<br />
+        /// </para>
+        /// </summary>
+        /// <param name="category">["<c>category</c>"] Category</param>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="positionSide">["<c>posSide</c>"] Position side</param>
+        /// <param name="operation">["<c>operation</c>"] Operation</param>
+        /// <param name="quantity">["<c>amount</c>"] Quantity</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult> SetMarginAsync(
+            ProductCategory category,
+            string symbol,
+            PositionSide positionSide,
+            Operation operation,
+            decimal quantity,
+            CancellationToken ct = default);
+
+        /// <summary>
         /// Get delta info
         /// <para>
         /// Docs:<br />

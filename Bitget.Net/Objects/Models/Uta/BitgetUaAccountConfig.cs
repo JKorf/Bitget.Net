@@ -59,7 +59,7 @@ public record BitgetUaAccountConfig
 }
 
 /// <summary>
-/// 
+/// Account symbol config
 /// </summary>
 public record BitgetUaAccountInfoSymbol
 {
@@ -83,6 +83,16 @@ public record BitgetUaAccountInfoSymbol
     /// </summary>
     [JsonPropertyName("leverage")]
     public decimal Leverage { get; set; }
+    /// <summary>
+    /// ["<c>longLeverage</c>"] Long position leverage for hedge mode
+    /// </summary>
+    [JsonPropertyName("longLeverage")]
+    public decimal? LongLeverage { get; set; }
+    /// <summary>
+    /// ["<c>shortLeverage</c>"] Short position leverage for hedge mode
+    /// </summary>
+    [JsonPropertyName("shortLeverage")]
+    public decimal? ShortLeverage { get; set; }
 }
 
 /// <summary>

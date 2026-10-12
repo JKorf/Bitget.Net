@@ -378,6 +378,31 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         #endregion
 
+        #region Set Margin
+
+        /// <inheritdoc />
+        public async Task<HttpResult> SetMarginAsync(
+            ProductCategory category,
+            string symbol,
+            PositionSide positionSide,
+            Operation operation,
+            decimal quantity,
+            CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("category", category);
+            parameters.Add("symbol", symbol);
+            parameters.Add("posSide", positionSide);
+            parameters.Add("operation", operation);
+            parameters.Add("amount", quantity);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v3/account/set-margin", BitgetExchange.RateLimiter.Overall, 1, true, 
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            var result = await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
         #region Get Delta Info
 
         /// <inheritdoc />

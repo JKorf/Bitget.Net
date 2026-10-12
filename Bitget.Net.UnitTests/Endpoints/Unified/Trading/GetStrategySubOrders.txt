@@ -1,0 +1,29 @@
+GET
+/api/v3/trade/strategy-sub-orders
+true
+UriParams: {"orderId":"123"}
+{
+  "code": "00000",
+  "msg": "success",
+  "requestTime": 1724486400000,
+  "data": {
+    "list": [
+      {
+        "subOrderId": "1234567890123456789",
+        "subClientOid": "myOrder001",
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "price": "60000",
+        "qty": "0.01",
+        "cumExecQty": "0.01",
+        "avgPrice": "60001",
+        "side": "buy",
+        "posSide": "long",
+        "status": "filled",
+        "createdTime": "1724486400000",
+        "updatedTime": "1724486401000"
+      }
+    ],
+    "cursor": 1234567890123456800
+  }
+}

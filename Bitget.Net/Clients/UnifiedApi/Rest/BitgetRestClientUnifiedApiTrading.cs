@@ -215,7 +215,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         /// <inheritdoc />
         public async Task<HttpResult<BitgetUaOrders>> GetClosedOrdersAsync(
             ProductCategory category,
-            string? orderId = null,
+            string? symbol = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
             int? limit = null,
@@ -224,7 +224,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("category", category);
-            parameters.Add("orderId", orderId);
+            parameters.Add("symbol", symbol);
             parameters.Add("startTime", startTime);
             parameters.Add("endTime", endTime);
             parameters.Add("limit", limit);
@@ -362,15 +362,15 @@ namespace Bitget.Net.Clients.UnifiedApi
             OrderSide? side = null,
             PositionSide? positionSide = null,
             bool? reduceOnly = null,
-            TriggerPriceType? tpTriggerBy = null,
-            TriggerPriceType? slTriggerBy = null,
+            PriceTriggerType? tpTriggerBy = null,
+            PriceTriggerType? slTriggerBy = null,
             decimal? takeProfit = null,
             decimal? stopLoss = null,
             OrderType? tpOrderType = null,
             OrderType? slOrderType = null,
             decimal? tpLimitPrice = null,
             decimal? slLimitPrice = null,
-            TriggerPriceType? triggerBy = null,
+            PriceTriggerType? triggerBy = null,
             decimal? triggerPrice = null,
             OrderType? triggerOrderType = null,
             decimal? triggerOrderPrice = null,
@@ -385,7 +385,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("qty", quantity);
             parameters.Add("side", side);
             parameters.Add("posSide", positionSide);
-            parameters.Add("reduceOnly", reduceOnly, BoolSerialization.String);
+            parameters.Add("reduceOnly", reduceOnly == null ? null : reduceOnly.Value ? "yes" : "no");
             parameters.Add("tpTriggerBy", tpTriggerBy);
             parameters.Add("slTriggerBy", slTriggerBy);
             parameters.Add("takeProfit", takeProfit);
@@ -412,15 +412,15 @@ namespace Bitget.Net.Clients.UnifiedApi
             string? orderId = null,
             string? clientOrderId = null,
             decimal? quantity = null,
-            TriggerPriceType? tpTriggerBy = null,
-            TriggerPriceType? slTriggerBy = null,
+            PriceTriggerType? tpTriggerBy = null,
+            PriceTriggerType? slTriggerBy = null,
             decimal? takeProfit = null,
             decimal? stopLoss = null,
             OrderType? tpOrderType = null,
             OrderType? slOrderType = null,
             decimal? tpLimitPrice = null,
             decimal? slLimitPrice = null,
-            TriggerPriceType? triggerBy = null,
+            PriceTriggerType? triggerBy = null,
             decimal? triggerPrice = null,
             OrderType? triggerOrderType = null,
             decimal? triggerOrderPrice = null,
@@ -511,5 +511,25 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         #endregion
 
+        #region Get Strategy Sub Orders
+
+        /// <inheritdoc />
+        public async Task<HttpResult<BitgetUaStrategySubOrders>> GetStrategySubOrdersAsync(
+            string orderId,
+            int? limit = null,
+            string? cursor = null,
+            CancellationToken ct = default)
+        {
+            var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
+            parameters.Add("orderId", orderId);
+            parameters.Add("limit", limit);
+            parameters.Add("cursor", cursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/trade/strategy-sub-orders", BitgetExchange.RateLimiter.Overall, 1, true,
+                limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding, keySelector: SingleLimitGuard.PerApiKey));
+            var result = await _baseClient.SendAsync<BitgetUaStrategySubOrders>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
     }
 }

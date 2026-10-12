@@ -43,7 +43,7 @@ namespace Bitget.Net.Enums.V2
         /// <summary>
         /// ["<c>reject</c>"] Reject
         /// </summary>
-        [Map("reject")]
+        [Map("reject", "failed")]
         Rejected
     }
 }

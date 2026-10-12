@@ -259,6 +259,7 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetWithdrawalRecordsAsync(), "GetWithdrawalRecords", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.GetWithdrawAddressBookAsync(), "GetWithdrawAddressBook", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Account.CancelWithdrawalAsync(), "CancelWithdrawal");
+            await tester.ValidateAsync(client => client.UnifiedApi.Account.SetMarginAsync(ProductCategory.UsdtFutures, "ETHUSDT", PositionSide.Long, Operation.Add, 1), "SetMargin");
         }
 
         [Test]
@@ -313,6 +314,10 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.CancelStrategyOrderAsync(), "CancelStrategyOrder");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetOpenStrategyOrdersAsync(ProductCategory.Spot), "GetOpenStrategyOrders", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetClosedStrategyOrdersAsync(ProductCategory.Spot, StrategyType.TpSl), "GetClosedStrategyOrders", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetClosedStrategyOrdersAsync(ProductCategory.Spot, StrategyType.TpSl), "GetClosedStrategyOrdersNumericCursor", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Trading.PlaceStrategyOrderAsync(ProductCategory.UsdtFutures, "ETHUSDT", reduceOnly: true, tpTriggerBy: PriceTriggerType.Mark, slTriggerBy: PriceTriggerType.Mark, triggerBy: PriceTriggerType.Mark), "PlaceStrategyOrderParameters", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Trading.EditStrategyOrderAsync(tpTriggerBy: PriceTriggerType.Mark, slTriggerBy: PriceTriggerType.Mark, triggerBy: PriceTriggerType.Mark), "EditStrategyOrderParameters", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetStrategySubOrdersAsync("123"), "GetStrategySubOrders", nestedJsonProperty: "data");
         }
 
         [Test]

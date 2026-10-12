@@ -375,5 +375,30 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult<BitgetDepositRecord[]>> GetSubAccountDepositHistoryAsync(long subAccountId, string? asset = null, DateTime? startTime = null, DateTime? endTime = null, long? idLessThan = null, int? limit = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Upgrade account to aa unified account
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/catalog/classic-spot-account/classic-spot-account#upgrade-account" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v2/spot/account/upgrade
+        /// </para>
+        /// </summary>
+        /// <param name="subUserId">["<c>subUid</c>"] Sub account id. Leave null for master account</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult> UpgradeAccountAsync(string? subUserId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the update to unified account status
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/catalog/classic-spot-account/classic-spot-account#get-upgrade-status" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v2/spot/account/upgrade-status
+        /// </para>
+        /// </summary>
+        /// <param name="subUserId">["<c>subUid</c>"] Sub account id. Leave null for master account</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<BitgetUpgradeStatus>> GetUpgradeStatusAsync(string? subUserId = null, CancellationToken ct = default);
     }
 }

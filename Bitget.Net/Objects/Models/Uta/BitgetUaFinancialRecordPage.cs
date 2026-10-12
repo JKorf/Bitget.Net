@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 using Bitget.Net.Enums.Uta;
+using CryptoExchange.Net.Converters.SystemTextJson;
 
 namespace Bitget.Net.Objects.Models;
 
@@ -18,6 +19,7 @@ public record BitgetUaFinancialRecordPage
     /// ["<c>cursor</c>"] Cursor
     /// </summary>
     [JsonPropertyName("cursor")]
+    [JsonConverter(typeof(NumberStringConverter))]
     public string? Cursor { get; set; }
 }
 
