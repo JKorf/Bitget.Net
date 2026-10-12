@@ -313,6 +313,9 @@ namespace Bitget.Net.UnitTests
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.CancelStrategyOrderAsync(), "CancelStrategyOrder");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetOpenStrategyOrdersAsync(ProductCategory.Spot), "GetOpenStrategyOrders", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetClosedStrategyOrdersAsync(ProductCategory.Spot, StrategyType.TpSl), "GetClosedStrategyOrders", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Trading.GetClosedStrategyOrdersAsync(ProductCategory.Spot, StrategyType.TpSl), "GetClosedStrategyOrdersNumericCursor", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Trading.PlaceStrategyOrderAsync(ProductCategory.UsdtFutures, "ETHUSDT", reduceOnly: true, tpTriggerBy: PriceTriggerType.Mark, slTriggerBy: PriceTriggerType.Mark, triggerBy: PriceTriggerType.Mark), "PlaceStrategyOrderParameters", nestedJsonProperty: "data");
+            await tester.ValidateAsync(client => client.UnifiedApi.Trading.EditStrategyOrderAsync(tpTriggerBy: PriceTriggerType.Mark, slTriggerBy: PriceTriggerType.Mark, triggerBy: PriceTriggerType.Mark), "EditStrategyOrderParameters", nestedJsonProperty: "data");
         }
 
         [Test]
