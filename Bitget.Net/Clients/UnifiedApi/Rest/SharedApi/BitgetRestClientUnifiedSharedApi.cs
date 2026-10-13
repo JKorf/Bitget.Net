@@ -64,7 +64,38 @@ namespace Bitget.Net.Clients.UnifiedApi
                 GetFuturesSymbolsOptions,
                 GetSpotSymbolsOptions,
                 GetRecentTradesOptions,
-                WithdrawOptions
+                WithdrawOptions,
+
+                PlaceSpotOrderOptions,
+                GetSpotOrderOptions,
+                GetSpotOrderByClientOrderIdOptions,
+                GetOpenSpotOrdersOptions,
+                GetClosedSpotOrdersOptions,
+                GetSpotUserTradeHistoryOptions,
+                GetSpotOrderTradesOptions,
+                CancelSpotOrderOptions,
+                CancelSpotOrderByClientOrderIdOptions,
+                CancelAllSpotOrdersOptions,
+                CancelAllSpotSymbolOrdersOptions,
+                EditSpotOrderOptions,
+                EditSpotOrderByClientOrderIdOptions,
+
+                PlaceFuturesOrderOptions,
+                GetFuturesOrderOptions,
+                GetFuturesOrderByClientOrderIdOptions,
+                GetOpenFuturesOrdersOptions,
+                GetClosedFuturesOrdersOptions,
+                GetFuturesUserTradeHistoryOptions,
+                GetFuturesOrderTradesOptions,
+                CancelFuturesOrderOptions,
+                CancelFuturesOrderByClientOrderIdOptions,
+                CancelAllFuturesOrdersOptions,
+                CancelAllFuturesSymbolOrdersOptions,
+                EditFuturesOrderOptions,
+                EditFuturesOrderByClientOrderIdOptions,
+                CloseFullPositionOptions,
+                GetPositionHistoryOptions,
+                GetPositionsOptions
                 );
         }
 

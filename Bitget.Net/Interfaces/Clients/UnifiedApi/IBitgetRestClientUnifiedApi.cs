@@ -7,6 +7,11 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
     /// </summary>
     public interface IBitgetRestClientUnifiedApi : IRestApiClient<BitgetCredentials>, IDisposable
     {
+        /// <summary>
+        /// [V2] Gets the aggregate Shared API interface. Shared APIs provide a common,
+        /// exchange-independent contract for accessing functionality across different
+        /// exchange client libraries.
+        /// </summary>
         public IBitgetRestClientUnifiedSharedApi SharedApi { get; }
 
         /// <summary>

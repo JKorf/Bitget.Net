@@ -89,5 +89,36 @@ namespace Bitget.Net.Clients.UnifiedApi
             return SharedTransferStatus.Unknown;
         }
 
+
+        #region Withdraw
+
+        public WithdrawOptions WithdrawOptions { get; } = new WithdrawOptions(_exchangeName);
+
+        async Task<IExchangeCallResult<SharedId>> IWithdraw.WithdrawAsync(WithdrawRequest request, CancellationToken ct)
+            => await WithdrawAsync(request, ct).ConfigureAwait(false);
+
+        public async Task<HttpResult<SharedId>> WithdrawAsync(WithdrawRequest request, CancellationToken ct)
+        {
+            var validationError = WithdrawOptions.ValidateRequest(request, this);
+            if (validationError != null)
+                return HttpResult.Fail<SharedId>(Exchange, validationError);
+
+            // Get data
+            var withdrawal = await _api.Account.WithdrawAsync(
+                request.Asset,
+                TransferType.OnChain,
+                request.Address,
+                request.Quantity,
+                network: request.Network,
+                tag: request.AddressTag,
+                ct: ct).ConfigureAwait(false);
+            if (!withdrawal.Success)
+                return HttpResult.Fail<SharedId>(withdrawal);
+
+            return HttpResult.Ok(withdrawal, new SharedId(withdrawal.Data.OrderId));
+        }
+
+        #endregion
+
     }
 }

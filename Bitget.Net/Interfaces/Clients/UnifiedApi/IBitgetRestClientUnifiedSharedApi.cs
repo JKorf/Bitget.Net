@@ -41,7 +41,40 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         IGetSpotSymbolsRest,
         IGetRecentTradesRest,
         IGetWithdrawalHistoryRest,
-        IWithdrawRest
+        IWithdrawRest,
+
+        IPlaceSpotOrderRest,
+        IGetSpotOrderRest,
+        IGetOpenSpotOrdersRest,
+        IGetClosedSpotOrdersRest,
+        ICancelSpotOrderRest,
+        IGetSpotOrderByClientOrderIdRest,
+        ICancelSpotOrderByClientOrderIdRest,
+        IGetSpotUserTradeHistoryRest,
+        IGetSpotOrderTradesRest,
+        ICancelAllSpotOrdersRest,
+        ICancelAllSpotSymbolOrdersRest,
+        IEditSpotOrderRest,
+        IEditSpotOrderByClientOrderIdRest,
+
+        IPlaceFuturesOrderRest,
+        IGetFuturesOrderRest,
+        IGetOpenFuturesOrdersRest,
+        IGetClosedFuturesOrdersRest,
+        ICancelFuturesOrderRest,
+        IGetFuturesOrderByClientOrderIdRest,
+        ICancelFuturesOrderByClientOrderIdRest,
+        IGetFuturesUserTradeHistoryRest,
+        IGetFuturesOrderTradesRest,
+        ICancelAllFuturesOrdersRest,
+        ICancelAllFuturesSymbolOrdersRest,
+        IEditFuturesOrderRest,
+        IEditFuturesOrderByClientOrderIdRest,
+        ICloseFullPositionRest,
+        IGetPositionsRest,
+        IGetPositionHistoryRest,
+        ISetFuturesTpSlRest,
+        ICancelFuturesTpSlRest
     {        
     }
 }
