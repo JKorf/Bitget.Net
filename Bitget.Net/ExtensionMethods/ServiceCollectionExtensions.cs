@@ -37,7 +37,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(Options.Options.Create(options.Socket));
             services.AddSingleton(Options.Options.Create(options));
 
-            return AddBitgetCore(services, options.SocketClientLifeTime);
+            return AddBitgetCore(services, options.SharedApi.ApiVersion, options.SocketClientLifeTime);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(Options.Options.Create(options.Socket));
             services.AddSingleton(Options.Options.Create(options));
 
-            return AddBitgetCore(services, options.SocketClientLifeTime);
+            return AddBitgetCore(services, options.SharedApi.ApiVersion, options.SocketClientLifeTime);
         }
 
         /// <summary>
@@ -67,6 +67,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns></returns>
         private static IServiceCollection AddBitgetCore(
             this IServiceCollection services,
+            BitgetApiVersion sharedApiVersion,
             ServiceLifetime? socketClientLifeTime = null)
         {
             services.AddHttpClient<IBitgetRestClient, BitgetRestClient>((client, serviceProvider) =>
@@ -90,19 +91,31 @@ namespace Microsoft.Extensions.DependencyInjection
                 x.GetRequiredService<IOptions<BitgetRestOptions>>(),
                 x.GetRequiredService<IOptions<BitgetSocketOptions>>()));
 
-            services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedClient);
-            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedClient);
-            services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().FuturesApiV2.SharedClient);
-            services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().FuturesApiV2.SharedClient);
+            if (sharedApiVersion == BitgetApiVersion.Classic)
+            {
+                services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().SpotApiV2.SharedClient);
+                services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().SpotApiV2.SharedClient);
+                services.RegisterSharedRestInterfaces(x => x.GetRequiredService<IBitgetRestClient>().FuturesApiV2.SharedClient);
+                services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<IBitgetSocketClient>().FuturesApiV2.SharedClient);
 
-            services.RegisterSharedApiClient<
-                IBitgetSharedApiClient,
-                BitgetSharedApiClient>(sharedApis => sharedApis
-                    .Add(client => client.SpotRest)
-                    .Add(client => client.SpotSocket)
-                    .Add(client => client.FuturesRest)
-                    .Add(client => client.FuturesSocket)
-                    );
+                services.RegisterSharedApiClient<
+                    IBitgetSharedApiClient,
+                    BitgetSharedApiClient>(sharedApis => sharedApis
+                        .Add(client => client.SpotRest)
+                        .Add(client => client.SpotSocket)
+                        .Add(client => client.FuturesRest)
+                        .Add(client => client.FuturesSocket)
+                        );
+            }
+            else
+            {
+                services.RegisterSharedApiClient<
+                    IBitgetSharedApiClient,
+                    BitgetSharedApiClient>(sharedApis => sharedApis
+                        .Add(client => client.UnifiedRest)
+                        .Add(client => client.UnifiedSocket)
+                        );
+            }
 
             return services;
         }

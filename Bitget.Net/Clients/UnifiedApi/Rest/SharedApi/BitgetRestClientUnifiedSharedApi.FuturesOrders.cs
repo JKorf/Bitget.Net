@@ -49,7 +49,7 @@ namespace Bitget.Net.Clients.UnifiedApi
                 request.Symbol!.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 (request.OrderType == SharedOrderType.Limit || request.OrderType == SharedOrderType.LimitMaker) ? OrderType.Limit : OrderType.Market,
-                quantity: (request.OrderType == SharedOrderType.Market && request.Side == SharedOrderSide.Buy ? request.Quantity?.QuantityInQuoteAsset : request.Quantity?.QuantityInBaseAsset) ?? 0,
+                quantity: request.Quantity?.QuantityInBaseAsset ?? 0,
                 price: request.Price,
                 timeInForce: GetTimeInForce(request.OrderType, request.TimeInForce),
                 clientOrderId: request.ClientOrderId,
@@ -95,8 +95,9 @@ namespace Bitget.Net.Clients.UnifiedApi
                 orders.Data.CreateTime)
             {
                 ClientOrderId = orders.Data.ClientOrderId,
-                OrderPrice = orders.Data.Price,
-                OrderQuantity = new SharedOrderQuantity(orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? null : orders.Data.Quantity, orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? orders.Data.Quantity : null),
+                OrderPrice = orders.Data.Price == 0 ? null : orders.Data.Price,
+                TimeInForce = ParseTimeInForce(orders.Data),
+                OrderQuantity = new SharedOrderQuantity(orders.Data.Quantity, orders.Data.QuoteQuantityFilled),
                 QuantityFilled = new SharedOrderQuantity(orders.Data.QuantityFilled, orders.Data.QuoteQuantityFilled),
                 AveragePrice = orders.Data.AveragePrice == 0 ? null : orders.Data.AveragePrice,
                 UpdateTime = orders.Data.UpdateTime,
@@ -142,8 +143,9 @@ namespace Bitget.Net.Clients.UnifiedApi
                 x.CreateTime)
             {
                 ClientOrderId = x.ClientOrderId,
-                OrderPrice = x.Price,
-                OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? x.Quantity : null),
+                OrderPrice = x.Price == 0 ? null : x.Price,
+                TimeInForce = ParseTimeInForce(x),
+                OrderQuantity = new SharedOrderQuantity(x.Quantity, x.QuoteQuantityFilled),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                 UpdateTime = x.UpdateTime,
@@ -212,8 +214,9 @@ namespace Bitget.Net.Clients.UnifiedApi
                                 x.CreateTime)
                             {
                                 ClientOrderId = x.ClientOrderId,
-                                OrderPrice = x.Price,
-                                OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? x.Quantity : null),
+                                OrderPrice = x.Price == 0 ? null : x.Price,
+                                TimeInForce = ParseTimeInForce(x),
+                                OrderQuantity = new SharedOrderQuantity(x.Quantity, x.QuoteQuantityFilled),
                                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                                 UpdateTime = x.UpdateTime,
@@ -296,7 +299,6 @@ namespace Bitget.Net.Clients.UnifiedApi
             var category = GetCategory(request);
             var result = await _api.Trading.GetUserTradesAsync(
                 category,
-                request.Symbol!.GetSymbol(FormatSymbol),
                 startTime: pageParams.StartTime,
                 endTime: pageParams.EndTime,
                 limit: limit,
@@ -387,8 +389,9 @@ namespace Bitget.Net.Clients.UnifiedApi
                 orders.Data.CreateTime)
             {
                 ClientOrderId = orders.Data.ClientOrderId,
-                OrderPrice = orders.Data.Price,
-                OrderQuantity = new SharedOrderQuantity(orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? null : orders.Data.Quantity, orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? orders.Data.Quantity : null),
+                OrderPrice = orders.Data.Price == 0 ? null : orders.Data.Price,
+                TimeInForce = ParseTimeInForce(orders.Data),
+                OrderQuantity = new SharedOrderQuantity(orders.Data.Quantity, orders.Data.QuoteQuantityFilled),
                 QuantityFilled = new SharedOrderQuantity(orders.Data.QuantityFilled, orders.Data.QuoteQuantityFilled),
                 AveragePrice = orders.Data.AveragePrice == 0 ? null : orders.Data.AveragePrice,
                 UpdateTime = orders.Data.UpdateTime,

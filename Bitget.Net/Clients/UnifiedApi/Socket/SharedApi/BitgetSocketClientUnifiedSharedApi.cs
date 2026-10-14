@@ -36,7 +36,30 @@ namespace Bitget.Net.Clients.UnifiedApi
             _api = api;
 
             SetCapabilities(
-                SubscribeTickerOptions
+                SubscribeTickerOptions,
+                SubscribeBalanceOptions,
+                SubscribeFundingInfoOptions,
+                SubscribeIndexPriceOptions,
+                SubscribeMarkPriceOptions,
+                SubscribeKlineOptions,
+                SubscribeOrderBookOptions,
+                SubscribeIncrementalOrderBookOptions,
+                SubscribeBookTickerOptions,
+                SubscribeTradeOptions,
+                SubscribeFuturesOrderOptions,
+                SubscribeSpotOrderOptions,
+                SubscribePositionOptions,
+                SubscribeUserTradeOptions,
+                PlaceSpotOrderOptions,
+                CancelSpotOrderOptions,
+                CancelSpotOrderByClientOrderIdOptions,
+                EditSpotOrderOptions,
+                EditSpotOrderByClientOrderIdOptions,
+                PlaceFuturesOrderOptions,
+                CancelFuturesOrderOptions,
+                CancelFuturesOrderByClientOrderIdOptions,
+                EditFuturesOrderOptions,
+                EditFuturesOrderByClientOrderIdOptions
                 );
         }
 

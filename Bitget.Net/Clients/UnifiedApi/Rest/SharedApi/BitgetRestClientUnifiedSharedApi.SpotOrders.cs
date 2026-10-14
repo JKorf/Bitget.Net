@@ -84,11 +84,12 @@ namespace Bitget.Net.Clients.UnifiedApi
                 orders.Data.CreateTime)
             {
                 ClientOrderId = orders.Data.ClientOrderId,
-                OrderPrice = orders.Data.Price,
-                OrderQuantity = new SharedOrderQuantity(orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? null : orders.Data.Quantity, orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? orders.Data.Quantity : null),
+                OrderPrice = orders.Data.Price == 0 ? null : orders.Data.Price,
+                OrderQuantity = new SharedOrderQuantity(orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? null : orders.Data.Quantity, orders.Data.QuoteQuantity == 0 ? null : orders.Data.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(orders.Data.QuantityFilled, orders.Data.QuoteQuantityFilled),
                 AveragePrice = orders.Data.AveragePrice == 0 ? null : orders.Data.AveragePrice,
-                UpdateTime = orders.Data.UpdateTime                
+                UpdateTime = orders.Data.UpdateTime,
+                TimeInForce = ParseTimeInForce(orders.Data)
             });
         }
 
@@ -121,11 +122,12 @@ namespace Bitget.Net.Clients.UnifiedApi
                 x.CreateTime)
             {
                 ClientOrderId = x.ClientOrderId,
-                OrderPrice = x.Price,
-                OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? x.Quantity : null),
+                OrderPrice = x.Price == 0 ? null : x.Price,
+                OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.QuoteQuantity == 0 ? null : x.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
-                UpdateTime = x.UpdateTime
+                UpdateTime = x.UpdateTime,
+                TimeInForce = ParseTimeInForce(x)
             }).ToArray());
         }
 
@@ -183,11 +185,12 @@ namespace Bitget.Net.Clients.UnifiedApi
                                 x.CreateTime)
                             {
                                 ClientOrderId = x.ClientOrderId,
-                                OrderPrice = x.Price,
-                                OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? x.Quantity : null),
+                                OrderPrice = x.Price == 0 ? null : x.Price,
+                                OrderQuantity = new SharedOrderQuantity(x.OrderType == OrderType.Market && x.Side == OrderSide.Buy ? null : x.Quantity, x.QuoteQuantity == 0 ? null : x.QuoteQuantity),
                                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                                 AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
                                 UpdateTime = x.UpdateTime,
+                                TimeInForce = ParseTimeInForce(x)
                             })
                        .ToArray(), nextPageRequest);
         }
@@ -253,7 +256,6 @@ namespace Bitget.Net.Clients.UnifiedApi
             // Get data
             var result = await _api.Trading.GetUserTradesAsync(
                 Enums.Uta.ProductCategory.Spot,
-                request.Symbol!.GetSymbol(FormatSymbol),
                 startTime: pageParams.StartTime,
                 endTime: pageParams.EndTime,
                 limit: limit,
@@ -350,6 +352,18 @@ namespace Bitget.Net.Clients.UnifiedApi
             return TimeInForce.GoodTillCanceled;
         }
 
+        private SharedTimeInForce? ParseTimeInForce(BitgetUaOrder x)
+        {
+            if (x.TimeInForce == TimeInForce.FillOrKill)
+                return SharedTimeInForce.FillOrKill;
+            if (x.TimeInForce == TimeInForce.GoodTillCanceled)
+                return SharedTimeInForce.GoodTillCanceled;
+            if (x.TimeInForce == TimeInForce.ImmediateOrCancel)
+                return SharedTimeInForce.ImmediateOrCancel;
+
+            return null;
+        }
+
         #region Get Spot Order By Client Order Id
 
         public GetSpotOrderByClientOrderIdOptions GetSpotOrderByClientOrderIdOptions { get; } = new GetSpotOrderByClientOrderIdOptions(_exchangeName, true);
@@ -376,11 +390,12 @@ namespace Bitget.Net.Clients.UnifiedApi
                 orders.Data.CreateTime)
             {
                 ClientOrderId = orders.Data.ClientOrderId,
-                OrderPrice = orders.Data.Price,
-                OrderQuantity = new SharedOrderQuantity(orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? null : orders.Data.Quantity, orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? orders.Data.Quantity : null),
+                OrderPrice = orders.Data.Price == 0 ? null : orders.Data.Price,
+                OrderQuantity = new SharedOrderQuantity(orders.Data.OrderType == OrderType.Market && orders.Data.Side == OrderSide.Buy ? null : orders.Data.Quantity, orders.Data.QuoteQuantity == 0 ? null : orders.Data.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(orders.Data.QuantityFilled, orders.Data.QuoteQuantityFilled),
                 AveragePrice = orders.Data.AveragePrice == 0 ? null : orders.Data.AveragePrice,
                 UpdateTime = orders.Data.UpdateTime,
+                TimeInForce = ParseTimeInForce(orders.Data)
             });
         }
 

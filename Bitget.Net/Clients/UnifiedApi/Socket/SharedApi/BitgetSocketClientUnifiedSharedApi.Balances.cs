@@ -7,6 +7,7 @@ using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
+using static CryptoExchange.Net.SharedApis.SharedCapabilities;
 
 namespace Bitget.Net.Clients.UnifiedApi
 {
@@ -15,7 +16,7 @@ namespace Bitget.Net.Clients.UnifiedApi
         #region Subscribe To Balance Updates
 
         public SubscribeBalanceOptions SubscribeBalanceOptions { get; } = new SubscribeBalanceOptions(_exchangeName, true);
-        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<DataEvent<SharedBalance>> handler, CancellationToken ct)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToBalanceUpdatesAsync(SubscribeBalancesRequest request, Action<DataEvent<SharedBalance[]>> handler, CancellationToken ct)
         {
             var validationError = SubscribeBalanceOptions.ValidateRequest(request, this);
             if (validationError != null)
@@ -26,11 +27,9 @@ namespace Bitget.Net.Clients.UnifiedApi
                 {
                     foreach (var item in update.Data)
                     {
-                        foreach (var asset in item.Asset) {
-                            handler(update.ToType(new SharedBalance(
-                                SupportedTradingModes, asset.Asset, asset.Available, asset.Balance)
-                                ));
-                        }
+                        handler(update.ToType(item.Asset.Select(x =>
+                            new SharedBalance(SupportedTradingModes, x.Asset, x.Available, x.BalanceOriginal)
+                                ).ToArray()));
                     }
                 }
             , ct).ConfigureAwait(false);

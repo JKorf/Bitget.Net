@@ -9,6 +9,28 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
     /// </summary>
     public interface IBitgetSocketClientUnifiedSharedApi :
         ISubscribeTickerSocket,
-        ISubscribeBalancesSocket
+        ISubscribeBalancesSocket,
+        ISubscribeFundingInfoSocket,
+        ISubscribeIndexPriceSocket,
+        ISubscribeMarkPriceSocket,
+        ISubscribeKlinesSocket,
+        ISubscribeOrderBookSocket,
+        ISubscribeIncrementalOrderBookSocket,
+        ISubscribeBookTickerSocket,
+        ISubscribeTradesSocket,
+        ISubscribeFuturesOrdersSocket,
+        ISubscribeSpotOrdersSocket,
+        ISubscribePositionsSocket,
+        ISubscribeUserTradesSocket,
+        IPlaceSpotOrderSocket,
+        ICancelSpotOrderSocket,
+        ICancelSpotOrderByClientOrderIdSocket,
+        IEditSpotOrderSocket,
+        IEditSpotOrderByClientOrderIdSocket,
+        IPlaceFuturesOrderSocket,
+        ICancelFuturesOrderSocket,
+        ICancelFuturesOrderByClientOrderIdSocket,
+        IEditFuturesOrderSocket,
+        IEditFuturesOrderByClientOrderIdSocket
     { }
 }

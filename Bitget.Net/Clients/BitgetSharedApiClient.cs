@@ -22,7 +22,7 @@ namespace Bitget.Net.Clients
         /// <inheritdoc />
         public IBitgetRestClientUnifiedSharedApi UnifiedRest { get; }
         /// <inheritdoc />
-        //public IBitgetSocketClientUnifiedSharedApi UnifiedSocket { get; }
+        public IBitgetSocketClientUnifiedSharedApi UnifiedSocket { get; }
 
         /// <summary>
         /// ctor
@@ -43,7 +43,7 @@ namespace Bitget.Net.Clients
             SpotSocket = socketClient.SpotApiV2.SharedApi;
             FuturesSocket = socketClient.FuturesApiV2.SharedApi;
             UnifiedRest = restClient.UnifiedApi.SharedApi;
-            //UnifiedSocket = socketClient.UnifiedApi.SharedApi;
+            UnifiedSocket = socketClient.UnifiedApi.SharedApi;
         }
     }
 }

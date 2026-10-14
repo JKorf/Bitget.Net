@@ -38,6 +38,6 @@ namespace Bitget.Net.Interfaces.Clients
         /// <summary>
         /// Unified WebSocket shared API implementations
         /// </summary>
-        //IBitgetSocketClientUnifiedSharedApi UnifiedSocket { get; }
+        IBitgetSocketClientUnifiedSharedApi UnifiedSocket { get; }
     }
 }
