@@ -244,6 +244,16 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 4.9.0 - 14 Oct 2026
+    * Updated CryptoExchange.Net to v13.2.0
+    * Added Shared API implementation for the Unified API
+    * Added UnifiedRest and UnifiedSocket to (I)BitgetSharedApiClient
+    * Added ApiVersion selector to SharedApi client options, defaults to Classic
+    * Added BalanceOriginal to BitgetUaAccountUpdateAsset model
+    * Updated Destination and Status to Enum type in BitgetUaDeposit model 
+    * Updated Destination to Enum type in BitgetUaWithdrawalRecord model 
+    * Updated Type to Enum type in BitgetUaFinancialRecord model
+
 * Version 4.8.0 - 12 Oct 2026
     * Added restClient.UnifiedApi.Account.SetMarginAsync endpoint
     * Added restClient.SpotApiV2.Account.GetUpgradeStatusAsync and UpgradeAccountAsync endpoints
