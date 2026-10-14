@@ -63,6 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Add the IBitgetClient and IBitgetSocketClient to the service collection so they can be injected
         /// </summary>
         /// <param name="services">The service collection</param>
+        /// <param name="sharedApiVersion">Shared API version to register</param>
         /// <param name="socketClientLifeTime">The lifetime of the IBitgetSocketClient for the service collection. Defaults to Singleton.</param>
         /// <returns></returns>
         private static IServiceCollection AddBitgetCore(
