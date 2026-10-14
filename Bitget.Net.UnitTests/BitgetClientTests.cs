@@ -253,5 +253,38 @@ namespace Bitget.Net.UnitTests
 
             Assert.That(unsupported, Is.Empty);
         }
+
+        [Test]
+        public void TestUnifiedRestSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BitgetRestClient().UnifiedApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestUnifiedSocketSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = CryptoExchange.Net.Testing.TestHelpers.ValidateUnsupportedCapabilities(new BitgetSocketClient().UnifiedApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestRestUnifiedSharedApiDiscoveryMatchesAggregate()
+        {
+            var (missingOptions, missingInterfaces) = CryptoExchange.Net.Testing.TestHelpers.ValidateSharedApi(new BitgetRestClient().UnifiedApi.SharedApi);
+            Assert.That(missingOptions, Is.Empty);
+            Assert.That(missingInterfaces, Is.Empty);
+        }
+
+        [Test]
+        public void TestSocketUnifiedSharedApiDiscoveryMatchesAggregate()
+        {
+            var (missingOptions, missingInterfaces) = CryptoExchange.Net.Testing.TestHelpers.ValidateSharedApi(new BitgetSocketClient().UnifiedApi.SharedApi);
+
+            Assert.That(missingOptions, Is.Empty);
+            Assert.That(missingInterfaces, Is.Empty);
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Bitget.Net.Objects.Options
         /// <summary>
         /// Options for Shared API usage
         /// </summary>
-        public SharedApiOptions SharedApi { get; set; } = new();
+        public BitgetSharedApiOptions SharedApi { get; set; } = new();
 
         /// <summary>
         /// Create options using the provided configuration action

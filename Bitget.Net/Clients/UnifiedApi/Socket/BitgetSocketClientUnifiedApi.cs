@@ -33,6 +33,8 @@ namespace Bitget.Net.Clients.UnifiedApi
     /// <inheritdoc />
     internal partial class BitgetSocketClientUnifiedApi : SocketApiClient<BitgetEnvironment, BitgetAuthenticationProviderV2, BitgetCredentials>, IBitgetSocketClientUnifiedApi
     {
+        private readonly IBitgetSocketClientUnifiedSharedApi _sharedApi;
+
         internal new BitgetSocketOptions ClientOptions => (BitgetSocketOptions)base.ClientOptions;
 
         protected override ErrorMapping ErrorMapping => BitgetErrors.UnifiedErrors;
@@ -42,6 +44,8 @@ namespace Bitget.Net.Clients.UnifiedApi
             base(loggerFactory, BitgetExchange.Metadata.Id, options.Environment.SocketBaseAddress, options, options.UnifiedOptions)
         {
             RateLimiter = BitgetExchange.RateLimiter.Websocket;
+
+            _sharedApi = new BitgetSocketClientUnifiedSharedApi(this);
 
             RegisterPeriodicQuery(
                 "Ping",
@@ -58,6 +62,8 @@ namespace Bitget.Net.Clients.UnifiedApi
                 });
         }
         #endregion
+        /// <inheritdoc />
+        public IBitgetSocketClientUnifiedSharedApi SharedApi => _sharedApi;
 
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(BitgetExchange._serializerContext));

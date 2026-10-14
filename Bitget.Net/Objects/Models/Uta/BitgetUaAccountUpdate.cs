@@ -96,5 +96,10 @@ public record BitgetUaAccountUpdateAsset
     /// </summary>
     [JsonPropertyName("usdValue")]
     public decimal UsdValue { get; set; }
+    /// <summary>
+    /// ["<c>balanceOriginal</c>"] New coin balance
+    /// </summary>
+    [JsonPropertyName("balanceOriginal")]
+    public decimal BalanceOriginal { get; set; }
 }
 

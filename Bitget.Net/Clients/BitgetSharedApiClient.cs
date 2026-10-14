@@ -1,6 +1,7 @@
 using Bitget.Net.Interfaces.Clients;
 using Bitget.Net.Interfaces.Clients.FuturesApiV2;
 using Bitget.Net.Interfaces.Clients.SpotApiV2;
+using Bitget.Net.Interfaces.Clients.UnifiedApi;
 using Bitget.Net.Objects.Options;
 using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Options;
@@ -18,6 +19,10 @@ namespace Bitget.Net.Clients
         public IBitgetSocketClientSpotSharedApi SpotSocket { get; }
         /// <inheritdoc />
         public IBitgetSocketClientFuturesSharedApi FuturesSocket { get; }
+        /// <inheritdoc />
+        public IBitgetRestClientUnifiedSharedApi UnifiedRest { get; }
+        /// <inheritdoc />
+        public IBitgetSocketClientUnifiedSharedApi UnifiedSocket { get; }
 
         /// <summary>
         /// ctor
@@ -37,6 +42,8 @@ namespace Bitget.Net.Clients
             FuturesRest = restClient.FuturesApiV2.SharedApi;
             SpotSocket = socketClient.SpotApiV2.SharedApi;
             FuturesSocket = socketClient.FuturesApiV2.SharedApi;
+            UnifiedRest = restClient.UnifiedApi.SharedApi;
+            UnifiedSocket = socketClient.UnifiedApi.SharedApi;
         }
     }
 }
