@@ -624,4 +624,19 @@ public enum FinancialEntryType
     /// </summary>
     [Map("RWA_CONTRACT_REBASE_USER_SELL_IN_SSM")]
     RwaContractRebaseUserSellInSsm,
+    /// <summary>
+    /// ["<c>WITHDRAW_TRANSFER_OUT</c>"] Withdrawal transfer out
+    /// </summary>
+    [Map("WITHDRAW_TRANSFER_OUT")]
+    WithdrawTransferOut,
+    /// <summary>
+    /// ["<c>WITHDRAW_TRANSFER_IN</c>"] Withdrawal transfer in
+    /// </summary>
+    [Map("WITHDRAW_TRANSFER_IN")]
+    WithdrawTransferIn,
+    /// <summary>
+    /// ["<c>BONUS_GRANT_USER_IN</c>"] Bonus granted to the user
+    /// </summary>
+    [Map("BONUS_GRANT_USER_IN")]
+    BonusGrantUserIn,
 }
