@@ -60,7 +60,7 @@ namespace Bitget.Net.Clients.SpotApiV2
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
             parameters.Add("coin", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/spot/public/coins", BitgetExchange.RateLimiter.Overall, 1, false,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/market/coins", BitgetExchange.RateLimiter.Overall, 1, false,
                 limitGuard: new SingleLimitGuard(3, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             return await _baseClient.SendAsync<BitgetAsset[]>(request, parameters, ct).ConfigureAwait(false);
         }

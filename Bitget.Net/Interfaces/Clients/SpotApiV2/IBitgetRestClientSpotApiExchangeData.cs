@@ -46,9 +46,9 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get list of supported assets and their networks
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/spot/market/Get-Coin-List" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-coins" /><br />
         /// Endpoint:<br />
-        /// GET /api/v2/spot/public/coins
+        /// GET /api/v3/market/coins
         /// </para>
         /// </summary>
         /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>

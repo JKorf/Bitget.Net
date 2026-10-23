@@ -116,7 +116,6 @@ namespace Bitget.Net.Objects.Models.V2
         /// </summary>
         [JsonPropertyName("withdrawMinScale"), JsonConverter(typeof(IntConverter))]
         public int? WithdrawQuantityPrecision { get; set; }
-
         /// <summary>
         /// ["<c>congestion</c>"] Congestion levels
         /// </summary>
