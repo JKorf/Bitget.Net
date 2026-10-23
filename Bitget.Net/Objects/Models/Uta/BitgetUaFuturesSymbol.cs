@@ -190,5 +190,26 @@ public record BitgetUaFuturesSymbol
     /// </summary>
     [JsonPropertyName("maxMarketOrderQty")]
     public decimal? MaxMarketOrderQuantity { get; set; }
+
+    /// <summary>
+    /// ["<c>fullName</c>"] Full name
+    /// </summary>
+    [JsonPropertyName("fullName")]
+    public string FullName { get; set; } = string.Empty;
+    /// <summary>
+    /// ["<c>instrumentType</c>"] Instrument type
+    /// </summary>
+    [JsonPropertyName("instrumentType")]
+    public InstrumentType InstrumentType { get; set; }
+    /// <summary>
+    /// ["<c>marketRegion</c>"] Market region
+    /// </summary>
+    [JsonPropertyName("marketRegion")]
+    public string? MarketRegion { get; set; }
+    /// <summary>
+    /// ["<c>isin</c>"] Isin
+    /// </summary>
+    [JsonPropertyName("isin")]
+    public string? Isin { get; set; }
 }
 
