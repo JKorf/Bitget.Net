@@ -26,6 +26,7 @@ namespace Bitget.Net.Converters
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaStrategyOrder[]>))]
     [JsonSerializable(typeof(BitgetSocketUpdate<BitgetUaAdlUpdate[]>))]
 
+    [JsonSerializable(typeof(BitgetResponse<BitgetUaOpenInterestHistoryWrapper>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaStrategySubOrders>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUpgradeStatus>))]
     [JsonSerializable(typeof(BitgetResponse<BitgetUaStrategyOrders>))]

@@ -331,5 +331,23 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult<BitgetUaIndexComponents>> GetIndexComponentsAsync(string symbol, CancellationToken ct = default);
 
+        /// <summary>
+        /// Get open interest history for a symbol
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/derivatives#get-open-interest-history" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/market/open-interest-history<br />
+        /// </para>
+        /// </summary>
+        /// <param name="symbol">["<c>symbol</c>"] The symbol, for example `ETHUSDT`</param>
+        /// <param name="period">["<c>period</c>"] The period, for example `1h`. Supports 5m, 15m, 30m, 1h, 2h, 4h, 6h, 12h, 1d</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult<BitgetUaOpenInterestHistory[]>> GetOpenInterestHistoryAsync(
+            string symbol,
+            string period,
+            CancellationToken ct = default);
+
     }
 }
