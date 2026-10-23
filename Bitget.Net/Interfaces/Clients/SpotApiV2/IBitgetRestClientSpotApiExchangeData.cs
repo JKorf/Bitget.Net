@@ -25,6 +25,13 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
 
         /// <summary>
         /// Get announcements
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-coins" /><br />
+        /// Endpoint:<br />
+        /// GET api/v3/public/annoucements
+        /// </para>
+        /// </summary>
         /// </summary>
         /// <param name="type">["<c>annType</c>"] Filter by type</param>
         /// <param name="language">["<c>language</c>"] Language</param>

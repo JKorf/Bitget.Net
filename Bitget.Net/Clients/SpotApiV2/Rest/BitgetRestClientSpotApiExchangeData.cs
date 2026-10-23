@@ -49,7 +49,7 @@ namespace Bitget.Net.Clients.SpotApiV2
             parameters.Add("cursor", cursor);
             parameters.Add("limit", limit);
 
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v2/public/annoucements", BitgetExchange.RateLimiter.Overall, 1, false, preventCaching: true,
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/public/annoucements", BitgetExchange.RateLimiter.Overall, 1, false, preventCaching: true,
                 limitGuard: new SingleLimitGuard(20, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetAnnouncement[]>(request, parameters, ct).ConfigureAwait(false);
             return result;
