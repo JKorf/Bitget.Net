@@ -1,5 +1,5 @@
 GET
-/api/v2/spot/public/coins
+/api/v3/market/coins
 false
 {
     "code": "00000",

@@ -1,5 +1,5 @@
 GET
-/api/v2/public/time
+/api/v3/market/time
 false
 {
     "code": "00000",
