@@ -14,7 +14,9 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
     /// exchange client libraries.
     /// </summary>
     public interface IBitgetRestClientUnifiedSharedApi
-        : IGetTickerRest,
+        : 
+        IGetAllAssetsRest,
+        IGetTickerRest,
         IGetAllTickersRest,
         IGetBalancesRest,
         IGetDepositAddressesRest,

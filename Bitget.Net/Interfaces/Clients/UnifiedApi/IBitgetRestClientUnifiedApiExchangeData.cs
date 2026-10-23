@@ -1,3 +1,4 @@
+using Bitget.Net.Enums;
 using Bitget.Net.Enums.Uta;
 using Bitget.Net.Objects.Models;
 using Bitget.Net.Objects.Models.V2;
@@ -10,13 +11,14 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
     /// </summary>
     public interface IBitgetRestClientUnifiedApiExchangeData
     {
+
         /// <summary>
         /// Get the server time
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/common/public/Get-Server-Time" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-server-time" /><br />
         /// Endpoint:<br />
-        /// GET /api/v2/public/time
+        /// GET /api/v3/market/time
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
@@ -24,10 +26,50 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         Task<HttpResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
 
         /// <summary>
+        /// Get announcements
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-coins" /><br />
+        /// Endpoint:<br />
+        /// GET api/v3/public/annoucements
+        /// </para>
+        /// </summary>
+        /// </summary>
+        /// <param name="type">["<c>annType</c>"] Filter by type</param>
+        /// <param name="language">["<c>language</c>"] Language</param>
+        /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>
+        /// <param name="endTime">["<c>endTime</c>"] Filter by end time</param>
+        /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
+        /// <param name="limit">["<c>limit</c>"] Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<HttpResult<BitgetAnnouncement[]>> GetAnnouncementsAsync(
+            AnnouncementType? type = null,
+            string? language = null,
+            DateTime? startTime = null,
+            DateTime? endTime = null,
+            string? cursor = null,
+            int? limit = null,
+            CancellationToken ct = default);
+
+        /// <summary>
+        /// Get list of supported assets and their networks
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-coins" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/market/coins
+        /// </para>
+        /// </summary>
+        /// <param name="asset">["<c>coin</c>"] Filter by asset, for example `ETH`</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<HttpResult<BitgetAsset[]>> GetAssetsAsync(string? asset = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get supported futures symbols
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Instruments" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-instruments" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/instruments<br />
         /// </para>
@@ -44,7 +86,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get supported spot symbols
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Instruments" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-instruments" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/instruments<br />
         /// </para>
@@ -59,7 +101,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get supported margin symbols
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Instruments" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-instruments" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/instruments<br />
         /// </para>
@@ -74,7 +116,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get spot tickers
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Tickers" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-tickers" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/tickers<br />
         /// </para>
@@ -89,7 +131,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get futures tickers
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Tickers" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-tickers" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/tickers<br />
         /// </para>
@@ -106,7 +148,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get order book snapshot
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/OrderBook" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-order-book" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/orderbook<br />
         /// </para>
@@ -125,7 +167,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get the most recent trades
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Fills" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-recent-public-fills" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/fills<br />
         /// </para>
@@ -144,7 +186,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get exchange's proof of reserves
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-Proof-Of-Reserves" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/public-config#get-proof-of-reserves" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/proof-of-reserves<br />
         /// </para>
@@ -156,7 +198,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get open interest for symbol(s)
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-Open-Interest" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/derivatives#get-open-interest-oi" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/open-interest<br />
         /// </para>
@@ -173,7 +215,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get klines/candlestick data
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-Candle-Data" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-kline-candlestick" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/candles<br />
         /// </para>
@@ -200,7 +242,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get kline history
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-History-Candle-Data" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-kline-candlestick-history" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/history-candles<br />
         /// </para>
@@ -227,7 +269,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get current funding rate
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-Current-Funding-Rate" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/derivatives#get-current-funding-rate" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/current-fund-rate<br />
         /// </para>
@@ -240,7 +282,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get funding rate history
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-History-Funding-Rate" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/derivatives#get-funding-rate-history" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/history-fund-rate<br />
         /// </para>
@@ -261,7 +303,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get margin loan discount rate
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-Discount-Rate" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/trading-risk-rules#get-discount-rate" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/discount-rate<br />
         /// </para>
@@ -273,7 +315,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get margin loan interest rates
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-Margin-Loans" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/trading-risk-rules#get-margin-loan" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/margin-loans<br />
         /// </para>
@@ -283,10 +325,10 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         Task<HttpResult<BitgetUaLoanInterestRate>> GetMarginLoanInterestRatesAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
-        /// 
+        /// Get position tiers
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-Position-Tier-Data" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/trading-risk-rules#get-position-tier" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/position-tier<br />
         /// </para>
@@ -305,7 +347,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get open interest limit
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-Contracts-Oi" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/trading-risk-rules#get-open-interest-limit" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/oi-limit<br />
         /// </para>
@@ -322,7 +364,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// Get index components
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/uta/public/Get-Index-Components" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/derivatives#get-index-price-components" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/market/index-components<br />
         /// </para>

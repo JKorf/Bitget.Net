@@ -96,7 +96,8 @@ namespace Bitget.Net.Clients.UnifiedApi
                 GetPositionHistoryOptions,
                 GetPositionsOptions,
                 SetFuturesTpSlOptions,
-                CancelFuturesTpSlOptions
+                CancelFuturesTpSlOptions,
+                GetAllAssetsOptions
                 );
         }
 
