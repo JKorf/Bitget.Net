@@ -242,6 +242,18 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 4.10.0 - 23 Oct 2026
+    * Updated CryptoExchange.Net to v13.2.2
+    * Fixed Unified API PlaceOrder marginMode parameter handling
+    * Added FinancialEntryType enum values
+    * Added GetAnnouncementsAsync and GetAssetsAsync to restClient.UnifiedApi.ExchangeData
+    * Added Unified GetAllAssetsAsync shared implementation
+    * Added Fullname, InstrumentType, MarketRegion and Isin to BitgetUaSpotSymbol, BitgetUaFuturesSymbol
+    * Added restClient.UnifiedApi.ExchangeData.GetOpenInterestHistoryAsync endpoint
+    * Updated V2 Spot GetAssetsAsync endpoint to V3
+    * Updated V2 Spot GetServerTimeAsync endpoint to V3, using the microseconds response
+    * Updated V2 Spot GetAnnouncementsAsync endpoint to V3
+
 * Version 4.9.0 - 14 Oct 2026
     * Updated CryptoExchange.Net to v13.2.0
     * Added Shared API implementation for the Unified API
