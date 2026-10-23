@@ -6,7 +6,7 @@ namespace Bitget.Net.Objects.Models.V2
     [SerializationModel]
     internal record BitgetServerTime
     {
-        [JsonPropertyName("serverTime")]
+        [JsonPropertyName("serverTimeMicros")]
         public DateTime ServerTime { get; set; }
     }
 }

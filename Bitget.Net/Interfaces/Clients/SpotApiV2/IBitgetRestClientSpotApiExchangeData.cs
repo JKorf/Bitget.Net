@@ -14,9 +14,9 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// Get the server time
         /// <para>
         /// Docs:<br />
-        /// <a href="https://www.bitget.com/api-doc/common/public/Get-Server-Time" /><br />
+        /// <a href="https://www.bitget.com/docs/catalog/market/market-data#get-server-time" /><br />
         /// Endpoint:<br />
-        /// GET /api/v2/public/time
+        /// GET /api/v3/market/time
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
