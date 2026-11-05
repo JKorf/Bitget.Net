@@ -32,7 +32,6 @@ namespace Bitget.Net.Interfaces.Clients.SpotApiV2
         /// GET api/v3/public/annoucements
         /// </para>
         /// </summary>
-        /// </summary>
         /// <param name="type">["<c>annType</c>"] Filter by type</param>
         /// <param name="language">["<c>language</c>"] Language</param>
         /// <param name="startTime">["<c>startTime</c>"] Filter by start time</param>

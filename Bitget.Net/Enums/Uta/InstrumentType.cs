@@ -35,4 +35,14 @@ public enum InstrumentType
     /// </summary>
     [Map("crypto")]
     Crypto,
+    /// <summary>
+    /// ["<c>index</c>"] Index
+    /// </summary>
+    [Map("index")]
+    Index,
+    /// <summary>
+    /// ["<c>fx</c>"] Foreign exchange
+    /// </summary>
+    [Map("fx")]
+    Forex,
 }
