@@ -349,6 +349,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         /// <param name="triggerPrice">["<c>triggerPrice</c>"] Trigger price</param>
         /// <param name="triggerOrderType">["<c>triggerOrderType</c>"] Trigger order type</param>
         /// <param name="triggerOrderPrice">["<c>triggerOrderPrice</c>"] Trigger order price</param>
+        /// <param name="marginMode">["<c>marginMode</c>"] Margin mode</param>
         /// <param name="ct">Cancellation token</param>
         Task<HttpResult<BitgetUaOrderResult>> PlaceStrategyOrderAsync(
             ProductCategory category,
@@ -372,6 +373,7 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
             decimal? triggerPrice = null,
             OrderType? triggerOrderType = null,
             decimal? triggerOrderPrice = null,
+            MarginMode? marginMode = null,
             CancellationToken ct = default);
 
         /// <summary>

@@ -375,6 +375,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             decimal? triggerPrice = null,
             OrderType? triggerOrderType = null,
             decimal? triggerOrderPrice = null,
+            MarginMode? marginMode = null,
             CancellationToken ct = default)
         {
             var parameters = new Parameters(BitgetExchange._parameterSerializationSettings);
@@ -399,6 +400,7 @@ namespace Bitget.Net.Clients.UnifiedApi
             parameters.Add("triggerPrice", triggerPrice);
             parameters.Add("triggerOrderType", triggerOrderType);
             parameters.Add("triggerOrderPrice", triggerOrderPrice);
+            parameters.Add("marginMode", marginMode);
             var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "/api/v3/trade/place-strategy-order", BitgetExchange.RateLimiter.Overall, 1, true, limitGuard: new SingleLimitGuard(10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             var result = await _baseClient.SendAsync<BitgetUaOrderResult>(request, parameters, ct).ConfigureAwait(false);
             return result;

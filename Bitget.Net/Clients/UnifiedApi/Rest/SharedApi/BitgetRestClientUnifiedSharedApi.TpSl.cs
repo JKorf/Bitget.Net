@@ -41,6 +41,7 @@ namespace Bitget.Net.Clients.UnifiedApi
                 Enums.Uta.StrategyType.TpSl,
                 tpslMode: Enums.Uta.TpslMode.Full,
                 reduceOnly: true,
+                marginMode: request.MarginMode == SharedMarginMode.Cross ? MarginMode.CrossMargin : request.MarginMode == SharedMarginMode.Isolated ? MarginMode.IsolatedMargin : null,
                 takeProfit: request.TpSlSide == SharedTpSlSide.TakeProfit ? request.TriggerPrice : null,
                 stopLoss: request.TpSlSide == SharedTpSlSide.StopLoss ? request.TriggerPrice : null,
                 ct: ct).ConfigureAwait(false);
