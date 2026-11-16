@@ -1,4 +1,5 @@
-﻿using Bitget.Net.Objects.Socket;
+﻿using Bitget.Net.Objects.Models;
+using Bitget.Net.Objects.Socket;
 using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Converters.SystemTextJson.MessageHandlers;
@@ -20,6 +21,7 @@ namespace Bitget.Net.Clients.MessageHandlers
         public BitgetSocketUnifiedMessageConverter()
         {
             AddTopicMapping<BitgetSocketEvent>(x => x.Args?.InstrumentId);
+            AddTopicMapping<BitgetSocketUpdate<BitgetUaPositionTierUpdate>>(x => x.Data.Symbol);
             AddTopicMapping<BitgetSocketUpdate>(x => x.Args.InstrumentId);
             AddTopicMapping<BitgetSocketResponse>(x => x.Id);
         }

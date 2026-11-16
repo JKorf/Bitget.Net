@@ -184,6 +184,111 @@ namespace Bitget.Net.Interfaces.Clients.UnifiedApi
         Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaTradeUpdate[]>> handler, CancellationToken ct = default);
 
         /// <summary>
+        /// Subscribe to symbol data updates
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/uta/websocket/public/Instruments-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v3/ws/public (channel: instruments)
+        /// </para>
+        /// </summary>
+        /// <param name="type">Symbol type</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns></returns>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(ProductCategory type, Action<DataEvent<BitgetUaSymbolUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to single user open interest limit updates
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/uta/websocket/public/Open-Interest-Limit-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v3/ws/public (channel: open-interest-limit)
+        /// </para>
+        /// </summary>
+        /// <param name="type">Symbol type</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOpenInterestLimitUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaOpenInterestLimitUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to single user open interest limit updates
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/uta/websocket/public/Open-Interest-Limit-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v3/ws/public (channel: open-interest-limit)
+        /// </para>
+        /// </summary>
+        /// <param name="type">Symbol type</param>
+        /// <param name="symbols">Symbols</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOpenInterestLimitUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaOpenInterestLimitUpdate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to updates to position tiers
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/uta/websocket/public/Position-Tier-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v3/ws/public (channel: position-tier)
+        /// </para>
+        /// </summary>
+        /// <param name="type">Symbol type</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionTierUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaPositionTierUpdate>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to updates to position tiers
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/uta/websocket/public/Position-Tier-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v3/ws/public (channel: position-tier)
+        /// </para>
+        /// </summary>
+        /// <param name="type">Symbol type</param>
+        /// <param name="symbols">Symbols</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionTierUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaPositionTierUpdate>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to updates to funding rates
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/uta/websocket/public/Funding-Rate-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v3/ws/public (channel: funding-rate)
+        /// </para>
+        /// </summary>
+        /// <param name="type">Symbol type</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToFundingRateUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaFundingRate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
+        /// Subscribe to updates to funding rates
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://www.bitget.com/docs/uta/websocket/public/Funding-Rate-Channel" /><br />
+        /// Endpoint:<br />
+        /// WSS /v3/ws/public (channel: funding-rate)
+        /// </para>
+        /// </summary>
+        /// <param name="type">Symbol type</param>
+        /// <param name="symbols">Symbols</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToFundingRateUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaFundingRate[]>> handler, CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribe to liquidation updates for symbols
         /// <para>
         /// Docs:<br />

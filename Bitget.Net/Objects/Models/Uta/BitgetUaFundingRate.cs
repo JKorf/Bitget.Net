@@ -39,5 +39,35 @@ public record BitgetUaFundingRate
     /// </summary>
     [JsonPropertyName("maxFundingRate")]
     public decimal MaxFundingRate { get; set; }
+    /// <summary>
+    /// ["<c>lastFundingRate</c>"] Last funding rate
+    /// </summary>
+    [JsonPropertyName("lastFundingRate")]
+    public decimal LastFundingRate { get; set; }
+    /// <summary>
+    /// ["<c>nextFundingRate</c>"] Next funding rate
+    /// </summary>
+    [JsonPropertyName("nextFundingRate")]
+    public decimal NextFundingRate { get; set; }
+    /// <summary>
+    /// ["<c>baseInterestRate</c>"] Base interest rate
+    /// </summary>
+    [JsonPropertyName("baseInterestRate")]
+    public decimal BaseInterestRate { get; set; }
+    /// <summary>
+    /// ["<c>impactMarginNotional</c>"] Impact margin notional
+    /// </summary>
+    [JsonPropertyName("impactMarginNotional")]
+    public decimal ImpactMarginNotional { get; set; }
+    /// <summary>
+    /// ["<c>cashDividend</c>"] Cash dividend
+    /// </summary>
+    [JsonPropertyName("cashDividend")]
+    public decimal? CashDividend { get; set; }
+    /// <summary>
+    /// ["<c>cashDividendNextUpdate</c>"] Cash dividend next update
+    /// </summary>
+    [JsonPropertyName("cashDividendNextUpdate")]
+    public DateTime? CashDividendNextUpdate { get; set; }
 }
 

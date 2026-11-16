@@ -159,6 +159,65 @@ namespace Bitget.Net.Clients.UnifiedApi
         }
 
         /// <inheritdoc />
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(ProductCategory type, Action<DataEvent<BitgetUaSymbolUpdate[]>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), [new Dictionary<string, string>
+                    {
+                        { "instType", EnumConverter.GetString(type).ToLowerInvariant() },
+                        { "topic", "instruments"  }
+                    }],
+            null, false, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToOpenInterestLimitUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaOpenInterestLimitUpdate[]>> handler, CancellationToken ct = default)
+            => SubscribeToOpenInterestLimitUpdatesAsync(type, new[] { symbol }, handler, ct);
+
+        /// <inheritdoc />
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToOpenInterestLimitUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaOpenInterestLimitUpdate[]>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), symbols.Select(s => new Dictionary<string, string>
+                    {
+                        { "instType", EnumConverter.GetString(type).ToLowerInvariant() },
+                        { "topic", "open-interest-limit"  },
+                        { "symbol", s },
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionTierUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaPositionTierUpdate>> handler, CancellationToken ct = default)
+            => SubscribeToPositionTierUpdatesAsync(type, new[] { symbol }, handler, ct);
+
+        /// <inheritdoc />
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionTierUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaPositionTierUpdate>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), symbols.Select(s => new Dictionary<string, string>
+                    {
+                        { "instType", EnumConverter.GetString(type).ToLowerInvariant() },
+                        { "topic", "position-tier"  },
+                        { "symbol", s },
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public Task<WebSocketResult<UpdateSubscription>> SubscribeToFundingRateUpdatesAsync(ProductCategory type, string symbol, Action<DataEvent<BitgetUaFundingRate[]>> handler, CancellationToken ct = default)
+            => SubscribeToFundingRateUpdatesAsync(type, new[] { symbol }, handler, ct);
+
+        /// <inheritdoc />
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToFundingRateUpdatesAsync(ProductCategory type, IEnumerable<string> symbols, Action<DataEvent<BitgetUaFundingRate[]>> handler, CancellationToken ct = default)
+        {
+            return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), symbols.Select(s => new Dictionary<string, string>
+                    {
+                        { "instType", EnumConverter.GetString(type).ToLowerInvariant() },
+                        { "topic", "funding-rate"  },
+                        { "symbol", s },
+                    }).ToArray(),
+            symbols, false, handler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToLiquidationUpdatesAsync(ProductCategory type, Action<DataEvent<BitgetUaLiquidationUpdate[]>> handler, CancellationToken ct = default)
         {
             return await SubscribeInternalAsync(BaseAddress.AppendPath("v3/ws/public"), [new Dictionary<string, string>
