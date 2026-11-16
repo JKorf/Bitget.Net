@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bitget.Net"
+  short_description: "Build C# Bitget integrations with Bitget.Net."
+  default_prompt: "Use $bitget-net to implement a Bitget.Net REST or websocket workflow."

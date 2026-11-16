@@ -1,27 +1,26 @@
-# Bitget.Net AI API Quick Map
+# Bitget.Net API surfaces
 
-Use this file to route common user intents to the correct Bitget.Net client member. If a method name or parameter is not listed here, inspect `Bitget.Net/Interfaces/Clients/**` before generating code.
+Use this reference to route an intent to the relevant member. Table entries abbreviate overloads; confirm parameters in the installed package before use. See [usage](usage.md) for setup and results.
 
-## Client Roots
+## Client roots
 
-| Intent | Use |
-|---|---|
-| REST calls | `new BitgetRestClient()` |
-| WebSocket streams | `new BitgetSocketClient()` |
-| API key authentication | `options.ApiCredentials = new BitgetCredentials("key", "secret", "passPhrase")` |
-| Live environment | `BitgetEnvironment.Live` |
-| Dependency injection | `services.AddBitget(options => { ... })` |
-| Spot REST | `client.SpotApiV2` |
-| Futures REST | `client.FuturesApiV2` |
-| Copy trading futures REST | `client.CopyTradingFuturesV2` |
-| Broker REST on concrete client | `client.BrokerV2` |
-| Spot WebSocket | `socketClient.SpotApiV2` |
-| Futures WebSocket | `socketClient.FuturesApiV2` |
-| Spot shared REST | `client.SpotApiV2.SharedApi` |
-| Futures shared REST | `client.FuturesApiV2.SharedApi` |
-| Spot shared socket | `socketClient.SpotApiV2.SharedApi` |
-| Futures shared socket | `socketClient.FuturesApiV2.SharedApi` |
-| Resolve a runtime-selected Shared API capability | `IBitgetSharedApiClient.GetCapability(...)` |
+| Surface | Purpose |
+| --- | --- |
+| `BitgetRestClient.SpotApiV2.ExchangeData` | Spot symbols, tickers, klines, trades, and books |
+| `BitgetRestClient.SpotApiV2.Account` | Spot/funding balances, account info, transfers, and wallet operations |
+| `BitgetRestClient.SpotApiV2.Trading` | Spot orders, triggers, and user trades |
+| `BitgetRestClient.SpotApiV2.Margin` | Cross/isolated margin accounts, borrowing, repayment, and orders |
+| `BitgetRestClient.FuturesApiV2` | Futures V2 `ExchangeData`, `Account`, and `Trading` |
+| `BitgetRestClient.CopyTradingFuturesV2` | Copy trading `Trader` and `Follower` |
+| `BitgetRestClient.BrokerV2` | Broker reporting; available on the concrete client, not `IBitgetRestClient` |
+| `BitgetRestClient.UnifiedApi` | UTA `ExchangeData`, `Account`, and `Trading` |
+| `BitgetSocketClient.SpotApiV2` | Spot V2 public/private subscriptions |
+| `BitgetSocketClient.FuturesApiV2` | Futures V2 public/private subscriptions |
+| `BitgetSocketClient.UnifiedApi` | UTA public/private subscriptions and order commands |
+
+The tables use `client` for a `BitgetRestClient` and `socketClient` for a `BitgetSocketClient`. Do not use unversioned `SpotApi`/`FuturesApi`, a top-level `MarginApi`, or an invented `UtaApi`.
+
+Select `BitgetEnvironment.Live` or `DemoTrading` through client options. Match account credentials and product support to the chosen environment; do not assume demo covers every live endpoint.
 
 ## Symbols, Product Types And Enums
 
@@ -258,54 +257,74 @@ Use this file to route common user intents to the correct Bitget.Net client memb
 | Subscribe futures equity updates | `socketClient.FuturesApiV2.SubscribeToEquityUpdatesAsync(BitgetProductTypeV2.UsdtFutures, handler)` |
 | Subscribe futures ADL updates | `socketClient.FuturesApiV2.SubscribeToAdlUpdatesAsync(BitgetProductTypeV2.UsdtFutures, handler)` |
 
-## SharedApis
+## Unified/UTA REST
 
-| User intent | Bitget.Net member or interface |
-|---|---|
-| Shared spot REST client | `new BitgetRestClient().SpotApiV2.SharedApi` |
-| Shared futures REST client | `new BitgetRestClient().FuturesApiV2.SharedApi` |
-| Shared spot socket client | `new BitgetSocketClient().SpotApiV2.SharedApi` |
-| Shared futures socket client | `new BitgetSocketClient().FuturesApiV2.SharedApi` |
-| Resolve a runtime-selected Shared API capability | `IBitgetSharedApiClient.GetCapability(...)` |
-| Get shared spot symbols and asset classifications | `IGetSpotSymbolsRest.GetSpotSymbolsAsync(new GetSymbolsRequest())` |
-| Read the populated shared spot symbol catalog | `IGetSpotSymbolsRest.SpotSymbolCatalog` after a successful symbol request |
-| Get shared futures symbols and asset classifications | `IGetFuturesSymbolsRest.GetFuturesSymbolsAsync(new GetSymbolsRequest())` |
-| Read the populated shared futures symbol catalog | `IGetFuturesSymbolsRest.FuturesSymbolCatalog` after a successful symbol request |
-| Shared spot ticker REST | `IGetTickerRest.GetTickerAsync(new GetTickerRequest(symbol))` |
-| Shared futures ticker REST | `IGetTickerRest.GetTickerAsync(new GetTickerRequest(symbol))` |
-| Shared spot order REST | `IPlaceSpotOrderRest.PlaceSpotOrderAsync(...)` |
-| Shared futures order REST | `IPlaceFuturesOrderRest.PlaceFuturesOrderAsync(...)` |
-| Shared ticker socket | `ISubscribeTickerSocket.SubscribeToTickerUpdatesAsync(...)` |
-| Shared order book socket | `ISubscribeOrderBookSocket.SubscribeToOrderBookUpdatesAsync(...)` |
+Use `ProductCategory` from `Bitget.Net.Enums.Uta`; order-side/type enums still come from `Bitget.Net.Enums.V2`. UTA-specific enums also include `KlineUaInterval`, `AccountLevel`, `HoldingMode`, and `StpMode`. Account and trading models differ from V2.
 
-Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers such as symbol support checks return `ExchangeCallResult<T>`.
+| Intent | Member |
+| --- | --- |
+| Spot symbol metadata | `client.UnifiedApi.ExchangeData.GetSpotSymbolsAsync("BTCUSDT")` |
+| Futures symbol metadata | `client.UnifiedApi.ExchangeData.GetFuturesSymbolsAsync(...)` |
+| Margin symbol metadata | `client.UnifiedApi.ExchangeData.GetMarginSymbolsAsync(...)` |
+| Spot tickers | `client.UnifiedApi.ExchangeData.GetSpotTickersAsync("BTCUSDT")` |
+| Futures tickers | `client.UnifiedApi.ExchangeData.GetFuturesTickersAsync(ProductCategory.UsdtFutures)` |
+| Books, trades, and candles | `client.UnifiedApi.ExchangeData.GetOrderBookAsync(...)`, `GetRecentTradesAsync(...)`, `GetKlinesAsync(...)` |
+| Account balances | `client.UnifiedApi.Account.GetBalancesAsync()` |
+| Account configuration | `client.UnifiedApi.Account.GetAccountConfigAsync()` |
+| Set holding mode | `client.UnifiedApi.Account.SetHoldModeAsync(...)` |
+| Set leverage | `client.UnifiedApi.Account.SetLeverageAsync(...)` |
+| Place/edit/cancel order | `client.UnifiedApi.Trading.PlaceOrderAsync(...)`, `EditOrderAsync(...)`, `CancelOrderAsync(...)` |
+| Read orders and user trades | `client.UnifiedApi.Trading.GetOrderAsync(...)`, `GetOpenOrdersAsync(...)`, `GetClosedOrdersAsync(...)`, `GetUserTradesAsync(...)` |
+| Positions and history | `client.UnifiedApi.Trading.GetPositionsAsync(...)`, `GetPositionHistoryAsync(...)` |
+| Close positions | `client.UnifiedApi.Trading.ClosePositionsAsync(...)` |
+| Strategy orders | `client.UnifiedApi.Trading.PlaceStrategyOrderAsync(...)` |
 
-Shared symbol results provide base/quote `SharedAssetType` and `SharedAssetSubType` metadata, including crypto, fiat, stablecoin, commodity, and equity classifications where available.
+UTA sockets use `SubscribeToSpotTickerUpdatesAsync(symbol, handler)` for spot and `SubscribeToFuturesTickerUpdatesAsync(category, symbol, handler)` for futures. Kline, trade, and book subscriptions take a category. Private callbacks cover balances, orders, positions, and related account events; inspect their exact signatures. Socket `PlaceOrderAsync`, `EditOrderAsync`, and `CancelOrderAsync` return `QueryResult<T>`.
 
-For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
+## Shared API V2
 
-## Result Handling
+Use `.SharedApi` on the selected `SpotApiV2`, `FuturesApiV2`, or `UnifiedApi` REST/socket root. Keep native request/model types separate from Shared API types.
 
-| Situation | Pattern |
-|---|---|
-| REST success check | `if (!result.Success) { Console.WriteLine(result.Error); return; }` |
-| Socket subscription success check | `WebSocketResult<UpdateSubscription> sub = await ...; if (!sub.Success) { Console.WriteLine(sub.Error); return; }` |
-| Read REST data | Read `result.Data` only after `result.Success` |
-| Shared helper data | Read `ExchangeCallResult<T>.Data` only after `result.Success` |
+| Intent | Capability or member |
+| --- | --- |
+| Get a ticker | `IGetTickerRest.GetTickerAsync` |
+| Get/filter spot symbols | `IGetSpotSymbolsRest.GetSpotSymbolsAsync` |
+| Get/filter futures symbols | `IGetFuturesSymbolsRest.GetFuturesSymbolsAsync` |
+| Place a spot order | `IPlaceSpotOrderRest.PlaceSpotOrderAsync` |
+| Place a futures order | `IPlaceFuturesOrderRest.PlaceFuturesOrderAsync` |
+| Subscribe to tickers | `ISubscribeTickerSocket.SubscribeToTickerUpdatesAsync` |
+| Subscribe to trades | `ISubscribeTradesSocket.SubscribeToTradeUpdatesAsync` |
+| Subscribe to order books | `ISubscribeOrderBookSocket.SubscribeToOrderBookUpdatesAsync` |
 
-## Common Routing Pitfalls
+`IBitgetSharedApiClient` exposes six named surfaces:
 
-| Do not use | Use instead |
-|---|---|
-| Raw `HttpClient` | `BitgetRestClient` / `BitgetSocketClient` |
-| `ApiCredentials` without passphrase | `BitgetCredentials("key", "secret", "passPhrase")` |
-| `SpotApi` | `SpotApiV2` |
-| `FuturesApi` | `FuturesApiV2` |
-| `MarginApi` | `SpotApiV2.Margin` |
-| `CopyTradingApi` | `CopyTradingFuturesV2` |
-| `UsdFuturesApi` | `FuturesApiV2` with `BitgetProductTypeV2.UsdtFutures` |
-| `BTC-USDT`, `BTC/USDT`, `tBTCUSD` | `BTCUSDT` |
-| Futures call without product type | Include `BitgetProductTypeV2.UsdtFutures` or another product type |
-| Futures account/trading call without margin asset | Pass `"USDT"` or the required margin asset |
-| `.Data` without `.Success` check | Check `.Success` first |
-| Shared socket `UnsubscribeAsync(...)` | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
+| Property | Interface |
+| --- | --- |
+| `SpotRest` | `IBitgetRestClientSpotSharedApi` |
+| `FuturesRest` | `IBitgetRestClientFuturesSharedApi` |
+| `SpotSocket` | `IBitgetSocketClientSpotSharedApi` |
+| `FuturesSocket` | `IBitgetSocketClientFuturesSharedApi` |
+| `UnifiedRest` | `IBitgetRestClientUnifiedSharedApi` |
+| `UnifiedSocket` | `IBitgetSocketClientUnifiedSharedApi` |
+
+Use a named surface when the API is known. For dynamic selection, call `GetCapability` on an aggregate instance with a typed descriptor such as `SharedCapabilities.Tickers.GetTicker.Rest`, and specify the intended trading mode. Check for a null match, then use its `Capability` and `Options`. Use `GetCapabilities` for all matches and `Discover` for summary metadata.
+
+The current aggregate initializes its runtime lookup catalog with the classic V2 surfaces. For UTA, select `UnifiedRest`/`UnifiedSocket` directly instead of assuming dynamic lookup includes them. DI capability registration is separately selected by `options.SharedApi.ApiVersion`: `BitgetApiVersion.Classic` is the default; `Unified` registers Unified capabilities. The enum is in `Bitget.Net.Objects.Options`. With multiple registrations, select the intended implementation explicitly.
+
+### Symbols and quantities
+
+Use `SharedSymbol` for portable requests rather than a native symbol string. Successful `GetSpotSymbolsAsync`/`GetFuturesSymbolsAsync` calls populate the corresponding `SpotSymbolCatalog`/`FuturesSymbolCatalog`. `GetSymbolsRequest` supports filters; responses include display names and asset type/subtype metadata, including crypto, fiat, stablecoin, commodity, and equity classifications where available.
+
+Shared quantities use `SharedOrderQuantity`; read `QuantityInBaseAsset`, `QuantityInQuoteAsset`, or `QuantityInContracts` as appropriate. Bitget shared order books report `QuantityType` as `SharedQuantityType.BaseAsset`. Close shared subscriptions through the concrete `BitgetSocketClient.UnsubscribeAsync(subscription.Data)`.
+
+## Source navigation and stateful helpers in a checkout
+
+These links require a source checkout, not just the standalone NuGet skill:
+
+- [Client interfaces](../../../../Bitget.Net/Interfaces/Clients/): exact signatures and endpoint documentation.
+- [Client implementations](../../../../Bitget.Net/Clients/): transport and Shared API mappings.
+- [Order book helpers](../../../../Bitget.Net/SymbolOrderBooks/): `BitgetSpotSymbolOrderBook`, `BitgetFuturesSymbolOrderBook`, `BitgetUnifiedSymbolOrderBook`, and the order book factory.
+- [User-data tracker](../../../../Bitget.Net/BitgetUserDataTracker.cs) and [tracker factory](../../../../Bitget.Net/BitgetTrackerFactory.cs): existing account-state helpers.
+- [Compiled examples](../../../../Examples/ai-friendly/): complete programs.
+
+For packaged usage patterns, see [usage](usage.md).

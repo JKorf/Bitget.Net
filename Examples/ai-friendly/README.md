@@ -1,100 +1,15 @@
-# Bitget.Net AI-friendly examples
+# Bitget.Net examples
 
-These examples are compact, copyable console snippets for AI coding assistants and quick onboarding. They are compiled by the unit test suite so API names stay aligned with the project.
+Each C# file is a complete console program. The [documentation compilation test](../../Bitget.Net.UnitTests/Documentation/AiExampleCompileTests.cs) builds them without executing exchange operations.
 
-## Install
+| Example | Purpose |
+| --- | --- |
+| [Spot quickstart](01-spot-quickstart.cs) | Public ticker, authenticated balances, and spot orders |
+| [Futures V2](02-futures-v2.cs) | Product type, margin asset, account data, orders, and cancellation |
+| [WebSockets](03-websocket.cs) | Public subscriptions and cleanup |
+| [Multi-exchange](04-multi-exchange.cs) | Shared API V2 capabilities and subscriptions |
+| [Error handling](05-error-handling.cs) | Results, read retries, and error diagnostics |
 
-```bash
-dotnet add package JK.Bitget.Net
-```
+For imports, authentication, and Unified examples, read the [consumer skill](../../.claude/skills/bitget-net/SKILL.md). Use the [API surfaces reference](../../.claude/skills/bitget-net/references/api-surfaces.md) for endpoint routing and enum namespaces.
 
-## API shape
-
-Use Bitget V2 surfaces:
-
-- Spot REST: `BitgetRestClient().SpotApiV2`
-- Futures REST: `BitgetRestClient().FuturesApiV2`
-- Copy trading REST: `BitgetRestClient().CopyTradingFuturesV2`
-- Broker REST: `BitgetRestClient().BrokerV2`
-- Spot WebSocket: `BitgetSocketClient().SpotApiV2`
-- Futures WebSocket: `BitgetSocketClient().FuturesApiV2`
-
-Do not use older or invented roots such as `SpotApi`, `FuturesApi`, `MarginApi`, `UsdFuturesApi`, `PerpetualFuturesApi`, or `CopyTradingApi`.
-
-## Symbols and futures product types
-
-Bitget symbols are compact:
-
-- Spot: `BTCUSDT`, `ETHUSDT`, `BGBUSDT`
-- Futures: `BTCUSDT`, `ETHUSDT`
-
-Do not use `BTC-USDT`, `BTC/USDT`, `BTC_USDT`, or Bitfinex-style `tBTCUSD`.
-
-Futures calls generally use:
-
-```csharp
-var productType = BitgetProductTypeV2.UsdtFutures;
-const string symbol = "BTCUSDT";
-const string marginAsset = "USDT";
-```
-
-## Result pattern
-
-Most REST calls return `HttpResult<T>` or `HttpResult`. Shared non-I/O symbol/cache helpers return `ExchangeCallResult<T>`. Always check `.Success` before using `.Data`; use `.Error` for exchange, validation, network and rate-limit failures.
-
-```csharp
-var result = await client.SpotApiV2.ExchangeData.GetTickersAsync("BTCUSDT");
-if (!result.Success)
-{
-    Console.WriteLine(result.Error);
-    return;
-}
-
-Console.WriteLine(result.Data.Single().LastPrice);
-```
-
-Socket subscription calls return `WebSocketResult<UpdateSubscription>`. Keep the concrete socket client so you can unsubscribe:
-
-```csharp
-var sub = await socketClient.SpotApiV2.SubscribeToTickerUpdatesAsync("BTCUSDT", update => { });
-if (sub.Success)
-    await socketClient.UnsubscribeAsync(sub.Data);
-```
-
-## Enum namespaces
-
-Use `Bitget.Net.Enums` for product type and socket/futures kline enums:
-
-- `BitgetProductTypeV2`
-- `BitgetStreamKlineIntervalV2`
-- `BitgetFuturesKlineInterval`
-
-Use `Bitget.Net.Enums.V2` for V2 order/account enums:
-
-- `OrderSide`, `OrderType`, `TimeInForce`
-- `MarginMode`, `TradeSide`, `PositionSide`, `PositionMode`
-- `TransferAccountType`, `TransferType`, `AccountType`
-- spot REST `KlineInterval`
-
-## Examples
-
-- `01-spot-quickstart.cs` - public market data, balances, open orders and spot order placement.
-- `02-futures-v2.cs` - futures product type, ticker, funding rate, balances, positions and order flow.
-- `03-websocket.cs` - spot and futures public WebSocket subscriptions and unsubscribe pattern.
-- `04-multi-exchange.cs` - CryptoExchange.Net shared API usage, capability discovery and shared subscriptions.
-- `05-error-handling.cs` - `HttpResult`, `WebSocketResult` and `ExchangeCallResult` handling, transient retry shape and order error categorization.
-
-## Common routing
-
-- Spot market data: `client.SpotApiV2.ExchangeData`
-- Spot account: `client.SpotApiV2.Account`
-- Spot orders: `client.SpotApiV2.Trading`
-- Spot margin: `client.SpotApiV2.Margin`
-- Futures market data: `client.FuturesApiV2.ExchangeData`
-- Futures account: `client.FuturesApiV2.Account`
-- Futures positions and orders: `client.FuturesApiV2.Trading`
-- Copy trading: `client.CopyTradingFuturesV2.Trader` and `.Follower`
-- Broker: `client.BrokerV2`
-- Shared APIs: `client.SpotApiV2.SharedClient`, `client.FuturesApiV2.SharedClient`; call `.Discover()` before routing optional shared features
-
-For detailed endpoint routing, see `docs/ai-api-map.md`. For fuller assistant context, see `llms-full.txt`.
+To try an example, create a console project, add `JK.Bitget.Net`, and copy one example into `Program.cs`. Private operations need your API key, secret, and passphrase. Review the operations before executing a program; compilation does not run its account or trading calls.
