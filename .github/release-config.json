@@ -1,0 +1,18 @@
+{
+  "baseBranch": "main",
+  "sdk": "11.0.100",
+  "packages": [
+    {
+      "key": "bitget",
+      "project": "Bitget.Net/Bitget.Net.csproj",
+      "testProjects": [
+        "Bitget.Net.UnitTests/Bitget.Net.UnitTests.csproj"
+      ],
+      "packageId": "JK.Bitget.Net",
+      "readme": "README.md",
+      "tagPrefix": "Bitget.Net.",
+      "releaseIntegrationTests": false,
+      "publishToGitHubPackages": true
+    }
+  ]
+}
