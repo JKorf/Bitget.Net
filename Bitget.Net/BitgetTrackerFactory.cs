@@ -53,17 +53,17 @@ namespace Bitget.Net
             var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
 
-            IKlineRestClient sharedRestClient;
-            IKlineSocketClient sharedSocketClient;
+            IGetKlinesRest sharedRestClient;
+            ISubscribeKlinesSocket sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                sharedRestClient = restClient.SpotApiV2.SharedClient;
-                sharedSocketClient = socketClient.SpotApiV2.SharedClient;
+                sharedRestClient = restClient.SpotApiV2.SharedApi;
+                sharedSocketClient = socketClient.SpotApiV2.SharedApi;
             }
             else
             {
-                sharedRestClient = restClient.FuturesApiV2.SharedClient;
-                sharedSocketClient = socketClient.FuturesApiV2.SharedClient;
+                sharedRestClient = restClient.FuturesApiV2.SharedApi;
+                sharedSocketClient = socketClient.FuturesApiV2.SharedApi;
             }
 
             return new KlineTracker(
@@ -89,17 +89,17 @@ namespace Bitget.Net
                 new ExchangeParameter("Bitget", "ProductType", productType.ToString()),
                 new ExchangeParameter("Bitget", "MarginAsset", marginAsset));
 
-            IKlineRestClient sharedRestClient;
-            IKlineSocketClient sharedSocketClient;
+            IGetKlinesRest sharedRestClient;
+            ISubscribeKlinesSocket sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                sharedRestClient = restClient.SpotApiV2.SharedClient;
-                sharedSocketClient = socketClient.SpotApiV2.SharedClient;
+                sharedRestClient = restClient.SpotApiV2.SharedApi;
+                sharedSocketClient = socketClient.SpotApiV2.SharedApi;
             }
             else
             {
-                sharedRestClient = restClient.FuturesApiV2.SharedClient;
-                sharedSocketClient = socketClient.FuturesApiV2.SharedClient;
+                sharedRestClient = restClient.FuturesApiV2.SharedApi;
+                sharedSocketClient = socketClient.FuturesApiV2.SharedApi;
             }
 
             return new KlineTracker(
@@ -120,17 +120,17 @@ namespace Bitget.Net
             var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
 
-            IRecentTradeRestClient sharedRestClient;
-            ITradeSocketClient sharedSocketClient;
+            IGetRecentTradesRest sharedRestClient;
+            ISubscribeTradesSocket sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                sharedRestClient = restClient.SpotApiV2.SharedClient;
-                sharedSocketClient = socketClient.SpotApiV2.SharedClient;
+                sharedRestClient = restClient.SpotApiV2.SharedApi;
+                sharedSocketClient = socketClient.SpotApiV2.SharedApi;
             }
             else
             {
-                sharedRestClient = restClient.FuturesApiV2.SharedClient;
-                sharedSocketClient = socketClient.FuturesApiV2.SharedClient;
+                sharedRestClient = restClient.FuturesApiV2.SharedApi;
+                sharedSocketClient = socketClient.FuturesApiV2.SharedApi;
             }
 
             return new TradeTracker(
@@ -156,17 +156,17 @@ namespace Bitget.Net
             var restClient = _serviceProvider?.GetRequiredService<IBitgetRestClient>() ?? new BitgetRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<IBitgetSocketClient>() ?? new BitgetSocketClient();
 
-            IRecentTradeRestClient sharedRestClient;
-            ITradeSocketClient sharedSocketClient;
+            IGetRecentTradesRest sharedRestClient;
+            ISubscribeTradesSocket sharedSocketClient;
             if (symbol.TradingMode == TradingMode.Spot)
             {
-                sharedRestClient = restClient.SpotApiV2.SharedClient;
-                sharedSocketClient = socketClient.SpotApiV2.SharedClient;
+                sharedRestClient = restClient.SpotApiV2.SharedApi;
+                sharedSocketClient = socketClient.SpotApiV2.SharedApi;
             }
             else
             {
-                sharedRestClient = restClient.FuturesApiV2.SharedClient;
-                sharedSocketClient = socketClient.FuturesApiV2.SharedClient;
+                sharedRestClient = restClient.FuturesApiV2.SharedApi;
+                sharedSocketClient = socketClient.FuturesApiV2.SharedApi;
             }
 
             return new TradeTracker(
