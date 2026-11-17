@@ -239,6 +239,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf).
 
 ## Release notes
+* Version 4.11.0 - 17 Nov 2026
+    * Updated CryptoExchange.Net to v13.3.0
+    * Added Index, Forex enum values to InstrumentType
+    * Added marginMode parameter to PlaceStrategyOrderAsync endpoint
+    * Added UTA SubscribeToSymbolUpdatesAsync, SubscribeToOpenInterestLimitUpdatesAsync, SubscribeToPositionTierUpdatesAsync and SubscribeToFundingRateUpdatesAsync subscriptions
+
 * Version 4.10.0 - 23 Oct 2026
     * Updated CryptoExchange.Net to v13.2.2
     * Fixed Unified API PlaceOrder marginMode parameter handling
