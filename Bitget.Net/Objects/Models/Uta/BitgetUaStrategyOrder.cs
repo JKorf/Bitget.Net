@@ -155,5 +155,10 @@ public record BitgetUaStrategyOrder
     /// </summary>
     [JsonPropertyName("updatedTime")]
     public DateTime? UpdateTime { get; set; }
+    /// <summary>
+    /// ["<c>marginMode</c>"] Margin mode
+    /// </summary>
+    [JsonPropertyName("marginMode")]
+    public MarginMode? MarginMode { get; set; }
 }
 
