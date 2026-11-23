@@ -39,16 +39,12 @@ namespace Bitget.Net.UnitTests
             return provider.GetRequiredService<IBitgetSharedApiClient>();
         }
 
-        protected override SharedApiTestConfig GetConfig(ISharedRest client)
+        protected override SharedApiTestConfig GetConfig(ISharedRest client, CapabilityOptions options)
         {
-            if (client is IBitgetRestClientUnifiedSharedApi)
+            if (options.SupportedTradingModes.Contains(TradingMode.Spot))
                 return new SharedApiTestConfig(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"), "ETH");
-            if (client is IBitgetRestClientSpotSharedApi)
-                return new SharedApiTestConfig(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"), "ETH");
-            if (client is IBitgetRestClientFuturesSharedApi)
-                return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualLinear, "ETH", "USDT"), "ETH");
 
-            throw new NotImplementedException();
+            return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualLinear, "ETH", "USDT"), "ETH");
         }
     }
 
@@ -80,16 +76,12 @@ namespace Bitget.Net.UnitTests
             return provider.GetRequiredService<IBitgetSharedApiClient>();
         }
 
-        protected override SharedApiTestConfig GetConfig(ISharedSocket client)
+        protected override SharedApiTestConfig GetConfig(ISharedSocket client, CapabilityOptions options)
         {
-            if (client is IBitgetSocketClientUnifiedSharedApi)
+            if (options.SupportedTradingModes.Contains(TradingMode.Spot))
                 return new SharedApiTestConfig(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"), "ETH");
-            if (client is IBitgetSocketClientSpotSharedApi)
-                return new SharedApiTestConfig(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"), "ETH");
-            if (client is IBitgetSocketClientFuturesSharedApi)
-                return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualLinear, "ETH", "USDT"), "ETH");
 
-            throw new NotImplementedException();
+            return new SharedApiTestConfig(new SharedSymbol(TradingMode.PerpetualLinear, "ETH", "USDT"), "ETH");
         }
     }
 }
