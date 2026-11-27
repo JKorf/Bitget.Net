@@ -20,9 +20,9 @@ namespace Bitget.Net.Clients.MessageHandlers
 
         public BitgetSocketUnifiedMessageConverter()
         {
-            AddTopicMapping<BitgetSocketEvent>(x => x.Args?.InstrumentId);
+            AddTopicMapping<BitgetSocketEvent>(x => x.Args?.InstrumentId + x.Args?.Interval);
             AddTopicMapping<BitgetSocketUpdate<BitgetUaPositionTierUpdate>>(x => x.Data.Symbol);
-            AddTopicMapping<BitgetSocketUpdate>(x => x.Args.InstrumentId);
+            AddTopicMapping<BitgetSocketUpdate>(x => x.Args.InstrumentId + x.Args?.Interval);
             AddTopicMapping<BitgetSocketResponse>(x => x.Id);
         }
 

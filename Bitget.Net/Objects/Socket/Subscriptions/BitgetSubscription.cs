@@ -22,16 +22,18 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
             _handler = handler;
 
             IndividualSubscriptionCount = args.Length;
+            var routeParams = args.Select(GetRouteParams).Distinct().ToArray();
 
             if (symbols == null)
             {
                 // If no symbols are provided use the instType + channel/topic without filter
-                MessageRouter = MessageRouter.CreateForEvent<BitgetSocketUpdate<T>>(args.Select(GetRouteParams), DoHandleMessage);
+                MessageRouter = MessageRouter.CreateForEvent<BitgetSocketUpdate<T>>(routeParams, DoHandleMessage);
             }
             else
             {
                 // If symbols are provided, use the instType + channel/topic with filter for each symbol
-                MessageRouter = MessageRouter.CreateForEvent<BitgetSocketUpdate<T>>(args.Select(GetRouteParams).Distinct(), symbols, DoHandleMessage);
+                var topicFilters = args.Select(x => GetRouteFilters(x)).ToArray();
+                MessageRouter = MessageRouter.CreateForEvent<BitgetSocketUpdate<T>>(routeParams, topicFilters, DoHandleMessage);
             }
         }
 
@@ -39,6 +41,12 @@ namespace Bitget.Net.Objects.Socket.Subscriptions
         {
             var subject = arg.TryGetValue("channel", out var channel) ? channel : arg["topic"];
             return $"{arg["instType"]}{subject}";
+        }
+
+        private string GetRouteFilters(Dictionary<string, string> arg)
+        {
+            var excluded = new string[] { "channel", "topic", "instType" };
+            return string.Join("", arg.Where(x => !excluded.Contains(x.Key)).Select(x => x.Value));
         }
 
         protected override Query? GetSubQuery(SocketConnection connection) => new BitgetQuery(_client, new BitgetSocketRequest { Args = _args, Op = "subscribe" }, false) { RequiredResponses = _args.Count() };

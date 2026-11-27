@@ -54,7 +54,7 @@ namespace Bitget.Net.Clients.UnifiedApi
 
         #endregion
 
-        #region Subscribe To Order Book Updates
+        #region Subscribe To Incremental Order Book Updates
 
         public SubscribeIncrementalOrderBookOptions SubscribeIncrementalOrderBookOptions { get; } = new SubscribeIncrementalOrderBookOptions(_exchangeName, false, [50], SharedOrderBookSubscriptionType.SnapshotThenIncremental)
         {

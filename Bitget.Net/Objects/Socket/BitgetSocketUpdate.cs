@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Bitget.Net.Enums.Uta;
+using System.Text.Json.Serialization;
 
 namespace Bitget.Net.Objects.Socket
 {
@@ -22,6 +23,8 @@ namespace Bitget.Net.Objects.Socket
             get => InstrumentId;
             set => InstrumentId = value;
         }
+        [JsonPropertyName("interval")]
+        public string? Interval { get; set; }
     }
 
     internal class BitgetSocketUpdate
