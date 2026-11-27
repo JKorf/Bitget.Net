@@ -68,6 +68,6 @@ public record BitgetUaFundingRate
     /// ["<c>cashDividendNextUpdate</c>"] Cash dividend next update
     /// </summary>
     [JsonPropertyName("cashDividendNextUpdate")]
-    public DateTime? CashDividendNextUpdate { get; set; }
+    public string? CashDividendNextUpdate { get; set; }
 }
 
